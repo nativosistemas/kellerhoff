@@ -1,0 +1,58 @@
+﻿@{
+    string classBuscador = "";
+    string classDiferido = "";
+    string classSubirpedido = "";
+    string classEstadopedidos = "";
+    string classRecuperador = "";
+    string classPromocionesCliente = "";
+    string strController = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+    switch (strController)
+    {
+        case "Buscador":
+        case "carrito":
+            classBuscador = " class=\"active\" ";
+            break;
+        case "Diferido":
+        case "carritoDiferido":
+            classDiferido = " class=\"active\" ";
+            break;
+        case "subirpedido":
+        case "subirarchivoresultado":
+        case "subirarchivoresultado_msg":
+            classSubirpedido = " class=\"active\" ";
+            break;
+        case "estadopedidos":
+        case "estadopedidosresultado":
+            classEstadopedidos = " class=\"active\" ";
+            break;
+        case "recuperador":
+            classRecuperador = " class=\"active\" ";
+            break;
+        case "promocionescliente":
+            classPromocionesCliente = " active ";
+            break;
+        default:
+            break;
+    }
+
+}
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="nav_sec">
+            <a href="/mvc/Buscador" @{ WriteLiteral(classBuscador);} ><i class="fa fa-search" title="BUSCADOR"></i><span class="hidden-sm hidden-xs">BUSCADOR</span></a>
+            <div class="separate"></div>
+            <a href="/mvc/Diferido" @{WriteLiteral(classDiferido);} ><i class="fa fa-shopping-basket" title="CARRO SECUNDARIO"></i><span class="hidden-sm hidden-xs">CARRO SECUNDARIO</span></a>
+            <div class="separate"></div>
+            <a href="/mvc/estadopedidos"  @{WriteLiteral(classEstadopedidos);} ><i class="fa fa-file-text" title="MIS PEDIDOS"></i><span class="hidden-sm hidden-xs">MIS PEDIDOS</span></a>
+            <div class="separate"></div>
+            <a href="/mvc/recuperador?t=1" @{WriteLiteral(classRecuperador);} ><i class="fa fa-recycle" title="RECUPERADOR"></i><span class="hidden-sm hidden-xs">RECUPERADOR</span></a>
+            <div class="separate"></div>
+            <a  href="/mvc/subirpedido" @{ WriteLiteral(classSubirpedido);} ><i class="fa fa-upload" title="SUBIR PEDIDOS"></i><span class="hidden-sm hidden-xs">SUBIR PEDIDOS</span></a>
+            <div class="separate"></div>
+            <a href="/mvc/promocionescliente" class="oferta  @{ WriteLiteral(classPromocionesCliente);}" ><i class="fa fa-percent"  title="OFERTAS"></i><span class="hidden-sm hidden-xs">OFERTAS</span></a>
+        </div>
+    </div>
+</div>
+

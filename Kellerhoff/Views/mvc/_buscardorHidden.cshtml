@@ -1,0 +1,84 @@
+﻿@{
+
+    string resultado = string.Empty;
+    if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null )
+    {
+        List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
+        // Optimizar
+        List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursalInfoAux = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((Kellerhoff.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
+        List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursalInfo = new List<Kellerhoff.Codigo.capaDatos.cSucursal>();
+        //// Inicio S7
+        List<string> ListaSucursalOptimizar = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
+        //// Fin S7
+        foreach (string itemSucursalOptimizar in ListaSucursalOptimizar)
+        {
+            foreach (Kellerhoff.Codigo.capaDatos.cSucursal itemSucursalInfoAux in listaSucursal)
+            {
+                if (itemSucursalOptimizar == itemSucursalInfoAux.sde_sucursal)
+                {
+                    listaSucursalInfo.Add(itemSucursalInfoAux);
+                    break;
+                }
+            }
+        }
+        // Fin Optimizar
+        resultado += "<input type=\"hidden\" id=\"hiddenListaSucursalesDependienteInfo\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaSucursalInfo)) + "\" />";
+        List<Kellerhoff.Codigo.clases.cCarrito> listaCarrito = new List<Kellerhoff.Codigo.clases.cCarrito>();
+        if (Kellerhoff.Controllers.mvcController.isDiferido())
+        {
+            Session["clientesDefault_CarritoDiferido"] = Kellerhoff.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosDiferidosPorCliente((int)((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
+            listaCarrito = (List<Kellerhoff.Codigo.clases.cCarrito>)Session["clientesDefault_CarritoDiferido"];
+            resultado += "<input type=\"hidden\" id=\"hiddenIsCarritoDiferido\" value=\"" + Server.HtmlEncode("true") + "\" />";
+            if (Kellerhoff.Codigo.capaDatos.capaCAR_decision.isCAR) {
+                resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(Kellerhoff.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(((Kellerhoff.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), Kellerhoff.Codigo.clases.Constantes.cTipo_CarritoDiferidoTransfers))) + "\" />";
+            }
+
+        }
+        else if (Kellerhoff.Controllers.mvcController.isBuscador())
+        {
+            Session["clientesDefault_Carrito"] = Kellerhoff.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosPorSucursalYProductos((int)((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
+            listaCarrito = (List<Kellerhoff.Codigo.clases.cCarrito>)Session["clientesDefault_Carrito"];
+            resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(Kellerhoff.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(((Kellerhoff.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]),Kellerhoff.Codigo.clases.Constantes.cTipo_CarritoTransfers))) + "\" />";
+
+        }
+        resultado += "<input type=\"hidden\" id=\"hiddenListaCarritos\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaCarrito)) + "\" />";
+        resultado += "<input type=\"hidden\" id=\"hiddenListaSucursalesInfo\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaSucursal)) + "\" />";
+        Kellerhoff.Codigo.capaDatos.cClientes oCliente = (Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+        resultado += "<input type=\"hidden\" id=\"hiddenCliente\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(oCliente)) + "\" />";
+        resultado += "<input type=\"hidden\" id=\"hiddenCantidadProductoParametrizado\" value=\"" + Server.HtmlEncode(WebService.RecuperarProductoParametrizadoCantidad().ToString()) + "\" />";
+        resultado += "<input type=\"hidden\" id=\"hiddenListaTipoEnviosSucursales\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarTiposDeEnvios())) + "\" />";
+        resultado += "<input type=\"hidden\" id=\"hiddenListaCadeteriaRestricciones\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson((WebService.RecuperarTodosCadeteriaRestricciones()))) + "\" />";
+        resultado += "<input type=\"hidden\" id=\"hiddenCantidadFilaPorPagina\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Constantes.cCantidadFilaPorPagina.ToString()) + "\" />";
+        resultado += "<input type=\"hidden\" id=\"hiddenLimiteDePaginador\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Constantes.cLimiteDePaginador.ToString()) + "\" />";
+
+        if (HttpContext.Current.Session["home_IdOferta"] != null)
+        {
+            resultado += "<input type=\"hidden\" id=\"hiddenHomeIdOferta\" value=\"" + Server.HtmlEncode(HttpContext.Current.Session["home_IdOferta"].ToString()) + "\" />";
+            HttpContext.Current.Session["home_IdOferta"] = null;
+        }
+        if (HttpContext.Current.Session["home_IdTransfer"] != null)
+        {
+            resultado += "<input type=\"hidden\" id=\"hiddenhomeIdTransfer\" value=\"" + Server.HtmlEncode(HttpContext.Current.Session["home_IdTransfer"].ToString()) + "\" />";
+            HttpContext.Current.Session["home_IdTransfer"] = null;
+        }
+        if (HttpContext.Current.Session["home_Tipo"] != null)
+        {
+            resultado += "<input type=\"hidden\" id=\"hiddenhomeTipo\" value=\"" + Server.HtmlEncode(HttpContext.Current.Session["home_Tipo"].ToString()) + "\" />";
+            HttpContext.Current.Session["home_Tipo"] = null;
+        }
+
+
+    }
+    resultado += "<input id=\"hiddenIndexCarrito\" type =\"hidden\" />";
+
+    if (Kellerhoff.Controllers.mvcController.isCarritoExclusivo())
+    {
+        resultado += "<input type=\"hidden\" id=\"hiddenIsCarritoExclusivo\" value=\"" + Server.HtmlEncode("true") + "\" />";
+    }
+    if (Kellerhoff.Controllers.mvcController.isSubirPedido())
+    {
+        resultado += "<input type=\"hidden\" id=\"hiddenIsSubirPedido\" value=\"" + Server.HtmlEncode("true") + "\" />";
+    }
+
+    WriteLiteral(resultado);
+}
