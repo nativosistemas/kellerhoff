@@ -112,7 +112,34 @@ namespace Kellerhoff.Controllers
                         }
                         else
                         {
-                            resultado = "Usuario con rol sin permiso";
+                            if (user.idRol == Constantes.cROL_PROMOTOR)
+                            {
+                                // resultado = "Es Promotor";
+                                //resultado = user.NombreYApellido;
+                                Autenticacion objAutenticacion = new Autenticacion();
+                                objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
+                                objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
+                                WebService.CredencialAutenticacion = objAutenticacion;
+
+                                List<cClientes> clientes = WebService.spRecuperarTodosClientesByPromotor(user.ApNombre);
+
+                                System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
+
+                                if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                                {
+                                    System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
+                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                    System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
+                                    CargarAccionesEnVariableSession();
+                                    System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
+                                    System.Web.HttpContext.Current.Session["isMostrarOferta"] = false;
+                                    resultado = "OkPromotor";
+                                }
+                            }
+                            else
+                            {
+                                resultado = "Usuario con rol sin permiso.";
+                            }
                         }
                     }
                     else

@@ -348,5 +348,9 @@ namespace Kellerhoff.Controllers
             resultado = System.IO.File.Exists(Constantes.cArchivo_ImpresionesComprobante + nombreArchivo);
             return resultado;
         }
+        public void CambiarClientePromotor(int IdCliente)
+        {
+            System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)IdCliente);
+        }
     }
 }

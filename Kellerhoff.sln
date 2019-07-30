@@ -12,19 +12,14 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{56850317-1AB8-4331-94FE-FA7704239813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56850317-1AB8-4331-94FE-FA7704239813}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56850317-1AB8-4331-94FE-FA7704239813}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56850317-1AB8-4331-94FE-FA7704239813}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://kellerhoff.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Kellerhoff\\Kellerhoff.csproj
-		SccProjectName1 = Kellerhoff
-		SccLocalPath1 = Kellerhoff
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE231427-A3D9-4D07-B389-8442B9F231F6}
 	EndGlobalSection
 EndGlobal

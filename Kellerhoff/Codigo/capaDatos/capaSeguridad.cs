@@ -33,6 +33,11 @@ namespace Kellerhoff.Codigo.capaDatos
             get;
             set;
         }
+        public string ApNombre
+        {
+            get;
+            set;
+        }
         public string usu_pswDesencriptado
         {
             get;
@@ -61,6 +66,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public int? usu_codCliente { get; set; }
         public string rol_Nombre { get; set; }
         public string NombreYapellido { get; set; }
+        public string ApNombre { get; set; }
         public string usu_nombre { get; set; }
         public string usu_apellido { get; set; }
         public string usu_login { get; set; }

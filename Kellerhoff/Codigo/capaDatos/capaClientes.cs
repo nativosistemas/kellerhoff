@@ -56,6 +56,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public string cli_IdSucursalAlternativa { get; set; }
         private bool _cli_AceptaPsicotropicos = true;
         public bool cli_AceptaPsicotropicos { get { return _cli_AceptaPsicotropicos; } set {  _cli_AceptaPsicotropicos = value; } }
+        public string cli_promotor { get; set; }
     }
     public class cSucursal
     {
@@ -238,6 +239,34 @@ namespace Kellerhoff.Codigo.capaDatos
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("Clientes.spRecuperarTodosClientes", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                Conn.Open();
+                DataTable dt = new DataTable();
+                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+                dt.Load(LectorSQLdata);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
+        public static DataTable spRecuperarTodosClientesByPromotor(string pPromotor)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("Clientes.spRecuperarTodosClientesByPromotor", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter paPromotor = cmdComandoInicio.Parameters.Add("@cli_promotor", SqlDbType.NVarChar, 75);
+            paPromotor.Value = pPromotor;
             try
             {
                 Conn.Open();

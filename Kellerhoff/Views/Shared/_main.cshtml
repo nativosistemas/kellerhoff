@@ -119,24 +119,31 @@
 
                             }
                             @*inicio FARMASHOW*@
-                            @*@{
-
-                                string hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8082/index.php?NumeroCliente=" + ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente.ToString() + "\" ";
+                            @{
+                                string hrefFARMASHOW;
+                                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                                {
+                                    hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8082\" ";
+                                }
+                                else
+                                {
+                                    hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8082/index.php?NumeroCliente=" + ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente.ToString() + "\" ";
+                                }
                             }
-                            <li><a @{WriteLiteral(hrefFARMASHOW);} target="_blank"><h3>FARMASHOW</h3></a></li>*@
+                            <li><a @{WriteLiteral(hrefFARMASHOW);} target="_blank" class="btnFarmashow"><h3>PEDIDOS<br />FARMASHOW</h3></a></li>
                             @*fin FARMASHOW*@
                             @{
-                                if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_PEDIDOS))
+                                if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_PEDIDOS) && ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
                                 {
                                     <li><a @{ WriteLiteral(classPedidos);} href="/mvc/Buscador"><h3>PEDIDOS</h3></a></li>
-    }
-    if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_CUENTASCORRIENTES))
-    {
-        <li><a href="/ctacte/composicionsaldo" @{ WriteLiteral(classCuentasCorrientes);}><h3>CUENTAS CORRIENTES</h3></a></li>}
-    <li><a @{ WriteLiteral(classMediosDePagos);} href="/config/mediosdepago1"><h3>MEDIOS DE PAGOS</h3></a></li>
-    if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DESCARGAS))
-    {
-        <li><a href="/config/catalogo" @{ WriteLiteral(classDescargas);}><h3>DESCARGAS</h3></a></li>}
+                                }
+                                if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_CUENTASCORRIENTES))
+                                {
+                                    <li><a href="/ctacte/composicionsaldo" @{ WriteLiteral(classCuentasCorrientes);}><h3>CUENTAS CORRIENTES</h3></a></li>}
+                                <li><a @{ WriteLiteral(classMediosDePagos);} href="/config/mediosdepago1"><h3>MEDIOS DE PAGOS</h3></a></li>
+                                if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DESCARGAS))
+                                {
+                                    <li><a href="/config/catalogo" @{ WriteLiteral(classDescargas);}><h3>DESCARGAS</h3></a></li>}
                             }
                             <li>
                                 <a data-toggle="dropdown" class="user" href="#"><span><i class="fa fa-circle"></i></span><i class="fa fa-user-circle-o"></i></a>
@@ -150,13 +157,20 @@
                                             }}
                                     </li>
                                     <li><div class="separate"></div></li>
-                                    <li><a href="/config/mensajes"><i class="fa fa-envelope"></i>Mensajes<span class="msj_active">@{WriteLiteral(Kellerhoff.Controllers.configController.ObtenerCantidadMensaje());}</span></a></li>
-                                    <li><a href="/config/perfil"><i class="fa fa-key"></i>Contrase&ntilde;a</a></li>
-                                    @{  if (HttpContext.Current.Session["clientesDefault_Usuario"] != null
-            && ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_OPERADORCLIENTE)
+                                    <li><div class="separate"></div></li>
+                                    @{
+                                        if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                                        {
+                                            <li><a href="/config/mensajes"><i class="fa fa-envelope"></i>Mensajes<span class="msj_active">@{WriteLiteral(Kellerhoff.Controllers.configController.ObtenerCantidadMensaje());}</span></a></li>
+                                        }
+                                        <li><a href="/config/perfil"><i class="fa fa-key"></i>Contrase&ntilde;a</a></li>
+                                        if (HttpContext.Current.Session["clientesDefault_Usuario"] != null
+                                        && ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_OPERADORCLIENTE && ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
                                         {
                                             <li><a href="/config/usuarios"><i class="fa fa-users"></i>Usuarios</a></li>
-                                        } }
+                                        }
+
+                                    }
                                     <li><a class="off" href="#" onclick="onclickSignOff(); return false;"><i class="fa fa-power-off"></i>SALIR</a></li>
                                 </ul>
                             </li>
@@ -175,11 +189,11 @@
                 </div>
                 <div class="clear"></div>
                 @*inicio FARMASHOW*@
-                @*<li>
-                    <a class="s_menu1" id="filter_FARMASHOW"  @{WriteLiteral(hrefFARMASHOW);} target="_blank">FARMASHOW</a>
-                </li>*@
+                <li>
+                    <a class="s_menu1 btnFarmashow" id="filter_FARMASHOW" @{WriteLiteral(hrefFARMASHOW);} target="_blank">FARMASHOW</a>
+                </li>
                 @*fin FARMASHOW*@
-                @{  if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_PEDIDOS))
+                @{ if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_PEDIDOS) && ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
                     {
                         <li>
                             <a class="s_menu" id="filter_1" href="#">PEDIDOS<i id="angle_filter_1" class="fa fa-angle-down"></i></a>
@@ -231,13 +245,18 @@
                     <li>
                         <a class="s_menu" id="filter_5" href="#">PERFIL<i id="angle_filter_5" class="fa fa-angle-down"></i></a>
                         <div class="div_filter" id="d_filter_5">
-                            <a href="/config/mensajes"><i class="fa fa-envelope"></i>MENSAJES<span class="msj_active">@{WriteLiteral(Kellerhoff.Controllers.configController.ObtenerCantidadMensaje());}</span></a>
-                            <a href="/config/perfil"><i class="fa fa-key"></i>CONTRASE&Ntilde;A</a>
-                            @{  if (HttpContext.Current.Session["clientesDefault_Usuario"] != null
-        && ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_OPERADORCLIENTE)
+                            @{
+                                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                                {
+                                    <a href="/config/mensajes"><i class="fa fa-envelope"></i>MENSAJES<span class="msj_active">@{WriteLiteral(Kellerhoff.Controllers.configController.ObtenerCantidadMensaje());}</span></a>
+                                }
+                                <a href="/config/perfil"><i class="fa fa-key"></i>CONTRASE&Ntilde;A</a>
+                                if (HttpContext.Current.Session["clientesDefault_Usuario"] != null
+&& ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_OPERADORCLIENTE && ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
                                 {
                                     <a href="/config/usuarios"><i class="fa fa-users"></i>USUARIOS</a>
-                                } }
+                                }
+                            }
                         </div>
                     </li>
                     <li>
@@ -255,6 +274,35 @@
         </nav>
     </header>
     <section class="section-gris-claro wrapCelular">
+        <div class="col-xs-12">
+            @* Inicio Promotores *@
+            @{
+                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                {
+                    <p class="TitleCliente">Seleccione un cliente</p>
+                    List<Kellerhoff.Codigo.capaDatos.cClientes> colClientes = WebService.spRecuperarTodosClientesByPromotor(((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).ApNombre);
+                    //Kellerhoff.Codigo.capaDatos.cClientes oCli = ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+                    //<li><a  @{ WriteLiteral(classMediosDePagos);} ><h5>@{ WriteLiteral(oCli.cli_nombre); }&nbsp;&nbsp; <i class="fa fa-refresh"></i></h5></a></li>
+
+                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                        @{
+                            foreach (Kellerhoff.Codigo.capaDatos.cClientes oCli in colClientes)
+                            {
+                                if (((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); }</option>
+                                }
+                                else
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); }</option>
+                                }
+                            }
+                        }
+                    </select>
+                }
+            }
+            @* Fin Promotores *@
+        </div>
         <div id="contenidoRender" class="container-fluid">
             @RenderBody()
         </div>
@@ -338,6 +386,8 @@
     <script type="text/javascript" src="../includes/mvc/js/jquery/jquery.js"></script>
     <script type="text/javascript" src="../includes/mvc/js/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="../includes/mvc/js/jquery/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+
 
 
     <script src="~/includes/mvc/js/libreria.js?n=20" type="text/javascript"></script>
@@ -345,6 +395,7 @@
     <script src="~/includes/mvc/js/kellerhoff.js?n=32" type="text/javascript"></script>
     <script src="~/includes/mvc/js/ajax.js?n=38" type="text/javascript"></script>
     <script src="~/includes/mvc/js/mensaje.js?n=22" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/promotores.js?n=2" type="text/javascript"></script>
 
     @RenderSection("scripts", required: false)
 </body>

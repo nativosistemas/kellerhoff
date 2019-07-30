@@ -136,6 +136,10 @@ namespace Kellerhoff.Codigo.clases
         {
             get { return Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["rol_OperadorCliente"]); }
         }
+        public static int cROL_PROMOTOR
+        {
+            get { return Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["rol_Promotor"]); }
+        }
         public static string cTABLA_CATALOGO
         {
             get { return "catalogo"; }

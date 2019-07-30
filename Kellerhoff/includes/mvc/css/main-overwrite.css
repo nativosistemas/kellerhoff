@@ -213,3 +213,55 @@ color: #66abd8 !important;
 .cssInputNoMostrar {
   display:none;
 }
+
+
+.cmbCliente {
+    text-align-last: center !important;
+    height: 50px !important;
+}
+
+.select2-container--default .select2-selection--single {
+    border: none !important;
+    border-radius: 0 !important;
+    text-align: center !important;
+    height: 50px !important;
+}
+
+    .select2-container--default .select2-selection--single:focus {
+        outline-width: 0 !important;
+        height: 50px !important;
+    }
+
+.btnFarmashow {
+    margin-top: 20px !important;
+    background: #2ECC71 !important;
+    color: black !important;
+}
+
+    .btnFarmashow:hover,
+    .btnFarmashow:focus,
+    .btnFarmashow:active,
+    .btnFarmashow:window-inactive,
+    .btnFarmashow:visited {
+        margin-top: 20px !important;
+        background: #2ECC71 !important;
+        color: black !important;
+    }
+
+    .btnFarmashow h3 {
+        padding: 15px !important;
+        color: black !important;
+    }
+
+.navbar-inverse .btnFarmashow {
+    margin-top: 14px !important;
+}
+
+.TitleCliente {
+    text-align: center;
+    background: white;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    font-weight: 600;
+}

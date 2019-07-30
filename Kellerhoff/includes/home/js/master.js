@@ -143,12 +143,23 @@ function OnCallBackLoginCarrito(args) {
 function funIrIntranet() {
     location.href = '../mvc/Buscador';
 }
+
+function funIrIntranetPromotor() {
+    location.href = '../ctacte/composicionsaldo';
+}
+
 function OnCallBackLogin(args) {
     isIngresarPageMethods = false;
+    console.log(args);
     if (args == 'Ok') {
         localStorage['name'] = name;
         localStorage['pass'] = pass;
         funIrIntranet();
+    }
+    else if (args == 'OkPromotor') {
+        localStorage['name'] = name;
+        localStorage['pass'] = pass;
+        funIrIntranetPromotor();
     }
     else {
         $.alert({
