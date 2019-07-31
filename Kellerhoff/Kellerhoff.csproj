@@ -518,6 +518,7 @@
     <Content Include="includes\mvc\js\plugins\daterangepicker\daterangepicker.min.js" />
     <Content Include="includes\mvc\js\plugins\daterangepicker\moment.min.js" />
     <Content Include="includes\mvc\js\plugins\footable\footable.js" />
+    <Content Include="includes\mvc\js\promotores.js" />
     <Content Include="includes\mvc\js\subirpedido.js" />
     <Content Include="includes\mvc\js\transfer.js" />
     <Content Include="includes\mvc\less\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -910,6 +911,7 @@
     <Content Include="servicios\generar_archivoPdf.aspx" />
     <Content Include="servicios\generar_comprobantes_discriminado.aspx" />
     <Content Include="servicios\thumbnail.aspx" />
+    <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
     <Content Include="WebService.asmx" />
     <Content Include="img\Thumbs.db" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1114,6 +1114,8 @@ namespace Kellerhoff
 
             if (pItem.Table.Columns.Contains("cli_AceptaPsicotropicos") && pItem["cli_AceptaPsicotropicos"] != DBNull.Value)
                 obj.cli_AceptaPsicotropicos = Convert.ToBoolean(pItem["cli_AceptaPsicotropicos"]);
+            if (pItem.Table.Columns.Contains("cli_promotor") && pItem["cli_promotor"] != DBNull.Value)
+                obj.cli_promotor = Convert.ToString(pItem["cli_promotor"]);
             return obj;
         }
         private static cProductos ConvertToProductos(DataRow pItem)
@@ -1297,6 +1299,23 @@ namespace Kellerhoff
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 DataTable tablaClientes = capaClientes.RecuperarTodosClientes();
+                if (tablaClientes != null)
+                {
+                    resultado = new List<cClientes>();
+                    foreach (DataRow item in tablaClientes.Rows)
+                    {
+                        resultado.Add(ConvertToCliente(item));
+                    }
+                }
+            }
+            return resultado;
+        }
+        public static List<cClientes> spRecuperarTodosClientesByPromotor(string pPromotor)
+        {
+            List<cClientes> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                DataTable tablaClientes = capaClientes.spRecuperarTodosClientesByPromotor(pPromotor);
                 if (tablaClientes != null)
                 {
                     resultado = new List<cClientes>();
