@@ -119,7 +119,7 @@
 
                             }
                             @*inicio FARMASHOW*@
-                            @{
+                            @*@{
                                 string hrefFARMASHOW;
                                 if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
                                 {
@@ -130,7 +130,7 @@
                                     hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8082/index.php?NumeroCliente=" + ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente.ToString() + "\" ";
                                 }
                             }
-                            <li><a @{WriteLiteral(hrefFARMASHOW);} target="_blank" class="btnFarmashow"><h3>PEDIDOS<br />FARMASHOW</h3></a></li>
+                            <li><a @{WriteLiteral(hrefFARMASHOW);} target="_blank" class="btnFarmashow"><h3>PEDIDOS<br />FARMASHOW</h3></a></li>*@
                             @*fin FARMASHOW*@
                             @{
                                 if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_PEDIDOS) && ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
@@ -156,7 +156,6 @@
                                                 WriteLiteral(((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido);
                                             }}
                                     </li>
-                                    <li><div class="separate"></div></li>
                                     <li><div class="separate"></div></li>
                                     @{
                                         if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
@@ -189,9 +188,9 @@
                 </div>
                 <div class="clear"></div>
                 @*inicio FARMASHOW*@
-                <li>
+                @*<li>
                     <a class="s_menu1 btnFarmashow" id="filter_FARMASHOW" @{WriteLiteral(hrefFARMASHOW);} target="_blank">FARMASHOW</a>
-                </li>
+                </li>*@
                 @*fin FARMASHOW*@
                 @{ if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_PEDIDOS) && ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
                     {
