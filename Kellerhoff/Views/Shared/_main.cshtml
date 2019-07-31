@@ -43,14 +43,27 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
-                        <a class="navbar-brand" href="/mvc/Buscador">&nbsp;</a>
+                        @{
+                            string hrefHOME;
+                            if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                            {
+                                //hrefHOME = " href=\"http://www.kellerhoff.com.ar:8082\" ";
+                                hrefHOME = " href=\" /ctacte/composicionsaldo\" ";
+                            }
+                            else
+                            {
+                                hrefHOME = " href=\"/mvc/Buscador\" ";
+                                //hrefHOME = " href=\"http://www.kellerhoff.com.ar:8082/index.php?NumeroCliente=" + ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente.ToString() + "\" ";
+                            }
+                        }
+                        <a class="navbar-brand" @{WriteLiteral(hrefHOME);}>&nbsp;</a>
                     </div>
                     <div class="col-xs-12 visible-xs">
                         <div class="col-xs-2 no-padding-left">
                             <a id="menu-toggle" href="#" class="navbar-toggle float-left"><i class="fa fa-bars"></i></a>
                         </div>
                         <div class="col-xs-1 no-padding">
-                            <a href="/mvc/Buscador" class="float-left" style="margin-top:5px"><img src="/../../img/mvc/logos/logo_ch.png" /></a>
+                            <a @{WriteLiteral(hrefHOME);} class="float-left" style="margin-top:5px"><img src="/../../img/mvc/logos/logo_ch.png" /></a>
                         </div>
                         <div class="col-xs-9 no-padding text-right">
                             <div class="col-xs-11 bienv_xs">
@@ -395,7 +408,7 @@
     <script src="~/includes/mvc/js/kellerhoff.js?n=32" type="text/javascript"></script>
     <script src="~/includes/mvc/js/ajax.js?n=38" type="text/javascript"></script>
     <script src="~/includes/mvc/js/mensaje.js?n=22" type="text/javascript"></script>
-    <script src="~/includes/mvc/js/promotores.js?n=2" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/promotores.js?n=3" type="text/javascript"></script>
 
     @RenderSection("scripts", required: false)
 </body>

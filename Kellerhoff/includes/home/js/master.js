@@ -129,9 +129,12 @@ function OnCallBackLoginCarrito(args) {
     if (args == 'Ok') {
         localStorage['name'] = name;
         localStorage['pass'] = pass;
-        // Logeo correcto
-        idOferta = null;
         funIrIntranet();
+    }
+    else if (args == 'OkPromotor') {
+        localStorage['name'] = name;
+        localStorage['pass'] = pass;
+        funIrIntranetPromotor();
     }
     else {
         $.alert({

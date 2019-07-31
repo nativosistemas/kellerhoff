@@ -27,8 +27,8 @@
 
 var width_old = $(window).width();
 $(window).resize(function () {
-    if ($(window).width != width_old) {
+    if ($(this).width() != width_old) {
         $(".cmbCliente").select2();
-        width_old = $(window).width();
+        width_old = $(this).width();
     }
 })

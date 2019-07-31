@@ -22,16 +22,22 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="nav_sec">
-            <a href="/config/mensajes" @{ WriteLiteral(classMensajes);}><i class="fa fa-envelope" title="MENSAJES"></i><span class="hidden-sm hidden-xs">MENSAJES</span></a>
-            <div class="separate"></div>
+            @{
+                if (((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                {
+                    <a href="/config/mensajes" @{ WriteLiteral(classMensajes);}><i class="fa fa-envelope" title="MENSAJES"></i><span class="hidden-sm hidden-xs">MENSAJES</span></a>
+                    <div class="separate"></div>
+    }
+            }
             <a href="/config/perfil" @{ WriteLiteral(classPerfil);}><i class="fa fa-key" title="CONTRASEÑA"></i><span class="hidden-sm hidden-xs">CONTRASEÑA</span></a>
             @{
                 if (HttpContext.Current.Session["clientesDefault_Usuario"] != null
-                  && ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_OPERADORCLIENTE)
+                  && ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_OPERADORCLIENTE
+                  && ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
                 {
                     <div class="separate"></div>
-                    <a href="/config/usuarios" @{ WriteLiteral(classUsuarios);}><i class="fa fa-users"  title="USUARIOS"></i><span class="hidden-sm hidden-xs">USUARIOS</span></a>
-                }
+                    <a href="/config/usuarios" @{ WriteLiteral(classUsuarios);}><i class="fa fa-users" title="USUARIOS"></i><span class="hidden-sm hidden-xs">USUARIOS</span></a>
+    }
             }
         </div>
     </div>
