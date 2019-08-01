@@ -928,6 +928,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Web_config\Web.config_produccion" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\Default.aspx.cs">

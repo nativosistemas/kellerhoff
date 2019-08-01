@@ -123,7 +123,7 @@
                                         <u>Mostrador</u>: 0341-4203363<br />
                                         <u>Jefatura de ventas</u>: Joaquín Gamborena<br />
                                         <u>Promotores</u>: Mario Palacios; Néstor Perez; Facundo Angelini<br />
-                                        <u>Farmacéutica</u>: Crisitina Kellerhoff<br />
+                                        <u>Farmacéutica</u>: Cristina Kellerhoff<br />
                                         <u>Domicilio</u>: Pueyrredon 1149<br />
                                         <u>C.P.A.</u>: S2000QIG<br />
                                         <u>WhatsApp</u>: 341 3163291<br />
@@ -148,7 +148,7 @@
                                         <b>CONCEPCI&#211;N DEL URUGUAY</b><br />
                                         <u>Encargado</u>: Eduardo Gutierrez<br />
                                         <u>Promotor</u>: Oscar Moyano<br />
-                                        <u>Ctas. Ctes.</u>: Paola Calzia<br />
+                                        <u>Ctas. Ctes.</u>: Nadia Saade<br />
                                         <u>Farmacéutico</u>: Roberto O. Bracco<br />
                                         <u>Domicilio</u>: Posadas 976<br />
                                         <u>C.P.A.</u>: E3260ATF<br />
@@ -173,9 +173,10 @@
                                     <div class="info_mapa hidden" data-info="5">
                                         <b>C&#211;RDOBA</b><br />
                                         <u>Encargado</u>: Marcelo Bravin<br />
-                                        <u>Promotor</u>: José Portelli - Olga Echenique<br />
+                                        <u>Promotor</u>: José Portelli - Olga Echenique - Juan Pablo Martellotto<br />
                                         <u>Ctas. Ctes.</u>: Carolina Beretta<br />
                                         <u>Farmacéutico</u>: Karina Nieddu<br />
+                                         <u>Supervisor de Ventas</u>: Edgar Martinelli<br />
 <%--DOMICILIO: RAYO CORTADO 2275 - Bº EMPALME
 CPA: X5006IMG
 TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
@@ -193,8 +194,8 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                     <div class="info_mapa hidden" data-info="6">
                                         <b>SANTA FE</b><br />
                                         <u>Encargado</u>: Walter Cesar Luque<br />
-                                        <u>Promotor</u>: Maximiliano Flores – Sebastián Mora<br />
-                                        <u>Ctas. Ctes.</u>: Leonardo Valentinuzzi – Claudia Campagnucci<br />
+                                        <u>Promotor</u>: Maximiliano Flores<br />
+                                        <u>Ctas. Ctes.</u>: Daniela Cardozo – Claudia Campagnucci<br />
                                         <u>Farmacéutico</u>: Patricia Borrelli<br />
                                         <u>Domicilio</u>: Av. Blas Parera 6633<br />
                                         <u>C.P.A.</u>: S3000FCC<br />
@@ -207,7 +208,7 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                     <div class="info_mapa hidden" data-info="7">
                                         <b>SAN NICOLAS</b><br />
                                         <u>Encargado</u>: Guillermo Díaz<br />
-                                        <u>Promotor</u>: Nestor Perez<br />
+                                        <u>Promotor</u>: German Gonzalez<br />
                                         <u>Ctas. Ctes.</u>: Nanci Giussani<br />
                                         <u>Farmacéutico</u>: Pablo Prado<br />
                                         <u>Domicilio</u>: Pte Perón 1445<br />
@@ -220,7 +221,8 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                      <div class="info_mapa hidden" data-info="8">
                                         <b>VILLA MARÍA</b><br />
                                         <u>Encargado</u>: Manuel Vinzón<br />
-                                        <u>Farmacéutico</u>: Ivana Bodello<br />
+                                        <u>Farmacéutico</u>: Natalia Buhlman<br />
+                                        <u>Promotor</u>: Agustín Arias<br />
                                         <u>Domicilio</u>: Leandro N Alem 330<br />
                                         <u>C.P.A.</u>: X5900JAQ<br />
                                         <u>Teléfonos</u>: 0353-4548519 / 0353-4546570<br />
@@ -231,7 +233,8 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                     <div class="info_mapa hidden" data-info="9">
                                         <b>RÍO CUARTO</b><br />
                                         <u>Encargado</u>: Gustavo Oscar Antonucci<br />
-                                        <u>Farmacéutico</u>: María Eleonor Riesgo<br />
+                                        <u>Farmacéutico</u>: Guillermo Canónico<br />
+                                        <u>Promotor</u>: Agustín Arias<br />
                                         <u>Domicilio</u>: Buenos Aires 264<br />
                                         <u>C.P.A.</u>: X5800DIF<br />
                                         <u>Teléfonos</u>: 0358-4633632 / 4650717 / 4654048 / 4702634<br />
