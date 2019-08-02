@@ -29,8 +29,8 @@
     <link rel="shortcut icon" href="~/favicon.ico" />
 
     @RenderSection("head", required: false)
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
     <link href="../includes/mvc/css/main.css?n=19" rel="stylesheet">
+    <link href="../includes/mvc/css/select2.min.css?n=1" rel="stylesheet">
     <link href="../includes/mvc/css/main-overwrite.css?n=29" rel="stylesheet">
 </head>
 <body id="divBody" class="bd_sec" onresize="onresizeBody()">
@@ -134,17 +134,17 @@
                             }
                             @*inicio FARMASHOW*@
                             @*@{
-                                string hrefFARMASHOW;
-                                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
-                                {
-                                    hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8082\" ";
+                                    string hrefFARMASHOW;
+                                    if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                                    {
+                                        hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8082\" ";
+                                    }
+                                    else
+                                    {
+                                        hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8082/index.php?NumeroCliente=" + ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente.ToString() + "\" ";
+                                    }
                                 }
-                                else
-                                {
-                                    hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8082/index.php?NumeroCliente=" + ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente.ToString() + "\" ";
-                                }
-                            }
-                            <li><a @{WriteLiteral(hrefFARMASHOW);} target="_blank" class="btnFarmashow"><h3>PEDIDOS<br />FARMASHOW</h3></a></li>*@
+                                <li><a @{WriteLiteral(hrefFARMASHOW);} target="_blank" class="btnFarmashow"><h3>PEDIDOS<br />FARMASHOW</h3></a></li>*@
                             @*fin FARMASHOW*@
                             @{
                                 if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_PEDIDOS) && ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
@@ -203,8 +203,8 @@
                 <div class="clear"></div>
                 @*inicio FARMASHOW*@
                 @*<li>
-                    <a class="s_menu1 btnFarmashow" id="filter_FARMASHOW" @{WriteLiteral(hrefFARMASHOW);} target="_blank">FARMASHOW</a>
-                </li>*@
+                        <a class="s_menu1 btnFarmashow" id="filter_FARMASHOW" @{WriteLiteral(hrefFARMASHOW);} target="_blank">FARMASHOW</a>
+                    </li>*@
                 @*fin FARMASHOW*@
                 @{ if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_PEDIDOS) && ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
                     {
@@ -399,7 +399,7 @@
     <script type="text/javascript" src="../includes/mvc/js/jquery/jquery.js"></script>
     <script type="text/javascript" src="../includes/mvc/js/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="../includes/mvc/js/jquery/owl.carousel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+    <script type="text/javascript" src="../includes/mvc/js/select2.full.min.js"></script>
 
 
 
