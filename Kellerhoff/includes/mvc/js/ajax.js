@@ -460,6 +460,23 @@ function RecuperarTransfer(pNombreProducto) {
         }
     });
 }
+function RecuperarTransferPromotores(pNombreProducto) {
+    $.ajax({
+        type: "POST",
+        url: "/mvc/RecuperarTransfer",
+        data: { pNombreProducto: pNombreProducto },
+        success:
+            function (response) {
+                OnCallBackRecuperarTransferPromotor(response);
+            },
+        failure: function (response) {
+            OnFail(response);
+        },
+        error: function (response) {
+            OnFail(response);
+        }
+    });
+}
 function TomarTransferPedidoCarrito(pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio) {
     $.ajax({
         type: "POST",

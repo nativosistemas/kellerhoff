@@ -337,7 +337,7 @@ function OnCallBackRecuperarProductosPromotores(args) {
                     }
                     strHtml += '<td class="' + tdBodyClass + ' tdNombreProducto ';
                     strHtml += strHtmlColorFondo + '" ';//'">';
-                    strHtml += ' OnMouseMove="OnMouseMoveProdructo(event)" OnMouseOver="OnMouseOverProdructo(' + i + ')" OnMouseOut="OnMouseOutProdructo()"  onclick="onclickRecuperarTransfer(' + i + '); return false;" >'
+                    strHtml += ' OnMouseMove="OnMouseMoveProdructo(event)" OnMouseOver="OnMouseOverProdructo(' + i + ')" OnMouseOut="OnMouseOutProdructo()"  onclick="onclickRecuperarTransferPromotor(' + i + '); return false;" >'
                     if (isSubirPedido) {
                         strHtml += '<div class="col-lg-10 col-md-10 col-sm-10 div_prod_sp">';
                     }
@@ -537,6 +537,41 @@ function OnCallBackRecuperarProductosPromotores(args) {
                 setTimeout(function () { CargarUnidadesRenglones(); }, 300);
                 setTimeout(function () { ReAjustarColumnasBuscador(); }, 40);
             }
+        }
+    }
+}
+
+
+function onclickRecuperarTransferPromotor(pIndice) {
+    if (!isSubirPedido) { // si no es carrito diferido
+        if (cli_tomaTransfers()) {
+            if (listaProductosBuscados[pIndice].isTieneTransfer) {
+                productoSeleccionado = listaProductosBuscados[pIndice].pro_nombre;
+                RecuperarTransferPromotores(listaProductosBuscados[pIndice].pro_nombre);
+            }
+        }
+    }
+}
+function OnCallBackRecuperarTransferPromotor(args) {
+    if (isNotNullEmpty(args))
+        listaTransfer = eval('(' + args + ')');
+    else
+        listaTransfer = null;
+
+    if (listaTransfer != null) {
+        if (listaTransfer.length > 0) {
+            if (listaTransfer.length == 1) {
+                onclickMostrarUnTransferDeVarios(0);
+                //strHtmlTransfer += AgregarTransferHtmlAlPopUp(0);
+            } else {
+                //strHtmlTransfer += '<div style="font-size:16px; margin-top: 10px;"  >' + 'Seleccione un transfer:' + '</div>';//Elija un transfer:
+                //for (var i = 0; i < listaTransfer.length; i++) {
+                //    strHtmlTransfer += '<div class="transferComboLista" style="font-size:14px; margin-top: 50px; cursor:pointer;" onmouseover="onmouseoverElijaTransfer(this)" onmouseout="onmouseoutElijaTransfer(this)" onclick="onclickMostrarUnTransferDeVarios(' + i + ')">' + listaTransfer[i].tfr_nombre + '</div>';
+                //}
+                $('#modalModulo').html(htmlSeleccioneTransfer(listaTransfer));
+                $('#modalModulo').modal();
+            }
+
         }
     }
 }
