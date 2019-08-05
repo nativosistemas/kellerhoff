@@ -21,9 +21,24 @@
     </div>
     <div class="col-lg-12 no-padding">
         @*<form>*@
+        @{
+            string actionBuscar;
+            string actionBuscarInput;
+            if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+            {
+                actionBuscar = "onClickBuscarPromotores(); return false;";
+                actionBuscarInput = "onkeypressEnterPromotores(event, this)";
+            }
+            else
+            {
+
+                actionBuscar = "onClickBuscar(); return false;";
+                actionBuscarInput = "onkeypressEnter(event, this)";
+            }
+        }
         <input class="form-control buscador" id="txtBuscador" name="txtBuscador" placeholder="Buscar por nombre, c&oacute;digo, laboratorio, otro"
-               onkeypress="onkeypressEnter(event, this)" onfocus="onNullBuscar(this)" onblur="onNullBuscar(this)"
-               autocomplete="off" /><a class="btn_buscar" href="#" onclick="onClickBuscar(); return false;"></a>
+               onkeypress=" @{WriteLiteral(actionBuscarInput);}" onfocus="onNullBuscar(this)" onblur="onNullBuscar(this)"
+               autocomplete="off" /><a class="btn_buscar" href="#" onclick=" @{WriteLiteral(actionBuscar);}"></a>
         @*</form>*@
     </div>
     <div class="clear15"></div>
