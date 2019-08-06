@@ -233,7 +233,7 @@ color: #66abd8 !important;
     }
 
 .btnFarmashow {
-    margin-top: 20px !important;
+    margin-top: 30px !important;
     background: #2ECC71 !important;
     color: black !important;
 }
@@ -243,7 +243,7 @@ color: #66abd8 !important;
     .btnFarmashow:active,
     .btnFarmashow:window-inactive,
     .btnFarmashow:visited {
-        margin-top: 20px !important;
+        margin-top: 30px !important;
         background: #2ECC71 !important;
         color: black !important;
     }
