@@ -16,36 +16,46 @@
     }
 
 }
+
+@{
+    if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+    {
+        <style>
+            input[type=number], .cant_trasf_combo, .btn_confirmar, .btn_carrito, .cssFocusCantProdCarrito {
+                display: none !important;
+            }
+
+            .pt_transf_combo {
+                width: 100%;
+            }
+            .pt_stock, .pt_sin_stock, .pt_critico {
+                float: none;
+            }
+        </style>
+    }
+}
+
 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 col_PedidosBuscador">
     <div id="divContenedorBaseCuentaRegresivaCelular" style="display:none;" class="div_cierre_reparto">
     </div>
     <div class="col-lg-12 no-padding">
         @*<form>*@
-        @{
-            string actionBuscar;
-            string actionBuscarInput;
-            if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
-            {
-                actionBuscar = "onClickBuscarPromotores(); return false;";
-                actionBuscarInput = "onkeypressEnterPromotores(event, this)";
-            }
-            else
-            {
-
-                actionBuscar = "onClickBuscar(); return false;";
-                actionBuscarInput = "onkeypressEnter(event, this)";
-            }
-        }
         <input class="form-control buscador" id="txtBuscador" name="txtBuscador" placeholder="Buscar por nombre, c&oacute;digo, laboratorio, otro"
-               onkeypress=" @{WriteLiteral(actionBuscarInput);}" onfocus="onNullBuscar(this)" onblur="onNullBuscar(this)"
-               autocomplete="off" /><a class="btn_buscar" href="#" onclick=" @{WriteLiteral(actionBuscar);}"></a>
+               onkeypress="onkeypressEnter(event, this)" onfocus="onNullBuscar(this)" onblur="onNullBuscar(this)"
+               autocomplete="off" /><a class="btn_buscar" href="#" onclick="onClickBuscar(); return false;"></a>
         @*</form>*@
     </div>
     <div class="clear15"></div>
     @*<div class="col-lg-5 no-padding"><a id="opciones_avanzadas" class="btn_a14-g" href="#">Opciones avanzadas<i id="eye_opciones_avanzadas" class="fa fa-eye-slash"></i></a></div>*@
     <div class="col-lg-5 col-xs-6 no-padding"><div class="clear10 visible-xs"></div> <a id="opciones_avanzadas" class="btn_a14-g" href="#">Opciones avanzadas<i id="eye_opciones_avanzadas" class="fa fa-eye-slash"></i></a></div>
     <div class="col-lg-7 no-padding text-right hidden-xs"><div class="div-pt_buscador no-margin-r">Sin stock</div><div class="pt_sin_stock pt_buscador"></div><div class="div-pt_buscador">Crítico</div><div class="pt_critico pt_buscador"></div><div class="div-pt_buscador">Stock</div><div class="pt_stock pt_buscador"></div></div>
-    <div class="col-xs-6 no-padding text-right visible-xs"><a class="btn_carrito_cant" href=@{ WriteLiteral(hrefCarritoGenerico);}>Carrito<span id="spanCarritoCantidad"></span></a></div>
+    @{
+        if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+        {
+            <div class="col-xs-6 no-padding text-right visible-xs"><a class="btn_carrito_cant" href=@{ WriteLiteral(hrefCarritoGenerico);}>Carrito<span id="spanCarritoCantidad"></span></a></div>
+        }
+    }
+
     <div class="clear15"></div>
     <div id="filtros_opciones_avanzadas" class="col-lg-12 no-padding">
         <div class="radio-checkbox rc_buscador">
