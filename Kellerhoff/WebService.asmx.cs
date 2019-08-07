@@ -3150,8 +3150,9 @@ namespace Kellerhoff
             List<cFaltantesConProblemasCrediticiosPadre> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
+                cClientes oCliente = RecuperarClientePorId(fpc_codCliente);
                 DataTable tabla = capaLogRegistro.RecuperarFaltasProblemasCrediticios(fpc_codCliente, fpc_tipo, pCantidadDia);
-                resultado = ConvertDataTableAClase(tabla);
+                resultado = ConvertDataTableAClase(tabla, oCliente);
                 return resultado;
             }
             else
@@ -3193,8 +3194,9 @@ namespace Kellerhoff
             List<cFaltantesConProblemasCrediticiosPadre> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
+                cClientes oCliente = RecuperarClientePorId(fpc_codCliente);
                 DataTable tabla = capaLogRegistro.RecuperarFaltasProblemasCrediticios_TodosEstados(fpc_codCliente, fpc_tipo, pCantidadDia);
-                resultado = ConvertDataTableAClase(tabla);
+                resultado = ConvertDataTableAClase(tabla, oCliente);
                 return resultado;
             }
             else
@@ -3202,7 +3204,7 @@ namespace Kellerhoff
                 return resultado;
             }
         }
-        public static List<cFaltantesConProblemasCrediticiosPadre> ConvertDataTableAClase(DataTable tabla)
+        public static List<cFaltantesConProblemasCrediticiosPadre> ConvertDataTableAClase(DataTable tabla, cClientes pClientes)
         {
             List<cFaltantesConProblemasCrediticiosPadre> resultado = null;
             if (tabla != null)
@@ -3219,9 +3221,24 @@ namespace Kellerhoff
                     obj.suc_nombre = resultadoTemporalDistinct[i].suc_nombre;
                     obj.fpc_tipo = resultadoTemporalDistinct[i].fpc_tipo;
                     obj.listaProductos = new List<cFaltantesConProblemasCrediticios>();
-                    obj.listaProductos.AddRange((from itemTabla in tabla.AsEnumerable()
-                                                 where itemTabla.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal
-                                                 select new cFaltantesConProblemasCrediticios { fpc_cantidad = itemTabla.Field<int>("fpc_cantidad"), fpc_nombreProducto = itemTabla.Field<string>("fpc_nombreProducto"), stk_stock = itemTabla.Field<string>("stk_stock"), pro_ofeunidades = itemTabla.Field<int>("pro_ofeunidades"), pro_ofeporcentaje = itemTabla.Field<decimal>("pro_ofeporcentaje") }));
+                    foreach (var item in tabla.AsEnumerable().Where(xRow => xRow.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal))
+                    {
+                        cProductos oTemp = ConvertToProductos(item);
+                        //cFaltantesConProblemasCrediticios o = new cFaltantesConProblemasCrediticios(oTemp);
+                        cFaltantesConProblemasCrediticios o = new cFaltantesConProblemasCrediticios();
+                        o.fpc_cantidad = item.Field<int>("fpc_cantidad");
+
+                        o.fpc_nombreProducto = item.Field<string>("fpc_nombreProducto");
+                        o.stk_stock = item.Field<string>("stk_stock");
+                        o.PrecioFinal = FuncionesPersonalizadas.ObtenerPrecioFinal(pClientes, oTemp);
+                        o.pro_ofeunidades = item.Field<int>("pro_ofeunidades");
+                        o.pro_ofeporcentaje = item.Field<decimal>("pro_ofeporcentaje");
+                        obj.listaProductos.Add(o);
+                    }
+
+                    //obj.listaProductos.AddRange((from itemTabla in tabla.AsEnumerable()
+                    //                             where itemTabla.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal
+                    //                             select new cFaltantesConProblemasCrediticios { fpc_cantidad = itemTabla.Field<int>("fpc_cantidad"), fpc_nombreProducto = itemTabla.Field<string>("fpc_nombreProducto"), stk_stock = itemTabla.Field<string>("stk_stock"), pro_ofeunidades = itemTabla.Field<int>("pro_ofeunidades"), pro_ofeporcentaje = itemTabla.Field<decimal>("pro_ofeporcentaje") }));
                     resultado.Add(obj);
                 }
 

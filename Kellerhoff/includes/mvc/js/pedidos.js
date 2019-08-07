@@ -248,6 +248,15 @@ function CargarRecuperadorFaltasYCrediticios() {
                 strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Cantidad</td></tr>';
                 strHtml += '</table>';
                 strHtml += '</th>';
+                // inicio precio
+                strHtml += '<th class="col-xs-1 text-center">';
+                strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+                strHtml += '<tr class="hidden-xs"><td class="col-lg-12 text-center">&nbsp;<div class="clear"></div></td></tr>';
+                strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Precio</td></tr>';
+                strHtml += '</table>';
+                strHtml += '</th>';
+                strHtml += '</th>';
+                // fin precio
                 strHtml += '<th class="col-xs-1 text-center">';
                 strHtml += '<table class="hidden-xs" width="100%" cellpadding="0" cellspacing="0">';
                 strHtml += '<tr class="hidden-xs"><td class="col-lg-12 text-center">&nbsp;<div class="clear"></div></td></tr>';
@@ -259,12 +268,13 @@ function CargarRecuperadorFaltasYCrediticios() {
                 //
                 strHtml += '<tbody class="pagos">';
                 strHtml += '<tr class="wht">';
-                strHtml += '<td class="col-xs-10 pl_xs">';
+                strHtml += '<td class="col-xs-9 pl_xs">';
                 strHtml += '<div class="radio-checkbox">';
                 strHtml += '<input class="checkbox"  type="checkbox" id="checkRecuperador_' + i + '_' + 'Todos' + '" onclick="onclickSeleccionarTodosRecuperador(' + i + ')" />';
                 strHtml += '<label for="checkRecuperador_' + i + '_' + 'Todos' + '" value="">TODOS</label>';
                 strHtml += '</div>';
                 strHtml += '</td>';
+                strHtml += '<td class="col-xs-1 text-center"></td>';
                 strHtml += '<td class="col-xs-1 text-center"></td>';
                 strHtml += '<td class="col-xs-1 text-center"></td>';
                 strHtml += '</tr>';
@@ -280,19 +290,26 @@ function CargarRecuperadorFaltasYCrediticios() {
                     strHtml += '<div class="radio-checkbox">';
                     var SoloLecturaCheckBox = '';
 
-                    strHtml += '<input class="checkbox"  type="checkbox" id="checkRecuperador_' + i + '_' + iProductos + '" ' + SoloLecturaCheckBox + ' />';
+                    strHtml += '<input class="checkbox"  type="checkbox" id="checkRecuperador_' + i + '_' + iProductos + '" ' + SoloLecturaCheckBox + '  onclick="onclickActualizarTotal(' + i + ')" />';
                     strHtml += '<label for="checkRecuperador_' + i + '_' + iProductos + '" value="">' + listaRecuperardor[i].listaProductos[iProductos].fpc_nombreProducto + '</label>';
                     strHtml += '</div>';
                     strHtml += '</td>';
                     strHtml += '<td id="tdCantidadRecuperador_' + i + '_' + iProductos + '" class="col-xs-1 text-center">' 
                     strHtml += listaRecuperardor[i].listaProductos[iProductos].fpc_cantidad;
                     strHtml += '</td>';
+                    strHtml += '<td class="col-xs-1 text-center">'
+                    var precio = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaRecuperardor[i].listaProductos[iProductos].PrecioFinal.toFixed(2));
+                    if (listaRecuperardor[i].listaProductos[iProductos].PrecioFinal === 0) {
+                        precio = '';
+                    }
+                    strHtml += precio;
+                    strHtml += '</td>';
                     strHtml += '<td class="col-xs-1 text-center"><div class="' + getNameClassStock(listaRecuperardor[i].listaProductos[iProductos].stk_stock.toUpperCase()) + ' center"></div></td>';
                     strHtml += '</tr>';
                 }
                 strHtml += '</tbody>';
                 strHtml += '</table>';
-
+                strHtml += '<span id="spanTotal' + i + '" class="badge badge-secondary"></span>';
                 strHtml += '<a class="btn_confirmar" href="#" onclick="onclickConfirmarRecuperador(' + i + '); return false;">CONFIRMAR</a>';
                 strHtml += '<a class="btn_vaciar float-left" href="#" onclick="onclickDescartarRecuperador(' + i + '); return false;">DESCARTAR</a>';
   
@@ -314,13 +331,32 @@ function CargarRecuperadorFaltasYCrediticios() {
 
     $('#divRecuperador').html(strHtml);
 }
+function onclickActualizarTotal(pValor) {
+    if (listaRecuperardor != null) {
+        //var isChecked = $('#checkRecuperador_' + pValor + '_' + 'Todos').is(":checked");
+        var total = 0;
+        for (var iProductos = 0; iProductos < listaRecuperardor[pValor].listaProductos.length; iProductos++) {
+            if ($('#checkRecuperador_' + pValor + '_' + iProductos).is(":checked")) {
+                total += (listaRecuperardor[pValor].listaProductos[iProductos].PrecioFinal * listaRecuperardor[pValor].listaProductos[iProductos].fpc_cantidad );
+            }
+           // $('#checkRecuperador_' + pValor + '_' + iProductos).attr('checked', isChecked);
+        }
+        if (total === 0) {
+            $('#spanTotal' + pValor).html('');
+        } else {
+            $('#spanTotal' + pValor).html('Total: ' + '$&nbsp;' + FormatoDecimalConDivisorMiles(total.toFixed(2)));
+        }
+
+    }
+}
 function onclickSeleccionarTodosRecuperador(pValor) {
     if (listaRecuperardor != null) {
         var isChecked = $('#checkRecuperador_' + pValor + '_' + 'Todos').is(":checked");
         for (var iProductos = 0; iProductos < listaRecuperardor[pValor].listaProductos.length; iProductos++) {
-            $('#checkRecuperador_' + pValor + '_' + iProductos).attr('checked', isChecked);
+            $('#checkRecuperador_' + pValor + '_' + iProductos).prop('checked', isChecked);
         }
     }
+    onclickActualizarTotal(pValor);
 }
 function onclickConfirmarRecuperador(pIndexCarrito) {
     var contadorArray = -1;

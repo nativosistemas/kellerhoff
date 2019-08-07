@@ -40,15 +40,33 @@ namespace Kellerhoff.Codigo.capaDatos
         //public string stk_stock { get; set; }
         public List<cFaltantesConProblemasCrediticios> listaProductos { get; set; }
     }
-    public class cFaltantesConProblemasCrediticios
+    public class cFaltantesConProblemasCrediticios//:cProductos
     {
-        //public int fpc_id { get; set; }
+        //public cFaltantesConProblemasCrediticios(cProductos pProducto)
+        //{
+        //    base.pro_codigo = pProducto.pro_codigo;
+        //    base.pro_nombre = pProducto.pro_nombre;
+        //    base.PrecioFinal = pProducto.PrecioFinal;
+        //    base.pro_codigoalfabeta = pProducto.pro_codigoalfabeta;
+        //    base.pro_codigobarra = pProducto.pro_codigobarra;
+        //    base.pro_codtpopro = pProducto.pro_codtpopro;
+        //    base.pro_descuentoweb = pProducto.pro_descuentoweb;
+        //    base.pro_laboratorio = pProducto.pro_laboratorio;
+        //    base.pro_monodroga = pProducto.pro_monodroga;
+        //    base.pro_codtpovta = pProducto.pro_codtpovta;
+        //    base.pro_neto = pProducto.pro_neto;
+        //    base.pro_ofeporcentaje = pProducto.pro_ofeporcentaje;
+        //    base.pro_ofeunidades = pProducto.pro_ofeunidades;
+        //    base.pro_precio = pProducto.pro_precio;
+        //    base.pro_preciofarmacia = pProducto.pro_preciofarmacia;
+        //    base.pro_isTrazable = pProducto.pro_isTrazable;
+        //    base.pro_NoTransfersEnClientesPerf = pProducto.pro_NoTransfersEnClientesPerf;
+        //}
         public string fpc_nombreProducto { get; set; }
         public int fpc_cantidad { get; set; }
         public int pro_ofeunidades { get; set; }
         public decimal pro_ofeporcentaje { get; set; }
-        //public DateTime? fpc_fecha { get; set; }
-        //public string fpc_fechaToString { get; set; }
+        public decimal PrecioFinal { get; set; }
         public string stk_stock { get; set; }
     }
     public class cHistorialArchivoSubir
