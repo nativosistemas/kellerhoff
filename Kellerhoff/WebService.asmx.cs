@@ -3151,43 +3151,24 @@ namespace Kellerhoff
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 cClientes oCliente = RecuperarClientePorId(fpc_codCliente);
-                DataTable tabla = capaLogRegistro.RecuperarFaltasProblemasCrediticios(fpc_codCliente, fpc_tipo, pCantidadDia);
-                resultado = ConvertDataTableAClase(tabla, oCliente);
+                //DataTable tabla = capaLogRegistro.RecuperarFaltasProblemasCrediticios(fpc_codCliente, fpc_tipo, pCantidadDia);
+                DataSet dsResultado = capaLogRegistro.RecuperarFaltasProblemasCrediticios(fpc_codCliente, fpc_tipo, pCantidadDia);
+                List<cTransferDetalle> listaTransferDetalle = new List<cTransferDetalle>();
+                DataTable tablaTransferDetalle = dsResultado.Tables[1];
+                foreach (DataRow itemTransferDetalle in tablaTransferDetalle.Rows)
+                {
+                    cTransferDetalle objTransferDetalle = ConvertToTransferDetalle(itemTransferDetalle);
+                    objTransferDetalle.CargarTransfer(ConvertToTransfer(itemTransferDetalle));
+                    listaTransferDetalle.Add(objTransferDetalle);
+                }
+
+                resultado = ConvertDataTableAClase(dsResultado.Tables[0], listaTransferDetalle, oCliente);
                 return resultado;
             }
             else
             {
                 return resultado;
             }
-            //if (VerificarPermisos(CredencialAutenticacion))
-            //{
-            //    List<cFaltantesConProblemasCrediticiosPadre> resultado = new List<cFaltantesConProblemasCrediticiosPadre>();
-            //    DataTable tabla = capaLogRegistro.RecuperarFaltasProblemasCrediticios(fpc_codCliente, fpc_tipo, pCantidadDia);
-            //    if (tabla != null)
-            //    {
-            //        var resultadoTemporal = (from item in tabla.AsEnumerable()
-            //                                 select new { fpc_tipo = item.Field<int>("fpc_tipo"), fpc_codSucursal = item.Field<string>("fpc_codSucursal"), suc_nombre = item.IsNull("suc_nombre") ? item.Field<string>("fpc_codSucursal") : item.Field<string>("suc_nombre") }).Distinct().ToList();
-
-            //        var resultadoTemporalDistinct = (from t in resultadoTemporal select new { fpc_tipo = t.fpc_tipo, fpc_codSucursal = t.fpc_codSucursal, suc_nombre = t.suc_nombre }).Distinct().ToList();
-            //        for (int i = 0; i < resultadoTemporalDistinct.Count; i++)
-            //        {
-            //            cFaltantesConProblemasCrediticiosPadre obj = new cFaltantesConProblemasCrediticiosPadre();
-            //            obj.fpc_codSucursal = resultadoTemporalDistinct[i].fpc_codSucursal;
-            //            obj.suc_nombre = resultadoTemporalDistinct[i].suc_nombre;
-            //            obj.fpc_tipo = resultadoTemporalDistinct[i].fpc_tipo;
-            //            obj.listaProductos = new List<cFaltantesConProblemasCrediticios>();
-            //            obj.listaProductos.AddRange((from itemTabla in tabla.AsEnumerable()
-            //                                         where itemTabla.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal
-            //                                         select new cFaltantesConProblemasCrediticios { fpc_cantidad = itemTabla.Field<int>("fpc_cantidad"), fpc_nombreProducto = itemTabla.Field<string>("fpc_nombreProducto"), stk_stock = itemTabla.Field<string>("stk_stock"), pro_ofeunidades = itemTabla.Field<int>("pro_ofeunidades"), pro_ofeporcentaje = itemTabla.Field<decimal>("pro_ofeporcentaje") }));
-            //            resultado.Add(obj);
-            //        }
-            //    }
-            //    return resultado;
-            //}
-            //else
-            //{
-            //    return null;
-            //}
         }
         public static List<cFaltantesConProblemasCrediticiosPadre> RecuperarFaltasProblemasCrediticios_TodosEstados(int fpc_codCliente, int fpc_tipo, int pCantidadDia)
         {
@@ -3195,8 +3176,16 @@ namespace Kellerhoff
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 cClientes oCliente = RecuperarClientePorId(fpc_codCliente);
-                DataTable tabla = capaLogRegistro.RecuperarFaltasProblemasCrediticios_TodosEstados(fpc_codCliente, fpc_tipo, pCantidadDia);
-                resultado = ConvertDataTableAClase(tabla, oCliente);
+                DataSet dsResultado = capaLogRegistro.RecuperarFaltasProblemasCrediticios_TodosEstados(fpc_codCliente, fpc_tipo, pCantidadDia);
+                List<cTransferDetalle> listaTransferDetalle = new List<cTransferDetalle>();
+                DataTable tablaTransferDetalle = dsResultado.Tables[1];
+                foreach (DataRow itemTransferDetalle in tablaTransferDetalle.Rows)
+                {
+                    cTransferDetalle objTransferDetalle = ConvertToTransferDetalle(itemTransferDetalle);
+                    objTransferDetalle.CargarTransfer(ConvertToTransfer(itemTransferDetalle));
+                    listaTransferDetalle.Add(objTransferDetalle);
+                }
+                resultado = ConvertDataTableAClase(dsResultado.Tables[0], listaTransferDetalle, oCliente);
                 return resultado;
             }
             else
@@ -3204,7 +3193,7 @@ namespace Kellerhoff
                 return resultado;
             }
         }
-        public static List<cFaltantesConProblemasCrediticiosPadre> ConvertDataTableAClase(DataTable tabla, cClientes pClientes)
+        public static List<cFaltantesConProblemasCrediticiosPadre> ConvertDataTableAClase(DataTable tabla, List<cTransferDetalle> listaTransferDetalle, cClientes pClientes)
         {
             List<cFaltantesConProblemasCrediticiosPadre> resultado = null;
             if (tabla != null)
@@ -3220,6 +3209,8 @@ namespace Kellerhoff
                     obj.fpc_codSucursal = resultadoTemporalDistinct[i].fpc_codSucursal;
                     obj.suc_nombre = resultadoTemporalDistinct[i].suc_nombre;
                     obj.fpc_tipo = resultadoTemporalDistinct[i].fpc_tipo;
+                    obj.listaProductos = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tabla.AsEnumerable().Where(xRow => xRow.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal).CopyToDataTable(), null, listaTransferDetalle, Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito, obj.fpc_codSucursal);
+                    /*
                     obj.listaProductos = new List<cFaltantesConProblemasCrediticios>();
                     foreach (var item in tabla.AsEnumerable().Where(xRow => xRow.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal))
                     {
@@ -3231,17 +3222,20 @@ namespace Kellerhoff
                         o.fpc_nombreProducto = item.Field<string>("fpc_nombreProducto");
                         o.stk_stock = item.Field<string>("stk_stock");
                         o.PrecioFinal = FuncionesPersonalizadas.ObtenerPrecioFinal(pClientes, oTemp);
-                        o.pro_ofeunidades = item.Field<int>("pro_ofeunidades");
-                        o.pro_ofeporcentaje = item.Field<decimal>("pro_ofeporcentaje");
+                        if (item["pro_ofeunidades"] != DBNull.Value)
+                        {
+                            o.pro_ofeunidades = item.Field<int>("pro_ofeunidades");
+                        }
+                        if (item["pro_ofeporcentaje"] != DBNull.Value)
+                        {
+                            o.pro_ofeporcentaje = item.Field<decimal>("pro_ofeporcentaje");
+                        }
                         obj.listaProductos.Add(o);
-                    }
 
-                    //obj.listaProductos.AddRange((from itemTabla in tabla.AsEnumerable()
-                    //                             where itemTabla.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal
-                    //                             select new cFaltantesConProblemasCrediticios { fpc_cantidad = itemTabla.Field<int>("fpc_cantidad"), fpc_nombreProducto = itemTabla.Field<string>("fpc_nombreProducto"), stk_stock = itemTabla.Field<string>("stk_stock"), pro_ofeunidades = itemTabla.Field<int>("pro_ofeunidades"), pro_ofeporcentaje = itemTabla.Field<decimal>("pro_ofeporcentaje") }));
+                    }
+                    */
                     resultado.Add(obj);
                 }
-
             }
             return resultado;
         }
@@ -3857,7 +3851,7 @@ namespace Kellerhoff
             int resultado = 0;
             string accion = Constantes.cSQL_INSERT;
             int codigoEstado = Constantes.cESTADO_SINLEER;
-            DataSet dsResultado = capaCV.GestiónCurriculumVitae(null, DateTime.Now, tcv_nombre, tcv_comentario, tcv_mail, tcv_dni, codigoEstado, null, accion,tcv_puesto,  tcv_sucursal, tcv_fechaPresentacion);
+            DataSet dsResultado = capaCV.GestiónCurriculumVitae(null, DateTime.Now, tcv_nombre, tcv_comentario, tcv_mail, tcv_dni, codigoEstado, null, accion, tcv_puesto, tcv_sucursal, tcv_fechaPresentacion);
             if (dsResultado != null)
             {
                 if (dsResultado.Tables.Contains("CurriculumVitae"))
@@ -3909,7 +3903,7 @@ namespace Kellerhoff
         {
             cCurriculumVitae resultado = null;
             string accion = Constantes.cSQL_SELECT;
-            DataSet dsResultado = capaCV.GestiónCurriculumVitae(pId, null, null, null, null, null, null, null, accion,null,null,null);
+            DataSet dsResultado = capaCV.GestiónCurriculumVitae(pId, null, null, null, null, null, null, null, accion, null, null, null);
             if (dsResultado != null)
             {
                 if (dsResultado.Tables.Contains("CurriculumVitae"))
@@ -3927,7 +3921,7 @@ namespace Kellerhoff
         {
             List<cCurriculumVitae> resultado = null;
             string accion = Constantes.cSQL_SELECT;
-            DataSet dsResultado = capaCV.GestiónCurriculumVitae(null, null, null, null, null, null, null, pFiltro, accion,null,null,null);
+            DataSet dsResultado = capaCV.GestiónCurriculumVitae(null, null, null, null, null, null, null, pFiltro, accion, null, null, null);
             if (dsResultado != null)
             {
                 resultado = new List<cCurriculumVitae>();
@@ -3944,12 +3938,12 @@ namespace Kellerhoff
         public static void EliminarCurriculumVitae(int tcv_codCV)
         {
             string accion = Constantes.cSQL_DELETE;
-            DataSet dsResultado = capaCV.GestiónCurriculumVitae(tcv_codCV, null, null, null, null, null, null, null, accion,null,null,null);
+            DataSet dsResultado = capaCV.GestiónCurriculumVitae(tcv_codCV, null, null, null, null, null, null, null, accion, null, null, null);
         }
         public static void CambiarEstadoCurriculumVitae(int tcv_codCV, int tcv_estado)
         {
             string accion = Constantes.cSQL_ESTADO;
-            DataSet dsResultado = capaCV.GestiónCurriculumVitae(tcv_codCV, null, null, null, null, null, tcv_estado, null, accion,null,null,null);
+            DataSet dsResultado = capaCV.GestiónCurriculumVitae(tcv_codCV, null, null, null, null, null, tcv_estado, null, accion, null, null, null);
         }
         public static bool ImprimirComprobante(string pTipoComprobante, string pNroComprobante)
         {

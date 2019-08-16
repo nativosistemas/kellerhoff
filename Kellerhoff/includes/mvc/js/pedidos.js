@@ -298,8 +298,9 @@ function CargarRecuperadorFaltasYCrediticios() {
                     strHtml += listaRecuperardor[i].listaProductos[iProductos].fpc_cantidad;
                     strHtml += '</td>';
                     strHtml += '<td class="col-xs-1 text-center">'
-                    var precio = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaRecuperardor[i].listaProductos[iProductos].PrecioFinal.toFixed(2));
-                    if (listaRecuperardor[i].listaProductos[iProductos].PrecioFinal === 0) {
+                    var precio = '';
+                    var precio = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaRecuperardor[i].listaProductos[iProductos].PrecioFinalRecuperador.toFixed(2));
+                    if (listaRecuperardor[i].listaProductos[iProductos].PrecioFinalRecuperador === 0) {
                         precio = '';
                     }
                     strHtml += precio;

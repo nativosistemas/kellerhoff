@@ -12,7 +12,7 @@ namespace Kellerhoff.Codigo.clases
         //isDesdeBuscador_OfertaTransfer
         //isSubirArchivo
         //isDesdeTabla
-     public  enum CargarProductosBuscador { isDesdeBuscador = 1, isDesdeBuscador_OfertaTransfer, isSubirArchivo, isDesdeTabla };
+     public  enum CargarProductosBuscador { isDesdeBuscador = 1, isDesdeBuscador_OfertaTransfer, isSubirArchivo, isDesdeTabla, isRecuperadorFaltaCredito };
 
         public static string cSQL_INSERT
         {

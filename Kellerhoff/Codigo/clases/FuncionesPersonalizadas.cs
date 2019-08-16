@@ -19,11 +19,20 @@ namespace Kellerhoff.Codigo.clases
                 if (item["pro_codigo"] != DBNull.Value)
                 {
                     List<cSucursalStocks> tempListaSucursalStocks = new List<cSucursalStocks>();
-                    tempListaSucursalStocks = (from r in tablaSucursalStocks.Select("stk_codpro = '" + item["pro_codigo"].ToString() + "'").AsEnumerable()
-                                               select new cSucursalStocks { stk_codpro = r["stk_codpro"].ToString(), stk_codsuc = r["stk_codsuc"].ToString(), stk_stock = r["stk_stock"].ToString() }).ToList();
+                    if (pCargarProductosBuscador == Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito)
+                    {
+                        cSucursalStocks oStocks = new cSucursalStocks { stk_codpro = item["pro_codigo"].ToString(), stk_codsuc = item["fpc_codSucursal"].ToString(), stk_stock = item["stk_stock"].ToString() };
+                        tempListaSucursalStocks.Add(oStocks);
+                    }
+                    else
+                    {
+                        tempListaSucursalStocks = (from r in tablaSucursalStocks.Select("stk_codpro = '" + item["pro_codigo"].ToString() + "'").AsEnumerable()
+                                                   select new cSucursalStocks { stk_codpro = r["stk_codpro"].ToString(), stk_codsuc = r["stk_codsuc"].ToString(), stk_stock = r["stk_stock"].ToString() }).ToList();
+                    }
                     if (tempListaSucursalStocks.Count > 0)
                     {
                         cProductosGenerico obj = new cProductosGenerico();
+                        obj.listaSucursalStocks = tempListaSucursalStocks;
                         obj.pro_codigo = item["pro_codigo"].ToString();
                         if (item["pro_nombre"] != DBNull.Value)
                         {
@@ -147,7 +156,7 @@ namespace Kellerhoff.Codigo.clases
                                 obj.isMostrarTransfersEnClientesPerf = false;
                         }
                         if ((listaTransferDetalle != null && obj.isMostrarTransfersEnClientesPerf && pCargarProductosBuscador == Constantes.CargarProductosBuscador.isDesdeBuscador) ||
-                        (listaTransferDetalle != null && (pCargarProductosBuscador == Constantes.CargarProductosBuscador.isDesdeBuscador_OfertaTransfer || pCargarProductosBuscador == Constantes.CargarProductosBuscador.isSubirArchivo || pCargarProductosBuscador == Constantes.CargarProductosBuscador.isDesdeTabla)))
+                        (listaTransferDetalle != null && (pCargarProductosBuscador == Constantes.CargarProductosBuscador.isDesdeBuscador_OfertaTransfer || pCargarProductosBuscador == Constantes.CargarProductosBuscador.isSubirArchivo || pCargarProductosBuscador == Constantes.CargarProductosBuscador.isDesdeTabla || pCargarProductosBuscador == Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito)))
                         {
                             List<cTransferDetalle> listaAUXtransferDetalle = listaTransferDetalle.Where(x => x.tde_codpro == obj.pro_nombre).ToList();
                             if (listaAUXtransferDetalle.Count > 0)
@@ -172,11 +181,30 @@ namespace Kellerhoff.Codigo.clases
                                 }
                             }
                         }
-                        obj.listaSucursalStocks = tempListaSucursalStocks;
-                        if (pCargarProductosBuscador == Constantes.CargarProductosBuscador.isDesdeTabla)
+
+                        if (pCargarProductosBuscador == Constantes.CargarProductosBuscador.isDesdeTabla || pCargarProductosBuscador == Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito)
                         {
                             obj.PrecioFinal = FuncionesPersonalizadas.ObtenerPrecioFinal(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), obj);
                             obj.PrecioConDescuentoOferta = FuncionesPersonalizadas.ObtenerPrecioUnitarioConDescuentoOferta(obj.PrecioFinal, obj);
+                        }
+                        if (pCargarProductosBuscador == Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito)
+                        {
+                            if (item.Table.Columns.Contains("fpc_cantidad") && item["fpc_cantidad"] != DBNull.Value)
+                                obj.fpc_cantidad = Convert.ToInt32(item["fpc_cantidad"]);
+                            if (item.Table.Columns.Contains("fpc_nombreProducto") && item["fpc_nombreProducto"] != DBNull.Value)
+                                obj.fpc_nombreProducto = Convert.ToString(item["fpc_nombreProducto"]);
+                            if (item.Table.Columns.Contains("stk_stock") && item["stk_stock"] != DBNull.Value)
+                                obj.stk_stock = Convert.ToString(item["stk_stock"]);
+
+                            obj.PrecioFinalRecuperador = obj.PrecioFinal;
+                            if (obj.PrecioFinalTransfer > 0 && obj.PrecioFinalTransfer < obj.PrecioFinalRecuperador)
+                            {
+                                obj.PrecioFinalRecuperador = obj.PrecioFinalTransfer;
+                            }
+                            if (obj.PrecioConDescuentoOferta > 0 && obj.PrecioConDescuentoOferta < obj.PrecioFinalRecuperador)
+                            {
+                                obj.PrecioFinalRecuperador = obj.PrecioConDescuentoOferta;
+                            }
                         }
                         if (pCargarProductosBuscador == Constantes.CargarProductosBuscador.isSubirArchivo)
                         {

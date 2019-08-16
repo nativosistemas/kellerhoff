@@ -38,7 +38,9 @@ namespace Kellerhoff.Codigo.capaDatos
         //public DateTime? fpc_fecha { get; set; }
         //public string fpc_fechaToString { get; set; }
         //public string stk_stock { get; set; }
-        public List<cFaltantesConProblemasCrediticios> listaProductos { get; set; }
+
+        //public List<cFaltantesConProblemasCrediticios> listaProductos { get; set; }
+        public List<cProductosGenerico> listaProductos { get; set; }
     }
     public class cFaltantesConProblemasCrediticios//:cProductos
     {
@@ -67,6 +69,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public int pro_ofeunidades { get; set; }
         public decimal pro_ofeporcentaje { get; set; }
         public decimal PrecioFinal { get; set; }
+        public decimal PrecioFinalTransfer { get; set; }
         public string stk_stock { get; set; }
     }
     public class cHistorialArchivoSubir
@@ -816,10 +819,10 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataTable RecuperarFaltasProblemasCrediticios(int fpc_codCliente, int fpc_tipo, int pDia)
+        public static DataSet RecuperarFaltasProblemasCrediticios(int fpc_codCliente, int fpc_tipo, int pDia)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarFaltasProblemasCrediticios", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarFaltasProblemasCrediticiosV2", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             //SqlParameter paCodSucursal = cmdComandoInicio.Parameters.Add("@fpc_codSucursal", SqlDbType.NVarChar, 2);
@@ -832,11 +835,16 @@ namespace Kellerhoff.Codigo.capaDatos
             paTipo.Value = fpc_tipo;
             try
             {
+                //Conn.Open();
+                //DataTable dt = new DataTable();
+                //SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+                //dt.Load(LectorSQLdata);
+                //return dt;
                 Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
+                DataSet dsResultado = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
+                da.Fill(dsResultado, "ProductosBuscador");
+                return dsResultado;
             }
             catch (Exception ex)
             {
@@ -850,10 +858,10 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataTable RecuperarFaltasProblemasCrediticios_TodosEstados(int fpc_codCliente, int fpc_tipo, int pDia)
+        public static DataSet RecuperarFaltasProblemasCrediticios_TodosEstados(int fpc_codCliente, int fpc_tipo, int pDia)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarFaltasProblemasCrediticiosTodosEstados", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarFaltasProblemasCrediticiosTodosEstadosV2", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paCodCliente = cmdComandoInicio.Parameters.Add("@fpc_codCliente", SqlDbType.Int);
@@ -865,11 +873,16 @@ namespace Kellerhoff.Codigo.capaDatos
             paTipo.Value = fpc_tipo;
             try
             {
+                //Conn.Open();
+                //DataTable dt = new DataTable();
+                //SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+                //dt.Load(LectorSQLdata);
+                //return dt;
                 Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
+                DataSet dsResultado = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
+                da.Fill(dsResultado, "ProductosBuscador");
+                return dsResultado;
             }
             catch (Exception ex)
             {

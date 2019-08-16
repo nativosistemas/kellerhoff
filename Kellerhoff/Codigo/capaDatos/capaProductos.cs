@@ -98,6 +98,11 @@ namespace Kellerhoff.Codigo.capaDatos
         public string codProducto { get; set; }
         public int idUsuario { get; set; }
         public string stk_stock { get; set; }
+        //
+        public string fpc_nombreProducto { get; set; }
+        public int fpc_cantidad { get; set; }
+        public decimal PrecioFinalRecuperador { get; set; }
+        //
         public void CargarTransferYTransferDetalle(cTransferDetalle pValor)
         {
             base.tde_codpro = pValor.tde_codpro;
