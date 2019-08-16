@@ -11,14 +11,17 @@
             resultadoHtmlCarritosTransfer += "<div class=\"div_cierre_reparto\" id=\"divContenedorBaseCuentaRegresiva\" >";
             resultadoHtmlCarritosTransfer += "</div>";
         }
-        foreach (string item in ListaSucursal)
+        if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
         {
-            resultadoHtmlCarritosTransfer += "<div id=\"divContenedorBase_" + item + "\" > </div>";
+            foreach (string item in ListaSucursal)
+            {
+                resultadoHtmlCarritosTransfer += "<div id=\"divContenedorBase_" + item + "\" > </div>";
 
-        }
-        foreach (string item in ListaSucursal)
-        {
-            resultadoHtmlCarritosTransfer += "<div id=\"divContenedorBaseTransfer_" + item + "\" > </div>";
+            }
+            foreach (string item in ListaSucursal)
+            {
+                resultadoHtmlCarritosTransfer += "<div id=\"divContenedorBaseTransfer_" + item + "\" > </div>";
+            }
         }
     }
     WriteLiteral(resultadoHtmlCarritosTransfer);

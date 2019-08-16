@@ -32,3 +32,4 @@ $(window).resize(function () {
         width_old = $(this).width();
     }
 })
+

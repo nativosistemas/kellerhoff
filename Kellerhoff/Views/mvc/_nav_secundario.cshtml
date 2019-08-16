@@ -43,14 +43,24 @@
         <div class="nav_sec">
             <a href="/mvc/Buscador" @{ WriteLiteral(classBuscador);} ><i class="fa fa-search" title="BUSCADOR"></i><span class="hidden-sm hidden-xs">BUSCADOR</span></a>
             <div class="separate"></div>
-            <a href="/mvc/Diferido" @{WriteLiteral(classDiferido);} ><i class="fa fa-shopping-basket" title="CARRO SECUNDARIO"></i><span class="hidden-sm hidden-xs">CARRO SECUNDARIO</span></a>
-            <div class="separate"></div>
+            @{
+                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                {
+                    <a href="/mvc/Diferido" @{WriteLiteral(classDiferido);} ><i class="fa fa-shopping-basket" title="CARRO SECUNDARIO"></i><span class="hidden-sm hidden-xs">CARRO SECUNDARIO</span></a>
+                    <div class="separate"></div>
+                }
+            }
             <a href="/mvc/estadopedidos"  @{WriteLiteral(classEstadopedidos);} ><i class="fa fa-file-text" title="MIS PEDIDOS"></i><span class="hidden-sm hidden-xs">MIS PEDIDOS</span></a>
             <div class="separate"></div>
-            <a href="/mvc/recuperador?t=1" @{WriteLiteral(classRecuperador);} ><i class="fa fa-recycle" title="RECUPERADOR"></i><span class="hidden-sm hidden-xs">RECUPERADOR</span></a>
-            <div class="separate"></div>
-            <a  href="/mvc/subirpedido" @{ WriteLiteral(classSubirpedido);} ><i class="fa fa-upload" title="SUBIR PEDIDOS"></i><span class="hidden-sm hidden-xs">SUBIR PEDIDOS</span></a>
-            <div class="separate"></div>
+            @{ 
+                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                {
+                    <a href="/mvc/recuperador?t=1" @{WriteLiteral(classRecuperador);} ><i class="fa fa-recycle" title="RECUPERADOR"></i><span class="hidden-sm hidden-xs">RECUPERADOR</span></a>
+                    <div class="separate"></div>
+                    <a  href="/mvc/subirpedido" @{ WriteLiteral(classSubirpedido);} ><i class="fa fa-upload" title="SUBIR PEDIDOS"></i><span class="hidden-sm hidden-xs">SUBIR PEDIDOS</span></a>
+                    <div class="separate"></div>
+                }
+            }
             <a href="/mvc/promocionescliente" class="oferta  @{ WriteLiteral(classPromocionesCliente);}" ><i class="fa fa-percent"  title="OFERTAS"></i><span class="hidden-sm hidden-xs">OFERTAS</span></a>
         </div>
     </div>
