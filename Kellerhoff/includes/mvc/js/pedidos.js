@@ -338,7 +338,7 @@ function onclickActualizarTotal(pValor) {
         var total = 0;
         for (var iProductos = 0; iProductos < listaRecuperardor[pValor].listaProductos.length; iProductos++) {
             if ($('#checkRecuperador_' + pValor + '_' + iProductos).is(":checked")) {
-                total += (listaRecuperardor[pValor].listaProductos[iProductos].PrecioFinal * listaRecuperardor[pValor].listaProductos[iProductos].fpc_cantidad );
+                total += (listaRecuperardor[pValor].listaProductos[iProductos].PrecioFinalRecuperador * listaRecuperardor[pValor].listaProductos[iProductos].fpc_cantidad);
             }
            // $('#checkRecuperador_' + pValor + '_' + iProductos).attr('checked', isChecked);
         }
