@@ -288,8 +288,7 @@ function onclickConfimarTransferPedidoOk() {
 function OnCallBackTomarTransferPedidoCarrito(args) {
     //    CerrarContenedorTransfer();
     isBotonNoEstaEnProceso = true;
-    if (!isNotNullEmpty(args))
-    {
+    if (!isNotNullEmpty(args)) {
         args = null;
     } else {
         args = eval('(' + args + ')');
@@ -321,7 +320,7 @@ function OnCallBackTomarTransferPedidoCarrito(args) {
 function onclickVaciarCarritoTransfer_ButtonOK(pIndice) {
     indiceCarritoTransferBorrar = pIndice;
     BorrarCarritoTransfer(listaCarritoTransferPorSucursal[pIndice].Sucursal);
-   // BorrarCarritoPorId(listaCarritoTransferPorSucursal[pIndice].car_id, 'OnCallBackBorrarCarritoTransfer');
+    // BorrarCarritoPorId(listaCarritoTransferPorSucursal[pIndice].car_id, 'OnCallBackBorrarCarritoTransfer');
     return false;
 }
 function onclickVaciarCarritoTransfer(pIndice) {
@@ -386,7 +385,7 @@ function htmlSeleccioneTransfer(pListaTransfer) {
     for (var i = 0; i < pListaTransfer.length; i++) {
         var nombreMostrarTransfer = pListaTransfer[i].tfr_nombre;
         for (var iMostrarTransfer = 0; iMostrarTransfer < pListaTransfer[i].listaDetalle.length; iMostrarTransfer++) {
-            if (productoSeleccionado == pListaTransfer[i].listaDetalle[iMostrarTransfer].tde_codpro && isNotNullEmpty( pListaTransfer[i].listaDetalle[iMostrarTransfer].tde_DescripcionDeProducto)) {
+            if (productoSeleccionado == pListaTransfer[i].listaDetalle[iMostrarTransfer].tde_codpro && isNotNullEmpty(pListaTransfer[i].listaDetalle[iMostrarTransfer].tde_DescripcionDeProducto)) {
                 nombreMostrarTransfer = pListaTransfer[i].listaDetalle[iMostrarTransfer].tde_DescripcionDeProducto;// pListaTransfer[i].tfr_nombre + ' - ' +
                 break;
             }
@@ -407,7 +406,7 @@ function AgregarTransferHtmlAlPopUp(pIndex) {
     strHtmlTransfer += '<div class="modal-header no-padding-bottom">';
     strHtmlTransfer += '<div class="row">';
     strHtmlTransfer += '<div class="col-lg-12">';
-   // strHtmlTransfer += '<h4>' + listaTransfer[pIndex].tfr_nombre + '</h4>';
+    // strHtmlTransfer += '<h4>' + listaTransfer[pIndex].tfr_nombre + '</h4>';
     strHtmlTransfer += '</div>';
     strHtmlTransfer += '</div>';
     strHtmlTransfer += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
@@ -647,6 +646,15 @@ function ValidarTransferTotal_sucursal(pIndice, pIndiceSursal) {
                 mensaje_alert(listaTransfer[pIndice].listaDetalle[i].tde_codpro + ' es un producto obligatorio');
             }
         }
+        // inicio 2019/09/11
+        if (!isMostrarImput_CC_ClientesCordoba(listaTransfer[pIndice].listaDetalle[i].pro_codtpopro, listaSucursalesDependienteInfo[pIndiceSursal].sde_sucursal, listaTransfer[pIndice].listaDetalle[i].listaSucursalStocks)) {
+            if (intMensajeProducto > 0) {
+                isGrabarProducto = false;
+                $('#tdError' + pIndice + '_' + i).html('Este producto no se puede pedir en Casa Central');
+                mensaje_alert(listaTransfer[pIndice].listaDetalle[i].tde_codpro + ' este producto no se puede pedir en Casa Central');
+            }
+        }
+        // fin 2019/09/11
         if (isGrabarProducto) {
             if (intMensajeProducto > 0) {
                 var objProducto = new jcTransfersProductos();
@@ -787,6 +795,7 @@ function ValidarTransferPorProducto(pIndiceTransfer, pIndiceProducto) {
                     $('#tdError' + pIndiceTransfer + '_' + pIndiceProducto).html('La cantidad es diferente de la unidad fija');
                 }
             }
+            //
         }
     }
     return intTipoMensaje;
