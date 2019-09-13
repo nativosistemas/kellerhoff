@@ -152,15 +152,15 @@ namespace Kellerhoff.Codigo.clases
                         HttpContext.Current.Session["subirpedido_ListaProductos"] = WebService.AgregarProductoAlCarritoDesdeArchivoPedidosV5(sucElegida, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc, tablaArchivoPedidos, TipoArchivo, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_isGLN, ((capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id);
 
 
-                        if (pIsNombreRepetido == null || pIsNombreRepetido.Value)
-                        {
+                        //if (pIsNombreRepetido == null || pIsNombreRepetido.Value)
+                        //{
                             HttpContext.Current.Session["subirpedido_nombreArchivoCompleto"] = pNombreArchivo;
                             HttpContext.Current.Session["subirpedido_nombreArchivoCompletoOriginal"] = pNombreArchivoOriginal;
-                        }
-                        else
-                        {
+                        //}
+                        //else
+                        //{
                             WebService.AgregarHistorialSubirArchivo(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, sucElegida, pNombreArchivo, pNombreArchivoOriginal, DateTime.Now);
-                        }
+                        //}
                     }
                 }
             }
