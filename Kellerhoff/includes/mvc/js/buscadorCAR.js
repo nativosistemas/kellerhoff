@@ -1089,7 +1089,7 @@ function CargarProductoCantidadDependiendoTransfer_base(pFila, pColumna, pCantid
         } else {
             precioConDescuentoDependiendoCantidad = precioConDescuentoDependiendoCantidad / pCantidad;
         }
-        if (parseFloat(precioConDescuentoDependiendoCantidad) > parseFloat(listaProductosBuscados[pFila].PrecioFinalTransfer)) {
+        if (parseFloat(precioConDescuentoDependiendoCantidad) >= parseFloat(listaProductosBuscados[pFila].PrecioFinalTransfer)) {
             var isSumarTransfer = false;
 
             if (listaProductosBuscados[pFila].tde_muluni != null && listaProductosBuscados[pFila].tde_unidadesbonificadas != null) {
