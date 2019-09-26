@@ -34,7 +34,9 @@
     <link href="../includes/mvc/css/main-overwrite.css?n=29" rel="stylesheet">
 </head>
 @{
-    if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+    if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR || 
+        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL || 
+        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
     {
         <style>
             .btn_confirmar {
@@ -55,7 +57,9 @@
                     <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
                         @{
                             string hrefHOME;
-                            if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                            if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR || 
+                                ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL || 
+                                ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
                             {
                                 //hrefHOME = " href=\"http://www.kellerhoff.com.ar:8082\" ";
                                 hrefHOME = " href=\" /ctacte/composicionsaldo\" ";
@@ -144,17 +148,19 @@
                             }
                             @*inicio FARMASHOW*@
                             @{
-                                string hrefFARMASHOW;
-                                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
-                                {
-                                    hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8081\" ";
-                                }
-                                else
-                                {
-                                    hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8081/index.php?NumeroCliente=" + ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente.ToString() + "\" ";
-                                }
+                                //string hrefFARMASHOW;
+                                //if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR || 
+                                //    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL || 
+                                //    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
+                                //{
+                                //    hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8081\" ";
+                                //}
+                                //else
+                                //{
+                                //    hrefFARMASHOW = " href=\"http://www.kellerhoff.com.ar:8081/index.php?NumeroCliente=" + ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente.ToString() + "\" ";
+                                //}
                             }
-                            <li><a @{WriteLiteral(hrefFARMASHOW);} target="_blank" class="btnFarmashow"><h3>FARMASHOW</h3></a></li>
+                            @*<li><a @{WriteLiteral(hrefFARMASHOW);} target="_blank" class="btnFarmashow"><h3>FARMASHOW</h3></a></li>*@
                             @*fin FARMASHOW*@
                             @{
                                 if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_PEDIDOS))
@@ -182,14 +188,19 @@
                                     </li>
                                     <li><div class="separate"></div></li>
                                     @{
-                                        if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                                        if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                                            ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL && 
+                                            ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
                                         {
                                             <li><a href="/config/mensajes"><i class="fa fa-envelope"></i>Mensajes<span class="msj_active">@{WriteLiteral(Kellerhoff.Controllers.configController.ObtenerCantidadMensaje());}</span></a></li>
                                         }
                                         <li><a href="/config/perfil"><i class="fa fa-key"></i>Contrase&ntilde;a</a></li>
-                                        if (HttpContext.Current.Session["clientesDefault_Usuario"] != null
-                                        && ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_OPERADORCLIENTE && ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
-                                        {
+                                                if (HttpContext.Current.Session["clientesDefault_Usuario"] != null && 
+                                                    ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_OPERADORCLIENTE && 
+                                                    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                                                    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL && 
+                                                    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
+                                                {
                                             <li><a href="/config/usuarios"><i class="fa fa-users"></i>Usuarios</a></li>
                                         }
 
@@ -212,9 +223,9 @@
                 </div>
                 <div class="clear"></div>
                 @*inicio FARMASHOW*@
-                <li>
+                @*<li>
                         <a class="s_menu1 btnFarmashow" id="filter_FARMASHOW" @{WriteLiteral(hrefFARMASHOW);} target="_blank">FARMASHOW</a>
-                    </li>
+                    </li>*@
                 @*fin FARMASHOW*@
                 @{ if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_PEDIDOS))
                     {
@@ -223,14 +234,18 @@
                             <div class="div_filter" id="d_filter_1">
                                 <a href="/mvc/Buscador"><i class="fa fa-search"></i>BUSCADOR</a>
                                 @{
-                                    if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                                    if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR && 
+                                        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL && 
+                                        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
                                     {
                                         <a href="/mvc/Diferido"><i class="fa fa-shopping-basket"></i>CARRO SECUNDARIO</a>
                                     }
                                 }
                                 <a href="/mvc/estadopedidos"><i class="fa fa-file-text"></i>MIS PEDIDOS</a>
                                 @{
-                                    if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                                    if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR && 
+                                       ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL && 
+                                       ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL )
                                     {
                                         <a href="/mvc/recuperador?t=1"><i class="fa fa-recycle"></i>RECUPERADOR</a>
                                         <a href="/mvc/subirpedido"><i class="fa fa-upload"></i>SUBIR PEDIDOS</a>
@@ -252,7 +267,15 @@
                                 <a href="/ctacte/ConsultaDeComprobantes"><i class="fa fa-file"></i>COMPROBANTES</a>
                                 <a href="/ctacte/ConsultaDeComprobantesObraSocial"><i class="fa fa-medkit"></i>OBRAS SOCIALES</a>
                                 <a href="/ctacte/descargaResumenes"><i class="fa fa-file-pdf-o"></i>RESUMENES</a>
-                                <a href="#" onclick="onclickConsultasCtaCte(); return false;"><i class="fa fa-envelope"></i>CONSULTAS</a>
+                                @{
+                                    if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                                        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+                                        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
+                                    {
+                                        <a href="#" onclick="onclickConsultasCtaCte(); return false;"><i class="fa fa-envelope"></i>CONSULTAS</a>
+                                    }
+                                }
+                                
                             </div>
                         </li>}
                     <li>
@@ -279,13 +302,18 @@
                         <a class="s_menu" id="filter_5" href="#">PERFIL<i id="angle_filter_5" class="fa fa-angle-down"></i></a>
                         <div class="div_filter" id="d_filter_5">
                             @{
-                                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR && 
+                                    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL && 
+                                    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
                                 {
                                     <a href="/config/mensajes"><i class="fa fa-envelope"></i>MENSAJES<span class="msj_active">@{WriteLiteral(Kellerhoff.Controllers.configController.ObtenerCantidadMensaje());}</span></a>
                                 }
                                 <a href="/config/perfil"><i class="fa fa-key"></i>CONTRASE&Ntilde;A</a>
-                                if (HttpContext.Current.Session["clientesDefault_Usuario"] != null
-&& ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_OPERADORCLIENTE && ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+                                if (HttpContext.Current.Session["clientesDefault_Usuario"] != null && 
+                                    ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_OPERADORCLIENTE && 
+                                    (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR  && 
+                                    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL && 
+                                    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL))
                                 {
                                     <a href="/config/usuarios"><i class="fa fa-users"></i>USUARIOS</a>
                                 }
@@ -308,26 +336,105 @@
     </header>
     <section class="section-gris-claro wrapCelular">
         <div class="col-xs-12">
-            @* Inicio Promotores *@
+            @* Inicio Promotores Y Encargados *@
             @{
                 if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
                 {
                     <p class="TitleCliente">Seleccione un cliente</p>
                     List<Kellerhoff.Codigo.capaDatos.cClientes> colClientes = WebService.spRecuperarTodosClientesByPromotor(((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).ApNombre);
-                    //Kellerhoff.Codigo.capaDatos.cClientes oCli = ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
-                    //<li><a  @{ WriteLiteral(classMediosDePagos);} ><h5>@{ WriteLiteral(oCli.cli_nombre); }&nbsp;&nbsp; <i class="fa fa-refresh"></i></h5></a></li>
 
                     <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
                         @{
                             foreach (Kellerhoff.Codigo.capaDatos.cClientes oCli in colClientes)
                             {
-                                if (((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                                string inhabilitado;
+
+                                if (oCli.cli_estado == "INH")
                                 {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); }</option>
+                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
                                 }
                                 else
                                 {
-                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); }</option>
+                                    inhabilitado = "";
+                                }
+                                if (((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                }
+                            }
+                        }
+                    </select>
+                }
+                
+                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
+                {
+                    <p class="TitleCliente">Seleccione un cliente</p>
+                    List<Kellerhoff.Codigo.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientes();
+
+                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                        @{
+                            foreach (Kellerhoff.Codigo.capaDatos.cClientes oCli in colClientes)
+                            {
+                                string inhabilitado;
+
+                                if (oCli.cli_estado == "INH")
+                                {
+                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                                }
+                                else
+                                {
+                                    inhabilitado = "";
+                                }
+                                if (((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                        @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);}
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
+                                }
+                            }
+                        }
+                    </select>
+                }
+
+                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL)
+                {
+                    <p class="TitleCliente">Seleccione un cliente</p> 
+                    string IdSuc;
+
+                    IdSuc = ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).NombreYApellido.Substring(9, 2);
+
+                    List<Kellerhoff.Codigo.capaDatos.cClientes> colClientes = WebService.RecuperarTodosClientesBySucursal(IdSuc);
+                    <select class="form-control cmbCliente" id="cmbCliente" name="cmdCliente">
+                        @{
+                            foreach (Kellerhoff.Codigo.capaDatos.cClientes oCli in colClientes)
+                            {
+                                string inhabilitado;
+
+                                if (oCli.cli_estado == "INH")
+                                {
+                                    inhabilitado = "<span style='color: red;'> (INHABILITADO) </span>";
+                                } else
+                                {
+                                    inhabilitado = "";
+                                }
+                                if (((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo == oCli.cli_codigo)
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }" selected>
+                                    @{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option >
+                                }
+                                else
+                                {
+                                    <option value="@{ WriteLiteral(oCli.cli_codigo); }">@{ WriteLiteral(oCli.cli_codigo); } - @{ WriteLiteral(oCli.cli_nombre); } @{ WriteLiteral(inhabilitado);} </option>
                                 }
                             }
                         }

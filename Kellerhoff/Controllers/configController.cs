@@ -76,6 +76,7 @@ namespace Kellerhoff.Controllers
         }
         public string login(string pName, string pPass)
         {
+            string IdSuc = "CC";
             string resultado = null;
             string userAgent = System.Web.HttpContext.Current.Request.UserAgent;
             string ip = System.Web.HttpContext.Current.Server.HtmlEncode(System.Web.HttpContext.Current.Request.UserHostAddress);
@@ -122,6 +123,56 @@ namespace Kellerhoff.Controllers
                                 WebService.CredencialAutenticacion = objAutenticacion;
 
                                 List<cClientes> clientes = WebService.spRecuperarTodosClientesByPromotor(user.ApNombre);
+
+                                System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
+
+                                if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                                {
+                                    System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
+                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                    System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
+                                    CargarAccionesEnVariableSession();
+                                    System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
+                                    System.Web.HttpContext.Current.Session["isMostrarOferta"] = false;
+                                    resultado = "OkPromotor";
+                                }
+                            }
+                            else if (user.idRol == Constantes.cROL_ENCGRAL)
+                            {
+                                // resultado = "Es Promotor";
+                                //resultado = user.NombreYApellido;
+                                Autenticacion objAutenticacion = new Autenticacion();
+                                objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
+                                objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
+                                WebService.CredencialAutenticacion = objAutenticacion;
+
+                                List<cClientes> clientes = WebService.RecuperarTodosClientes();
+
+                                System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
+
+                                if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                                {
+                                    System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
+                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                    System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
+                                    CargarAccionesEnVariableSession();
+                                    System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
+                                    System.Web.HttpContext.Current.Session["isMostrarOferta"] = false;
+                                    resultado = "OkPromotor";
+                                }
+                            }
+                            else if (user.idRol == Constantes.cROL_ENCSUCURSAL)
+                            {
+                                // resultado = "Es Promotor";
+                                //resultado = user.NombreYApellido;
+                                Autenticacion objAutenticacion = new Autenticacion();
+                                objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
+                                objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
+                                WebService.CredencialAutenticacion = objAutenticacion;
+
+                                IdSuc = pName.Substring(3, 2);
+
+                                List<cClientes> clientes = WebService.RecuperarTodosClientesBySucursal(IdSuc);
 
                                 System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)clientes[0].cli_codigo);
 

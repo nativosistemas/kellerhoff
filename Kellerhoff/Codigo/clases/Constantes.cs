@@ -140,6 +140,14 @@ namespace Kellerhoff.Codigo.clases
         {
             get { return Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["rol_Promotor"]); }
         }
+        public static int cROL_ENCSUCURSAL
+        {
+            get { return Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["rol_EncSuc"]); }
+        }
+        public static int cROL_ENCGRAL
+        {
+            get { return Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["rol_EncGral"]); }
+        }
         public static string cTABLA_CATALOGO
         {
             get { return "catalogo"; }

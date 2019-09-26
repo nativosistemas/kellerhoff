@@ -11,7 +11,9 @@
             resultadoHtmlCarritosTransfer += "<div class=\"div_cierre_reparto\" id=\"divContenedorBaseCuentaRegresiva\" >";
             resultadoHtmlCarritosTransfer += "</div>";
         }
-        if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR)
+        if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
+            ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+            ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
         {
             foreach (string item in ListaSucursal)
             {
