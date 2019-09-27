@@ -912,6 +912,7 @@
     <Content Include="servicios\generar_comprobantes_discriminado.aspx" />
     <Content Include="servicios\thumbnail.aspx" />
     <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
+    <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
     <Content Include="WebService.asmx" />
     <Content Include="img\Thumbs.db" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
