@@ -58,6 +58,7 @@ namespace Kellerhoff.Codigo.capaDatos
             get { return _isPermitirPedirProducto; }
             set { _isPermitirPedirProducto = value; }
         }
+        public string pro_Familia { get; set; } 
     }
     public class cProductosGenerico : cTransferDetalle
     {
@@ -85,6 +86,7 @@ namespace Kellerhoff.Codigo.capaDatos
             base.pro_preciofarmacia = pProducto.pro_preciofarmacia;
             base.pro_isTrazable = pProducto.pro_isTrazable;
             base.pro_NoTransfersEnClientesPerf = pProducto.pro_NoTransfersEnClientesPerf;
+            base.pro_Familia = pProducto.pro_Familia;
             listaSucursalStocks = new List<cSucursalStocks>();
             isProductoNoEncontrado = false;
         }
@@ -133,75 +135,7 @@ namespace Kellerhoff.Codigo.capaDatos
             base.tfr_descripcion = pValor.tfr_descripcion;
         }
 
-    }
-    //public class cProductosBuscador : cTransferDetalle
-    //{
-    //    public cProductosBuscador()
-    //    {
-    //        listaSucursalStocks = new List<cSucursalStocks>();
-    //        isProductoNoEncontrado = false;
-    //    }
-    //    public cProductosBuscador(cProductos pProducto)
-    //    {
-    //        base.pro_codigo = pProducto.pro_codigo;
-    //        base.pro_nombre = pProducto.pro_nombre;
-    //        base.PrecioFinal = pProducto.PrecioFinal;
-    //        base.pro_codigoalfabeta = pProducto.pro_codigoalfabeta;
-    //        base.pro_codigobarra = pProducto.pro_codigobarra;
-    //        base.pro_codtpopro = pProducto.pro_codtpopro;
-    //        base.pro_descuentoweb = pProducto.pro_descuentoweb;
-    //        base.pro_laboratorio = pProducto.pro_laboratorio;
-    //        base.pro_monodroga = pProducto.pro_monodroga;
-    //        base.pro_codtpovta = pProducto.pro_codtpovta;
-    //        base.pro_neto = pProducto.pro_neto;
-    //        base.pro_ofeporcentaje = pProducto.pro_ofeporcentaje;
-    //        base.pro_ofeunidades = pProducto.pro_ofeunidades;
-    //        base.pro_precio = pProducto.pro_precio;
-    //        base.pro_preciofarmacia = pProducto.pro_preciofarmacia;
-    //        base.pro_isTrazable = pProducto.pro_isTrazable;
-    //        base.pro_NoTransfersEnClientesPerf = pProducto.pro_NoTransfersEnClientesPerf;
-    //        listaSucursalStocks = new List<cSucursalStocks>();
-    //        isProductoNoEncontrado = false;
-    //    }
-    //    public int pro_Ranking { get; set; }
-    //    public bool isTieneTransfer { get; set; }
-    //    public bool isValePsicotropicos { get; set; }
-    //    public int cantidad { get; set; }
-    //    public int nroordenamiento { get; set; }
-    //    public bool isProductoNoEncontrado { get; set; }
-    //    public bool isProductoFacturacionDirecta { get; set; }
-    //    public void CargarTransferYTransferDetalle(cTransferDetalle pValor)
-    //    {
-    //        base.tde_codpro = pValor.tde_codpro;
-    //        base.tde_codtfr = pValor.tde_codtfr;
-    //        base.tde_descripcion = pValor.tde_descripcion;
-    //        base.tde_fijuni = pValor.tde_fijuni;
-    //        base.tde_maxuni = pValor.tde_maxuni;
-    //        base.tde_minuni = pValor.tde_minuni;
-    //        base.tde_muluni = pValor.tde_muluni;
-    //        base.tde_predescuento = pValor.tde_predescuento;
-    //        base.tde_prepublico = pValor.tde_prepublico;
-    //        base.tde_proobligatorio = pValor.tde_proobligatorio;
-    //        base.tde_unidadesbonificadas = pValor.tde_unidadesbonificadas;
-    //        base.tde_unidadesbonificadasdescripcion = pValor.tde_unidadesbonificadasdescripcion;
-    //        base.tfr_codigo = pValor.tfr_codigo;
-    //        base.tfr_accion = pValor.tfr_accion;
-    //        base.tfr_nombre = pValor.tfr_nombre;
-    //        base.tfr_deshab = pValor.tfr_deshab;
-    //        base.tfr_pordesadi = pValor.tfr_pordesadi;
-    //        base.tfr_tipo = pValor.tfr_tipo;
-    //        base.tfr_mospap = pValor.tfr_mospap;
-    //        base.tfr_minrenglones = pValor.tfr_minrenglones;
-    //        base.tfr_minunidades = pValor.tfr_minunidades;
-    //        base.tfr_maxunidades = pValor.tfr_maxunidades;
-    //        base.tfr_mulunidades = pValor.tfr_mulunidades;
-    //        base.tfr_fijunidades = pValor.tfr_fijunidades;
-    //        base.tfr_facturaciondirecta = pValor.tfr_facturaciondirecta;
-    //        base.tfr_descripcion = pValor.tfr_descripcion;
-    //    }
-
-    //}
-  
+    }  
     public class cSucursalStocks
     {
         public string stk_codpro { get; set; }
@@ -217,7 +151,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public static DataSet RecuperarTodosProductosBuscadorV3(string pTextoBuscador, List<string> pListaColumna, string pSucursalPerteneciente, int? pIdCliente, string pCli_codprov)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarTodosProductosBuscadorV3", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarTodosProductosBuscadorV3_new2", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paWhere = cmdComandoInicio.Parameters.Add("@Where", SqlDbType.NVarChar, 4000);
@@ -501,7 +435,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public static DataSet RecuperarTodosProductosBuscadorEnTransfer(string pSucursalPerteneciente, int? pIdCliente, string pCli_codprov)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarTodosProductosBuscadorEnTransfer", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarTodosProductosBuscadorEnTransfer_new2", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar, 2);
@@ -540,7 +474,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public static DataSet RecuperarTodosProductosBuscadorEnOferta(string pSucursalPerteneciente, int? pIdCliente, string pCli_codprov)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarTodosProductosBuscadorEnOferta", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarTodosProductosBuscadorEnOferta_new", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar, 2);

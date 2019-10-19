@@ -141,11 +141,11 @@ namespace Kellerhoff.Codigo.clases
                                 obj.nroordenamiento = Convert.ToInt32(item["nroordenamiento"]);
                             }
                         }
-                        if (item.Table.Columns.Contains("pro_acuerdo"))
+                        if (item.Table.Columns.Contains("pro_Familia"))
                         {
-                            if (item["pro_acuerdo"] != DBNull.Value)
+                            if (item["pro_Familia"] != DBNull.Value)
                             {
-                                obj.pro_acuerdo = Convert.ToInt32(item["pro_acuerdo"]);
+                                obj.pro_Familia = Convert.ToString(item["pro_Familia"]);
                             }
                         }
                         obj.isProductoFacturacionDirecta = false;

@@ -490,6 +490,7 @@
     <Content Include="includes\js\subirpedido_v2.js" />
     <Content Include="includes\mvc\css\main-overwrite.css" />
     <Content Include="includes\mvc\css\main.css" />
+    <Content Include="includes\mvc\css\select2.min.css" />
     <Content Include="includes\mvc\fonts\footable.svg" />
     <Content Include="includes\mvc\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="includes\mvc\js\ajax.js" />
@@ -519,6 +520,7 @@
     <Content Include="includes\mvc\js\plugins\daterangepicker\moment.min.js" />
     <Content Include="includes\mvc\js\plugins\footable\footable.js" />
     <Content Include="includes\mvc\js\promotores.js" />
+    <Content Include="includes\mvc\js\select2.full.min.js" />
     <Content Include="includes\mvc\js\subirpedido.js" />
     <Content Include="includes\mvc\js\transfer.js" />
     <Content Include="includes\mvc\less\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -911,6 +913,7 @@
     <Content Include="servicios\generar_archivoPdf.aspx" />
     <Content Include="servicios\generar_comprobantes_discriminado.aspx" />
     <Content Include="servicios\thumbnail.aspx" />
+    <Content Include="SQLscript\nativosistemas_2019_10_16.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
     <Content Include="WebService.asmx" />
