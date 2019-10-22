@@ -474,7 +474,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public static DataSet RecuperarTodosProductosBuscadorEnOferta(string pSucursalPerteneciente, int? pIdCliente, string pCli_codprov)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarTodosProductosBuscadorEnOferta_new", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperarTodosProductosBuscadorEnOferta", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar, 2);
