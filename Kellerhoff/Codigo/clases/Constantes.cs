@@ -345,6 +345,10 @@ namespace Kellerhoff.Codigo.clases
         {
             get { return Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["seccion_CUENTASCORRIENTES"]); }
         }
+        public static string cSECCION_DEVOLUCIONES
+        {
+            get { return Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["seccion_DEVOLUCIONES"]); }
+        }
         public static string cSeparadorCSV
         {
             get { return ";"; }

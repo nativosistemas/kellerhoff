@@ -490,6 +490,7 @@
     <Content Include="includes\js\subirpedido_v2.js" />
     <Content Include="includes\mvc\css\main-overwrite.css" />
     <Content Include="includes\mvc\css\main.css" />
+    <Content Include="includes\mvc\css\select2.min.css" />
     <Content Include="includes\mvc\fonts\footable.svg" />
     <Content Include="includes\mvc\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="includes\mvc\js\ajax.js" />
@@ -500,6 +501,7 @@
     <Content Include="includes\mvc\js\comprobantes.js" />
     <Content Include="includes\mvc\js\config.js" />
     <Content Include="includes\mvc\js\ctacte.js" />
+    <Content Include="includes\mvc\js\devoluciones.js" />
     <Content Include="includes\mvc\js\documento.js" />
     <Content Include="includes\mvc\js\jquery\function.js" />
     <Content Include="includes\mvc\js\jquery\function_forms.js" />
@@ -519,6 +521,7 @@
     <Content Include="includes\mvc\js\plugins\daterangepicker\moment.min.js" />
     <Content Include="includes\mvc\js\plugins\footable\footable.js" />
     <Content Include="includes\mvc\js\promotores.js" />
+    <Content Include="includes\mvc\js\select2.full.min.js" />
     <Content Include="includes\mvc\js\subirpedido.js" />
     <Content Include="includes\mvc\js\transfer.js" />
     <Content Include="includes\mvc\less\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -905,6 +908,43 @@
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.TomarPedidoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCCbteParaImprimir1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCConsObraSocial.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCResumen1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerComprobantesAImprimirEnBaseAResumenResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerComprobantesObrasSocialesDePuntoDeVentaEntreFechasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerCreditoDisponibleSemanalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerCreditoDisponibleTotalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerUltimos10ResumenesDePuntoDeVentaResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.TomarPedidoConIdCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.TomarPedidoDeTransfersConIdCarritoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCLote.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ServiceReferenceDLL\Service1.disco" />
     <Content Include="servicios\descargarArchivo.aspx" />
     <Content Include="servicios\generarCSV.aspx" />
     <Content Include="servicios\generar_archivo.aspx" />
@@ -929,6 +969,12 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\devoluciones\Devoluciones.cshtml" />
+    <Content Include="Views\devoluciones\_nav_secundario.cshtml" />
+    <Content Include="Views\devoluciones\NuevaDevolucion.cshtml" />
+    <Content Include="Views\devoluciones\NuevaDevolucionVencidos.cshtml" />
+    <Content Include="Views\devoluciones\_scriptsDevoluciones.cshtml" />
+    <None Include="Service References\ServiceReferenceDLL\Service1.wsdl" />
     <None Include="Web_config\Web.config_produccion" />
   </ItemGroup>
   <ItemGroup>
@@ -1089,6 +1135,7 @@
     </Compile>
     <Compile Include="Controllers\configController.cs" />
     <Compile Include="Controllers\ctacteController.cs" />
+    <Compile Include="Controllers\devolucionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\mvcController.cs" />
     <Compile Include="Filters\AuthorizePermisoAttribute.cs" />

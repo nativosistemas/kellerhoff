@@ -86,6 +86,15 @@ namespace Kellerhoff
             //}
         }
 
+        public static List<ServiceReferenceDLL.cLote> ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(string pNombreProducto, string pNumeroLote, string pLoginWeb)
+        {
+            List<ServiceReferenceDLL.cLote> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(pNombreProducto, pNumeroLote, pLoginWeb);
+            }
+            return resultado;
+        }
 
         private static cArchivo ConvertToArchivo(DataRow pItem)
         {

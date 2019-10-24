@@ -265,3 +265,41 @@ color: #66abd8 !important;
     margin: 0;
     font-weight: 600;
 }
+
+.msjList {
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+    font-size:16px;
+    line-height:30px;
+}
+
+.msjList:nth-child(even) {
+    background: #f1f1f1;
+}
+
+.lotesList {
+    list-style: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 30px;
+    padding-left:5px;
+    padding-right:5px;
+}
+.headerlotesList {
+    list-style: none;
+    text-align: left;
+    font-size: 16px;
+    line-height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.fven {
+    float: right;
+}
+
+.lotesList:nth-child(even) {
+    background: #f1f1f1;
+}

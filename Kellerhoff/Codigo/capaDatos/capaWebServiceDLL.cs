@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using Kellerhoff.Codigo.clases;
+using Kellerhoff.ServiceReferenceDLL;
 
 namespace Kellerhoff.Codigo.capaDatos
 {
@@ -90,6 +91,23 @@ namespace Kellerhoff.Codigo.capaDatos
                 return null;
             }
         }
+
+        public static List<ServiceReferenceDLL.cLote> ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(string pNombreProducto, string pNumeroLote, string pLoginWeb)
+        {
+            try
+            {
+                ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
+                List<ServiceReferenceDLL.cLote> resultado = objServicio.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(pNombreProducto, pNumeroLote, pLoginWeb);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pNombreProducto, pNumeroLote, pLoginWeb);
+                return null;
+            }
+            
+        }
+
         public static ServiceReferenceDLL.cNotaDeCredito ObtenerNotaDeCredito(string pNroNotaDeCredito, string pLoginWeb)
         {
             try
