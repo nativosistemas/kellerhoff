@@ -148,6 +148,10 @@ namespace Kellerhoff.Codigo.clases
         {
             get { return Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["rol_EncGral"]); }
         }
+        public static int cROL_GRUPOCLIENTE
+        {
+            get { return Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["rol_GrupoCliente"]); }
+        }
         public static string cTABLA_CATALOGO
         {
             get { return "catalogo"; }
