@@ -1732,6 +1732,7 @@ function OnCallBackRecuperarProductos(args) {
 
             document.getElementById('divResultadoBuscador').innerHTML = strHtml + getHtmlTablaResolucionCelular();
             // Elejir el primer producto
+            $(".btn_buscar").focus();
             if ($('#inputSuc0_0').length) {
                 $('#inputSuc0_0').focus();
                 selectedInput = document.getElementById('inputSuc0_0');
