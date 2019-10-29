@@ -60,27 +60,56 @@ $(document).ready(function () {
 
 
     $("#cmbTipoComprobante").focus(function () {
-        $("#cmbTipoComprobante").val("");
-        //$('#DEVTipoComprobante').addClass("hidden");
-        //$('#DEVNroComprobante').addClass("hidden");
-        //$("#DEVFactura").addClass("hidden");
-        //$("#DEVDevolver").addClass("hidden");
-        //$("#DEVCant").addClass("hidden");
-        //$("#DEVAgregar").addClass("hidden");
-        //$("#txtCantDevolver").val("");
-        //$("#txtNombreProductoDev").val("");
+        $('#DEVNroComprobante input').val("");
+        $("#DEVFactura").addClass("hidden");
+        $('#DEVFactura input').val("");
+        $("#DEVDevolver").addClass("hidden");
+        $('#DEVDevolver input').val("");
+        $("#DEVCant").addClass("hidden");
+        $('#DEVCant input').val("");
+        $("#DEVLote").addClass("hidden");
+        $('#DEVLote input').val("");
+        $("#DEVLoteVenc").addClass("hidden");
+        $('#DEVLoteVenc input').val("");
+        $("#DEVAgregar").addClass("hidden");
     });
 
     $("#cmbNombreProducto").focus(function () {
-        $("#cmbNombreProducto").val("");
-        //$('#DEVTipoComprobante').addClass("hidden");
-        //$('#DEVNroComprobante').addClass("hidden");
-        //$("#DEVFactura").addClass("hidden");
-        //$("#DEVDevolver").addClass("hidden");
-        //$("#DEVCant").addClass("hidden");
-        //$("#DEVAgregar").addClass("hidden");
-        //$("#txtCantDevolver").val("");
-        //$("#txtNombreProductoDev").val("");
+        $('#DEVFactura input').val("");
+        $("#DEVCant").addClass("hidden");
+        $('#DEVCant input').val("");
+        $("#DEVLote").addClass("hidden");
+        $('#DEVLote input').val("");
+        $("#DEVLoteVenc").addClass("hidden");
+        $('#DEVLoteVenc input').val("");
+        $("#DEVAgregar").addClass("hidden");
+    });
+
+    $("#txtNombreProductoDev").focus(function () {
+        $('#DEVDevolver input').val("");
+        $("#DEVCant").addClass("hidden");
+        $('#DEVCant input').val("");
+        $("#DEVLote").addClass("hidden");
+        $('#DEVLote input').val("");
+        $("#DEVLoteVenc").addClass("hidden");
+        $('#DEVLoteVenc input').val("");
+        $("#DEVAgregar").addClass("hidden");
+    });
+
+    $("#txtCantDevolver").focus(function () {
+        $('#DEVCant input').val("");
+        $("#DEVLote").addClass("hidden");
+        $('#DEVLote input').val("");
+        $("#DEVLoteVenc").addClass("hidden");
+        $('#DEVLoteVenc input').val("");
+        $("#DEVAgregar").addClass("hidden");
+    });
+
+    $("#txtNumeroLote").focus(function () {
+        $('#DEVLote input').val("");
+        $("#DEVLoteVenc").addClass("hidden");
+        $('#DEVLoteVenc input').val("");
+        $("#DEVAgregar").addClass("hidden");
     });
 
     $("#cmbMotivo").change(function (e) {
@@ -265,6 +294,13 @@ $(document).ready(function () {
                         $("#modalModulo").unbind("click");
                         return false;
                     }
+                }
+
+                if (objPRDDev.pro_codtpopro != 'M') {
+                    $("#DEVAgregar").removeClass("hidden");
+                    $("#btnAgregarDev").removeAttr("disabled", "disabled");
+                    $("#btnAgregarDev").focus();
+                    return false;
                 }
 
                 $("#DEVLote").removeClass("hidden");

@@ -6,14 +6,9 @@
 @Html.Partial("_nav_secundario")
 @Html.Partial("_scriptsDevoluciones")
 <style>
-    .select2-container--default .select2-selection--single {
-        height: auto !important;
-        text-align: left !important;
-        margin-bottom: 15px !important;
-    }
-    .select2-container--default .select2-selection--single:focus {
-        margin-bottom: 15px !important;
-        height: auto !important;
+    #divPanelNroComprobante {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #999;
     }
     input, select {
         margin-bottom: 15px !important;
@@ -83,7 +78,7 @@
                 <label for="txtNumeroLote">Nro. Lote</label>
                 <input type="text" id="txtNumeroLote" name="txtNumeroLote" class="form-control" style="text-align:right;">
             </div>
-            <div class="col-sm-2 col-xs-4 hidden" id="DEVLoteVenc" style="text-align:right;">
+            <div class="col-sm-2 col-lg-1 col-xs-4 hidden" id="DEVLoteVenc" style="text-align:right;">
                 <label for="txtNumeroLote">Vencimiento</label>
                 <input type="text" id="txtNumeroLoteVenc" name="txtNumeroLoteVenc" class="form-control" style="text-align:right;">
             </div>
