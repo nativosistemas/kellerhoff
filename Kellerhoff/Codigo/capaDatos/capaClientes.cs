@@ -287,6 +287,34 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
+        public static DataTable RecuperarTodosClientesByGrupoCliente(string pGC)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("Clientes.spRecuperarTodosClientesByGrupoCliente", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter paGrupoCliente = cmdComandoInicio.Parameters.Add("@cli_GrupoCliente", SqlDbType.NVarChar, 75);
+            paGrupoCliente.Value = pGC;
+            try
+            {
+                Conn.Open();
+                DataTable dt = new DataTable();
+                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+                dt.Load(LectorSQLdata);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
         public static DataTable spRecuperarTodosClientesByPromotor(string pPromotor)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
