@@ -183,24 +183,23 @@ namespace Kellerhoff.Codigo.capaDatos
                 int maxValue = rd.Next(1000, 7500);
                 while (n < 10)
                 {
-                     minValue = rd.Next(minValue, minValue + 1000);
-                     maxValue = rd.Next(maxValue, maxValue +10000);
-                    if (minValue >= maxValue)
-                        maxValue += minValue;
                     int time= rd.Next(minValue, maxValue);
                     System.Threading.Thread.Sleep(time);
                     isBorrar = capaCAR.BorrarCarritoPorId(car_id, pAccion);
                     if (isBorrar)
                         return isBorrar;
                     n++;
+                    minValue = rd.Next(minValue, minValue + 800);
+                    maxValue = rd.Next(maxValue, maxValue + 8000);
+                    if (minValue >= maxValue)
+                        maxValue += minValue;
                 }
             }
             return false;
         }
         public static bool BorrarCarritoPorId(int car_id, string pAccion)
         {
-            return false;
-            /*SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("CAR.spBorrarCarritoPorId", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
@@ -228,7 +227,7 @@ namespace Kellerhoff.Codigo.capaDatos
                 {
                     Conn.Close();
                 }
-            }*/
+            }
         }
 
         public static void guardarPedido(cCarrito pCarrito, string pTipo, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
