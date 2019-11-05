@@ -3338,6 +3338,118 @@ namespace Kellerhoff
             }
             return resultado;
         }
+        /// DEVOLUCIONES
+        /// ///////////////////
+        /// 
+        public static List<cDevolucionItemPrecarga> RecuperarItemsDevolucionPrecargaPorCliente(int pIdCliente)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                List<cDevolucionItemPrecarga> resultado = new List<cDevolucionItemPrecarga>();
+                DataTable tabla = capaDevoluciones.RecuperarItemsDevolucionPrecargaPorCliente(pIdCliente);
+                if (tabla != null)
+                {
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        resultado.Add(ConvertToItemDevPrecarga(item));
+                    }
+                }
+                return resultado;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool AgregarDevolucionItemPrecarga(cDevolucionItemPrecarga Item)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.AgregarDevolucionItemPrecarga(Item);
+            }
+            return result;
+        }
+
+        public static bool EliminarDevolucionItemPrecarga(int NumeroItem)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.EliminarDevolucionItemPrecarga(NumeroItem);
+            }
+            return result;
+        }
+
+        public static bool EliminarPrecargaDevolucionPorCliente(int NumeroCliente)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.EliminarPrecargaDevolucionPorCliente(NumeroCliente);
+            }
+            return result;
+        }
+        
+        private static cDevolucionItemPrecarga ConvertToItemDevPrecarga(DataRow pItem)
+        {
+            cDevolucionItemPrecarga obj = new cDevolucionItemPrecarga();
+
+            if (pItem["dev_numeroitem"] != DBNull.Value)
+            {
+                obj.dev_numeroitem = Convert.ToInt32(pItem["dev_numeroitem"]);
+            }
+
+            if (pItem["dev_numerocliente"] != DBNull.Value)
+            {
+                obj.dev_numerocliente = Convert.ToInt32(pItem["dev_numerocliente"]);
+            }
+            if (pItem["dev_numerofactura"] != DBNull.Value)
+            {
+                obj.dev_numerofactura = pItem["dev_numerofactura"].ToString();
+            }
+            if (pItem["dev_nombreproductodevolucion"] != DBNull.Value)
+            {
+                obj.dev_nombreproductodevolucion = pItem["dev_nombreproductodevolucion"].ToString();
+            }
+            if (pItem["dev_fecha"] != DBNull.Value)
+            {
+                obj.dev_fecha = Convert.ToDateTime(pItem["dev_fecha"]);
+                obj.dev_fechaToString = Convert.ToDateTime(pItem["dev_fecha"]).ToShortDateString();
+            }
+            if (pItem["dev_motivo"] != DBNull.Value)
+            {
+                obj.dev_motivo = Convert.ToInt32(pItem["dev_motivo"]);
+            }
+            if (pItem["dev_numeroitemfactura"] != DBNull.Value)
+            {
+                obj.dev_numeroitemfactura = Convert.ToInt32(pItem["dev_numeroitemfactura"]);
+            }
+            if (pItem["dev_nombreproductofactura"] != DBNull.Value)
+            {
+                obj.dev_nombreproductofactura = pItem["dev_nombreproductofactura"].ToString();
+            }
+            if (pItem["dev_cantidad"] != DBNull.Value)
+            {
+                obj.dev_cantidad = Convert.ToInt32(pItem["dev_cantidad"]);
+            }
+            if (pItem["dev_numerolote"] != DBNull.Value)
+            {
+                obj.dev_numerolote = pItem["dev_numerolote"].ToString();
+            }
+            if (pItem["dev_fechavencimientolote"] != DBNull.Value)
+            {
+                obj.dev_fechavencimientolote = Convert.ToDateTime(pItem["dev_fechavencimientolote"]);
+                obj.dev_fechavencimientoloteToString = Convert.ToDateTime(pItem["dev_fechavencimientolote"]).ToShortDateString();
+            }
+            return obj;
+        }
+
+
         public static ServiceReferenceDLL.cDllRespuestaResumenAbierto ObtenerResumenAbierto(string pLoginWeb)
         {
             ServiceReferenceDLL.cDllRespuestaResumenAbierto resultado = null;

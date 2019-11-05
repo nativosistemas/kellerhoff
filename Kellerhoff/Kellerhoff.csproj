@@ -1073,6 +1073,7 @@
     <Compile Include="Codigo\capaDatos\capaClientes.cs" />
     <Compile Include="Codigo\capaDatos\capaContactos.cs" />
     <Compile Include="Codigo\capaDatos\capaCV.cs" />
+    <Compile Include="Codigo\capaDatos\capaDevoluciones.cs" />
     <Compile Include="Codigo\capaDatos\capaEF.cs" />
     <Compile Include="Codigo\capaDatos\capaHome.cs" />
     <Compile Include="Codigo\capaDatos\capaLogRegistro.cs" />

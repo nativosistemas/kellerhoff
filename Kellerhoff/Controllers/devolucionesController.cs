@@ -58,5 +58,53 @@ namespace Kellerhoff.Controllers
             else
                 return null;
         }
+        public string RecuperarItemsDevolucionPrecargaPorCliente()
+        {
+            object resultadoObj = null;
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultadoObj = WebService.RecuperarItemsDevolucionPrecargaPorCliente(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
+            }
+            if (resultadoObj != null)
+                return Serializador.SerializarAJson(resultadoObj);
+            else
+                return null;
+        }
+
+        public bool AgregarDevolucionItemPrecarga( cDevolucionItemPrecarga Item )
+        {
+            bool resultadoObj = false;
+
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultadoObj = WebService.AgregarDevolucionItemPrecarga(Item);
+            }
+
+            return resultadoObj;
+        }
+
+        public bool EliminarDevolucionItemPrecarga(int NumeroItem)
+        {
+            bool resultadoObj = false;
+
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultadoObj = WebService.EliminarDevolucionItemPrecarga(NumeroItem);
+            }
+
+            return resultadoObj;
+        }
+
+        public bool EliminarPrecargaDevolucionPorCliente(int NumeroCliente)
+        {
+            bool resultadoObj = false;
+
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultadoObj = WebService.EliminarPrecargaDevolucionPorCliente(NumeroCliente);
+            }
+
+            return resultadoObj;
+        }
     }
 }

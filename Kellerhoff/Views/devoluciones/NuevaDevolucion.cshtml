@@ -9,9 +9,30 @@
     #divPanelNroComprobante {
         padding-bottom: 10px;
         border-bottom: 1px solid #999;
+        margin-bottom: 1em;
     }
-    input, select {
+    #divPanelNroComprobante input, #divPanelNroComprobante select {
         margin-bottom: 15px !important;
+    }
+    .table thead tr th {
+        padding: 11px 5px !important;
+        border-right: 1px solid #cecece;
+        vertical-align: middle;
+        font-weight: 400 !important;
+        font-size: 11px !important;
+        line-height: 11px;
+        color: #fff !important;
+        border-bottom: none !important;
+    }
+    .tablaDevoluciones thead tr th:last-child {
+        border-right: none !important;
+    }
+    .tablaDevoluciones {
+        border-bottom: 2px solid #34495e;
+    }
+    .botonera_dev {
+        background: #fff;
+        padding: 1em;
     }
 </style>
 <h3>Devolución Normal</h3>
@@ -23,6 +44,11 @@
             <div class="col-xs-12 col-sm-3">
                 <label for="cmbMotivo">Motivo</label>
                 <input type="text" name="cmbMotivo" id="cmbMotivo" list="MotivoValues" class="form-control" />
+                @{ 
+                    int nroCliente = ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo;
+
+                    <input type="hidden" name="txtNroCliente" id="txtNroCliente" value="@{ WriteLiteral(nroCliente); }" />
+                }
                 <datalist id="MotivoValues">
                     <option value="Bien facturado mal enviado" data-id="1">
                     <option value="No pedido" data-id="2">
@@ -90,6 +116,39 @@
                 </button>
             </div>
             <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 padding_l-10 table-responsive">
+        <h3>Devoluciones Precargadas</h3>
+        <table class="table table-striped tablaDevoluciones">
+            <thead>
+                <tr>
+                    <th>Factura</th>
+                    <th>Producto facturado</th>
+                    <th>Producto devuelto</th>
+                    <th>Motivo</th>
+                    <th class="text-center">Cantidad</th>
+                    <th>Lote</th>
+                    <th>Vencimiento</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tblDevolucion"></tbody>
+            
+        </table>
+    </div>
+    <div class="col-xs-12 padding_l-10">
+        <div class="col-xs-6 botonera_dev">
+            <button type="button" class="btn btn-danger btnLimpiarPrecarga" id="btnLimpiarPrecarga">
+                <i class="fa fa-trash-o"></i> &nbsp;&nbsp; LIMPIAR
+            </button>
+        </div>
+        <div class="col-xs-6 botonera_dev">
+            <button type="button" class="btn btn-primary pull-right btnProcesarPrecarga" id="btnProcesarPrecarga">
+                <i class="fa fa-check"></i> &nbsp;&nbsp; CONFIRMAR
+            </button>
         </div>
     </div>
 </div>
