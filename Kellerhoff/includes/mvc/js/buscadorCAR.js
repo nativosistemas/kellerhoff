@@ -351,6 +351,11 @@ function CargarDatosProductos(pIndice) {
     } else {
         $('#tdTrazable').html('No');
     }
+    if (listaProductosBuscados[pIndice].pro_Familia != null) {
+        $('#tdFamilia').html(listaProductosBuscados[pIndice].pro_Familia);
+    } else {
+        $('#tdFamilia').html('');
+    }
     // Inicio Imagen Producto
     if (listaProductosBuscados[pIndice].pri_nombreArchivo == null) {
         $('#imgProductoDatos').attr('src', '');
@@ -393,7 +398,7 @@ function onClickBuscar() {
                 //}
                 isTransferSeleccionado = $('#checkBoxTodosTransfer').is(':checked');
 
-                if ($('#checkNombre').is(':checked') || $('#checkBoxCodigoBarra').is(':checked') || $('#checkBoxMonodroga').is(':checked') || $('#checkBoxLaboratorio').is(':checked') || $('#checkBoxCodigoAlfaBeta').is(':checked') || $('#checkBoxTroquel').is(':checked') || $('#checkBoxTodosOfertas').is(':checked') || isTransferSeleccionado) {
+                if ($('#checkNombre').is(':checked') || $('#checkBoxCodigoBarra').is(':checked') || $('#checkBoxMonodroga').is(':checked') || $('#checkBoxLaboratorio').is(':checked') || $('#checkBoxCodigoAlfaBeta').is(':checked') || $('#checkBoxTroquel').is(':checked') || $('#checkBoxFamilia').is(':checked') || $('#checkBoxTodosOfertas').is(':checked') || isTransferSeleccionado) {
                     //
                     //Ascender_pro_precio = true;
                     //Ascender_PrecioFinal = true;
@@ -416,6 +421,9 @@ function onClickBuscar() {
                     }
                     if ($('#checkBoxTroquel').is(':checked')) {
                         arrayListaColumna.push($('#checkBoxTroquel').val());
+                    }
+                    if ($('#checkBoxFamilia').is(':checked')) {
+                        arrayListaColumna.push($('#checkBoxFamilia').val());
                     }
                     showCargandoBuscador();
                     intPaginadorTipoDeRecuperar = 3; // buscador común
@@ -1724,6 +1732,7 @@ function OnCallBackRecuperarProductos(args) {
 
             document.getElementById('divResultadoBuscador').innerHTML = strHtml + getHtmlTablaResolucionCelular();
             // Elejir el primer producto
+            $(".btn_buscar").focus();
             if ($('#inputSuc0_0').length) {
                 $('#inputSuc0_0').focus();
                 selectedInput = document.getElementById('inputSuc0_0');
@@ -2605,6 +2614,14 @@ function detalleProducto_celular(pIndex) {
     }
     strHtml += '<div class="col-xs-4 no-padding">Trazable:</div>';
     strHtml += '<div class="col-xs-8 no-padding">' + Trazable + '</div>';
+    //
+    var familia = '&nbsp;';
+    if (listaProductosBuscados[pIndex].pro_Familia != null) {
+        familia = listaProductosBuscados[pIndex].pro_Familia;
+    }
+    strHtml += '<div class="col-xs-4 no-padding">Familia:</div>';
+    strHtml += '<div class="col-xs-8 no-padding">' + familia + '</div>';
+    //
     // Detalle Transfer
     if (listaProductosBuscados[pIndex].tfr_descripcion != null) {
         strHtml += '<div class="col-xs-4 no-padding detalleTransferModoCelular">Condición General:</div>';

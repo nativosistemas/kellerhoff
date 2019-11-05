@@ -20,7 +20,8 @@
 @{
     if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR ||
         ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL ||
-        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
+        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL ||
+        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
     {
         <style>
             input[type=number], .cant_trasf_combo, .btn_confirmar, .cssFocusCantProdCarrito {
@@ -54,7 +55,8 @@
     @{
         if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
             ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
-            ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL)
+            ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL &&
+            ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
         {
             <div class="col-xs-6 no-padding text-right visible-xs"><a class="btn_carrito_cant" href=@{ WriteLiteral(hrefCarritoGenerico);}>Carrito<span id="spanCarritoCantidad"></span></a></div>
         }
@@ -85,6 +87,10 @@
         <div class="radio-checkbox rc_buscador">
             <input id="checkBoxTroquel" class="checkbox" type="checkbox" value="pro_troquel">
             <label for="checkBoxTroquel" value="">Troquel</label>
+        </div>
+        <div class="radio-checkbox rc_buscador">
+            <input id="checkBoxFamilia" class="checkbox" type="checkbox" value="pro_familia">
+            <label for="checkBoxFamilia" value="">Familia</label>
         </div>
         @{if (Kellerhoff.Controllers.mvcController.isClienteTomaOferta())
             {

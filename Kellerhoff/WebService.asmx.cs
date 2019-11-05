@@ -1336,6 +1336,23 @@ namespace Kellerhoff
             }
             return resultado;
         }
+        public static List<cClientes> RecuperarTodosClientesByGrupoCliente(string pGC)
+        {
+            List<cClientes> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                DataTable tablaClientes = capaClientes.RecuperarTodosClientesByGrupoCliente(pGC);
+                if (tablaClientes != null)
+                {
+                    resultado = new List<cClientes>();
+                    foreach (DataRow item in tablaClientes.Rows)
+                    {
+                        resultado.Add(ConvertToCliente(item));
+                    }
+                }
+            }
+            return resultado;
+        }
         public static List<cClientes> spRecuperarTodosClientesByPromotor(string pPromotor)
         {
             List<cClientes> resultado = null;
