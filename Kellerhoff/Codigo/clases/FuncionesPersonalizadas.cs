@@ -148,6 +148,13 @@ namespace Kellerhoff.Codigo.clases
                                 obj.pro_Familia = Convert.ToString(item["pro_Familia"]);
                             }
                         }
+                        if (item.Table.Columns.Contains("pro_PackDeVenta"))
+                        {
+                            if (item["pro_PackDeVenta"] != DBNull.Value)
+                            {
+                                obj.pro_PackDeVenta = Convert.ToInt32(item["pro_PackDeVenta"]);
+                            }
+                        }
                         obj.isProductoFacturacionDirecta = false;
                         if (item.Table.Columns.Contains("pro_NoTransfersEnClientesPerf") && item["pro_NoTransfersEnClientesPerf"] != DBNull.Value)
                         {

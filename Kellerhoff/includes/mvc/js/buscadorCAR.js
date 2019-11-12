@@ -356,6 +356,13 @@ function CargarDatosProductos(pIndice) {
     } else {
         $('#tdFamilia').html('');
     }
+    //
+    if (listaProductosBuscados[pIndice].pro_PackDeVenta != null) {
+        $('#tdPackDeVenta').html(listaProductosBuscados[pIndice].pro_PackDeVenta);
+    } else {
+        $('#tdPackDeVenta').html('');
+    }
+    //
     // Inicio Imagen Producto
     if (listaProductosBuscados[pIndice].pri_nombreArchivo == null) {
         $('#imgProductoDatos').attr('src', '');
@@ -2621,6 +2628,14 @@ function detalleProducto_celular(pIndex) {
     }
     strHtml += '<div class="col-xs-4 no-padding">Familia:</div>';
     strHtml += '<div class="col-xs-8 no-padding">' + familia + '</div>';
+    //
+    //
+    var packDeVenta = '&nbsp;';
+    if (listaProductosBuscados[pIndex].pro_PackDeVenta != null) {
+        packDeVenta = listaProductosBuscados[pIndex].pro_PackDeVenta;
+    }
+    strHtml += '<div class="col-xs-4 no-padding">Pack de venta:</div>';
+    strHtml += '<div class="col-xs-8 no-padding">' + packDeVenta + '</div>';
     //
     // Detalle Transfer
     if (listaProductosBuscados[pIndex].tfr_descripcion != null) {

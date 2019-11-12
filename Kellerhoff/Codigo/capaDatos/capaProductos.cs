@@ -58,7 +58,8 @@ namespace Kellerhoff.Codigo.capaDatos
             get { return _isPermitirPedirProducto; }
             set { _isPermitirPedirProducto = value; }
         }
-        public string pro_Familia { get; set; } 
+        public string pro_Familia { get; set; }
+        public int? pro_PackDeVenta { get; set; }
     }
     public class cProductosGenerico : cTransferDetalle
     {
@@ -87,6 +88,7 @@ namespace Kellerhoff.Codigo.capaDatos
             base.pro_isTrazable = pProducto.pro_isTrazable;
             base.pro_NoTransfersEnClientesPerf = pProducto.pro_NoTransfersEnClientesPerf;
             base.pro_Familia = pProducto.pro_Familia;
+            base.pro_PackDeVenta = pProducto.pro_PackDeVenta;
             listaSucursalStocks = new List<cSucursalStocks>();
             isProductoNoEncontrado = false;
         }

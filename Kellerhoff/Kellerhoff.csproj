@@ -914,6 +914,7 @@
     <Content Include="servicios\generar_comprobantes_discriminado.aspx" />
     <Content Include="servicios\thumbnail.aspx" />
     <Content Include="SQLscript\nativosistemas_2019_10_16.sql" />
+    <Content Include="SQLscript\nativosistemas_2019_11_12.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
     <Content Include="WebService.asmx" />
