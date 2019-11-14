@@ -1,4 +1,187 @@
-﻿--ALTER TABLE [dbo].[tbl_Productos] 
+﻿
+
+CREATE procedure [LogRegistro].[spCargarCarritoProductoSucursalDesdeArchivoPedidosV5_Columnas]
+@lrc_codSucursal nvarchar(2),
+@Sucursal nvarchar(2),
+@lrc_codCliente int,
+@lcp_codUsuario int,
+@Tabla_Detalle ProductosArchivosPedidosTableType READONLY,
+@TipoDeArchivo nvarchar(1),
+@cli_codprov nvarchar(75),
+@cli_isGLN bit
+ AS
+BEGIN TRANSACTION
+BEGIN TRY
+
+----
+IF OBJECT_ID ( 'tempdb..#tbl_Transfers_Temporal' ) IS NOT NULL 
+BEGIN
+   DROP TABLE #tbl_Transfers_Temporal
+END
+SELECT [tfr_codigo]
+      ,[tfr_accion]
+      ,[tfr_nombre]
+      ,[tfr_deshab]
+      ,[tfr_pordesadi]
+      ,[tfr_tipo]
+      ,[tfr_mospap]
+      ,[tfr_minrenglones]
+      ,[tfr_minunidades]
+      ,[tfr_maxunidades]
+      ,[tfr_mulunidades]
+      ,[tfr_fijunidades]
+      ,[tfr_descripcion]
+      ,[tfr_facturaciondirecta]
+      ,[tfr_provincia]
+INTO #tbl_Transfers_Temporal
+FROM [tbl_Transfers]
+where [tfr_codigo] in (select distinct tcl_IdTransfer
+FROM  tbl_TransfersClientes where tcl_NumeroCliente = @lrc_codCliente) or [tfr_codigo] not in (select distinct tcl_IdTransfer
+FROM  tbl_TransfersClientes )
+----
+
+
+if @TipoDeArchivo = 'F'
+BEGIN
+       
+SELECT pro_codigo as 'codigo', SUM(cantidad) as cantidad, MIN(nroordenamiento) as 'nroordenamiento'
+INTO #tempTablaProductosPedidosF
+FROM tbl_Productos
+INNER JOIN @Tabla_Detalle ON pro_codigo = codProducto
+GROUP BY pro_codigo
+
+select codigo,
+       p.*,
+       tde_codpro as isTransfer,
+CASE ISNULL(val_codprov,'0')
+         WHEN '0' THEN 0
+         ELSE 1
+         END as 'RequiereVale'
+          , cantidad
+         , nroordenamiento  as 'nroordenamiento'
+from #tempTablaProductosPedidosF 
+LEFT JOIN tbl_Productos as p  ON pro_codigo = codigo
+LEFT JOIN (select distinct tde_codpro from tbl_Transfers_Detalle  INNER JOIN  #tbl_Transfers_Temporal ON tde_codtfr = tfr_codigo WHERE tfr_facturaciondirecta  is null OR tfr_facturaciondirecta  = 0) as tb1 on tb1.tde_codpro = pro_nombre
+LEFT JOIN (SELECT val_codprov,val_codpro FROM tbl_Productos_Vales WHERE val_codprov =  @cli_codprov) as tblProductosVales ON pro_codigo = val_codpro
+ORDER BY nroordenamiento
+
+
+select stk_codpro,stk_codsuc,stk_stock
+from tbl_Productos_Stocks
+where stk_codpro in (select codigo from #tempTablaProductosPedidosF)
+AND stk_codsuc in (select sde_sucursalDependiente from Clientes.tbl_sucursalDependiente where sde_sucursal = @Sucursal)
+
+SELECT codProducto  as 'nombreNoEncontrado', SUM(tb1.cantidad) as cantidad, MIN(tb1.nroordenamiento) as 'nroordenamiento'
+FROM @Tabla_Detalle as tb1
+LEFT JOIN  #tempTablaProductosPedidosF as tb2 ON  codigo = codProducto 
+WHERE  ISNULL(codigo ,'-1') = '-1'
+GROUP BY codProducto
+
+
+SELECT [tde_codtfr],[tde_codpro],[tde_descripcion],[tde_prepublico],[tde_predescuento],[tde_minuni],[tde_maxuni],[tde_muluni],[tde_fijuni],[tde_proobligatorio],tde_unidadesbonificadas,tde_unidadesbonificadasdescripcion,[tfr_codigo],[tfr_accion],[tfr_nombre],[tfr_deshab],[tfr_pordesadi],[tfr_tipo],[tfr_mospap],[tfr_minrenglones],[tfr_minunidades],[tfr_maxunidades],[tfr_mulunidades],[tfr_fijunidades],[tfr_descripcion],[tfr_facturaciondirecta]
+,tcl_IdTransfer,tde_DescripcionDeProducto
+from tbl_Transfers_Detalle
+INNER JOIN  (SELECT * FROM #tbl_Transfers_Temporal WHERE tfr_facturaciondirecta = 1) as tb1 on  [tde_codtfr] = tb1.tfr_codigo
+LEFT JOIN tbl_TransfersClientes on [tde_codtfr] = tcl_IdTransfer and tcl_NumeroCliente = @lrc_codCliente
+WHERE tde_codpro in (select pro_nombre from tbl_Productos INNER JOIN #tempTablaProductosPedidosF ON codigo = pro_codigo)
+
+DROP TABLE #tempTablaProductosPedidosF
+
+
+END
+ELSE
+BEGIN
+IF @TipoDeArchivo = 'S'
+BEGIN
+
+
+--SELECT pro_codigo as 'codigo', SUM(cantidad) as cantidad, MIN(nroordenamiento) as 'nroordenamiento'
+--INTO #tempTablaProductosPedidosS
+--FROM tbl_Productos
+--INNER JOIN @Tabla_Detalle ON (pro_codigobarra = codigobarra OR pro_troquel = troquel OR pro_codigoalfabeta = codigoalfabeta)
+--GROUP BY pro_codigo
+---------------
+SELECT pro_codigo as 'codigo', SUM(cantidad) as cantidad, MIN(nroordenamiento) as 'nroordenamiento'
+INTO #tempTablaProductosPedidosS
+FROM tbl_Productos
+INNER JOIN @Tabla_Detalle ON (RTRIM (LTRIM(pro_codigobarra)) = RTRIM (LTRIM(codigobarra)))
+GROUP BY pro_codigo
+
+INSERT INTO #tempTablaProductosPedidosS(codigo,cantidad,nroordenamiento)
+SELECT pro_codigo as 'codigo', SUM(cantidad) as cantidad, MIN(nroordenamiento) as 'nroordenamiento'
+FROM tbl_Productos 
+INNER JOIN @Tabla_Detalle ON (RTRIM (LTRIM(pro_troquel)) = RTRIM (LTRIM(troquel)))
+where nroordenamiento not in (select nroordenamiento FROM #tempTablaProductosPedidosS)
+GROUP BY pro_codigo
+
+INSERT INTO #tempTablaProductosPedidosS(codigo,cantidad,nroordenamiento)
+SELECT pro_codigo as 'codigo', SUM(cantidad) as cantidad, MIN(nroordenamiento) as 'nroordenamiento'
+FROM tbl_Productos 
+INNER JOIN @Tabla_Detalle ON ( RTRIM (LTRIM(pro_codigoalfabeta)) = RTRIM (LTRIM(codigoalfabeta)))
+where nroordenamiento not in (select nroordenamiento FROM #tempTablaProductosPedidosS)
+GROUP BY pro_codigo
+
+
+
+----------------------------
+
+select codigo,
+       p.*,
+       tde_codpro as isTransfer,
+CASE ISNULL(val_codprov,'0')
+         WHEN '0' THEN 0
+         ELSE 1
+         END as 'RequiereVale'
+         , cantidad
+         ,nroordenamiento  as 'nroordenamiento'
+from #tempTablaProductosPedidosS
+LEFT JOIN tbl_Productos as p ON pro_codigo = codigo
+LEFT JOIN (select distinct tde_codpro from tbl_Transfers_Detalle  INNER JOIN  #tbl_Transfers_Temporal ON tde_codtfr = tfr_codigo WHERE tfr_facturaciondirecta  is null OR tfr_facturaciondirecta  = 0) as tb1 on tb1.tde_codpro = pro_nombre
+LEFT JOIN (SELECT val_codprov,val_codpro FROM tbl_Productos_Vales WHERE val_codprov =  @cli_codprov) as tblProductosVales ON pro_codigo = val_codpro
+ORDER BY nroordenamiento
+
+
+
+select stk_codpro,stk_codsuc,stk_stock
+from tbl_Productos_Stocks
+where stk_codpro in (select codigo from #tempTablaProductosPedidosS)
+AND stk_codsuc in (select sde_sucursalDependiente from Clientes.tbl_sucursalDependiente where sde_sucursal = @Sucursal)
+
+--
+SELECT codigobarra + ' ' + troquel + ' ' + codigoalfabeta  as 'nombreNoEncontrado' ,codigobarra , troquel ,codigoalfabeta,  SUM(cantidad) as cantidad, MIN(nroordenamiento) as 'nroordenamiento'
+--INTO #tempTablaProductosPedidosS_AUX
+FROM tbl_Productos
+RIGHT JOIN @Tabla_Detalle ON (RTRIM (LTRIM(pro_codigobarra)) = RTRIM (LTRIM(codigobarra)) OR RTRIM (LTRIM(pro_troquel)) = RTRIM (LTRIM(troquel)) OR RTRIM (LTRIM(pro_codigoalfabeta)) = RTRIM (LTRIM(codigoalfabeta)))
+WHERE ISNULL( pro_codigo,'-1') = '-1'
+GROUP BY codigobarra , troquel ,codigoalfabeta
+
+SELECT [tde_codtfr],[tde_codpro],[tde_descripcion],[tde_prepublico],[tde_predescuento],[tde_minuni],[tde_maxuni],[tde_muluni],[tde_fijuni],[tde_proobligatorio],tde_unidadesbonificadas,tde_unidadesbonificadasdescripcion,[tfr_codigo],[tfr_accion],[tfr_nombre],[tfr_deshab],[tfr_pordesadi],[tfr_tipo],[tfr_mospap],[tfr_minrenglones],[tfr_minunidades],[tfr_maxunidades],[tfr_mulunidades],[tfr_fijunidades],[tfr_descripcion],[tfr_facturaciondirecta]
+,tcl_IdTransfer
+from tbl_Transfers_Detalle
+INNER JOIN  (SELECT * FROM #tbl_Transfers_Temporal WHERE tfr_facturaciondirecta = 1) as tb1 on  [tde_codtfr] = tb1.tfr_codigo
+LEFT JOIN tbl_TransfersClientes on [tde_codtfr] = tcl_IdTransfer and tcl_NumeroCliente = @lrc_codCliente
+WHERE tde_codpro in (select pro_nombre from tbl_Productos INNER JOIN #tempTablaProductosPedidosS ON codigo = pro_codigo)
+
+
+--
+DROP TABLE #tempTablaProductosPedidosS
+
+
+END -- IF @TipoDeArchivo = 'S'
+END -- ELSE
+
+
+
+COMMIT TRANSACTION 
+END TRY
+BEGIN CATCH
+ROLLBACK TRANSACTION 
+EXEC LogRegistro.spLogError @mensaje = N'';
+END CATCH
+GO
+
+--------------
+--ALTER TABLE [dbo].[tbl_Productos] 
 --ADD [pro_PackDeVenta] [smallint] NULL
 --GO
 ----
