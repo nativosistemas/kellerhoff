@@ -1,6 +1,6 @@
 ﻿
 
-CREATE procedure [LogRegistro].[spCargarCarritoProductoSucursalDesdeArchivoPedidosV5_Columnas]
+CREATE procedure [LogRegistro].[spCargarCarritoProductoSucursalDesdeArchivoPedidosV5]
 @lrc_codSucursal nvarchar(2),
 @Sucursal nvarchar(2),
 @lrc_codCliente int,
