@@ -14,7 +14,22 @@ namespace Kellerhoff.Codigo.clases.Generales
         //    // TODO: Add constructor logic here
         //    //
         //}
-
+        public static string toString_ParteEntera_8( decimal n)
+        {
+            return toString_ParteEntera(8,  n);
+        }
+        public static string toString_ParteEntera(int totalWidth, decimal n)
+        {
+           return AgregarSeparaciónDeMiles(Math.Truncate(n).ToString()).PadLeft(totalWidth, '0');
+        }
+        public static string toString_ParteDecimal_2(decimal n)
+        {
+            return toString_ParteDecimal(2,  n);
+        }
+        public static string toString_ParteDecimal(int totalWidth, decimal n)
+        {
+            return Numerica.ParteDecimal(n).ToString().PadRight(totalWidth, '0');
+        }
         public static Int32 ParteDecimal(decimal n)
         {
             string s = n.ToString("#.#########", System.Globalization.CultureInfo.InvariantCulture);

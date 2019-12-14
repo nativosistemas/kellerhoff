@@ -523,9 +523,13 @@ namespace Kellerhoff.Controllers
                         ds.Tables.Add(dt);
                         ds.WriteXml(f);
                     }
-                    else if (id == 5 || id == 6 || id == 7 || id == 8)
+                    else if (id == 5 || id == 6 || id == 7)
                     {
                         GenerarArchivo(f, dt);
+                    }
+                    else if (id == 8)
+                    {
+                        GenerarArchivo_ProductosEnOferta(f, dt);
                     }
                     var fileStream = new FileStream(f, FileMode.Open, FileAccess.Read);
                     //return new FileStreamResult(fileStream, MimeMapping.GetMimeMapping(f));
@@ -634,6 +638,50 @@ namespace Kellerhoff.Controllers
                                 Trazable = item["Trazable"].ToString();
                             }
                             fila += Trazable;
+                            writer.WriteLine(fila);
+                        }
+                    }
+                    //writer.Close();
+                }
+            }
+        }
+        public static void GenerarArchivo_ProductosEnOferta(string RutaNombreArchivo, DataTable pTabla)
+        {
+            if (pTabla != null && RutaNombreArchivo != null)
+            {
+                if (pTabla.Rows.Count > 0)
+                {
+                    string path = RutaNombreArchivo;
+                    FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write);
+                    //StreamWriter writer = new StreamWriter(stream);
+                    using (StreamWriter writer = new StreamWriter(stream))
+                    {
+                        string encabezado = string.Empty;
+                        encabezado += "Nombre producto" + Constantes.cSeparadorCSV;
+                        encabezado += "Unidades Mínimas" + Constantes.cSeparadorCSV;
+                        encabezado += "% de descuento";
+                        writer.WriteLine(encabezado);
+                        foreach (DataRow item in pTabla.Rows)
+                        {
+                            string fila = string.Empty;
+                            string NombreProducto = string.Empty;
+                            if (item["Nombre producto"] != DBNull.Value)
+                            {
+                                NombreProducto = item["Nombre producto"].ToString();
+                            }
+                            fila += NombreProducto + Constantes.cSeparadorCSV;
+                            string UnidadesMínimas = string.Empty;
+                            if (item["Unidades Mínimas"] != DBNull.Value)
+                            {
+                                UnidadesMínimas = item["Unidades Mínimas"].ToString();
+                            }
+                            fila += UnidadesMínimas + Constantes.cSeparadorCSV;
+                            string Descuento = string.Empty;
+                            if (item["% de descuento"] != DBNull.Value)
+                            {
+                                Descuento = item["% de descuento"].ToString();
+                            }
+                            fila += Descuento;
                             writer.WriteLine(fila);
                         }
                     }
