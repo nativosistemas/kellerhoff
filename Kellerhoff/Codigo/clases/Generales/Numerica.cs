@@ -8,12 +8,6 @@ namespace Kellerhoff.Codigo.clases.Generales
     /// </summary>
     public class Numerica
     {
-        //public Numerica()
-        //{
-        //    //
-        //    // TODO: Add constructor logic here
-        //    //
-        //}
         public static string toString_ParteEntera_8( decimal n)
         {
             return toString_ParteEntera(8,  n);
@@ -24,22 +18,17 @@ namespace Kellerhoff.Codigo.clases.Generales
         }
         public static string toString_ParteDecimal_2(decimal n)
         {
-            return toString_ParteDecimal(2,  n);
+            return ReplaceFirst(n.ToString("F2"), Math.Truncate(n).ToString(), string.Empty).Replace(".", string.Empty).Replace(",", string.Empty);
         }
-        public static string toString_ParteDecimal(int totalWidth, decimal n)
+        public static string ReplaceFirst(string text, string search, string replace)
         {
-            return Numerica.ParteDecimal(n).ToString().PadRight(totalWidth, '0');
-        }
-        public static Int32 ParteDecimal(decimal n)
-        {
-            string s = n.ToString("#.#########", System.Globalization.CultureInfo.InvariantCulture);
-            if (s.IndexOf(".") == -1)
+            int pos = text.IndexOf(search);
+            if (pos < 0)
             {
-                s += ".0";
+                return text;
             }
-            return Int32.Parse(s.Substring(s.IndexOf(".") + 1));
+            return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
         }
-
         public static string AgregarSeparaciónDeMiles(string pValor)
         {
             string resultado = string.Empty;
