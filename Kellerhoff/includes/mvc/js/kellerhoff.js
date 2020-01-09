@@ -403,7 +403,16 @@ function OnCallBackObtenerCreditoDisponible(args) {
     }
     mensaje_CreditoDisponible(strCreditoSemanal, strCreditoTotal);
 }
-
+function onclickObtenerSaldoFinalADiciembrePorCliente() {
+    ObtenerSaldoFinalADiciembrePorCliente(cli_login());
+}
+function OnCallBackObtenerSaldoFinalADiciembrePorCliente(args) {
+    var strSaldo = '&nbsp;';
+    if (isNotNullEmpty(args)) {
+        strSaldo = '$&nbsp;' + FormatoDecimalConDivisorMiles(Number.parseFloat(args).toFixed(2));
+    }
+    mensaje_SaldoFinalADiciembre(strSaldo);
+}
 function onclickConsultasCtaCte() {
     mensaje_ConsultasCtaCte();
 }

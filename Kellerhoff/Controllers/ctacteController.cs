@@ -120,6 +120,11 @@ namespace Kellerhoff.Controllers
             return Codigo.clases.Generales.Serializador.SerializarAJson(o);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public double? ObtenerSaldoFinalADiciembrePorCliente(string pCli_login)
+        {
+            return capaWebServiceDLL.ObtenerSaldoFinalADiciembrePorCliente(pCli_login);
+        }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string ObtenerComprobantesObrasSocialesDePuntoDeVentaEntreFechas(string pLoginWeb, string pPlan, int diaDesde, int mesDesde, int añoDesde, int diaHasta, int mesHasta, int añoHasta)
         {
             DateTime fechaDesde = new DateTime(añoDesde, mesDesde, diaDesde);//, 0, 0, 0

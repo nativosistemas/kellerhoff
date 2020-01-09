@@ -360,6 +360,36 @@ function mensaje_CreditoDisponible(pCreditoSemanal, pCreditoTotal) {
     $('#modalModulo').html(strHtml);
     $('#modalModulo').modal();
 }
+function mensaje_SaldoFinalADiciembre(pSaldo) {
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
+    strHtml += '<div class="modal-header no-padding-bottom">';
+    strHtml += '<div class="row ">';
+    strHtml += '<div class="col-lg-12">';
+    strHtml += '<div class="modulo_icon usd noImprimir"></div>';
+    var anio = (new Date()).getFullYear() - 1;
+    strHtml += '<div class="SaldoFinalADiciembreH4 siImprimir">' + 'Droguería Kellerhoff' + '</div>';
+    strHtml += '<div class="SaldoFinalADiciembreH5 siImprimir">SALDO AL 31/12/' + anio.toString() + '</div>';
+    strHtml += '<h4 class="noImprimir">SALDO AL 31/12/' + anio.toString() +'</h4>';
+    strHtml += '</div>';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal noImprimir" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '<div id="divImprimirSaldoDiciembre" class="modal-body">';
+    strHtml += '<div class="col-xs-8 text-left"><p>SALDO:</p></div>';
+    strHtml += '<div class="col-xs-4 text-right"><p>' + pSaldo + '</p></div>';
+    strHtml += '<div class="clear10"></div>';
+    strHtml += '<div class="clear20"></div>';
+    strHtml += '<a class="btn_vaciar float-left noImprimir" href="#" data-dismiss="modal">CERRAR</a>';
+    strHtml += '<a class="btn_print float-right noImprimir" href="#" onclick="window.print(); return false;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="">IMPRIMIR</a>';
+    //strHtml += '<input type="button" name="imprimir" value="Imprimir" onclick="window.print();" >';
+    strHtml += '</div>';
+    strHtml += '<div class="clear"></div>';
+    strHtml += '</div></div>';
+    $('#modalModulo').html(strHtml);
+    $('#modalModulo').modal();
+}
 function mensaje_ConsultasCtaCte() {
     var strHtml = '';
     strHtml += '<div class="modal-background">&nbsp;</div>';
