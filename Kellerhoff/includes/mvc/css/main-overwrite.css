@@ -265,3 +265,21 @@ color: #66abd8 !important;
     margin: 0;
     font-weight: 600;
 }
+.SaldoFinalADiciembreH4 {
+   
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1b82c5;
+    text-align: center;
+    text-transform: uppercase;
+}
+.SaldoFinalADiciembreH5 {
+
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    color: #1b82c5;
+    text-align: center;
+    text-transform: uppercase;
+}
