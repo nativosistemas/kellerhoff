@@ -700,8 +700,6 @@ namespace Kellerhoff.Codigo.clases
                 {
                     case "M": // medicamento
                         resultado = pProductos.pro_preciofarmacia;
-
-                        //resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesbetmed / Convert.ToDecimal(100)));
                         if (pClientes.cli_deswebnetmed)
                         {
                             resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
@@ -709,7 +707,6 @@ namespace Kellerhoff.Codigo.clases
                         break;
                     case "P": // Perfumeria
                         resultado = pProductos.pro_preciofarmacia;
-                        //resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesnetos / Convert.ToDecimal(100)));
                         if (pClientes.cli_deswebnetperpropio)
                         {
                             resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
@@ -717,7 +714,6 @@ namespace Kellerhoff.Codigo.clases
                         break;
                     case "A": // Accesorio
                         resultado = pProductos.pro_preciofarmacia;
-                        //resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesnetos / Convert.ToDecimal(100)));
                         if (pClientes.cli_deswebnetacc)
                         {
                             resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
@@ -725,7 +721,6 @@ namespace Kellerhoff.Codigo.clases
                         break;
                     case "V": // Accesorio
                         resultado = pProductos.pro_preciofarmacia;
-                        //resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesnetos / Convert.ToDecimal(100)));
                         if (pClientes.cli_deswebnetacc)
                         {
                             resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
@@ -733,8 +728,6 @@ namespace Kellerhoff.Codigo.clases
                         break;
                     case "F": // Perfumería Cuenta y Orden
                         resultado = pProductos.pro_preciofarmacia;
-                        //resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordescomperfcyo / Convert.ToDecimal(100)));
-                        //resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesfinperfcyo / Convert.ToDecimal(100)));
                         if (pClientes.cli_deswebnetpercyo)
                         {
                             resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
@@ -747,7 +740,6 @@ namespace Kellerhoff.Codigo.clases
             else
             {  // No neto      
                 resultado = pProductos.pro_preciofarmacia;
-                //resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesespmed / Convert.ToDecimal(100)));
                 if (pClientes.cli_deswebespmed)
                 {
                     resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
