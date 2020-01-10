@@ -907,31 +907,13 @@
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.TomarPedidoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.AgregarSolicitudDevolucionClienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCCbteParaImprimir1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCConsObraSocial.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCFactura.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCLote.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCResumen1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.EsFacturaConDevolucionesEnProcesoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerComprobantesAImprimirEnBaseAResumenResponse1.datasource">
@@ -946,19 +928,7 @@
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerCreditoDisponibleTotalResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerFacturasPorUltimosNumerosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClientePorNumeroResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerUltimos10ResumenesDePuntoDeVentaResponse1.datasource">
