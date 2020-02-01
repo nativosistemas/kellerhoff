@@ -1116,6 +1116,8 @@ namespace Kellerhoff
                 obj.cli_AceptaPsicotropicos = Convert.ToBoolean(pItem["cli_AceptaPsicotropicos"]);
             if (pItem.Table.Columns.Contains("cli_promotor") && pItem["cli_promotor"] != DBNull.Value)
                 obj.cli_promotor = Convert.ToString(pItem["cli_promotor"]);
+            if (pItem.Table.Columns.Contains("cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto") && pItem["cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto"] != DBNull.Value)
+                obj.cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = Convert.ToDecimal(pItem["cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto"]);
             return obj;
         }
         private static cProductos ConvertToProductos(DataRow pItem)
@@ -1185,7 +1187,10 @@ namespace Kellerhoff
                     obj.pro_acuerdo = Convert.ToInt32(pItem["pro_acuerdo"]);
                 }
             }
-
+            if (pItem.Table.Columns.Contains("pro_PrecioBase") && pItem["pro_PrecioBase"] != DBNull.Value)
+                obj.pro_PrecioBase = Convert.ToDecimal(pItem["pro_PrecioBase"]);
+            if (pItem.Table.Columns.Contains("pro_PorcARestarDelDtoDeCliente") && pItem["pro_PorcARestarDelDtoDeCliente"] != DBNull.Value)
+                obj.pro_PorcARestarDelDtoDeCliente = Convert.ToDecimal(pItem["pro_PorcARestarDelDtoDeCliente"]);
             return obj;
         }
 
@@ -2262,7 +2267,7 @@ namespace Kellerhoff
                                 listaProductoCarrtios[iPrecioFinal].CargarTransferYTransferDetalle(listaAUXtransferDetalle[0]);
                                 if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                                 {
-                                    listaProductoCarrtios[iPrecioFinal].PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"], listaProductoCarrtios[iPrecioFinal].tfr_deshab, listaProductoCarrtios[iPrecioFinal].tfr_pordesadi, listaProductoCarrtios[iPrecioFinal].pro_neto, listaProductoCarrtios[iPrecioFinal].pro_codtpopro, listaProductoCarrtios[iPrecioFinal].pro_descuentoweb, listaProductoCarrtios[iPrecioFinal].tde_predescuento == null ? 0 : (decimal)listaProductoCarrtios[iPrecioFinal].tde_predescuento);
+                                    listaProductoCarrtios[iPrecioFinal].PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"], listaProductoCarrtios[iPrecioFinal].tfr_deshab, listaProductoCarrtios[iPrecioFinal].tfr_pordesadi, listaProductoCarrtios[iPrecioFinal].pro_neto, listaProductoCarrtios[iPrecioFinal].pro_codtpopro, listaProductoCarrtios[iPrecioFinal].pro_descuentoweb, listaProductoCarrtios[iPrecioFinal].tde_predescuento == null ? 0 : (decimal)listaProductoCarrtios[iPrecioFinal].tde_predescuento, listaProductoCarrtios[iPrecioFinal].tde_PrecioConDescuentoDirecto, listaProductoCarrtios[iPrecioFinal].tde_PorcARestarDelDtoDeCliente);
                                 }
                             }
                         }
@@ -2305,7 +2310,7 @@ namespace Kellerhoff
                                                                               pro_ofeporcentaje = itemProductoCarrtios.IsNull("pro_ofeporcentaje") ? 0 : itemProductoCarrtios.Field<decimal>("pro_ofeporcentaje"),
                                                                               tde_prepublico = itemProductoCarrtios.IsNull("tde_prepublico") ? 0 : itemProductoCarrtios.Field<decimal>("tde_prepublico"),
                                                                               tde_predescuento = itemProductoCarrtios.IsNull("tde_predescuento") ? 0 : itemProductoCarrtios.Field<decimal>("tde_predescuento"),
-                                                                              PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase(pCliente, item.tfr_deshab, item.tfr_pordesadi, itemProductoCarrtios.Field<bool>("pro_neto"), itemProductoCarrtios.Field<string>("pro_codtpopro"), itemProductoCarrtios.IsNull("pro_descuentoweb") ? 0 : itemProductoCarrtios.Field<decimal>("pro_descuentoweb"), itemProductoCarrtios.Field<decimal>("tde_predescuento"))
+                                                                              PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase(pCliente, item.tfr_deshab, item.tfr_pordesadi, itemProductoCarrtios.Field<bool>("pro_neto"), itemProductoCarrtios.Field<string>("pro_codtpopro"), itemProductoCarrtios.IsNull("pro_descuentoweb") ? 0 : itemProductoCarrtios.Field<decimal>("pro_descuentoweb"), itemProductoCarrtios.Field<decimal>("tde_predescuento"), itemProductoCarrtios.Field<decimal>("tde_PrecioConDescuentoDirecto"), itemProductoCarrtios.Field<decimal>("tde_PorcARestarDelDtoDeCliente"))
                                                                           }).ToList();
                         item.listaProductos = listaProductoCarrtios;
                     }
@@ -2376,7 +2381,7 @@ namespace Kellerhoff
                                                                           tde_prepublico = itemProductoCarrtios.IsNull("tde_prepublico") ? 0 : itemProductoCarrtios.Field<decimal>("tde_prepublico"),
                                                                           tde_predescuento = itemProductoCarrtios.IsNull("tde_predescuento") ? 0 : itemProductoCarrtios.Field<decimal>("tde_predescuento"),
                                                                           stk_stock = itemProductoCarrtios.Table.Columns.Contains("stk_stock") && !itemProductoCarrtios.IsNull("stk_stock") ? itemProductoCarrtios.Field<string>("stk_stock") : null,
-                                                                          PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase(pCliente, item.tfr_deshab, item.tfr_pordesadi, itemProductoCarrtios.Field<bool>("pro_neto"), itemProductoCarrtios.Field<string>("pro_codtpopro"), itemProductoCarrtios.IsNull("pro_descuentoweb") ? 0 : itemProductoCarrtios.Field<decimal>("pro_descuentoweb"), itemProductoCarrtios.Field<decimal>("tde_predescuento"))
+                                                                          PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase(pCliente, item.tfr_deshab, item.tfr_pordesadi, itemProductoCarrtios.Field<bool>("pro_neto"), itemProductoCarrtios.Field<string>("pro_codtpopro"), itemProductoCarrtios.IsNull("pro_descuentoweb") ? 0 : itemProductoCarrtios.Field<decimal>("pro_descuentoweb"), itemProductoCarrtios.Field<decimal>("tde_predescuento"), itemProductoCarrtios.IsNull("tde_PrecioConDescuentoDirecto") ? 0 : itemProductoCarrtios.Field<decimal>("tde_PrecioConDescuentoDirecto"), itemProductoCarrtios.IsNull("tde_PorcARestarDelDtoDeCliente") ? 0 : itemProductoCarrtios.Field<decimal>("tde_PorcARestarDelDtoDeCliente"))
                                                                       }).ToList();
 
                     for (int iProductoCarrtios = 0; iProductoCarrtios < listaProductoCarrtios.Count; iProductoCarrtios++)
@@ -2777,6 +2782,16 @@ namespace Kellerhoff
                     obj.pro_codtpovta = Convert.ToString(pItem["pro_codtpovta"]);
                 }
             }
+            if (pItem.Table.Columns.Contains("tde_PrecioConDescuentoDirecto") && pItem["tde_PrecioConDescuentoDirecto"] != DBNull.Value)
+                obj.tde_PrecioConDescuentoDirecto = Convert.ToDecimal(pItem["tde_PrecioConDescuentoDirecto"]);
+            if (pItem.Table.Columns.Contains("tde_PrecioConDescuentoDirecto") && pItem["tde_PrecioConDescuentoDirecto"] != DBNull.Value)
+                obj.tde_PrecioConDescuentoDirecto = Convert.ToDecimal(pItem["tde_PrecioConDescuentoDirecto"]);
+            //
+            if (pItem.Table.Columns.Contains("pro_PrecioBase") && pItem["pro_PrecioBase"] != DBNull.Value)
+                obj.pro_PrecioBase = Convert.ToDecimal(pItem["pro_PrecioBase"]);
+            if (pItem.Table.Columns.Contains("pro_PorcARestarDelDtoDeCliente") && pItem["pro_PorcARestarDelDtoDeCliente"] != DBNull.Value)
+                obj.pro_PorcARestarDelDtoDeCliente = Convert.ToDecimal(pItem["pro_PorcARestarDelDtoDeCliente"]);
+            //
             return obj;
         }
         public static List<cTransfer> RecuperarTodosTransferMasDetallePorIdProducto(string pNombreProducto, cClientes pClientes)
@@ -5129,7 +5144,7 @@ namespace Kellerhoff
                                 listaProductoCarrtios[iPrecioFinal].CargarTransferYTransferDetalle(listaAUXtransferDetalle[0]);
                                 if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                                 {
-                                    listaProductoCarrtios[iPrecioFinal].PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"], listaProductoCarrtios[iPrecioFinal].tfr_deshab, listaProductoCarrtios[iPrecioFinal].tfr_pordesadi, listaProductoCarrtios[iPrecioFinal].pro_neto, listaProductoCarrtios[iPrecioFinal].pro_codtpopro, listaProductoCarrtios[iPrecioFinal].pro_descuentoweb, listaProductoCarrtios[iPrecioFinal].tde_predescuento == null ? 0 : (decimal)listaProductoCarrtios[iPrecioFinal].tde_predescuento);
+                                    listaProductoCarrtios[iPrecioFinal].PrecioFinalTransfer = FuncionesPersonalizadas.ObtenerPrecioFinalTransferBase((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"], listaProductoCarrtios[iPrecioFinal].tfr_deshab, listaProductoCarrtios[iPrecioFinal].tfr_pordesadi, listaProductoCarrtios[iPrecioFinal].pro_neto, listaProductoCarrtios[iPrecioFinal].pro_codtpopro, listaProductoCarrtios[iPrecioFinal].pro_descuentoweb, listaProductoCarrtios[iPrecioFinal].tde_predescuento == null ? 0 : (decimal)listaProductoCarrtios[iPrecioFinal].tde_predescuento, listaProductoCarrtios[iPrecioFinal].tde_PrecioConDescuentoDirecto, listaProductoCarrtios[iPrecioFinal].tde_PorcARestarDelDtoDeCliente);
                                 }
                             }
                         }
