@@ -1,6 +1,7 @@
 ﻿@{
     string classDevoluciones = "";
     string classNuevaDevolucion = "";
+    string classNuevaDevolucionFacturaCompleta = "";
     string classNuevaDevolucionVencidos = "";
     string strController = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
     switch (strController)
@@ -10,6 +11,9 @@
             break;
         case "NuevaDevolucion":
             classNuevaDevolucion = " class=\"active\" ";
+            break;
+        case "NuevaDevolucionFacturaCompleta":
+            classNuevaDevolucionFacturaCompleta = " class=\"active\" ";
             break;
         case "NuevaDevolucionVencidos":
             classNuevaDevolucionVencidos = " class=\"active\" ";
@@ -24,13 +28,26 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="nav_sec">
-            <a href="/devoluciones/Devoluciones" @{ WriteLiteral(classDevoluciones);}><i class="fa fa-file-text" title="DEVOLUCIONES"></i><span class="hidden-sm hidden-xs">DEVOLUCIONES</span></a>
-            <div class="separate"></div>
-            <a href="/devoluciones/NuevaDevolucion" @{WriteLiteral(classNuevaDevolucion);}><i class="fa fa-reply" title="DEVOLUCIÓN NORMAL"></i><span class="hidden-sm hidden-xs">DEVOLUCIÓN NORMAL</span></a>
-            <div class="separate"></div>
-            <a href="/devoluciones/NuevaDevolucionVencidos" @{WriteLiteral(classNuevaDevolucionVencidos);}><i class="fa fa-calendar-minus-o" title="DEVOLUCIÓN DE VENCIDOS"></i><span class="hidden-sm hidden-xs">DEVOLUCIÓN DE VENCIDOS</span></a>
+            <a href="/devoluciones/Devoluciones" @{ WriteLiteral(classDevoluciones);}><i class="fa fa-file-text" title="DEVOLUCIONES"></i><span class="hidden-sm hidden-xs">HISTORIAL DE DEVOLUCIONES</span></a>
+            @{
+                if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+                    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL &&
+                    ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+                {
+                    <div class="separate"></div>
+                    <a href="/devoluciones/NuevaDevolucion" @{WriteLiteral(classNuevaDevolucion);}><i class="fa fa-reply" title="DEVOLUCIÓN NORMAL"></i><span class="hidden-sm hidden-xs">DEVOLUCIÓN POR RECLAMO</span></a>
+                    <div class="separate"></div>
+                    <a href="/devoluciones/NuevaDevolucionVencidos" @{WriteLiteral(classNuevaDevolucionVencidos);}><i class="fa fa-calendar-minus-o" title="DEVOLUCIÓN DE VENCIDOS"></i><span class="hidden-sm hidden-xs">DEVOLUCIÓN DE VENCIDOS</span></a>
+                    <!--<div class="separate"></div>
+                    <a href="/devoluciones/NuevaDevolucionFacturaCompleta" @{WriteLiteral(classNuevaDevolucionFacturaCompleta);}><i class="fa fa-file-o" title="DEVOLUCIÓN FACTURA COMPLETA"></i><span class="hidden-sm hidden-xs">DEVOLUCIÓN FACTURA COMPLETA</span></a>-->
+                }
+            }
+
         </div>
     </div>
 </div>
+
+<input type="hidden" value="@{ WriteLiteral(((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc); }" id="txtIdSucursalCliente" />
 
 

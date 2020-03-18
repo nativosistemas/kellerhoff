@@ -1,4 +1,6 @@
-﻿.footer {
+﻿@import url('https://fonts.googleapis.com/css?family=Libre+Barcode+128|Libre+Barcode+39&display=swap');
+
+.footer {
     background-color: #ededed;
         height: 100%;
 }
@@ -302,4 +304,55 @@ color: #66abd8 !important;
 
 .lotesList:nth-child(even) {
     background: #f1f1f1;
+}
+
+#divPanelNroComprobante {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #999;
+    margin-bottom: 1em;
+}
+
+#divPanelNroComprobante input, #divPanelNroComprobante select {
+    margin-bottom: 15px !important;
+}
+
+.tablaDevoluciones thead tr th {
+    padding: 11px 5px !important;
+    border-right: 1px solid #cecece;
+    vertical-align: middle;
+    font-weight: 400 !important;
+    font-size: 11px !important;
+    line-height: 11px;
+    color: #fff !important;
+    border-bottom: none !important;
+}
+
+.tablaDevoluciones thead tr th:last-child {
+    border-right: none !important;
+}
+
+.tablaDevoluciones {
+    border-bottom: 2px solid #34495e;
+}
+
+.botonera_dev {
+    background: #fff;
+    padding: 1em;
+}
+
+
+.tablaDevoluciones td {
+    font-size: 12px !important;
+}
+
+.tablaDevoluciones td .label {
+    font-size: 11px !important;
+}
+.refresh-input {
+    margin-top:1em;
+}
+
+#form_reclamos {
+    transition: all 1s ease-in-out;
+    -webkit-transition: all 1s ease-in-out;
 }

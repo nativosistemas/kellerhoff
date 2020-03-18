@@ -16,17 +16,20 @@ namespace Kellerhoff.Codigo.capaDatos
         public string dev_numerofactura { get; set; }
         public string dev_numerosolicituddevolucion { get; set; }
         public string dev_nombreproductodevolucion { get; set; }
-        public DateTime? dev_fecha { get; set; }
+        public DateTime dev_fecha { get; set; }
         public string dev_fechaToString { get; set; }
         public int dev_motivo { get; set; }
         public int dev_numeroitemfactura { get; set; }
         public string dev_nombreproductofactura { get; set; }
         public int dev_cantidad { get; set; }
         public string dev_numerolote { get; set; }
-        public DateTime? dev_fechavencimientolote { get; set; }
+        public DateTime dev_fechavencimientolote { get; set; }
         public string dev_fechavencimientoloteToString { get; set; }
         public string dev_estado { get; set; }
         public string dev_mensaje { get; set; }
+        public int dev_cantidadrecibida { get; set; }
+        public int dev_cantidadrechazada { get; set; }
+        public string dev_idsucursal { get; set; }
     }
 
     public class capaDevoluciones
@@ -35,6 +38,66 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("Devoluciones.spRecuperarItemsDevolucionesPrecargaPorCliente", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@numerocliente", SqlDbType.Int);
+            paIdCliente.Value = pIdCliente;
+
+            try
+            {
+                Conn.Open();
+                DataTable dt = new DataTable();
+                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+                dt.Load(LectorSQLdata);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
+
+        public static DataTable RecuperarItemsDevolucionPrecargaVencidosPorCliente(int pIdCliente)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("Devoluciones.spRecuperarItemsDevolucionesPrecargaVencidosPorCliente", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@numerocliente", SqlDbType.Int);
+            paIdCliente.Value = pIdCliente;
+
+            try
+            {
+                Conn.Open();
+                DataTable dt = new DataTable();
+                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+                dt.Load(LectorSQLdata);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
+
+        public static DataTable RecuperarItemsDevolucionPrecargaFacturaCompletaPorCliente(int pIdCliente)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("Devoluciones.spRecuperarItemsDevolucionesPrecargaFacturaCompletaPorCliente", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@numerocliente", SqlDbType.Int);
@@ -76,11 +139,18 @@ namespace Kellerhoff.Codigo.capaDatos
             SqlParameter paCantidad = cmdComandoInicio.Parameters.Add("@cantidad", SqlDbType.Int);
             SqlParameter paNumeroLote = cmdComandoInicio.Parameters.Add("@numerolote", SqlDbType.NVarChar,75);
             SqlParameter paFechaVencimmientoLote = cmdComandoInicio.Parameters.Add("@fechavencimientolote", SqlDbType.NVarChar,10);
+            SqlParameter paIdSucursal = cmdComandoInicio.Parameters.Add("@idsucursal", SqlDbType.NVarChar,2);
             SqlParameter paOK = cmdComandoInicio.Parameters.Add("@isOk", SqlDbType.Bit);
             paOK.Direction = ParameterDirection.Output;
 
             paNumeroCliente.Value = Item.dev_numerocliente;
-            paNumeroFactura.Value = Item.dev_numerofactura;
+            if (Item.dev_numerofactura == null)
+            {
+                paNumeroFactura.Value = DBNull.Value;
+            } else
+            {
+                paNumeroFactura.Value = Item.dev_numerofactura;
+            }
             paNombreProductoDevolucion.Value = Item.dev_nombreproductodevolucion;
             paMotivo.Value = Item.dev_motivo;
             if (Item.dev_numeroitemfactura == 0)
@@ -101,6 +171,15 @@ namespace Kellerhoff.Codigo.capaDatos
             }
 
             paCantidad.Value = Item.dev_cantidad;
+
+            if (Item.dev_idsucursal == null)
+            {
+                paIdSucursal.Value = DBNull.Value;
+            }
+            else
+            {
+                paIdSucursal.Value = Item.dev_idsucursal;
+            }
 
             if (Item.dev_numerolote == null)
             {
@@ -180,6 +259,74 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("Devoluciones.spEliminarPrecargaDevolucionPorCliente", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter paNumeroCliente = cmdComandoInicio.Parameters.Add("@NumeroCliente", SqlDbType.Int);
+            SqlParameter paOK = cmdComandoInicio.Parameters.Add("@isOk", SqlDbType.Bit);
+            paOK.Direction = ParameterDirection.Output;
+
+            paNumeroCliente.Value = NumeroCliente;
+            //paOK.Value = false;
+
+            try
+            {
+                Conn.Open();
+                //object objResultado = cmdComandoInicio.ExecuteNonQuery();
+                cmdComandoInicio.ExecuteNonQuery();
+                return Convert.ToBoolean(paOK.Value);
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return false;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
+
+        public static bool EliminarPrecargaDevolucionVencidosPorCliente(int NumeroCliente)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("Devoluciones.spEliminarPrecargaDevolucionVencidosPorCliente", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter paNumeroCliente = cmdComandoInicio.Parameters.Add("@NumeroCliente", SqlDbType.Int);
+            SqlParameter paOK = cmdComandoInicio.Parameters.Add("@isOk", SqlDbType.Bit);
+            paOK.Direction = ParameterDirection.Output;
+
+            paNumeroCliente.Value = NumeroCliente;
+            //paOK.Value = false;
+
+            try
+            {
+                Conn.Open();
+                //object objResultado = cmdComandoInicio.ExecuteNonQuery();
+                cmdComandoInicio.ExecuteNonQuery();
+                return Convert.ToBoolean(paOK.Value);
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return false;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
+
+        public static bool EliminarPrecargaDevolucionFacturaCompletaPorCliente(int NumeroCliente)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("Devoluciones.spEliminarPrecargaDevolucionFacturaCompletaPorCliente", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paNumeroCliente = cmdComandoInicio.Parameters.Add("@NumeroCliente", SqlDbType.Int);

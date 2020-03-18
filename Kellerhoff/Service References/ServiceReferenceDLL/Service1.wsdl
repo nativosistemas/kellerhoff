@@ -1087,6 +1087,155 @@
           <s:element minOccurs="0" maxOccurs="1" name="FechaVencimientoToString" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NombreProducto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroFactura" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYClienteResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSolicitudesDevolucionCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSolicitudesDevolucionClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerSolicitudesDevolucionClienteResult" type="tns:ArrayOfCDevolucionItemPrecarga" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCDevolucionItemPrecarga">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cDevolucionItemPrecarga" nillable="true" type="tns:cDevolucionItemPrecarga" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cDevolucionItemPrecarga">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="dev_numeroitem" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="dev_numerocliente" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_numerofactura" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_numerosolicituddevolucion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_nombreproductodevolucion" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="dev_fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_fechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="dev_motivo" type="tns:dllMotivoDevolucion" />
+          <s:element minOccurs="1" maxOccurs="1" name="dev_numeroitemfactura" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_nombreproductofactura" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="dev_cantidad" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_numerolote" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="dev_fechavencimientolote" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_fechavencimientoloteToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_estado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_mensaje" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="dev_cantidadrecibida" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="dev_cantidadrechazada" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_idsucursal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dev_numerosolicitudNC" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="dllMotivoDevolucion">
+        <s:restriction base="s:string">
+          <s:enumeration value="BienFacturadoMalEnviado" />
+          <s:enumeration value="ProductoMalEstado" />
+          <s:enumeration value="FacturadoNoPedido" />
+          <s:enumeration value="ProductoDeMasSinSerFacturado" />
+          <s:enumeration value="VencimientoCorto" />
+          <s:enumeration value="ProductoFallaFabricante" />
+          <s:enumeration value="Vencido" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AgregarSolicitudDevolucionCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="colSDC" type="tns:ArrayOfCDevolucionItemPrecarga" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarSolicitudDevolucionClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarSolicitudDevolucionClienteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSolicitudesDevolucionClientePorNumero">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroSolicitud" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSolicitudesDevolucionClientePorNumeroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerSolicitudesDevolucionClientePorNumeroResult" type="tns:ArrayOfCDevolucionItemPrecarga" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EsFacturaConDevolucionesEnProceso">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroFactura" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EsFacturaConDevolucionesEnProcesoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EsFacturaConDevolucionesEnProcesoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerFacturasPorUltimosNumeros">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroFactura" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerFacturasPorUltimosNumerosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerFacturasPorUltimosNumerosResult" type="tns:ArrayOfCFactura" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCFactura">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cFactura" nillable="true" type="tns:cFactura" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ObtenerSaldoFinalADiciembrePorCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSaldoFinalADiciembrePorClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerSaldoFinalADiciembrePorClienteResult" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LoginSoapIn">
@@ -1323,6 +1472,48 @@
   <wsdl:message name="ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaSoapOut">
     <wsdl:part name="parameters" element="tns:ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaResponse" />
   </wsdl:message>
+  <wsdl:message name="ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSolicitudesDevolucionClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerSolicitudesDevolucionCliente" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSolicitudesDevolucionClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerSolicitudesDevolucionClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgregarSolicitudDevolucionClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarSolicitudDevolucionCliente" />
+  </wsdl:message>
+  <wsdl:message name="AgregarSolicitudDevolucionClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarSolicitudDevolucionClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSolicitudesDevolucionClientePorNumeroSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerSolicitudesDevolucionClientePorNumero" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSolicitudesDevolucionClientePorNumeroSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerSolicitudesDevolucionClientePorNumeroResponse" />
+  </wsdl:message>
+  <wsdl:message name="EsFacturaConDevolucionesEnProcesoSoapIn">
+    <wsdl:part name="parameters" element="tns:EsFacturaConDevolucionesEnProceso" />
+  </wsdl:message>
+  <wsdl:message name="EsFacturaConDevolucionesEnProcesoSoapOut">
+    <wsdl:part name="parameters" element="tns:EsFacturaConDevolucionesEnProcesoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerFacturasPorUltimosNumerosSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerFacturasPorUltimosNumeros" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerFacturasPorUltimosNumerosSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerFacturasPorUltimosNumerosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldoFinalADiciembrePorClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldoFinalADiciembrePorCliente" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldoFinalADiciembrePorClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldoFinalADiciembrePorClienteResponse" />
+  </wsdl:message>
   <wsdl:portType name="ServiceSoap">
     <wsdl:operation name="Login">
       <wsdl:input message="tns:LoginSoapIn" />
@@ -1479,6 +1670,34 @@
     <wsdl:operation name="ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena">
       <wsdl:input message="tns:ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaSoapIn" />
       <wsdl:output message="tns:ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente">
+      <wsdl:input message="tns:ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYClienteSoapIn" />
+      <wsdl:output message="tns:ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSolicitudesDevolucionCliente">
+      <wsdl:input message="tns:ObtenerSolicitudesDevolucionClienteSoapIn" />
+      <wsdl:output message="tns:ObtenerSolicitudesDevolucionClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarSolicitudDevolucionCliente">
+      <wsdl:input message="tns:AgregarSolicitudDevolucionClienteSoapIn" />
+      <wsdl:output message="tns:AgregarSolicitudDevolucionClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSolicitudesDevolucionClientePorNumero">
+      <wsdl:input message="tns:ObtenerSolicitudesDevolucionClientePorNumeroSoapIn" />
+      <wsdl:output message="tns:ObtenerSolicitudesDevolucionClientePorNumeroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EsFacturaConDevolucionesEnProceso">
+      <wsdl:input message="tns:EsFacturaConDevolucionesEnProcesoSoapIn" />
+      <wsdl:output message="tns:EsFacturaConDevolucionesEnProcesoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFacturasPorUltimosNumeros">
+      <wsdl:input message="tns:ObtenerFacturasPorUltimosNumerosSoapIn" />
+      <wsdl:output message="tns:ObtenerFacturasPorUltimosNumerosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoFinalADiciembrePorCliente">
+      <wsdl:input message="tns:ObtenerSaldoFinalADiciembrePorClienteSoapIn" />
+      <wsdl:output message="tns:ObtenerSaldoFinalADiciembrePorClienteSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
@@ -1834,6 +2053,69 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente">
+      <soap:operation soapAction="http://tempuri.org/ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSolicitudesDevolucionCliente">
+      <soap:operation soapAction="http://tempuri.org/ObtenerSolicitudesDevolucionCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarSolicitudDevolucionCliente">
+      <soap:operation soapAction="http://tempuri.org/AgregarSolicitudDevolucionCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSolicitudesDevolucionClientePorNumero">
+      <soap:operation soapAction="http://tempuri.org/ObtenerSolicitudesDevolucionClientePorNumero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EsFacturaConDevolucionesEnProceso">
+      <soap:operation soapAction="http://tempuri.org/EsFacturaConDevolucionesEnProceso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFacturasPorUltimosNumeros">
+      <soap:operation soapAction="http://tempuri.org/ObtenerFacturasPorUltimosNumeros" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoFinalADiciembrePorCliente">
+      <soap:operation soapAction="http://tempuri.org/ObtenerSaldoFinalADiciembrePorCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -2181,6 +2463,69 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena">
       <soap12:operation soapAction="http://tempuri.org/ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSolicitudesDevolucionCliente">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerSolicitudesDevolucionCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarSolicitudDevolucionCliente">
+      <soap12:operation soapAction="http://tempuri.org/AgregarSolicitudDevolucionCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSolicitudesDevolucionClientePorNumero">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerSolicitudesDevolucionClientePorNumero" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EsFacturaConDevolucionesEnProceso">
+      <soap12:operation soapAction="http://tempuri.org/EsFacturaConDevolucionesEnProceso" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFacturasPorUltimosNumeros">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerFacturasPorUltimosNumeros" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldoFinalADiciembrePorCliente">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerSaldoFinalADiciembrePorCliente" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -5,5 +5,27 @@
 
 @Html.Partial("_nav_secundario")
 
-<h3>Devoluciones</h3>
+@Html.Partial("_scriptsDevoluciones")
 
+<p class="tit_secund">Historial de Devoluciones</p>
+
+
+<div class="row">
+    <div class="clear15"></div>
+    <div class="col-xs-12 padding_l-10 table-responsive" id="divPanelDevoluciones">
+        <table class="table table-striped tablaDevoluciones">
+            <thead>
+                <tr>
+                    <th>Numero de Devolución</th>
+                    <th>Fecha</th>
+                    <th width="100">Devueltas</th>
+                    <th width="100">Recibidas</th>
+                    <th width="100">Rechazadas</th>
+                    <th width="200" >Estado</th>
+                    <th width="100"></th>
+                </tr>
+            </thead>
+            <tbody id="tblDevoluciones"></tbody>
+        </table>
+    </div>
+</div>

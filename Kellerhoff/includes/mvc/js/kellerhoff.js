@@ -426,6 +426,46 @@ function onclickEnviarConsulta() {
         mensaje_alert_generic('Información', strHtml);
     }
 }
+function onclickEnviarConsultaAReclamos() {
+    var vMail = $('#idReclamoMail').val();
+    var vNombreProducto = $('#idReclamoProducto').val();
+    var vComentario = $('#idReclamoComentario').val();
+    if (isNotNullEmpty(vMail) && isNotNullEmpty(vComentario)) {
+        modalModuloHide();
+        enviarConsultaReclamo(vMail, vComentario,vNombreProducto);
+    } else {
+        var strHtml = '';
+        strHtml += '<div class="col-lg-12">';
+        strHtml += '<p class="text-center">Complete los datos, por favor.</p>';
+        strHtml += '<p>&nbsp;</p>';
+        strHtml += '<p>&nbsp;</p>';
+        strHtml += '<div class="clear10"></div>';
+        strHtml += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal">CERRAR</a>';
+        strHtml += '</div>';
+
+        mensaje_alert_generic('Información', strHtml);
+    }
+}
+function onclickEnviarConsultaAValePsicotropico() {
+    var vMail = $('#idValeMail').val();
+    var vNombreProducto = $('#idValeProducto').val();
+    var vComentario = $('#idValeComentario').val();
+    if (isNotNullEmpty(vMail) && isNotNullEmpty(vComentario)) {
+        modalModuloHide();
+        enviarConsultaValePsicotropico(vMail, vComentario, vNombreProducto);
+    } else {
+        var strHtml = '';
+        strHtml += '<div class="col-lg-12">';
+        strHtml += '<p class="text-center">Complete los datos, por favor.</p>';
+        strHtml += '<p>&nbsp;</p>';
+        strHtml += '<p>&nbsp;</p>';
+        strHtml += '<div class="clear10"></div>';
+        strHtml += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal">CERRAR</a>';
+        strHtml += '</div>';
+
+        mensaje_alert_generic('Información', strHtml);
+    }
+}
 function onresizeBody() {
     if (typeof listaCarritos !== 'undefined') {
         if (listaCarritos != null) {

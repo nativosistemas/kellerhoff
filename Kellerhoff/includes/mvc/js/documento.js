@@ -297,6 +297,7 @@ function CargarHtmlResumen() {
         }
         strHtml += '</tbody>';
         strHtml += '</table>';
+        console.log(objDocumento);
         //
         ////var httpRaiz = $('#hiddenRaiz').val();
         ////strHtml += '<div class="cssDivDescarga">';

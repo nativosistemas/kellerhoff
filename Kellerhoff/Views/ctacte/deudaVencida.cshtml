@@ -13,7 +13,7 @@
                 decimal? limiteSaldo = WebService.RecuperarLimiteSaldo();
                 DateTime fechaActual = DateTime.Now;
                 List<Kellerhoff.ServiceReferenceDLL.cCtaCteMovimiento> l_deudaVencida = l.Where(x => x.FechaVencimiento.HasValue && x.FechaVencimiento.Value < fechaActual && x.Saldo.HasValue && limiteSaldo.HasValue && x.Saldo > limiteSaldo).ToList();
-                List<Kellerhoff.ServiceReferenceDLL.cCtaCteMovimiento> l_saldoSinImputar = l.Where(x => x.TipoComprobanteToString != "RES" && x.Saldo != null && x.Saldo.Value < 0).ToList();
+                List<Kellerhoff.ServiceReferenceDLL.cCtaCteMovimiento> l_saldoSinImputar = l.Where(x => x.Saldo != null && x.Saldo.Value < 0).ToList();
                 HttpContext.Current.Session["ctacte_deudaVencida"] = l_deudaVencida;
                 HttpContext.Current.Session["ctacte_saldoSinImputar"] = l_saldoSinImputar;
                 resultado_sub += "<input type=\"hidden\" id=\"hiddenListaDeudaVencida\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(l_deudaVencida)) + "\" />";

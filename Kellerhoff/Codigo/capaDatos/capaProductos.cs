@@ -46,6 +46,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public int pro_acuerdo { get; set; }
         public string pri_nombreArchivo { get; set; }
         public bool pro_NoTransfersEnClientesPerf { get; set; }
+        public bool pro_AceptaVencidos { get; set; }
         private bool _isMostrarTransfersEnClientesPerf = true;
         public bool isMostrarTransfersEnClientesPerf
         {
@@ -87,6 +88,7 @@ namespace Kellerhoff.Codigo.capaDatos
             base.pro_isTrazable = pProducto.pro_isTrazable;
             base.pro_NoTransfersEnClientesPerf = pProducto.pro_NoTransfersEnClientesPerf;
             base.pro_Familia = pProducto.pro_Familia;
+            base.pro_AceptaVencidos = pProducto.pro_AceptaVencidos;
             listaSucursalStocks = new List<cSucursalStocks>();
             isProductoNoEncontrado = false;
         }

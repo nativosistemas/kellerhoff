@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Default.aspx" />
+    <Content Include="clientes\pages\devoluciones.aspx" />
     <Content Include="clientes\pages\carrodiferido.aspx" />
     <Content Include="clientes\pages\composicionsaldo.aspx" />
     <Content Include="clientes\pages\composicionsaldoCtaCte.aspx" />
@@ -944,6 +945,33 @@
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.AgregarSolicitudDevolucionClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClientePorNumeroResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCFactura.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.EsFacturaConDevolucionesEnProcesoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerFacturasPorUltimosNumerosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceReferenceDLL\Service1.disco" />
     <Content Include="servicios\descargarArchivo.aspx" />
     <Content Include="servicios\generarCSV.aspx" />
@@ -976,7 +1004,11 @@
     <Content Include="Views\devoluciones\NuevaDevolucionVencidos.cshtml" />
     <Content Include="Views\devoluciones\_scriptsDevoluciones.cshtml" />
     <None Include="Service References\ServiceReferenceDLL\Service1.wsdl" />
-    <None Include="Web_config\Web.config_produccion" />
+    <Content Include="Views\devoluciones\NotaDevolucion.cshtml" />
+    <Content Include="Views\devoluciones\NuevaDevolucionFacturaCompleta.cshtml" />
+    <None Include="Web_config\Web.config_produccion">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\Default.aspx.cs">
@@ -987,6 +1019,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="clientes\pages\devoluciones.aspx.cs">
+      <DependentUpon>devoluciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\devoluciones.aspx.designer.cs">
+      <DependentUpon>devoluciones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="clientes\pages\carrodiferido.aspx.cs">
       <DependentUpon>carrodiferido.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

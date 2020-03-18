@@ -110,6 +110,10 @@ namespace Kellerhoff.Codigo.clases
                         {
                             obj.pro_isCadenaFrio = Convert.ToBoolean(item["pro_isCadenaFrio"]);
                         }
+                        if (item["pro_AceptaVencidos"] != DBNull.Value)
+                        {
+                            obj.pro_AceptaVencidos = Convert.ToBoolean(item["pro_AceptaVencidos"]);
+                        }
                         if (item["pro_canmaxima"] != DBNull.Value)
                         {
                             obj.pro_canmaxima = Convert.ToInt32(item["pro_canmaxima"]);
