@@ -949,6 +949,7 @@
     <Content Include="servicios\thumbnail.aspx" />
     <Content Include="SQLscript\nativosistemas_2019_10_16.sql" />
     <Content Include="SQLscript\nativosistemas_2019_11_12.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_04_02.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
     <Content Include="WebService.asmx" />
@@ -968,7 +969,9 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
-    <None Include="Web_config\Web.config_produccion" />
+    <None Include="Web_config\Web.config_produccion">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\Default.aspx.cs">

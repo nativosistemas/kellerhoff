@@ -90,38 +90,32 @@ namespace Kellerhoff.servicios
                         strCabeceraFAC += "00" + "00" + "0000";
                     }
                     // fin fecha
-                    //monto total N(10) [1]        //eeeeeeeedd
+                    //monto total N(10) [1]        
                     string montoTotal = string.Empty;
-                    //  var fdf = Numerica.AgregarSeparaciónDeMiles(Math.Truncate(objFactura.MontoTotal).ToString());
-                    montoTotal += Numerica.toString_ParteEntera_8(objFactura.MontoTotal);
-                    montoTotal += Numerica.toString_ParteDecimal_2(objFactura.MontoTotal);
+                    montoTotal += Numerica.toString_NumeroTXT_N10(objFactura.MontoTotal);                   
                     strCabeceraFAC += montoTotal;
                     // fin monto total N(10) [1] 
 
                     //4 monto exento N(10) [1] 
-                    strCabeceraFAC += Numerica.toString_ParteEntera_8(objFactura.MontoExento) + Numerica.toString_ParteDecimal_2(objFactura.MontoExento);
+                    strCabeceraFAC += Numerica.toString_NumeroTXT_N10(objFactura.MontoExento);
                     //5 monto gravado N(10) [1] 
-                    strCabeceraFAC += Numerica.toString_ParteEntera_8(objFactura.MontoGravado) + Numerica.toString_ParteDecimal_2(objFactura.MontoGravado);
+                    strCabeceraFAC += Numerica.toString_NumeroTXT_N10(objFactura.MontoGravado);
                     //6 monto IVA inscripto N(10) [1] 
-                    strCabeceraFAC += Numerica.toString_ParteEntera_8(objFactura.MontoIvaInscripto) + Numerica.toString_ParteDecimal_2(objFactura.MontoIvaInscripto);
+                    strCabeceraFAC += Numerica.toString_NumeroTXT_N10(objFactura.MontoIvaInscripto);
                     //7 monto IVA no inscripto N(10) [1] 
-                    strCabeceraFAC += Numerica.toString_ParteEntera_8(objFactura.MontoIvaNoInscripto) + Numerica.toString_ParteDecimal_2(objFactura.MontoIvaNoInscripto);
+                    strCabeceraFAC += Numerica.toString_NumeroTXT_N10(objFactura.MontoIvaNoInscripto);
                     //8 monto percepción DGR N(10) [1] 
-                    //strCabeceraFAC += Math.Truncate(objFactura.MontoPercepcionDGR).ToString().PadLeft(8, '0') + Numerica.ParteDecimal(objFactura.MontoPercepcionDGR).ToString().PadRight(2, '0');
-                    //string parteEntera = Numerica.AgregarSeparaciónDeMiles(Math.Truncate(objFactura.MontoPercepcionDGR).ToString()).PadLeft(8, '0');
-                    // string parteDecimal = Numerica.ParteDecimal(objFactura.MontoPercepcionDGR).ToString().PadLeft(2, '0');
-                    // string juntos = parteEntera + parteDecimal;
-                    strCabeceraFAC += Numerica.toString_ParteEntera_8(objFactura.MontoPercepcionDGR) + Numerica.toString_ParteDecimal_2(objFactura.MontoPercepcionDGR);
+                    strCabeceraFAC += Numerica.toString_NumeroTXT_N10(objFactura.MontoPercepcionDGR) ;
                     //9 descuento especial N(10) [1] 
-                    strCabeceraFAC += Numerica.toString_ParteEntera_8(objFactura.DescuentoEspecial) + Numerica.toString_ParteDecimal_2(objFactura.DescuentoEspecial);
+                    strCabeceraFAC += Numerica.toString_NumeroTXT_N10(objFactura.DescuentoEspecial) ;
                     //10 descuento netos N(10) [1] 
-                    strCabeceraFAC += Numerica.toString_ParteEntera_8(objFactura.DescuentoNetos) + Numerica.toString_ParteDecimal_2(objFactura.DescuentoNetos);
+                    strCabeceraFAC += Numerica.toString_NumeroTXT_N10(objFactura.DescuentoNetos) ;
                     //11 descuento perfumería N(10) [1] 
-                    strCabeceraFAC += Numerica.toString_ParteEntera_8(objFactura.DescuentoPerfumeria) + Numerica.toString_ParteDecimal_2(objFactura.DescuentoPerfumeria);
+                    strCabeceraFAC += Numerica.toString_NumeroTXT_N10(objFactura.DescuentoPerfumeria);
                     //12 descuento web N(10) [1] 
-                    strCabeceraFAC += Numerica.toString_ParteEntera_8(objFactura.DescuentoWeb) + Numerica.toString_ParteDecimal_2(objFactura.DescuentoWeb);
+                    strCabeceraFAC += Numerica.toString_NumeroTXT_N10(objFactura.DescuentoWeb) ;
                     //13 Monto Percepcion Municipal N(10) [1] 
-                    strCabeceraFAC += Numerica.toString_ParteEntera_8(objFactura.MontoPercepcionMunicipal) + Numerica.toString_ParteDecimal_2(objFactura.MontoPercepcionMunicipal);
+                    strCabeceraFAC += Numerica.toString_NumeroTXT_N10(objFactura.MontoPercepcionMunicipal) ;
 
 
                     FAC_txt.WriteLine(strCabeceraFAC);
@@ -154,7 +148,7 @@ namespace Kellerhoff.servicios
                                         //5 neto N(1) 0 - Normail / 1 - Neto + IVA
                                         //6 precio público N(10) [1]
                                         //7 precio unitario N(10) [1]
-                                        //8 importe N(10) [1]   //eeeeeeeedd
+                                        //8 importe N(10) [1]   
                                         cProductos producto = WebService.RecuperarProductoPorNombre(item.Descripcion);
                                         bool isNoTieneCodigoBarra = true;//código de barras producto C(13)
                                         if (producto != null)
@@ -194,9 +188,9 @@ namespace Kellerhoff.servicios
                                         {
                                             detalleFAC += " ";
                                         }
-                                        detalleFAC += Numerica.AgregarSeparaciónDeMilesConDecimal(item.PrecioPublico);
-                                        detalleFAC += Numerica.AgregarSeparaciónDeMilesConDecimal(item.PrecioUnitario);
-                                        detalleFAC += Numerica.AgregarSeparaciónDeMilesConDecimal(item.Importe);
+                                        detalleFAC += Numerica.toString_NumeroTXT_N10(item.PrecioPublico);
+                                        detalleFAC += Numerica.toString_NumeroTXT_N10(item.PrecioUnitario);
+                                        detalleFAC += Numerica.toString_NumeroTXT_N10(item.Importe);
 
                                         //resultado += detalleFAC + "\n";
                                         FAC_txt.WriteLine(detalleFAC);
