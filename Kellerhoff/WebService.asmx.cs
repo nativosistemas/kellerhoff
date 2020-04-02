@@ -2784,8 +2784,8 @@ namespace Kellerhoff
             }
             if (pItem.Table.Columns.Contains("tde_PrecioConDescuentoDirecto") && pItem["tde_PrecioConDescuentoDirecto"] != DBNull.Value)
                 obj.tde_PrecioConDescuentoDirecto = Convert.ToDecimal(pItem["tde_PrecioConDescuentoDirecto"]);
-            if (pItem.Table.Columns.Contains("tde_PrecioConDescuentoDirecto") && pItem["tde_PrecioConDescuentoDirecto"] != DBNull.Value)
-                obj.tde_PrecioConDescuentoDirecto = Convert.ToDecimal(pItem["tde_PrecioConDescuentoDirecto"]);
+            if (pItem.Table.Columns.Contains("tde_PorcARestarDelDtoDeCliente") && pItem["tde_PorcARestarDelDtoDeCliente"] != DBNull.Value)
+                obj.tde_PorcARestarDelDtoDeCliente = Convert.ToDecimal(pItem["tde_PorcARestarDelDtoDeCliente"]);
             //
             if (pItem.Table.Columns.Contains("pro_PrecioBase") && pItem["pro_PrecioBase"] != DBNull.Value)
                 obj.pro_PrecioBase = Convert.ToDecimal(pItem["pro_PrecioBase"]);
