@@ -74,11 +74,6 @@ function MostrarMensajePopUp() {
 			mensaje_PopUp(indexPopUp);
 			longPopUpMostrar = longPopUpMostrar - 1;
     }
-    //if (listaPopUp != null && listaPopUp.length > 0) {
-    //    var indexPopUp = listaPopUp.length - longPopUpMostrar;
-    //    longPopUpMostrar = longPopUpMostrar - 1;
-    //    mensaje_PopUp(indexPopUp);
-    //}
 }
 function MostrarMensajeImportante() {
     if (listaMensajeImportanteMostrar != null) {
