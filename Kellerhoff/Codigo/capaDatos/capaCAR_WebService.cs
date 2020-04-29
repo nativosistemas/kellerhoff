@@ -42,7 +42,7 @@ namespace Kellerhoff.Codigo.capaDatos
                     List<cProductosGenerico> listaProductoCarrtios = new List<cProductosGenerico>();
                     foreach (DataRow itemProductoCarrtio in dsProductoCarrito.Tables[0].Select("cad_codCarrito = " + item.lrc_id))
                     {
-                        cProductos objProducto = WebService.ConvertToProductos_generico(itemProductoCarrtio);
+                        cProductos objProducto = WebService.ConvertToProductos(itemProductoCarrtio);
                         cProductosGenerico objProductosGenerico = new cProductosGenerico(objProducto);
                         if (itemProductoCarrtio.Table.Columns.Contains("stk_stock") && itemProductoCarrtio["stk_stock"] != DBNull.Value)
                             objProductosGenerico.stk_stock = itemProductoCarrtio["stk_stock"].ToString(); 
