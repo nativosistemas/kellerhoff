@@ -1714,7 +1714,7 @@ function RecuperarDevolucionesPorCliente() {
                 }
             } else {
                 html = "<tr>";
-                html += "<td colspan='6' class='text-center color_red'><p class='color_red'>No hay devoluciones cargadas</p></td>";
+                html += "<td colspan='7' class='text-center color_red'><p class='color_red'>No hay devoluciones cargadas</p></td>";
                 html += "</tr>";
                 $("#tblDevoluciones").append(html);
             }
