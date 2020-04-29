@@ -950,6 +950,7 @@
     <Content Include="SQLscript\nativosistemas_2019_10_16.sql" />
     <Content Include="SQLscript\nativosistemas_2019_11_12.sql" />
     <Content Include="SQLscript\nativosistemas_2020_04_02.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_04_29.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
     <Content Include="WebService.asmx" />
