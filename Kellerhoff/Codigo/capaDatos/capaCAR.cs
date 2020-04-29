@@ -85,7 +85,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public static DataSet RecuperarCarritosPorSucursalYProductos_generica(int pIdCliente, string pTipo)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spRecuperarCarritosPorSucursalYProductos", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spRecuperarCarritosPorSucursalYProductos_v2", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@car_codCliente", SqlDbType.Int);
