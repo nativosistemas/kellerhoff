@@ -209,7 +209,9 @@ function CargarListaComprobanteCompleto() {
             ///
             var strHtmlDescarga = '';
             strHtmlDescarga += '<a class="btn_download float-right" href="../../servicios/generar_comprobantes_discriminado.aspx" data-toggle="tooltip" data-placement="bottom" title="Descarga csv" data-original-title="Descarga csv">CSV</a>';
-            strHtmlDescarga += '<div class="float-right pad_7 hidden-xs">Descargas:</div>';
+            strHtmlDescarga += '<a class="btn_download float-right" href="../../servicios/generar_comprobantes_txt.aspx" data-toggle="tooltip" data-placement="bottom" title="Descarga TXT" data-original-title="Descarga TXT">TXT</a>';
+            strHtmlDescarga += '<a class="btn_download float-right" href="../../archivos/FormatoArchivoTXTFacturas.pdf" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Descargar en formato txt" data-original-title="Descargar en formato txt">FORMATO TXT</a>';
+            strHtmlDescarga += '<div class="float-right pad_7 hidden-xs">Descargas: </div>';
             $('#divContenedorDescarga').append(strHtmlDescarga);
             //strHtml += '<div style="text-align:right;margin-top:10px;">' + '<a  href="../../servicios/generar_comprobantes_discriminado.aspx"  >' + '<img src="../../img/iconos/disk.png" alt="txt" title="Descarga csv" />' + '</a></div>';
 
