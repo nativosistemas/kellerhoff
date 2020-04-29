@@ -40,7 +40,7 @@ namespace Kellerhoff.Codigo.capaDatos
                 {
                     item.proximoHorarioEntrega = FuncionesPersonalizadas.ObtenerHorarioCierre(objClientes.cli_codsuc, item.codSucursal, objClientes.cli_codrep);
                     List<cProductosGenerico> listaProductoCarrtios = new List<cProductosGenerico>();
-                    foreach (DataRow itemProductoCarrtio in dsProductoCarrito.Tables[0].Rows)
+                    foreach (DataRow itemProductoCarrtio in dsProductoCarrito.Tables[0].Select("cad_codCarrito = " + item.lrc_id))
                     {
                         cProductos objProducto = WebService.ConvertToProductos_generico(itemProductoCarrtio);
                         cProductosGenerico objProductosGenerico = new cProductosGenerico(objProducto);
