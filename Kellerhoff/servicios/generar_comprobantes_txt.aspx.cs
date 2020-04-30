@@ -23,10 +23,11 @@ namespace Kellerhoff.servicios
                 DIR.Create();
             }
             string nombreTXT = null;
-            if (HttpContext.Current.Session["ConsultaDeComprobantes_ComprobantesEntreFecha"] != null)
+            if (HttpContext.Current.Session["ConsultaDeComprobantes_NumerosDeComprobantes"] != null && HttpContext.Current.Session["ConsultaDeComprobantes_ComprobantesEntreFecha"] != null)
             {
-                List<Kellerhoff.ServiceReferenceDLL.cComprobanteDiscriminado> l = (List<Kellerhoff.ServiceReferenceDLL.cComprobanteDiscriminado>)Session["ConsultaDeComprobantes_ComprobantesEntreFecha"];
-                nombreTXT = grabarComprobastesTXT(l);
+                List<Kellerhoff.ServiceReferenceDLL.cComprobanteDiscriminado> l2 = (List<Kellerhoff.ServiceReferenceDLL.cComprobanteDiscriminado>)Session["ConsultaDeComprobantes_ComprobantesEntreFecha"];
+                List<object> l = (List<object>)Session["ConsultaDeComprobantes_NumerosDeComprobantes"];
+                nombreTXT = grabarComprobastesTXT(l,l2);
             }
             //string nombreTXT = GrabarComprobantesTXT(rutaTemporal);
             if (nombreTXT != string.Empty)
@@ -46,7 +47,7 @@ namespace Kellerhoff.servicios
                 }
             }
         }
-        public string grabarComprobastesTXT(List<Kellerhoff.ServiceReferenceDLL.cComprobanteDiscriminado> pLista)
+        public string grabarComprobastesTXT(List<object> pLista , List<Kellerhoff.ServiceReferenceDLL.cComprobanteDiscriminado> pLista2)
         {
             string resultado = string.Empty;
 
@@ -69,7 +70,7 @@ namespace Kellerhoff.servicios
 
                 for (int i = 0; i < pLista.Count; i++)
                 { 
-                    ServiceReferenceDLL.cFactura objFactura = WebService.ObtenerFactura(pLista[i].NumeroComprobante, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login);
+                    ServiceReferenceDLL.cFactura objFactura = WebService.ObtenerFactura(pLista[i].ToString(), ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login);
                     string strCabeceraFAC = string.Empty;
                     // identificación cabecera
                     strCabeceraFAC += "C-";

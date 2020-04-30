@@ -190,12 +190,21 @@ namespace Kellerhoff.Controllers
             if (Session["clientesDefault_Cliente"] != null)
             {
                 string resultado = string.Empty;
+                object NroComprobante = null;
+                List<object> NrosDeComprobante = new List<object>();
                 DateTime fechaDesde = new DateTime(añoDesde, mesDesde, diaDesde);
                 DateTime fechaHasta = new DateTime(añoHasta, mesHasta, diaHasta);
                 List<ServiceReferenceDLL.cComprobanteDiscriminado> resultadoObj = WebService.ObtenerComprobantesEntreFecha(pTipo, fechaDesde, fechaHasta, ((cClientes)Session["clientesDefault_Cliente"]).cli_login);
                 if (resultadoObj != null)
                 {
                     Session["ConsultaDeComprobantes_ComprobantesEntreFecha"] = resultadoObj;
+                    Session["comprobantescompleto_FechaDesde"] = fechaDesde;
+                    Session["comprobantescompleto_FechaHasta"] = fechaHasta;
+                    for (var i = 0; i < resultadoObj.Count;i++) {
+                        NroComprobante = resultadoObj[i].NumeroComprobante;
+                        NrosDeComprobante.Add(NroComprobante);
+                    }
+                    Session["ConsultaDeComprobantes_NumerosDeComprobantes"] = NrosDeComprobante;
                 }
             }
         }
@@ -356,6 +365,21 @@ namespace Kellerhoff.Controllers
         public void CambiarClientePromotor(int IdCliente)
         {
             System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)IdCliente);
+        }
+        public void ActualizarFacturasDescarga(List<object> NrosComprobantes)
+        {
+            if (Session["clientesDefault_Cliente"] != null)
+            {
+                object NroComprobante = null;
+                List<object> NrosDeComprobante = new List<object>();
+
+                for (var i = 0;i<NrosComprobantes.Count;i++)
+                {
+                    NroComprobante = NrosComprobantes[i];
+                    NrosDeComprobante.Add(NroComprobante);
+                }
+                Session["ConsultaDeComprobantes_NumerosDeComprobantes"] = NrosDeComprobante;
+            }
         }
     }
 }

@@ -23,6 +23,15 @@
             List<Kellerhoff.ServiceReferenceDLL.cComprobanteDiscriminado> resultadoObj = (List<Kellerhoff.ServiceReferenceDLL.cComprobanteDiscriminado>)Session["ConsultaDeComprobantes_ComprobantesEntreFecha"];
             resultado += "<input type=\"hidden\" id=\"hiddenListaComprobantesEntreFecha\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(resultadoObj)) + "\" />";
             resultado += "<input type=\"hidden\" id=\"hiddenTipoDocumento\" value=\"" + Server.HtmlEncode(Session["RespuestaConsultaDeComprobantes_TIPO"].ToString()) + "\" />";
+            resultado += "<input type=\"hidden\" id=\"hiddenListaNroComps\" value=\"[";
+            for (var i= 0; i < resultadoObj.Count;i++) {
+                resultado += "{" + resultadoObj[i].NumeroComprobante + "}";
+                if (i < resultadoObj.Count - 1)
+                {
+                    resultado += ",";
+                }
+            }
+            resultado += "]\" />";
         }
         WriteLiteral(resultado);
     }
