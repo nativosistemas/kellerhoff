@@ -209,8 +209,6 @@ function CargarListaComprobanteCompleto() {
             ///
             var strHtmlDescarga = '';
             strHtmlDescarga += '<a class="btn_download float-right" href="../../servicios/generar_comprobantes_discriminado.aspx" data-toggle="tooltip" data-placement="bottom" title="Descarga csv" data-original-title="Descarga csv">CSV</a>';
-            strHtmlDescarga += '<a class="btn_download float-right" href="../../servicios/generar_comprobantes_txt.aspx" data-toggle="tooltip" data-placement="bottom" title="Descarga TXT" data-original-title="Descarga TXT">TXT</a>';
-            strHtmlDescarga += '<a class="btn_download float-right" href="../../archivos/FormatoArchivoTXTFacturas.pdf" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Descargar en formato txt" data-original-title="Descargar en formato txt">FORMATO TXT</a>';
             strHtmlDescarga += '<div class="float-right pad_7 hidden-xs">Descargas: </div>';
             $('#divContenedorDescarga').append(strHtmlDescarga);
             //strHtml += '<div style="text-align:right;margin-top:10px;">' + '<a  href="../../servicios/generar_comprobantes_discriminado.aspx"  >' + '<img src="../../img/iconos/disk.png" alt="txt" title="Descarga csv" />' + '</a></div>';
@@ -240,6 +238,10 @@ function CargarHtmlComprobanteEntreFecha() {
     var strHtml = '';
     if (listaComprobantesEntreFecha != null) {
         if (listaComprobantesEntreFecha.length > 0) {
+            var esFactura = false;
+            if (listaComprobantesEntreFecha[0].Comprobante === 'FAC') {
+                esFactura = true;
+            }
             strHtml += '<table class="footable table tbl_ch table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="1" cellpadding="5" border="0">';
             strHtml += '<thead>';
             strHtml += '<tr>';
@@ -300,6 +302,10 @@ function CargarHtmlComprobanteEntreFecha() {
             ///
             var strHtmlDescarga = '';
             strHtmlDescarga += '<a class="btn_download float-right" href="../../servicios/generarCSV.aspx?t=ConsultaDeComprobantesEntreFecha" data-toggle="tooltip" data-placement="bottom" title="Descarga csv" data-original-title="Descarga csv">CSV</a>';
+            if (esFactura) {
+                strHtmlDescarga += '<a class="btn_download float-right" href="../../servicios/generar_comprobantes_txt.aspx" data-toggle="tooltip" data-placement="bottom" title="Descarga TXT" data-original-title="Descarga TXT">TXT</a>';
+                strHtmlDescarga += '<a class="btn_download float-right" href="../../archivos/FormatoArchivoTXTFacturas.pdf" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Descargar en formato txt" data-original-title="Descargar en formato txt">FORMATO TXT</a>';
+            }
             strHtmlDescarga += '<div class="float-right pad_7 hidden-xs">Descargas:</div>';
             $('#divContenedorDescarga').append(strHtmlDescarga);
 
