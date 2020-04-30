@@ -258,7 +258,7 @@ function CargarHtmlComprobanteEntreFecha() {
             strHtml += '</table>';
             strHtml += '<span class="thd_letra_chica visible-xs">Tipo</span>';
             strHtml += '</th>';
-            strHtml += '<th class="col-lg-4 col-md-3 col-sm-3 col-xs-1 text-center no-padding" data-breakpoints="xs">';
+            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-1 text-center no-padding" data-breakpoints="xs">';
             strHtml += '<table class="hidden-xs" width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Comprobante</td></tr>';
@@ -269,6 +269,12 @@ function CargarHtmlComprobanteEntreFecha() {
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center no_brd-r">Importe</td></tr>';
+            strHtml += '</table>';
+            strHtml += '</th>';
+            strHtml += '<th class="col-lg-1 col-md-2 col-sm-2 col-xs-2 text-center no-padding">';
+            strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+            strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center no_brd-r">Descargar</td></tr>';
             strHtml += '</table>';
             strHtml += '</th>';
             strHtml += '</tr>';
@@ -282,7 +288,7 @@ function CargarHtmlComprobanteEntreFecha() {
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center c_to_l-xs">' + listaComprobantesEntreFecha[i].FechaToString + '</td>'; // listaComprobantesEntreFecha[i].FechaToString
                 strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 text-center c_to_l-xs">' + listaComprobantesEntreFecha[i].Comprobante + '</td>';
-                strHtml += '<td class="col-lg-4 col-md-4 col-sm-4 text-center c_to_l-xs">';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-2 text-center c_to_l-xs">';
                 if (isDetalleComprobante(listaComprobantesEntreFecha[i].Comprobante)) {
                     strHtml += '<a href="../ctacte/Documento?t=' + listaComprobantesEntreFecha[i].Comprobante + '&id=' + listaComprobantesEntreFecha[i].NumeroComprobante + '" >' + listaComprobantesEntreFecha[i].NumeroComprobante + '</a>';
                 } else {
@@ -290,6 +296,7 @@ function CargarHtmlComprobanteEntreFecha() {
                 }
                 strHtml += ' </td>';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-right">$&nbsp;' + FormatoDecimalConDivisorMiles(listaComprobantesEntreFecha[i].MontoTotal.toFixed(2)) + '</td>';
+                strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center"><input onclick="generarListaADescargar()" type="checkbox" class="form-control input-descarga" style="height: 17px !important" checked="true" name="' + listaComprobantesEntreFecha[i].NumeroComprobante + '" id="' + listaComprobantesEntreFecha[i].NumeroComprobante + '"></td>';
                 strHtml += '</tr>';
             }
             strHtml += '</tbody>';
@@ -326,4 +333,25 @@ function CargarHtmlComprobanteEntreFecha() {
     }
     $('#divResultadoComprobanteEntreFecha').html(strHtml);
     $('.footable').footable();
+}
+
+function generarListaADescargar() {
+    var checks = $('input[type=checkbox]:checked').serialize();
+    $.ajax({
+        type: "POST",
+        url: "/ctacte/ActualizarFacturasDescarga",
+        data: { NrosComprobantes: JSON.stringify(checks) },
+        success:
+            function (response) {
+                //hideCargandoBuscador();
+            },
+        failure: function (response) {
+            hideCargandoBuscador();
+            OnFail(response);
+        },
+        error: function (response) {
+            hideCargandoBuscador();
+            OnFail(response);
+        }
+    });
 }
