@@ -336,16 +336,14 @@ function CargarHtmlComprobanteEntreFecha() {
 }
 
 function generarListaADescargar() {
-    var checks = $('input[type=checkbox]:checked').serializeArray();
-    console.log(checks);
+    var checks = $('input[type=checkbox]:checked').serialize();
     $.ajax({
         type: "POST",
         url: "/ctacte/ActualizarFacturasDescarga",
-        data: { NrosComprobantes:checks },
+        data: { NrosComprobantes: JSON.stringify(checks) },
         success:
             function (response) {
                 //hideCargandoBuscador();
-                console.log('listo');
             },
         failure: function (response) {
             hideCargandoBuscador();

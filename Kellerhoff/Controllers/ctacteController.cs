@@ -372,10 +372,15 @@ namespace Kellerhoff.Controllers
             {
                 object NroComprobante = null;
                 List<object> NrosDeComprobante = new List<object>();
-
-                for (var i = 0;i<NrosComprobantes.Count;i++)
+                string listado = NrosComprobantes[0].ToString();
+                listado = listado.Replace('n', ' ');
+                listado = listado.Replace('o', ' ');
+                listado = listado.Replace('=', ' ');
+                listado = listado.Replace('\"', ' ');
+                var ncomp = listado.Split('&');
+                for (var i = 0;i< ncomp.Length;i++)
                 {
-                    NroComprobante = NrosComprobantes[i];
+                    NroComprobante = ncomp[i].ToString().Trim();
                     NrosDeComprobante.Add(NroComprobante);
                 }
                 Session["ConsultaDeComprobantes_NumerosDeComprobantes"] = NrosDeComprobante;
