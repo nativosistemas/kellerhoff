@@ -5304,6 +5304,87 @@ namespace Kellerhoff
             return obj;
         }
 
+        private static cMensajeNew ConvertToMensajeNew(DataRow pItem)
+        {
+            cMensajeNew obj = new cMensajeNew();
+            if (pItem["tmn_codigo"] != DBNull.Value)
+            {
+                obj.tmn_codigo = Convert.ToInt32(pItem["tmn_codigo"]);
+            }
+            if (pItem["tmn_fecha"] != DBNull.Value)
+            {
+                obj.tmn_fecha = Convert.ToDateTime(pItem["tmn_fecha"]);
+                obj.tmn_fechaToString = Convert.ToDateTime(pItem["tmn_fecha"]).ToShortDateString();
+            }
+            if (pItem["tmn_asunto"] != DBNull.Value)
+            {
+                obj.tmn_asunto = pItem["tmn_asunto"].ToString();
+            }
+            if (pItem["tmn_mensaje"] != DBNull.Value)
+            {
+                obj.tmn_mensaje = pItem["tmn_mensaje"].ToString();
+            }
+            if (pItem.Table.Columns.Contains("tmn_importante") && pItem["tmn_importante"] != DBNull.Value)
+            {
+                obj.tmn_importante = Convert.ToBoolean(pItem["tmn_importante"]);
+            }
+            obj.tmn_fechaDesde = DateTime.MinValue;
+            if (pItem.Table.Columns.Contains("tmn_fechaDesde") && pItem["tmn_fechaDesde"] != DBNull.Value)
+            {
+                obj.tmn_fechaDesde = Convert.ToDateTime(pItem["tmn_fechaDesde"]);
+            }
+            obj.tmn_fechaHasta = DateTime.MinValue;
+            if (pItem.Table.Columns.Contains("tmn_fechaHasta") && pItem["tmn_fechaHasta"] != DBNull.Value)
+            {
+                obj.tmn_fechaHasta = Convert.ToDateTime(pItem["tmn_fechaHasta"]);
+            }
+            if (obj.tmn_importante)
+            {
+                obj.tmn_fechaDesdeToString = ((DateTime)obj.tmn_fechaDesde).ToShortDateString();
+                obj.tmn_fechaHastaToString = ((DateTime)obj.tmn_fechaHasta).ToShortDateString();
+                obj.tmn_importanteToString = "Si";
+            }
+            else
+            {
+                obj.tmn_importanteToString = "No";
+            }
+
+            if (pItem.Table.Columns.Contains("tmn_todosSucursales") && pItem["tmn_todosSucursales"] != DBNull.Value)
+            {
+                obj.tmn_todosSucursales = pItem["tmn_todosSucursales"].ToString();
+            }
+            return obj;
+        }
+        public static List<cMensaje> RecuperartTodosMensajeNewPorSucursal(string pSucursal)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                List<cMensaje> lista = new List<cMensaje>();
+                List<cMensajeNew> lista_aux = new List<cMensajeNew>();
+                DataTable tabla = capaMensaje.RecuperartTodosMensajeNewPorSucursal(pSucursal);
+                if (tabla != null)
+                {
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        cMensajeNew obj = ConvertToMensajeNew(item);
+                        lista_aux.Add(obj);
+                    }
+                    if (lista_aux.Count > 0)
+                    {
+                        foreach (cMensajeNew m in lista_aux)
+                        {
+                            cMensaje o = new cMensaje() { tme_asunto = m.tmn_asunto,tme_mensaje =m.tmn_mensaje};
+                            lista.Add(o);
+                        }
+                    }
+                }
+                return lista;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
     public class Autenticacion : SoapHeader
     {

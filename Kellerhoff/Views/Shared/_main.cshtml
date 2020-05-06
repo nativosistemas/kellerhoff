@@ -561,6 +561,7 @@
             DateTime fechaCompararDesde = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
             DateTime fechaCompararHasta = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59, 999);
             listaMensaje = listaMensaje.Where(x => x.tme_importante && ((DateTime)x.tme_fechaDesde) <= fechaCompararDesde && ((DateTime)x.tme_fechaHasta) >= fechaCompararHasta).ToList();
+            listaMensaje.AddRange(WebService.RecuperartTodosMensajeNewPorSucursal(((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc));
             resultado += "<input type=\"hidden\" id=\"hiddenListaMensajeImportante\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaMensaje)) + "\" />";
             List<Kellerhoff.Codigo.capaDatos.cArchivo> listaPopUp = WebService.RecuperarPopUpPorCliente((int)((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente, ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc);
             resultado += "<input type=\"hidden\" id=\"hiddenListaPopUp\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaPopUp)) + "\" />";
