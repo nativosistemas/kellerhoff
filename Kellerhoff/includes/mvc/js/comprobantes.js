@@ -209,7 +209,7 @@ function CargarListaComprobanteCompleto() {
             ///
             var strHtmlDescarga = '';
             strHtmlDescarga += '<a class="btn_download float-right" href="../../servicios/generar_comprobantes_discriminado.aspx" data-toggle="tooltip" data-placement="bottom" title="Descarga csv" data-original-title="Descarga csv">CSV</a>';
-            strHtmlDescarga += '<div class="float-right pad_7 hidden-xs">Descargas:</div>';
+            strHtmlDescarga += '<div class="float-right pad_7 hidden-xs">Descargas: </div>';
             $('#divContenedorDescarga').append(strHtmlDescarga);
             //strHtml += '<div style="text-align:right;margin-top:10px;">' + '<a  href="../../servicios/generar_comprobantes_discriminado.aspx"  >' + '<img src="../../img/iconos/disk.png" alt="txt" title="Descarga csv" />' + '</a></div>';
 
@@ -238,6 +238,10 @@ function CargarHtmlComprobanteEntreFecha() {
     var strHtml = '';
     if (listaComprobantesEntreFecha != null) {
         if (listaComprobantesEntreFecha.length > 0) {
+            var esFactura = false;
+            if (listaComprobantesEntreFecha[0].Comprobante === 'FAC') {
+                esFactura = true;
+            }
             strHtml += '<table class="footable table tbl_ch table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="1" cellpadding="5" border="0">';
             strHtml += '<thead>';
             strHtml += '<tr>';
@@ -254,7 +258,7 @@ function CargarHtmlComprobanteEntreFecha() {
             strHtml += '</table>';
             strHtml += '<span class="thd_letra_chica visible-xs">Tipo</span>';
             strHtml += '</th>';
-            strHtml += '<th class="col-lg-4 col-md-3 col-sm-3 col-xs-1 text-center no-padding" data-breakpoints="xs">';
+            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-1 text-center no-padding" data-breakpoints="xs">';
             strHtml += '<table class="hidden-xs" width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Comprobante</td></tr>';
@@ -265,6 +269,12 @@ function CargarHtmlComprobanteEntreFecha() {
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center no_brd-r">Importe</td></tr>';
+            strHtml += '</table>';
+            strHtml += '</th>';
+            strHtml += '<th class="col-lg-1 col-md-2 col-sm-2 col-xs-2 text-center no-padding">';
+            strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+            strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center no_brd-r">Descargar</td></tr>';
             strHtml += '</table>';
             strHtml += '</th>';
             strHtml += '</tr>';
@@ -278,7 +288,7 @@ function CargarHtmlComprobanteEntreFecha() {
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center c_to_l-xs">' + listaComprobantesEntreFecha[i].FechaToString + '</td>'; // listaComprobantesEntreFecha[i].FechaToString
                 strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 text-center c_to_l-xs">' + listaComprobantesEntreFecha[i].Comprobante + '</td>';
-                strHtml += '<td class="col-lg-4 col-md-4 col-sm-4 text-center c_to_l-xs">';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-2 text-center c_to_l-xs">';
                 if (isDetalleComprobante(listaComprobantesEntreFecha[i].Comprobante)) {
                     strHtml += '<a href="../ctacte/Documento?t=' + listaComprobantesEntreFecha[i].Comprobante + '&id=' + listaComprobantesEntreFecha[i].NumeroComprobante + '" >' + listaComprobantesEntreFecha[i].NumeroComprobante + '</a>';
                 } else {
@@ -286,6 +296,7 @@ function CargarHtmlComprobanteEntreFecha() {
                 }
                 strHtml += ' </td>';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-right">$&nbsp;' + FormatoDecimalConDivisorMiles(listaComprobantesEntreFecha[i].MontoTotal.toFixed(2)) + '</td>';
+                strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center"><input onclick="generarListaADescargar()" type="checkbox" class="form-control input-descarga" style="height: 17px !important" checked="true" name="' + listaComprobantesEntreFecha[i].NumeroComprobante + '" id="' + listaComprobantesEntreFecha[i].NumeroComprobante + '"></td>';
                 strHtml += '</tr>';
             }
             strHtml += '</tbody>';
@@ -298,6 +309,10 @@ function CargarHtmlComprobanteEntreFecha() {
             ///
             var strHtmlDescarga = '';
             strHtmlDescarga += '<a class="btn_download float-right" href="../../servicios/generarCSV.aspx?t=ConsultaDeComprobantesEntreFecha" data-toggle="tooltip" data-placement="bottom" title="Descarga csv" data-original-title="Descarga csv">CSV</a>';
+            if (esFactura) {
+                strHtmlDescarga += '<a class="btn_download float-right" href="../../servicios/generar_comprobantes_txt.aspx" data-toggle="tooltip" data-placement="bottom" title="Descarga TXT" data-original-title="Descarga TXT">TXT</a>';
+                strHtmlDescarga += '<a class="btn_download float-right" href="../../archivos/FormatoArchivoTXTFacturas.pdf" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Descargar en formato txt" data-original-title="Descargar en formato txt">FORMATO TXT</a>';
+            }
             strHtmlDescarga += '<div class="float-right pad_7 hidden-xs">Descargas:</div>';
             $('#divContenedorDescarga').append(strHtmlDescarga);
 
@@ -318,4 +333,25 @@ function CargarHtmlComprobanteEntreFecha() {
     }
     $('#divResultadoComprobanteEntreFecha').html(strHtml);
     $('.footable').footable();
+}
+
+function generarListaADescargar() {
+    var checks = $('input[type=checkbox]:checked').serialize();
+    $.ajax({
+        type: "POST",
+        url: "/ctacte/ActualizarFacturasDescarga",
+        data: { NrosComprobantes: JSON.stringify(checks) },
+        success:
+            function (response) {
+                //hideCargandoBuscador();
+            },
+        failure: function (response) {
+            hideCargandoBuscador();
+            OnFail(response);
+        },
+        error: function (response) {
+            hideCargandoBuscador();
+            OnFail(response);
+        }
+    });
 }

@@ -758,6 +758,7 @@
     <Content Include="includes\home\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="includes\home\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="includes\home\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="archivos\FormatoArchivoTXTFacturas.pdf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -945,11 +946,13 @@
     <Content Include="servicios\generarCSV.aspx" />
     <Content Include="servicios\generar_archivo.aspx" />
     <Content Include="servicios\generar_archivoPdf.aspx" />
+    <Content Include="servicios\generar_comprobantes_txt.aspx" />
     <Content Include="servicios\generar_comprobantes_discriminado.aspx" />
     <Content Include="servicios\thumbnail.aspx" />
     <Content Include="SQLscript\nativosistemas_2019_10_16.sql" />
     <Content Include="SQLscript\nativosistemas_2019_11_12.sql" />
     <Content Include="SQLscript\nativosistemas_2020_04_02.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_04_29.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
     <Content Include="WebService.asmx" />
@@ -1268,6 +1271,13 @@
     </Compile>
     <Compile Include="servicios\generar_archivoPdf.aspx.designer.cs">
       <DependentUpon>generar_archivoPdf.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\generar_comprobantes_txt.aspx.cs">
+      <DependentUpon>generar_comprobantes_txt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="servicios\generar_comprobantes_txt.aspx.designer.cs">
+      <DependentUpon>generar_comprobantes_txt.aspx</DependentUpon>
     </Compile>
     <Compile Include="servicios\generar_comprobantes_discriminado.aspx.cs">
       <DependentUpon>generar_comprobantes_discriminado.aspx</DependentUpon>
