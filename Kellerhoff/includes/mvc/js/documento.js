@@ -1,5 +1,6 @@
 ﻿var objDocumento = null;
 var objTipoDocumento = null;
+var oVencimientoResumen = null;
 //
 //var nombreArchivoPDF = '';
 var nroDocumento = '';
@@ -237,6 +238,13 @@ function CargarHtmlResumen() {
                 var strHtmlColorFondo = 'wht';
                 if (i % 2 != 0) {
                     strHtmlColorFondo = 'grs';
+                }
+                aDesc = '';
+                if (objDocumento.lista[i].Descripcion.toUpperCase().search('VENCIMIENTOS:') > -1) {
+                    var aDesc = objDocumento.lista[i].Descripcion.split("/");
+                    var FechaVtoString = aDesc[2].substr(0, 4) + "/" + aDesc[1] + "/" + aDesc[0].substr(aDesc[0].length-2);
+                    console.log(FechaVtoString);
+
                 }
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
                 strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 col-xs-3  text-center">';
@@ -955,4 +963,9 @@ function CargarHtmlObraSocialCliente() {
         $('#divContenedorDocumento').html(strHtml);
     }
     $('.footable').footable();
+}
+function ObtenerVtosResumenes(NroResumen, fechaVto) {
+    $.ajax({
+
+    });
 }

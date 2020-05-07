@@ -225,8 +225,11 @@ function CargarHtmlCompocisionSaldo_CtaCte() {
                             strHtmlColorSaldoCabecera = 'color_vencido';
                         }
                     }
-
-                    strHtml += '<td  class="col-lg-1 col-md-1 col-sm-2 col-xs-4 text-center ' + strHtmlColorFondoFechaVencimiento + '">' + listaCompocisionSaldo[i].FechaVencimientoToString + '</td>'; //Vencimiento
+                    var compRes = ''
+                    if (listaCompocisionSaldo[i].TipoComprobanteToString == 'RES') {
+                        compRes = '<i class="fa fa-search float-left" onclick="MostrarVencimientos(' + i + ')"></i>';
+                    }
+                    strHtml += '<td  class="col-lg-1 col-md-1 col-sm-2 col-xs-4 text-center ' + strHtmlColorFondoFechaVencimiento + '">' + compRes + listaCompocisionSaldo[i].FechaVencimientoToString + '</td>'; //Vencimiento
 
                     if (isDetalleComprobante(listaCompocisionSaldo[i].TipoComprobanteToString)) {
                         strHtml += '<td class="col-lg-1 col-md-1 col-sm-2 text-center c_to_l-xs">' + ' <div class="txt_link_doc"><a href="Documento?t=' + listaCompocisionSaldo[i].TipoComprobanteToString + '&id=' + listaCompocisionSaldo[i].NumeroComprobante + '" >' + listaCompocisionSaldo[i].TipoComprobanteToString + ' ' + listaCompocisionSaldo[i].NumeroComprobante + '</a></div>' + '</td>';
@@ -239,7 +242,7 @@ function CargarHtmlCompocisionSaldo_CtaCte() {
                     if (isNotNullEmpty(listaCompocisionSaldo[i].Importe)) {
                         strImporte = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaCompocisionSaldo[i].Importe.toFixed(2));
                     }
-                    strHtml += '<td class="col-lg-1 col-md-1 col-sm-2 text-right r_to_l-xs ">' + strImporte + '</td>'; //Importe
+                    strHtml += '<td class="col-lg-1 col-md-1 col-sm-2 text-right r_to_l-xs ">' + compRes + strImporte + '</td>'; //Importe
                     strHtml += '<td class="col-lg-1 col-md-1 col-sm-2 text-center c_to_l-xs">' + ObtenerLinkDeDocumentoDesdeStr(listaCompocisionSaldo[i].NumeroRecibo) + '</td>'; //Recibo Nro
                     var strPago = '&nbsp;';
                     if (isNotNullEmpty(listaCompocisionSaldo[i].Pago)) {
@@ -535,4 +538,41 @@ function CargarHtmlChequesEnCartera() {
         $('.footable').footable();
     }
 
+}
+
+function MostrarVencimientos( id ){
+    var html = '<table with="100%" class="table table-striped" style="background: #e1e1e1;">';
+    html += '<thead>';
+    html += '<tr style="height: 40px;"><th class="text-center">Comprobante<br></th><th class="text-center">Número<br></th><th class="text-center">Fecha<br></th><th class="text-center">Importes<br></th></tr></thead>';
+    html += '<tbody class="table-striped">';
+    for (var i = 0; i < listaCompocisionSaldo[id].lista.length;i++ ) {
+        html += '<tr style="height: 40px">';
+        html += '<td class="text-center">' + listaCompocisionSaldo[id].lista[i].Tipo + '</td>';
+        html += '<td class="text-center"><a href="Documento?t=' + listaCompocisionSaldo[id].lista[i].Tipo + '&id=' + listaCompocisionSaldo[id].lista[i].NumeroComprobante + '" >' + listaCompocisionSaldo[id].lista[i].NumeroComprobante + '</a></td>';
+        html += '<td class="text-center">' + listaCompocisionSaldo[id].lista[i].FechaToString + '</td>';
+        html += '<td class="text-center">$ ' + listaCompocisionSaldo[id].lista[i].Importe + '</td>';
+        html += '</tr>';
+    }
+    html += '</tbody></table>';
+
+    //mensaje(, html);
+
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
+    strHtml += '<div class="modal-header">';
+    strHtml += '<div class="col-12">';
+    strHtml += '<h5 style="color: steelblue;">Comprobantes con vencimiento ' + listaCompocisionSaldo[id].FechaVencimientoToString + '</h5>';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '<div class="modal-body no-padding"><div class="col-12">';
+    strHtml += html;
+    strHtml += '</div></div>';
+    strHtml += '</div></div>';
+    $('#modalModulo').html(strHtml);
+    $('#modalModulo').modal();
+
+    // $(".fa.fa-times").hide();
+    //$("#modalModulo").unbind("click");
 }
