@@ -121,7 +121,7 @@ function OnCallBackObtenerRangoFecha(args) {
 function CargarHtmlCompocisionSaldo_CtaCte() {
     if (listaCompocisionSaldo != null) {
         var strHtml = '';
-
+        console.log(listaCompocisionSaldo);
         if (listaCompocisionSaldo.length > 0) {
             strHtml += '<table class="footable table tbl_ch table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="1" cellpadding="5" border="0">';
             strHtml += '<thead>';
