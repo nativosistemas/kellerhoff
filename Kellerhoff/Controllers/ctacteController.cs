@@ -386,82 +386,17 @@ namespace Kellerhoff.Controllers
                 Session["ConsultaDeComprobantes_NumerosDeComprobantes"] = NrosDeComprobante;
             }
         }
-        public static List<ServiceReferenceDLL.cVencimientoResumen> ObtenerVencimientosResumen(string pNumeroResumen, DateTime pFechaVencimiento)
+        public static List<ServiceReferenceDLL.cVencimientoResumen> ObtenerVencimientosResumenPorFecha(string pNumeroResumen, DateTime pFechaVencimiento)
         {
-            string resultado = string.Empty;
-            DateTime fechaVencimiento = pFechaVencimiento;
-
             List<ServiceReferenceDLL.cVencimientoResumen> resultadoObj = WebService.ObtenerVencimientosResumenPorFecha(pNumeroResumen, pFechaVencimiento);
 
             if (resultadoObj != null)
             {
-                List<ServiceReferenceDLL.cCtaCteMovimiento> resultadoAUX = new List<ServiceReferenceDLL.cCtaCteMovimiento>();
-                List<ServiceReferenceDLL.cCtaCteMovimiento> parteAUX = null;
-                bool isPaso = false;
-                bool isPasoPorPaso = false;
-                for (int i = 0; i < resultadoObj.Count; i++)
-                {
-                    bool isAgregarAhora = false;
-                    if (isPaso)
-                    {
-                        parteAUX.Add(resultadoObj[i]);
-                        isPaso = false;
-                        isPasoPorPaso = true;
-                    }
-                    if (resultadoObj[i].FechaVencimiento == null)
-                    {
-                        isAgregarAhora = true;
-                    }
-                    else
-                    {
-                        if (i == resultadoObj.Count - 1)
-                        {
-                            isAgregarAhora = true;
-                        }
-                        else
-                        {
-                            if (resultadoObj[i].NumeroComprobante != "" && Convert.ToInt32(resultadoObj[i].TipoComprobante) < 14)
-                            {
-                                if (resultadoObj[i].NumeroComprobante == resultadoObj[i + 1].NumeroComprobante && resultadoObj[i].TipoComprobante == resultadoObj[i + 1].TipoComprobante)
-                                {
-                                    if (parteAUX == null)
-                                    {
-                                        parteAUX = new List<ServiceReferenceDLL.cCtaCteMovimiento>();
-                                    }
-                                    if (!isPasoPorPaso)
-                                    {
-                                        parteAUX.Add(resultadoObj[i]);
-                                    }
-                                    isPaso = true;
-                                }
-                                else
-                                {
-                                    isAgregarAhora = true;
-                                }
-                            }
-                            else
-                            {
-                                isAgregarAhora = true;
-                            }
-                        }
-                    }
-                    if (isAgregarAhora)
-                    {
-                        if (parteAUX != null)
-                        {
-                            resultadoAUX.AddRange(parteAUX.OrderBy(x => x.FechaVencimiento).ToList());
-                            parteAUX = null;
-                        }
-                        if (!isPasoPorPaso)
-                        {
-                            resultadoAUX.Add(resultadoObj[i]);
-                        }
-                    }
-                    isPasoPorPaso = false;
-                }
-                return resultadoAUX;
+                return resultadoObj;
+            } else
+            {
+                return null;
             }
-            return null;
         }
     }
 }

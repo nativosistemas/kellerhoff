@@ -244,6 +244,7 @@ function CargarHtmlResumen() {
                     var aDesc = objDocumento.lista[i].Descripcion.split("/");
                     var FechaVtoString = aDesc[2].substr(0, 4) + "/" + aDesc[1] + "/" + aDesc[0].substr(aDesc[0].length-2);
                     console.log(FechaVtoString);
+                    ObtenerVtosResumenes(objDocumento.Numero, FechaVtoString);
 
                 }
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
@@ -963,9 +964,4 @@ function CargarHtmlObraSocialCliente() {
         $('#divContenedorDocumento').html(strHtml);
     }
     $('.footable').footable();
-}
-function ObtenerVtosResumenes(NroResumen, fechaVto) {
-    $.ajax({
-
-    });
 }
