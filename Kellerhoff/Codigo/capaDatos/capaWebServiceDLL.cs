@@ -696,6 +696,20 @@ namespace Kellerhoff.Codigo.capaDatos
                 return false;
             }
         }
+        public static double? ObtenerSaldoFinalADiciembrePorCliente(string pLoginWeb)
+        {
+            try
+            {
+                ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
+                double resultado = objServicio.ObtenerSaldoFinalADiciembrePorCliente(pLoginWeb);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pLoginWeb);
+                return null;
+            }
+        }
     }
 
 

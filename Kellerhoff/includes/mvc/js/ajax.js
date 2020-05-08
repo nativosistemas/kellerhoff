@@ -1159,3 +1159,24 @@ function ObtenerComprobantesObrasSocialesDePuntoDeVentaEntreFechas(pLoginWeb, pP
         }
     });
 }
+function ObtenerSaldoFinalADiciembrePorCliente(pCli_login) {
+    showCargandoBuscador();
+    $.ajax({
+        type: "POST",
+        url: "/ctacte/ObtenerSaldoFinalADiciembrePorCliente",
+        data: { pCli_login: pCli_login },
+        success:
+            function (response) {
+                hideCargandoBuscador();
+                OnCallBackObtenerSaldoFinalADiciembrePorCliente(response);
+            },
+        failure: function (response) {
+            hideCargandoBuscador();
+            OnFail(response);
+        },
+        error: function (response) {
+            hideCargandoBuscador();
+            OnFail(response);
+        }
+    });
+}

@@ -59,7 +59,10 @@ namespace Kellerhoff.Codigo.capaDatos
             get { return _isPermitirPedirProducto; }
             set { _isPermitirPedirProducto = value; }
         }
-        public string pro_Familia { get; set; } 
+        public string pro_Familia { get; set; }
+        public int? pro_PackDeVenta { get; set; }
+        public decimal pro_PorcARestarDelDtoDeCliente { get; set; }
+        public decimal pro_PrecioBase { get; set; }
     }
     public class cProductosGenerico : cTransferDetalle
     {
@@ -89,6 +92,9 @@ namespace Kellerhoff.Codigo.capaDatos
             base.pro_NoTransfersEnClientesPerf = pProducto.pro_NoTransfersEnClientesPerf;
             base.pro_Familia = pProducto.pro_Familia;
             base.pro_AceptaVencidos = pProducto.pro_AceptaVencidos;
+            base.pro_PackDeVenta = pProducto.pro_PackDeVenta;
+            base.pro_PrecioBase = pProducto.pro_PrecioBase;
+            base.pro_PorcARestarDelDtoDeCliente = pProducto.pro_PorcARestarDelDtoDeCliente;
             listaSucursalStocks = new List<cSucursalStocks>();
             isProductoNoEncontrado = false;
         }
@@ -121,6 +127,8 @@ namespace Kellerhoff.Codigo.capaDatos
             base.tde_proobligatorio = pValor.tde_proobligatorio;
             base.tde_unidadesbonificadas = pValor.tde_unidadesbonificadas;
             base.tde_unidadesbonificadasdescripcion = pValor.tde_unidadesbonificadasdescripcion;
+            base.tde_PrecioConDescuentoDirecto = pValor.tde_PrecioConDescuentoDirecto;
+            base.tde_PorcARestarDelDtoDeCliente = pValor.tde_PorcARestarDelDtoDeCliente;
             base.tfr_codigo = pValor.tfr_codigo;
             base.tfr_accion = pValor.tfr_accion;
             base.tfr_nombre = pValor.tfr_nombre;

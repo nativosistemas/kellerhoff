@@ -74,11 +74,6 @@ function MostrarMensajePopUp() {
 			mensaje_PopUp(indexPopUp);
 			longPopUpMostrar = longPopUpMostrar - 1;
     }
-    //if (listaPopUp != null && listaPopUp.length > 0) {
-    //    var indexPopUp = listaPopUp.length - longPopUpMostrar;
-    //    longPopUpMostrar = longPopUpMostrar - 1;
-    //    mensaje_PopUp(indexPopUp);
-    //}
 }
 function MostrarMensajeImportante() {
     if (listaMensajeImportanteMostrar != null) {
@@ -403,7 +398,16 @@ function OnCallBackObtenerCreditoDisponible(args) {
     }
     mensaje_CreditoDisponible(strCreditoSemanal, strCreditoTotal);
 }
-
+function onclickObtenerSaldoFinalADiciembrePorCliente() {
+    ObtenerSaldoFinalADiciembrePorCliente(cli_login());
+}
+function OnCallBackObtenerSaldoFinalADiciembrePorCliente(args) {
+    var strSaldo = '&nbsp;';
+    if (isNotNullEmpty(args)) {
+        strSaldo = '$&nbsp;' + FormatoDecimalConDivisorMiles(Number.parseFloat(args).toFixed(2));
+    }
+    mensaje_SaldoFinalADiciembre(strSaldo);
+}
 function onclickConsultasCtaCte() {
     mensaje_ConsultasCtaCte();
 }

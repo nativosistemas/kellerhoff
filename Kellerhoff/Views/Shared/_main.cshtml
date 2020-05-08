@@ -285,6 +285,7 @@
                                 <a href="/ctacte/ConsultaDeComprobantes"><i class="fa fa-file"></i>COMPROBANTES</a>
                                 <a href="/ctacte/ConsultaDeComprobantesObraSocial"><i class="fa fa-medkit"></i>OBRAS SOCIALES</a>
                                 <a href="/ctacte/descargaResumenes"><i class="fa fa-file-pdf-o"></i>RESUMENES</a>
+                                <a href="#" onclick="onclickObtenerSaldoFinalADiciembrePorCliente(); return false;"><i class="fa fa-usd"></i>SALDO AL 31/12</a>
                                 @{
                                     if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
                                         ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
@@ -583,6 +584,7 @@
             DateTime fechaCompararDesde = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
             DateTime fechaCompararHasta = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59, 999);
             listaMensaje = listaMensaje.Where(x => x.tme_importante && ((DateTime)x.tme_fechaDesde) <= fechaCompararDesde && ((DateTime)x.tme_fechaHasta) >= fechaCompararHasta).ToList();
+            listaMensaje.AddRange(WebService.RecuperartTodosMensajeNewPorSucursal(((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc));
             resultado += "<input type=\"hidden\" id=\"hiddenListaMensajeImportante\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaMensaje)) + "\" />";
             List<Kellerhoff.Codigo.capaDatos.cArchivo> listaPopUp = WebService.RecuperarPopUpPorCliente((int)((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).usu_codCliente, ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc);
             resultado += "<input type=\"hidden\" id=\"hiddenListaPopUp\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaPopUp)) + "\" />";
@@ -603,9 +605,9 @@
 
     <script src="~/includes/mvc/js/libreria.js?n=20" type="text/javascript"></script>
     <script src="~/includes/mvc/js/oferta.js?n=11" type="text/javascript"></script>
-    <script src="~/includes/mvc/js/kellerhoff.js?n=32" type="text/javascript"></script>
-    <script src="~/includes/mvc/js/ajax.js?n=39" type="text/javascript"></script>
-    <script src="~/includes/mvc/js/mensaje.js?n=23" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/kellerhoff.js?n=36" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/ajax.js?n=40" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/mensaje.js?n=27" type="text/javascript"></script>
     <script src="~/includes/mvc/js/promotores.js?n=3" type="text/javascript"></script>
 
     @RenderSection("scripts", required: false)

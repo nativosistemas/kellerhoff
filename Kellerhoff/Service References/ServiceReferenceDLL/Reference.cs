@@ -6118,6 +6118,15 @@ namespace Kellerhoff.ServiceReferenceDLL {
         public ObtenerNotaDeCreditoResponseBody(Kellerhoff.ServiceReferenceDLL.cNotaDeCredito ObtenerNotaDeCreditoResult) {
             this.ObtenerNotaDeCreditoResult = ObtenerNotaDeCreditoResult;
         }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ValidarExistenciaDeCarritoWebPasado", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> ValidarExistenciaDeCarritoWebPasadoAsync(int pIdCarrito);
+        
+        // CODEGEN: Generating message contract since element name LoginWeb from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldoFinalADiciembrePorCliente", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponse ObtenerSaldoFinalADiciembrePorCliente(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldoFinalADiciembrePorCliente", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponse> ObtenerSaldoFinalADiciembrePorClienteAsync(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -8839,6 +8848,74 @@ namespace Kellerhoff.ServiceReferenceDLL {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerSaldoFinalADiciembrePorClienteRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerSaldoFinalADiciembrePorCliente", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequestBody Body;
+        
+        public ObtenerSaldoFinalADiciembrePorClienteRequest() {
+        }
+        
+        public ObtenerSaldoFinalADiciembrePorClienteRequest(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerSaldoFinalADiciembrePorClienteRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string LoginWeb;
+        
+        public ObtenerSaldoFinalADiciembrePorClienteRequestBody() {
+        }
+        
+        public ObtenerSaldoFinalADiciembrePorClienteRequestBody(string LoginWeb) {
+            this.LoginWeb = LoginWeb;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerSaldoFinalADiciembrePorClienteResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerSaldoFinalADiciembrePorClienteResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponseBody Body;
+        
+        public ObtenerSaldoFinalADiciembrePorClienteResponse() {
+        }
+        
+        public ObtenerSaldoFinalADiciembrePorClienteResponse(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerSaldoFinalADiciembrePorClienteResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public double ObtenerSaldoFinalADiciembrePorClienteResult;
+        
+        public ObtenerSaldoFinalADiciembrePorClienteResponseBody() {
+        }
+        
+        public ObtenerSaldoFinalADiciembrePorClienteResponseBody(double ObtenerSaldoFinalADiciembrePorClienteResult) {
+            this.ObtenerSaldoFinalADiciembrePorClienteResult = ObtenerSaldoFinalADiciembrePorClienteResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ServiceSoapChannel : Kellerhoff.ServiceReferenceDLL.ServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -9916,6 +9993,7 @@ namespace Kellerhoff.ServiceReferenceDLL {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+<<<<<<< HEAD
         Kellerhoff.ServiceReferenceDLL.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(Kellerhoff.ServiceReferenceDLL.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaRequest request) {
             return base.Channel.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(request);
         }
@@ -10107,6 +10185,7 @@ namespace Kellerhoff.ServiceReferenceDLL {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+
         Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerSaldoFinalADiciembrePorCliente(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequest request) {
             return base.Channel.ObtenerSaldoFinalADiciembrePorCliente(request);
         }

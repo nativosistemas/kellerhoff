@@ -120,6 +120,11 @@ namespace Kellerhoff.Controllers
             return Codigo.clases.Generales.Serializador.SerializarAJson(o);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public double? ObtenerSaldoFinalADiciembrePorCliente(string pCli_login)
+        {
+            return capaWebServiceDLL.ObtenerSaldoFinalADiciembrePorCliente(pCli_login);
+        }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string ObtenerComprobantesObrasSocialesDePuntoDeVentaEntreFechas(string pLoginWeb, string pPlan, int diaDesde, int mesDesde, int añoDesde, int diaHasta, int mesHasta, int añoHasta)
         {
             DateTime fechaDesde = new DateTime(añoDesde, mesDesde, diaDesde);//, 0, 0, 0
@@ -185,12 +190,21 @@ namespace Kellerhoff.Controllers
             if (Session["clientesDefault_Cliente"] != null)
             {
                 string resultado = string.Empty;
+                object NroComprobante = null;
+                List<object> NrosDeComprobante = new List<object>();
                 DateTime fechaDesde = new DateTime(añoDesde, mesDesde, diaDesde);
                 DateTime fechaHasta = new DateTime(añoHasta, mesHasta, diaHasta);
                 List<ServiceReferenceDLL.cComprobanteDiscriminado> resultadoObj = WebService.ObtenerComprobantesEntreFecha(pTipo, fechaDesde, fechaHasta, ((cClientes)Session["clientesDefault_Cliente"]).cli_login);
                 if (resultadoObj != null)
                 {
                     Session["ConsultaDeComprobantes_ComprobantesEntreFecha"] = resultadoObj;
+                    Session["comprobantescompleto_FechaDesde"] = fechaDesde;
+                    Session["comprobantescompleto_FechaHasta"] = fechaHasta;
+                    for (var i = 0; i < resultadoObj.Count;i++) {
+                        NroComprobante = resultadoObj[i].NumeroComprobante;
+                        NrosDeComprobante.Add(NroComprobante);
+                    }
+                    Session["ConsultaDeComprobantes_NumerosDeComprobantes"] = NrosDeComprobante;
                 }
             }
         }
@@ -351,6 +365,26 @@ namespace Kellerhoff.Controllers
         public void CambiarClientePromotor(int IdCliente)
         {
             System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)IdCliente);
+        }
+        public void ActualizarFacturasDescarga(List<object> NrosComprobantes)
+        {
+            if (Session["clientesDefault_Cliente"] != null)
+            {
+                object NroComprobante = null;
+                List<object> NrosDeComprobante = new List<object>();
+                string listado = NrosComprobantes[0].ToString();
+                listado = listado.Replace('n', ' ');
+                listado = listado.Replace('o', ' ');
+                listado = listado.Replace('=', ' ');
+                listado = listado.Replace('\"', ' ');
+                var ncomp = listado.Split('&');
+                for (var i = 0;i< ncomp.Length;i++)
+                {
+                    NroComprobante = ncomp[i].ToString().Trim();
+                    NrosDeComprobante.Add(NroComprobante);
+                }
+                Session["ConsultaDeComprobantes_NumerosDeComprobantes"] = NrosDeComprobante;
+            }
         }
     }
 }
