@@ -3,6 +3,7 @@ var diasPedidos = 0;
 var nroPendientesDeFacturar = 0;
 var listaRecuperardor = null;
 var tipoRecuperador = null;
+var listaSucursales = null;
 
 jQuery(document).ready(function () {
     if (tipoRecuperador == null) {
@@ -11,7 +12,12 @@ jQuery(document).ready(function () {
             tipoRecuperador = null;
         }
     }
-
+    if (listaSucursales == null) {
+        listaSucursales = eval('(' + $('#hiddenListaSucursalesInfo').val() + ')');
+        if (typeof listaSucursales == 'undefined') {
+            listaSucursales = null;
+        }
+    }
     if (listaEstadoPedidos == null) {
         listaEstadoPedidos = eval('(' + $('#hiddenListaPedidos').val() + ')');
         if (typeof listaEstadoPedidos == 'undefined') {
@@ -20,8 +26,7 @@ jQuery(document).ready(function () {
     }
     CargarHtmlListaEstadoPedidos();
     nroPendientesDeFacturar = 0;
-    if (tipoRecuperador != null)
-    {
+    if (tipoRecuperador != null) {
         funLlenarGrillaFaltasProblemasCrediticios();
     }
 });
@@ -229,7 +234,7 @@ function CargarRecuperadorFaltasYCrediticios() {
                 strHtml += '<div class="clear20"></div>';
                 strHtml += '<div class="col-xs-12">';
 
-                strHtml += '<div class="div_tit_suc">';      
+                strHtml += '<div class="div_tit_suc">';
                 strHtml += listaRecuperardor[i].suc_nombre;
                 strHtml += '</div>';
 
@@ -240,7 +245,7 @@ function CargarRecuperadorFaltasYCrediticios() {
                 strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
                 strHtml += '<tr class="hidden-xs"><td class="col-lg-12 text-center">&nbsp;<div class="clear"></div></td></tr>';
                 strHtml += '<tr class="tr_thead"><td class="col-lg-12 pl">Nombre producto</td></tr>';
-                strHtml += '</table>';   
+                strHtml += '</table>';
                 strHtml += '</th>';
                 strHtml += '<th class="col-xs-1 text-center">';
                 strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
@@ -289,12 +294,15 @@ function CargarRecuperadorFaltasYCrediticios() {
                     strHtml += '<td class="col-xs-10 pl_xs">';
                     strHtml += '<div class="radio-checkbox">';
                     var SoloLecturaCheckBox = '';
-
+                    if (!isMostrarImput_FacturaTrazablesProvincia(listaRecuperardor[i].fpc_codSucursal, listaRecuperardor[i].listaProductos[iProductos].pro_isTrazable)) {
+                        SoloLecturaCheckBox = 'disabled'
+                    }
+                    //
                     strHtml += '<input class="checkbox"  type="checkbox" id="checkRecuperador_' + i + '_' + iProductos + '" ' + SoloLecturaCheckBox + '  onclick="onclickActualizarTotal(' + i + ')" />';
                     strHtml += '<label for="checkRecuperador_' + i + '_' + iProductos + '" value="">' + listaRecuperardor[i].listaProductos[iProductos].fpc_nombreProducto + '</label>';
                     strHtml += '</div>';
                     strHtml += '</td>';
-                    strHtml += '<td id="tdCantidadRecuperador_' + i + '_' + iProductos + '" class="col-xs-1 text-center">' 
+                    strHtml += '<td id="tdCantidadRecuperador_' + i + '_' + iProductos + '" class="col-xs-1 text-center">'
                     strHtml += listaRecuperardor[i].listaProductos[iProductos].fpc_cantidad;
                     strHtml += '</td>';
                     strHtml += '<td class="col-xs-1 text-center">'
@@ -313,7 +321,7 @@ function CargarRecuperadorFaltasYCrediticios() {
                 strHtml += '<span id="spanTotal' + i + '" class="badge badge-secondary"></span>';
                 strHtml += '<a class="btn_confirmar" href="#" onclick="onclickConfirmarRecuperador(' + i + '); return false;">CONFIRMAR</a>';
                 strHtml += '<a class="btn_vaciar float-left" href="#" onclick="onclickDescartarRecuperador(' + i + '); return false;">DESCARTAR</a>';
-  
+
 
                 strHtml += '</div>'; // fin <div class="col-xs-12">
             }
@@ -326,7 +334,7 @@ function CargarRecuperadorFaltasYCrediticios() {
     } else {
         strHtml += '<div class="clear20"></div>';
         strHtml += '<div class="col-xs-12">';
-        strHtml += '<div class="alert-danger">' + objMensajeSeProdujoErrorIntentaMasTarde  + '</div>';
+        strHtml += '<div class="alert-danger">' + objMensajeSeProdujoErrorIntentaMasTarde + '</div>';
         strHtml += '</div>';
     }
 
@@ -340,7 +348,7 @@ function onclickActualizarTotal(pValor) {
             if ($('#checkRecuperador_' + pValor + '_' + iProductos).is(":checked")) {
                 total += (listaRecuperardor[pValor].listaProductos[iProductos].PrecioFinalRecuperador * listaRecuperardor[pValor].listaProductos[iProductos].fpc_cantidad);
             }
-           // $('#checkRecuperador_' + pValor + '_' + iProductos).attr('checked', isChecked);
+            // $('#checkRecuperador_' + pValor + '_' + iProductos).attr('checked', isChecked);
         }
         if (total === 0) {
             $('#spanTotal' + pValor).html('');
@@ -354,7 +362,9 @@ function onclickSeleccionarTodosRecuperador(pValor) {
     if (listaRecuperardor != null) {
         var isChecked = $('#checkRecuperador_' + pValor + '_' + 'Todos').is(":checked");
         for (var iProductos = 0; iProductos < listaRecuperardor[pValor].listaProductos.length; iProductos++) {
-            $('#checkRecuperador_' + pValor + '_' + iProductos).prop('checked', isChecked);
+            if (!$('#checkRecuperador_' + pValor + '_' + iProductos).is(":disabled")) {
+                $('#checkRecuperador_' + pValor + '_' + iProductos).prop('checked', isChecked);
+            }
         }
     }
     onclickActualizarTotal(pValor);

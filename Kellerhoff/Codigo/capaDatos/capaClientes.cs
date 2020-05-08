@@ -75,6 +75,9 @@ namespace Kellerhoff.Codigo.capaDatos
         public decimal suc_montoMinimo { get; set; }
         public string suc_codigo { get; set; }
         public string suc_nombre { get; set; }
+        public string suc_provincia { get; set; }
+        public bool suc_facturaTrazables { get; set; }
+        public bool suc_facturaTrazablesEnOtrasProvincias { get; set; }
         public string sde_sucursalDependiente { get; set; }
         public string sucursal_sucursalDependiente { get; set; }
     }
