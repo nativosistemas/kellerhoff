@@ -227,7 +227,7 @@ function CargarHtmlCompocisionSaldo_CtaCte() {
                     }
                     var compRes = ''
                     if (listaCompocisionSaldo[i].TipoComprobanteToString == 'RES') {
-                        compRes = '<i class="fa fa-search float-left" onclick="MostrarVencimientos(' + i + ')"></i>';
+                        compRes = '<i data-toggle="tooltip" title="Ver Detalle de Vencimiento" class="fa fa-search float-left" style="cursor: pointer;" onclick="MostrarVencimientos(' + i + ')"></i>';
                     }
                     strHtml += '<td  class="col-lg-1 col-md-1 col-sm-2 col-xs-4 text-center ' + strHtmlColorFondoFechaVencimiento + '">' + compRes + listaCompocisionSaldo[i].FechaVencimientoToString + '</td>'; //Vencimiento
 
@@ -242,7 +242,7 @@ function CargarHtmlCompocisionSaldo_CtaCte() {
                     if (isNotNullEmpty(listaCompocisionSaldo[i].Importe)) {
                         strImporte = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaCompocisionSaldo[i].Importe.toFixed(2));
                     }
-                    strHtml += '<td class="col-lg-1 col-md-1 col-sm-2 text-right r_to_l-xs ">' + compRes + strImporte + '</td>'; //Importe
+                    strHtml += '<td class="col-lg-1 col-md-1 col-sm-2 text-right r_to_l-xs ">' + strImporte + '</td>'; //Importe
                     strHtml += '<td class="col-lg-1 col-md-1 col-sm-2 text-center c_to_l-xs">' + ObtenerLinkDeDocumentoDesdeStr(listaCompocisionSaldo[i].NumeroRecibo) + '</td>'; //Recibo Nro
                     var strPago = '&nbsp;';
                     if (isNotNullEmpty(listaCompocisionSaldo[i].Pago)) {
@@ -540,7 +540,8 @@ function CargarHtmlChequesEnCartera() {
 
 }
 
-function MostrarVencimientos( id ){
+function MostrarVencimientos(id) {
+    var total = 0;
     var html = '<table with="100%" class="table table-striped" style="background: #e1e1e1;">';
     html += '<thead>';
     html += '<tr style="height: 40px;"><th class="text-center">Comprobante<br></th><th class="text-center">Número<br></th><th class="text-center">Fecha<br></th><th class="text-center">Importes<br></th></tr></thead>';
@@ -550,8 +551,9 @@ function MostrarVencimientos( id ){
         html += '<td class="text-center">' + listaCompocisionSaldo[id].lista[i].Tipo + '</td>';
         html += '<td class="text-center"><a href="Documento?t=' + listaCompocisionSaldo[id].lista[i].Tipo + '&id=' + listaCompocisionSaldo[id].lista[i].NumeroComprobante + '" >' + listaCompocisionSaldo[id].lista[i].NumeroComprobante + '</a></td>';
         html += '<td class="text-center">' + listaCompocisionSaldo[id].lista[i].FechaToString + '</td>';
-        html += '<td class="text-center">$ ' + listaCompocisionSaldo[id].lista[i].Importe + '</td>';
+        html += '<td class="text-center">$ ' + FormatoDecimalConDivisorMiles(Number(listaCompocisionSaldo[id].lista[i].Importe).toFixed( 2 )) + '</td>';
         html += '</tr>';
+        total += listaCompocisionSaldo[id].lista[i].Importe;
     }
     html += '</tbody></table>';
 
@@ -562,7 +564,7 @@ function MostrarVencimientos( id ){
     strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
     strHtml += '<div class="modal-header">';
     strHtml += '<div class="col-12">';
-    strHtml += '<h5 style="color: steelblue;">Comprobantes con vencimiento ' + listaCompocisionSaldo[id].FechaVencimientoToString + '</h5>';
+    strHtml += '<h5 style="color: steelblue;">Comprobantes con vencimiento ' + listaCompocisionSaldo[id].FechaVencimientoToString + '<br>Total: $ ' + FormatoDecimalConDivisorMiles(Number( total ).toFixed( 2 )) + '</h5>';
     strHtml += '</div>';
     strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
     strHtml += '</div>';
@@ -576,3 +578,7 @@ function MostrarVencimientos( id ){
     // $(".fa.fa-times").hide();
     //$("#modalModulo").unbind("click");
 }
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

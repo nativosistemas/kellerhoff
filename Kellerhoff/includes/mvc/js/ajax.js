@@ -1102,25 +1102,3 @@ function ObtenerSaldoFinalADiciembrePorCliente(pCli_login) {
         }
     });
 }
-function ObtenerVtosResumenes(NroResumen, fechaVto) {
-    var fecha = new Date(fechaVto);
-    console.log(fecha, NroResumen);
-    $.ajax({
-        type: "POST",
-        url: "/ctacte/ObtenerVencimientosResumenPorFecha",
-        data: { pNumeroResumen: NroResumen, pFechaVencimiento: fecha },
-        success:
-        function (response) {
-            //hideCargandoBuscador();
-            //OnCallBackObtenerRangoFecha(response);
-            alert(response);
-        },
-        failure: function (response) {
-            alert(response);
-        },
-        error: function (response) {
-
-            alert(response);
-        }
-    });
-}
