@@ -2869,6 +2869,9 @@ namespace Kellerhoff.ServiceReferenceDLL {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TipoComprobanteToStringField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Kellerhoff.ServiceReferenceDLL.ArrayOfCVencimientoResumen listaField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -3083,6 +3086,164 @@ namespace Kellerhoff.ServiceReferenceDLL {
                 if ((object.ReferenceEquals(this.TipoComprobanteToStringField, value) != true)) {
                     this.TipoComprobanteToStringField = value;
                     this.RaisePropertyChanged("TipoComprobanteToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCVencimientoResumen lista {
+            get {
+                return this.listaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.listaField, value) != true)) {
+                    this.listaField = value;
+                    this.RaisePropertyChanged("lista");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ArrayOfCVencimientoResumen", Namespace="http://tempuri.org/", ItemName="cVencimientoResumen")]
+    [System.SerializableAttribute()]
+    public class ArrayOfCVencimientoResumen : System.Collections.Generic.List<Kellerhoff.ServiceReferenceDLL.cVencimientoResumen> {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="cVencimientoResumen", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class cVencimientoResumen : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TipoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NumeroComprobanteField;
+        
+        private System.Nullable<System.DateTime> FechaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FechaToStringField;
+        
+        private System.Nullable<System.DateTime> FechaVencimientoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FechaVencimientoToStringField;
+        
+        private System.Nullable<double> ImporteField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Tipo {
+            get {
+                return this.TipoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TipoField, value) != true)) {
+                    this.TipoField = value;
+                    this.RaisePropertyChanged("Tipo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string NumeroComprobante {
+            get {
+                return this.NumeroComprobanteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumeroComprobanteField, value) != true)) {
+                    this.NumeroComprobanteField = value;
+                    this.RaisePropertyChanged("NumeroComprobante");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public System.Nullable<System.DateTime> Fecha {
+            get {
+                return this.FechaField;
+            }
+            set {
+                if ((this.FechaField.Equals(value) != true)) {
+                    this.FechaField = value;
+                    this.RaisePropertyChanged("Fecha");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string FechaToString {
+            get {
+                return this.FechaToStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechaToStringField, value) != true)) {
+                    this.FechaToStringField = value;
+                    this.RaisePropertyChanged("FechaToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        public System.Nullable<System.DateTime> FechaVencimiento {
+            get {
+                return this.FechaVencimientoField;
+            }
+            set {
+                if ((this.FechaVencimientoField.Equals(value) != true)) {
+                    this.FechaVencimientoField = value;
+                    this.RaisePropertyChanged("FechaVencimiento");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string FechaVencimientoToString {
+            get {
+                return this.FechaVencimientoToStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechaVencimientoToStringField, value) != true)) {
+                    this.FechaVencimientoToStringField = value;
+                    this.RaisePropertyChanged("FechaVencimientoToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        public System.Nullable<double> Importe {
+            get {
+                return this.ImporteField;
+            }
+            set {
+                if ((this.ImporteField.Equals(value) != true)) {
+                    this.ImporteField = value;
+                    this.RaisePropertyChanged("Importe");
                 }
             }
         }
@@ -5536,6 +5697,13 @@ namespace Kellerhoff.ServiceReferenceDLL {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldoFinalADiciembrePorCliente", ReplyAction="*")]
         System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponse> ObtenerSaldoFinalADiciembrePorClienteAsync(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento NumeroComprobante del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerVencimientosResumenPorFecha", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponse ObtenerVencimientosResumenPorFecha(Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerVencimientosResumenPorFecha", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponse> ObtenerVencimientosResumenPorFechaAsync(Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -6118,15 +6286,6 @@ namespace Kellerhoff.ServiceReferenceDLL {
         public ObtenerNotaDeCreditoResponseBody(Kellerhoff.ServiceReferenceDLL.cNotaDeCredito ObtenerNotaDeCreditoResult) {
             this.ObtenerNotaDeCreditoResult = ObtenerNotaDeCreditoResult;
         }
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ValidarExistenciaDeCarritoWebPasado", ReplyAction="*")]
-        System.Threading.Tasks.Task<bool> ValidarExistenciaDeCarritoWebPasadoAsync(int pIdCarrito);
-        
-        // CODEGEN: Generating message contract since element name LoginWeb from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldoFinalADiciembrePorCliente", ReplyAction="*")]
-        Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponse ObtenerSaldoFinalADiciembrePorCliente(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldoFinalADiciembrePorCliente", ReplyAction="*")]
-        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponse> ObtenerSaldoFinalADiciembrePorClienteAsync(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -8852,15 +9011,15 @@ namespace Kellerhoff.ServiceReferenceDLL {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ObtenerSaldoFinalADiciembrePorClienteRequest {
+    public partial class ObtenerVencimientosResumenPorFechaRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerSaldoFinalADiciembrePorCliente", Namespace="http://tempuri.org/", Order=0)]
-        public Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerVencimientosResumenPorFecha", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequestBody Body;
         
-        public ObtenerSaldoFinalADiciembrePorClienteRequest() {
+        public ObtenerVencimientosResumenPorFechaRequest() {
         }
         
-        public ObtenerSaldoFinalADiciembrePorClienteRequest(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequestBody Body) {
+        public ObtenerVencimientosResumenPorFechaRequest(Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -8869,16 +9028,20 @@ namespace Kellerhoff.ServiceReferenceDLL {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class ObtenerSaldoFinalADiciembrePorClienteRequestBody {
+    public partial class ObtenerVencimientosResumenPorFechaRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string LoginWeb;
+        public string NumeroComprobante;
         
-        public ObtenerSaldoFinalADiciembrePorClienteRequestBody() {
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public System.DateTime FechaVencimiento;
+        
+        public ObtenerVencimientosResumenPorFechaRequestBody() {
         }
         
-        public ObtenerSaldoFinalADiciembrePorClienteRequestBody(string LoginWeb) {
-            this.LoginWeb = LoginWeb;
+        public ObtenerVencimientosResumenPorFechaRequestBody(string NumeroComprobante, System.DateTime FechaVencimiento) {
+            this.NumeroComprobante = NumeroComprobante;
+            this.FechaVencimiento = FechaVencimiento;
         }
     }
     
@@ -8886,15 +9049,15 @@ namespace Kellerhoff.ServiceReferenceDLL {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ObtenerSaldoFinalADiciembrePorClienteResponse {
+    public partial class ObtenerVencimientosResumenPorFechaResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerSaldoFinalADiciembrePorClienteResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerVencimientosResumenPorFechaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponseBody Body;
         
-        public ObtenerSaldoFinalADiciembrePorClienteResponse() {
+        public ObtenerVencimientosResumenPorFechaResponse() {
         }
         
-        public ObtenerSaldoFinalADiciembrePorClienteResponse(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponseBody Body) {
+        public ObtenerVencimientosResumenPorFechaResponse(Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -8903,16 +9066,16 @@ namespace Kellerhoff.ServiceReferenceDLL {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class ObtenerSaldoFinalADiciembrePorClienteResponseBody {
+    public partial class ObtenerVencimientosResumenPorFechaResponseBody {
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public double ObtenerSaldoFinalADiciembrePorClienteResult;
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCVencimientoResumen ObtenerVencimientosResumenPorFechaResult;
         
-        public ObtenerSaldoFinalADiciembrePorClienteResponseBody() {
+        public ObtenerVencimientosResumenPorFechaResponseBody() {
         }
         
-        public ObtenerSaldoFinalADiciembrePorClienteResponseBody(double ObtenerSaldoFinalADiciembrePorClienteResult) {
-            this.ObtenerSaldoFinalADiciembrePorClienteResult = ObtenerSaldoFinalADiciembrePorClienteResult;
+        public ObtenerVencimientosResumenPorFechaResponseBody(Kellerhoff.ServiceReferenceDLL.ArrayOfCVencimientoResumen ObtenerVencimientosResumenPorFechaResult) {
+            this.ObtenerVencimientosResumenPorFechaResult = ObtenerVencimientosResumenPorFechaResult;
         }
     }
     
@@ -9993,7 +10156,6 @@ namespace Kellerhoff.ServiceReferenceDLL {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-<<<<<<< HEAD
         Kellerhoff.ServiceReferenceDLL.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(Kellerhoff.ServiceReferenceDLL.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadenaRequest request) {
             return base.Channel.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(request);
         }
@@ -10185,7 +10347,6 @@ namespace Kellerhoff.ServiceReferenceDLL {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-
         Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerSaldoFinalADiciembrePorCliente(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequest request) {
             return base.Channel.ObtenerSaldoFinalADiciembrePorCliente(request);
         }
@@ -10208,6 +10369,33 @@ namespace Kellerhoff.ServiceReferenceDLL {
             inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerSaldoFinalADiciembrePorClienteRequestBody();
             inValue.Body.LoginWeb = LoginWeb;
             return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerSaldoFinalADiciembrePorClienteAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerVencimientosResumenPorFecha(Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequest request) {
+            return base.Channel.ObtenerVencimientosResumenPorFecha(request);
+        }
+        
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCVencimientoResumen ObtenerVencimientosResumenPorFecha(string NumeroComprobante, System.DateTime FechaVencimiento) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequestBody();
+            inValue.Body.NumeroComprobante = NumeroComprobante;
+            inValue.Body.FechaVencimiento = FechaVencimiento;
+            Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerVencimientosResumenPorFecha(inValue);
+            return retVal.Body.ObtenerVencimientosResumenPorFechaResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerVencimientosResumenPorFechaAsync(Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequest request) {
+            return base.Channel.ObtenerVencimientosResumenPorFechaAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponse> ObtenerVencimientosResumenPorFechaAsync(string NumeroComprobante, System.DateTime FechaVencimiento) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequestBody();
+            inValue.Body.NumeroComprobante = NumeroComprobante;
+            inValue.Body.FechaVencimiento = FechaVencimiento;
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerVencimientosResumenPorFechaAsync(inValue);
         }
     }
 }

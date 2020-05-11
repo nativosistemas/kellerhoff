@@ -497,6 +497,23 @@
           <s:element minOccurs="0" maxOccurs="1" name="Semana" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="TipoComprobante" type="tns:dllTipoComprobante" />
           <s:element minOccurs="0" maxOccurs="1" name="TipoComprobanteToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lista" type="tns:ArrayOfCVencimientoResumen" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCVencimientoResumen">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cVencimientoResumen" nillable="true" type="tns:cVencimientoResumen" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cVencimientoResumen">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroComprobante" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechaVencimiento" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaVencimientoToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Importe" nillable="true" type="s:double" />
         </s:sequence>
       </s:complexType>
       <s:element name="ObtenerPedidosEntreFechas">
@@ -1236,6 +1253,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ObtenerVencimientosResumenPorFecha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroComprobante" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FechaVencimiento" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerVencimientosResumenPorFechaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerVencimientosResumenPorFechaResult" type="tns:ArrayOfCVencimientoResumen" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LoginSoapIn">
@@ -1514,6 +1546,12 @@
   <wsdl:message name="ObtenerSaldoFinalADiciembrePorClienteSoapOut">
     <wsdl:part name="parameters" element="tns:ObtenerSaldoFinalADiciembrePorClienteResponse" />
   </wsdl:message>
+  <wsdl:message name="ObtenerVencimientosResumenPorFechaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerVencimientosResumenPorFecha" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerVencimientosResumenPorFechaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerVencimientosResumenPorFechaResponse" />
+  </wsdl:message>
   <wsdl:portType name="ServiceSoap">
     <wsdl:operation name="Login">
       <wsdl:input message="tns:LoginSoapIn" />
@@ -1698,6 +1736,10 @@
     <wsdl:operation name="ObtenerSaldoFinalADiciembrePorCliente">
       <wsdl:input message="tns:ObtenerSaldoFinalADiciembrePorClienteSoapIn" />
       <wsdl:output message="tns:ObtenerSaldoFinalADiciembrePorClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerVencimientosResumenPorFecha">
+      <wsdl:input message="tns:ObtenerVencimientosResumenPorFechaSoapIn" />
+      <wsdl:output message="tns:ObtenerVencimientosResumenPorFechaSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
@@ -2116,6 +2158,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ObtenerVencimientosResumenPorFecha">
+      <soap:operation soapAction="http://tempuri.org/ObtenerVencimientosResumenPorFecha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -2526,6 +2577,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerSaldoFinalADiciembrePorCliente">
       <soap12:operation soapAction="http://tempuri.org/ObtenerSaldoFinalADiciembrePorCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerVencimientosResumenPorFecha">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerVencimientosResumenPorFecha" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
