@@ -184,10 +184,10 @@
                                 {
                                     <li><a href="/config/catalogo" @{ WriteLiteral(classDescargas);}><h3>DESCARGAS</h3></a></li>
                                 }
-                                //if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DEVOLUCIONES) && ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "CC")
-                                //{
+                                if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DEVOLUCIONES) && ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "CC")
+                                {
                                     <li><a href="/devoluciones/Devoluciones" @{ WriteLiteral(classDevo);}><h3>DEVOLUCIONES</h3></a></li>
-                                //}
+                                }
                             }
                             <li>
                                 <a data-toggle="dropdown" class="user" href="#"><span><i class="fa fa-circle"></i></span><i class="fa fa-user-circle-o"></i></a>
