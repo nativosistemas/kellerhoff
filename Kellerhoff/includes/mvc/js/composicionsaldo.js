@@ -227,7 +227,8 @@ function CargarHtmlCompocisionSaldo_CtaCte() {
                     }
                     var compRes = ''
                     if (listaCompocisionSaldo[i].TipoComprobanteToString == 'RES') {
-                        compRes = '<i data-toggle="tooltip" title="Ver Detalle de Vencimiento" class="fa fa-search float-left" style="cursor: pointer;" onclick="MostrarVencimientos(' + i + ')"></i>';
+                        var FechaVtoString = splitFecha[2] + "/" + splitFecha[1] + "/" + splitFecha[0];
+                        compRes = '<i data-toggle="tooltip" title="Ver Detalle de Vencimiento" class="fa fa-search float-left" style="cursor: pointer;" onclick="ObtenerVtosResumenes(\'' + listaCompocisionSaldo[i].NumeroComprobante + '\',\'' + FechaVtoString + '\')"></i>';
                     }
                     strHtml += '<td  class="col-lg-1 col-md-1 col-sm-2 col-xs-4 text-center ' + strHtmlColorFondoFechaVencimiento + '">' + compRes + listaCompocisionSaldo[i].FechaVencimientoToString + '</td>'; //Vencimiento
 
@@ -540,21 +541,84 @@ function CargarHtmlChequesEnCartera() {
 
 }
 
-function MostrarVencimientos(id) {
+//function MostrarVencimientos(id) {
+//    var total = 0;
+//    var html = '<table with="100%" class="table table-striped" style="background: #e1e1e1;">';
+//    html += '<thead>';
+//    html += '<tr style="height: 40px;"><th class="text-center">Comprobante<br></th><th class="text-center">Número<br></th><th class="text-center">Fecha<br></th><th class="text-center">Importes<br></th></tr></thead>';
+//    html += '<tbody class="table-striped">';
+//    for (var i = 0; i < listaCompocisionSaldo[id].lista.length;i++ ) {
+//        html += '<tr style="height: 40px">';
+//        html += '<td class="text-center">' + listaCompocisionSaldo[id].lista[i].Tipo + '</td>';
+//        html += '<td class="text-center"><a href="Documento?t=' + listaCompocisionSaldo[id].lista[i].Tipo + '&id=' + listaCompocisionSaldo[id].lista[i].NumeroComprobante + '" >' + listaCompocisionSaldo[id].lista[i].NumeroComprobante + '</a></td>';
+//        html += '<td class="text-center">' + listaCompocisionSaldo[id].lista[i].FechaToString + '</td>';
+//        html += '<td class="text-center">$ ' + FormatoDecimalConDivisorMiles(Number(listaCompocisionSaldo[id].lista[i].Importe).toFixed( 2 )) + '</td>';
+//        html += '</tr>';
+//        total += listaCompocisionSaldo[id].lista[i].Importe;
+//    }
+//    html += '</tbody></table>';
+
+//    //mensaje(, html);
+
+//    var strHtml = '';
+//    strHtml += '<div class="modal-background">&nbsp;</div>';
+//    strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
+//    strHtml += '<div class="modal-header">';
+//    strHtml += '<div class="col-12">';
+//    strHtml += '<h5 style="color: steelblue;">Comprobantes con vencimiento ' + listaCompocisionSaldo[id].FechaVencimientoToString + '<br>Total: $ ' + FormatoDecimalConDivisorMiles(Number( total ).toFixed( 2 )) + '</h5>';
+//    strHtml += '</div>';
+//    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+//    strHtml += '</div>';
+//    strHtml += '<div class="modal-body no-padding"><div class="col-12">';
+//    strHtml += html;
+//    strHtml += '</div></div>';
+//    strHtml += '</div></div>';
+//    $('#modalModulo').html(strHtml);
+//    $('#modalModulo').modal();
+
+//    // $(".fa.fa-times").hide();
+//    //$("#modalModulo").unbind("click");
+//}
+
+function ObtenerVtosResumenes(NroResumen, fechaVto) {
+    var fecha = new Date(fechaVto);
+    console.log(fecha, NroResumen);
+    $.ajax({
+        type: "POST",
+        url: "/ctacte/ObtenerVencimientosResumenPorFecha",
+        data: { pNumeroResumen: NroResumen, pFechaVencimiento: fechaVto },
+        success:
+            function (response) {
+                cVencimientosResumen = eval('(' + response + ')');
+                MostrarVencimientos(cVencimientosResumen);
+            },
+        failure: function (response) {
+            alert(response);
+        },
+        error: function (response) {
+
+            alert(response);
+        }
+    });
+}
+
+
+function MostrarVencimientos(cVencimientosResumen) {
     var total = 0;
     var html = '<table with="100%" class="table table-striped" style="background: #e1e1e1;">';
     html += '<thead>';
     html += '<tr style="height: 40px;"><th class="text-center">Comprobante<br></th><th class="text-center">Número<br></th><th class="text-center">Fecha<br></th><th class="text-center">Importes<br></th></tr></thead>';
     html += '<tbody class="table-striped">';
-    for (var i = 0; i < listaCompocisionSaldo[id].lista.length;i++ ) {
+    for (var i = 0; i < cVencimientosResumen.length; i++) {
         html += '<tr style="height: 40px">';
-        html += '<td class="text-center">' + listaCompocisionSaldo[id].lista[i].Tipo + '</td>';
-        html += '<td class="text-center"><a href="Documento?t=' + listaCompocisionSaldo[id].lista[i].Tipo + '&id=' + listaCompocisionSaldo[id].lista[i].NumeroComprobante + '" >' + listaCompocisionSaldo[id].lista[i].NumeroComprobante + '</a></td>';
-        html += '<td class="text-center">' + listaCompocisionSaldo[id].lista[i].FechaToString + '</td>';
-        html += '<td class="text-center">$ ' + FormatoDecimalConDivisorMiles(Number(listaCompocisionSaldo[id].lista[i].Importe).toFixed( 2 )) + '</td>';
+        html += '<td class="text-center">' + cVencimientosResumen[i].Tipo + '</td>';
+        html += '<td class="text-center"><a href="Documento?t=' + cVencimientosResumen[i].Tipo + '&id=' + cVencimientosResumen[i].NumeroComprobante + '" >' + cVencimientosResumen[i].NumeroComprobante + '</a></td>';
+        html += '<td class="text-center">' + cVencimientosResumen[i].FechaToString + '</td>';
+        html += '<td class="text-right">$ ' + FormatoDecimalConDivisorMiles(Number(cVencimientosResumen[i].Importe).toFixed(2)) + '</td>';
         html += '</tr>';
-        total += listaCompocisionSaldo[id].lista[i].Importe;
+        total += cVencimientosResumen[i].Importe
     }
+    //html += '<tr><td colspan="3" class="text-right"><em>TOTAL</em></td><td class="text-right">' + Number( total ).toFixed( 2 ) + '</td></tr>'
     html += '</tbody></table>';
 
     //mensaje(, html);
@@ -564,7 +628,7 @@ function MostrarVencimientos(id) {
     strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
     strHtml += '<div class="modal-header">';
     strHtml += '<div class="col-12">';
-    strHtml += '<h5 style="color: steelblue;">Comprobantes con vencimiento ' + listaCompocisionSaldo[id].FechaVencimientoToString + '<br>Total: $ ' + FormatoDecimalConDivisorMiles(Number( total ).toFixed( 2 )) + '</h5>';
+    strHtml += '<h5 style="color: steelblue;">Comprobantes con vencimiento ' + cVencimientosResumen[0].FechaVencimientoToString + '<br>Total: $ ' + FormatoDecimalConDivisorMiles(Number(total).toFixed(2)) + '</h5>';
     strHtml += '</div>';
     strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
     strHtml += '</div>';
