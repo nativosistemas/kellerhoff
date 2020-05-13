@@ -374,3 +374,8 @@ color: #66abd8 !important;
     text-align: center;
     text-transform: uppercase;
 }
+@media (min-width: 768px) {
+    .vtos-sm {
+        display: none !important;
+    }
+}

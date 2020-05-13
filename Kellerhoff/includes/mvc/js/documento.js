@@ -1,5 +1,7 @@
 ﻿var objDocumento = null;
 var objTipoDocumento = null;
+var oVencimientoResumen = null;
+var cVencimientosResumen = [];
 //
 //var nombreArchivoPDF = '';
 var nroDocumento = '';
@@ -200,28 +202,28 @@ function CargarHtmlResumen() {
         strHtml += '<table class="footable table tbl_ch table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="1" cellpadding="5" border="0">';
         strHtml += '<thead>';
         strHtml += '<tr>';
-        strHtml += '<th class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center no-padding" >';
+        strHtml += '<th class="col-lg-1 col-md-1 col-sm-1 col-xs-2 text-center no-padding" >';
         strHtml += '<table  width="100%" cellpadding="0" cellspacing="0">';
         strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
         strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">D&iacute;a</td></tr>';
         strHtml += '</table>';                                
         //strHtml += '<span class="thd_letra_chica visible-xs">D&iacute;a</span>';                               
         strHtml += '</th>';
-        strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-1 text-center no-padding" data-breakpoints="xs">';
+        strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-5 text-center no-padding" data-breakpoints="xs" >';
         strHtml += '<table class="hidden-xs" width="100%" cellpadding="0" cellspacing="0">';
         strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
         strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Descripci&oacute;n</td></tr>';
         strHtml += '</table>';
         strHtml += '<span class="thd_letra_chica visible-xs">Descripci&oacute;n</span>';
         strHtml += '</th>';
-        strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-center no-padding" >';
+        strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-6 text-center no-padding">';
         strHtml += '<table  width="100%" cellpadding="0" cellspacing="0">';
         strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
         strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Tipo Comprobante</td></tr>';
         strHtml += '</table>';                               
         //strHtml += '<span class="thd_letra_chica visible-xs">Tipo</span>';                               
         strHtml += '</th>';
-        strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-5 text-center no-padding">';
+        strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-center no-padding">';
         strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
         strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
         strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center no_brd-r">Importe</td></tr>';
@@ -231,21 +233,36 @@ function CargarHtmlResumen() {
         strHtml += '</thead>';
         strHtml += '<tbody>';
 
-
+        var orden = 0;
         for (var i = 0; i < objDocumento.lista.length; i++) {
             if (isVizualizarDetalleResumenLlendoDescripcion(objDocumento.lista[i].Descripcion)) {
                 var strHtmlColorFondo = 'wht';
                 if (i % 2 != 0) {
                     strHtmlColorFondo = 'grs';
                 }
+
+                aDesc = '';
+                var verVtos = '';
+                var vtoTexto = '';
+                if (objDocumento.lista[i].Descripcion.toUpperCase().search('TOTAL DE UNIDADES') > -1) {
+                    vtoTexto = "VENCIMIENTOS:"
+                }
+                if (objDocumento.lista[i].Descripcion.toUpperCase().search('VENCIMIENTOS:') > -1) {
+                    var aDesc = objDocumento.lista[i].Descripcion.split("/");
+                    var FechaVtoString = aDesc[2].substr(0, 4) + "/" + aDesc[1] + "/" + aDesc[0].substr(aDesc[0].length-2);
+                    vtoTexto = aDesc[0].substr(aDesc[0].length - 2) + "/" + aDesc[1] + "/" + aDesc[2].substr(0, 4) + " | $ " + aDesc[2].substr(5, aDesc[2].lenght).trim();
+                    //ObtenerVtosResumenes(objDocumento.Numero, FechaVtoString);
+                    verVtos = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i data-toggle="tooltip" title="Ver Detalle de Vencimiento" class="fa fa-search" style="cursor: pointer;" onclick="ObtenerVtosResumenes(\'' + objDocumento.Numero + '\',\'' + FechaVtoString + '\')"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                }
+                
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
-                strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 col-xs-3  text-center">';
+                strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 col-xs-2  text-center">';
                 strHtml += objDocumento.lista[i].Dia;
                 strHtml += '</td>';
-                strHtml += '<td class="col-lg-7 col-md-7 col-sm-7 col-xs-12 text-center c_to_l-xs">';
-                strHtml += ObtenerLinkDeDocumentoDesdeStr(objDocumento.lista[i].Descripcion);
+                strHtml += '<td class="col-lg-7 col-md-7 col-sm-7 col-xs-12 text-center">';
+                strHtml += ObtenerLinkDeDocumentoDesdeStr(objDocumento.lista[i].Descripcion) + verVtos;
                 strHtml += '</td>';
-                strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-center">';
+                strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 col-xs-6 text-center c_to_l-xs">';
                 var strTipoComprobante = objDocumento.lista[i].TipoComprobante;
                 //        FAC = 0,
                 //        REC = 1,
@@ -283,13 +300,16 @@ function CargarHtmlResumen() {
                     default:
                         break;
                 }
-                strHtml += strTipoComprobante; // objDocumento.lista[i].TipoComprobante; //       
+                strHtml += strTipoComprobante; // objDocumento.lista[i].TipoComprobante; //    
+                strHtml +=  '<span class="vtos-sm">' +  vtoTexto + verVtos + '</span>';
+                
                 strHtml += '</td>';
-                strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 col-xs-5 text-right">';
+                strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-right">';
                 var strImporte = '&nbsp;';
                 if (isNotNullEmpty(objDocumento.lista[i].Importe)) {
                     strImporte = '$&nbsp;' + FormatoDecimalConDivisorMiles(parseFloat(objDocumento.lista[i].Importe.replace(",", ".")).toFixed(2));
                 }
+
                 strHtml += strImporte;
                 strHtml += '</td>';
                 strHtml += '</tr>';
@@ -298,6 +318,7 @@ function CargarHtmlResumen() {
         strHtml += '</tbody>';
         strHtml += '</table>';
         console.log(objDocumento);
+        console.log(cVencimientosResumen);
         //
         ////var httpRaiz = $('#hiddenRaiz').val();
         ////strHtml += '<div class="cssDivDescarga">';
@@ -957,3 +978,69 @@ function CargarHtmlObraSocialCliente() {
     }
     $('.footable').footable();
 }
+function ObtenerVtosResumenes(NroResumen, fechaVto) {
+    var fecha = new Date(fechaVto);
+    console.log(fecha, NroResumen);
+    $.ajax({
+        type: "POST",
+        url: "/ctacte/ObtenerVencimientosResumenPorFecha",
+        data: { pNumeroResumen: NroResumen, pFechaVencimiento: fechaVto },
+        success:
+            function (response) {
+                cVencimientosResumen = eval('(' + response + ')');
+                MostrarVencimientos(cVencimientosResumen);
+            },
+        failure: function (response) {
+            alert(response);
+        },
+        error: function (response) {
+
+            alert(response);
+        }
+    });
+}
+
+
+function MostrarVencimientos(cVencimientosResumen) {
+    var total = 0;
+    var html = '<table with="100%" class="table table-striped" style="background: #e1e1e1;">';
+    html += '<thead>';
+    html += '<tr style="height: 40px;"><th class="text-center">Comprobante<br></th><th class="text-center">Número<br></th><th class="text-center">Fecha<br></th><th class="text-center">Importes<br></th></tr></thead>';
+    html += '<tbody class="table-striped">';
+    for (var i = 0; i < cVencimientosResumen.length; i++) {
+        html += '<tr style="height: 40px">';
+        html += '<td class="text-center">' + cVencimientosResumen[i].Tipo + '</td>';
+        html += '<td class="text-center"><a href="Documento?t=' + cVencimientosResumen[i].Tipo + '&id=' + cVencimientosResumen[i].NumeroComprobante + '" >' + cVencimientosResumen[i].NumeroComprobante + '</a></td>';
+        html += '<td class="text-center">' + cVencimientosResumen[i].FechaToString + '</td>';
+        html += '<td class="text-right">$ ' + FormatoDecimalConDivisorMiles(Number(cVencimientosResumen[i].Importe).toFixed(2)) + '</td>';
+        html += '</tr>';
+        total += cVencimientosResumen[i].Importe
+    }
+    //html += '<tr><td colspan="3" class="text-right"><em>TOTAL</em></td><td class="text-right">' + Number( total ).toFixed( 2 ) + '</td></tr>'
+    html += '</tbody></table>';
+
+    //mensaje(, html);
+
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
+    strHtml += '<div class="modal-header">';
+    strHtml += '<div class="col-12">';
+    strHtml += '<h5 style="color: steelblue;">Comprobantes con vencimiento ' + cVencimientosResumen[0].FechaVencimientoToString + '<br>Total: $ ' + FormatoDecimalConDivisorMiles(Number(total).toFixed( 2 )) + '</h5>';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '<div class="modal-body no-padding"><div class="col-12">';
+    strHtml += html;
+    strHtml += '</div></div>';
+    strHtml += '</div></div>';
+    $('#modalModulo').html(strHtml);
+    $('#modalModulo').modal();
+
+    // $(".fa.fa-times").hide();
+    //$("#modalModulo").unbind("click");
+}
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

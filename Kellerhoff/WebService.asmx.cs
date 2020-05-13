@@ -5739,6 +5739,15 @@ namespace Kellerhoff
                 return null;
             }
         }
+        public static List<ServiceReferenceDLL.cVencimientoResumen> ObtenerVencimientosResumenPorFecha(string pNumeroResumen, DateTime pFechaVencimiento)
+        {
+            List<ServiceReferenceDLL.cVencimientoResumen> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerVencimientosResumenPorFecha(pNumeroResumen, pFechaVencimiento);
+            }
+            return resultado;
+        }
     }
     public class Autenticacion : SoapHeader
     {

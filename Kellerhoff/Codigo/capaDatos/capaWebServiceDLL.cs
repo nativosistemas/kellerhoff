@@ -710,6 +710,20 @@ namespace Kellerhoff.Codigo.capaDatos
                 return null;
             }
         }
+        public static List<ServiceReferenceDLL.cVencimientoResumen> ObtenerVencimientosResumenPorFecha(string pNumeroResumen, DateTime pFechaVencimiento)
+        {
+            try
+            {
+                ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
+                List<ServiceReferenceDLL.cVencimientoResumen> resultado = objServicio.ObtenerVencimientosResumenPorFecha(pNumeroResumen,pFechaVencimiento);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pNumeroResumen, pFechaVencimiento);
+                return null;
+            }
+        }
     }
 
 
