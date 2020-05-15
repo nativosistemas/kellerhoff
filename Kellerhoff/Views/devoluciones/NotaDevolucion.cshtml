@@ -43,12 +43,21 @@
     var NroDev
     $(document).ready(function () {
         NroDev = $("#txtNroDev").val().trim();
-        var Imprimir = $("#txtImprimir").val().trim();
-        if (Imprimir == 1) {
-            mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Importante</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Imprima el comprobante generado.<br><em>COPIA PARA LA FARMACIA</em>: Debe ser firmada por el transportista<br><em>COPIA PARA LA DROGUERÍA</em>: Debe ser entregada junto con la mercadería.</h5>");
+        var ImpriDirecto = $("#txtImprimir").val().trim();
+        if (ImpriDirecto == 1) {
+            var ImpCartel = '';
+            ImpCartel += "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Imprima el comprobante generado.<br>";
+            ImpCartel += "<b>COPIA PARA LA FARMACIA</b>: Debe ser firmada por el transportista.<br><span style='color: steelblue !important;'><b>( EXCLUYENTE )</b></span><br><b>COPIA PARA LA DROGUERÍA</b>: Debe ser entregada junto con la mercadería <b>dentro del empaque</b>.<span style='color: steelblue !important;'><b>( EXCLUYENTE )</b></span></h5 > "
+            mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Importante</span>", ImpCartel);           
         }
         $(document).attr("title", 'Nota de Devolución N° ' + NroDev.slice(0, 5) + ' - ' + NroDev.slice(5));
         CodBarra = "<br><img height='35' alt='Barcode Generator TEC-IT' src='https://barcode.tec-it.com/barcode.ashx?data=" + NroDev.slice(1) + "&code=Code25IL&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0' />";
+        $('#modalModulo').on('hidden.bs.modal', function (e) {
+            if (ImpriDirecto == 1) {
+                console.log('entro');
+                Imprimir();
+            }
+        });
         ObtenerItemsDevolucionPorNumero(NroDev);
     });
 </script>

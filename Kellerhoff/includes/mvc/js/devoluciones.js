@@ -48,6 +48,7 @@ function oProd(Nombre,Cant,Orden) {
 $(document).ready(function () {
     $("#cmbMotivo").focus();
     campoActual = "cmbMotivo";
+    
 
     RecuperarDevolucionesPorCliente();
     RecuperarItemsDevolucionPrecargaPorCliente();
@@ -1868,14 +1869,10 @@ function ObtenerItemsDevolucionPorNumero(NumeroDevolucion) {
                                 Observaciones += "<b>Solicitud N°</b>: " + ItemsDev[i].dev_numerosolicitudNC + "<br>";
                             } else {
                                 Estado = "<span class='label label-success'>RESUELTA</span>";
-                                //Observaciones += "<b>NCR N°</b>: <a href='/servicios/generar_archivoPdf.aspx?tipo=NCR&amp;nro=" + ItemsDev[i].dev_numerosolicitudNC + "' onclick=\"return funImprimirComprobantePdf('" + ItemsDev[i].dev_numerosolicitudNC + "')\">" + ItemsDev[i].dev_numerosolicitudNC + "</a>";
                                 Observaciones += "<b>NCR N°</b>: <a href='/ctacte/Documento?t=NCR&id=" + ItemsDev[i].dev_numerosolicitudNC + "' data-toggle='tooltip' data-placement='bottom' title='Ver Nota de Crédito' data-original-title='Ver Nota de Crédito'>" + ItemsDev[i].dev_numerosolicitudNC + "</a><br>";
 
                             }
                         }
-
-                        //<a class="btn_download float-right" href="http://localhost:35230/servicios/generar_archivoPdf.aspx?tipo=NCR&amp;nro=A000103358294" onclick="return funImprimirComprobantePdf('A000103358294');" data-toggle="tooltip" data-placement="bottom" title="Descargar en pdf" data-original-title="Descargar en pdf">PDF</a>
-
 
                         if (ItemsDev[i].dev_mensaje != null) {
                             if (Observaciones != "") {
@@ -1908,8 +1905,7 @@ function ObtenerItemsDevolucionPorNumero(NumeroDevolucion) {
                 }
                 html += '</tbody>';
                 html += '</table>';
-                //mensaje("Detalle Solicitud de Devolución", html);
-
+                
                 $("#divPanelDevoluciones").html(html);
 
             } else {

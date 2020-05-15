@@ -379,3 +379,14 @@ color: #66abd8 !important;
         display: none !important;
     }
 }
+
+
+
+.nav li.nuevo a h3 {
+    color: forestgreen;
+}
+
+.badge-danger {
+    background-color: #e74c3c !important;
+    font-weight: 100;
+}

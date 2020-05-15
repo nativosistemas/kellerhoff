@@ -116,6 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Default.aspx" />
+    <Content Include="archivos\new.png" />
+    <Content Include="archivos\new2.png" />
+    <Content Include="archivos\nuevo.png" />
     <Content Include="clientes\pages\devoluciones.aspx" />
     <Content Include="clientes\pages\carrodiferido.aspx" />
     <Content Include="clientes\pages\composicionsaldo.aspx" />

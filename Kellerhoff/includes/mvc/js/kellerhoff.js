@@ -66,6 +66,8 @@ $(document).ready(function () {
         longPopUpMostrar = listaPopUp.length;
     }
     setTimeout(function () { MostrarMensajeImportante(); }, 300);
+
+
    
 });
 function MostrarMensajePopUp() {
