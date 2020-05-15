@@ -728,9 +728,15 @@ function CargarHtmlDeudaVencida_Generica(pLista, pNameID) {
                 if (i % 2 != 0) {
                     strHtmlColorFondo = 'grs';
                 }
+                var compRes = '';
+                if (listaGenerica[i].TipoComprobanteToString == 'RES') {
+                    var splitFecha = listaGenerica[i].FechaVencimientoToString.split('/');
+                    var FechaVtoString = splitFecha[2] + "/" + splitFecha[1] + "/" + splitFecha[0];
+                    compRes = '<i data-toggle="tooltip" title="Ver Detalle de Vencimiento" class="fa fa-search float-left" style="cursor: pointer;" onclick="ObtenerVtosResumenes(\'' + listaGenerica[i].NumeroComprobante + '\',\'' + FechaVtoString + '\')"></i>';
+                }
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
                 strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 text-center">' + listaGenerica[i].FechaToString + '</td>';
-                strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 text-center c_to_l-xs">' + listaGenerica[i].FechaVencimientoToString + '</td>';
+                strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 text-center c_to_l-xs">' + compRes + listaGenerica[i].FechaVencimientoToString + '</td>';
                 strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 text-center c_to_l-xs">';
                 if (isDetalleComprobante(listaGenerica[i].TipoComprobanteToString)) {
                     strHtml += '<a class="noImprimir" href="Documento?t=' + listaGenerica[i].TipoComprobanteToString + '&id=' + listaGenerica[i].NumeroComprobante + '" >' + listaGenerica[i].TipoComprobanteToString + ' ' + listaGenerica[i].NumeroComprobante + '</a>';
@@ -915,3 +921,70 @@ function CargarHtmlObraSocial_EntreFechas() {
     $('#divResultadoObraSocialEntreFechas').html(strHtml);
     $('.footable').footable();
 }
+
+function ObtenerVtosResumenes(NroResumen, fechaVto) {
+    var fecha = new Date(fechaVto);
+    console.log(fecha, NroResumen);
+    $.ajax({
+        type: "POST",
+        url: "/ctacte/ObtenerVencimientosResumenPorFecha",
+        data: { pNumeroResumen: NroResumen, pFechaVencimiento: fechaVto },
+        success:
+            function (response) {
+                cVencimientosResumen = eval('(' + response + ')');
+                MostrarVencimientos(cVencimientosResumen);
+            },
+        failure: function (response) {
+            alert(response);
+        },
+        error: function (response) {
+
+            alert(response);
+        }
+    });
+}
+
+
+function MostrarVencimientos(cVencimientosResumen) {
+    var total = 0;
+    var html = '<table with="100%" class="table table-striped" style="background: #e1e1e1;">';
+    html += '<thead>';
+    html += '<tr style="height: 40px;"><th class="text-center">Comprobante<br></th><th class="text-center">Número<br></th><th class="text-center">Fecha<br></th><th class="text-center">Importes<br></th></tr></thead>';
+    html += '<tbody class="table-striped">';
+    for (var i = 0; i < cVencimientosResumen.length; i++) {
+        html += '<tr style="height: 40px">';
+        html += '<td class="text-center">' + cVencimientosResumen[i].Tipo + '</td>';
+        html += '<td class="text-center"><a href="Documento?t=' + cVencimientosResumen[i].Tipo + '&id=' + cVencimientosResumen[i].NumeroComprobante + '" >' + cVencimientosResumen[i].NumeroComprobante + '</a></td>';
+        html += '<td class="text-center">' + cVencimientosResumen[i].FechaToString + '</td>';
+        html += '<td class="text-right">$ ' + FormatoDecimalConDivisorMiles(Number(cVencimientosResumen[i].Importe).toFixed(2)) + '</td>';
+        html += '</tr>';
+        total += cVencimientosResumen[i].Importe
+    }
+    //html += '<tr><td colspan="3" class="text-right"><em>TOTAL</em></td><td class="text-right">' + Number( total ).toFixed( 2 ) + '</td></tr>'
+    html += '</tbody></table>';
+
+    //mensaje(, html);
+
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
+    strHtml += '<div class="modal-header">';
+    strHtml += '<div class="col-12">';
+    strHtml += '<h5 style="color: steelblue;">Comprobantes con vencimiento ' + cVencimientosResumen[0].FechaVencimientoToString + '<br>Total: $ ' + FormatoDecimalConDivisorMiles(Number(total).toFixed(2)) + '</h5>';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '<div class="modal-body no-padding"><div class="col-12">';
+    strHtml += html;
+    strHtml += '</div></div>';
+    strHtml += '</div></div>';
+    $('#modalModulo').html(strHtml);
+    $('#modalModulo').modal();
+
+    // $(".fa.fa-times").hide();
+    //$("#modalModulo").unbind("click");
+}
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

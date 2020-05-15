@@ -1,5 +1,6 @@
 ﻿using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
+using Kellerhoff.Codigo.clases.Generales;
 using Kellerhoff.Filters;
 using System;
 using System.Collections.Generic;
@@ -384,6 +385,19 @@ namespace Kellerhoff.Controllers
                     NrosDeComprobante.Add(NroComprobante);
                 }
                 Session["ConsultaDeComprobantes_NumerosDeComprobantes"] = NrosDeComprobante;
+            }
+        }
+        public string ObtenerVencimientosResumenPorFecha(string pNumeroResumen, DateTime pFechaVencimiento)
+        {
+            string resultado = string.Empty;
+            List<ServiceReferenceDLL.cVencimientoResumen> resultadoObj = WebService.ObtenerVencimientosResumenPorFecha(pNumeroResumen, pFechaVencimiento);
+
+            if (resultadoObj != null)
+            {
+                return Serializador.SerializarAJson(resultadoObj);
+            } else
+            {
+                return resultado;
             }
         }
     }
