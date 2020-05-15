@@ -113,15 +113,13 @@ function CargarUnidadesRenglones() {
             listaSucursalesUnidadesRenglones.push(obj);
         }
         for (var iProducto = 0; iProducto < listaProductosBuscados.length; iProducto++) {
-            //for (var iSucursal = 0; iSucursal < listaSucursal.length; iSucursal++) {
-            //if (listaSucursal[iSucursal] == '')
-
             for (var iSucursalStocks = 0; iSucursalStocks < listaProductosBuscados[iProducto].listaSucursalStocks.length; iSucursalStocks++) {
                 if (isNotNullEmpty(listaProductosBuscados[iProducto].listaSucursalStocks[iSucursalStocks].cantidadSucursal)) {
                     var nroValor = parseInt(listaProductosBuscados[iProducto].listaSucursalStocks[iSucursalStocks].cantidadSucursal);
                     if (nroValor > 0) {
                         for (var iSucursalesUnidadesRenglones = 0; iSucursalesUnidadesRenglones < listaSucursalesUnidadesRenglones.length; iSucursalesUnidadesRenglones++) {
-                            if (listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal == listaProductosBuscados[iProducto].listaSucursalStocks[iSucursalStocks].stk_codsuc) {
+                            if (listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal == listaProductosBuscados[iProducto].listaSucursalStocks[iSucursalStocks].stk_codsuc
+                                && isMostrarImput_FacturaTrazablesProvincia(listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal, listaProductosBuscados[iProducto].pro_isTrazable)) {
                                 listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].Unidades += nroValor;
                                 listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].Renglones += 1;
                                 break;
@@ -132,47 +130,6 @@ function CargarUnidadesRenglones() {
                 }
 
             }
-
-            //if (isNotNullEmpty(listaProductosBuscados[iProducto].listaSucursalStocks[iSucursal].cantidadSucursal)) {
-            //    var nroValor = parseInt(listaProductosBuscados[iProducto].listaSucursalStocks[iSucursal].cantidadSucursal);
-            //    if (nroValor > 0) {
-            //        //listaSucursalesUnidadesRenglones[iSucursal].Unidades += nroValor;
-            //        //listaSucursalesUnidadesRenglones[iSucursal].Renglones += 1;
-
-
-            //        for (var iSucursalesUnidadesRenglones = 0; iSucursalesUnidadesRenglones < listaSucursalesUnidadesRenglones.length; iSucursalesUnidadesRenglones++) {
-            //            if (listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal == listaSucursal[iSucursal]) {
-            //                listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].Unidades += nroValor;
-            //                listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].Renglones += 1;
-            //                break;
-            //            }
-            //        }
-
-            //    }
-            //}
-            //var mytext = $("#inputSuc" + iProducto + "_" + iSucursal);
-            //if ($("#divBody").hasClass("modal-open-Celular")) {
-            //    mytext = $("#inputSucCelular" + iProducto + "_" + iSucursal);
-            //}
-            //if (mytext.length > 0) {
-            //    // 
-            //} else {
-            //    mytext = null;
-            //}
-
-            //if (mytext != null) {
-            //    // mytext.focus();
-            //    var valor = mytext.val();
-            //    if (valor != '') {
-
-            //        var nroValor = parseInt(valor);
-            //        if (nroValor > 0) {
-            //            listaSucursalesUnidadesRenglones[iSucursal].Unidades += nroValor;
-            //            listaSucursalesUnidadesRenglones[iSucursal].Renglones += 1;
-            //        }
-            //    }
-            //} // fin  for (var iSucursal = 0; iSucursal < listaSucursal.length; iSucursal++) {
-            // }  // fin for (var iProducto = 0; iProducto < listaProductosBuscados.length; iProducto++) {
         } // fin if (listaProductosBuscados != null && listaSucursal != null) {
         //
         for (var iSucursal = 0; iSucursal < listaSucursalesUnidadesRenglones.length; iSucursal++) {
