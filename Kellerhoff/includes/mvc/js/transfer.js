@@ -646,6 +646,20 @@ function ValidarTransferTotal_sucursal(pIndice, pIndiceSursal) {
                 mensaje_alert(listaTransfer[pIndice].listaDetalle[i].tde_codpro + ' es un producto obligatorio');
             }
         }
+        if (isGrabarProducto) {
+            var cantidad_paraFacturaTrazablesProvincia = $('#txtProdTransf' + pIndice + '_' + i).val();
+            if (isNotNullEmpty(cantidad_paraFacturaTrazablesProvincia)) {
+                cantidad_paraFacturaTrazablesProvincia = parseInt(cantidad_paraFacturaTrazablesProvincia);
+                if (cantidad_paraFacturaTrazablesProvincia > 0) {
+                    if (!isMostrarImput_FacturaTrazablesProvincia(listaSucursalesDependienteInfo[pIndiceSursal].sde_sucursal, listaTransfer[pIndice].listaDetalle[i].pro_isTrazable)) {
+                        isGrabarProducto = false;
+                        $('#tdError' + pIndice + '_' + i).html('Producto que no se puede agregar a la sucursal');
+                        mensaje_alert(listaTransfer[pIndice].listaDetalle[i].tde_codpro + ' es un producto que no se puede agregar en esta sucursal');
+
+                    }
+                }
+            }
+        }
         //// inicio 2019/09/11
         //if (!isMostrarImput_CC_ClientesCordoba(listaTransfer[pIndice].listaDetalle[i].pro_codtpopro, listaSucursalesDependienteInfo[pIndiceSursal].sde_sucursal, listaTransfer[pIndice].listaDetalle[i].listaSucursalStocks)) {
         //    if (intMensajeProducto > 0) {

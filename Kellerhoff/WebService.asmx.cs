@@ -2457,21 +2457,22 @@ namespace Kellerhoff
                         }
                         if (isAgregar)
                         {
-                            cSucursal obj = new cSucursal();
-                            if (tabla.Rows[i]["suc_codigo"] != DBNull.Value)
-                            {
-                                obj.suc_codigo = tabla.Rows[i]["suc_codigo"].ToString();
-                                obj.sde_sucursal = tabla.Rows[i]["suc_codigo"].ToString();
-                            }
-                            if (tabla.Rows[i]["suc_nombre"] != DBNull.Value)
-                            {
-                                obj.suc_nombre = tabla.Rows[i]["suc_nombre"].ToString();
-                            }
-                            if (tabla.Rows[i]["suc_montoMinimo"] != DBNull.Value)
-                            {
-                                obj.suc_montoMinimo = Convert.ToDecimal(tabla.Rows[i]["suc_montoMinimo"]);
-                            }
-                            resultado.Add(obj);
+                            //cSucursal obj = new cSucursal();
+                            //if (tabla.Rows[i]["suc_codigo"] != DBNull.Value)
+                            //{
+                            //    obj.suc_codigo = tabla.Rows[i]["suc_codigo"].ToString();
+                            //    obj.sde_sucursal = tabla.Rows[i]["suc_codigo"].ToString();
+                            //}
+                            //if (tabla.Rows[i]["suc_nombre"] != DBNull.Value)
+                            //{
+                            //    obj.suc_nombre = tabla.Rows[i]["suc_nombre"].ToString();
+                            //}
+                            //if (tabla.Rows[i]["suc_montoMinimo"] != DBNull.Value)
+                            //{
+                            //    obj.suc_montoMinimo = Convert.ToDecimal(tabla.Rows[i]["suc_montoMinimo"]);
+                            //}                        
+                            //resultado.Add(obj);
+                            resultado.Add(ConvertToSucursal(tabla.Rows[i]));
                         }
                     }
 
@@ -2491,28 +2492,44 @@ namespace Kellerhoff
                     resultado = new List<cSucursal>();
                     for (int i = 0; i < tabla.Rows.Count; i++)
                     {
-                        cSucursal obj = new cSucursal();
-                        if (tabla.Rows[i]["suc_codigo"] != DBNull.Value)
-                        {
-                            obj.suc_codigo = tabla.Rows[i]["suc_codigo"].ToString();
-                            obj.sde_sucursal = tabla.Rows[i]["suc_codigo"].ToString();
-                        }
-                        if (tabla.Rows[i]["suc_nombre"] != DBNull.Value)
-                        {
-                            obj.suc_nombre = tabla.Rows[i]["suc_nombre"].ToString();
-                        }
-                        if (tabla.Rows[i]["suc_montoMinimo"] != DBNull.Value)
-                        {
-                            obj.suc_montoMinimo = Convert.ToDecimal(tabla.Rows[i]["suc_montoMinimo"]);
-                        }
-                        resultado.Add(obj);
+                        resultado.Add(ConvertToSucursal(tabla.Rows[i]));
                     }
 
                 }
             }
             return resultado;
         }
-
+        public static cSucursal ConvertToSucursal(DataRow pItem)
+        {
+            cSucursal obj = new cSucursal();
+            if (pItem.Table.Columns.Contains("suc_codigo") && pItem["suc_codigo"] != DBNull.Value)
+            {
+                obj.suc_codigo = pItem["suc_codigo"].ToString();
+                obj.sde_sucursal = pItem["suc_codigo"].ToString();
+            }
+            if (pItem.Table.Columns.Contains("suc_nombre") && pItem["suc_nombre"] != DBNull.Value)
+            {
+                obj.suc_nombre = pItem["suc_nombre"].ToString();
+            }
+            if (pItem.Table.Columns.Contains("suc_montoMinimo") && pItem["suc_montoMinimo"] != DBNull.Value)
+            {
+                obj.suc_montoMinimo = Convert.ToDecimal(pItem["suc_montoMinimo"]);
+            }
+            //
+            if (pItem.Table.Columns.Contains("suc_provincia") && pItem["suc_provincia"] != DBNull.Value)
+            {
+                obj.suc_provincia = pItem["suc_provincia"].ToString();
+            }
+            if (pItem.Table.Columns.Contains("suc_facturaTrazables") && pItem["suc_facturaTrazables"] != DBNull.Value)
+            {
+                obj.suc_facturaTrazables = Convert.ToBoolean(pItem["suc_facturaTrazables"]);
+            }
+            if (pItem.Table.Columns.Contains("suc_facturaTrazablesEnOtrasProvincias") && pItem["suc_facturaTrazablesEnOtrasProvincias"] != DBNull.Value)
+            {
+                obj.suc_facturaTrazablesEnOtrasProvincias = Convert.ToBoolean(pItem["suc_facturaTrazablesEnOtrasProvincias"]);
+            }
+            return obj;
+        }
         public static void EliminarSucursal(int sde_codigo)
         {
             if (VerificarPermisos(CredencialAutenticacion))
