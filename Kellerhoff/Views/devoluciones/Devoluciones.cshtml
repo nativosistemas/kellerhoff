@@ -15,11 +15,10 @@
 
 <div class="row">
     @*<input type="hidden" value="@{ WriteLiteral(Session["Cliente_ultima_busqueda_fecha"].ToString()); }" id="ubFechas" />
-    <input type="hidden" value="@{ WriteLiteral(Session["Cliente_ultima_busqueda_estados"].ToString()); }" id="ubEstados" />*@
+        <input type="hidden" value="@{ WriteLiteral(Session["Cliente_ultima_busqueda_estados"].ToString()); }" id="ubEstados" />*@
     <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
-        <label>Entre fechas<input type="checkbox" name="chkFechas" id="chkFechas" value="" class="chk-filtros"/></label>
+        <label>Entre fechas<input type="checkbox" name="chkFechas" id="chkFechas" value="" class="chk-filtros" /></label>
         <input type="text" id="dtpEntreFechas" class="form-control" name="datefilter" value="" />
-
     </div>
     <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
         <label>Estado<input type="checkbox" name="chkEstados" id="chkEstados" value="" class="chk-filtros" /></label>
@@ -37,6 +36,10 @@
             <option value="SI">CON RECHAZOS</option>
             <option value="NO">SIN RECHAZOS</option>
         </select>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+        <label>Por Número de Devolución<input type="checkbox" name="chkNroDev" id="chkNroDev" value="" class="chk-filtros" /></label>
+        <input type="text" id="txtNroDev" class="form-control" />
     </div>
     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
         <label class="col-xs-12" style="color: #ededed !important;">Boton</label>
@@ -96,5 +99,8 @@
     $('#dtpEntreFechas').on('apply.daterangepicker', function (ev, picker) {
         //do something, like clearing an input
         $("#chkFechas").prop("checked", true);
+        $("#chkNroDev:checked").prop("checked", false);
+        $("#txtNroDev").val("");
+        //$("#btn-consultar").click();
     });
 </script>

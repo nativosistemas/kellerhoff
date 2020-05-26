@@ -929,26 +929,67 @@ $(document).ready(function () {
         Imprimir();
         //$("#divPanelDevoluciones").printElement();
     });
+
+    /*########### FILTROS ###########*/
+    $("#chkFechas").change(function () {
+        //$("#btn-consultar").click();
+        $("#chkNroDev:checked").prop("checked", false);
+        $("#txtNroDev").val("");
+    });
     $("#chkEstados").change(function () {
         if ($("#chkEstados:checked").length == 0) {
             $("#cmbEstados").val("TODAS");
+        } else {
+            $("#chkNroDev:checked").prop("checked", false);
+            $("#txtNroDev").val("");
         }
+        //$("#btn-consultar").click();
     });
     $("#chkRechazos").change(function () {
         if ($("#chkRechazos:checked").length == 0) {
             $("#cmbRechazos").val("TODAS");
+        } else {
+            $("#txtNroDev").val("");
+            $("#chkNroDev:checked").prop("checked", false);
+        }
+        //$("#btn-consultar").click();
+    });
+    $("#chkNroDev").change(function () {
+        if ($("#chkNroDev:checked").length == 0) {
+            $("#txtNroDev").val("");
+        } else {
+            $("#chkNroDev").prop("checked", true);
+            $("#chkEstados").prop("checked", false);
+            $("#cmbEstados").val("TODAS");
+            $("#chkRechazos").prop("checked", false);
+            $("#cmbRechazos").val("TODAS");
+            $("#chkFechas").prop("checked", false);
         }
     });
     $("#cmbEstados").change(function () {
-        $("#chkEstados").prop("checked",true);
+        $("#chkEstados").prop("checked", true);
+        $("#chkNroDev:checked").prop("checked", false);
+        $("#txtNroDev").val("");
+        //$("#btn-consultar").click();
     });
     $("#cmbRechazos").change(function () {
         $("#chkRechazos").prop("checked", true);
+        $("#chkNroDev:checked").prop("checked", false);
+        $("#txtNroDev").val("");
+        //$("#btn-consultar").click();
     });
-    //$("#dtpEntreFechas").click(function () {
-    //    $("#chkFechas").prop("checked", true);
-    //});
-    
+    $("#txtNroDev").keypress(function (e) {
+        if (e.which === 13) {
+            $("#chkNroDev").prop("checked", true);
+            $("#chkEstados").prop("checked", false);
+            $("#cmbEstados").val("TODAS");
+            $("#chkRechazos").prop("checked", false);
+            $("#cmbRechazos").val("TODAS");
+            $("#chkFechas").prop("checked", false);
+            $("#btn-consultar").click();
+        }
+
+    });
 });
 
 function OnCallBackIsBanderaUsarDll_ComprobanteNro(args) {
@@ -1893,13 +1934,13 @@ function ordenarPor(col) {
 }
 
 function filtrarPor() {
-    var aFechas = $('#dtpEntreFechas').val().split('-'), estado = $("#cmbEstados").val(), rechazos = $("#cmbRechazos").val(),
-        detDesde = aFechas[0].split('/'),
-        detHasta = aFechas[1].split('/'),
+
+    var aFechas = $('#dtpEntreFechas').val().split('-'), detDesde = aFechas[0].split('/'), detHasta = aFechas[1].split('/'),
         fechaDesde = new Date(`${detDesde[2].trim()}/${detDesde[1].trim()}/${detDesde[0].trim()}`),
         fechaHasta = new Date(`${detHasta[2].trim()}/${detHasta[1].trim()}/${detHasta[0].trim()}`),
+        estado = $("#cmbEstados").val(), rechazos = $("#cmbRechazos").val(), nroDevFiltro = $("#txtNroDev").val().trim(),
         chkFechas = $("#chkFechas:checked").length, chkEstados = $("#chkEstados:checked").length,
-        chkRechazos = $("#chkRechazos:checked").length;
+        chkRechazos = $("#chkRechazos:checked").length, chkNroDev = $("#chkNroDev:checked").length;
     
     var dev = Devoluciones;
     if ( chkFechas ) {
@@ -1933,15 +1974,24 @@ function filtrarPor() {
             }
         });
     }
-    if ( chkFechas || chkEstados || chkRechazos ) {
-        desplegarDevoluciones(dev);
-    } else {
-        $("#tblDevoluciones").html('');
-        html = "<tr>";
-        html += "<td colspan='7' class='text-center color_red'><p class='color_red'>Por favor, seleccione los campos para filtrar las devoluciones</p></td>";
-        html += "</tr>";
-        $("#tblDevoluciones").append(html);
+
+    if (chkNroDev && nroDevFiltro != "") {
+        dev = dev.filter(devo => devo.dev_numerosolicituddevolucion.slice(-nroDevFiltro.length) === nroDevFiltro);
     }
+
+    $("#divPanelDevoluciones").slideUp('fast');
+    setTimeout(function () {
+        if ( chkFechas || chkEstados || chkRechazos || chkNroDev ) {
+            desplegarDevoluciones(dev);
+        } else {
+            $("#tblDevoluciones").html('');
+            html = "<tr>";
+            html += "<td colspan='7' class='text-center color_red'><p class='color_red'>Por favor, seleccione los campos para filtrar las devoluciones</p></td>";
+            html += "</tr>";
+            $("#tblDevoluciones").append(html);
+        }
+        $("#divPanelDevoluciones").slideDown('fast');
+    }, 750);
 
 }
 function ObtenerItemsDevolucionPorNumero(NumeroDevolucion) {
