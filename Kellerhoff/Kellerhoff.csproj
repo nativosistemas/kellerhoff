@@ -118,7 +118,6 @@
     <Content Include="admin\Default.aspx" />
     <Content Include="archivos\new.png" />
     <Content Include="archivos\new2.png" />
-    <Content Include="archivos\nuevo.png" />
     <Content Include="clientes\pages\devoluciones.aspx" />
     <Content Include="clientes\pages\carrodiferido.aspx" />
     <Content Include="clientes\pages\composicionsaldo.aspx" />
@@ -1022,6 +1021,7 @@
     <Content Include="Views\devoluciones\NotaDevolucion.cshtml" />
     <Content Include="Views\devoluciones\NuevaDevolucionFacturaCompleta.cshtml" />
     <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
+    <Content Include="Views\devoluciones\_scriptsDevsDaterangepicker.cshtml" />
     <None Include="Web_config\Web.config_produccion">
       <SubType>Designer</SubType>
     </None>

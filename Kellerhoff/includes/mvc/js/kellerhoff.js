@@ -40,6 +40,22 @@ var cliente = null;
 
 $(document).ready(function () {
 
+    novedades();
+
+    $('.s_menu').click(function () {
+        var nodo = $(this).attr("id");
+        if ($("#d_" + nodo).is(":visible")) {
+            $("#d_" + nodo).slideUp(300);
+            $("#angle_" + nodo).removeClass();
+            $("#angle_" + nodo).addClass("fa fa-angle-down");
+            return false;
+        } else {
+            $("#angle_" + nodo).removeClass();
+            $("#angle_" + nodo).addClass("fa fa-angle-up");
+            $("#d_" + nodo).slideDown(300);
+            return false;
+        }
+    });
     if (cliente == null) {
         cliente = eval('(' + $('#hiddenCliente').val() + ')');
         if (typeof cliente == 'undefined') {
@@ -66,7 +82,6 @@ $(document).ready(function () {
         longPopUpMostrar = listaPopUp.length;
     }
     setTimeout(function () { MostrarMensajeImportante(); }, 300);
-
 
    
 });
@@ -362,21 +377,6 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
 
-$('.s_menu').click(function () {
-    var nodo = $(this).attr("id");
-    if ($("#d_" + nodo).is(":visible")) {
-        $("#d_" + nodo).slideUp(300);
-        $("#angle_" + nodo).removeClass();
-        $("#angle_" + nodo).addClass("fa fa-angle-down");
-        return false;
-    } else {
-        $("#angle_" + nodo).removeClass();
-        $("#angle_" + nodo).addClass("fa fa-angle-up");
-        $("#d_" + nodo).slideDown(300);
-        return false;
-    }
-});
-
 function onclickCreditoDisponible() {
     ObtenerCreditoDisponible(cli_login());
 }
@@ -542,4 +542,22 @@ function funLog() {
     //       // OnFail(response);
     //    }
     //});
+}
+
+function novedades() {
+    var html = $('.nuevo').html(),
+        fechaDissmis = new Date($('.nuevo').attr('data-fecha')),
+        htmlCel = $('.nuevo-celu').html(),
+        fechaDissmisCel = new Date($('.nuevo-celu').attr('data-fecha')),
+        hoy = new Date();
+    //if (fechaDissmis > hoy) {
+    //    $('.nuevo').html('<span class="badge badge-danger"><i class="fa fa-certificate"></i> NEW!</span> ' + html);
+    //} else {
+    //    $('.nuevo').removeClass('nuevo');
+    //}
+    //if (fechaDissmisCel > hoy) {
+    //    $('.nuevo-celu').html(htmlCel + ' <span class="badge badge-danger"><i class="fa fa-certificate" style="width: 25px !important;padding: 0!important;display: inline;"></i> NEW!</span> ' );
+    //} else {
+    //    $('.nuevo-celu').removeClass('nuevo-celu');
+    //}
 }

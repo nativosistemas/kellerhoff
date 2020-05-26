@@ -23,7 +23,7 @@
 @{
     if (Session["Cliente_NumeroDevolucion"] != null)
     {
-        <a href='/devoluciones/Devoluciones' class='btn_volver pull-left'> <i class='fa fa-play'></i> VOLVER </a>
+        <a class='btn_volver pull-left' onclick="window.history.back()"> <i class='fa fa-play'></i> VOLVER </a>
         <p class="tit_secund">
             Nota de Devolucion @{ WriteLiteral(Session["Cliente_NumeroDevolucion"].ToString()); }
             <button type="button" id="btnImprimirND" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Imprimir</button>

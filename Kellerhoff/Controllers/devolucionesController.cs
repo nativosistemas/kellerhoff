@@ -294,6 +294,21 @@ namespace Kellerhoff.Controllers
             return true;
         }
 
+        public void ultimaBusqueda( bool chkFechas, bool chkEstados, bool chkRechazos )
+        {
+            if (Session["Cliente_ultima_busqueda_fechas"] != null)
+            {
+                Session["Cliente_ultima_busqueda_fechas"] = chkFechas;
+                Session["Cliente_ultima_busqueda_estados"] = chkEstados;
+                Session["Cliente_ultima_busqueda_rechazos"] = chkRechazos;
+            } else
+            {
+                Session["Cliente_ultima_busqueda_fechas"] = false;
+                Session["Cliente_ultima_busqueda_estados"] = false;
+                Session["Cliente_ultima_busqueda_rechazos"] = false;
+            }
+        }
+
     }
 
 }

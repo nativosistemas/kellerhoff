@@ -63,6 +63,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public int? pro_PackDeVenta { get; set; }
         public decimal pro_PorcARestarDelDtoDeCliente { get; set; }
         public decimal pro_PrecioBase { get; set; }
+        public bool pro_ProductoRequiereLote { get; set; }
     }
     public class cProductosGenerico : cTransferDetalle
     {
@@ -95,6 +96,7 @@ namespace Kellerhoff.Codigo.capaDatos
             base.pro_PackDeVenta = pProducto.pro_PackDeVenta;
             base.pro_PrecioBase = pProducto.pro_PrecioBase;
             base.pro_PorcARestarDelDtoDeCliente = pProducto.pro_PorcARestarDelDtoDeCliente;
+            base.pro_ProductoRequiereLote = pProducto.pro_ProductoRequiereLote;
             listaSucursalStocks = new List<cSucursalStocks>();
             isProductoNoEncontrado = false;
         }

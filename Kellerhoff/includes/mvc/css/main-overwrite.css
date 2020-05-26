@@ -380,13 +380,64 @@ color: #66abd8 !important;
     }
 }
 
-
-
 .nav li.nuevo a h3 {
     color: forestgreen;
+}
+
+.nuevo {
+    margin-left:60px !important;
+}
+
+.nav li.nuevo a h3::before {
+    content: '';
+    background-image: url(/archivos/new2.png);
+    width: 58px !important;
+    height: 18px;
+    position: absolute;
+    left: -60px;
+    top: -2px;
+}
+
+.sidebar-nav li a.nuevo-celu::after {
+    content: '';
+    background-image: url(/archivos/new.png);
+    width: 58px !important;
+    height: 18px;
+    position: relative;
+    display: inline-block;
+    left: 10px;
 }
 
 .badge-danger {
     background-color: #e74c3c !important;
     font-weight: 100;
+    font-size: 16px !important;
+}
+
+@media (min-width : 768px) {
+    .badge-danger {
+        background-color: #e74c3c !important;
+        font-weight: 100;
+        font-size: 12px !important;
+    }
+
+}
+
+header .nav li {
+    margin-right: 15px !important;
+    padding: 0;
+    width: auto !important;
+}
+
+.box {
+    background: white;
+    padding: 1em;
+    border-radius: 0.2rem;
+}
+
+.chk-filtros {
+    height: 17px !important;
+    margin-right: 10px !important;
+    margin-top: 2px !important;
+    float: left !important;
 }

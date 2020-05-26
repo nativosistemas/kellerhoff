@@ -31,7 +31,7 @@
     @RenderSection("head", required: false)
     <link href="../includes/mvc/css/main.css?n=21" rel="stylesheet">
     <link href="../includes/mvc/css/select2.min.css?n=2" rel="stylesheet">
-    <link href="../includes/mvc/css/main-overwrite.css?n=37" rel="stylesheet">
+    <link href="../includes/mvc/css/main-overwrite.css?n=42" rel="stylesheet">
 </head>
 @{
     if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol == Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR || 
@@ -177,16 +177,16 @@
                                 }
                                 if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DEVOLUCIONES) && ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "CC")
                                 {
-                                    <li class="nuevo"><span class="badge badge-danger"><i class="fa fa-certificate"></i> NEW!</span> <a href="/devoluciones/Devoluciones" @{ WriteLiteral(classDevo);}><h3>DEVOLUCIONES</h3></a></li>
+                                    <li class="nuevo" data-fecha="2021-01-01"><a href="/devoluciones/Devoluciones" @{ WriteLiteral(classDevo);}><h3>DEVOLUCIONES</h3></a></li>
                                 }
                                 if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_CUENTASCORRIENTES))
                                 {
                                     <li><a href="/ctacte/composicionsaldo" @{ WriteLiteral(classCuentasCorrientes);}><h3>CUENTAS CORRIENTES</h3></a></li>
                                 }
-                                <li><a @{ WriteLiteral(classMediosDePagos);} href="/config/mediosdepago1"><h3>MEDIOS DE PAGOS</h3></a></li>
+                                <li class="hidden-sm"><a @{ WriteLiteral(classMediosDePagos);} href="/config/mediosdepago1"><h3>MEDIOS DE PAGOS</h3></a></li>
                                 if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DESCARGAS))
                                 {
-                                    <li><a href="/config/catalogo" @{ WriteLiteral(classDescargas);}><h3>DESCARGAS</h3></a></li>
+                                    <li class="hidden-sm"><a href="/config/catalogo" @{ WriteLiteral(classDescargas);}><h3>DESCARGAS</h3></a></li>
                                 }
                             }
                             <li>
@@ -275,9 +275,9 @@
                     }
                     if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DEVOLUCIONES) && ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "CC")
                     {
-                        <li>
-                            <a class="s_menu" id="filter_5" href="#">DEVOLUCIONES<i id="angle_filter_5" class="fa fa-angle-down"></i></a>
-                            <div class="div_filter" id="d_filter_5">
+                        <li >
+                            <a class="s_menu nuevo-celu" id="filter_6" href="#" data-fecha="2021-01-01">DEVOLUCIONES<i id="angle_filter_6" class="fa fa-angle-down"></i></a>
+                            <div class="div_filter" id="d_filter_6">
                                 <a href="/devoluciones/Devoluciones"><i class="fa fa-file-text"></i>DEVOLUCIONES</a>
                                 <a href="/devoluciones/NuevaDevolucion"><i class="fa fa-reply"></i>DEVOLUCIÓN NORMAL</a>
                                 <a href="/devoluciones/NuevaDevolucionVencidos"><i class="fa fa-calendar-minus-o"></i>DEVOLUCIÓN DE VENCIDOS</a>
@@ -606,7 +606,7 @@
 
     <script src="~/includes/mvc/js/libreria.js?n=20" type="text/javascript"></script>
     <script src="~/includes/mvc/js/oferta.js?n=11" type="text/javascript"></script>
-    <script src="~/includes/mvc/js/kellerhoff.js?n=36" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/kellerhoff.js?n=41" type="text/javascript"></script>
     <script src="~/includes/mvc/js/ajax.js?n=40" type="text/javascript"></script>
     <script src="~/includes/mvc/js/mensaje.js?n=27" type="text/javascript"></script>
     <script src="~/includes/mvc/js/promotores.js?n=3" type="text/javascript"></script>

@@ -98,7 +98,7 @@ function CargarHtmlListaEstadoPedidos() {
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
                 //
                 strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 col-xs-6 text-center">';
-                if (listaEstadoPedidos[i].EstadoToString == 'Pendiente De Facturar') {
+                if (listaEstadoPedidos[i].EstadoToString == 'PendienteDeFacturar') {
                     var strDescVerDetalle = 'Ver detalles';
                     if (listaEstadoPedidos[i].DetalleSucursal != '')
                         strDescVerDetalle += ' de ' + listaEstadoPedidos[i].DetalleSucursal;
