@@ -1020,8 +1020,8 @@
     <None Include="Service References\ServiceReferenceDLL\Service1.wsdl" />
     <Content Include="Views\devoluciones\NotaDevolucion.cshtml" />
     <Content Include="Views\devoluciones\NuevaDevolucionFacturaCompleta.cshtml" />
-    <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
     <Content Include="Views\devoluciones\_scriptsDevsDaterangepicker.cshtml" />
+    <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
     <None Include="Web_config\Web.config_produccion">
       <SubType>Designer</SubType>
     </None>
