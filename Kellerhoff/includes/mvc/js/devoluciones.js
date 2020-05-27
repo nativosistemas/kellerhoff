@@ -990,6 +990,25 @@ $(document).ready(function () {
         }
 
     });
+    $("#btn-consultar").click(function () {
+        reiniciarOrden();
+    });
+
+    /*########### TABS ###########*/
+    //$("#globales").click(function () {
+    //    if (!$("#globales").hasClass('active')) {
+    //        $("#globales").addClass('active');
+    //        $("#individuales").removeClass('active');
+    //        $("#global-search").fadeIn();
+    //    }
+    //});
+    //$("#individuales").click(function () {
+    //    if (!$("#individuales").hasClass('active')) {
+    //        $("#individuales").addClass('active');
+    //        $("#globales").removeClass('active');
+    //        $("#global-search").fadeOut();
+    //    }
+    //});
 });
 
 function OnCallBackIsBanderaUsarDll_ComprobanteNro(args) {
@@ -1836,7 +1855,7 @@ function RecuperarDevolucionesPorCliente() {
             //desplegarDevoluciones(Devoluciones);
             
             if ($("#btn-consultar").length > 0) {
-                filtrarPor();
+                reiniciarOrden();
             }
         }
     });
@@ -1888,6 +1907,14 @@ async function desplegarDevoluciones(cDevs) {
     }
 };
 
+function reiniciarOrden() {
+    $('#OrdFecha').removeClass('fa-sort-desc').removeClass('fa-sort-asc').removeClass('fa-sort').addClass('fa-sort');
+    $('#OrdEst').removeClass('fa-sort-desc').removeClass('fa-sort-asc').removeClass('fa-sort').addClass('fa-sort');
+    $('#OrdSol').removeClass('fa-sort-desc').removeClass('fa-sort-asc').removeClass('fa-sort').addClass('fa-sort');
+    Devoluciones = Devoluciones.sort((a, b) => (a.dev_numerosolicituddevolucion > b.dev_numerosolicituddevolucion) ? 1 : -1);
+    filtrarPor();
+}
+
 function ordenarPor(col) {
     var dev = [];
     if (col == 0) {
@@ -1930,7 +1957,7 @@ function ordenarPor(col) {
         }
         OrdenEstado = !OrdenEstado;
     }
-    desplegarDevoluciones(dev);
+    filtrarPor();
 }
 
 function filtrarPor() {
@@ -1979,9 +2006,9 @@ function filtrarPor() {
         dev = dev.filter(devo => devo.dev_numerosolicituddevolucion.slice(-nroDevFiltro.length) === nroDevFiltro);
     }
 
-    $("#divPanelDevoluciones").slideUp('fast');
+    $("#divPanelDevoluciones").fadeOut('faster')
     setTimeout(function () {
-        if ( chkFechas || chkEstados || chkRechazos || chkNroDev ) {
+        if (chkFechas || chkEstados || chkRechazos || chkNroDev) {
             desplegarDevoluciones(dev);
         } else {
             $("#tblDevoluciones").html('');
@@ -1990,8 +2017,8 @@ function filtrarPor() {
             html += "</tr>";
             $("#tblDevoluciones").append(html);
         }
-        $("#divPanelDevoluciones").slideDown('fast');
-    }, 750);
+        $("#divPanelDevoluciones").fadeIn('faster');
+    }, 650);
 
 }
 function ObtenerItemsDevolucionPorNumero(NumeroDevolucion) {

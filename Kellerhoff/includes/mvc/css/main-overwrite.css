@@ -441,3 +441,26 @@ header .nav li {
     margin-top: 2px !important;
     float: left !important;
 }
+
+.nav.nav-tabs {
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid darkgrey;
+}
+
+.nav.nav-tabs li {
+    padding: 0 !important;
+    margin-bottom: -1px !important;
+}
+
+.nav.nav-tabs li .active {
+    border: 1px solid darkgrey;
+    /*background: ;*/
+    color: steelblue !important;
+    border-bottom-color: #ededed !important;
+}
+
+.nav.nav-tabs li a:hover {
+    background: #ddd;
+}
+
+
