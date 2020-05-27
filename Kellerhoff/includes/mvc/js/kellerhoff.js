@@ -143,7 +143,9 @@ function cli_email() {
 function cli_isAceptaPsicotropicos() {
     return cliente.cli_AceptaPsicotropicos;
 }
-
+function cli_codprov() {
+    return cliente.cli_codprov;
+}
 
 function volverBuscador() {
     if (isCarritoExclusivo) {
@@ -560,4 +562,23 @@ function novedades() {
     //} else {
     //    $('.nuevo-celu').removeClass('nuevo-celu');
     //}
+}
+function isMostrarImput_FacturaTrazablesProvincia(pSucursal, pIsProductoTrazable) {
+    if (listaSucursales != null) {
+        if (pIsProductoTrazable) {
+            for (var i = 0; i < listaSucursales.length; i++) {
+                if (pSucursal == listaSucursales[i].sde_sucursal) {
+                    if (!listaSucursales[i].suc_facturaTrazables) {
+                        return false;
+                    } else if (!listaSucursales[i].suc_facturaTrazablesEnOtrasProvincias &&
+                        listaSucursales[i].suc_provincia != null &&
+                        listaSucursales[i].suc_provincia != cli_codprov()) {
+                        return false;
+                    }
+                    break;
+                }
+            }
+        }
+    }// fin if (listaSucursales != null && listaProductosBuscados != null) {
+    return true;
 }
