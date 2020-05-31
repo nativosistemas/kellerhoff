@@ -1204,6 +1204,25 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ObtenerSolicitudesDevolucionClienteSegunFiltros">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Desde" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="Hasta" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="NombreProductoF" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NombreProductoD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroFactura" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerSolicitudesDevolucionClienteSegunFiltrosResult" type="tns:ArrayOfCDevolucionItemPrecarga" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="EsFacturaConDevolucionesEnProceso">
         <s:complexType>
           <s:sequence>
@@ -1528,6 +1547,12 @@
   <wsdl:message name="ObtenerSolicitudesDevolucionClientePorNumeroSoapOut">
     <wsdl:part name="parameters" element="tns:ObtenerSolicitudesDevolucionClientePorNumeroResponse" />
   </wsdl:message>
+  <wsdl:message name="ObtenerSolicitudesDevolucionClienteSegunFiltrosSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerSolicitudesDevolucionClienteSegunFiltros" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSolicitudesDevolucionClienteSegunFiltrosSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse" />
+  </wsdl:message>
   <wsdl:message name="EsFacturaConDevolucionesEnProcesoSoapIn">
     <wsdl:part name="parameters" element="tns:EsFacturaConDevolucionesEnProceso" />
   </wsdl:message>
@@ -1724,6 +1749,10 @@
     <wsdl:operation name="ObtenerSolicitudesDevolucionClientePorNumero">
       <wsdl:input message="tns:ObtenerSolicitudesDevolucionClientePorNumeroSoapIn" />
       <wsdl:output message="tns:ObtenerSolicitudesDevolucionClientePorNumeroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSolicitudesDevolucionClienteSegunFiltros">
+      <wsdl:input message="tns:ObtenerSolicitudesDevolucionClienteSegunFiltrosSoapIn" />
+      <wsdl:output message="tns:ObtenerSolicitudesDevolucionClienteSegunFiltrosSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="EsFacturaConDevolucionesEnProceso">
       <wsdl:input message="tns:EsFacturaConDevolucionesEnProcesoSoapIn" />
@@ -2124,6 +2153,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerSolicitudesDevolucionClientePorNumero">
       <soap:operation soapAction="http://tempuri.org/ObtenerSolicitudesDevolucionClientePorNumero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSolicitudesDevolucionClienteSegunFiltros">
+      <soap:operation soapAction="http://tempuri.org/ObtenerSolicitudesDevolucionClienteSegunFiltros" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2550,6 +2588,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerSolicitudesDevolucionClientePorNumero">
       <soap12:operation soapAction="http://tempuri.org/ObtenerSolicitudesDevolucionClientePorNumero" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSolicitudesDevolucionClienteSegunFiltros">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerSolicitudesDevolucionClienteSegunFiltros" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

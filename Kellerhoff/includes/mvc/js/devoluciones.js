@@ -438,13 +438,10 @@ $(document).ready(function () {
                 if (objItemFac != "" && (NroMotivo == 3 || NroMotivo == 5 || NroMotivo == 6 || NroMotivo == 2 || NroMotivo == 1)) {
                     //console.log(objItemFac);
                     var cantSol = ObtenerCantidadPendiente(objItemFac.Descripcion, objItemFac.NumeroFactura, objItemFac.Cantidad, CantADev);
-                } else if (objPRDDev != "" && (NroMotivo == 4)) {
-                    //console.log(objItemFac);
-                    var cantSol = ObtenerCantidadPendiente(objPRDDev.pro_nombre, ItemDevolucion.dev_numerofactura, 0, CantADev);
                 } else {
                     ItemDevolucion.dev_cantidad = CantADev;
                     $("#txtCantDevolver").attr("disabled", "disabled");
-                    if (objPRDDev.pro_codtpopro != 'M' && !objPRDDev.pro_ProductoRequiereLote ) {
+                    if (objPRDDev.pro_codtpopro != 'M' && objPRDDev.pro_ProductoRequiereLote ) {
                         $("#DEVAgregar").removeClass("hidden");
                         $("#btnAgregarDev").removeAttr("disabled", "disabled");
                         $("#btnAgregarDev").focus();
@@ -1861,7 +1858,7 @@ function RecuperarDevolucionesPorCliente() {
     });
 }
 
-async function desplegarDevoluciones(cDevs) {
+function desplegarDevoluciones(cDevs) {
     $("#tblDevoluciones").html('');
 
     if (cDevs.length > 0) {
