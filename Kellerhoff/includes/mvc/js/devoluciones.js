@@ -2266,7 +2266,12 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
                 if (NroMotivo == 1) {
                     var CantRestante = (CantFact - response - CantPrecargada);
 
-                    var msj = "<h5 style='text-align: center; line - height: 1.5em; font - weight: 300; font - size: 16px;'>La factura " + NumeroFactura + " tiene " + CantFact + " unidades facturadas";
+                    var msj = "<h5 style='text-align: center; line - height: 1.5em; font - weight: 300; font - size: 16px;'>La factura " + NumeroFactura + " tiene " + CantFact;
+                    if (CantFact == 1) {
+                        msj += " unidad facturada";
+                    } else {
+                        msj += " unidades facturadas";
+                    }
 
                     if (response > 0) {
                         if (CantPrecargada > 0) {
@@ -2274,17 +2279,29 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
                         } else {
                             msj += " y ";
                         }
-                        msj += response + " unidades con solicitud de devolución / de Nota de Crédito";
+                        if (response == 1) {
+                            msj += response + " unidad con solicitud de devolución / de Nota de Crédito";
+                        } else {
+                            msj += response + " unidades con solicitud de devolución / de Nota de Crédito";
+                        }
                     }
 
                     if (CantPrecargada > 0) {
-                        msj += " y " + CantPrecargada + " unidades precargadas para devolución";
+                        if (CantPrecargada == 1) {
+                            msj += " y " + CantPrecargada + " unidad precargada para devolución";
+                        } else {
+                            msj += " y " + CantPrecargada + " unidades precargadas para devolución";
+                        }
                     }
 
                     msj += " del producto " + NombreProducto + " y usted está devolviendo " + CantADev + ".<br>";
 
                     if (CantRestante > 0) {
-                        msj += "Sólo se generará Nota de Crédito por las " + CantRestante + " unidades restantes.</h5>";
+                        if (CantRestante == 1) {
+                            msj += "Sólo se generará Nota de Crédito por la " + CantRestante + " unidad restante.</h5>";
+                        } else {
+                            msj += "Sólo se generará Nota de Crédito por las " + CantRestante + " unidades restantes.</h5>";
+                        }
                     } else {
                         msj += "No se generará Nota de Crédito puesto que la cantidad restante es 0";
                     }
