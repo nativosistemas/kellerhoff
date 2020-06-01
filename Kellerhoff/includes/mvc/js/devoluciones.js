@@ -2018,6 +2018,7 @@ function filtrarPor() {
     }, 650);
 
 }
+
 function ObtenerItemsDevolucionPorNumero(NumeroDevolucion) {
     showCargandoBuscador();
     $(".buttonontop").click();
@@ -2263,7 +2264,32 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
 
             if ((parseInt(CantFact) - parseInt(response) - parseInt(CantPrecargada)) < parseInt(CantADev)) {
                 if (NroMotivo == 1) {
-                    mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> INFORMACIÓN</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura " + NumeroFactura + " tiene " + CantFact + " unidades facturas del producto " + NombreProducto + " y usted está devolviendo " + CantADev + ".<br>Sólo se generará Nota de Crédito por las unidades facturadas.</h5>");
+                    var CantRestante = (CantFact - response - CantPrecargada);
+
+                    var msj = "<h5 style='text-align: center; line - height: 1.5em; font - weight: 300; font - size: 16px;'>La factura " + NumeroFactura + " tiene " + CantFact + " unidades facturadas";
+
+                    if (response > 0) {
+                        if (CantPrecargada > 0) {
+                            msj += ", ";
+                        } else {
+                            msj += " y ";
+                        }
+                        msj += response + " unidades con solicitud de devolución / de Nota de Crédito";
+                    }
+
+                    if (CantPrecargada > 0) {
+                        msj += " y " + CantPrecargada + " unidades precargadas para devolución";
+                    }
+
+                    msj += " del producto " + NombreProducto + " y usted está devolviendo " + CantADev + ".<br>";
+
+                    if (CantRestante > 0) {
+                        msj += "Sólo se generará Nota de Crédito por las " + CantRestante + " unidades restantes.</h5>";
+                    } else {
+                        msj += "No se generará Nota de Crédito puesto que la cantidad restante es 0";
+                    }
+
+                    mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> INFORMACIÓN</span>", msj );
                     //$(".fa.fa-times").click();
                     //return false;
                 } else if (parseInt(response) > 0 && parseInt(CantPrecargada) > 0) {
