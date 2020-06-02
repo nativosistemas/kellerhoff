@@ -1195,6 +1195,7 @@
     </Compile>
     <Compile Include="Controllers\configController.cs" />
     <Compile Include="Controllers\ctacteController.cs" />
+    <Compile Include="Controllers\apiController.cs" />
     <Compile Include="Controllers\devolucionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\mvcController.cs" />

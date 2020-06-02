@@ -926,6 +926,66 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
+        public static DataSet getApiKey(int usu_codigo)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spGetApiKeyByUsuario", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter paUsu_codigo = cmdComandoInicio.Parameters.Add("@cod", SqlDbType.Int);
+
+            paUsu_codigo.Value = usu_codigo;
+
+            try
+            {
+                Conn.Open();
+                DataSet dsResultado = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
+                da.Fill(dsResultado, "ApiKey");
+                return dsResultado;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
+        public static DataSet validarUsuarioByApikey(string apikey)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spValidarUsuarioByApikey", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter paApikey = cmdComandoInicio.Parameters.Add("@apikey", SqlDbType.NVarChar, 255);
+
+            paApikey.Value = apikey;
+
+            try
+            {
+                Conn.Open();
+                DataSet dsResultado = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
+                da.Fill(dsResultado, "ApiKey");
+                return dsResultado;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
     }
 
 }

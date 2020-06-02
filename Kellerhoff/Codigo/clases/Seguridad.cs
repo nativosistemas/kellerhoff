@@ -597,5 +597,31 @@ namespace Kellerhoff.Codigo.clases
             }
             return resultado;
         }
+        public static string getApiKey(int pIdUsuario)
+        {
+            string resultado = null;
+            DataSet dtResultado = capaSeguridad.getApiKey(pIdUsuario);
+            if (dtResultado != null)
+            {
+                foreach (DataRow item in dtResultado.Tables["ApiKey"].Rows)
+                {
+                    resultado = item["api_key"].ToString();
+                }
+            }
+            return resultado;
+        }
+        public static string validarUsuarioByApikey(string apikey)
+        {
+            string resultado = null;
+            DataSet dtResultado = capaSeguridad.validarUsuarioByApikey(apikey);
+            if (dtResultado != null)
+            {
+                foreach (DataRow item in dtResultado.Tables["ApiKey"].Rows)
+                {
+                    resultado = item["api_codigo"].ToString();
+                }
+            }
+            return resultado;
+        }
     }
 }
