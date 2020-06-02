@@ -80,6 +80,9 @@ namespace Kellerhoff.Codigo.capaDatos
         public bool suc_facturaTrazablesEnOtrasProvincias { get; set; }
         public string sde_sucursalDependiente { get; set; }
         public string sucursal_sucursalDependiente { get; set; }
+        public bool suc_pedirCC_ok { get; set; }
+        public string suc_pedirCC_sucursalReferencia { get; set; }
+        public bool suc_pedirCC_tomaSoloPerfumeria { get; set; }
     }
     public class cHorariosSucursal
     {

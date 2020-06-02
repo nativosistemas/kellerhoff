@@ -2528,6 +2528,18 @@ namespace Kellerhoff
             {
                 obj.suc_facturaTrazablesEnOtrasProvincias = Convert.ToBoolean(pItem["suc_facturaTrazablesEnOtrasProvincias"]);
             }
+            if (pItem.Table.Columns.Contains("suc_pedirCC_ok") && pItem["suc_pedirCC_ok"] != DBNull.Value)
+            {
+                obj.suc_pedirCC_ok = Convert.ToBoolean(pItem["suc_pedirCC_ok"]);
+            }
+            if (pItem.Table.Columns.Contains("suc_pedirCC_sucursalReferencia") && pItem["suc_pedirCC_sucursalReferencia"] != DBNull.Value)
+            {
+                obj.suc_pedirCC_sucursalReferencia = Convert.ToString(pItem["suc_pedirCC_sucursalReferencia"]);
+            }
+            if (pItem.Table.Columns.Contains("suc_pedirCC_tomaSoloPerfumeria") && pItem["suc_pedirCC_tomaSoloPerfumeria"] != DBNull.Value)
+            {
+                obj.suc_pedirCC_tomaSoloPerfumeria = Convert.ToBoolean(pItem["suc_pedirCC_tomaSoloPerfumeria"]);
+            }
             return obj;
         }
         public static void EliminarSucursal(int sde_codigo)

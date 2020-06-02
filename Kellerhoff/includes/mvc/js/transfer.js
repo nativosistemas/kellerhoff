@@ -660,15 +660,6 @@ function ValidarTransferTotal_sucursal(pIndice, pIndiceSursal) {
                 }
             }
         }
-        //// inicio 2019/09/11
-        //if (!isMostrarImput_CC_ClientesCordoba(listaTransfer[pIndice].listaDetalle[i].pro_codtpopro, listaSucursalesDependienteInfo[pIndiceSursal].sde_sucursal, listaTransfer[pIndice].listaDetalle[i].listaSucursalStocks)) {
-        //    if (intMensajeProducto > 0) {
-        //        isGrabarProducto = false;
-        //        $('#tdError' + pIndice + '_' + i).html('Este producto no se puede pedir en Casa Central');
-        //        mensaje_alert(listaTransfer[pIndice].listaDetalle[i].tde_codpro + ' este producto no se puede pedir en Casa Central');
-        //    }
-        //}
-        //// fin 2019/09/11
         if (isGrabarProducto) {
             if (intMensajeProducto > 0) {
                 var objProducto = new jcTransfersProductos();
