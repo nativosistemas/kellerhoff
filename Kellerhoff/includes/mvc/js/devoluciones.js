@@ -300,10 +300,15 @@ $(document).ready(function () {
                         $("#txtNombreProductoDev").focus()
                     }, 100);
                 } else {
-                    $("#cmbNombreProducto").attr("disabled", "disabled");
-                    $("#DEVCant").removeClass("hidden");
-                    campoActual = "txtCantDevolver";
-                    $("#txtCantDevolver").focus();
+                    if (objPRDDev.pro_nombre == objItemFac.Descripcion) {
+                        mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Al seleccionar el motivo 'Mal facturado A por B' el producto devuelto debe ser distinto al facturado.</h5>");
+                        return false;
+                    } else {
+                        $("#cmbNombreProducto").attr("disabled", "disabled");
+                        $("#DEVCant").removeClass("hidden");
+                        campoActual = "txtCantDevolver";
+                        $("#txtCantDevolver").focus();
+                    }
                 }
             } else {
                 var arrayListaColumna = new Array();
@@ -348,10 +353,15 @@ $(document).ready(function () {
                                             $("#txtNombreProductoDev").focus()
                                         }, 100);
                                     } else {
-                                        $("#cmbNombreProducto").attr("disabled", "disabled");
-                                        $("#DEVCant").removeClass("hidden");
-                                        campoActual = "txtCantDevolver";
-                                        $("#txtCantDevolver").focus();
+                                        if (objPRDDev.pro_nombre == objItemFac.Descripcion) {
+                                            mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Al seleccionar el motivo 'Mal facturado A por B' el producto devuelto debe ser distinto al facturado.</h5>");
+                                            return false;
+                                        } else {
+                                            $("#cmbNombreProducto").attr("disabled", "disabled");
+                                            $("#DEVCant").removeClass("hidden");
+                                            campoActual = "txtCantDevolver";
+                                            $("#txtCantDevolver").focus();
+                                        }
                                     }
                                 } else {
                                     var arrayListaColumna = new Array();
