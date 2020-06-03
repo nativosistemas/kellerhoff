@@ -232,7 +232,7 @@ namespace Kellerhoff.Controllers
             return resultado;
         }
 
-        public string DeudaVencidaApi(string apikey)
+        public string DeudaVencidaApi(string apikey, int pagina = 1)
         {
             bool ok = true;
             string resultado = null;
@@ -244,7 +244,8 @@ namespace Kellerhoff.Controllers
                 resultado += ",\"mensaje\": \"Token invalido\"";
                 resultado += "}";
                 return resultado;
-            }
+            } 
+            int skip = (pagina - 1) * 10;
             Autenticacion objAutenticacion = new Autenticacion();
             objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
             objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
@@ -257,12 +258,12 @@ namespace Kellerhoff.Controllers
             DateTime fechaHasta = DateTime.Now;
             List<ServiceReferenceDLL.cCtaCteMovimiento> l = ctacteController.AgregarVariableSessionComposicionSaldo(fechaDesde, fechaHasta, pPendiente, pCancelado, oUser.usu_login);
             resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
-            resultado += ",\"DeudaVencida\": " + Serializador.SerializarAJson(l);
+            resultado += ",\"DeudaVencida\": " + Serializador.SerializarAJson(l.GetRange(skip,10));
             resultado += "}";
             return resultado;
         }
 
-        public string ObtenerComprobantesDiscriminadosEntreFechasApi(string desde, string hasta, string apikey)
+        public string ObtenerComprobantesDiscriminadosEntreFechasApi(string desde, string hasta, string apikey, int pagina = 1)
         {
             bool ok = true;
             string resultado = null;
@@ -275,6 +276,7 @@ namespace Kellerhoff.Controllers
                 resultado += "}";
                 return resultado;
             }
+            int skip = (pagina - 1) * 10;
             Autenticacion objAutenticacion = new Autenticacion();
             objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
             objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
@@ -285,12 +287,12 @@ namespace Kellerhoff.Controllers
             DateTime fechaHasta = Convert.ToDateTime(hasta + " 23:59:59");//, 23, 59, 59
             List<ServiceReferenceDLL.cComprobantesDiscriminadosDePuntoDeVenta> resultadoObj = WebService.ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas(oUser.usu_login, fechaDesde, fechaHasta);
             resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
-            resultado += ",\"ComprobantesDiscriminados\": " + Serializador.SerializarAJson(resultadoObj);
+            resultado += ",\"ComprobantesDiscriminados\": " + Serializador.SerializarAJson(resultadoObj.GetRange(skip,10));
             resultado += "}";
 
             return resultado;
         }
-        public string ComposicionSaldoApi(int pDia, int pPendiente, int pCancelado, string apikey)
+        public string ComposicionSaldoApi(int pDia, int pPendiente, int pCancelado, string apikey, int pagina = 1)
         {
             bool ok = true;
             string resultado = null;
@@ -303,6 +305,7 @@ namespace Kellerhoff.Controllers
                 resultado += "}";
                 return resultado;
             }
+            int skip = (pagina - 1) * 10;
             Autenticacion objAutenticacion = new Autenticacion();
             objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
             objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
@@ -312,7 +315,7 @@ namespace Kellerhoff.Controllers
             DateTime fechaHasta = DateTime.Now;
             List<ServiceReferenceDLL.cCtaCteMovimiento> l = ctacteController.AgregarVariableSessionComposicionSaldo(fechaDesde, fechaHasta, pPendiente, pCancelado, oUser.usu_login);
             resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
-            resultado += ",\"ComposicionSaldo\": " + Serializador.SerializarAJson(l);
+            resultado += ",\"ComposicionSaldo\": " + Serializador.SerializarAJson(l.GetRange(skip,10));
             resultado += "}";
             return resultado;
         }
