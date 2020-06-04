@@ -554,12 +554,15 @@ function isMostrarImput_pedirCC(pPro_codtpopro, pSucursalEvaluar, pListaSucursal
     }
     return true;
 }
-function getCantidad_SubirArchivo_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
+function getCantidad_SubirArchivo_pedirCC(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
     var sucursalInfo = getSucursalClienteInfo();
     if (sucursalInfo != null) {
-        if (sucursalInfo.suc_pedirCC_sucursalReferencia != null &&
-            pSucursalEvaluar == sucursalInfo.suc_pedirCC_sucursalReferencia && 
-           !sucursalInfo.suc_pedirCC_ok &&//
+        var sucReferencia = cli_codsuc();
+        if (sucursalInfo.suc_pedirCC_sucursalReferencia != null) {
+            sucReferencia = sucursalInfo.suc_pedirCC_sucursalReferencia;
+        }
+        if (pSucursalEvaluar == sucReferencia &&
+           !sucursalInfo.suc_pedirCC_ok &&
             ((pPro_codtpopro == 'P' &&
         sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)//TIPOPRODUCTO_Perfumeria
         || !sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)) //TIPOPRODUCTO_Perfumeria

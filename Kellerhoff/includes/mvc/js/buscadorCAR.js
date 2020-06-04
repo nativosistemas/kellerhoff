@@ -1674,7 +1674,7 @@ function OnCallBackRecuperarProductos(args) {
                                             //cantidadDeProductoEnCarrito = listaProductosBuscados[i].listaSucursalStocks[iSucursal].cantidadSucursal;
                                             cantidadDeProductoEnCarrito = listaProductosBuscados[i].listaSucursalStocks[iSucursal].cantidadSucursal;
                                             if (cantidadDeProductoEnCarrito == 0 && !isMostrarImput_pedirCC(listaProductosBuscados[i].pro_codtpopro, 'CC', listaProductosBuscados[i].listaSucursalStocks)) {
-                                                var cantidadDeProductoEnCarrito_temp = getCantidad_SubirArchivo_CC_ClientesCordoba(listaProductosBuscados[i].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].listaSucursalStocks);
+                                                var cantidadDeProductoEnCarrito_temp = getCantidad_SubirArchivo_pedirCC(listaProductosBuscados[i].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].listaSucursalStocks);
                                                 if (isNotNullEmpty(cantidadDeProductoEnCarrito_temp)) {
                                                     cantidadDeProductoEnCarrito = cantidadDeProductoEnCarrito_temp;
                                                 }
@@ -1774,25 +1774,25 @@ function OnCallBackRecuperarProductos(args) {
 //    }
 //    return true;
 //}
-function getCantidad_SubirArchivo_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
-    if (pSucursalEvaluar == 'CB' && // Cordoba
-       (cli_codsuc() == 'CB' || //	Cordoba
-        cli_codsuc() == 'VM' || //	Villa María
-        cli_codsuc() == 'RC') &&//	Río Cuarto
-        pPro_codtpopro == 'P') //TIPOPRODUCTO_Perfumeria
-    {
-        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
-            if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CC') {// Casa central
-                if (isNotNullEmpty(pListaSucursalStocks[iSucursal].cantidadSucursal))
-                {
-                    return pListaSucursalStocks[iSucursal].cantidadSucursal;
-                }
-                break;
-            }
-        }
-    }
-    return '';
-}
+//function getCantidad_SubirArchivo_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
+//    if (pSucursalEvaluar == 'CB' && // Cordoba
+//       (cli_codsuc() == 'CB' || //	Cordoba
+//        cli_codsuc() == 'VM' || //	Villa María
+//        cli_codsuc() == 'RC') &&//	Río Cuarto
+//        pPro_codtpopro == 'P') //TIPOPRODUCTO_Perfumeria
+//    {
+//        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
+//            if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CC') {// Casa central
+//                if (isNotNullEmpty(pListaSucursalStocks[iSucursal].cantidadSucursal))
+//                {
+//                    return pListaSucursalStocks[iSucursal].cantidadSucursal;
+//                }
+//                break;
+//            }
+//        }
+//    }
+//    return '';
+//}
 function AgregarAlHistorialProductoCarrito_SubirPedido(pIndexProducto, pIndexSucursal, pCantidadProducto, pIsSumarCantidad) {
     for (var iSucursal = 0; iSucursal < listaProductosBuscados[pIndexProducto].listaSucursalStocks.length; iSucursal++) {
         if (listaProductosBuscados[pIndexProducto].listaSucursalStocks[iSucursal].stk_codsuc == listaSucursal[pIndexSucursal]) {
@@ -2777,7 +2777,7 @@ function detalleProducto_celular(pIndex) {
                         if (isSubirPedido) {
                             cantidadDeProductoEnCarrito = listaProductosBuscados[pIndex].listaSucursalStocks[iSucursal].cantidadSucursal;
                             if (cantidadDeProductoEnCarrito == 0 && !isMostrarImput_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, 'CC', listaProductosBuscados[pIndex].listaSucursalStocks)) {
-                                var cantidadDeProductoEnCarrito_temp = getCantidad_SubirArchivo_CC_ClientesCordoba(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
+                                var cantidadDeProductoEnCarrito_temp = getCantidad_SubirArchivo_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
                                 if (isNotNullEmpty(cantidadDeProductoEnCarrito_temp))
                                 {
                                     cantidadDeProductoEnCarrito = cantidadDeProductoEnCarrito_temp;
