@@ -1201,7 +1201,7 @@ function ObtenerFacturaCliente(pNroFactura) {
                     ItemDevolucion.dev_numerofactura = objFactura.Numero
                     //console.log(objFactura.lista);
                     for (var i = 0; i < objFactura.lista.length; i++) {
-                        if (objFactura.lista[i].Cantidad != "" && objFactura.lista[i].PrecioUnitario != "") {
+                        if (objFactura.lista[i].Cantidad != "" && objFactura.lista[i].PrecioUnitario != "0,00") {
                             html += "<option value=\"" + objFactura.lista[i].Descripcion + "\"  data-id=\"" + i + "\">";
                         }
                         $("#cmbTipoComprobante").attr("disabled", "disabled");
