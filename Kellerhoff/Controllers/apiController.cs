@@ -12,8 +12,18 @@ using System.Web.Mvc;
 
 namespace Kellerhoff.Controllers
 {
+    public class AllowCrossSiteJsonAttribute : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Control-Allow-Origin", "*");
+            base.OnActionExecuting(filterContext);
+        }
+    }
+    [AllowCrossSiteJson]
     public class apiController : Controller
     {
+        [AllowCrossSiteJson]
         public string loginApi( string login, string password)
         {
             string resultado = null;
@@ -28,11 +38,20 @@ namespace Kellerhoff.Controllers
                 {
                     if (user.usu_estado == Constantes.cESTADO_ACTIVO && user.usu_codCliente != null)
                     {
+                        user.usu_pswDesencriptado = null;
                         Autenticacion objAutenticacion = new Autenticacion();
                         objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
                         objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
                         WebService.CredencialAutenticacion = objAutenticacion;
                         cClientes oCliente = WebService.RecuperarClientePorId((int)user.usu_codCliente);
+                        if ( oCliente == null )
+                        {
+                            ok = false;
+                            resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+                            resultado += ",\"mensaje\": \"Usuario sin cliente asociado\"";
+                            resultado += "}";
+                            return resultado;
+                        }
                         List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(user.id);
                         string apiKey = Codigo.clases.Seguridad.getApiKey((int)user.id);
                         resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
@@ -182,18 +201,30 @@ namespace Kellerhoff.Controllers
                         }
                         else
                         {
-                            resultado = "Usuario inactivo";
+                            ok = false;
+                            resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+                            resultado += ",\"mensaje\": \"Usuario inactivo\"";
+                            resultado += "}";
+                            return resultado;
                         }
                     }
                 }
                 else
                 {
-                    resultado = "Mail o contraseña erróneo";
+                    ok = false;
+                    resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+                    resultado += ",\"mensaje\": \"Usuario o contraseña erróneo\"";
+                    resultado += "}";
+                    return resultado;
                 }
             }
             else
             {
-                resultado = "Error en el servidor";
+                ok = false;
+                resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+                resultado += ",\"mensaje\": \"Error en el servidor\"";
+                resultado += "}";
+                return resultado;
             }
 
 
@@ -316,6 +347,39 @@ namespace Kellerhoff.Controllers
             List<ServiceReferenceDLL.cCtaCteMovimiento> l = ctacteController.AgregarVariableSessionComposicionSaldo(fechaDesde, fechaHasta, pPendiente, pCancelado, oUser.usu_login);
             resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
             resultado += ",\"ComposicionSaldo\": " + Serializador.SerializarAJson(l.GetRange(skip,10));
+            resultado += "}";
+            return resultado;
+        }
+
+        public string ObtenerSaldosPresentacionParaComposicionApi(string apikey)
+        {
+            bool ok = true;
+            string resultado = null;
+            string idUser = validarUsuario(apikey);
+            if (idUser == null)
+            {
+                ok = false;
+                resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+                resultado += ",\"mensaje\": \"Token invalido\"";
+                resultado += "}";
+                return resultado;
+            }
+            Autenticacion objAutenticacion = new Autenticacion();
+            objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
+            objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
+            WebService.CredencialAutenticacion = objAutenticacion;
+            cUsuario oUser = Seguridad.RecuperarUsuarioPorId(Int32.Parse(idUser));
+            ServiceReferenceDLL.cDllSaldosComposicion saldo = WebService.ObtenerSaldosPresentacionParaComposicion(oUser.usu_login, DateTime.Now);
+            if ( saldo == null )
+            {
+                ok = false;
+                resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+                resultado += ",\"mensaje\": \"El cliente no posee saldo disponible\"";
+                resultado += "}";
+                return resultado;
+            }
+            resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+            resultado += ",\"PresentacionSaldo\": " + Serializador.SerializarAJson(saldo);
             resultado += "}";
             return resultado;
         }
