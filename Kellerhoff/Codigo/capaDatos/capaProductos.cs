@@ -1027,5 +1027,30 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
+
+        public static DataTable DescargaMedicamentosYAccesoriosNoIncluidosEnAlfaBeta()
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spMedicamentosYAccesoriosNoIncluidosEnAlfaBeta", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                Conn.Open();
+                DataTable table = new DataTable();
+                table.Load(cmdComandoInicio.ExecuteReader());
+                return table;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
     }
 }
