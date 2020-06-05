@@ -2160,8 +2160,13 @@ function ObtenerItemsDevolucionPorNumero(NumeroDevolucion) {
                         }
                         if (ItemsDev[i].dev_numerosolicitudNC != null) {
                             if ($.isNumeric(ItemsDev[i].dev_numerosolicitudNC)) {
-                                Estado = "<span class='label label-warning'>EN PROCESO</span>";
-                                Observaciones += "<b>Solicitud N°</b>: " + ItemsDev[i].dev_numerosolicitudNC + "<br>";
+                                if (ItemsDev[i].dev_cantidad == ItemsDev[i].dev_cantidadrechazada) {
+                                    Estado = "<span class='label label-danger'>RECHAZADA</span>";
+                                    Observaciones += "<b>Solicitud N°</b>: " + ItemsDev[i].dev_numerosolicitudNC + " <span style='color:#e74c3c!important;'>RECHAZADA</span><br>";
+                                } else {
+                                    Estado = "<span class='label label-warning'>EN PROCESO</span>";
+                                    Observaciones += "<b>Solicitud N°</b>: " + ItemsDev[i].dev_numerosolicitudNC + "<br>";
+                                }
                             } else {
                                 Estado = "<span class='label label-success'>RESUELTA</span>";
                                 Observaciones += "<b>NCR N°</b>: <a href='/ctacte/Documento?t=NCR&id=" + ItemsDev[i].dev_numerosolicitudNC + "' data-toggle='tooltip' data-placement='bottom' title='Ver Nota de Crédito' data-original-title='Ver Nota de Crédito'>" + ItemsDev[i].dev_numerosolicitudNC + "</a><br>";

@@ -510,6 +510,10 @@ namespace Kellerhoff.Controllers
                         else
                             nameFile = "ProductosEnOferta.csv";
                         break;
+                    case 9:
+                        dt = capaProductos.DescargaMedicamentosYAccesoriosNoIncluidosEnAlfaBeta();
+                        nameFile = "MedicamentosYAccesoriosNoIncluidosEnAlfaBeta.csv";
+                        break;
                     default:
                         break;
                 }
@@ -530,6 +534,10 @@ namespace Kellerhoff.Controllers
                     else if (id == 8)
                     {
                         GenerarArchivo_ProductosEnOferta(f, dt);
+                    }
+                    else if (id == 9)
+                    {
+                        GenerarArchivo_MedicamentosYAccesoriosNoIncluidosEnAlfaBeta(f, dt);
                     }
                     var fileStream = new FileStream(f, FileMode.Open, FileAccess.Read);
                     //return new FileStreamResult(fileStream, MimeMapping.GetMimeMapping(f));
@@ -682,6 +690,53 @@ namespace Kellerhoff.Controllers
                                 Descuento = item["% de descuento"].ToString();
                             }
                             fila += Descuento;
+                            writer.WriteLine(fila);
+                        }
+                    }
+                    //writer.Close();
+                }
+            }
+        }
+
+        public static void GenerarArchivo_MedicamentosYAccesoriosNoIncluidosEnAlfaBeta(string RutaNombreArchivo, DataTable pTabla)
+        {
+            if (pTabla != null && RutaNombreArchivo != null)
+            {
+                if (pTabla.Rows.Count > 0)
+                {
+                    string path = RutaNombreArchivo;
+                    FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write);
+                    //StreamWriter writer = new StreamWriter(stream);
+                    using (StreamWriter writer = new StreamWriter(stream))
+                    {
+                        string encabezado = string.Empty;
+                        encabezado += "Tipo" + Constantes.cSeparadorCSV;
+                        encabezado += "Producto" + Constantes.cSeparadorCSV;
+                        encabezado += "AlfaBeta" + Constantes.cSeparadorCSV;
+                        encabezado += "Troquel" + Constantes.cSeparadorCSV;
+                        encabezado += "CodBarraPrinc" + Constantes.cSeparadorCSV;
+                        encabezado += "Laboratorio" + Constantes.cSeparadorCSV;
+                        encabezado += "Precio" + Constantes.cSeparadorCSV;
+                        encabezado += "Neto" + Constantes.cSeparadorCSV;
+                        encabezado += "CadenaFrio" + Constantes.cSeparadorCSV;
+                        encabezado += "RequiereVale" + Constantes.cSeparadorCSV;
+                        encabezado += "Trazable";
+                        writer.WriteLine(encabezado);
+                        foreach (DataRow item in pTabla.Rows)
+                        {
+                            string fila = string.Empty;
+                            fila += item["Tipo"].ToString() + Constantes.cSeparadorCSV;
+                            fila += item["Producto"].ToString() + Constantes.cSeparadorCSV;
+                            fila += item["AlfaBeta"].ToString() + Constantes.cSeparadorCSV;
+                            fila += item["Troquel"].ToString() + Constantes.cSeparadorCSV;
+                            fila += item["CodBarraPrinc"].ToString() + Constantes.cSeparadorCSV;
+                            fila += item["Laboratorio"].ToString() + Constantes.cSeparadorCSV;
+                            fila += item["Precio"].ToString() + Constantes.cSeparadorCSV;
+                            fila += item["Neto"].ToString() + Constantes.cSeparadorCSV;
+                            fila += item["CadenaFrio"].ToString() + Constantes.cSeparadorCSV;
+                            fila += item["RequiereVale"].ToString() + Constantes.cSeparadorCSV;
+                            fila += item["Trazable"].ToString();
+
                             writer.WriteLine(fila);
                         }
                     }
