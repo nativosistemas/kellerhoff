@@ -2160,7 +2160,11 @@ function ObtenerItemsDevolucionPorNumero(NumeroDevolucion) {
                         }
                         if (ItemsDev[i].dev_numerosolicitudNC != null) {
                             if ($.isNumeric(ItemsDev[i].dev_numerosolicitudNC)) {
-                                Estado = "<span class='label label-warning'>EN PROCESO</span>";
+                                if (ItemsDev[i].dev_cantidad == ItemsDev[i].dev_cantidadrechazada) {
+                                    Estado = "<span class='label label-danger'>RECHAZADA</span>";
+                                } else {
+                                    Estado = "<span class='label label-warning'>EN PROCESO</span>";
+                                }
                                 Observaciones += "<b>Solicitud N°</b>: " + ItemsDev[i].dev_numerosolicitudNC + "<br>";
                             } else {
                                 Estado = "<span class='label label-success'>RESUELTA</span>";
