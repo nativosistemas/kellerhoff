@@ -233,7 +233,7 @@
                     <!-- SUCURSAL 1 -->
                     <div class="col-lg-6 col-sm-6 col-xs-12 div_nav_ftr">
                         <div>CHAÑAR LADEADO</div>
-                        <div><i class="fa fa-map-marker fa_contacto_ftr"></i>Estanislao López 415 &bull; S2643CHI</div>
+                        <div><i class="fa fa-map-marker fa_contacto_ftr"></i>Belgrano 245 &bull; S2139AFE</div>
                         <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:03468-481881">03468-481881 &bull; (Tel/Fax) 481117</a></div>
                         <div><i class="fa fa-envelope fa_contacto_ftr"></i><a href="mailto:sucursalchanarladeado@kellerhoff.com.ar">sucursalchanarladeado@kellerhoff.com.ar</a></div>
                         <div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:3468648933">3468 648933</a></div>
@@ -326,7 +326,8 @@
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-5 col-xs-12 padding_left_ftr ftr_contacto">
                 <div class="clear15"></div>
-                <p class="p_11 color_white">&copy; <% Response.Write(DateTime.Now.Year.ToString());%>  Droguer&iacute;a Kellerhoff. Todos los derechos reservados</p>
+                <p class="p_11 color_white hidden-xs">&copy; <% Response.Write(DateTime.Now.Year.ToString());%>  Droguer&iacute;a Kellerhoff. Todos los derechos reservados</p>
+<%--                <p class="p_11 color_white visible-xs">&copy; <% Response.Write(DateTime.Now.Year.ToString());%>  Droguer&iacute;a Kellerhoff.</p>--%>
             </div>
             <div class="col-lg-8 col-md-6 col-sm-7 padding_left_ftr ftr_contacto padding_firma">
                 <table border="0" cellspacing="0" cellpadding="0" class="hidden-xs">
@@ -343,7 +344,7 @@
                         <td><a class="mtz" href="http://mestizosweb.com/" target="_blank" title="Mestizos Comunicaci&oacute;n"></a></td>
                     </tr>
                 </table>
-                <%--  <div class="col-xs-12 text-center visible-xs"><a  href="http://www.nativosistemas.com/" target="_blank" title="Nativo Sistemas"> <img src="../img/home/logos/nativo.png" height="28px" /></a></div>--%>
+                <div class="col-xs-12 text-center visible-xs"><a href="http://www.nativosistemas.com/" target="_blank" title="Nativo Sistemas"> <img src="../img/mvc/logos/nativo.png" style="height:28px;" /></a></div>
             </div>
         </div>
     </div>

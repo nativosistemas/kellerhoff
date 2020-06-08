@@ -25,7 +25,7 @@ var OrdenNro = false, OrdenFecha = false, OrdenEstado = false;
 
 var colMotivos = [
     'Sin definición',
-    'Mal facturado A por B',
+    'Mal enviado A por B',
     'Producto en Mal Estado/Roto/Incompleto',
     'Facturado no pedido',
     'Producto de más sin ser facturado',
@@ -473,7 +473,7 @@ $(document).ready(function () {
         var pNumeroLote = $(this).val().trim(),
             pNombreProducto = objPRDDev.pro_nombre;
 
-        if (pNumeroLote.length >= 3) {
+        if (pNumeroLote.length > 0) {
             showCargandoBuscador();
             $.ajax({
                 type: "POST",
@@ -533,7 +533,7 @@ $(document).ready(function () {
                 }
             });
         } else {
-            mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Por favor, ingrese al menos 3 caracteres para realizar la búsqueda del lote.</h5>");
+            mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Por favor, ingrese al menos 1 caracteres para realizar la búsqueda del lote.</h5>");
             // $(".fa.fa-times").hide();
         }
     });
@@ -702,7 +702,7 @@ $(document).ready(function () {
         var pNumeroLote = $(this).val().trim(),
             pNombreProducto = objPRDDev.pro_nombre;
         ControlarSesion();
-        if (pNumeroLote.length >= 3) {
+        if (pNumeroLote.length > 0) {
             showCargandoBuscador();
             $.ajax({
                 type: "POST",
@@ -766,7 +766,7 @@ $(document).ready(function () {
                 }
             });
         } else {
-            mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Por favor, ingrese al menos 3 caracteres para realizar la búsqueda del lote.</h5>");
+            mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Por favor, ingrese al menos 1 caracteres para realizar la búsqueda del lote.</h5>");
             // $(".fa.fa-times").hide();
         }
     });
@@ -1560,7 +1560,7 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                             }
                             mensaje("Seleccione un producto", html);
                             // $(".fa.fa-times").hide();
-                            $("#modalModulo").unbind("click");
+                            //$("#modalModulo").unbind("click");
                             $(".msjList").click(function () {
                                 var idItem = $(this).attr("data-nroprod");
                                 $("#txtNombreProductoDevVencidos").val(listaPRD.listaProductos[idItem].pro_nombre);
@@ -1595,7 +1595,7 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                                 }
                             });
 
-                            $("#modalModulo").bind("click");
+                            //$("#modalModulo").bind("click");
                         }
                     } else {
                         mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>No se encontraron productos en esta búsqueda.</h5>");
@@ -1728,7 +1728,7 @@ function RecuperarItemsDevolucionPrecargaVencidosPorCliente() {
             var html = "";
             $("#tblDevolucionVencidos").html("");
             ItemsPrecargadosVencidos = eval('(' + response + ')');
-            //console.log(ItemsPrecargadosVencidos);
+            console.log(ItemsPrecargadosVencidos);
             if (ItemsPrecargadosVencidos.length > 0) {
                 for (i = 0; i < ItemsPrecargadosVencidos.length; i++) {
                     if (ItemsPrecargadosVencidos[i].dev_fechavencimientoloteToString != null) {

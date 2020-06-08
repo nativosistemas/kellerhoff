@@ -136,8 +136,8 @@
                                         <u>Promotor</u>: Alexis Ronzani<br />
                                         <u>Ctas. Ctes.</u>: Carlos Filipuzzi<br />
                                         <u>Farmacéutico</u>: Juan Carlos Ferraris<br />
-                                        <u>Domicilio</u>: Estanislao López 415<br />
-                                        <u>C.P.A.</u>: S2643CHI<br />
+                                        <u>Domicilio</u>: Belgrano 245<br />
+                                        <u>C.P.A.</u>: S2139AFE<br />
                                         <u>Teléfonos</u>: 03468-481881 (Tel/Fax) / 481117<br />
                                         <u>WhatsApp</u>: 3468 648933<br />
                                         <u>E-Mail</u>: sucursalchanarladeado@kellerhoff.com.ar<br />
