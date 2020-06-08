@@ -188,6 +188,7 @@ namespace Kellerhoff.Codigo.capaDatos
                     obj.dev_numeroitemfactura = Item[i].dev_numeroitemfactura;
                     obj.dev_numerolote = Item[i].dev_numerolote;
                     obj.dev_numerosolicituddevolucion = Item[i].dev_numerosolicituddevolucion;
+                    obj.dev_idsucursal = Item[i].dev_idsucursal;
 
                     ItemArray.Add(obj);
                 }
