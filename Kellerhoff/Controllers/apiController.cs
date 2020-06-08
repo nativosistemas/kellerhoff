@@ -323,7 +323,8 @@ namespace Kellerhoff.Controllers
 
             return resultado;
         }
-        public string ComposicionSaldoApi(int pDia, int pPendiente, int pCancelado, string apikey, int pagina = 1)
+        [AllowCrossSiteJson]
+        public string ComposicionSaldoApi(string pDesde, string pHasta, int pPendiente, int pCancelado, string apikey, int pagina = 1)
         {
             bool ok = true;
             string resultado = null;
@@ -336,21 +337,21 @@ namespace Kellerhoff.Controllers
                 resultado += "}";
                 return resultado;
             }
-            int skip = (pagina - 1) * 10;
+            //int skip = (pagina - 1) * 10;
             Autenticacion objAutenticacion = new Autenticacion();
             objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
             objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
             WebService.CredencialAutenticacion = objAutenticacion;
             cUsuario oUser = Seguridad.RecuperarUsuarioPorId(Int32.Parse(idUser));
-            DateTime fechaDesde = DateTime.Now.AddDays(pDia * -1);
-            DateTime fechaHasta = DateTime.Now;
+            DateTime fechaDesde = DateTime.Parse(pDesde + " 00:00:00");
+            DateTime fechaHasta = DateTime.Parse(pHasta + " 23:59:59");
             List<ServiceReferenceDLL.cCtaCteMovimiento> l = ctacteController.AgregarVariableSessionComposicionSaldo(fechaDesde, fechaHasta, pPendiente, pCancelado, oUser.usu_login);
             resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
-            resultado += ",\"ComposicionSaldo\": " + Serializador.SerializarAJson(l.GetRange(skip,10));
+            resultado += ",\"ComprobantesDiscriminados\": " + Serializador.SerializarAJson(l);
             resultado += "}";
             return resultado;
         }
-
+        [AllowCrossSiteJson]
         public string ObtenerSaldosPresentacionParaComposicionApi(string apikey)
         {
             bool ok = true;
