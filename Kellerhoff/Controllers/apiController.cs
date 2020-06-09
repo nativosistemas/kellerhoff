@@ -384,7 +384,72 @@ namespace Kellerhoff.Controllers
             resultado += "}";
             return resultado;
         }
-
+        [AllowCrossSiteJson]
+        public string ObtenerSaldosResumenAbiertoApi(string apikey)
+        {
+            bool ok = true;
+            string resultado = null;
+            string idUser = validarUsuario(apikey);
+            if (idUser == null)
+            {
+                ok = false;
+                resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+                resultado += ",\"mensaje\": \"Token invalido\"";
+                resultado += "}";
+                return resultado;
+            }
+            Autenticacion objAutenticacion = new Autenticacion();
+            objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
+            objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
+            WebService.CredencialAutenticacion = objAutenticacion;
+            cUsuario oUser = Seguridad.RecuperarUsuarioPorId(Int32.Parse(idUser));
+            ServiceReferenceDLL.cDllRespuestaResumenAbierto objResumenAbierto = WebService.ObtenerResumenAbierto(oUser.usu_login);
+            if (objResumenAbierto == null)
+            {
+                ok = false;
+                resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+                resultado += ",\"mensaje\": \"No se ha encontrado resumenes abiertos\"";
+                resultado += "}";
+                return resultado;
+            }
+            resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+            resultado += ",\"ResumenAbierto\": " + Serializador.SerializarAJson(objResumenAbierto.lista);
+            resultado += "}";
+            return resultado;
+        }
+        [AllowCrossSiteJson]
+        public string ObtenerSaldoChequesEnCarteraApi(string apikey)
+        {
+            bool ok = true;
+            string resultado = null;
+            string idUser = validarUsuario(apikey);
+            if (idUser == null)
+            {
+                ok = false;
+                resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+                resultado += ",\"mensaje\": \"Token invalido\"";
+                resultado += "}";
+                return resultado;
+            }
+            Autenticacion objAutenticacion = new Autenticacion();
+            objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
+            objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
+            WebService.CredencialAutenticacion = objAutenticacion;
+            cUsuario oUser = Seguridad.RecuperarUsuarioPorId(Int32.Parse(idUser));
+            List<ServiceReferenceDLL.cDllChequeRecibido > resultadoChequesEnCartera = WebService.ObtenerChequesEnCartera(oUser.usu_login);
+            if (resultadoChequesEnCartera == null)
+            {
+                ok = false;
+                resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+                resultado += ",\"mensaje\": \"No se ha encontrado resumenes abiertos\"";
+                resultado += "}";
+                return resultado;
+            }
+            resultado += "{\"ok\": " + Serializador.SerializarAJson(ok);
+            resultado += ",\"ChequesEnCartera\": " + Serializador.SerializarAJson(resultadoChequesEnCartera);
+            resultado += "}";
+            return resultado;
+        }
     }
 
 }
