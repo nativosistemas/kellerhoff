@@ -215,7 +215,7 @@ $(document).ready(function () {
         var obj = $("#MotivoValues").find("option[value='" + Motivo + "']");
         campoActual = $(this).attr("id");
         ItemDevolucion = new ItemDev();
-
+        console.log(ItemDevolucion);
         if (obj != null && obj.length > 0) {
             NroMotivo = obj[0].dataset.id;
             if (Motivo != "") {
@@ -451,7 +451,7 @@ $(document).ready(function () {
                 } else {
                     ItemDevolucion.dev_cantidad = CantADev;
                     $("#txtCantDevolver").attr("disabled", "disabled");
-                    if (objPRDDev.pro_codtpopro != 'M' && objPRDDev.pro_ProductoRequiereLote ) {
+                    if (objPRDDev.pro_codtpopro != 'M' && !objPRDDev.pro_ProductoRequiereLote ) {
                         $("#DEVAgregar").removeClass("hidden");
                         $("#btnAgregarDev").removeAttr("disabled", "disabled");
                         $("#btnAgregarDev").focus();
@@ -1165,30 +1165,14 @@ function ObtenerFacturaCliente(pNroFactura) {
                         }
                         break;
                     case 0:
-                        if (diff <= 5) {
-                            fechaOK = true;
-                        }
-                        break;
                     case 1:
-                        if (diff <= 5) {
-                            fechaOK = true;
-                        }
-                        break;
                     case 2:
-                        if (diff <= 5) {
-                            fechaOK = true;
-                        }
-                        break;
                     case 3:
                         if (diff <= 5) {
                             fechaOK = true;
                         }
                         break;
                     case 4:
-                        if (diff <= 3) {
-                            fechaOK = true;
-                        }
-                        break;
                     case 5:
                         if (diff <= 3) {
                             fechaOK = true;
@@ -2358,7 +2342,7 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
             ItemDevolucion.dev_cantidad = CantADev;
             $("#txtCantDevolver").attr("disabled", "disabled");
             //console.log(objPRDDev);
-            if (objPRDDev.pro_codtpopro != 'M' && objPRDDev.pro_ProductoRequiereLote) {
+            if (objPRDDev.pro_codtpopro != 'M' && !objPRDDev.pro_ProductoRequiereLote) {
                 campoActual = "btnAgregarDev";
                 $("#DEVAgregar").removeClass("hidden");
                 $("#btnAgregarDev").removeAttr("disabled", "disabled");
@@ -2561,8 +2545,15 @@ function Imprimir() {
         html += '<table class="table" style="border: 1px solid #cecece;margin-bottom:5px;">';
         html += '<tbody>';
         html += '<tr>';
-        html += '<td width="100%" style="border:none">';
+        html += '<td width="50%" style="border:none">';
         html += Cliente.cli_nombre + '<br>' + Cliente.cli_dirección + "<br>" + Cliente.cli_localidad + " - " + Cliente.cli_codprov;
+        html += '</td>';
+        html += '<td width="50%" style="border:none; text-align:right">';
+        if (esDevVencidos) {
+            html += '<h1><b>VENCIDOS</b></h1>';
+        } else {
+            html += ' ';
+        }
         html += '</td>';
         html += '</tr>';
         html += '</tbody>';
@@ -2686,8 +2677,21 @@ function Imprimir() {
                 SucNombre = 'SUCURSAL CHAÑAR LADEADO';
                 break;
         }
-        html += '<td style="border: none !important;; height: 50px; width: 80%; text-align: left; font-size:16px !important;"><b>Entregar en ' + SucNombre ;
-        html += '</b></td>';
+        //html += '<td style="border: none !important; height: 50px; width: 50%; text-align: left; font-size:16px !important;"><b>Entregar en ' + SucNombre ;
+        //html += '</b><h1><b>VENCIDOS</b></h1></td>';
+        //html += '<td style="border: none !important; height: 50px; width: 30%; text-align: center; font-size:20px !important;">';
+        //if (esDevVencidos) {
+        //    html += '<h1><b>VENCIDOS</b></h1>';
+        //} else {
+        //    html += '';
+        //}
+        html += '<td style="border: none !important; height: 50px; width: 80%; text-align: left; font-size:16px !important;"><b>Entregar en ' + SucNombre;
+        if (esDevVencidos) {
+            html += '</b><h1><b>VENCIDOS</b></h1></td>';
+        } else {
+            html += '</b></td>';
+        }
+        html += '</td>';
         html += '<td style="border: 1px solid #cecece !important; height: 50px; width: 20%">';
         html += '</td>';
         html += '</tr>';

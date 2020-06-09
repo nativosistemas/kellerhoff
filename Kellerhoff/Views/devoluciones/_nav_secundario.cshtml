@@ -41,13 +41,21 @@
                     <a href="/devoluciones/NuevaDevolucionVencidos" @{WriteLiteral(classNuevaDevolucionVencidos);}><i class="fa fa-calendar-minus-o" title="DEVOLUCIÓN DE VENCIDOS"></i><span class="hidden-sm hidden-xs">DEVOLUCIÓN DE VENCIDOS</span></a>
                     <!--<div class="separate"></div>
                     <a href="/devoluciones/NuevaDevolucionFacturaCompleta" @{WriteLiteral(classNuevaDevolucionFacturaCompleta);}><i class="fa fa-file-o" title="DEVOLUCIÓN FACTURA COMPLETA"></i><span class="hidden-sm hidden-xs">DEVOLUCIÓN FACTURA COMPLETA</span></a>-->
-                }
+                        }
             }
 
         </div>
     </div>
 </div>
 
-<input type="hidden" value="@{ WriteLiteral(((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc); }" id="txtIdSucursalCliente" />
+@{
+    string IdSucursalCliente = ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc;
+    if ( IdSucursalCliente == "SN" )
+    {
+        IdSucursalCliente = "CC";
+    }
+    <input type="hidden" value="@{ WriteLiteral(IdSucursalCliente); }" id="txtIdSucursalCliente" />
+}
+
 
 
