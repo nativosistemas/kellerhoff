@@ -8,6 +8,10 @@
 .div_info_mapa, .div_ref_mapa {
     margin-top: -80px;
 }
+.ref_mapa a {
+    padding: 13px 0 13px 10px!important;
+    line-height: 15px;
+}
 .section-gris-claro{padding:10px 0;}
 
 .hospitalario h1 {
