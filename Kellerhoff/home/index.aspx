@@ -98,14 +98,14 @@
 								-->
                                         <a data-role="expand-info" data-info="1" href="">ROSARIO</a>
                                         <a data-role="expand-info" data-info="10" href="">DK HOSPITALARIO</a>
-                                        <a data-role="expand-info" data-info="6" href="">SANTA FE</a>
-                                        <a data-role="expand-info" data-info="2" href="">CHA&Ntilde;AR LADEADO</a>
-                                        <a data-role="expand-info" data-info="3" href="">CONCEPCI&#211;N DEL URUGUAY</a>
-                                        <a data-role="expand-info" data-info="4" href="">CONCORDIA</a>
                                         <a data-role="expand-info" data-info="7" href="">SAN NICOLAS</a>
+                                        <a data-role="expand-info" data-info="2" href="">CHA&Ntilde;AR LADEADO</a>
+                                        <a data-role="expand-info" data-info="6" href="">SANTA FE</a>
                                         <a data-role="expand-info" data-info="5" href="">C&#211;RDOBA</a>
                                         <a data-role="expand-info" data-info="8" href="">VILLA MARÍA</a>
                                         <a data-role="expand-info" data-info="9" href="">RÍO CUARTO</a>
+                                        <a data-role="expand-info" data-info="3" href="">CONCEPCI&#211;N DEL URUGUAY</a>
+                                        <a data-role="expand-info" data-info="4" href="">CONCORDIA</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-5 col-sm-6 div_info_mapa hidden">
