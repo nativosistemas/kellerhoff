@@ -248,7 +248,7 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                         <b>DK HOSPITALARIO</b><br />
                                         <u>Conmutador General</u>: 0341-4239280/4239280<br />
                                         <u>Cuentas Corrientes</u>: 0341-4203329 / 0341-4203336<br />
-                                        <u>Gerente de venta</u>: Carlos Mira<br />
+                                        <u>Gerente de Ventas</u>: Carlos Mira<br />
                                         <u>Responsable Administrativa</u>: María Alejandra Vitali<br />
                                         <u>Promotores</u>: Maximiliano Frontera - Walter Pasquinelli - Federico Gauna - Esteban Cohen<br />
                                         <u>Farmacéutico</u>: Carlos Giadans<br />
