@@ -31,7 +31,7 @@
     <link href="../includes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
     <link href="../includes/home/css/main.css?n=10" rel="stylesheet" />
-    <link href="../includes/home/css/main-overwrite.css?n=1" rel="stylesheet" />
+    <link href="../includes/home/css/main-overwrite.css?n=3" rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" />
 
@@ -317,6 +317,13 @@
                         <div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:3413163291">341 3163291</a></div>
                         <%--                    <div class="clear15"></div>
                     <a class="hidden-xs hidden-sm" href="#" target="_F960AFIPInfo"><img src="../img/home/dataweb.jpg" height="90" border="0"></a>--%>
+                        <div class="clear15"></div>
+                        <div class="hospitalario">
+                            <h1>DK HOSPITALARIO</h1>
+                        </div>
+                        <div class="clear10"></div>
+                        <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80</a></div>
+
                     </div>
                 </div>
             </div>
