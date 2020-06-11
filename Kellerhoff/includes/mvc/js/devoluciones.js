@@ -556,6 +556,7 @@ $(document).ready(function () {
     $("#btnProcesarPrecarga").click(function () {
         ControlarSesion();
         if (ItemsPrecargados.length > 0) {
+            $("#btnProcesarPrecarga").attr('disabled', 'disabled');
             $.ajax({
                 type: "POST",
                 url: "/devoluciones/AgregarSolicitudDevolucionCliente",
@@ -788,6 +789,7 @@ $(document).ready(function () {
         //console.log(ItemsPrecargadosVencidos);
         ControlarSesion();
         if (ItemsPrecargadosVencidos.length > 0) {
+            $("#btnProcesarPrecargaVencidos").attr('disabled','disabled');
             $.ajax({
                 type: "POST",
                 url: "/devoluciones/AgregarSolicitudDevolucionCliente",
