@@ -215,7 +215,7 @@ $(document).ready(function () {
         var obj = $("#MotivoValues").find("option[value='" + Motivo + "']");
         campoActual = $(this).attr("id");
         ItemDevolucion = new ItemDev();
-        console.log(ItemDevolucion);
+        //console.log(ItemDevolucion);
         if (obj != null && obj.length > 0) {
             NroMotivo = obj[0].dataset.id;
             if (Motivo != "") {
@@ -681,7 +681,7 @@ $(document).ready(function () {
 
                 ItemDevolucion.dev_cantidad = CantADev;
                 $("#txtCantDevolverVencidos").attr("disabled", "disabled");
-                console.log(objPRDDev);
+                //console.log(objPRDDev);
                 if (objPRDDev.pro_codtpopro != 'M' && !objPRDDev.pro_ProductoRequiereLote ) {
                     $("#DEVAgregarVencidos").removeClass("hidden");
                     $("#btnAgregarDevVencidos").removeAttr("disabled", "disabled");
@@ -1151,30 +1151,26 @@ function ObtenerFacturaCliente(pNroFactura) {
                 }
 
                 //valores para DESARROLLO
-                    //ahora = new Date('2019/10/15').getTime();
-                    //dia = new Date('2019/10/15').getDay();
-                    //FechaFactura = new Date('2019/10/14').getTime();
+                    //ahora = new Date('2020/06/20').getTime();
+                    //dia = new Date('2020/06/20').getDay();
+                    //FechaFactura = new Date('2020/05/30').getTime();
                 // FIN para DESARROLLO
 
                 var diff = parseInt((ahora - FechaFactura) / (1000 * 60 * 60 * 24));
                 var fechaOK = false;
                 switch (dia) {
                     case 6:
-                        if (diff <= 4) {
+                    case 0:
+                        if (diff < 21) {
                             fechaOK = true;
                         }
                         break;
-                    case 0:
                     case 1:
                     case 2:
                     case 3:
-                        if (diff <= 5) {
-                            fechaOK = true;
-                        }
-                        break;
                     case 4:
                     case 5:
-                        if (diff <= 3) {
+                        if (diff < 22) {
                             fechaOK = true;
                         }
                         break;
@@ -1216,7 +1212,7 @@ function ObtenerFacturaCliente(pNroFactura) {
                         }
                     }
                 } else {
-                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 72 horas de emitida.</h5>");
+                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 15 días hábiles de emitida.</h5>");
                     // $(".fa.fa-times").hide();
                 }
             } else {
@@ -1712,7 +1708,7 @@ function RecuperarItemsDevolucionPrecargaVencidosPorCliente() {
             var html = "";
             $("#tblDevolucionVencidos").html("");
             ItemsPrecargadosVencidos = eval('(' + response + ')');
-            console.log(ItemsPrecargadosVencidos);
+            //console.log(ItemsPrecargadosVencidos);
             if (ItemsPrecargadosVencidos.length > 0) {
                 for (i = 0; i < ItemsPrecargadosVencidos.length; i++) {
                     if (ItemsPrecargadosVencidos[i].dev_fechavencimientoloteToString != null) {
