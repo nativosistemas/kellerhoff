@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/home.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs"
     Inherits="Kellerhoff.home.index" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -25,16 +26,16 @@
                     </div>
                 </div>
             </div>
-            <div class="clear55 hidden-xs"></div>
+            <div class="clear55 hidden-xs clear55_ofertas"></div>
             <div class="clear20 visible-xs"></div>
             <div id="divContenedorOfertas"></div>
         </div>
     </section>
-    
-	<!-- RECALL -->
-    <section id="divContenedorRecallIndex" class="section-blanco" style="display:none;">
-	</section>                    	    
-	<!-- FIN RECALL -->
+
+    <!-- RECALL -->
+    <section id="divContenedorRecallIndex" class="section-blanco" style="display: none;">
+    </section>
+    <!-- FIN RECALL -->
     <asp:Panel ID="Panel_Revista" runat="server" Visible="false">
         <section class="section-revista">
             <div class="container">
@@ -96,14 +97,15 @@
 								donde XX debe ser el ID del div conla informacion, segun se indica abajo
 								-->
                                         <a data-role="expand-info" data-info="1" href="">ROSARIO</a>
-                                        <a data-role="expand-info" data-info="2" href="">CHA&Ntilde;AR LADEADO</a>
-                                        <a data-role="expand-info" data-info="3" href="">CONCEPCI&#211;N DEL URUGUAY</a>
-                                        <a data-role="expand-info" data-info="4" href="">CONCORDIA</a>
-                                        <a data-role="expand-info" data-info="5" href="">C&#211;RDOBA</a>
-                                        <a data-role="expand-info" data-info="6" href="">SANTA FE</a>
+                                        <a data-role="expand-info" data-info="10" href="">DK HOSPITALARIO</a>
                                         <a data-role="expand-info" data-info="7" href="">SAN NICOLAS</a>
+                                        <a data-role="expand-info" data-info="2" href="">CHA&Ntilde;AR LADEADO</a>
+                                        <a data-role="expand-info" data-info="6" href="">SANTA FE</a>
+                                        <a data-role="expand-info" data-info="5" href="">C&#211;RDOBA</a>
                                         <a data-role="expand-info" data-info="8" href="">VILLA MARÍA</a>
                                         <a data-role="expand-info" data-info="9" href="">RÍO CUARTO</a>
+                                        <a data-role="expand-info" data-info="3" href="">CONCEPCI&#211;N DEL URUGUAY</a>
+                                        <a data-role="expand-info" data-info="4" href="">CONCORDIA</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-5 col-sm-6 div_info_mapa hidden">
@@ -122,7 +124,7 @@
                                         <u>Reclamos</u>: 0341-4203314<br />
                                         <u>Mostrador</u>: 0341-4203363<br />
                                         <u>Jefatura de ventas</u>: Joaquín Gamborena<br />
-                                        <u>Promotores</u>: Mario Palacios; Néstor Perez; Facundo Angelini<br />
+                                        <u>Promotores</u>: Mario Palacios - Néstor Perez - Facundo Angelini<br />
                                         <u>Farmacéutica</u>: Cristina Kellerhoff<br />
                                         <u>Domicilio</u>: Pueyrredon 1149<br />
                                         <u>C.P.A.</u>: S2000QIG<br />
@@ -136,8 +138,8 @@
                                         <u>Promotor</u>: Alexis Ronzani<br />
                                         <u>Ctas. Ctes.</u>: Carlos Filipuzzi<br />
                                         <u>Farmacéutico</u>: Juan Carlos Ferraris<br />
-                                        <u>Domicilio</u>: Estanislao López 415<br />
-                                        <u>C.P.A.</u>: S2643CHI<br />
+                                        <u>Domicilio</u>: Belgrano 245<br />
+                                        <u>C.P.A.</u>: S2139AFE<br />
                                         <u>Teléfonos</u>: 03468-481881 (Tel/Fax) / 481117<br />
                                         <u>WhatsApp</u>: 3468 648933<br />
                                         <u>E-Mail</u>: sucursalchanarladeado@kellerhoff.com.ar<br />
@@ -176,14 +178,14 @@
                                         <u>Promotor</u>: José Portelli - Olga Echenique - Juan Pablo Martellotto<br />
                                         <u>Ctas. Ctes.</u>: Carolina Beretta<br />
                                         <u>Farmacéutico</u>: Karina Nieddu<br />
-                                         <u>Supervisor de Ventas</u>: Edgar Martinelli<br />
-<%--DOMICILIO: RAYO CORTADO 2275 - Bº EMPALME
+                                        <u>Supervisor de Ventas</u>: Edgar Martinelli<br />
+                                        <%--DOMICILIO: RAYO CORTADO 2275 - Bº EMPALME
 CPA: X5006IMG
 TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                         <u>Domicilio</u>: RAYO CORTADO 2275 - Bº EMPALME<br />
                                         <u>C.P.A.</u>: X5006IMG<br />
                                         <u>Teléfonos</u>: 0351-5236100 / 0351-5236111 (PEDIDOS)<br />
-<%--                                        <u>Domicilio</u>: Libertad 248<br />
+                                        <%--                                        <u>Domicilio</u>: Libertad 248<br />
                                         <u>C.P.A.</u>: X5000FGF<br />
                                         <u>Teléfonos</u>: 0351-4251118 y Rotativas<br />--%>
                                         <u>WhatsApp</u>: 351 6523189<br />
@@ -218,7 +220,7 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                         <u>Horarios</u>: L a V de 10:00 a 12:00 y de 18:00 a 20:00 hs.<br />
                                         Sáb :  10:00 a 12:00 hs.<br />
                                     </div>
-                                     <div class="info_mapa hidden" data-info="8">
+                                    <div class="info_mapa hidden" data-info="8">
                                         <b>VILLA MARÍA</b><br />
                                         <u>Encargado</u>: Manuel Vinzón<br />
                                         <u>Farmacéutico</u>: Natalia Buhlman<br />
@@ -242,6 +244,19 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                         <u>Horarios</u>: L a V de 8:30 a 21:00  hs.<br />
                                         Sáb :  8:30 a 13:00 hs.<br />
                                     </div>
+                                    <div class="info_mapa hidden" data-info="10">
+                                        <b>DK HOSPITALARIO</b><br />
+                                        <u>Conmutador General</u>: 0341-4239280/4239280<br />
+                                        <u>Cuentas Corrientes</u>: 0341-4203329 / 0341-4203336<br />
+                                        <u>Gerente de Ventas</u>: Carlos Mira<br />
+                                        <u>Responsable Administrativa</u>: María Alejandra Vitali<br />
+                                        <u>Promotores</u>: Maximiliano Frontera - Walter Pasquinelli - Federico Gauna - Esteban Cohen<br />
+                                        <u>Farmacéutico</u>: Carlos Giadans<br />
+                                        <u>Domicilio</u>: Uriburu 1923/1927<br />
+                                        <u>C.P.A.</u>: S2001CFM<br />
+                                        <u>Fax</u>: 0341-4239288<br />
+                                        <u>E-mail</u>: dkinstitucional@kellerhoff.com.ar<br />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -254,7 +269,7 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
 
     <%  AgregarHtmlOculto(); %>
 
-<%--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj5tbgIz5_otRZz97proggQAnX0p1ZyRU"></script>
+    <%--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj5tbgIz5_otRZz97proggQAnX0p1ZyRU"></script>
     <script type="text/javascript" src="../includes/home/js/jquery/maps.js"></script>--%>
     <script src="../includes/home/js/oferta.js?n=9"></script>
     <script src="../includes/home/js/slider.js?n=15"></script>
@@ -285,4 +300,3 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
     </script>
 
 </asp:Content>
-
