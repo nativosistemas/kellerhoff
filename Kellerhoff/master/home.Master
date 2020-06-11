@@ -31,7 +31,7 @@
     <link href="../includes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
     <link href="../includes/home/css/main.css?n=10" rel="stylesheet" />
-    <link href="../includes/home/css/main-overwrite.css?n=1" rel="stylesheet" />
+    <link href="../includes/home/css/main-overwrite.css?n=3" rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" />
 
@@ -223,6 +223,12 @@
                         <a href="" target="_F960AFIPInfo">
                             <img src="../img/home/dataweb.jpg" height="90" border="0" /></a>
                     </div>--%>
+                    <div class="clear55"></div>
+                    <div class="hospitalario">
+                        <h1>DK HOSPITALARIO</h1>
+                    </div>
+                    <div class="clear10"></div>
+                    <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80</a></div>
                 </div>
                 <div class="clear55 visible-sm visible-md"></div>
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ftr_contacto">
@@ -317,6 +323,13 @@
                         <div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:3413163291">341 3163291</a></div>
                         <%--                    <div class="clear15"></div>
                     <a class="hidden-xs hidden-sm" href="#" target="_F960AFIPInfo"><img src="../img/home/dataweb.jpg" height="90" border="0"></a>--%>
+                        <div class="clear55"></div>
+                        <div class="hospitalario">
+                            <h1>DK HOSPITALARIO</h1>
+                        </div>
+                        <div class="clear10"></div>
+                        <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80</a></div>
+
                     </div>
                 </div>
             </div>
@@ -327,7 +340,7 @@
             <div class="col-lg-4 col-md-6 col-sm-5 col-xs-12 padding_left_ftr ftr_contacto">
                 <div class="clear15"></div>
                 <p class="p_11 color_white hidden-xs">&copy; <% Response.Write(DateTime.Now.Year.ToString());%>  Droguer&iacute;a Kellerhoff. Todos los derechos reservados</p>
-<%--                <p class="p_11 color_white visible-xs">&copy; <% Response.Write(DateTime.Now.Year.ToString());%>  Droguer&iacute;a Kellerhoff.</p>--%>
+                <%--                <p class="p_11 color_white visible-xs">&copy; <% Response.Write(DateTime.Now.Year.ToString());%>  Droguer&iacute;a Kellerhoff.</p>--%>
             </div>
             <div class="col-lg-8 col-md-6 col-sm-7 padding_left_ftr ftr_contacto padding_firma">
                 <table border="0" cellspacing="0" cellpadding="0" class="hidden-xs">
@@ -344,7 +357,8 @@
                         <td><a class="mtz" href="http://mestizosweb.com/" target="_blank" title="Mestizos Comunicaci&oacute;n"></a></td>
                     </tr>
                 </table>
-                <div class="col-xs-12 text-center visible-xs"><a href="http://www.nativosistemas.com/" target="_blank" title="Nativo Sistemas"> <img src="../img/mvc/logos/nativo.png" style="height:28px;" /></a></div>
+                <div class="col-xs-12 text-center visible-xs"><a href="http://www.nativosistemas.com/" target="_blank" title="Nativo Sistemas">
+                    <img src="../img/mvc/logos/nativo.png" style="height: 28px;" /></a></div>
             </div>
         </div>
     </div>

@@ -6,5 +6,23 @@
 }
 
 .div_info_mapa, .div_ref_mapa {
-    margin-top: -25px;
+    margin-top: -80px;
+}
+.ref_mapa a {
+    padding: 13px 0 13px 10px!important;
+    line-height: 15px;
+}
+.section-gris-claro{padding:10px 0;}
+
+.hospitalario h1 {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 13px;
+    color: #d6dbdf;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.clear55_ofertas {
+    height: 20px;
 }
