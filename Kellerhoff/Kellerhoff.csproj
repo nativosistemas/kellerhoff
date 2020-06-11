@@ -116,6 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Default.aspx" />
+    <Content Include="archivos\new.png" />
+    <Content Include="archivos\new2.png" />
+    <Content Include="clientes\pages\devoluciones.aspx" />
     <Content Include="clientes\pages\carrodiferido.aspx" />
     <Content Include="clientes\pages\composicionsaldo.aspx" />
     <Content Include="clientes\pages\composicionsaldoCtaCte.aspx" />
@@ -501,6 +504,7 @@
     <Content Include="includes\mvc\js\comprobantes.js" />
     <Content Include="includes\mvc\js\config.js" />
     <Content Include="includes\mvc\js\ctacte.js" />
+    <Content Include="includes\mvc\js\devoluciones.js" />
     <Content Include="includes\mvc\js\documento.js" />
     <Content Include="includes\mvc\js\jquery\function.js" />
     <Content Include="includes\mvc\js\jquery\function_forms.js" />
@@ -759,6 +763,7 @@
     <Content Include="includes\home\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="includes\home\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="archivos\FormatoArchivoTXTFacturas.pdf" />
+    <Content Include="clientes\pages\devoluciones.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -977,7 +982,15 @@
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCCbteParaImprimir.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCResumen.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerComprobantesAImprimirEnBaseAResumenResponse.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerUltimos10ResumenesDePuntoDeVentaResponse.datasource" />
     <None Include="Service References\ServiceReferenceDLL\Service2.disco" />
+    <None Include="Service References\ServiceReferenceDLL\Service1.disco" />
     <Content Include="servicios\descargarArchivo.aspx" />
     <Content Include="servicios\generarCSV.aspx" />
     <Content Include="servicios\generar_archivo.aspx" />
@@ -991,7 +1004,6 @@
     <Content Include="SQLscript\nativosistemas_2020_04_29.sql" />
     <Content Include="SQLscript\nativosistemas_2020_05_05.sql" />
     <Content Include="SQLscript\nativosistemas_2020_05_08.sql" />
-    <Content Include="SQLscript\nativosistemas_2020_06_04.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
     <Content Include="WebService.asmx" />
@@ -1010,6 +1022,15 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\devoluciones\Devoluciones.cshtml" />
+    <Content Include="Views\devoluciones\_nav_secundario.cshtml" />
+    <Content Include="Views\devoluciones\NuevaDevolucion.cshtml" />
+    <Content Include="Views\devoluciones\NuevaDevolucionVencidos.cshtml" />
+    <Content Include="Views\devoluciones\_scriptsDevoluciones.cshtml" />
+    <None Include="Service References\ServiceReferenceDLL\Service1.wsdl" />
+    <Content Include="Views\devoluciones\NotaDevolucion.cshtml" />
+    <Content Include="Views\devoluciones\NuevaDevolucionFacturaCompleta.cshtml" />
+    <Content Include="Views\devoluciones\_scriptsDevsDaterangepicker.cshtml" />
     <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
     <None Include="Web_config\Web.config_produccion">
       <SubType>Designer</SubType>
@@ -1024,6 +1045,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="clientes\pages\devoluciones.aspx.cs">
+      <DependentUpon>devoluciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes\pages\devoluciones.aspx.designer.cs">
+      <DependentUpon>devoluciones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="clientes\pages\carrodiferido.aspx.cs">
       <DependentUpon>carrodiferido.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1111,6 +1139,7 @@
     <Compile Include="Codigo\capaDatos\capaClientes.cs" />
     <Compile Include="Codigo\capaDatos\capaContactos.cs" />
     <Compile Include="Codigo\capaDatos\capaCV.cs" />
+    <Compile Include="Codigo\capaDatos\capaDevoluciones.cs" />
     <Compile Include="Codigo\capaDatos\capaEF.cs" />
     <Compile Include="Codigo\capaDatos\capaHome.cs" />
     <Compile Include="Codigo\capaDatos\capaLogRegistro.cs" />
@@ -1173,6 +1202,7 @@
     </Compile>
     <Compile Include="Controllers\configController.cs" />
     <Compile Include="Controllers\ctacteController.cs" />
+    <Compile Include="Controllers\devolucionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\mvcController.cs" />
     <Compile Include="Filters\AuthorizePermisoAttribute.cs" />

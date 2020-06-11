@@ -1,4 +1,6 @@
-﻿.footer {
+﻿@import url('https://fonts.googleapis.com/css?family=Libre+Barcode+128|Libre+Barcode+39&display=swap');
+
+.footer {
     background-color: #ededed;
         height: 100%;
 }
@@ -265,6 +267,95 @@ color: #66abd8 !important;
     margin: 0;
     font-weight: 600;
 }
+
+.msjList {
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+    font-size:16px;
+    line-height:30px;
+}
+
+.msjList:nth-child(even) {
+    background: #f1f1f1;
+}
+
+.lotesList {
+    list-style: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 30px;
+    padding-left:5px;
+    padding-right:5px;
+}
+.headerlotesList {
+    list-style: none;
+    text-align: left;
+    font-size: 16px;
+    line-height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.fven {
+    float: right;
+}
+
+.lotesList:nth-child(even) {
+    background: #f1f1f1;
+}
+
+#divPanelNroComprobante {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #999;
+    margin-bottom: 1em;
+}
+
+#divPanelNroComprobante input, #divPanelNroComprobante select {
+    margin-bottom: 15px !important;
+}
+
+.tablaDevoluciones thead tr th {
+    padding: 11px 5px !important;
+    border-right: 1px solid #cecece;
+    vertical-align: middle;
+    font-weight: 400 !important;
+    font-size: 11px !important;
+    line-height: 11px;
+    color: #fff !important;
+    border-bottom: none !important;
+}
+
+.tablaDevoluciones thead tr th:last-child {
+    border-right: none !important;
+}
+
+.tablaDevoluciones {
+    border-bottom: 2px solid #34495e;
+}
+
+.botonera_dev {
+    background: #fff;
+    padding: 1em;
+}
+
+
+.tablaDevoluciones td {
+    font-size: 12px !important;
+}
+
+.tablaDevoluciones td .label {
+    font-size: 11px !important;
+}
+.refresh-input {
+    margin-top:1em;
+}
+
+#form_reclamos {
+    transition: all 1s ease-in-out;
+    -webkit-transition: all 1s ease-in-out;
+}
 .SaldoFinalADiciembreH4 {
    
     font-weight: 700;
@@ -288,3 +379,88 @@ color: #66abd8 !important;
         display: none !important;
     }
 }
+
+.nav li.nuevo a h3 {
+    color: forestgreen;
+}
+
+.nuevo {
+    margin-left:60px !important;
+}
+
+.nav li.nuevo a h3::before {
+    content: '';
+    background-image: url(/archivos/new2.png);
+    width: 58px !important;
+    height: 18px;
+    position: absolute;
+    left: -60px;
+    top: -2px;
+}
+
+.sidebar-nav li a.nuevo-celu::after {
+    content: '';
+    background-image: url(/archivos/new.png);
+    width: 58px !important;
+    height: 18px;
+    position: relative;
+    display: inline-block;
+    left: 10px;
+}
+
+.badge-danger {
+    background-color: #e74c3c !important;
+    font-weight: 100;
+    font-size: 16px !important;
+}
+
+@media (min-width : 768px) {
+    .badge-danger {
+        background-color: #e74c3c !important;
+        font-weight: 100;
+        font-size: 12px !important;
+    }
+
+}
+
+header .nav li {
+    margin-right: 15px !important;
+    padding: 0;
+    width: auto !important;
+}
+
+.box {
+    background: white;
+    padding: 1em;
+    border-radius: 0.2rem;
+}
+
+.chk-filtros {
+    height: 17px !important;
+    margin-right: 10px !important;
+    margin-top: 2px !important;
+    float: left !important;
+}
+
+.nav.nav-tabs {
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid darkgrey;
+}
+
+.nav.nav-tabs li {
+    padding: 0 !important;
+    margin-bottom: -1px !important;
+}
+
+.nav.nav-tabs li .active {
+    border: 1px solid darkgrey;
+    /*background: ;*/
+    color: steelblue !important;
+    border-bottom-color: #ededed !important;
+}
+
+.nav.nav-tabs li a:hover {
+    background: #ddd;
+}
+
+

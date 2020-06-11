@@ -317,6 +317,7 @@ function CargarHtmlResumen() {
         }
         strHtml += '</tbody>';
         strHtml += '</table>';
+        console.log(objDocumento);
         console.log(cVencimientosResumen);
         //
         ////var httpRaiz = $('#hiddenRaiz').val();

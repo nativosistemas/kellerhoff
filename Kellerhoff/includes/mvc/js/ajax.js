@@ -1036,6 +1036,84 @@ function enviarConsultaCtaCte(pMail, pComentario) {
         }
     });
 }
+function enviarConsultaReclamo(pMail, pComentario,pNombreProducto) {
+    showCargandoBuscador();
+    $.ajax({
+        type: "POST",
+        url: "/devoluciones/enviarConsultaReclamos",
+        data: {
+            pMail,
+            pComentario,
+            pNombreProducto
+        },
+        success:
+        function (response) {
+            //modalModuloHide();
+            hideCargandoBuscador();
+        },
+        failure: function (response) {
+            //modalModuloHide();
+            hideCargandoBuscador();
+            OnFail(response);
+        },
+        error: function (response) {
+            //modalModuloHide();
+            hideCargandoBuscador();
+            OnFail(response);
+        }
+    });
+}
+function enviarConsultaValePsicotropico(pMail, pComentario,pNombreProducto) {
+    showCargandoBuscador();
+    $.ajax({
+        type: "POST",
+        url: "/devoluciones/enviarConsultaValePsicotropico",
+        data: {
+            pMail,
+            pComentario,
+            pNombreProducto
+        },
+        success:
+        function (response) {
+            //modalModuloHide();
+            hideCargandoBuscador();
+        },
+        failure: function (response) {
+            //modalModuloHide();
+            hideCargandoBuscador();
+            OnFail(response);
+        },
+        error: function (response) {
+            //modalModuloHide();
+            hideCargandoBuscador();
+            OnFail(response);
+        }
+    });
+}
+function ControlarSesion() {
+    $.ajax({
+        type: "POST",
+        url: "/devoluciones/contralarSesion",
+        data: {
+        },
+        success: function (response) {
+            console.log(response);
+            if (response == "False") {
+                mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> ATENCIÓN</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Su sesión ha caducado, por favor vuelva a ingresar.<br><br><button class='btn btn-primary' id='btn_cierre_sesion'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aceptar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></h5>");
+                $("#btn_cierre_sesion").focus();
+                $('body').keypress(function (e) {
+                    if (e.which == 13 || e.which == 9) {
+                        window.location.reload();
+                    }
+                });
+                $("#btn_cierre_sesion").click(function () {
+                    window.location.reload();
+                });
+                return false;
+            }
+        }
+    });
+}
 function ObtenerCreditoDisponible(pCli_login) {
     showCargandoBuscador();
     $.ajax({

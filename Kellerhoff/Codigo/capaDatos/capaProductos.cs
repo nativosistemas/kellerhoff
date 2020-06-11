@@ -46,6 +46,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public int pro_acuerdo { get; set; }
         public string pri_nombreArchivo { get; set; }
         public bool pro_NoTransfersEnClientesPerf { get; set; }
+        public bool pro_AceptaVencidos { get; set; }
         private bool _isMostrarTransfersEnClientesPerf = true;
         public bool isMostrarTransfersEnClientesPerf
         {
@@ -62,6 +63,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public int? pro_PackDeVenta { get; set; }
         public decimal pro_PorcARestarDelDtoDeCliente { get; set; }
         public decimal pro_PrecioBase { get; set; }
+        public bool pro_ProductoRequiereLote { get; set; }
     }
     public class cProductosGenerico : cTransferDetalle
     {
@@ -90,9 +92,11 @@ namespace Kellerhoff.Codigo.capaDatos
             base.pro_isTrazable = pProducto.pro_isTrazable;
             base.pro_NoTransfersEnClientesPerf = pProducto.pro_NoTransfersEnClientesPerf;
             base.pro_Familia = pProducto.pro_Familia;
+            base.pro_AceptaVencidos = pProducto.pro_AceptaVencidos;
             base.pro_PackDeVenta = pProducto.pro_PackDeVenta;
             base.pro_PrecioBase = pProducto.pro_PrecioBase;
             base.pro_PorcARestarDelDtoDeCliente = pProducto.pro_PorcARestarDelDtoDeCliente;
+            base.pro_ProductoRequiereLote = pProducto.pro_ProductoRequiereLote;
             listaSucursalStocks = new List<cSucursalStocks>();
             isProductoNoEncontrado = false;
         }
@@ -1014,6 +1018,31 @@ namespace Kellerhoff.Codigo.capaDatos
             catch (Exception ex)
             {
                 return false;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
+
+        public static DataTable DescargaMedicamentosYAccesoriosNoIncluidosEnAlfaBeta()
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spMedicamentosYAccesoriosNoIncluidosEnAlfaBeta", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                Conn.Open();
+                DataTable table = new DataTable();
+                table.Load(cmdComandoInicio.ExecuteReader());
+                return table;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
             finally
             {

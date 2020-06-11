@@ -40,6 +40,22 @@ var cliente = null;
 
 $(document).ready(function () {
 
+    novedades();
+
+    $('.s_menu').click(function () {
+        var nodo = $(this).attr("id");
+        if ($("#d_" + nodo).is(":visible")) {
+            $("#d_" + nodo).slideUp(300);
+            $("#angle_" + nodo).removeClass();
+            $("#angle_" + nodo).addClass("fa fa-angle-down");
+            return false;
+        } else {
+            $("#angle_" + nodo).removeClass();
+            $("#angle_" + nodo).addClass("fa fa-angle-up");
+            $("#d_" + nodo).slideDown(300);
+            return false;
+        }
+    });
     if (cliente == null) {
         cliente = eval('(' + $('#hiddenCliente').val() + ')');
         if (typeof cliente == 'undefined') {
@@ -67,12 +83,13 @@ $(document).ready(function () {
     }
     setTimeout(function () { MostrarMensajeImportante(); }, 300);
 
+   
 });
 function MostrarMensajePopUp() {
     if (longPopUpMostrar > 0) {
-        var indexPopUp = listaPopUp.length - longPopUpMostrar;
-        mensaje_PopUp(indexPopUp);
-        longPopUpMostrar = longPopUpMostrar - 1;
+			var indexPopUp = listaPopUp.length - longPopUpMostrar;
+			mensaje_PopUp(indexPopUp);
+			longPopUpMostrar = longPopUpMostrar - 1;
     }
 }
 function MostrarMensajeImportante() {
@@ -129,16 +146,7 @@ function cli_isAceptaPsicotropicos() {
 function cli_codprov() {
     return cliente.cli_codprov;
 }
-function getSucursalClienteInfo() {
-    if (listaSucursales != null) {
-        for (var i = 0; i < listaSucursales.length; i++) {
-            if (cli_codsuc() == listaSucursales[i].sde_sucursal) {
-                return listaSucursales[i];
-            }
-        }
-    }
-    return null;
-}
+
 function volverBuscador() {
     if (isCarritoExclusivo) {
         if (isCarritoDiferido) {
@@ -371,28 +379,13 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
 
-$('.s_menu').click(function () {
-    var nodo = $(this).attr("id");
-    if ($("#d_" + nodo).is(":visible")) {
-        $("#d_" + nodo).slideUp(300);
-        $("#angle_" + nodo).removeClass();
-        $("#angle_" + nodo).addClass("fa fa-angle-down");
-        return false;
-    } else {
-        $("#angle_" + nodo).removeClass();
-        $("#angle_" + nodo).addClass("fa fa-angle-up");
-        $("#d_" + nodo).slideDown(300);
-        return false;
-    }
-});
-
 function onclickCreditoDisponible() {
     ObtenerCreditoDisponible(cli_login());
 }
 function OnCallBackObtenerCreditoDisponible(args) {
     args = eval('(' + args + ')');
-
-
+  
+   
     var creditoTotal = args.CreditoDisponibleTotal;
     var creditoSemanal = args.CreditoDisponibleSemanal;
 
@@ -428,6 +421,46 @@ function onclickEnviarConsulta() {
     if (isNotNullEmpty(vMail) && isNotNullEmpty(vComentario)) {
         modalModuloHide();
         enviarConsultaCtaCte(vMail, vComentario);
+    } else {
+        var strHtml = '';
+        strHtml += '<div class="col-lg-12">';
+        strHtml += '<p class="text-center">Complete los datos, por favor.</p>';
+        strHtml += '<p>&nbsp;</p>';
+        strHtml += '<p>&nbsp;</p>';
+        strHtml += '<div class="clear10"></div>';
+        strHtml += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal">CERRAR</a>';
+        strHtml += '</div>';
+
+        mensaje_alert_generic('Información', strHtml);
+    }
+}
+function onclickEnviarConsultaAReclamos() {
+    var vMail = $('#idReclamoMail').val();
+    var vNombreProducto = $('#idReclamoProducto').val();
+    var vComentario = $('#idReclamoComentario').val();
+    if (isNotNullEmpty(vMail) && isNotNullEmpty(vComentario)) {
+        modalModuloHide();
+        enviarConsultaReclamo(vMail, vComentario,vNombreProducto);
+    } else {
+        var strHtml = '';
+        strHtml += '<div class="col-lg-12">';
+        strHtml += '<p class="text-center">Complete los datos, por favor.</p>';
+        strHtml += '<p>&nbsp;</p>';
+        strHtml += '<p>&nbsp;</p>';
+        strHtml += '<div class="clear10"></div>';
+        strHtml += '<a class="btn_vaciar float-left" href="#" data-dismiss="modal">CERRAR</a>';
+        strHtml += '</div>';
+
+        mensaje_alert_generic('Información', strHtml);
+    }
+}
+function onclickEnviarConsultaAValePsicotropico() {
+    var vMail = $('#idValeMail').val();
+    var vNombreProducto = $('#idValeProducto').val();
+    var vComentario = $('#idValeComentario').val();
+    if (isNotNullEmpty(vMail) && isNotNullEmpty(vComentario)) {
+        modalModuloHide();
+        enviarConsultaValePsicotropico(vMail, vComentario, vNombreProducto);
     } else {
         var strHtml = '';
         strHtml += '<div class="col-lg-12">';
@@ -512,6 +545,20 @@ function funLog() {
     //    }
     //});
 }
+
+function novedades() {
+    var html = $('.nuevo').attr('data-fecha'),
+        fechaDissmis = new Date($('.nuevo').attr('data-fecha')),
+        htmlCel = $('.nuevo-celu').html(),
+        fechaDissmisCel = new Date($('.nuevo-celu').attr('data-fecha')),
+        hoy = new Date();
+    if (fechaDissmis < hoy) {
+        $('.nuevo').removeClass('nuevo');
+    }
+    if (fechaDissmisCel < hoy) {
+        $('.nuevo-celu').removeClass('nuevo-celu');
+    }
+}
 function isMostrarImput_FacturaTrazablesProvincia(pSucursal, pIsProductoTrazable) {
     if (listaSucursales != null) {
         if (pIsProductoTrazable) {
@@ -530,52 +577,4 @@ function isMostrarImput_FacturaTrazablesProvincia(pSucursal, pIsProductoTrazable
         }
     }// fin if (listaSucursales != null && listaProductosBuscados != null) {
     return true;
-}
-function isMostrarImput_pedirCC(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
-    var sucursalInfo = getSucursalClienteInfo();
-    if (sucursalInfo != null &&
-        pSucursalEvaluar == 'CC' && // Casa central
-        !sucursalInfo.suc_pedirCC_ok &&
-        ((pPro_codtpopro == 'P' &&
-        sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)//TIPOPRODUCTO_Perfumeria
-        || !sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)) {
-        var sucReferencia = cli_codsuc();
-        if (sucursalInfo.suc_pedirCC_sucursalReferencia != null) {
-            sucReferencia = sucursalInfo.suc_pedirCC_sucursalReferencia;
-        }
-        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
-            if (pListaSucursalStocks[iSucursal].stk_codsuc === sucReferencia) {
-                if (pListaSucursalStocks[iSucursal].stk_stock === 'S') {
-                    return false;
-                }
-                break;
-            }
-        }
-    }
-    return true;
-}
-function getCantidad_SubirArchivo_pedirCC(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
-    var sucursalInfo = getSucursalClienteInfo();
-    if (sucursalInfo != null) {
-        var sucReferencia = cli_codsuc();
-        if (sucursalInfo.suc_pedirCC_sucursalReferencia != null) {
-            sucReferencia = sucursalInfo.suc_pedirCC_sucursalReferencia;
-        }
-        if (pSucursalEvaluar == sucReferencia &&
-           !sucursalInfo.suc_pedirCC_ok &&
-            ((pPro_codtpopro == 'P' &&
-        sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)//TIPOPRODUCTO_Perfumeria
-        || !sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)) //TIPOPRODUCTO_Perfumeria
-        {
-            for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
-                if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CC') {// Casa central
-                    if (isNotNullEmpty(pListaSucursalStocks[iSucursal].cantidadSucursal)) {
-                        return pListaSucursalStocks[iSucursal].cantidadSucursal;
-                    }
-                    break;
-                }
-            }
-        }
-    }
-    return '';
 }

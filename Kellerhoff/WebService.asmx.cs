@@ -86,6 +86,76 @@ namespace Kellerhoff
             //}
         }
 
+        public static List<ServiceReferenceDLL.cLote> ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(string pNombreProducto, string pNumeroLote, string pLoginWeb)
+        {
+            List<ServiceReferenceDLL.cLote> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(pNombreProducto, pNumeroLote, pLoginWeb);
+            }
+            return resultado;
+        }
+
+        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> RecuperarDevolucionesPorCliente(string pLoginWeb)
+        {
+            List<ServiceReferenceDLL.cDevolucionItemPrecarga> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerDevolucionesPorCliente(pLoginWeb);
+            }
+            return resultado;
+        }
+
+        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> RecuperarDevolucionesPorClientePorNumero(string pNumeroDevolucion,string pLoginWeb)
+        {
+            List<ServiceReferenceDLL.cDevolucionItemPrecarga> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerDevolucionesPorClientePorNumero(pNumeroDevolucion,pLoginWeb);
+            }
+            return resultado;
+        }
+
+        public static string AgregarSolicitudDevolucionCliente(List<cDevolucionItemPrecarga> Item, string pLoginWeb)
+        {
+            string resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+
+                resultado = capaWebServiceDLL.AgregarSolicitudDevolucionCliente(Item, pLoginWeb);
+            }
+            return resultado;
+        }
+
+        public static long ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(string NombreProducto, string NumeroFactura, string pLoginWeb)
+        {
+            long resultado = 0;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+
+                resultado = capaWebServiceDLL.ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(NombreProducto,NumeroFactura, pLoginWeb);
+            }
+            return resultado;
+        }
+
+        public static bool EsFacturaConDevolucionesEnProceso(string pNumeroFactura, string pLoginWeb)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                return capaWebServiceDLL.EsFacturaConDevolucionesEnProceso(pNumeroFactura, pLoginWeb);
+            }
+            return false;
+        }
+
+        public static List<ServiceReferenceDLL.cFactura> ObtenerFacturasPorUltimosNumeros(string pNumeroFactura, string pLoginWeb)
+        {
+            List<ServiceReferenceDLL.cFactura> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerFacturasPorUltimosNumeros(pNumeroFactura, pLoginWeb);
+            }
+            return resultado;
+        }
 
         private static cArchivo ConvertToArchivo(DataRow pItem)
         {
@@ -3316,6 +3386,265 @@ namespace Kellerhoff
             }
             return resultado;
         }
+        /// DEVOLUCIONES
+        /// ///////////////////
+        /// 
+        public static List<cDevolucionItemPrecarga> RecuperarItemsDevolucionPrecargaPorCliente(int pIdCliente)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                List<cDevolucionItemPrecarga> resultado = new List<cDevolucionItemPrecarga>();
+                DataTable tabla = capaDevoluciones.RecuperarItemsDevolucionPrecargaPorCliente(pIdCliente);
+                if (tabla != null)
+                {
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        resultado.Add(ConvertToItemDevPrecarga(item));
+                    }
+                }
+                return resultado;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static List<cDevolucionItemPrecarga> RecuperarItemsDevolucionPrecargaVencidosPorCliente(int pIdCliente)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                List<cDevolucionItemPrecarga> resultado = new List<cDevolucionItemPrecarga>();
+                DataTable tabla = capaDevoluciones.RecuperarItemsDevolucionPrecargaVencidosPorCliente(pIdCliente);
+                if (tabla != null)
+                {
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        resultado.Add(ConvertToItemDevPrecarga(item));
+                    }
+                }
+                return resultado;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static List<cDevolucionItemPrecarga> RecuperarItemsDevolucionPrecargaFacturaCompletaPorCliente(int pIdCliente)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                List<cDevolucionItemPrecarga> resultado = new List<cDevolucionItemPrecarga>();
+                DataTable tabla = capaDevoluciones.RecuperarItemsDevolucionPrecargaFacturaCompletaPorCliente(pIdCliente);
+                if (tabla != null)
+                {
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        resultado.Add(ConvertToItemDevPrecarga(item));
+                    }
+                }
+                return resultado;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool AgregarDevolucionItemPrecarga(cDevolucionItemPrecarga Item)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.AgregarDevolucionItemPrecarga(Item);
+            }
+            return result;
+        }
+
+        public static bool EliminarDevolucionItemPrecarga(int NumeroItem)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.EliminarDevolucionItemPrecarga(NumeroItem);
+            }
+            return result;
+        }
+
+        public static bool EliminarPrecargaDevolucionPorCliente(int NumeroCliente)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.EliminarPrecargaDevolucionPorCliente(NumeroCliente);
+            }
+            return result;
+        }
+
+        public static bool EliminarPrecargaDevolucionVencidosPorCliente(int NumeroCliente)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.EliminarPrecargaDevolucionVencidosPorCliente(NumeroCliente);
+            }
+            return result;
+        }
+
+        public static bool EliminarPrecargaDevolucionFacturaCompletaPorCliente(int NumeroCliente)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.EliminarPrecargaDevolucionFacturaCompletaPorCliente(NumeroCliente);
+            }
+            return result;
+        }
+
+        //public static List<cDevolucionItemPrecarga> RecuperarDevolucionesPorCliente(int pIdCliente)
+        //{
+        //    if (VerificarPermisos(CredencialAutenticacion))
+        //    {
+        //        List<cDevolucionItemPrecarga> resultado = new List<cDevolucionItemPrecarga>();
+        //        DataTable tabla = capaDevoluciones.RecuperarItemsDevolucionPrecargaPorCliente(pIdCliente);
+        //        if (tabla != null)
+        //        {
+        //            foreach (DataRow item in tabla.Rows)
+        //            {
+        //                resultado.Add(ConvertToItemDevPrecarga(item));
+        //            }
+        //        }
+        //        return resultado;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
+
+        private static cDevolucionItemPrecarga ConvertToItemDevPrecarga(DataRow pItem)
+        {
+            cDevolucionItemPrecarga obj = new cDevolucionItemPrecarga();
+
+            if (pItem["dev_numeroitem"] != DBNull.Value)
+            {
+                obj.dev_numeroitem = Convert.ToInt32(pItem["dev_numeroitem"]);
+            }
+
+            if (pItem["dev_numerocliente"] != DBNull.Value)
+            {
+                obj.dev_numerocliente = Convert.ToInt32(pItem["dev_numerocliente"]);
+            }
+            if (pItem["dev_numerofactura"] != DBNull.Value)
+            {
+                obj.dev_numerofactura = pItem["dev_numerofactura"].ToString();
+            }
+            if (pItem["dev_nombreproductodevolucion"] != DBNull.Value)
+            {
+                obj.dev_nombreproductodevolucion = pItem["dev_nombreproductodevolucion"].ToString();
+            }
+            if (pItem["dev_fecha"] != DBNull.Value)
+            {
+                obj.dev_fecha = Convert.ToDateTime(pItem["dev_fecha"]);
+                obj.dev_fechaToString = Convert.ToDateTime(pItem["dev_fecha"]).ToShortDateString();
+            }
+            if (pItem["dev_motivo"] != DBNull.Value)
+            {
+                obj.dev_motivo = Convert.ToInt32(pItem["dev_motivo"]);
+            }
+            if (pItem["dev_numeroitemfactura"] != DBNull.Value)
+            {
+                obj.dev_numeroitemfactura = Convert.ToInt32(pItem["dev_numeroitemfactura"]);
+            }
+            if (pItem["dev_nombreproductofactura"] != DBNull.Value)
+            {
+                obj.dev_nombreproductofactura = pItem["dev_nombreproductofactura"].ToString();
+            }
+            if (pItem["dev_cantidad"] != DBNull.Value)
+            {
+                obj.dev_cantidad = Convert.ToInt32(pItem["dev_cantidad"]);
+            }
+            if (pItem["dev_numerolote"] != DBNull.Value)
+            {
+                obj.dev_numerolote = pItem["dev_numerolote"].ToString();
+            }
+            if (pItem["dev_fechavencimientolote"] != DBNull.Value)
+            {
+                obj.dev_fechavencimientolote = Convert.ToDateTime(pItem["dev_fechavencimientolote"]);
+                obj.dev_fechavencimientoloteToString = Convert.ToDateTime(pItem["dev_fechavencimientolote"]).ToShortDateString();
+            }
+            if (pItem["dev_idsucursal"] != DBNull.Value)
+            {
+                obj.dev_idsucursal = pItem["dev_idsucursal"].ToString();
+            }
+            return obj;
+        }
+
+        private static cDevolucionItemPrecarga ConvertToItemDevolucion(DataRow pItem)
+        {
+            cDevolucionItemPrecarga obj = new cDevolucionItemPrecarga();
+
+            if (pItem["dev_numeroitem"] != DBNull.Value)
+            {
+                obj.dev_numeroitem = Convert.ToInt32(pItem["dev_numeroitem"]);
+            }
+
+            if (pItem["dev_numerocliente"] != DBNull.Value)
+            {
+                obj.dev_numerocliente = Convert.ToInt32(pItem["dev_numerocliente"]);
+            }
+            if (pItem["dev_numerofactura"] != DBNull.Value)
+            {
+                obj.dev_numerofactura = pItem["dev_numerofactura"].ToString();
+            }
+            if (pItem["dev_numerofactura"] != DBNull.Value)
+            {
+                obj.dev_numerofactura = pItem["dev_numerofactura"].ToString();
+            }
+            if (pItem["dev_nombreproductodevolucion"] != DBNull.Value)
+            {
+                obj.dev_nombreproductodevolucion = pItem["dev_nombreproductodevolucion"].ToString();
+            }
+            if (pItem["dev_fecha"] != DBNull.Value)
+            {
+                obj.dev_fecha = Convert.ToDateTime(pItem["dev_fecha"]);
+                obj.dev_fechaToString = Convert.ToDateTime(pItem["dev_fecha"]).ToShortDateString();
+            }
+            if (pItem["dev_motivo"] != DBNull.Value)
+            {
+                obj.dev_motivo = Convert.ToInt32(pItem["dev_motivo"]);
+            }
+            if (pItem["dev_numeroitemfactura"] != DBNull.Value)
+            {
+                obj.dev_numeroitemfactura = Convert.ToInt32(pItem["dev_numeroitemfactura"]);
+            }
+            if (pItem["dev_nombreproductofactura"] != DBNull.Value)
+            {
+                obj.dev_nombreproductofactura = pItem["dev_nombreproductofactura"].ToString();
+            }
+            if (pItem["dev_cantidad"] != DBNull.Value)
+            {
+                obj.dev_cantidad = Convert.ToInt32(pItem["dev_cantidad"]);
+            }
+            if (pItem["dev_numerolote"] != DBNull.Value)
+            {
+                obj.dev_numerolote = pItem["dev_numerolote"].ToString();
+            }
+            if (pItem["dev_fechavencimientolote"] != DBNull.Value)
+            {
+                obj.dev_fechavencimientolote = Convert.ToDateTime(pItem["dev_fechavencimientolote"]);
+                obj.dev_fechavencimientoloteToString = Convert.ToDateTime(pItem["dev_fechavencimientolote"]).ToShortDateString();
+            }
+            return obj;
+        }
+
+
         public static ServiceReferenceDLL.cDllRespuestaResumenAbierto ObtenerResumenAbierto(string pLoginWeb)
         {
             ServiceReferenceDLL.cDllRespuestaResumenAbierto resultado = null;
@@ -5192,6 +5521,31 @@ namespace Kellerhoff
             cMail.enviarMail(System.Configuration.ConfigurationManager.AppSettings["mail_ctacte"], "Consultas cuentas corrientes", "Cliente: " + NombreYApellido + "<br/>Mail: " + pMail + "<br/>Comentario: " + pComentario);
             return resultado;
         }
+
+        public static int enviarConsultaReclamos(string pMail, string pComentario, string pNombreProducto)
+        {
+            int resultado = 0;
+            string NombreYApellido = string.Empty;
+            if (HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+            {
+                NombreYApellido = ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).NombreYApellido;
+            }
+            cMail.enviarMail(System.Configuration.ConfigurationManager.AppSettings["mail_reclamos"], "Consulta por el producto " + pNombreProducto + " con CADENA DE FRÍO", "Cliente: " + NombreYApellido + "<br/>Mail: " + pMail + "<br/>Comentario: " + pComentario);
+            return resultado;
+        }
+
+        public static int enviarConsultaValePsicotropico(string pMail, string pComentario, string pNombreProducto)
+        {
+            int resultado = 0;
+            string NombreYApellido = string.Empty;
+            if (HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+            {
+                NombreYApellido = ((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).NombreYApellido;
+            }
+            cMail.enviarMail(System.Configuration.ConfigurationManager.AppSettings["mail_reclamos"], "Consulta por el producto " + pNombreProducto + " el cual requiere VALE DE PSICOTRÓPICO", "Cliente: " + NombreYApellido + "<br/>Mail: " + pMail + "<br/>Comentario: " + pComentario);
+            return resultado;
+        }
+
         public static decimal? ObtenerCreditoDisponibleSemanal(string pLoginWeb)
         {
             decimal? resultado = null;

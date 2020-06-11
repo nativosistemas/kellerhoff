@@ -5677,6 +5677,13 @@ namespace Kellerhoff.ServiceReferenceDLL {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSolicitudesDevolucionClientePorNumero", ReplyAction="*")]
         System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClientePorNumeroResponse> ObtenerSolicitudesDevolucionClientePorNumeroAsync(Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClientePorNumeroRequest request);
         
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento NombreProductoF del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSolicitudesDevolucionClienteSegunFiltros", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse ObtenerSolicitudesDevolucionClienteSegunFiltros(Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSolicitudesDevolucionClienteSegunFiltros", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse> ObtenerSolicitudesDevolucionClienteSegunFiltrosAsync(Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest request);
+        
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento NumeroFactura del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EsFacturaConDevolucionesEnProceso", ReplyAction="*")]
         Kellerhoff.ServiceReferenceDLL.EsFacturaConDevolucionesEnProcesoResponse EsFacturaConDevolucionesEnProceso(Kellerhoff.ServiceReferenceDLL.EsFacturaConDevolucionesEnProcesoRequest request);
@@ -8799,6 +8806,94 @@ namespace Kellerhoff.ServiceReferenceDLL {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerSolicitudesDevolucionClienteSegunFiltros", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequestBody Body;
+        
+        public ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest() {
+        }
+        
+        public ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest(Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerSolicitudesDevolucionClienteSegunFiltrosRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public System.DateTime Desde;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public System.DateTime Hasta;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string NombreProductoF;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string NombreProductoD;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string NumeroFactura;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string LoginWeb;
+        
+        public ObtenerSolicitudesDevolucionClienteSegunFiltrosRequestBody() {
+        }
+        
+        public ObtenerSolicitudesDevolucionClienteSegunFiltrosRequestBody(System.DateTime Desde, System.DateTime Hasta, string NombreProductoF, string NombreProductoD, string NumeroFactura, string LoginWeb) {
+            this.Desde = Desde;
+            this.Hasta = Hasta;
+            this.NombreProductoF = NombreProductoF;
+            this.NombreProductoD = NombreProductoD;
+            this.NumeroFactura = NumeroFactura;
+            this.LoginWeb = LoginWeb;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponseBody Body;
+        
+        public ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse() {
+        }
+        
+        public ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse(Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerSolicitudesDevolucionClienteSegunFiltrosResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga ObtenerSolicitudesDevolucionClienteSegunFiltrosResult;
+        
+        public ObtenerSolicitudesDevolucionClienteSegunFiltrosResponseBody() {
+        }
+        
+        public ObtenerSolicitudesDevolucionClienteSegunFiltrosResponseBody(Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga ObtenerSolicitudesDevolucionClienteSegunFiltrosResult) {
+            this.ObtenerSolicitudesDevolucionClienteSegunFiltrosResult = ObtenerSolicitudesDevolucionClienteSegunFiltrosResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class EsFacturaConDevolucionesEnProcesoRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="EsFacturaConDevolucionesEnProceso", Namespace="http://tempuri.org/", Order=0)]
@@ -10290,6 +10385,41 @@ namespace Kellerhoff.ServiceReferenceDLL {
             inValue.Body.NumeroSolicitud = NumeroSolicitud;
             inValue.Body.LoginWeb = LoginWeb;
             return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerSolicitudesDevolucionClientePorNumeroAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerSolicitudesDevolucionClienteSegunFiltros(Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest request) {
+            return base.Channel.ObtenerSolicitudesDevolucionClienteSegunFiltros(request);
+        }
+        
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga ObtenerSolicitudesDevolucionClienteSegunFiltros(System.DateTime Desde, System.DateTime Hasta, string NombreProductoF, string NombreProductoD, string NumeroFactura, string LoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequestBody();
+            inValue.Body.Desde = Desde;
+            inValue.Body.Hasta = Hasta;
+            inValue.Body.NombreProductoF = NombreProductoF;
+            inValue.Body.NombreProductoD = NombreProductoD;
+            inValue.Body.NumeroFactura = NumeroFactura;
+            inValue.Body.LoginWeb = LoginWeb;
+            Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerSolicitudesDevolucionClienteSegunFiltros(inValue);
+            return retVal.Body.ObtenerSolicitudesDevolucionClienteSegunFiltrosResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerSolicitudesDevolucionClienteSegunFiltrosAsync(Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest request) {
+            return base.Channel.ObtenerSolicitudesDevolucionClienteSegunFiltrosAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse> ObtenerSolicitudesDevolucionClienteSegunFiltrosAsync(System.DateTime Desde, System.DateTime Hasta, string NombreProductoF, string NombreProductoD, string NumeroFactura, string LoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosRequestBody();
+            inValue.Body.Desde = Desde;
+            inValue.Body.Hasta = Hasta;
+            inValue.Body.NombreProductoF = NombreProductoF;
+            inValue.Body.NombreProductoD = NombreProductoD;
+            inValue.Body.NumeroFactura = NumeroFactura;
+            inValue.Body.LoginWeb = LoginWeb;
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerSolicitudesDevolucionClienteSegunFiltrosAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
