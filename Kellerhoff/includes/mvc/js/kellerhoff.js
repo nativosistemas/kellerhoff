@@ -146,7 +146,16 @@ function cli_isAceptaPsicotropicos() {
 function cli_codprov() {
     return cliente.cli_codprov;
 }
-
+function getSucursalClienteInfo() {
+    if (listaSucursales != null) {
+        for (var i = 0; i < listaSucursales.length; i++) {
+            if (cli_codsuc() == listaSucursales[i].sde_sucursal) {
+                return listaSucursales[i];
+            }
+        }
+    }
+    return null;
+}
 function volverBuscador() {
     if (isCarritoExclusivo) {
         if (isCarritoDiferido) {
@@ -577,4 +586,52 @@ function isMostrarImput_FacturaTrazablesProvincia(pSucursal, pIsProductoTrazable
         }
     }// fin if (listaSucursales != null && listaProductosBuscados != null) {
     return true;
+}
+function isMostrarImput_pedirCC(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
+    var sucursalInfo = getSucursalClienteInfo();
+    if (sucursalInfo != null &&
+        pSucursalEvaluar == 'CC' && // Casa central
+        !sucursalInfo.suc_pedirCC_ok &&
+        ((pPro_codtpopro == 'P' &&
+        sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)//TIPOPRODUCTO_Perfumeria
+        || !sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)) {
+        var sucReferencia = cli_codsuc();
+        if (sucursalInfo.suc_pedirCC_sucursalReferencia != null) {
+            sucReferencia = sucursalInfo.suc_pedirCC_sucursalReferencia;
+        }
+        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
+            if (pListaSucursalStocks[iSucursal].stk_codsuc === sucReferencia) {
+                if (pListaSucursalStocks[iSucursal].stk_stock === 'S') {
+                    return false;
+                }
+                break;
+            }
+        }
+    }
+    return true;
+}
+function getCantidad_SubirArchivo_pedirCC(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
+    var sucursalInfo = getSucursalClienteInfo();
+    if (sucursalInfo != null) {
+        var sucReferencia = cli_codsuc();
+        if (sucursalInfo.suc_pedirCC_sucursalReferencia != null) {
+            sucReferencia = sucursalInfo.suc_pedirCC_sucursalReferencia;
+        }
+        if (pSucursalEvaluar == sucReferencia &&
+           !sucursalInfo.suc_pedirCC_ok &&
+            ((pPro_codtpopro == 'P' &&
+        sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)//TIPOPRODUCTO_Perfumeria
+        || !sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)) //TIPOPRODUCTO_Perfumeria
+        {
+            for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
+                if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CC') {// Casa central
+                    if (isNotNullEmpty(pListaSucursalStocks[iSucursal].cantidadSucursal)) {
+                        return pListaSucursalStocks[iSucursal].cantidadSucursal;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    return '';
 }
