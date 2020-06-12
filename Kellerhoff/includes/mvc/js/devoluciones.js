@@ -21,6 +21,7 @@ var isArchivoGenerado = false;
 var isLlamarArchivoPDF = true;
 var contadorPDF = 0;
 var Devoluciones = [];
+var Cant = 0;
 var OrdenNro = false, OrdenFecha = false, OrdenEstado = false;
 
 var colMotivos = [
@@ -289,7 +290,11 @@ $(document).ready(function () {
                 return;
             }
             NombreProductoFact = objFactura.lista[NroItem].Descripcion;
-            Cant = objFactura.lista[NroItem].Cantidad;
+            Cant = 0;
+            var cProds = objFactura.lista.filter(item => item.Descripcion === NombreProductoFact);
+            for (var i = 0; i < cProds.length; i++) {
+                Cant += Number(cProds[i].Cantidad);
+            }
             ItemDevolucion.dev_nombreproductofactura = NombreProductoFact;
             ItemDevolucion.dev_numeroitemfactura = objFactura.lista[NroItem].NumeroItem;
             if (NroMotivo == 1) {
@@ -342,7 +347,11 @@ $(document).ready(function () {
                                 }
                                 NombreProductoFact = objFactura.lista[NroItem].Descripcion;
                                 $("#cmbNombreProducto").val(NombreProductoFact);
-                                Cant = objFactura.lista[NroItem].Cantidad;
+                                Cant = 0;
+                                var cProds = objFactura.lista.filter(item => item.Descripcion === NombreProductoFact);
+                                for (var i = 0; i < cProds.length; i++) {
+                                    Cant += Number(cProds[i].Cantidad);
+                                }
                                 ItemDevolucion.dev_nombreproductofactura = NombreProductoFact;
                                 ItemDevolucion.dev_numeroitemfactura = objFactura.lista[NroItem].NumeroItem;
                                 if (NroMotivo == 1) {
@@ -447,7 +456,7 @@ $(document).ready(function () {
 
                 if (objItemFac != "" && (NroMotivo == 3 || NroMotivo == 5 || NroMotivo == 6 || NroMotivo == 2 || NroMotivo == 1)) {
                     //console.log(objItemFac);
-                    var cantSol = ObtenerCantidadPendiente(objItemFac.Descripcion, objItemFac.NumeroFactura, objItemFac.Cantidad, CantADev);
+                    var cantSol = ObtenerCantidadPendiente(objItemFac.Descripcion, objItemFac.NumeroFactura, Cant, CantADev);
                 } else {
                     ItemDevolucion.dev_cantidad = CantADev;
                     $("#txtCantDevolver").attr("disabled", "disabled");
@@ -556,6 +565,7 @@ $(document).ready(function () {
     $("#btnProcesarPrecarga").click(function () {
         ControlarSesion();
         if (ItemsPrecargados.length > 0) {
+            showCargandoBuscador();
             $("#btnProcesarPrecarga").attr('disabled', 'disabled');
             $.ajax({
                 type: "POST",
@@ -789,7 +799,8 @@ $(document).ready(function () {
         //console.log(ItemsPrecargadosVencidos);
         ControlarSesion();
         if (ItemsPrecargadosVencidos.length > 0) {
-            $("#btnProcesarPrecargaVencidos").attr('disabled','disabled');
+            $("#btnProcesarPrecargaVencidos").attr('disabled', 'disabled');
+            showCargandoBuscador();
             $.ajax({
                 type: "POST",
                 url: "/devoluciones/AgregarSolicitudDevolucionCliente",
@@ -1180,11 +1191,14 @@ function ObtenerFacturaCliente(pNroFactura) {
 
                 if (fechaOK) {
                     var html = "";
-                    ItemDevolucion.dev_numerofactura = objFactura.Numero
-                    //console.log(objFactura.lista);
+                    ItemDevolucion.dev_numerofactura = objFactura.Numero;
+                    var cProductosDespliegue = [];
+                    console.log(objFactura.lista);
                     for (var i = 0; i < objFactura.lista.length; i++) {
-                        if (objFactura.lista[i].Cantidad != "" && objFactura.lista[i].PrecioUnitario != "0,00") {
+                        var existe = cProductosDespliegue.find(prd => prd === objFactura.lista[i].Descripcion);
+                        if (objFactura.lista[i].Cantidad != "" && !existe) {
                             html += "<option value=\"" + objFactura.lista[i].Descripcion + "\"  data-id=\"" + i + "\">";
+                            cProductosDespliegue.push(objFactura.lista[i].Descripcion);
                         }
                         $("#cmbTipoComprobante").attr("disabled", "disabled");
                         $("#txtNroComprobante").attr("disabled", "disabled");
