@@ -509,15 +509,19 @@ $(document).ready(function () {
                             var DFecha = LoteDev.FechaVencimientoToString.split("/"),
                                 fechaLote = new Date(DFecha[2] + "-" + DFecha[1] + "-" + DFecha[0]);
                             var ahora = new Date();
-                            //// Para DESARROLLO
-                            ////###########################################
-                            //ahora = new Date('2020-10-15');
+                            // Para DESARROLLO
+                            // ###########################################
+                            // ahora = new Date('2020-10-15');
 
                             var fechaMin = new Date(ahora.getFullYear(), (ahora.getMonth() + 1), 0);
+                            var fechaMaxVtoCorto = new Date( ahora.getFullYear(), (ahora.getMonth() + 7),0 );
                             if (fechaLote < fechaMin) {
                                 mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Solo se evaluarán <b>DEVOLUCIONES</b> de los productos cuya fecha de vencimiento sea posterior al mes en curso. Caso contrario debe pasarlas por <b>DEVOLUCIONES DE VENCIDOS</b>.</h5>");
                                 $("#modalModulo").bind("click");
                                 return false;
+                            } else if ( NroMotivo == 5 && fechaLote > fechaMaxVtoCorto ) {
+                                mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Solo se evaluarán <b>DEVOLUCIONES</b> de los productos cuya fecha de vencimiento sea posterior al mes en curso. Caso contrario debe pasarlas por <b>DEVOLUCIONES DE VENCIDOS</b>.</h5>");
+                                $("#modalModulo").bind("click");
                             } else {
                                 setTimeout(function () {
                                     $("#txtNumeroLote").val(colLotes[idItem].NumeroLote);
