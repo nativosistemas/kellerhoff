@@ -520,8 +520,9 @@ $(document).ready(function () {
                                 $("#modalModulo").bind("click");
                                 return false;
                             } else if ( NroMotivo == 5 && fechaLote > fechaMaxVtoCorto ) {
-                                mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Solo se evaluarán <b>DEVOLUCIONES</b> de los productos cuya fecha de vencimiento sea posterior al mes en curso. Caso contrario debe pasarlas por <b>DEVOLUCIONES DE VENCIDOS</b>.</h5>");
+                                mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La <b>Fecha de Vencimiento del Lote</b> del producto para realizar una devolución por <em>Corto Venciemiento</em> debe estar dentro de los <b>seis (6) meses</b> posteriores al mes en curso.</h5>");
                                 $("#modalModulo").bind("click");
+                                return false;
                             } else {
                                 setTimeout(function () {
                                     $("#txtNumeroLote").val(colLotes[idItem].NumeroLote);
