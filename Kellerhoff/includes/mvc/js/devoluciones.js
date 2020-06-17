@@ -32,7 +32,8 @@ var colMotivos = [
     'Producto de más sin ser facturado',
     'Corto vencimiento',
     'Producto con Falla de Fabricante',
-    'Producto Vencido'
+    'Producto Vencido',
+    'Pedido por error'
 ];
 
 
@@ -454,7 +455,7 @@ $(document).ready(function () {
                     return false;
                 }
 
-                if (objItemFac != "" && (NroMotivo == 3 || NroMotivo == 5 || NroMotivo == 6 || NroMotivo == 2 || NroMotivo == 1)) {
+                if (objItemFac != "" && (NroMotivo != 4)) {
                     //console.log(objItemFac);
                     var cantSol = ObtenerCantidadPendiente(objItemFac.Descripcion, objItemFac.NumeroFactura, Cant, CantADev);
                 } else {
