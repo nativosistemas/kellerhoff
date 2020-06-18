@@ -2358,7 +2358,7 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
 
             ItemDevolucion.dev_cantidad = CantADev;
             $("#txtCantDevolver").attr("disabled", "disabled");
-            //console.log(objPRDDev);
+            console.log(objPRDDev);
             if (objPRDDev.pro_codtpopro != 'M' && !objPRDDev.pro_ProductoRequiereLote) {
                 campoActual = "btnAgregarDev";
                 $("#DEVAgregar").removeClass("hidden");
