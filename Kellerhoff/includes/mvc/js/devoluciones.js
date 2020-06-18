@@ -454,7 +454,7 @@ $(document).ready(function () {
                     return false;
                 }
 
-                if (objItemFac != "" && (NroMotivo == 3 || NroMotivo == 5 || NroMotivo == 6 || NroMotivo == 2 || NroMotivo == 1)) {
+                if (objItemFac != "" && NroMotivo != 4) {
                     //console.log(objItemFac);
                     var cantSol = ObtenerCantidadPendiente(objItemFac.Descripcion, objItemFac.NumeroFactura, Cant, CantADev);
                 } else {
@@ -519,8 +519,8 @@ $(document).ready(function () {
                                 mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Solo se evaluarán <b>DEVOLUCIONES</b> de los productos cuya fecha de vencimiento sea posterior al mes en curso. Caso contrario debe pasarlas por <b>DEVOLUCIONES DE VENCIDOS</b>.</h5>");
                                 $("#modalModulo").bind("click");
                                 return false;
-                            } else if ( NroMotivo == 5 && fechaLote > fechaMaxVtoCorto ) {
-                                mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La <b>Fecha de Vencimiento del Lote</b> del producto para realizar una devolución por <em>Corto Venciemiento</em> debe estar dentro de los <b>seis (6) meses</b> posteriores al mes en curso.</h5>");
+                            } else if (NroMotivo == 5 && fechaLote > fechaMaxVtoCorto) {
+                                mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La <b>Fecha de Vencimiento del Lote</b> del producto para realizar una devolución por <em>Corto Vencimiento</em> debe estar dentro de los <b>seis (6) meses</b> posteriores al mes en curso.</h5>");
                                 $("#modalModulo").bind("click");
                                 return false;
                             } else {
@@ -2358,7 +2358,7 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
 
             ItemDevolucion.dev_cantidad = CantADev;
             $("#txtCantDevolver").attr("disabled", "disabled");
-            //console.log(objPRDDev);
+            console.log(objPRDDev);
             if (objPRDDev.pro_codtpopro != 'M' && !objPRDDev.pro_ProductoRequiereLote) {
                 campoActual = "btnAgregarDev";
                 $("#DEVAgregar").removeClass("hidden");
