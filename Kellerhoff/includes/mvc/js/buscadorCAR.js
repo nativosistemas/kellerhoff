@@ -1020,7 +1020,7 @@ function funExcedeImporteAceptar() {
             }
         }
         if (isSubirPedido) {
-            CargarUnidadesRenglones();
+           CargarUnidadesRenglones();
         }
         isEnterExcedeImporte = false;
         isExcedeImporte = false;
@@ -1062,6 +1062,23 @@ function genericInputSucSelect(pFila, pColumna) {
         }
     }
 }
+function genericInputSucGetValue(pFila, pColumna) {
+    if (pFila != null && pColumna != null) {
+        var mytext = $("#inputSuc" + pFila + "_" + pColumna);
+        if ($("#divBody").hasClass("modal-open-Celular")) {
+            mytext = $("#inputSucCelular" + pFila + "_" + pColumna);
+        }
+        if (mytext.length > 0) {
+        } else {
+            mytext = null;
+        }
+        if (mytext != null) {
+           return mytext.val();
+        }
+    }
+    return '';
+}
+
 function funExcedeImporteCancelar() {
     if (ExcedeImporteFila != null && ExcedeImporteColumna != null && ExcedeImporteValor != null) {
         genericInputSucSelect(ExcedeImporteFila, ExcedeImporteColumna);
