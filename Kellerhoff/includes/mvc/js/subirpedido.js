@@ -119,7 +119,8 @@ function CargarUnidadesRenglones() {
                     if (nroValor > 0) {
                         for (var iSucursalesUnidadesRenglones = 0; iSucursalesUnidadesRenglones < listaSucursalesUnidadesRenglones.length; iSucursalesUnidadesRenglones++) {
                             if (listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal == listaProductosBuscados[iProducto].listaSucursalStocks[iSucursalStocks].stk_codsuc
-                                && isMostrarImput_FacturaTrazablesProvincia(listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal, listaProductosBuscados[iProducto].pro_isTrazable)) {
+                                && isMostrarImput_FacturaTrazablesProvincia(listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal, listaProductosBuscados[iProducto].pro_isTrazable)
+                                && isMostrarImput_pedirCC(listaProductosBuscados[iProducto].pro_codtpopro, listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal, listaProductosBuscados[iProducto].listaSucursalStocks)) {
                                 listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].Unidades += nroValor;
                                 listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].Renglones += 1;
                                 break;
