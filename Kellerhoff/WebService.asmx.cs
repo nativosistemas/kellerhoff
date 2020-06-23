@@ -3219,14 +3219,14 @@ namespace Kellerhoff
         //        return -100;
         //    }
         //}
-        public static List<cFaltantesConProblemasCrediticiosPadre> RecuperarFaltasProblemasCrediticios(int fpc_codCliente, int fpc_tipo, int pCantidadDia)
+        public static List<cFaltantesConProblemasCrediticiosPadre> RecuperarFaltasProblemasCrediticios(int fpc_codCliente, int fpc_tipo, int pCantidadDia, string pSucursal)
         {
             List<cFaltantesConProblemasCrediticiosPadre> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 cClientes oCliente = RecuperarClientePorId(fpc_codCliente);
                 //DataTable tabla = capaLogRegistro.RecuperarFaltasProblemasCrediticios(fpc_codCliente, fpc_tipo, pCantidadDia);
-                DataSet dsResultado = capaLogRegistro.RecuperarFaltasProblemasCrediticios(fpc_codCliente, fpc_tipo, pCantidadDia);
+                DataSet dsResultado = capaLogRegistro.RecuperarFaltasProblemasCrediticios(fpc_codCliente, fpc_tipo, pCantidadDia, pSucursal);
                 List<cTransferDetalle> listaTransferDetalle = new List<cTransferDetalle>();
                 DataTable tablaTransferDetalle = dsResultado.Tables[1];
                 foreach (DataRow itemTransferDetalle in tablaTransferDetalle.Rows)
@@ -3236,7 +3236,7 @@ namespace Kellerhoff
                     listaTransferDetalle.Add(objTransferDetalle);
                 }
 
-                resultado = ConvertDataTableAClase(dsResultado.Tables[0], listaTransferDetalle, oCliente);
+                resultado = ConvertDataTableAClase(dsResultado.Tables[0], dsResultado.Tables[2], listaTransferDetalle, oCliente);
                 return resultado;
             }
             else
@@ -3244,13 +3244,13 @@ namespace Kellerhoff
                 return resultado;
             }
         }
-        public static List<cFaltantesConProblemasCrediticiosPadre> RecuperarFaltasProblemasCrediticios_TodosEstados(int fpc_codCliente, int fpc_tipo, int pCantidadDia)
+        public static List<cFaltantesConProblemasCrediticiosPadre> RecuperarFaltasProblemasCrediticios_TodosEstados(int fpc_codCliente, int fpc_tipo, int pCantidadDia, string pSucursal)
         {
             List<cFaltantesConProblemasCrediticiosPadre> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 cClientes oCliente = RecuperarClientePorId(fpc_codCliente);
-                DataSet dsResultado = capaLogRegistro.RecuperarFaltasProblemasCrediticios_TodosEstados(fpc_codCliente, fpc_tipo, pCantidadDia);
+                DataSet dsResultado = capaLogRegistro.RecuperarFaltasProblemasCrediticios_TodosEstados(fpc_codCliente, fpc_tipo, pCantidadDia, pSucursal);
                 List<cTransferDetalle> listaTransferDetalle = new List<cTransferDetalle>();
                 DataTable tablaTransferDetalle = dsResultado.Tables[1];
                 foreach (DataRow itemTransferDetalle in tablaTransferDetalle.Rows)
@@ -3259,7 +3259,7 @@ namespace Kellerhoff
                     objTransferDetalle.CargarTransfer(ConvertToTransfer(itemTransferDetalle));
                     listaTransferDetalle.Add(objTransferDetalle);
                 }
-                resultado = ConvertDataTableAClase(dsResultado.Tables[0], listaTransferDetalle, oCliente);
+                resultado = ConvertDataTableAClase(dsResultado.Tables[0], dsResultado.Tables[2],listaTransferDetalle, oCliente);
                 return resultado;
             }
             else
@@ -3267,7 +3267,7 @@ namespace Kellerhoff
                 return resultado;
             }
         }
-        public static List<cFaltantesConProblemasCrediticiosPadre> ConvertDataTableAClase(DataTable tabla, List<cTransferDetalle> listaTransferDetalle, cClientes pClientes)
+        public static List<cFaltantesConProblemasCrediticiosPadre> ConvertDataTableAClase(DataTable tabla, DataTable tablaSucursalStocks, List<cTransferDetalle> listaTransferDetalle, cClientes pClientes)
         {
             List<cFaltantesConProblemasCrediticiosPadre> resultado = null;
             if (tabla != null)
@@ -3283,31 +3283,7 @@ namespace Kellerhoff
                     obj.fpc_codSucursal = resultadoTemporalDistinct[i].fpc_codSucursal;
                     obj.suc_nombre = resultadoTemporalDistinct[i].suc_nombre;
                     obj.fpc_tipo = resultadoTemporalDistinct[i].fpc_tipo;
-                    obj.listaProductos = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tabla.AsEnumerable().Where(xRow => xRow.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal).CopyToDataTable(), null, listaTransferDetalle, Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito, obj.fpc_codSucursal);
-                    /*
-                    obj.listaProductos = new List<cFaltantesConProblemasCrediticios>();
-                    foreach (var item in tabla.AsEnumerable().Where(xRow => xRow.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal))
-                    {
-                        cProductos oTemp = ConvertToProductos(item);
-                        //cFaltantesConProblemasCrediticios o = new cFaltantesConProblemasCrediticios(oTemp);
-                        cFaltantesConProblemasCrediticios o = new cFaltantesConProblemasCrediticios();
-                        o.fpc_cantidad = item.Field<int>("fpc_cantidad");
-
-                        o.fpc_nombreProducto = item.Field<string>("fpc_nombreProducto");
-                        o.stk_stock = item.Field<string>("stk_stock");
-                        o.PrecioFinal = FuncionesPersonalizadas.ObtenerPrecioFinal(pClientes, oTemp);
-                        if (item["pro_ofeunidades"] != DBNull.Value)
-                        {
-                            o.pro_ofeunidades = item.Field<int>("pro_ofeunidades");
-                        }
-                        if (item["pro_ofeporcentaje"] != DBNull.Value)
-                        {
-                            o.pro_ofeporcentaje = item.Field<decimal>("pro_ofeporcentaje");
-                        }
-                        obj.listaProductos.Add(o);
-
-                    }
-                    */
+                    obj.listaProductos = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tabla.AsEnumerable().Where(xRow => xRow.Field<string>("fpc_codSucursal") == obj.fpc_codSucursal).CopyToDataTable(), tablaSucursalStocks, listaTransferDetalle, Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito, obj.fpc_codSucursal);
                     resultado.Add(obj);
                 }
             }

@@ -19,16 +19,16 @@ namespace Kellerhoff.Codigo.clases
                 if (item["pro_codigo"] != DBNull.Value)
                 {
                     List<cSucursalStocks> tempListaSucursalStocks = new List<cSucursalStocks>();
-                    if (pCargarProductosBuscador == Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito)
-                    {
-                        cSucursalStocks oStocks = new cSucursalStocks { stk_codpro = item["pro_codigo"].ToString(), stk_codsuc = item["fpc_codSucursal"].ToString(), stk_stock = item["stk_stock"].ToString() };
-                        tempListaSucursalStocks.Add(oStocks);
-                    }
-                    else
-                    {
+                    //if (pCargarProductosBuscador == Constantes.CargarProductosBuscador.isRecuperadorFaltaCredito)
+                    //{
+                    //    cSucursalStocks oStocks = new cSucursalStocks { stk_codpro = item["pro_codigo"].ToString(), stk_codsuc = item["fpc_codSucursal"].ToString(), stk_stock = item["stk_stock"].ToString() };
+                    //    tempListaSucursalStocks.Add(oStocks);
+                    //}
+                    //else
+                    //{
                         tempListaSucursalStocks = (from r in tablaSucursalStocks.Select("stk_codpro = '" + item["pro_codigo"].ToString() + "'").AsEnumerable()
                                                    select new cSucursalStocks { stk_codpro = r["stk_codpro"].ToString(), stk_codsuc = r["stk_codsuc"].ToString(), stk_stock = r["stk_stock"].ToString() }).ToList();
-                    }
+                    //}
                     if (tempListaSucursalStocks.Count > 0)
                     {
                         cProductosGenerico obj = new cProductosGenerico();
@@ -1130,9 +1130,9 @@ namespace Kellerhoff.Codigo.clases
                     isAgregar = false;
                 }
             }
-            if (isAgregar)
+            if (isAgregar && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                List<cFaltantesConProblemasCrediticiosPadre> listaRecuperador = WebService.RecuperarFaltasProblemasCrediticios(pIdCliente, 1, 14); ;
+                List<cFaltantesConProblemasCrediticiosPadre> listaRecuperador = WebService.RecuperarFaltasProblemasCrediticios(pIdCliente, 1, 14, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc); ;
                 if (listaRecuperador != null)
                 {
                     HttpContext.Current.Session["clientesDefault_CantRecuperadorFalta"] = listaRecuperador.Count;
