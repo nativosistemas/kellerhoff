@@ -107,6 +107,10 @@ namespace Kellerhoff.Codigo.clases
                         {
                             obj.pro_AceptaVencidos = Convert.ToBoolean(item["pro_AceptaVencidos"]);
                         }
+                        if (item["pro_ProductoRequiereLote"] != DBNull.Value)
+                        {
+                            obj.pro_ProductoRequiereLote = Convert.ToBoolean(item["pro_ProductoRequiereLote"]);
+                        }
                         if (item["pro_canmaxima"] != DBNull.Value)
                         {
                             obj.pro_canmaxima = Convert.ToInt32(item["pro_canmaxima"]);

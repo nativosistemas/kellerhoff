@@ -21,6 +21,7 @@ var isArchivoGenerado = false;
 var isLlamarArchivoPDF = true;
 var contadorPDF = 0;
 var Devoluciones = [];
+var Cant = 0;
 var OrdenNro = false, OrdenFecha = false, OrdenEstado = false;
 
 var colMotivos = [
@@ -215,7 +216,7 @@ $(document).ready(function () {
         var obj = $("#MotivoValues").find("option[value='" + Motivo + "']");
         campoActual = $(this).attr("id");
         ItemDevolucion = new ItemDev();
-        console.log(ItemDevolucion);
+        //console.log(ItemDevolucion);
         if (obj != null && obj.length > 0) {
             NroMotivo = obj[0].dataset.id;
             if (Motivo != "") {
@@ -289,7 +290,11 @@ $(document).ready(function () {
                 return;
             }
             NombreProductoFact = objFactura.lista[NroItem].Descripcion;
-            Cant = objFactura.lista[NroItem].Cantidad;
+            Cant = 0;
+            var cProds = objFactura.lista.filter(item => item.Descripcion === NombreProductoFact);
+            for (var i = 0; i < cProds.length; i++) {
+                Cant += Number(cProds[i].Cantidad);
+            }
             ItemDevolucion.dev_nombreproductofactura = NombreProductoFact;
             ItemDevolucion.dev_numeroitemfactura = objFactura.lista[NroItem].NumeroItem;
             if (NroMotivo == 1) {
@@ -342,7 +347,11 @@ $(document).ready(function () {
                                 }
                                 NombreProductoFact = objFactura.lista[NroItem].Descripcion;
                                 $("#cmbNombreProducto").val(NombreProductoFact);
-                                Cant = objFactura.lista[NroItem].Cantidad;
+                                Cant = 0;
+                                var cProds = objFactura.lista.filter(item => item.Descripcion === NombreProductoFact);
+                                for (var i = 0; i < cProds.length; i++) {
+                                    Cant += Number(cProds[i].Cantidad);
+                                }
                                 ItemDevolucion.dev_nombreproductofactura = NombreProductoFact;
                                 ItemDevolucion.dev_numeroitemfactura = objFactura.lista[NroItem].NumeroItem;
                                 if (NroMotivo == 1) {
@@ -445,9 +454,9 @@ $(document).ready(function () {
                     return false;
                 }
 
-                if (objItemFac != "" && (NroMotivo == 3 || NroMotivo == 5 || NroMotivo == 6 || NroMotivo == 2 || NroMotivo == 1)) {
+                if (objItemFac != "" && NroMotivo != 4) {
                     //console.log(objItemFac);
-                    var cantSol = ObtenerCantidadPendiente(objItemFac.Descripcion, objItemFac.NumeroFactura, objItemFac.Cantidad, CantADev);
+                    var cantSol = ObtenerCantidadPendiente(objItemFac.Descripcion, objItemFac.NumeroFactura, Cant, CantADev);
                 } else {
                     ItemDevolucion.dev_cantidad = CantADev;
                     $("#txtCantDevolver").attr("disabled", "disabled");
@@ -500,13 +509,18 @@ $(document).ready(function () {
                             var DFecha = LoteDev.FechaVencimientoToString.split("/"),
                                 fechaLote = new Date(DFecha[2] + "-" + DFecha[1] + "-" + DFecha[0]);
                             var ahora = new Date();
-                            //// Para DESARROLLO
-                            ////###########################################
-                            //ahora = new Date('2020-10-15');
+                            // Para DESARROLLO
+                            // ###########################################
+                            // ahora = new Date('2020-10-15');
 
                             var fechaMin = new Date(ahora.getFullYear(), (ahora.getMonth() + 1), 0);
+                            var fechaMaxVtoCorto = new Date( ahora.getFullYear(), (ahora.getMonth() + 7),0 );
                             if (fechaLote < fechaMin) {
                                 mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Solo se evaluarán <b>DEVOLUCIONES</b> de los productos cuya fecha de vencimiento sea posterior al mes en curso. Caso contrario debe pasarlas por <b>DEVOLUCIONES DE VENCIDOS</b>.</h5>");
+                                $("#modalModulo").bind("click");
+                                return false;
+                            } else if (NroMotivo == 5 && fechaLote > fechaMaxVtoCorto) {
+                                mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La <b>Fecha de Vencimiento del Lote</b> del producto para realizar una devolución por <em>Corto Vencimiento</em> debe estar dentro de los <b>seis (6) meses</b> posteriores al mes en curso.</h5>");
                                 $("#modalModulo").bind("click");
                                 return false;
                             } else {
@@ -556,6 +570,8 @@ $(document).ready(function () {
     $("#btnProcesarPrecarga").click(function () {
         ControlarSesion();
         if (ItemsPrecargados.length > 0) {
+            showCargandoBuscador();
+            $("#btnProcesarPrecarga").attr('disabled', 'disabled');
             $.ajax({
                 type: "POST",
                 url: "/devoluciones/AgregarSolicitudDevolucionCliente",
@@ -681,7 +697,7 @@ $(document).ready(function () {
 
                 ItemDevolucion.dev_cantidad = CantADev;
                 $("#txtCantDevolverVencidos").attr("disabled", "disabled");
-                console.log(objPRDDev);
+                //console.log(objPRDDev);
                 if (objPRDDev.pro_codtpopro != 'M' && !objPRDDev.pro_ProductoRequiereLote ) {
                     $("#DEVAgregarVencidos").removeClass("hidden");
                     $("#btnAgregarDevVencidos").removeAttr("disabled", "disabled");
@@ -788,6 +804,8 @@ $(document).ready(function () {
         //console.log(ItemsPrecargadosVencidos);
         ControlarSesion();
         if (ItemsPrecargadosVencidos.length > 0) {
+            $("#btnProcesarPrecargaVencidos").attr('disabled', 'disabled');
+            showCargandoBuscador();
             $.ajax({
                 type: "POST",
                 url: "/devoluciones/AgregarSolicitudDevolucionCliente",
@@ -1151,30 +1169,26 @@ function ObtenerFacturaCliente(pNroFactura) {
                 }
 
                 //valores para DESARROLLO
-                    //ahora = new Date('2019/10/15').getTime();
-                    //dia = new Date('2019/10/15').getDay();
-                    //FechaFactura = new Date('2019/10/14').getTime();
+                    //ahora = new Date('2020/06/20').getTime();
+                    //dia = new Date('2020/06/20').getDay();
+                    //FechaFactura = new Date('2020/05/30').getTime();
                 // FIN para DESARROLLO
 
                 var diff = parseInt((ahora - FechaFactura) / (1000 * 60 * 60 * 24));
                 var fechaOK = false;
                 switch (dia) {
                     case 6:
-                        if (diff <= 4) {
+                    case 0:
+                        if (diff < 21) {
                             fechaOK = true;
                         }
                         break;
-                    case 0:
                     case 1:
                     case 2:
                     case 3:
-                        if (diff <= 5) {
-                            fechaOK = true;
-                        }
-                        break;
                     case 4:
                     case 5:
-                        if (diff <= 3) {
+                        if (diff < 22) {
                             fechaOK = true;
                         }
                         break;
@@ -1182,11 +1196,14 @@ function ObtenerFacturaCliente(pNroFactura) {
 
                 if (fechaOK) {
                     var html = "";
-                    ItemDevolucion.dev_numerofactura = objFactura.Numero
-                    //console.log(objFactura.lista);
+                    ItemDevolucion.dev_numerofactura = objFactura.Numero;
+                    var cProductosDespliegue = [];
+                    console.log(objFactura.lista);
                     for (var i = 0; i < objFactura.lista.length; i++) {
-                        if (objFactura.lista[i].Cantidad != "" && objFactura.lista[i].PrecioUnitario != "0,00") {
+                        var existe = cProductosDespliegue.find(prd => prd === objFactura.lista[i].Descripcion);
+                        if (objFactura.lista[i].Cantidad != "" && !existe) {
                             html += "<option value=\"" + objFactura.lista[i].Descripcion + "\"  data-id=\"" + i + "\">";
+                            cProductosDespliegue.push(objFactura.lista[i].Descripcion);
                         }
                         $("#cmbTipoComprobante").attr("disabled", "disabled");
                         $("#txtNroComprobante").attr("disabled", "disabled");
@@ -1216,7 +1233,7 @@ function ObtenerFacturaCliente(pNroFactura) {
                         }
                     }
                 } else {
-                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 72 horas de emitida.</h5>");
+                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 15 días hábiles de emitida.</h5>");
                     // $(".fa.fa-times").hide();
                 }
             } else {
@@ -1712,7 +1729,7 @@ function RecuperarItemsDevolucionPrecargaVencidosPorCliente() {
             var html = "";
             $("#tblDevolucionVencidos").html("");
             ItemsPrecargadosVencidos = eval('(' + response + ')');
-            console.log(ItemsPrecargadosVencidos);
+            //console.log(ItemsPrecargadosVencidos);
             if (ItemsPrecargadosVencidos.length > 0) {
                 for (i = 0; i < ItemsPrecargadosVencidos.length; i++) {
                     if (ItemsPrecargadosVencidos[i].dev_fechavencimientoloteToString != null) {
@@ -2341,7 +2358,7 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
 
             ItemDevolucion.dev_cantidad = CantADev;
             $("#txtCantDevolver").attr("disabled", "disabled");
-            //console.log(objPRDDev);
+            console.log(objPRDDev);
             if (objPRDDev.pro_codtpopro != 'M' && !objPRDDev.pro_ProductoRequiereLote) {
                 campoActual = "btnAgregarDev";
                 $("#DEVAgregar").removeClass("hidden");

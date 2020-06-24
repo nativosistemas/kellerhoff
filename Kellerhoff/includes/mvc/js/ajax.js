@@ -1097,7 +1097,7 @@ function ControlarSesion() {
         data: {
         },
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             if (response == "False") {
                 mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> ATENCIÓN</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Su sesión ha caducado, por favor vuelva a ingresar.<br><br><button class='btn btn-primary' id='btn_cierre_sesion'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aceptar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></h5>");
                 $("#btn_cierre_sesion").focus();
