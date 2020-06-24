@@ -5,7 +5,7 @@
   GO
   ---
   
-create procedure [LogRegistro].[spRecuperarFaltasProblemasCrediticiosTodosEstadosV2_new]
+create procedure [LogRegistro].[spRecuperarFaltasProblemasCrediticiosTodosEstadosV2]
 @fpc_codCliente int,
 @fpc_tipo int,
 @cantidadDia int,
@@ -128,7 +128,7 @@ WHERE stk_codpro in (select pro_codigo from #tempTablaProductos)
 AND stk_codsuc in (select sde_sucursalDependiente from Clientes.tbl_sucursalDependiente where sde_sucursal = @Sucursal)
 GO
 ---
-create procedure [LogRegistro].[spRecuperarFaltasProblemasCrediticiosV2_new]
+create procedure [LogRegistro].[spRecuperarFaltasProblemasCrediticiosV2]
 @fpc_codCliente int,
 @fpc_tipo int,
 @cantidadDia int,

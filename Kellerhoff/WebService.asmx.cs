@@ -3199,33 +3199,12 @@ namespace Kellerhoff
             }
             return resultado;
         }
-        //public static int RecuperarFaltantesProblemasCrediticios(int fpc_codCarrito, string fpc_codSucursal, int fpc_codCliente, string fpc_nombreProducto, int fpc_cantidad, int fpc_tipo)
-        //{
-        //    if (VerificarPermisos(CredencialAutenticacion))
-        //    {
-        //        DataSet dsResultado = capaLogRegistro.GestiónFaltantesProblemasCrediticios(null, fpc_codCarrito, fpc_codSucursal, fpc_codCliente, fpc_nombreProducto, fpc_cantidad, fpc_tipo, null, Constantes.cSQL_SELECT);
-        //        int resultado = -1;
-        //        if (dsResultado != null)
-        //        {
-        //            if (dsResultado.Tables["FaltantesProblemasCrediticios"].Rows[0]["fpc_id"] != DBNull.Value)
-        //            {
-        //                resultado = Convert.ToInt32(dsResultado.Tables["FaltantesProblemasCrediticios"].Rows[0]["fpc_id"]);
-        //            }
-        //        }
-        //        return resultado;
-        //    }
-        //    else
-        //    {
-        //        return -100;
-        //    }
-        //}
         public static List<cFaltantesConProblemasCrediticiosPadre> RecuperarFaltasProblemasCrediticios(int fpc_codCliente, int fpc_tipo, int pCantidadDia, string pSucursal)
         {
             List<cFaltantesConProblemasCrediticiosPadre> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 cClientes oCliente = RecuperarClientePorId(fpc_codCliente);
-                //DataTable tabla = capaLogRegistro.RecuperarFaltasProblemasCrediticios(fpc_codCliente, fpc_tipo, pCantidadDia);
                 DataSet dsResultado = capaLogRegistro.RecuperarFaltasProblemasCrediticios(fpc_codCliente, fpc_tipo, pCantidadDia, pSucursal);
                 List<cTransferDetalle> listaTransferDetalle = new List<cTransferDetalle>();
                 DataTable tablaTransferDetalle = dsResultado.Tables[1];
