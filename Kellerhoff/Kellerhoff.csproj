@@ -763,6 +763,7 @@
     <Content Include="includes\home\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="includes\home\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="archivos\FormatoArchivoTXTFacturas.pdf" />
+    <Content Include="clientes\pages\devoluciones.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -984,7 +985,12 @@
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerSolicitudesDevolucionClienteSegunFiltrosResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCCbteParaImprimir.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCResumen.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerComprobantesAImprimirEnBaseAResumenResponse.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerUltimos10ResumenesDePuntoDeVentaResponse.datasource" />
     <None Include="Service References\ServiceReferenceDLL\Service2.disco" />
+    <None Include="Service References\ServiceReferenceDLL\Service1.disco" />
     <Content Include="servicios\descargarArchivo.aspx" />
     <Content Include="servicios\generarCSV.aspx" />
     <Content Include="servicios\generar_archivo.aspx" />
@@ -997,6 +1003,8 @@
     <Content Include="SQLscript\nativosistemas_2020_04_02.sql" />
     <Content Include="SQLscript\nativosistemas_2020_04_29.sql" />
     <Content Include="SQLscript\nativosistemas_2020_05_05.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_05_08.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_06_23.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
     <Content Include="WebService.asmx" />
