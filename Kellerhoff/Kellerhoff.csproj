@@ -989,8 +989,8 @@
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCResumen.datasource" />
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerComprobantesAImprimirEnBaseAResumenResponse.datasource" />
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerUltimos10ResumenesDePuntoDeVentaResponse.datasource" />
-    <None Include="Service References\ServiceReferenceDLL\Service2.disco" />
     <None Include="Service References\ServiceReferenceDLL\Service1.disco" />
+    <None Include="Service References\ServiceReferenceDLL\Service2.disco" />
     <Content Include="servicios\descargarArchivo.aspx" />
     <Content Include="servicios\generarCSV.aspx" />
     <Content Include="servicios\generar_archivo.aspx" />
