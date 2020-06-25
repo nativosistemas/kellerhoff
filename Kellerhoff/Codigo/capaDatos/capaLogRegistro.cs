@@ -819,27 +819,24 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataSet RecuperarFaltasProblemasCrediticios(int fpc_codCliente, int fpc_tipo, int pDia)
+        public static DataSet RecuperarFaltasProblemasCrediticios(int fpc_codCliente, int fpc_tipo, int pDia, string pSucursal)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarFaltasProblemasCrediticiosV2", Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            //SqlParameter paCodSucursal = cmdComandoInicio.Parameters.Add("@fpc_codSucursal", SqlDbType.NVarChar, 2);
             SqlParameter paCodCliente = cmdComandoInicio.Parameters.Add("@fpc_codCliente", SqlDbType.Int);
             SqlParameter paTipo = cmdComandoInicio.Parameters.Add("@fpc_tipo", SqlDbType.Int);
             SqlParameter paCantidadDia = cmdComandoInicio.Parameters.Add("@cantidadDia", SqlDbType.Int);
+            SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar,2);
 
             paCantidadDia.Value = pDia;
             paCodCliente.Value = fpc_codCliente;
             paTipo.Value = fpc_tipo;
+            paSucursal.Value = pSucursal;
+
             try
             {
-                //Conn.Open();
-                //DataTable dt = new DataTable();
-                //SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                //dt.Load(LectorSQLdata);
-                //return dt;
                 Conn.Open();
                 DataSet dsResultado = new DataSet();
                 SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
@@ -858,7 +855,7 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataSet RecuperarFaltasProblemasCrediticios_TodosEstados(int fpc_codCliente, int fpc_tipo, int pDia)
+        public static DataSet RecuperarFaltasProblemasCrediticios_TodosEstados(int fpc_codCliente, int fpc_tipo, int pDia, string pSucursal)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarFaltasProblemasCrediticiosTodosEstadosV2", Conn);
@@ -867,17 +864,14 @@ namespace Kellerhoff.Codigo.capaDatos
             SqlParameter paCodCliente = cmdComandoInicio.Parameters.Add("@fpc_codCliente", SqlDbType.Int);
             SqlParameter paTipo = cmdComandoInicio.Parameters.Add("@fpc_tipo", SqlDbType.Int);
             SqlParameter paCantidadDia = cmdComandoInicio.Parameters.Add("@cantidadDia", SqlDbType.Int);
+            SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar,2);
 
             paCantidadDia.Value = pDia;
             paCodCliente.Value = fpc_codCliente;
             paTipo.Value = fpc_tipo;
+            paSucursal.Value = pSucursal;
             try
             {
-                //Conn.Open();
-                //DataTable dt = new DataTable();
-                //SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                //dt.Load(LectorSQLdata);
-                //return dt;
                 Conn.Open();
                 DataSet dsResultado = new DataSet();
                 SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);

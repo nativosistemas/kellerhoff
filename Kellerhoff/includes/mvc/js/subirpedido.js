@@ -114,12 +114,68 @@ function CargarUnidadesRenglones() {
         }
         for (var iProducto = 0; iProducto < listaProductosBuscados.length; iProducto++) {
             for (var iSucursalStocks = 0; iSucursalStocks < listaProductosBuscados[iProducto].listaSucursalStocks.length; iSucursalStocks++) {
+                ///
+                var indexSucursal_temp = 0;
+                for (var iEncabezadoSucursal_aux = 0; iEncabezadoSucursal_aux < listaSucursal.length; iEncabezadoSucursal_aux++) {
+                    if (listaProductosBuscados[iProducto].listaSucursalStocks[iSucursalStocks].stk_codsuc === listaSucursal[iEncabezadoSucursal_aux]) {
+                            indexSucursal_temp = iEncabezadoSucursal_aux;
+                            break;
+                        }
+                }
+                var nroValor = genericInputSucGetValue(iProducto, indexSucursal_temp);
+                ///
+                if (isNotNullEmpty(nroValor)) {
+                    nroValor = parseInt(nroValor);
+                    if (nroValor > 0) {
+                        for (var iSucursalesUnidadesRenglones = 0; iSucursalesUnidadesRenglones < listaSucursalesUnidadesRenglones.length; iSucursalesUnidadesRenglones++) {
+                            if (listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal == listaProductosBuscados[iProducto].listaSucursalStocks[iSucursalStocks].stk_codsuc
+                                && isMostrarImput_FacturaTrazablesProvincia(listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal, listaProductosBuscados[iProducto].pro_isTrazable)
+                                && isMostrarImput_pedirCC(listaProductosBuscados[iProducto].pro_codtpopro, listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal, listaProductosBuscados[iProducto].listaSucursalStocks)) {
+                                listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].Unidades += nroValor;
+                                listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].Renglones += 1;
+                                break;
+                            }
+                        }
+
+                    }
+                }
+
+            }
+        } // fin if (listaProductosBuscados != null && listaSucursal != null) {
+        //
+        for (var iSucursal = 0; iSucursal < listaSucursalesUnidadesRenglones.length; iSucursal++) {
+
+
+            $('#tdUnidades_' + iSucursal).html(listaSucursalesUnidadesRenglones[iSucursal].Unidades);
+            $('#tdRenglones_' + iSucursal).html(listaSucursalesUnidadesRenglones[iSucursal].Renglones);
+
+            $('#tdUnidadesCel_' + iSucursal).html(listaSucursalesUnidadesRenglones[iSucursal].Unidades);
+            $('#tdRenglonesCel_' + iSucursal).html(listaSucursalesUnidadesRenglones[iSucursal].Renglones);
+
+        }
+    }
+}
+function CargarUnidadesRenglones_viejo() {
+    if (listaProductosBuscados != null && listaSucursal != null) {
+        $('#divUnidadesRenglones').html('');
+        listaProductosAPedir = [];
+        var listaSucursalesUnidadesRenglones = [];
+        for (var iSucursal = 0; iSucursal < listaSucursal.length; iSucursal++) {
+            var obj = new cUnidadesAndRenglones();
+            obj.Unidades = 0;
+            obj.Renglones = 0;
+            obj.codSucursal = listaSucursal[iSucursal];
+            listaSucursalesUnidadesRenglones.push(obj);
+        }
+        for (var iProducto = 0; iProducto < listaProductosBuscados.length; iProducto++) {
+            for (var iSucursalStocks = 0; iSucursalStocks < listaProductosBuscados[iProducto].listaSucursalStocks.length; iSucursalStocks++) {
                 if (isNotNullEmpty(listaProductosBuscados[iProducto].listaSucursalStocks[iSucursalStocks].cantidadSucursal)) {
                     var nroValor = parseInt(listaProductosBuscados[iProducto].listaSucursalStocks[iSucursalStocks].cantidadSucursal);
                     if (nroValor > 0) {
                         for (var iSucursalesUnidadesRenglones = 0; iSucursalesUnidadesRenglones < listaSucursalesUnidadesRenglones.length; iSucursalesUnidadesRenglones++) {
                             if (listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal == listaProductosBuscados[iProducto].listaSucursalStocks[iSucursalStocks].stk_codsuc
-                                && isMostrarImput_FacturaTrazablesProvincia(listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal, listaProductosBuscados[iProducto].pro_isTrazable)) {
+                                && isMostrarImput_FacturaTrazablesProvincia(listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal, listaProductosBuscados[iProducto].pro_isTrazable)
+                                && isMostrarImput_pedirCC(listaProductosBuscados[iProducto].pro_codtpopro, listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].codSucursal, listaProductosBuscados[iProducto].listaSucursalStocks)) {
                                 listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].Unidades += nroValor;
                                 listaSucursalesUnidadesRenglones[iSucursalesUnidadesRenglones].Renglones += 1;
                                 break;

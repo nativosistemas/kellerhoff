@@ -1020,7 +1020,7 @@ function funExcedeImporteAceptar() {
             }
         }
         if (isSubirPedido) {
-            CargarUnidadesRenglones();
+           CargarUnidadesRenglones();
         }
         isEnterExcedeImporte = false;
         isExcedeImporte = false;
@@ -1062,6 +1062,23 @@ function genericInputSucSelect(pFila, pColumna) {
         }
     }
 }
+function genericInputSucGetValue(pFila, pColumna) {
+    if (pFila != null && pColumna != null) {
+        var mytext = $("#inputSuc" + pFila + "_" + pColumna);
+        if ($("#divBody").hasClass("modal-open-Celular")) {
+            mytext = $("#inputSucCelular" + pFila + "_" + pColumna);
+        }
+        if (mytext.length > 0) {
+        } else {
+            mytext = null;
+        }
+        if (mytext != null) {
+           return mytext.val();
+        }
+    }
+    return '';
+}
+
 function funExcedeImporteCancelar() {
     if (ExcedeImporteFila != null && ExcedeImporteColumna != null && ExcedeImporteValor != null) {
         genericInputSucSelect(ExcedeImporteFila, ExcedeImporteColumna);
@@ -1661,7 +1678,7 @@ function OnCallBackRecuperarProductos(args) {
                                     strHtml += '<div class="' + getNameClassStock(listaProductosBuscados[i].listaSucursalStocks[iSucursal].stk_stock) + '"></div>';
                                     if (isMostrarImput)
                                     {
-                                        isMostrarImput = isMostrarImput_CC_ClientesCordoba(listaProductosBuscados[i].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].listaSucursalStocks);
+                                        isMostrarImput = isMostrarImput_pedirCC(listaProductosBuscados[i].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].listaSucursalStocks);
                                     }                                    
                                     if (isMostrarImput)
                                     { //(pIndexSucursal, pIndexProducto)
@@ -1673,8 +1690,8 @@ function OnCallBackRecuperarProductos(args) {
                                         if (isSubirPedido) {
                                             //cantidadDeProductoEnCarrito = listaProductosBuscados[i].listaSucursalStocks[iSucursal].cantidadSucursal;
                                             cantidadDeProductoEnCarrito = listaProductosBuscados[i].listaSucursalStocks[iSucursal].cantidadSucursal;
-                                            if (cantidadDeProductoEnCarrito == 0 && !isMostrarImput_CC_ClientesCordoba(listaProductosBuscados[i].pro_codtpopro, 'CC', listaProductosBuscados[i].listaSucursalStocks)) {
-                                                var cantidadDeProductoEnCarrito_temp = getCantidad_SubirArchivo_CC_ClientesCordoba(listaProductosBuscados[i].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].listaSucursalStocks);
+                                            if (cantidadDeProductoEnCarrito == 0 && !isMostrarImput_pedirCC(listaProductosBuscados[i].pro_codtpopro, 'CC', listaProductosBuscados[i].listaSucursalStocks)) {
+                                                var cantidadDeProductoEnCarrito_temp = getCantidad_SubirArchivo_pedirCC(listaProductosBuscados[i].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].listaSucursalStocks);
                                                 if (isNotNullEmpty(cantidadDeProductoEnCarrito_temp)) {
                                                     cantidadDeProductoEnCarrito = cantidadDeProductoEnCarrito_temp;
                                                 }
@@ -1756,43 +1773,43 @@ function OnCallBackRecuperarProductos(args) {
         }
     }
 }
-function isMostrarImput_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
-    if (pSucursalEvaluar == 'CC' && // Casa central
-       (cli_codsuc() == 'CB' || //	Cordoba
-        cli_codsuc() == 'VM' || //	Villa María
-        cli_codsuc() == 'RC') &&//	Río Cuarto
-        pPro_codtpopro == 'P') //TIPOPRODUCTO_Perfumeria
-    {
-        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
-            if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CB') {
-                if (pListaSucursalStocks[iSucursal].stk_stock === 'S') {
-                    return false;
-                }
-                break;
-            }
-        }
-    }
-    return true;
-}
-function getCantidad_SubirArchivo_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
-    if (pSucursalEvaluar == 'CB' && // Cordoba
-       (cli_codsuc() == 'CB' || //	Cordoba
-        cli_codsuc() == 'VM' || //	Villa María
-        cli_codsuc() == 'RC') &&//	Río Cuarto
-        pPro_codtpopro == 'P') //TIPOPRODUCTO_Perfumeria
-    {
-        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
-            if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CC') {// Casa central
-                if (isNotNullEmpty(pListaSucursalStocks[iSucursal].cantidadSucursal))
-                {
-                    return pListaSucursalStocks[iSucursal].cantidadSucursal;
-                }
-                break;
-            }
-        }
-    }
-    return '';
-}
+//function isMostrarImput_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
+//    if (pSucursalEvaluar == 'CC' && // Casa central
+//       (cli_codsuc() == 'CB' || //	Cordoba
+//        cli_codsuc() == 'VM' || //	Villa María
+//        cli_codsuc() == 'RC') &&//	Río Cuarto
+//        pPro_codtpopro == 'P') //TIPOPRODUCTO_Perfumeria
+//    {
+//        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
+//            if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CB') {
+//                if (pListaSucursalStocks[iSucursal].stk_stock === 'S') {
+//                    return false;
+//                }
+//                break;
+//            }
+//        }
+//    }
+//    return true;
+//}
+//function getCantidad_SubirArchivo_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
+//    if (pSucursalEvaluar == 'CB' && // Cordoba
+//       (cli_codsuc() == 'CB' || //	Cordoba
+//        cli_codsuc() == 'VM' || //	Villa María
+//        cli_codsuc() == 'RC') &&//	Río Cuarto
+//        pPro_codtpopro == 'P') //TIPOPRODUCTO_Perfumeria
+//    {
+//        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
+//            if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CC') {// Casa central
+//                if (isNotNullEmpty(pListaSucursalStocks[iSucursal].cantidadSucursal))
+//                {
+//                    return pListaSucursalStocks[iSucursal].cantidadSucursal;
+//                }
+//                break;
+//            }
+//        }
+//    }
+//    return '';
+//}
 function AgregarAlHistorialProductoCarrito_SubirPedido(pIndexProducto, pIndexSucursal, pCantidadProducto, pIsSumarCantidad) {
     for (var iSucursal = 0; iSucursal < listaProductosBuscados[pIndexProducto].listaSucursalStocks.length; iSucursal++) {
         if (listaProductosBuscados[pIndexProducto].listaSucursalStocks[iSucursal].stk_codsuc == listaSucursal[pIndexSucursal]) {
@@ -2766,7 +2783,7 @@ function detalleProducto_celular(pIndex) {
                 if (listaProductosBuscados[pIndex].listaSucursalStocks[iSucursal].stk_codsuc === listaSucursal[iEncabezadoSucursal]) {
                     var isMostrarImputSucursal = true;
                     if (isMostrarImput) {
-                        isMostrarImput = isMostrarImput_CC_ClientesCordoba(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
+                        isMostrarImput = isMostrarImput_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
                     }
                     if (isMostrarImput) { 
                         isMostrarImputSucursal = isMostrarImput_FacturaTrazablesProvincia(listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].pro_isTrazable);
@@ -2776,8 +2793,8 @@ function detalleProducto_celular(pIndex) {
                         var cantidadDeProductoEnCarrito = '';
                         if (isSubirPedido) {
                             cantidadDeProductoEnCarrito = listaProductosBuscados[pIndex].listaSucursalStocks[iSucursal].cantidadSucursal;
-                            if (cantidadDeProductoEnCarrito == 0 && !isMostrarImput_CC_ClientesCordoba(listaProductosBuscados[pIndex].pro_codtpopro, 'CC', listaProductosBuscados[pIndex].listaSucursalStocks)) {
-                                var cantidadDeProductoEnCarrito_temp = getCantidad_SubirArchivo_CC_ClientesCordoba(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
+                            if (cantidadDeProductoEnCarrito == 0 && !isMostrarImput_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, 'CC', listaProductosBuscados[pIndex].listaSucursalStocks)) {
+                                var cantidadDeProductoEnCarrito_temp = getCantidad_SubirArchivo_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
                                 if (isNotNullEmpty(cantidadDeProductoEnCarrito_temp))
                                 {
                                     cantidadDeProductoEnCarrito = cantidadDeProductoEnCarrito_temp;

@@ -910,7 +910,7 @@ namespace Kellerhoff.Controllers
             if (System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_CantidadDia"] = pDia;
-                listaRecuperador = WebService.RecuperarFaltasProblemasCrediticios(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), pDia);
+                listaRecuperador = WebService.RecuperarFaltasProblemasCrediticios(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), pDia, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc);
             }
             if (listaRecuperador != null)
                 return Serializador.SerializarAJson(listaRecuperador);
@@ -924,7 +924,7 @@ namespace Kellerhoff.Controllers
             if (System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_CantidadDia"] = pDia;
-                listaRecuperador = WebService.RecuperarFaltasProblemasCrediticios_TodosEstados(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), pDia);
+                listaRecuperador = WebService.RecuperarFaltasProblemasCrediticios_TodosEstados(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), pDia, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc);
             }
             if (listaRecuperador != null)
                 return Serializador.SerializarAJson(listaRecuperador);
