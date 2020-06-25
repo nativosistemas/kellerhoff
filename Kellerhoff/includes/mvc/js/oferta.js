@@ -46,7 +46,7 @@ function CargarHtmlOfertasEnHome() {
         var strHtml = '';
 
 
-        strHtml += '<a class="s-h_off_fxd" href="#"><i class="fa fa-angle-up"></i>Mostrar ofertas</a>';
+        strHtml += '<a id="botonOferta" class="s-h_off_fxd" href="#"><i class="fa fa-angle-up"></i>Mostrar ofertas</a>';
         strHtml += '<div class="off_fxd_cont">';
         strHtml += '<div class="clear20"></div>';
         strHtml += '<div class="owl-carousel">';
@@ -141,20 +141,61 @@ function CargarHtmlOfertasEnHome() {
             stopOnHover: true,
         })
         //setTimeout(function () { accionOferta(); }, 300);
-        if (isMostrarOferta) { 
+        if (isMostrarOferta) {
             accionOferta();
         }
+        setTimeout("cambiarColorOferta()", 1000);
     }
 }
 
+
+var isColorOfertaAccion = true;
+var nroColorOferta = 0;
+var styleColorOferta = '#1b82c5';
+var fontWeightColorOferta = '400';
+function cambiarColorOferta() {
+
+    if (isColorOfertaAccion) {
+        switch (nroColorOferta) {
+            case 0:
+                styleColorOferta = '#315e7b';
+                fontWeightColorOferta = '600';
+                break;
+            case 1:
+                styleColorOferta = '#5a5c5e';
+                fontWeightColorOferta = '400';
+                break;
+            case 2:
+                styleColorOferta = '#35587b';
+                fontWeightColorOferta = '600';
+                break;
+            case 3:
+                styleColorOferta = '#1b82c5';
+                fontWeightColorOferta = '400';
+                break;
+            default:
+                break;
+        }
+        nroColorOferta++;
+        if (nroColorOferta > 3)
+            nroColorOferta = 0;
+        document.getElementById("botonOferta").style.backgroundColor = styleColorOferta;
+        //document.getElementById("botonOferta").style.fontWeight = fontWeightColorOferta;
+        setTimeout("cambiarColorOferta()", 150);
+    }
+
+}
 function accionOferta() {
     if ($(".off_fxd_cont").height() < 3) {
         $(".off_fxd_cont").animate({ 'height': 200 }, 500);
         $(".s-h_off_fxd").animate({ "bottom": 200 }, 500).html('<i class="fa fa-angle-down"></i>Ocultar ofertas');
+        isColorOfertaAccion = false;
         return false;
     } else {
         $(".s-h_off_fxd").animate({ "bottom": 2 }, 500).html('<i class="fa fa-angle-up"></i>Mostrar ofertas');
         $(".off_fxd_cont").animate({ "height": 2 }, 500);
+        isColorOfertaAccion = true;
+        cambiarColorOferta();
         return false;
     }
 }
@@ -190,11 +231,11 @@ function CargarHtmlPromocionesClientes() {
                 //        window.open('../../servicios/generar_archivoPdf.aspx?tipo=' + objTipoDocumento + '&nro=' + nroDocumento, '_parent');
                 strHtml += '<a target="_blank" href="../../servicios/descargarArchivo.aspx?t=' + 'ofertaspdf' + '&n=' + listaPromocionesClientes[i].namePdf + '&inline=yes"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
             }
-            if (isNotNullEmpty(listaPromocionesClientes[i].nameImagen)){
+            if (isNotNullEmpty(listaPromocionesClientes[i].nameImagen)) {
                 // strHtml += '<div class="div_ImagenPromo" style="' + 'background-image: url(../../servicios/thumbnail.aspx?r=ofertas&n=' + listaPromocionesClientes[i].nameImagen + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF);' + '"></div>';
                 strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + listOferta[i].nameImagen + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF' + '" alt="oferta" title=" alt="oferta">';
             }
-            else { 
+            else {
                 // strHtml += '<div class="div_ImagenPromo" style="' + 'background-image: url(../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF);' + '"></div>';
                 strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF' + '" alt="oferta" title=" alt="oferta">';
             }
