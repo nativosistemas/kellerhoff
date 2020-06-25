@@ -285,14 +285,14 @@ $(document).ready(function () {
             var NroItem = obj[0].dataset.id;
             objItemFac = objFactura.lista[NroItem];
             //console.log(objItemFac);
-            var existe = ItemsPrecargados.find(oItem => oItem.dev_nombreproductofactura === objItemFac.Descripcion && oItem.dev_numerofactura === objItemFac.NumeroFactura && oItem.dev_motivo == NroMotivo );
+            var existe = ItemsPrecargados.find(oItem => oItem.dev_nombreproductofactura === objItemFac.Descripcion && oItem.dev_numerofactura === objItemFac.NumeroFactura);
             if ( existe ) {
                 mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> INFORMACIÓN</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto " + existe.dev_nombreproductofactura + " de la factura N° " + existe.dev_numerofactura + " ya posee una solicitud cargada con un motivo diferente, para ingresar un nuevo motivo, genere una nueva nota de devolución.</h5>");
                 return;
             }
             NombreProductoFact = objFactura.lista[NroItem].Descripcion;
             Cant = 0;
-            var cProds = objFactura.lista.filter(item => item.Descripcion === NombreProductoFact);
+            var cProds = objFactura.lista.filter(item => item.Descripcion === NombreProductoFact && item.PrecioUnitario != "");
             for (var i = 0; i < cProds.length; i++) {
                 Cant += Number(cProds[i].Cantidad);
             }
@@ -341,7 +341,7 @@ $(document).ready(function () {
                                 Encontrado = true;
                                 var NroItem = i;
                                 objItemFac = objFactura.lista[NroItem];
-                                var existe = ItemsPrecargados.find(oItem => oItem.dev_nombreproductofactura === objItemFac.Descripcion && oItem.dev_numerofactura === objItemFac.NumeroFactura && oItem.dev_motivo === NroMotivo);
+                                var existe = ItemsPrecargados.find(oItem => oItem.dev_nombreproductofactura === objItemFac.Descripcion && oItem.dev_numerofactura === objItemFac.NumeroFactura);
                                 if (existe) {
                                     mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> INFORMACIÓN</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto " + existe.dev_nombreproductofactura + " de la factura N° " + existe.dev_numerofactura + " ya posee una solicitud cargada con un motivo diferente, para ingresar un nuevo motivo, genere una nueva nota de devolución.</h5>");
                                     return;
@@ -349,7 +349,7 @@ $(document).ready(function () {
                                 NombreProductoFact = objFactura.lista[NroItem].Descripcion;
                                 $("#cmbNombreProducto").val(NombreProductoFact);
                                 Cant = 0;
-                                var cProds = objFactura.lista.filter(item => item.Descripcion === NombreProductoFact);
+                                var cProds = objFactura.lista.filter(item => item.Descripcion === NombreProductoFact && item.PrecioUnitario != "");
                                 for (var i = 0; i < cProds.length; i++) {
                                     Cant += Number(cProds[i].Cantidad);
                                 }
@@ -520,11 +520,7 @@ $(document).ready(function () {
                                 mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Solo se evaluarán <b>DEVOLUCIONES</b> de los productos cuya fecha de vencimiento sea posterior al mes en curso. Caso contrario debe pasarlas por <b>DEVOLUCIONES DE VENCIDOS</b>.</h5>");
                                 $("#modalModulo").bind("click");
                                 return false;
-<<<<<<< HEAD
                             } else if ( NroMotivo == 5 && fechaLote > fechaMaxVtoCorto ) {
-=======
-                            } else if (NroMotivo == 5 && fechaLote > fechaMaxVtoCorto) {
->>>>>>> devsuc
                                 mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La <b>Fecha de Vencimiento del Lote</b> del producto para realizar una devolución por <em>Corto Vencimiento</em> debe estar dentro de los <b>seis (6) meses</b> posteriores al mes en curso.</h5>");
                                 $("#modalModulo").bind("click");
                                 return false;
@@ -1184,7 +1180,7 @@ function ObtenerFacturaCliente(pNroFactura) {
                 switch (dia) {
                     case 6:
                     case 0:
-                        if (diff < 21) {
+                        if (diff <= 13) {
                             fechaOK = true;
                         }
                         break;
@@ -1193,7 +1189,7 @@ function ObtenerFacturaCliente(pNroFactura) {
                     case 3:
                     case 4:
                     case 5:
-                        if (diff < 22) {
+                        if (diff <= 14) {
                             fechaOK = true;
                         }
                         break;
@@ -1206,7 +1202,7 @@ function ObtenerFacturaCliente(pNroFactura) {
                     console.log(objFactura.lista);
                     for (var i = 0; i < objFactura.lista.length; i++) {
                         var existe = cProductosDespliegue.find(prd => prd === objFactura.lista[i].Descripcion);
-                        if (objFactura.lista[i].Cantidad != "" && !existe) {
+                        if (objFactura.lista[i].Cantidad != "" && !existe && objFactura.lista[i].PrecioUnitario != "") {
                             html += "<option value=\"" + objFactura.lista[i].Descripcion + "\"  data-id=\"" + i + "\">";
                             cProductosDespliegue.push(objFactura.lista[i].Descripcion);
                         }
@@ -1238,7 +1234,7 @@ function ObtenerFacturaCliente(pNroFactura) {
                         }
                     }
                 } else {
-                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 15 días hábiles de emitida.</h5>");
+                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 10 días hábiles de emitida.</h5>");
                     // $(".fa.fa-times").hide();
                 }
             } else {
@@ -1292,37 +1288,17 @@ function ObtenerFacturaClienteFacturaCompleta(pNroFactura) {
                             var fechaOK = false;
                             switch (dia) {
                                 case 6:
-                                    if (diff <= 4) {
-                                        fechaOK = true;
-                                    }
-                                    break;
                                 case 0:
-                                    if (diff <= 5) {
+                                    if (diff < 13) {
                                         fechaOK = true;
                                     }
                                     break;
                                 case 1:
-                                    if (diff <= 5) {
-                                        fechaOK = true;
-                                    }
-                                    break;
                                 case 2:
-                                    if (diff <= 5) {
-                                        fechaOK = true;
-                                    }
-                                    break;
                                 case 3:
-                                    if (diff <= 5) {
-                                        fechaOK = true;
-                                    }
-                                    break;
                                 case 4:
-                                    if (diff <= 3) {
-                                        fechaOK = true;
-                                    }
-                                    break;
                                 case 5:
-                                    if (diff <= 3) {
+                                    if (diff < 14) {
                                         fechaOK = true;
                                     }
                                     break;
@@ -1389,7 +1365,7 @@ function ObtenerFacturaClienteFacturaCompleta(pNroFactura) {
                                     }
                                 }
                             } else {
-                                mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 72 horas de emitida.</h5>");
+                                mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 10 días hábiles de emitida.</h5>");
                                 // $(".fa.fa-times").hide();
                             }
                         } else {
@@ -2275,7 +2251,7 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
             NumeroFactura
         },
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             var CantPrecargada = 0;
             for (var i = 0; i < ItemsPrecargados.length; i++) {
                 if (ItemsPrecargados[i].dev_nombreproductofactura == NombreProducto && ItemsPrecargados[i].dev_numerofactura == NumeroFactura) {

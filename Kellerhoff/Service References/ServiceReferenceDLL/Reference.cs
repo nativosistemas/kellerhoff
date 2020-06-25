@@ -5360,6 +5360,9 @@ namespace Kellerhoff.ServiceReferenceDLL {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Vencido = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PedidoPorError = 7,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

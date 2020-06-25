@@ -179,6 +179,9 @@ namespace Kellerhoff.Codigo.capaDatos
                         case 7:
                             obj.dev_motivo = dllMotivoDevolucion.Vencido;
                             break;
+                        case 8:
+                            obj.dev_motivo = dllMotivoDevolucion.PedidoPorError;
+                            break;
                     }
                     obj.dev_nombreproductodevolucion = Item[i].dev_nombreproductodevolucion;
                     obj.dev_nombreproductofactura = Item[i].dev_nombreproductofactura;

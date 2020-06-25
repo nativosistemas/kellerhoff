@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://172.16.0.4/Service.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://172.16.0.3/Service.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service2.disco" MetadataType="Disco" ID="4a3eb557-d07c-425a-a330-c48e4dbca64e" SourceId="1" SourceUrl="http://172.16.0.4/Service.asmx?disco" />
-    <MetadataFile FileName="Service2.wsdl" MetadataType="Wsdl" ID="991e9618-74fa-48c5-a4ff-0aafd4c22c32" SourceId="1" SourceUrl="http://172.16.0.4/Service.asmx?wsdl" />
+    <MetadataFile FileName="Service2.wsdl" MetadataType="Wsdl" ID="a58990a1-c1c1-4559-a4e0-b81d895ab636" SourceId="1" SourceUrl="http://172.16.0.3/Service.asmx?wsdl" />
+    <MetadataFile FileName="Service2.disco" MetadataType="Disco" ID="2fcdd454-6a7e-489d-8bf5-8f444f855085" SourceId="1" SourceUrl="http://172.16.0.3/Service.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
