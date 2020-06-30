@@ -131,6 +131,7 @@ namespace Kellerhoff.Codigo.capaDatos
             base.tde_unidadesbonificadasdescripcion = pValor.tde_unidadesbonificadasdescripcion;
             base.tde_PrecioConDescuentoDirecto = pValor.tde_PrecioConDescuentoDirecto;
             base.tde_PorcARestarDelDtoDeCliente = pValor.tde_PorcARestarDelDtoDeCliente;
+            base.tde_PorcDtoSobrePVP = pValor.tde_PorcDtoSobrePVP;
             base.tfr_codigo = pValor.tfr_codigo;
             base.tfr_accion = pValor.tfr_accion;
             base.tfr_nombre = pValor.tfr_nombre;

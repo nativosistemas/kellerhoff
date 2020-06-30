@@ -1460,12 +1460,24 @@ function OnCallBackRecuperarProductos(args) {
             strHtml += '</th>';
             //
             //if (!isCarritoDiferido) {
+            var col_lg_transfer_pvp = 4;
+            var col_md_transfer_pvp = 5;
+            var col_sm_transfer_pvp = 5;
+
+            var col_lg_transfer_cond = 3;
+            var col_md_transfer_cond = 2;
+            var col_sm_transfer_cond = 2;
+
+            var col_lg_transfer_precio = 5;
+            var col_md_transfer_precio = 5;
+            var col_sm_transfer_precio = 5;
             strHtml += '<th class="col-lg-2 col-md-2 col-sm-2  text-center" colspan="2">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
-            strHtml += '<tr><td colspan="2" class="col-lg-12 text-center">Transfer<div class="clear5"></div></td></tr>';
+            strHtml += '<tr><td colspan="3" class="col-lg-12 text-center">Transfer<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead">';
-            strHtml += '<td class="col-lg-6 text-center no_border">Cond</td>';
-            strHtml += '<td class="col-lg-6 text-center click" data-toggle="tooltip" data-placement="bottom" title="Ordenar"  onclick="onclickOrdenarProducto(3)">Precio<span  id="spanOrder3" class="order ' + getCSSColumnaOrdenar(3) + '"></span></td>';
+            strHtml += '<td class="col-lg-' + col_lg_transfer_pvp + ' col-md-' + col_md_transfer_pvp + ' col-sm-' + col_sm_transfer_pvp + '  text-center no_border">% PVP</td>';
+            strHtml += '<td class="col-lg-' + col_lg_transfer_cond + ' col-md-' + col_md_transfer_cond + ' col-sm-' + col_sm_transfer_cond + '  text-center no_border">Cond</td>';
+            strHtml += '<td class="col-lg-' + col_lg_transfer_precio + ' col-md-' + col_md_transfer_precio + ' col-sm-' + col_sm_transfer_precio + '  text-center click" data-toggle="tooltip" data-placement="bottom" title="Ordenar"  onclick="onclickOrdenarProducto(3)">Precio<span  id="spanOrder3" class="order ' + getCSSColumnaOrdenar(3) + '"></span></td>';
             strHtml += '</tr>';
             strHtml += '</table>';
             strHtml += '</th>';
@@ -1645,15 +1657,39 @@ function OnCallBackRecuperarProductos(args) {
                             }
                         }
                     }
+                    // inicio transfer
+
+                    strHtml += '<td colspan="2" class="col-lg-2 col-md-2 col-sm-2 text-center no-padding">';
+                    strHtml += '<div class="col-lg-' + col_lg_transfer_pvp + ' col-md-' + col_md_transfer_pvp + ' col-sm-' + col_sm_transfer_pvp + ' col-xs-' + col_sm_transfer_pvp + ' col_small">';
+                    if (listaProductosBuscados[i].tde_PorcDtoSobrePVP !== null) {
+                        strHtml += '$&nbsp;' + FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(i).toFixed(2));
+                    }
+                    strHtml += '</div>';
                     //
-                    strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">';
+                    strHtml += '<div class="col-lg-' + col_lg_transfer_cond + ' col-md-' + col_md_transfer_cond + ' col-sm-' + col_sm_transfer_cond + ' col-xs-' + col_sm_transfer_cond + ' col_small">';
                     if (varTransferFacturacionDirectaCondicion !== '') {
                         strHtml += '<div  OnMouseMove="OnMouseMoveProdructoFacturacionDirecta(event)" OnMouseOver="OnMouseOverProdructoFacturacionDirecta(' + i + ')" OnMouseOut="OnMouseOutProdructoFacturacionDirecta()"  style="cursor:pointer;" >'
                         strHtml += varTransferFacturacionDirectaCondicion;
                         strHtml += '</div>';
                     }
+                    strHtml += '</div>';
+                    //
+                    strHtml += '<div class="col-lg-' + col_lg_transfer_precio + ' col-md-' + col_md_transfer_precio + ' col-sm-' + col_sm_transfer_precio + ' col-xs-' + col_sm_transfer_precio + ' col_small">' + varTransferFacturacionDirectaPrecio + '</div>'
                     strHtml += '</td>';
-                    strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">' + varTransferFacturacionDirectaPrecio + '</td>';
+                    // inicio columna PVP 
+                    //strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">';
+                    //strHtml += '</td>';
+                    // fin columna PVP
+                    //
+                    //strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">';
+                    //if (varTransferFacturacionDirectaCondicion !== '') {
+                    //    strHtml += '<div  OnMouseMove="OnMouseMoveProdructoFacturacionDirecta(event)" OnMouseOver="OnMouseOverProdructoFacturacionDirecta(' + i + ')" OnMouseOut="OnMouseOutProdructoFacturacionDirecta()"  style="cursor:pointer;" >'
+                    //    strHtml += varTransferFacturacionDirectaCondicion;
+                    //    strHtml += '</div>';
+                    //}
+                    //strHtml += '</td>';
+                    //strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">' + varTransferFacturacionDirectaPrecio + '</td>';
+                    // fin transfer
                     //}
                     // NUEVO Transfer facturacion directa
 
@@ -1772,6 +1808,27 @@ function OnCallBackRecuperarProductos(args) {
             }
         }
     }
+}
+function getPorcDtoSobrePVP(pIndex) {
+    var result = 0;
+    if (listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP !== null) {
+        if (listaProductosBuscados[pIndex].tfr_deshab) {
+            //Dto1 = dato de la columna PorcDtoSobrePVP
+            //Dto2 = tblClientes.cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto - tbl_Transfers_Detalle.tde_PorcARestarDelDtoDeCliente
+            //PorcDtoSobrePVP = ((1 - ((1 - Dto1 / 100) * (1 - Dto2 / 100))) * 100)
+            //PorcDtoSobrePVP = Round(PorcDtoSobrePVP - 0.0041, 2) (redondeo para abajo)
+
+            var Dto1 = listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP;
+            var Dto2 = cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto() - listaProductosBuscados[pIndex].tde_PorcARestarDelDtoDeCliente
+            var PorcDtoSobrePVP = ((1 - ((1 - Dto1 / 100) * (1 - Dto2 / 100))) * 100)
+            result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2)
+        }
+        else {
+            result = listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP;
+        }
+    }
+    return result;
+
 }
 //function isMostrarImput_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
 //    if (pSucursalEvaluar == 'CC' && // Casa central
@@ -2729,10 +2786,14 @@ function detalleProducto_celular(pIndex) {
 
 
     //if (!isCarritoDiferido) {
+    var varTransferFacturacionDirectaPVP = '';
     var varTransferFacturacionDirectaCondicion = '';
     var varTransferFacturacionDirectaPrecio = '';
     if (cli_tomaTransfers() && listaProductosBuscados[pIndex].isMostrarTransfersEnClientesPerf) {
         if (listaProductosBuscados[pIndex].isProductoFacturacionDirecta) {
+            if (listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP !== null) {
+                varTransferFacturacionDirectaPVP = '$&nbsp;' + FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(pIndex).toFixed(2));
+            }
             if (listaProductosBuscados[pIndex].tde_unidadesbonificadasdescripcion !== null) {
                 varTransferFacturacionDirectaCondicion = listaProductosBuscados[pIndex].tde_unidadesbonificadasdescripcion;
             }
@@ -2751,6 +2812,7 @@ function detalleProducto_celular(pIndex) {
 
 
     strHtml += '<div class="col-xs-12 mpbxs_fila_dest">Transfer</div>';
+    strHtml += '<div class="col-xs-12 mpbxs_dsc">% PVP<span class="float-right">' + varTransferFacturacionDirectaPVP + '</span></div>';
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Cond<span class="float-right">' + varTransferFacturacionDirectaCondicion + '</span></div>';
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Precio<span class="float-right">' + varTransferFacturacionDirectaPrecio + '</span></div>';
 

@@ -2737,6 +2737,10 @@ namespace Kellerhoff
             {
                 obj.tde_proobligatorio = Convert.ToBoolean(pItem["tde_proobligatorio"]);
             }
+            if (pItem.Table.Columns.Contains("tde_PorcDtoSobrePVP") && pItem["tde_PorcDtoSobrePVP"] != DBNull.Value)
+            {
+                obj.tde_PorcDtoSobrePVP = Convert.ToDecimal(pItem["tde_PorcDtoSobrePVP"]);
+            }
             if (pItem.Table.Columns.Contains("pro_neto"))
             {
                 if (pItem["pro_neto"] != DBNull.Value)
