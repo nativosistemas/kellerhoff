@@ -1662,7 +1662,7 @@ function OnCallBackRecuperarProductos(args) {
                     strHtml += '<td colspan="2" class="col-lg-2 col-md-2 col-sm-2 text-center no-padding">';
                     strHtml += '<div class="col-lg-' + col_lg_transfer_pvp + ' col-md-' + col_md_transfer_pvp + ' col-sm-' + col_sm_transfer_pvp + ' col-xs-' + col_sm_transfer_pvp + ' col_small">';
                     if (listaProductosBuscados[i].tde_PorcDtoSobrePVP !== null) {
-                        strHtml += '$&nbsp;' + FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(i).toFixed(2));
+                        strHtml += FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(i).toFixed(2)) + '&nbsp;%';
                     }
                     strHtml += '</div>';
                     //
@@ -1813,15 +1813,23 @@ function getPorcDtoSobrePVP(pIndex) {
     var result = 0;
     if (listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP !== null) {
         if (listaProductosBuscados[pIndex].tfr_deshab) {
-            //Dto1 = dato de la columna PorcDtoSobrePVP
-            //Dto2 = tblClientes.cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto - tbl_Transfers_Detalle.tde_PorcARestarDelDtoDeCliente
-            //PorcDtoSobrePVP = ((1 - ((1 - Dto1 / 100) * (1 - Dto2 / 100))) * 100)
-            //PorcDtoSobrePVP = Round(PorcDtoSobrePVP - 0.0041, 2) (redondeo para abajo)
-
-            var Dto1 = listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP;
-            var Dto2 = cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto() - listaProductosBuscados[pIndex].tde_PorcARestarDelDtoDeCliente
-            var PorcDtoSobrePVP = ((1 - ((1 - Dto1 / 100) * (1 - Dto2 / 100))) * 100)
-            result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2)
+            var Dto1 = parseFloat(listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP);
+            var varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto();
+            if (varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto == null){
+                varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = 0;
+            }
+            var varTemp_tde_PorcARestarDelDtoDeCliente = listaProductosBuscados[pIndex].tde_PorcARestarDelDtoDeCliente;
+            if (varTemp_tde_PorcARestarDelDtoDeCliente == null) {
+                varTemp_tde_PorcARestarDelDtoDeCliente = 0;
+            }
+            var Dto2 = parseFloat(varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto) - parseFloat(varTemp_tde_PorcARestarDelDtoDeCliente);
+            if (listaProductosBuscados[pIndex].tfr_pordesadi !== null && listaProductosBuscados[pIndex].tfr_pordesadi > 0)
+            {
+                Dto2 = parseFloat(listaProductosBuscados[pIndex].tfr_pordesadi);
+            }
+            //var PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - parseFloat(Dto1) / parseFloat(100)) * (parseFloat(1) - parseFloat(Dto2) / parseFloat(100)))) * parseFloat(100));
+            var PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - (parseFloat(Dto1) / parseFloat(100))) * (parseFloat(1) - (parseFloat(Dto2) / parseFloat(100))))) * parseFloat(100));
+            result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2);
         }
         else {
             result = listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP;
@@ -2792,7 +2800,7 @@ function detalleProducto_celular(pIndex) {
     if (cli_tomaTransfers() && listaProductosBuscados[pIndex].isMostrarTransfersEnClientesPerf) {
         if (listaProductosBuscados[pIndex].isProductoFacturacionDirecta) {
             if (listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP !== null) {
-                varTransferFacturacionDirectaPVP = '$&nbsp;' + FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(pIndex).toFixed(2));
+                varTransferFacturacionDirectaPVP = FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(pIndex).toFixed(2)) + '&nbsp;%';
             }
             if (listaProductosBuscados[pIndex].tde_unidadesbonificadasdescripcion !== null) {
                 varTransferFacturacionDirectaCondicion = listaProductosBuscados[pIndex].tde_unidadesbonificadasdescripcion;
