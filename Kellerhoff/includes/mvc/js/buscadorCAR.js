@@ -1823,13 +1823,20 @@ function getPorcDtoSobrePVP(pIndex) {
                 varTemp_tde_PorcARestarDelDtoDeCliente = 0;
             }
             var Dto2 = parseFloat(varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto) - parseFloat(varTemp_tde_PorcARestarDelDtoDeCliente);
-            if (listaProductosBuscados[pIndex].tfr_pordesadi !== null && listaProductosBuscados[pIndex].tfr_pordesadi > 0)
-            {
-                Dto2 = parseFloat(listaProductosBuscados[pIndex].tfr_pordesadi);
-            }
-            //var PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - parseFloat(Dto1) / parseFloat(100)) * (parseFloat(1) - parseFloat(Dto2) / parseFloat(100)))) * parseFloat(100));
             var PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - (parseFloat(Dto1) / parseFloat(100))) * (parseFloat(1) - (parseFloat(Dto2) / parseFloat(100))))) * parseFloat(100));
-            result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2);
+            var isRedondeo = true;
+            if (listaProductosBuscados[pIndex].tfr_pordesadi !== null && listaProductosBuscados[pIndex].tfr_pordesadi > 0) {
+                var Dto3 = PorcDtoSobrePVP;
+                var Dto4 = parseFloat(listaProductosBuscados[pIndex].tfr_pordesadi);
+                PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - (parseFloat(Dto3) / parseFloat(100))) * (parseFloat(1) - (parseFloat(Dto4) / parseFloat(100))))) * parseFloat(100));
+            } else if (listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP == 0) {
+                isRedondeo = false;
+            }
+            if (isRedondeo) {
+                result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2);
+            } else {
+                result = PorcDtoSobrePVP;
+            }
         }
         else {
             result = listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP;
