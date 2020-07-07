@@ -1662,7 +1662,7 @@ function OnCallBackRecuperarProductos(args) {
                     strHtml += '<td colspan="2" class="col-lg-2 col-md-2 col-sm-2 text-center no-padding">';
                     strHtml += '<div class="col-lg-' + col_lg_transfer_pvp + ' col-md-' + col_md_transfer_pvp + ' col-sm-' + col_sm_transfer_pvp + ' col-xs-' + col_sm_transfer_pvp + ' col_small">';
                     if (listaProductosBuscados[i].tde_PorcDtoSobrePVP !== null) {
-                        strHtml += FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(i).toFixed(2)) + '&nbsp;%';
+                        strHtml += FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(i).toFixed(2));
                     }
                     strHtml += '</div>';
                     //
@@ -2807,7 +2807,7 @@ function detalleProducto_celular(pIndex) {
     if (cli_tomaTransfers() && listaProductosBuscados[pIndex].isMostrarTransfersEnClientesPerf) {
         if (listaProductosBuscados[pIndex].isProductoFacturacionDirecta) {
             if (listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP !== null) {
-                varTransferFacturacionDirectaPVP = FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(pIndex).toFixed(2)) + '&nbsp;%';
+                varTransferFacturacionDirectaPVP = FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(pIndex).toFixed(2));
             }
             if (listaProductosBuscados[pIndex].tde_unidadesbonificadasdescripcion !== null) {
                 varTransferFacturacionDirectaCondicion = listaProductosBuscados[pIndex].tde_unidadesbonificadasdescripcion;
