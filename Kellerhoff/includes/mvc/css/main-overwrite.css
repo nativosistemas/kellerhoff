@@ -463,4 +463,6 @@ header .nav li {
     background: #ddd;
 }
 
-
+.titleNoCumplenConCondicion {
+    text-align:center;color: #721c24;background-color: #f8d7da;border-color: #f5c6cb;font-size: 12px;padding: .75rem 1.25rem;margin-bottom: 0.3em;
+}
