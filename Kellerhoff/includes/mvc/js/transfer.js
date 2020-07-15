@@ -898,7 +898,9 @@ function CargarRespuestaDePedidoTransfer(pValor) {
                     // facturarse de forma Habitual 
 
                     strHtmlPedidoFacturarseHabitual += '<div class="col-xs-12">';
-                    strHtmlPedidoFacturarseHabitual += '<div class="titleConfirmar">Productos en transfer no procesados por falta de stock para llegar a condición mínima o exceso en el cupo de unidades. Confirme cuantas unidades quiere con su descuento habitual.</div>';
+                    //strHtmlPedidoFacturarseHabitual += '<div class="titleConfirmar">Productos en transfer no procesados por falta de stock para llegar a condición mínima o exceso en el cupo de unidades. Confirme cuantas unidades quiere con su descuento habitual.</div>';
+                    strHtmlPedidoFacturarseHabitual += '<div class="titleNoCumplenConCondicion">No cumplen con la condición mínima por falta de stock o exceden la cantidad de unidades semanales autorizadas por el laboratorio.<br>';
+                    strHtmlPedidoFacturarseHabitual += '<u><b>Si continúa, las unidades se facturarán con su descuento habitual.</b></u></div>';
                     strHtmlPedidoFacturarseHabitual += '<table class="footable table carrito table-stripped" width="100%" align="center" cellspacing="0" cellpadding="0" border="0"><thead><tr>';
                     strHtmlPedidoFacturarseHabitual += '<th class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">Nombre producto</th>';
                     strHtmlPedidoFacturarseHabitual += '<th class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">Cantidad</th>';
@@ -1013,11 +1015,12 @@ function CargarRespuestaDePedidoTransfer(pValor) {
     strHtml_modal += '<div class="col-lg-12">';
     if (strHtml != '' && strHtmlPedidoFacturarseHabitual == '' && strHtmlEnRevision == '' && strHtmlFaltantes == '') {
         strHtml_modal += '<div class="modulo_icon ok"></div>';
+        strHtml_modal += '<h4>Resultado del pedido</h4>';
     }
     else {
         strHtml_modal += '<div class="modulo_icon alert"></div>';
+        strHtml_modal += '<h4>ALGUNOS PRODUCTOS DE TRANSFER NO PUDIERON SER PROCESADOS</h4>';
     }
-    strHtml_modal += '<h4>Resultado del pedido</h4>';
     strHtml_modal += '</div>';
     strHtml_modal += '</div>';
     strHtml_modal += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
