@@ -1020,7 +1020,7 @@ function funExcedeImporteAceptar() {
             }
         }
         if (isSubirPedido) {
-           CargarUnidadesRenglones();
+            CargarUnidadesRenglones();
         }
         isEnterExcedeImporte = false;
         isExcedeImporte = false;
@@ -1073,7 +1073,7 @@ function genericInputSucGetValue(pFila, pColumna) {
             mytext = null;
         }
         if (mytext != null) {
-           return mytext.val();
+            return mytext.val();
         }
     }
     return '';
@@ -1452,7 +1452,7 @@ function OnCallBackRecuperarProductos(args) {
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td colspan="3" class="col-lg-12 text-center">Oferta<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead">';
-            strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center no_border">%</td>';
+            strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center no_border">% s/PVP</td>';
             strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center no_border">Min</td>';
             strHtml += '<td class="col-lg-6 col-md-6 col-sm-6 click text-center" data-toggle="tooltip" data-placement="bottom" title="Ordenar" onclick="onclickOrdenarProducto(2)">Precio<span id="spanOrder2" class="order ' + getCSSColumnaOrdenar(2) + '"></span></td>';
             strHtml += '</tr>';
@@ -1632,7 +1632,8 @@ function OnCallBackRecuperarProductos(args) {
                     if (cli_tomaOfertas()) {
                         if (listaProductosBuscados[i].pro_ofeunidades !== 0 || listaProductosBuscados[i].pro_ofeporcentaje !== 0) {
                             varOfeunidades = listaProductosBuscados[i].pro_ofeunidades;
-                            varOfeporcentaje = listaProductosBuscados[i].pro_ofeporcentaje;
+                            //varOfeporcentaje = listaProductosBuscados[i].pro_ofeporcentaje;
+                            varOfeporcentaje = FormatoDecimalConDivisorMiles(getPorcDtoSobreOferta(i).toFixed(2));
                             varPrecioConDescuentoOferta = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioConDescuentoOferta.toFixed(2));
                         }
                     }
@@ -1712,12 +1713,10 @@ function OnCallBackRecuperarProductos(args) {
                                 if (listaProductosBuscados[i].listaSucursalStocks[iSucursal].stk_codsuc === listaSucursal[iEncabezadoSucursal]) {
                                     var isMostrarImputSucursal = true;
                                     strHtml += '<div class="' + getNameClassStock(listaProductosBuscados[i].listaSucursalStocks[iSucursal].stk_stock) + '"></div>';
-                                    if (isMostrarImput)
-                                    {
+                                    if (isMostrarImput) {
                                         isMostrarImput = isMostrarImput_pedirCC(listaProductosBuscados[i].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].listaSucursalStocks);
-                                    }                                    
-                                    if (isMostrarImput)
-                                    { //(pIndexSucursal, pIndexProducto)
+                                    }
+                                    if (isMostrarImput) { //(pIndexSucursal, pIndexProducto)
                                         isMostrarImputSucursal = isMostrarImput_FacturaTrazablesProvincia(listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].pro_isTrazable);
                                     }
                                     if (isMostrarImput && isMostrarImputSucursal) {
@@ -1815,7 +1814,7 @@ function getPorcDtoSobrePVP(pIndex) {
         if (listaProductosBuscados[pIndex].tfr_deshab) {
             var Dto1 = parseFloat(listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP);
             var varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto();
-            if (varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto == null){
+            if (varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto == null) {
                 varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = 0;
             }
             var varTemp_tde_PorcARestarDelDtoDeCliente = listaProductosBuscados[pIndex].tde_PorcARestarDelDtoDeCliente;
@@ -1845,43 +1844,47 @@ function getPorcDtoSobrePVP(pIndex) {
     return result;
 
 }
-//function isMostrarImput_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
-//    if (pSucursalEvaluar == 'CC' && // Casa central
-//       (cli_codsuc() == 'CB' || //	Cordoba
-//        cli_codsuc() == 'VM' || //	Villa María
-//        cli_codsuc() == 'RC') &&//	Río Cuarto
-//        pPro_codtpopro == 'P') //TIPOPRODUCTO_Perfumeria
-//    {
-//        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
-//            if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CB') {
-//                if (pListaSucursalStocks[iSucursal].stk_stock === 'S') {
-//                    return false;
-//                }
-//                break;
-//            }
-//        }
-//    }
-//    return true;
-//}
-//function getCantidad_SubirArchivo_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
-//    if (pSucursalEvaluar == 'CB' && // Cordoba
-//       (cli_codsuc() == 'CB' || //	Cordoba
-//        cli_codsuc() == 'VM' || //	Villa María
-//        cli_codsuc() == 'RC') &&//	Río Cuarto
-//        pPro_codtpopro == 'P') //TIPOPRODUCTO_Perfumeria
-//    {
-//        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
-//            if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CC') {// Casa central
-//                if (isNotNullEmpty(pListaSucursalStocks[iSucursal].cantidadSucursal))
-//                {
-//                    return pListaSucursalStocks[iSucursal].cantidadSucursal;
-//                }
-//                break;
-//            }
-//        }
-//    }
-//    return '';
-//}
+function getPorcDtoSobreOferta(pIndex) {
+    var result = listaProductosBuscados[pIndex].pro_ofeporcentaje;
+
+    var varTemp_tde_PorcARestarDelDtoDeCliente = listaProductosBuscados[pIndex].tde_PorcARestarDelDtoDeCliente;
+    if (varTemp_tde_PorcARestarDelDtoDeCliente == null) {
+        varTemp_tde_PorcARestarDelDtoDeCliente = 0;
+    }
+    //1) Si pro_Neto=0
+    if (!listaProductosBuscados[pIndex].pro_neto) {  //pro_Neto=0
+        var Dto1 = parseFloat(listaProductosBuscados[pIndex].pro_ofeporcentaje);
+        var varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto();
+        if (varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto == null) {
+            varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = 0;
+        }
+        var Dto2 = parseFloat(varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto) - parseFloat(varTemp_tde_PorcARestarDelDtoDeCliente);
+        var PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - (parseFloat(Dto1) / parseFloat(100))) * (parseFloat(1) - (parseFloat(Dto2) / parseFloat(100))))) * parseFloat(100));
+        result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2);
+    } else if (listaProductosBuscados[pIndex].pro_neto && listaProductosBuscados[pIndex].pro_precio === 0) { //2) Si pro_Neto=1  y  pro_ProPrecio=0 -->
+        var Dto1 = parseFloat(listaProductosBuscados[pIndex].pro_ofeporcentaje);
+        var Dto2 = 0;
+        if (listaProductosBuscados[pIndex].pro_codtpopro == 'M') {
+            var varTemp_PorcentajeDescuentoDeNetosMedicamentos = cli_nickname_PorcentajeDescuentoDeNetosMedicamentos();
+            if (varTemp_PorcentajeDescuentoDeNetosMedicamentos == null) {
+                varTemp_PorcentajeDescuentoDeNetosMedicamentos = 0;
+            }
+            Dto2 = parseFloat(varTemp_PorcentajeDescuentoDeNetosMedicamentos) - parseFloat(varTemp_tde_PorcARestarDelDtoDeCliente);
+        } else {
+            var varTemp_PorcentajeDescuentoDeNetos = cli_nickname_PorcentajeDescuentoDeNetos();
+            if (varTemp_PorcentajeDescuentoDeNetos == null) {
+                varTemp_PorcentajeDescuentoDeNetos = 0;
+            }
+            Dto2 = parseFloat(varTemp_PorcentajeDescuentoDeNetos) - parseFloat(varTemp_tde_PorcARestarDelDtoDeCliente);
+        }
+        var PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - (parseFloat(Dto1) / parseFloat(100))) * (parseFloat(1) - (parseFloat(Dto2) / parseFloat(100))))) * parseFloat(100));
+        result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2);
+    } else if (listaProductosBuscados[pIndex].pro_neto && listaProductosBuscados[pIndex].pro_precio > 0) { //3) Si pro_Neto=1 y pro_precio >0 -->
+        result = ((parseFloat(1) - (parseFloat(listaProductosBuscados[pIndex].PrecioConDescuentoOferta) / parseFloat(listaProductosBuscados[pIndex].pro_precio))) * parseFloat(100));
+    }
+    return result;
+
+}
 function AgregarAlHistorialProductoCarrito_SubirPedido(pIndexProducto, pIndexSucursal, pCantidadProducto, pIsSumarCantidad) {
     for (var iSucursal = 0; iSucursal < listaProductosBuscados[pIndexProducto].listaSucursalStocks.length; iSucursal++) {
         if (listaProductosBuscados[pIndexProducto].listaSucursalStocks[iSucursal].stk_codsuc == listaSucursal[pIndexSucursal]) {
@@ -2136,7 +2139,7 @@ function OnCallBackActualizarProductoCarrito(args) {
             args = eval('(' + args + ')');
             isActualizarCarrito = args.isOk;
         } catch (e) {
-            
+
         }
         if (isActualizarCarrito) {
             if (tempIdSucursal != null && tempIdProduco != null && tempCantidadProducto != null && tempIsDesdeBuscador != null) {
@@ -2788,13 +2791,14 @@ function detalleProducto_celular(pIndex) {
     if (cli_tomaOfertas()) {
         if (listaProductosBuscados[pIndex].pro_ofeunidades !== 0 || listaProductosBuscados[pIndex].pro_ofeporcentaje !== 0) {
             varOfeunidades = listaProductosBuscados[pIndex].pro_ofeunidades;
-            varOfeporcentaje = listaProductosBuscados[pIndex].pro_ofeporcentaje;
+            //varOfeporcentaje = listaProductosBuscados[pIndex].pro_ofeporcentaje;
+            varOfeporcentaje = FormatoDecimalConDivisorMiles(getPorcDtoSobreOferta(pIndex).toFixed(2));
             varPrecioConDescuentoOferta = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[pIndex].PrecioConDescuentoOferta.toFixed(2));
         }
     }
 
     strHtml += '<div class="col-xs-12 mpbxs_fila_dest">Oferta</div>';
-    strHtml += '<div class="col-xs-12 mpbxs_dsc">%<span class="float-right">' + varOfeporcentaje + '</span></div>';
+    strHtml += '<div class="col-xs-12 mpbxs_dsc">% s/PVP<span class="float-right">' + varOfeporcentaje + '</span></div>';
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Min<span class="float-right">' + varOfeunidades + '</span></div>';
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Precio<span class="float-right">' + varPrecioConDescuentoOferta + '</span></div>';
 
@@ -2862,7 +2866,7 @@ function detalleProducto_celular(pIndex) {
                     if (isMostrarImput) {
                         isMostrarImput = isMostrarImput_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
                     }
-                    if (isMostrarImput) { 
+                    if (isMostrarImput) {
                         isMostrarImputSucursal = isMostrarImput_FacturaTrazablesProvincia(listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].pro_isTrazable);
                     }
                     if (isMostrarImput && isMostrarImputSucursal) {
@@ -2872,8 +2876,7 @@ function detalleProducto_celular(pIndex) {
                             cantidadDeProductoEnCarrito = listaProductosBuscados[pIndex].listaSucursalStocks[iSucursal].cantidadSucursal;
                             if (cantidadDeProductoEnCarrito == 0 && !isMostrarImput_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, 'CC', listaProductosBuscados[pIndex].listaSucursalStocks)) {
                                 var cantidadDeProductoEnCarrito_temp = getCantidad_SubirArchivo_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
-                                if (isNotNullEmpty(cantidadDeProductoEnCarrito_temp))
-                                {
+                                if (isNotNullEmpty(cantidadDeProductoEnCarrito_temp)) {
                                     cantidadDeProductoEnCarrito = cantidadDeProductoEnCarrito_temp;
                                 }
                             }
