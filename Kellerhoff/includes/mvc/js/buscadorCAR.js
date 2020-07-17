@@ -581,10 +581,10 @@ function getHtmlTablaResolucionCelular() {
 
     strHtml += '<th class="col-xs-4 text-center" colspan="2">';
     strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
-    strHtml += '<tbody><tr><td colspan="2" class="col-lg-12 text-center">Precio<div class="clear5"></div></td></tr>';
+    strHtml += '<tbody><tr><td colspan="2" class="col-lg-12 text-center">Habitual<div class="clear5"></div></td></tr>';
     strHtml += '<tr class="tr_thead">';
     strHtml += '<td class="col-lg-6 text-center click td_busc_xs"  onclick="onclickOrdenarProducto(0)"><span data-toggle="tooltip" data-placement="bottom" title="Ordenar" data-original-title="Ordenar">Público</span><span class="order ' + getCSSColumnaOrdenar(0) + '"></span></td>';
-    strHtml += '<td class="col-lg-6 text-center click" data-toggle="tooltip" data-placement="bottom" title="Ordenar" data-original-title="Ordenar" onclick="onclickOrdenarProducto(1)">Cliente<span class="order ' + getCSSColumnaOrdenar(1) + '"></span></td>';
+    strHtml += '<td class="col-lg-6 text-center click" data-toggle="tooltip" data-placement="bottom" title="Ordenar" data-original-title="Ordenar" onclick="onclickOrdenarProducto(1)">Precio<span class="order ' + getCSSColumnaOrdenar(1) + '"></span></td>';
     strHtml += '</tr>';
     strHtml += '</tbody></table>';
     strHtml += '</th>';
@@ -1440,10 +1440,10 @@ function OnCallBackRecuperarProductos(args) {
 
             strHtml += '<th class="col-lg-2 col-md-2 col-sm-2  text-center" colspan="2">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
-            strHtml += '<tr><td colspan="2" class="col-lg-12 text-center">Precio<div class="clear5"></div></td></tr>';
+            strHtml += '<tr><td colspan="2" class="col-lg-12 text-center">Habitual<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead">';
             strHtml += '<td class="col-lg-6 text-center click no_border" onclick="onclickOrdenarProducto(0)"><span data-toggle="tooltip" data-placement="bottom" title="Ordenar">P&uacute;blico</span><span id="spanOrder0" class="order ' + getCSSColumnaOrdenar(0) + '"></span></td>';
-            strHtml += '<td class="col-lg-6 text-center click"  data-toggle="tooltip" data-placement="bottom" title="Ordenar" onclick="onclickOrdenarProducto(1)">Cliente <span id="spanOrder1" class="order ' + getCSSColumnaOrdenar(1) + '"></span></td>';
+            strHtml += '<td class="col-lg-6 text-center click"  data-toggle="tooltip" data-placement="bottom" title="Ordenar" onclick="onclickOrdenarProducto(1)">Precio<span id="spanOrder1" class="order ' + getCSSColumnaOrdenar(1) + '"></span></td>';
             strHtml += '</tr>';
             strHtml += '</table>';
             strHtml += '</th>';
@@ -1452,7 +1452,7 @@ function OnCallBackRecuperarProductos(args) {
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td colspan="3" class="col-lg-12 text-center">Oferta<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead">';
-            strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center no_border">% s/PVP</td>';
+            strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center no_border">% PVP</td>';
             strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center no_border">Min</td>';
             strHtml += '<td class="col-lg-6 col-md-6 col-sm-6 click text-center" data-toggle="tooltip" data-placement="bottom" title="Ordenar" onclick="onclickOrdenarProducto(2)">Precio<span id="spanOrder2" class="order ' + getCSSColumnaOrdenar(2) + '"></span></td>';
             strHtml += '</tr>';
@@ -1551,7 +1551,7 @@ function OnCallBackRecuperarProductos(args) {
                     if (isSubirPedido) {
                         tdBodyClass = cssTd_cabeceraBody;
                     }
-                    strHtml += '<td class="' + tdBodyClass + ' tdNombreProducto ';
+                    strHtml += '<td class="' + tdBodyClass + ' tdNombreProducto tdSeparadorGrilla';
                     strHtml += strHtmlColorFondo + '" ';//'">';
                     strHtml += ' OnMouseMove="OnMouseMoveProdructo(event)" OnMouseOver="OnMouseOverProdructo(' + i + ')" OnMouseOut="OnMouseOutProdructo()"  onclick="onclickRecuperarTransfer(' + i + '); return false;" >'
                     if (isSubirPedido) {
@@ -1619,10 +1619,10 @@ function OnCallBackRecuperarProductos(args) {
 
                     // 15/02/2018 mail de luciana para el producto
                     if (listaProductosBuscados[i].pro_nombre.match("^PAÑAL PAMI AD")) {
-                        strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].pro_preciofarmacia.toFixed(2)) + '</td>';
+                        strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center tdSeparadorGrilla">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].pro_preciofarmacia.toFixed(2)) + '</td>';
                     }
                     else {
-                        strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioFinal.toFixed(2)) + '</td>';
+                        strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center tdSeparadorGrilla">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioFinal.toFixed(2)) + '</td>';
                     }
                     // fin 15/02/2018 mail de luciana para el producto
 
@@ -1638,7 +1638,7 @@ function OnCallBackRecuperarProductos(args) {
                         }
                     }
                     //Oferta
-                    strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 text-center no-padding">';
+                    strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 text-center no-padding tdSeparadorGrilla">';
                     strHtml += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col_small">' + varOfeporcentaje + '</div>';
                     strHtml += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col_small">' + varOfeunidades + '</div>';
                     strHtml += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col_small">' + varPrecioConDescuentoOferta + '</div>'
@@ -1660,7 +1660,7 @@ function OnCallBackRecuperarProductos(args) {
                     }
                     // inicio transfer
 
-                    strHtml += '<td colspan="2" class="col-lg-2 col-md-2 col-sm-2 text-center no-padding">';
+                    strHtml += '<td colspan="2" class="col-lg-2 col-md-2 col-sm-2 text-center no-padding tdSeparadorGrilla">';
                     strHtml += '<div class="col-lg-' + col_lg_transfer_pvp + ' col-md-' + col_md_transfer_pvp + ' col-sm-' + col_sm_transfer_pvp + ' col-xs-' + col_sm_transfer_pvp + ' col_small">';
                     if (listaProductosBuscados[i].tde_PorcDtoSobrePVP !== null) {
                         strHtml += FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(i).toFixed(2));
@@ -2770,7 +2770,7 @@ function detalleProducto_celular(pIndex) {
     strHtml += '<div class="clear0"></div>';
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
-    strHtml += '<div class="col-xs-12 mpbxs_fila_dest">Precio</div>';
+    strHtml += '<div class="col-xs-12 mpbxs_fila_dest">Habitual</div>';
     var precioPublico = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[pIndex].pro_precio.toFixed(2));
     if (listaProductosBuscados[pIndex].pro_precio === 0) {
         precioPublico = '';
@@ -2782,7 +2782,7 @@ function detalleProducto_celular(pIndex) {
         precioCliente = FormatoDecimalConDivisorMiles(listaProductosBuscados[pIndex].pro_preciofarmacia.toFixed(2));
     }
     // fin 15/02/2018 mail de luciana para el producto
-    strHtml += '<div class="col-xs-12 mpbxs_dsc">Cliente<span class="float-right">' + precioCliente + '</span></div>';
+    strHtml += '<div class="col-xs-12 mpbxs_dsc">Precio<span class="float-right">' + precioCliente + '</span></div>';
 
 
     var varOfeunidades = ' &nbsp; ';
@@ -2798,7 +2798,7 @@ function detalleProducto_celular(pIndex) {
     }
 
     strHtml += '<div class="col-xs-12 mpbxs_fila_dest">Oferta</div>';
-    strHtml += '<div class="col-xs-12 mpbxs_dsc">% s/PVP<span class="float-right">' + varOfeporcentaje + '</span></div>';
+    strHtml += '<div class="col-xs-12 mpbxs_dsc">% PVP<span class="float-right">' + varOfeporcentaje + '</span></div>';
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Min<span class="float-right">' + varOfeunidades + '</span></div>';
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Precio<span class="float-right">' + varPrecioConDescuentoOferta + '</span></div>';
 
