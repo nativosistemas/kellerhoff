@@ -97,7 +97,7 @@
 								donde XX debe ser el ID del div conla informacion, segun se indica abajo
 								-->
                                         <a data-role="expand-info" data-info="1" href="">ROSARIO</a>
-                                        <a data-role="expand-info" data-info="10" href="">DK HOSPITALARIO</a>
+                                        <a data-role="expand-info" data-info="10" href="">DK HOSPITALARIOS</a>
                                         <a data-role="expand-info" data-info="7" href="">SAN NICOLAS</a>
                                         <a data-role="expand-info" data-info="2" href="">CHA&Ntilde;AR LADEADO</a>
                                         <a data-role="expand-info" data-info="6" href="">SANTA FE</a>
@@ -223,7 +223,7 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                     <div class="info_mapa hidden" data-info="8">
                                         <b>VILLA MARÍA</b><br />
                                         <u>Encargado</u>: Manuel Vinzón<br />
-                                        <u>Farmacéutico</u>: Natalia Buhlman<br />
+                                        <u>Farmacéutico</u>: Lucía Sánchez<br />
                                         <u>Promotor</u>: Agustín Arias<br />
                                         <u>Domicilio</u>: Leandro N Alem 330<br />
                                         <u>C.P.A.</u>: X5900JAQ<br />
@@ -245,13 +245,13 @@ TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                         Sáb :  8:30 a 13:00 hs.<br />
                                     </div>
                                     <div class="info_mapa hidden" data-info="10">
-                                        <b>DK HOSPITALARIO</b><br />
+                                        <b>DK HOSPITALARIOS</b><br />
                                         <u>Conmutador General</u>: 0341-4239280/4239280<br />
                                         <u>Cuentas Corrientes</u>: 0341-4203329 / 0341-4203336<br />
                                         <u>Gerente de Ventas</u>: Carlos Mira<br />
                                         <u>Responsable Administrativa</u>: María Alejandra Vitali<br />
                                         <u>Promotores</u>: Maximiliano Frontera - Walter Pasquinelli - Federico Gauna - Esteban Cohen<br />
-                                        <u>Farmacéutico</u>: Carlos Giadans<br />
+                                        <u>Farmacéutico</u>: Sofía Deharbe<br />
                                         <u>Domicilio</u>: Uriburu 1923/1927<br />
                                         <u>C.P.A.</u>: S2001CFM<br />
                                         <u>Fax</u>: 0341-4239288<br />
