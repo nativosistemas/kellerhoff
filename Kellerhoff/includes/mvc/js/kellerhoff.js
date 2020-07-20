@@ -146,6 +146,15 @@ function cli_isAceptaPsicotropicos() {
 function cli_codprov() {
     return cliente.cli_codprov;
 }
+function cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto() {
+    return cliente.cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto;
+}
+function cli_nickname_PorcentajeDescuentoDeNetosMedicamentos() {
+    return cliente.cli_pordesbetmed; //PorcentajeDescuentoDeNetosMedicamentos
+}
+function cli_nickname_PorcentajeDescuentoDeNetos() {
+    return cliente.cli_pordesnetos; //PorcentajeDescuentoDeNetos
+}
 function getSucursalClienteInfo() {
     if (listaSucursales != null) {
         for (var i = 0; i < listaSucursales.length; i++) {

@@ -581,10 +581,10 @@ function getHtmlTablaResolucionCelular() {
 
     strHtml += '<th class="col-xs-4 text-center" colspan="2">';
     strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
-    strHtml += '<tbody><tr><td colspan="2" class="col-lg-12 text-center">Precio<div class="clear5"></div></td></tr>';
+    strHtml += '<tbody><tr><td colspan="2" class="col-lg-12 text-center">Habitual<div class="clear5"></div></td></tr>';
     strHtml += '<tr class="tr_thead">';
     strHtml += '<td class="col-lg-6 text-center click td_busc_xs"  onclick="onclickOrdenarProducto(0)"><span data-toggle="tooltip" data-placement="bottom" title="Ordenar" data-original-title="Ordenar">Público</span><span class="order ' + getCSSColumnaOrdenar(0) + '"></span></td>';
-    strHtml += '<td class="col-lg-6 text-center click" data-toggle="tooltip" data-placement="bottom" title="Ordenar" data-original-title="Ordenar" onclick="onclickOrdenarProducto(1)">Cliente<span class="order ' + getCSSColumnaOrdenar(1) + '"></span></td>';
+    strHtml += '<td class="col-lg-6 text-center click" data-toggle="tooltip" data-placement="bottom" title="Ordenar" data-original-title="Ordenar" onclick="onclickOrdenarProducto(1)">Precio<span class="order ' + getCSSColumnaOrdenar(1) + '"></span></td>';
     strHtml += '</tr>';
     strHtml += '</tbody></table>';
     strHtml += '</th>';
@@ -1020,7 +1020,7 @@ function funExcedeImporteAceptar() {
             }
         }
         if (isSubirPedido) {
-           CargarUnidadesRenglones();
+            CargarUnidadesRenglones();
         }
         isEnterExcedeImporte = false;
         isExcedeImporte = false;
@@ -1073,7 +1073,7 @@ function genericInputSucGetValue(pFila, pColumna) {
             mytext = null;
         }
         if (mytext != null) {
-           return mytext.val();
+            return mytext.val();
         }
     }
     return '';
@@ -1440,10 +1440,10 @@ function OnCallBackRecuperarProductos(args) {
 
             strHtml += '<th class="col-lg-2 col-md-2 col-sm-2  text-center" colspan="2">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
-            strHtml += '<tr><td colspan="2" class="col-lg-12 text-center">Precio<div class="clear5"></div></td></tr>';
+            strHtml += '<tr><td colspan="2" class="col-lg-12 text-center">Habitual<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead">';
             strHtml += '<td class="col-lg-6 text-center click no_border" onclick="onclickOrdenarProducto(0)"><span data-toggle="tooltip" data-placement="bottom" title="Ordenar">P&uacute;blico</span><span id="spanOrder0" class="order ' + getCSSColumnaOrdenar(0) + '"></span></td>';
-            strHtml += '<td class="col-lg-6 text-center click"  data-toggle="tooltip" data-placement="bottom" title="Ordenar" onclick="onclickOrdenarProducto(1)">Cliente <span id="spanOrder1" class="order ' + getCSSColumnaOrdenar(1) + '"></span></td>';
+            strHtml += '<td class="col-lg-6 text-center click"  data-toggle="tooltip" data-placement="bottom" title="Ordenar" onclick="onclickOrdenarProducto(1)">Precio<span id="spanOrder1" class="order ' + getCSSColumnaOrdenar(1) + '"></span></td>';
             strHtml += '</tr>';
             strHtml += '</table>';
             strHtml += '</th>';
@@ -1452,7 +1452,7 @@ function OnCallBackRecuperarProductos(args) {
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td colspan="3" class="col-lg-12 text-center">Oferta<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead">';
-            strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center no_border">%</td>';
+            strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center no_border">% PVP</td>';
             strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center no_border">Min</td>';
             strHtml += '<td class="col-lg-6 col-md-6 col-sm-6 click text-center" data-toggle="tooltip" data-placement="bottom" title="Ordenar" onclick="onclickOrdenarProducto(2)">Precio<span id="spanOrder2" class="order ' + getCSSColumnaOrdenar(2) + '"></span></td>';
             strHtml += '</tr>';
@@ -1460,12 +1460,24 @@ function OnCallBackRecuperarProductos(args) {
             strHtml += '</th>';
             //
             //if (!isCarritoDiferido) {
+            var col_lg_transfer_pvp = 4;
+            var col_md_transfer_pvp = 5;
+            var col_sm_transfer_pvp = 5;
+
+            var col_lg_transfer_cond = 3;
+            var col_md_transfer_cond = 2;
+            var col_sm_transfer_cond = 2;
+
+            var col_lg_transfer_precio = 5;
+            var col_md_transfer_precio = 5;
+            var col_sm_transfer_precio = 5;
             strHtml += '<th class="col-lg-2 col-md-2 col-sm-2  text-center" colspan="2">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
-            strHtml += '<tr><td colspan="2" class="col-lg-12 text-center">Transfer<div class="clear5"></div></td></tr>';
+            strHtml += '<tr><td colspan="3" class="col-lg-12 text-center">Transfer<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead">';
-            strHtml += '<td class="col-lg-6 text-center no_border">Cond</td>';
-            strHtml += '<td class="col-lg-6 text-center click" data-toggle="tooltip" data-placement="bottom" title="Ordenar"  onclick="onclickOrdenarProducto(3)">Precio<span  id="spanOrder3" class="order ' + getCSSColumnaOrdenar(3) + '"></span></td>';
+            strHtml += '<td class="col-lg-' + col_lg_transfer_pvp + ' col-md-' + col_md_transfer_pvp + ' col-sm-' + col_sm_transfer_pvp + '  text-center no_border">% PVP</td>';
+            strHtml += '<td class="col-lg-' + col_lg_transfer_cond + ' col-md-' + col_md_transfer_cond + ' col-sm-' + col_sm_transfer_cond + '  text-center no_border">Cond</td>';
+            strHtml += '<td class="col-lg-' + col_lg_transfer_precio + ' col-md-' + col_md_transfer_precio + ' col-sm-' + col_sm_transfer_precio + '  text-center click" data-toggle="tooltip" data-placement="bottom" title="Ordenar"  onclick="onclickOrdenarProducto(3)">Precio<span  id="spanOrder3" class="order ' + getCSSColumnaOrdenar(3) + '"></span></td>';
             strHtml += '</tr>';
             strHtml += '</table>';
             strHtml += '</th>';
@@ -1539,7 +1551,7 @@ function OnCallBackRecuperarProductos(args) {
                     if (isSubirPedido) {
                         tdBodyClass = cssTd_cabeceraBody;
                     }
-                    strHtml += '<td class="' + tdBodyClass + ' tdNombreProducto ';
+                    strHtml += '<td class="' + tdBodyClass + ' tdNombreProducto tdSeparadorGrilla';
                     strHtml += strHtmlColorFondo + '" ';//'">';
                     strHtml += ' OnMouseMove="OnMouseMoveProdructo(event)" OnMouseOver="OnMouseOverProdructo(' + i + ')" OnMouseOut="OnMouseOutProdructo()"  onclick="onclickRecuperarTransfer(' + i + '); return false;" >'
                     if (isSubirPedido) {
@@ -1607,10 +1619,10 @@ function OnCallBackRecuperarProductos(args) {
 
                     // 15/02/2018 mail de luciana para el producto
                     if (listaProductosBuscados[i].pro_nombre.match("^PAÑAL PAMI AD")) {
-                        strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].pro_preciofarmacia.toFixed(2)) + '</td>';
+                        strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center tdSeparadorGrilla">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].pro_preciofarmacia.toFixed(2)) + '</td>';
                     }
                     else {
-                        strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioFinal.toFixed(2)) + '</td>';
+                        strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center tdSeparadorGrilla">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioFinal.toFixed(2)) + '</td>';
                     }
                     // fin 15/02/2018 mail de luciana para el producto
 
@@ -1620,12 +1632,13 @@ function OnCallBackRecuperarProductos(args) {
                     if (cli_tomaOfertas()) {
                         if (listaProductosBuscados[i].pro_ofeunidades !== 0 || listaProductosBuscados[i].pro_ofeporcentaje !== 0) {
                             varOfeunidades = listaProductosBuscados[i].pro_ofeunidades;
-                            varOfeporcentaje = listaProductosBuscados[i].pro_ofeporcentaje;
+                            //varOfeporcentaje = listaProductosBuscados[i].pro_ofeporcentaje;
+                            varOfeporcentaje = FormatoDecimalConDivisorMiles(getPorcDtoSobreOferta(i).toFixed(2));
                             varPrecioConDescuentoOferta = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioConDescuentoOferta.toFixed(2));
                         }
                     }
                     //Oferta
-                    strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 text-center no-padding">';
+                    strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 text-center no-padding tdSeparadorGrilla">';
                     strHtml += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col_small">' + varOfeporcentaje + '</div>';
                     strHtml += '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col_small">' + varOfeunidades + '</div>';
                     strHtml += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col_small">' + varPrecioConDescuentoOferta + '</div>'
@@ -1645,15 +1658,39 @@ function OnCallBackRecuperarProductos(args) {
                             }
                         }
                     }
+                    // inicio transfer
+
+                    strHtml += '<td colspan="2" class="col-lg-2 col-md-2 col-sm-2 text-center no-padding tdSeparadorGrilla">';
+                    strHtml += '<div class="col-lg-' + col_lg_transfer_pvp + ' col-md-' + col_md_transfer_pvp + ' col-sm-' + col_sm_transfer_pvp + ' col-xs-' + col_sm_transfer_pvp + ' col_small">';
+                    if (listaProductosBuscados[i].tde_PorcDtoSobrePVP !== null) {
+                        strHtml += FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(i).toFixed(2));
+                    }
+                    strHtml += '</div>';
                     //
-                    strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">';
+                    strHtml += '<div class="col-lg-' + col_lg_transfer_cond + ' col-md-' + col_md_transfer_cond + ' col-sm-' + col_sm_transfer_cond + ' col-xs-' + col_sm_transfer_cond + ' col_small">';
                     if (varTransferFacturacionDirectaCondicion !== '') {
                         strHtml += '<div  OnMouseMove="OnMouseMoveProdructoFacturacionDirecta(event)" OnMouseOver="OnMouseOverProdructoFacturacionDirecta(' + i + ')" OnMouseOut="OnMouseOutProdructoFacturacionDirecta()"  style="cursor:pointer;" >'
                         strHtml += varTransferFacturacionDirectaCondicion;
                         strHtml += '</div>';
                     }
+                    strHtml += '</div>';
+                    //
+                    strHtml += '<div class="col-lg-' + col_lg_transfer_precio + ' col-md-' + col_md_transfer_precio + ' col-sm-' + col_sm_transfer_precio + ' col-xs-' + col_sm_transfer_precio + ' col_small">' + varTransferFacturacionDirectaPrecio + '</div>'
                     strHtml += '</td>';
-                    strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">' + varTransferFacturacionDirectaPrecio + '</td>';
+                    // inicio columna PVP 
+                    //strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">';
+                    //strHtml += '</td>';
+                    // fin columna PVP
+                    //
+                    //strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">';
+                    //if (varTransferFacturacionDirectaCondicion !== '') {
+                    //    strHtml += '<div  OnMouseMove="OnMouseMoveProdructoFacturacionDirecta(event)" OnMouseOver="OnMouseOverProdructoFacturacionDirecta(' + i + ')" OnMouseOut="OnMouseOutProdructoFacturacionDirecta()"  style="cursor:pointer;" >'
+                    //    strHtml += varTransferFacturacionDirectaCondicion;
+                    //    strHtml += '</div>';
+                    //}
+                    //strHtml += '</td>';
+                    //strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">' + varTransferFacturacionDirectaPrecio + '</td>';
+                    // fin transfer
                     //}
                     // NUEVO Transfer facturacion directa
 
@@ -1676,12 +1713,10 @@ function OnCallBackRecuperarProductos(args) {
                                 if (listaProductosBuscados[i].listaSucursalStocks[iSucursal].stk_codsuc === listaSucursal[iEncabezadoSucursal]) {
                                     var isMostrarImputSucursal = true;
                                     strHtml += '<div class="' + getNameClassStock(listaProductosBuscados[i].listaSucursalStocks[iSucursal].stk_stock) + '"></div>';
-                                    if (isMostrarImput)
-                                    {
+                                    if (isMostrarImput) {
                                         isMostrarImput = isMostrarImput_pedirCC(listaProductosBuscados[i].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].listaSucursalStocks);
-                                    }                                    
-                                    if (isMostrarImput)
-                                    { //(pIndexSucursal, pIndexProducto)
+                                    }
+                                    if (isMostrarImput) { //(pIndexSucursal, pIndexProducto)
                                         isMostrarImputSucursal = isMostrarImput_FacturaTrazablesProvincia(listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].pro_isTrazable);
                                     }
                                     if (isMostrarImput && isMostrarImputSucursal) {
@@ -1773,43 +1808,83 @@ function OnCallBackRecuperarProductos(args) {
         }
     }
 }
-//function isMostrarImput_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
-//    if (pSucursalEvaluar == 'CC' && // Casa central
-//       (cli_codsuc() == 'CB' || //	Cordoba
-//        cli_codsuc() == 'VM' || //	Villa María
-//        cli_codsuc() == 'RC') &&//	Río Cuarto
-//        pPro_codtpopro == 'P') //TIPOPRODUCTO_Perfumeria
-//    {
-//        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
-//            if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CB') {
-//                if (pListaSucursalStocks[iSucursal].stk_stock === 'S') {
-//                    return false;
-//                }
-//                break;
-//            }
-//        }
-//    }
-//    return true;
-//}
-//function getCantidad_SubirArchivo_CC_ClientesCordoba(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
-//    if (pSucursalEvaluar == 'CB' && // Cordoba
-//       (cli_codsuc() == 'CB' || //	Cordoba
-//        cli_codsuc() == 'VM' || //	Villa María
-//        cli_codsuc() == 'RC') &&//	Río Cuarto
-//        pPro_codtpopro == 'P') //TIPOPRODUCTO_Perfumeria
-//    {
-//        for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
-//            if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CC') {// Casa central
-//                if (isNotNullEmpty(pListaSucursalStocks[iSucursal].cantidadSucursal))
-//                {
-//                    return pListaSucursalStocks[iSucursal].cantidadSucursal;
-//                }
-//                break;
-//            }
-//        }
-//    }
-//    return '';
-//}
+function getPorcDtoSobrePVP(pIndex) {
+    var result = 0;
+    if (listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP !== null) {
+        if (listaProductosBuscados[pIndex].tfr_deshab) {
+            var Dto1 = parseFloat(listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP);
+            var varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto();
+            if (varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto == null) {
+                varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = 0;
+            }
+            var varTemp_tde_PorcARestarDelDtoDeCliente = listaProductosBuscados[pIndex].tde_PorcARestarDelDtoDeCliente;
+            if (varTemp_tde_PorcARestarDelDtoDeCliente == null) {
+                varTemp_tde_PorcARestarDelDtoDeCliente = 0;
+            }
+            var Dto2 = parseFloat(varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto) - parseFloat(varTemp_tde_PorcARestarDelDtoDeCliente);
+            var PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - (parseFloat(Dto1) / parseFloat(100))) * (parseFloat(1) - (parseFloat(Dto2) / parseFloat(100))))) * parseFloat(100));
+            var isRedondeo = true;
+            if (listaProductosBuscados[pIndex].tfr_pordesadi !== null && listaProductosBuscados[pIndex].tfr_pordesadi > 0) {
+                var Dto3 = PorcDtoSobrePVP;
+                var Dto4 = parseFloat(listaProductosBuscados[pIndex].tfr_pordesadi);
+                PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - (parseFloat(Dto3) / parseFloat(100))) * (parseFloat(1) - (parseFloat(Dto4) / parseFloat(100))))) * parseFloat(100));
+            } else if (listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP == 0) {
+                isRedondeo = false;
+            }
+            if (isRedondeo) {
+                result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2);
+            } else {
+                result = PorcDtoSobrePVP;
+            }
+        }
+        else {
+            result = listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP;
+        }
+    }
+    return result;
+
+}
+function getPorcDtoSobreOferta(pIndex) {
+    var result = listaProductosBuscados[pIndex].pro_ofeporcentaje;
+
+    var varTemp_tde_PorcARestarDelDtoDeCliente = listaProductosBuscados[pIndex].tde_PorcARestarDelDtoDeCliente;
+    if (varTemp_tde_PorcARestarDelDtoDeCliente == null) {
+        varTemp_tde_PorcARestarDelDtoDeCliente = 0;
+    }
+    //1) Si pro_Neto=0
+    if (!listaProductosBuscados[pIndex].pro_neto) {  //pro_Neto=0
+        var Dto1 = parseFloat(listaProductosBuscados[pIndex].pro_ofeporcentaje);
+        var varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto();
+        if (varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto == null) {
+            varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = 0;
+        }
+        var Dto2 = parseFloat(varTemp_cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto) - parseFloat(varTemp_tde_PorcARestarDelDtoDeCliente);
+        var PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - (parseFloat(Dto1) / parseFloat(100))) * (parseFloat(1) - (parseFloat(Dto2) / parseFloat(100))))) * parseFloat(100));
+        result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2);
+    } else if (listaProductosBuscados[pIndex].pro_neto && listaProductosBuscados[pIndex].pro_precio === 0) { //2) Si pro_Neto=1  y  pro_ProPrecio=0 -->
+        var Dto1 = parseFloat(listaProductosBuscados[pIndex].pro_ofeporcentaje);
+        var Dto2 = 0;
+        if (listaProductosBuscados[pIndex].pro_codtpopro == 'M') {
+            var varTemp_PorcentajeDescuentoDeNetosMedicamentos = cli_nickname_PorcentajeDescuentoDeNetosMedicamentos();
+            if (varTemp_PorcentajeDescuentoDeNetosMedicamentos == null) {
+                varTemp_PorcentajeDescuentoDeNetosMedicamentos = 0;
+            }
+            Dto2 = parseFloat(varTemp_PorcentajeDescuentoDeNetosMedicamentos) - parseFloat(varTemp_tde_PorcARestarDelDtoDeCliente);
+        } else {
+            var varTemp_PorcentajeDescuentoDeNetos = cli_nickname_PorcentajeDescuentoDeNetos();
+            if (varTemp_PorcentajeDescuentoDeNetos == null) {
+                varTemp_PorcentajeDescuentoDeNetos = 0;
+            }
+            Dto2 = parseFloat(varTemp_PorcentajeDescuentoDeNetos) - parseFloat(varTemp_tde_PorcARestarDelDtoDeCliente);
+        }
+        var PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - (parseFloat(Dto1) / parseFloat(100))) * (parseFloat(1) - (parseFloat(Dto2) / parseFloat(100))))) * parseFloat(100));
+        result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2);
+    } else if (listaProductosBuscados[pIndex].pro_neto && listaProductosBuscados[pIndex].pro_precio > 0) { //3) Si pro_Neto=1 y pro_precio >0 -->
+        result = ((parseFloat(1) - (parseFloat(listaProductosBuscados[pIndex].PrecioConDescuentoOferta) / parseFloat(listaProductosBuscados[pIndex].pro_precio))) * parseFloat(100));
+    }
+    return result;
+
+}
 function AgregarAlHistorialProductoCarrito_SubirPedido(pIndexProducto, pIndexSucursal, pCantidadProducto, pIsSumarCantidad) {
     for (var iSucursal = 0; iSucursal < listaProductosBuscados[pIndexProducto].listaSucursalStocks.length; iSucursal++) {
         if (listaProductosBuscados[pIndexProducto].listaSucursalStocks[iSucursal].stk_codsuc == listaSucursal[pIndexSucursal]) {
@@ -2064,7 +2139,7 @@ function OnCallBackActualizarProductoCarrito(args) {
             args = eval('(' + args + ')');
             isActualizarCarrito = args.isOk;
         } catch (e) {
-            
+
         }
         if (isActualizarCarrito) {
             if (tempIdSucursal != null && tempIdProduco != null && tempCantidadProducto != null && tempIsDesdeBuscador != null) {
@@ -2695,7 +2770,7 @@ function detalleProducto_celular(pIndex) {
     strHtml += '<div class="clear0"></div>';
     strHtml += '</div>';
     strHtml += '<div class="clear"></div>';
-    strHtml += '<div class="col-xs-12 mpbxs_fila_dest">Precio</div>';
+    strHtml += '<div class="col-xs-12 mpbxs_fila_dest">Habitual</div>';
     var precioPublico = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[pIndex].pro_precio.toFixed(2));
     if (listaProductosBuscados[pIndex].pro_precio === 0) {
         precioPublico = '';
@@ -2707,7 +2782,7 @@ function detalleProducto_celular(pIndex) {
         precioCliente = FormatoDecimalConDivisorMiles(listaProductosBuscados[pIndex].pro_preciofarmacia.toFixed(2));
     }
     // fin 15/02/2018 mail de luciana para el producto
-    strHtml += '<div class="col-xs-12 mpbxs_dsc">Cliente<span class="float-right">' + precioCliente + '</span></div>';
+    strHtml += '<div class="col-xs-12 mpbxs_dsc">Precio<span class="float-right">' + precioCliente + '</span></div>';
 
 
     var varOfeunidades = ' &nbsp; ';
@@ -2716,23 +2791,28 @@ function detalleProducto_celular(pIndex) {
     if (cli_tomaOfertas()) {
         if (listaProductosBuscados[pIndex].pro_ofeunidades !== 0 || listaProductosBuscados[pIndex].pro_ofeporcentaje !== 0) {
             varOfeunidades = listaProductosBuscados[pIndex].pro_ofeunidades;
-            varOfeporcentaje = listaProductosBuscados[pIndex].pro_ofeporcentaje;
+            //varOfeporcentaje = listaProductosBuscados[pIndex].pro_ofeporcentaje;
+            varOfeporcentaje = FormatoDecimalConDivisorMiles(getPorcDtoSobreOferta(pIndex).toFixed(2));
             varPrecioConDescuentoOferta = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[pIndex].PrecioConDescuentoOferta.toFixed(2));
         }
     }
 
     strHtml += '<div class="col-xs-12 mpbxs_fila_dest">Oferta</div>';
-    strHtml += '<div class="col-xs-12 mpbxs_dsc">%<span class="float-right">' + varOfeporcentaje + '</span></div>';
+    strHtml += '<div class="col-xs-12 mpbxs_dsc">% PVP<span class="float-right">' + varOfeporcentaje + '</span></div>';
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Min<span class="float-right">' + varOfeunidades + '</span></div>';
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Precio<span class="float-right">' + varPrecioConDescuentoOferta + '</span></div>';
 
 
 
     //if (!isCarritoDiferido) {
+    var varTransferFacturacionDirectaPVP = '';
     var varTransferFacturacionDirectaCondicion = '';
     var varTransferFacturacionDirectaPrecio = '';
     if (cli_tomaTransfers() && listaProductosBuscados[pIndex].isMostrarTransfersEnClientesPerf) {
         if (listaProductosBuscados[pIndex].isProductoFacturacionDirecta) {
+            if (listaProductosBuscados[pIndex].tde_PorcDtoSobrePVP !== null) {
+                varTransferFacturacionDirectaPVP = FormatoDecimalConDivisorMiles(getPorcDtoSobrePVP(pIndex).toFixed(2));
+            }
             if (listaProductosBuscados[pIndex].tde_unidadesbonificadasdescripcion !== null) {
                 varTransferFacturacionDirectaCondicion = listaProductosBuscados[pIndex].tde_unidadesbonificadasdescripcion;
             }
@@ -2751,6 +2831,7 @@ function detalleProducto_celular(pIndex) {
 
 
     strHtml += '<div class="col-xs-12 mpbxs_fila_dest">Transfer</div>';
+    strHtml += '<div class="col-xs-12 mpbxs_dsc">% PVP<span class="float-right">' + varTransferFacturacionDirectaPVP + '</span></div>';
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Cond<span class="float-right">' + varTransferFacturacionDirectaCondicion + '</span></div>';
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Precio<span class="float-right">' + varTransferFacturacionDirectaPrecio + '</span></div>';
 
@@ -2785,7 +2866,7 @@ function detalleProducto_celular(pIndex) {
                     if (isMostrarImput) {
                         isMostrarImput = isMostrarImput_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
                     }
-                    if (isMostrarImput) { 
+                    if (isMostrarImput) {
                         isMostrarImputSucursal = isMostrarImput_FacturaTrazablesProvincia(listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].pro_isTrazable);
                     }
                     if (isMostrarImput && isMostrarImputSucursal) {
@@ -2795,8 +2876,7 @@ function detalleProducto_celular(pIndex) {
                             cantidadDeProductoEnCarrito = listaProductosBuscados[pIndex].listaSucursalStocks[iSucursal].cantidadSucursal;
                             if (cantidadDeProductoEnCarrito == 0 && !isMostrarImput_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, 'CC', listaProductosBuscados[pIndex].listaSucursalStocks)) {
                                 var cantidadDeProductoEnCarrito_temp = getCantidad_SubirArchivo_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
-                                if (isNotNullEmpty(cantidadDeProductoEnCarrito_temp))
-                                {
+                                if (isNotNullEmpty(cantidadDeProductoEnCarrito_temp)) {
                                     cantidadDeProductoEnCarrito = cantidadDeProductoEnCarrito_temp;
                                 }
                             }

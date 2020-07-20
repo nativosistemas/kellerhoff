@@ -51,6 +51,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public string tde_DescripcionDeProducto { get; set; }
         public decimal tde_PrecioConDescuentoDirecto { get; set; }
         public decimal tde_PorcARestarDelDtoDeCliente { get; set; }
+        public decimal? tde_PorcDtoSobrePVP { get; set; }
         private bool _isTablaTransfersClientes = false;
         public bool isTablaTransfersClientes { get { return _isTablaTransfersClientes; } set {  _isTablaTransfersClientes = value; } }
         public List<cSucursalStocks> listaSucursalStocks { get; set; }
