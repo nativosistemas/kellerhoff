@@ -1880,7 +1880,7 @@ function getPorcDtoSobreOferta(pIndex) {
         var PorcDtoSobrePVP = ((parseFloat(1) - ((parseFloat(1) - (parseFloat(Dto1) / parseFloat(100))) * (parseFloat(1) - (parseFloat(Dto2) / parseFloat(100))))) * parseFloat(100));
         result = (PorcDtoSobrePVP - 0.0041).toFixedDown(2);
     } else if (listaProductosBuscados[pIndex].pro_neto && listaProductosBuscados[pIndex].pro_precio > 0) { //3) Si pro_Neto=1 y pro_precio >0 -->
-        result = ((parseFloat(1) - (parseFloat(listaProductosBuscados[pIndex].PrecioConDescuentoOferta) / parseFloat(listaProductosBuscados[pIndex].pro_precio))) * parseFloat(100));
+        result = ((parseFloat(1) - (parseFloat(listaProductosBuscados[pIndex].PrecioConDescuentoOferta) / (parseFloat(listaProductosBuscados[pIndex].pro_precio) / parseFloat(1.21)))) * parseFloat(100));
     }
     return result;
 
