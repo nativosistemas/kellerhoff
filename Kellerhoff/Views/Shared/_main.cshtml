@@ -177,7 +177,8 @@
                                 }
                                 if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DEVOLUCIONES) 
                                    && (((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "CC"
-                                   || ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "SN"))
+                                   || ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "SN"
+                                   || ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "SF"))
                                 {
                                     <li class="nuevo" data-fecha="2021-01-01"><a href="/devoluciones/Devoluciones" @{ WriteLiteral(classDevo);}><h3>DEVOLUCIONES</h3></a></li>
                                 }

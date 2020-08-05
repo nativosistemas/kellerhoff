@@ -1509,7 +1509,7 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                             $("#txtNombreProductoDevVencidos").val(listaPRD.listaProductos[0].pro_nombre);
                             objPRDDev = listaPRD.listaProductos[0];
                             modalModuloHide();
-                            if (objPRDDev.pro_codtpopro != 'M' || objPRDDev.pro_AceptaVencidos == false) {
+                            if (objPRDDev.pro_AceptaVencidos == false) {
                                 mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está intentando devolver es un producto FUERA DE CONVENIO DE VENCIDOS, por favor comuníquese con RECLAMOS.</h5>");
                                 // $(".fa.fa-times").hide();
                                 return false;
@@ -1548,7 +1548,7 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                                 $("#txtNombreProductoDevVencidos").val(listaPRD.listaProductos[idItem].pro_nombre);
                                 objPRDDev = listaPRD.listaProductos[idItem];
                                 modalModuloHide();
-                                if (objPRDDev.pro_codtpopro != 'M' || objPRDDev.pro_AceptaVencidos == false) {
+                                if (objPRDDev.pro_AceptaVencidos == false) {
                                     mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está intentando devolver es un producto FUERA DE CONVENIO DE VENCIDOS, por favor comuníquese con RECLAMOS.</h5>");
                                     // $(".fa.fa-times").hide();
                                     return false;

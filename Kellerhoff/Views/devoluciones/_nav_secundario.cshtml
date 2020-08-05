@@ -50,10 +50,10 @@
 
 @{
     string IdSucursalCliente = ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc;
-    if ( IdSucursalCliente == "SN" )
-    {
-        IdSucursalCliente = "CC";
-    }
+    //if ( IdSucursalCliente == "SN" )
+    //{
+    //    IdSucursalCliente = "CC";
+    //}
     <input type="hidden" value="@{ WriteLiteral(IdSucursalCliente); }" id="txtIdSucursalCliente" />
 }
 
