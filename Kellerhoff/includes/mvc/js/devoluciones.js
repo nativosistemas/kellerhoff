@@ -579,6 +579,12 @@ $(document).ready(function () {
                 data: '{Item: ' + JSON.stringify(ItemsPrecargados) + '}',
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
+                    if (response == "") {
+                        mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Ha ocurrido un error al procesar la solicitud, por favor, comuníquese con el sector de <b>RECLAMOS</b> de la Droguería.</h5>");
+                        hideCargandoBuscador();
+                        $("#btnProcesarPrecarga").removeAttr('disabled');
+                        return false;
+                    }
                     LimpiarPrecarga();
                     mensaje("<span style='color: green !important;'><i class='fa fa-thumbs-up fa-2x'></i> ÉXITO</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La DEVOLUCIÓN  número " + response + " ha sido generada con éxito.</h5><button type='button' class='btn btn-primary pull-right' style='margin-top:1em;' id='btnGeneradaOk'>ACEPTAR</button>");
                     // $(".fa.fa-times").hide();
