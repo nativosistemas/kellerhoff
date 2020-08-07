@@ -22,7 +22,7 @@ namespace Kellerhoff.home
             HttpContext.Current.Session["registracion_msg"] = null;
             try
             {
-                if (true)//(ReCaptchaClass.Validate(g_recaptcha_response))
+                if (Kellerhoff.Codigo.clases.Generales.Captcha.ReCaptchaClass.Validate(g_recaptcha_response))
                 {
                     string cuerpo = "<b>Nombre Titular de la Farmacia: </b>" + txtTitularFarmacia + "<br/>";
                     cuerpo += "<b> ¿Es cliente?: </b>" + (isCliente ? "Si" : "No") + "<br/>";
@@ -79,7 +79,7 @@ namespace Kellerhoff.home
             }
             catch (Exception ex)
             {
-                var dd = ex;
+                Kellerhoff.Codigo.clases.FuncionesPersonalizadas.grabarLog(System.Reflection.MethodBase.GetCurrentMethod(), ex, DateTime.Now);
                 result = "No pudo ser realizada, intente nuevamente en unos minutos.";
 
             }
