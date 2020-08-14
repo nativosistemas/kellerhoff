@@ -207,6 +207,105 @@ namespace Kellerhoff.Codigo.capaDatos
 
         }
 
+        public static string AgregarReclamoFacturadoNoEnviadoCliente(List<cDevolucionItemPrecarga> Item, string pLoginWeb)
+        {
+            try
+            {
+                ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
+                ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga ItemArray = new ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga();
+                for (var i = 0; i < Item.Count(); i++)
+                {
+                    ServiceReferenceDLL.cDevolucionItemPrecarga obj = new ServiceReferenceDLL.cDevolucionItemPrecarga();
+                    obj.dev_cantidad = Item[i].dev_cantidad;
+                    obj.dev_estado = Item[i].dev_estado;
+                    obj.dev_fecha = Item[i].dev_fecha;
+                    obj.dev_fechaToString = Item[i].dev_fechaToString;
+                    obj.dev_fechavencimientolote = Item[i].dev_fechavencimientolote;
+                    obj.dev_fechavencimientoloteToString = Item[i].dev_fechavencimientoloteToString;
+                    obj.dev_mensaje = Item[i].dev_mensaje;
+                    switch (Item[i].dev_motivo)
+                    {
+                        case 1:
+                            obj.dev_motivo = dllMotivoDevolucion.BienFacturadoMalEnviado;
+                            break;
+                        case 2:
+                            obj.dev_motivo = dllMotivoDevolucion.ProductoMalEstado;
+                            break;
+                        case 3:
+                            obj.dev_motivo = dllMotivoDevolucion.FacturadoNoPedido;
+                            break;
+                        case 4:
+                            obj.dev_motivo = dllMotivoDevolucion.ProductoDeMasSinSerFacturado;
+                            break;
+                        case 5:
+                            obj.dev_motivo = dllMotivoDevolucion.VencimientoCorto;
+                            break;
+                        case 6:
+                            obj.dev_motivo = dllMotivoDevolucion.ProductoFallaFabricante;
+                            break;
+                        case 7:
+                            obj.dev_motivo = dllMotivoDevolucion.Vencido;
+                            break;
+                        case 8:
+                            obj.dev_motivo = dllMotivoDevolucion.PedidoPorError;
+                            break;
+                    }
+                    obj.dev_nombreproductodevolucion = Item[i].dev_nombreproductodevolucion;
+                    obj.dev_nombreproductofactura = Item[i].dev_nombreproductofactura;
+                    obj.dev_numerocliente = Item[i].dev_numerocliente;
+                    obj.dev_numerofactura = Item[i].dev_numerofactura;
+                    obj.dev_numeroitem = Item[i].dev_numeroitem;
+                    obj.dev_numeroitemfactura = Item[i].dev_numeroitemfactura;
+                    obj.dev_numerolote = Item[i].dev_numerolote;
+                    obj.dev_numerosolicituddevolucion = Item[i].dev_numerosolicituddevolucion;
+                    obj.dev_idsucursal = Item[i].dev_idsucursal;
+
+                    ItemArray.Add(obj);
+                }
+
+                string resultado = objServicio.AgregarReclamoFacturadoNoEnviado(ItemArray, pLoginWeb);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, Item, pLoginWeb);
+                return null;
+            }
+
+        }
+
+        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> ObtenerReclamosFacturadoNoEnviadoPorCliente(string pLoginWeb)
+        {
+            try
+            {
+                ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
+                List<ServiceReferenceDLL.cDevolucionItemPrecarga> resultado = objServicio.ObtenerReclamosFacturadoNoEnviadoPorCliente(pLoginWeb);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pLoginWeb);
+                return null;
+            }
+
+        }
+
+        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(string pNumeroDevolucion, string pLoginWeb)
+        {
+            try
+            {
+                ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
+                List<ServiceReferenceDLL.cDevolucionItemPrecarga> resultado = objServicio.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(pNumeroDevolucion, pLoginWeb);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pNumeroDevolucion, pLoginWeb);
+                return null;
+            }
+
+        }
+
         public static long ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(string pNombreProducto, string pNumeroFactura, string pLoginWeb)
         {
             try

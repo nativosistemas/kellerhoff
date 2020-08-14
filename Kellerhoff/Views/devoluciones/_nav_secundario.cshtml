@@ -23,6 +23,12 @@
     }
 
 }
+<style>
+    .btn:focus, .btn:active {
+        outline: thin;
+        outline-color: cornsilk;
+    }
+</style>
 
 
 <div class="row">
@@ -41,8 +47,10 @@
                     <a href="/devoluciones/NuevaDevolucionVencidos" @{WriteLiteral(classNuevaDevolucionVencidos);}><i class="fa fa-calendar-minus-o" title="DEVOLUCIÓN DE VENCIDOS"></i><span class="hidden-sm hidden-xs">DEVOLUCIÓN DE VENCIDOS</span></a>
                     <!--<div class="separate"></div>
                     <a href="/devoluciones/NuevaDevolucionFacturaCompleta" @{WriteLiteral(classNuevaDevolucionFacturaCompleta);}><i class="fa fa-file-o" title="DEVOLUCIÓN FACTURA COMPLETA"></i><span class="hidden-sm hidden-xs">DEVOLUCIÓN FACTURA COMPLETA</span></a>-->
-                        }
+                }
             }
+            <div class="separate"></div>
+            <a href="/devoluciones/DevolucionesFacturadoNoEnviado"><i class="fa fa-book" title="DEVOLUCIONES FACTURADO NO ENVIADO"></i><span class="hidden-sm hidden-xs">FACTURADO NO ENVIADO</span></a>
 
         </div>
     </div>
@@ -55,6 +63,7 @@
     //    IdSucursalCliente = "CC";
     //}
     <input type="hidden" value="@{ WriteLiteral(IdSucursalCliente); }" id="txtIdSucursalCliente" />
+    <input type="hidden" value="DEV" id="txtTipoDev" />
 }
 
 

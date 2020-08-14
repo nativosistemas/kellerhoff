@@ -77,6 +77,22 @@ namespace Kellerhoff.Controllers
             }
             return View();
         }
+        public ActionResult DevolucionesFacturadoNoEnviado()
+        {
+            if (Session["clientesDefault_Cliente"] == null)
+            {
+                Response.Redirect("~/home/index.aspx");
+            }
+            return View();
+        }
+        public ActionResult ReclamoFacturadoNoEnviado()
+        {
+            if (Session["clientesDefault_Cliente"] == null)
+            {
+                Response.Redirect("~/home/index.aspx");
+            }
+            return View();
+        }
         public string ObtenerFacturaCliente(string pNroFactura)
         {
             object resultadoObj = null;
@@ -142,6 +158,19 @@ namespace Kellerhoff.Controllers
                 return null;
         }
 
+        public string RecuperarItemsReclamoFacturadoNoEnviado()
+        {
+            object resultadoObj = null;
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultadoObj = WebService.RecuperarItemsReclamoFacturadoNoEnviado(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
+            }
+            if (resultadoObj != null)
+                return Serializador.SerializarAJson(resultadoObj);
+            else
+                return null;
+        }
+
         public bool AgregarDevolucionItemPrecarga( cDevolucionItemPrecarga Item )
         {
             bool resultadoObj = false;
@@ -154,6 +183,18 @@ namespace Kellerhoff.Controllers
             return resultadoObj;
         }
 
+        public bool AgregarReclamoFacturadoNoEnviadoItemPrecarga(cDevolucionItemPrecarga Item)
+        {
+            bool resultadoObj = false;
+
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultadoObj = WebService.AgregarReclamoFacturadoNoEnviadoItemPrecarga(Item);
+            }
+
+            return resultadoObj;
+        }
+        
         public bool EliminarDevolucionItemPrecarga(int NumeroItem)
         {
             bool resultadoObj = false;
@@ -165,7 +206,18 @@ namespace Kellerhoff.Controllers
 
             return resultadoObj;
         }
+        
+        public bool ElimminarItemReclamoFNEPrecarga(int NumeroItem)
+        {
+            bool resultadoObj = false;
 
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultadoObj = WebService.ElimminarItemReclamoFNEPrecarga(NumeroItem);
+            }
+
+            return resultadoObj;
+        }
         public bool EliminarPrecargaDevolucionPorCliente(int NumeroCliente)
         {
             bool resultadoObj = false;
@@ -197,6 +249,18 @@ namespace Kellerhoff.Controllers
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 resultadoObj = WebService.EliminarPrecargaDevolucionFacturaCompletaPorCliente(NumeroCliente);
+            }
+
+            return resultadoObj;
+        }
+        
+        public bool EliminarPrecargaReclamoFNEPorCliente(int NumeroCliente)
+        {
+            bool resultadoObj = false;
+
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultadoObj = WebService.EliminarPrecargaReclamoFNEPorCliente(NumeroCliente);
             }
 
             return resultadoObj;
@@ -238,6 +302,44 @@ namespace Kellerhoff.Controllers
             }
 
             return resultado;
+        }
+
+        public string AgregarReclamoFacturadoNoEnviadoCliente(List<cDevolucionItemPrecarga> Item)
+        {
+            string resultado = null;
+
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultado = WebService.AgregarReclamoFacturadoNoEnviadoCliente(Item, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login);
+            }
+
+            return resultado;
+        }
+
+        public string ObtenerReclamosFacturadoNoEnviadoPorCliente()
+        {
+            object resultadoObj = null;
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultadoObj = WebService.ObtenerReclamosFacturadoNoEnviadoPorCliente(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login);
+            }
+            if (resultadoObj != null)
+                return Serializador.SerializarAJson(resultadoObj);
+            else
+                return null;
+        }
+
+        public string ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(string NumeroDevolucion)
+        {
+            object resultadoObj = null;
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultadoObj = WebService.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(NumeroDevolucion, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login);
+            }
+            if (resultadoObj != null)
+                return Serializador.SerializarAJson(resultadoObj);
+            else
+                return null;
         }
 
         public long? ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(string NombreProducto, string NumeroFactura)

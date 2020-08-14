@@ -127,6 +127,37 @@ namespace Kellerhoff
             return resultado;
         }
 
+        public static string AgregarReclamoFacturadoNoEnviadoCliente(List<cDevolucionItemPrecarga> Item, string pLoginWeb)
+        {
+            string resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+
+                resultado = capaWebServiceDLL.AgregarReclamoFacturadoNoEnviadoCliente(Item, pLoginWeb);
+            }
+            return resultado;
+        }
+
+        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> ObtenerReclamosFacturadoNoEnviadoPorCliente(string pLoginWeb)
+        {
+            List<ServiceReferenceDLL.cDevolucionItemPrecarga> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerReclamosFacturadoNoEnviadoPorCliente(pLoginWeb);
+            }
+            return resultado;
+        }
+
+        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(string pNumeroDevolucion, string pLoginWeb)
+        {
+            List<ServiceReferenceDLL.cDevolucionItemPrecarga> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(pNumeroDevolucion, pLoginWeb);
+            }
+            return resultado;
+        }
+
         public static long ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(string NombreProducto, string NumeroFactura, string pLoginWeb)
         {
             long resultado = 0;
@@ -3411,6 +3442,27 @@ namespace Kellerhoff
             }
         }
 
+        public static List<cDevolucionItemPrecarga> RecuperarItemsReclamoFacturadoNoEnviado(int pIdCliente)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                List<cDevolucionItemPrecarga> resultado = new List<cDevolucionItemPrecarga>();
+                DataTable tabla = capaDevoluciones.RecuperarItemsReclamoFacturadoNoEnviado(pIdCliente);
+                if (tabla != null)
+                {
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        resultado.Add(ConvertToItemDevPrecarga(item));
+                    }
+                }
+                return resultado;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static bool AgregarDevolucionItemPrecarga(cDevolucionItemPrecarga Item)
         {
 
@@ -3422,6 +3474,17 @@ namespace Kellerhoff
             return result;
         }
 
+        public static bool AgregarReclamoFacturadoNoEnviadoItemPrecarga(cDevolucionItemPrecarga Item)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.AgregarReclamoFacturadoNoEnviadoItemPrecarga(Item);
+            }
+            return result;
+        }
+        
         public static bool EliminarDevolucionItemPrecarga(int NumeroItem)
         {
 
@@ -3429,6 +3492,17 @@ namespace Kellerhoff
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 result = capaDevoluciones.EliminarDevolucionItemPrecarga(NumeroItem);
+            }
+            return result;
+        }
+        
+        public static bool ElimminarItemReclamoFNEPrecarga(int NumeroItem)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.ElimminarItemReclamoFNEPrecarga(NumeroItem);
             }
             return result;
         }
@@ -3465,6 +3539,18 @@ namespace Kellerhoff
             }
             return result;
         }
+        
+        public static bool EliminarPrecargaReclamoFNEPorCliente(int NumeroCliente)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.EliminarPrecargaReclamoFNEPorCliente(NumeroCliente);
+            }
+            return result;
+        }
+
 
         //public static List<cDevolucionItemPrecarga> RecuperarDevolucionesPorCliente(int pIdCliente)
         //{
