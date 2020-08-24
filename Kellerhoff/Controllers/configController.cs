@@ -666,6 +666,7 @@ namespace Kellerhoff.Controllers
                     {
                         string encabezado = string.Empty;
                         encabezado += "Nombre producto" + Constantes.cSeparadorCSV;
+                        encabezado += "Codigo Barra" + Constantes.cSeparadorCSV;
                         encabezado += "Unidades Mínimas" + Constantes.cSeparadorCSV;
                         encabezado += "% de descuento";
                         writer.WriteLine(encabezado);
@@ -678,6 +679,12 @@ namespace Kellerhoff.Controllers
                                 NombreProducto = item["Nombre producto"].ToString();
                             }
                             fila += NombreProducto + Constantes.cSeparadorCSV;
+                            string CodigoBarra = string.Empty;
+                            if (item["Codigo Barra"] != DBNull.Value)
+                            {
+                                CodigoBarra = item["Codigo Barra"].ToString();
+                            }
+                            fila += CodigoBarra + Constantes.cSeparadorCSV;
                             string UnidadesMínimas = string.Empty;
                             if (item["Unidades Mínimas"] != DBNull.Value)
                             {
