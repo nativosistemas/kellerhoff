@@ -1417,7 +1417,9 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                                 $("#modalModulo").unbind("click");
                                 return false;
                             } else if (objPRDDev.pro_isTrazable) {
-                                mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución'.</h5>");
+                                setTimeout(function () {
+                                    mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución'.</h5>");
+                                }, 100);
                                 // $(".fa.fa-times").hide();
                                 ItemDevolucion.dev_nombreproductodevolucion = objPRDDev.pro_nombre;
                                 $("#txtNombreProductoDev").attr("disabled", "disabled");
@@ -1472,7 +1474,9 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                                     $("#modalModulo").unbind("click");
                                     return false;
                                 } else if (objPRDDev.pro_isTrazable) {
-                                    mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución'.</h5>");
+                                    setTimeout(function () {
+                                        mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución'.</h5>");
+                                    }, 100);
                                     // $(".fa.fa-times").hide();
                                     ItemDevolucion.dev_nombreproductodevolucion = objPRDDev.pro_nombre;
                                     $("#txtNombreProductoDev").attr("disabled", "disabled");
@@ -1528,7 +1532,9 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                                 $("#modalModulo").unbind("click");
                                 return false;
                             } else if (objPRDDev.pro_isTrazable) {
-                                mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución por vencimiento'.</h5>");
+                                setTimeout(function () {
+                                    mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución'.</h5>");
+                                }, 100);
                                 // $(".fa.fa-times").hide();
                                 ItemDevolucion.dev_nombreproductodevolucion = objPRDDev.pro_nombre;
                                 $("#txtNombreProductoDevVencidos").attr("disabled", "disabled");
@@ -1567,7 +1573,9 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                                     $("#modalModulo").unbind("click");
                                     return false;
                                 } else if (objPRDDev.pro_isTrazable) {
-                                    mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución por vencimiento'.</h5>");
+                                    setTimeout(function () {
+                                        mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución'.</h5>");
+                                    }, 100);
                                     // $(".fa.fa-times").hide();
                                     ItemDevolucion.dev_nombreproductodevolucion = objPRDDev.pro_nombre;
                                     $("#txtNombreProductoDevVencidos").attr("disabled", "disabled");
@@ -1609,7 +1617,9 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                             $("#modalModulo").unbind("click");
                             return false;
                         } else if (objPRDDev.pro_isTrazable) {
-                            mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución'.</h5>");
+                            setTimeout(function () {
+                                mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución'.</h5>");
+                            }, 100);
                             // $(".fa.fa-times").hide();
                             ItemDevolucion.dev_nombreproductodevolucion = objPRDDev.pro_nombre;
                             $("#cmbNombreProducto").attr("disabled", "disabled");
