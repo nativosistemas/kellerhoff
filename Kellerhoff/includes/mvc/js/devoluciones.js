@@ -1040,11 +1040,13 @@ $(document).ready(function () {
                         return false;
                     }
                     LimpiarPrecargaReclamoFNE();
-                    mensaje("<span style='color: green !important;'><i class='fa fa-thumbs-up fa-2x'></i> ÉXITO</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La DEVOLUCIÓN  número " + response + " ha sido generada con éxito.</h5><button type='button' class='btn btn-primary pull-right' style='margin-top:1em;' id='btnGeneradaOk'>ACEPTAR</button>");
+                    mensaje("<span style='color: green !important;'><i class='fa fa-thumbs-up fa-2x'></i> ÉXITO</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Se han cargado los Reclamos por <b>Facturado No Enviado</b> con éxito.</h5><button type='button' class='btn btn-primary pull-right' style='margin-top:1em;' id='btnGeneradaOkFNE'>ACEPTAR</button>");
                     // $(".fa.fa-times").hide();
-                    //$("#btnGeneradaOk").click(function () {
-                    //    location.href = "/devoluciones/NotaDevolucion?nrodev=" + response + "&imprimir=s";
-                    //});
+                    $("#btnGeneradaOkFNE").click(function () {
+                        setTimeout(function () {
+                            $("#txtNroComprobanteFNE").focus();
+                        }, 100);
+                    });
                 },
                 failure: function (response) {
                     //console.log("failure");
@@ -1806,13 +1808,15 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                                     $("#modalModulo").unbind("click");
                                     return false;
                                 } else if (objPRDDev.pro_isTrazable) {
-                                    mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución por vencimiento'.</h5>");
+                                    setTimeout(function () {
+                                        mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución por vencimiento'.</h5>");
+                                        ItemDevolucion.dev_nombreproductodevolucion = objPRDDev.pro_nombre;
+                                        $("#txtNombreProductoDevVencidos").attr("disabled", "disabled");
+                                        $("#DEVCantVencidos").removeClass("hidden");
+                                        campoActual = "txtCantDevolver";
+                                        $("#txtCantDevolver").focus();
+                                    }, 100);
                                     // $(".fa.fa-times").hide();
-                                    ItemDevolucion.dev_nombreproductodevolucion = objPRDDev.pro_nombre;
-                                    $("#txtNombreProductoDevVencidos").attr("disabled", "disabled");
-                                    $("#DEVCantVencidos").removeClass("hidden");
-                                    campoActual = "txtCantDevolver";
-                                    $("#txtCantDevolver").focus();
                                 } else {
                                     ItemDevolucion.dev_nombreproductodevolucion = objPRDDev.pro_nombre;
                                     $("#txtNombreProductoDevVencidos").attr("disabled", "disabled");
@@ -2248,6 +2252,9 @@ function desplegarDevolucionesFNE(cDevs) {
             }
 
             Observaciones = "";
+            if (cDevs[i].dev_estado == "EP" && cDevs[i].dev_numerosolicitudNC == null) {
+                Observaciones += "Analizando reclamo...";
+            }
             if (cDevs[i].dev_numerosolicitudNC != null) {
                 if ($.isNumeric(cDevs[i].dev_numerosolicitudNC)) {
                     if (cDevs[i].dev_cantidad == cDevs[i].dev_cantidadrechazada) {
@@ -2293,7 +2300,7 @@ function desplegarDevolucionesFNE(cDevs) {
         }
     } else {
         html = "<tr>";
-        html += "<td colspan='8' class='text-center color_red'><p class='color_red'>No hay devoluciones para mostrar.</p></td>";
+        html += "<td colspan='9' class='text-center color_red'><p class='color_red'>No hay devoluciones para mostrar.</p></td>";
         html += "</tr>";
         $("#tblDevoluciones").append(html);
     }
