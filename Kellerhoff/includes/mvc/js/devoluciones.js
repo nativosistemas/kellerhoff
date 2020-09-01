@@ -1040,7 +1040,7 @@ $(document).ready(function () {
                         return false;
                     }
                     LimpiarPrecargaReclamoFNE();
-                    mensaje("<span style='color: green !important;'><i class='fa fa-thumbs-up fa-2x'></i> ÉXITO</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Se han cargado los Reclamos por <b>Facturado No Enviado</b> con éxito.</h5><button type='button' class='btn btn-primary pull-right' style='margin-top:1em;' id='btnGeneradaOkFNE'>ACEPTAR</button>");
+                    mensaje("<span style='color: green !important;'><i class='fa fa-thumbs-up fa-2x'></i> ÉXITO</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>" + response + ".</h5><button type='button' class='btn btn-primary pull-right' style='margin-top:1em;' id='btnGeneradaOkFNE'>ACEPTAR</button>");
                     // $(".fa.fa-times").hide();
                     $("#btnGeneradaOkFNE").click(function () {
                         setTimeout(function () {
