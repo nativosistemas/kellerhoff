@@ -295,7 +295,7 @@ function CargarRecuperadorFaltasYCrediticios() {
                     strHtml += '<div class="radio-checkbox">';
                     var SoloLecturaCheckBox = '';
                     if (!isMostrarImput_FacturaTrazablesProvincia(listaRecuperardor[i].fpc_codSucursal, listaRecuperardor[i].listaProductos[iProductos].pro_isTrazable)//) {
-                        || !isMostrarImput_pedirCC(listaRecuperardor[i].listaProductos[iProductos].pro_codtpopro, listaRecuperardor[i].fpc_codSucursal, listaRecuperardor[i].listaProductos[iProductos].listaSucursalStocks)) {
+                        || !isMostrarImput_pedirCC(listaRecuperardor[i].listaProductos[iProductos].pro_codtpopro, listaRecuperardor[i].fpc_codSucursal, listaRecuperardor[i].listaProductos[iProductos].listaSucursalStocks) || (!MostrarImputPerfu(listaRecuperardor[i].listaProductos[iProductos].pro_codtpopro, listaRecuperardor[i].fpc_codSucursal) && listaRecuperardor[i].listaProductos[iProductos].pro_codtpopro == "P")) {
                         SoloLecturaCheckBox = 'disabled'
                     }
                     //

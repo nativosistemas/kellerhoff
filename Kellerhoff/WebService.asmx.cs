@@ -2610,6 +2610,10 @@ namespace Kellerhoff
             {
                 obj.suc_pedirCC_tomaSoloPerfumeria = Convert.ToBoolean(pItem["suc_pedirCC_tomaSoloPerfumeria"]);
             }
+            if (pItem.Table.Columns.Contains("suc_trabajaPerfumeria") && pItem["suc_trabajaPerfumeria"] != DBNull.Value)
+            {
+                obj.suc_trabajaPerfumeria = Convert.ToBoolean(pItem["suc_trabajaPerfumeria"]);
+            }
             return obj;
         }
         public static void EliminarSucursal(int sde_codigo)

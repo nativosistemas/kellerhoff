@@ -1712,7 +1712,7 @@ function OnCallBackRecuperarProductos(args) {
                             for (var iSucursal = 0; iSucursal < listaProductosBuscados[i].listaSucursalStocks.length; iSucursal++) {
                                 if (listaProductosBuscados[i].listaSucursalStocks[iSucursal].stk_codsuc === listaSucursal[iEncabezadoSucursal]) {
                                     var isMostrarImputSucursal = true;
-                                    var isMostrarImputCB = true;
+                                    var isMostrarImputPerfu = true;
                                     strHtml += '<div class="' + getNameClassStock(listaProductosBuscados[i].listaSucursalStocks[iSucursal].stk_stock) + '"></div>';
                                     if (isMostrarImput) {
                                         isMostrarImput = isMostrarImput_pedirCC(listaProductosBuscados[i].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].listaSucursalStocks);
@@ -1720,10 +1720,13 @@ function OnCallBackRecuperarProductos(args) {
                                     if (isMostrarImput) { //(pIndexSucursal, pIndexProducto)
                                         isMostrarImputSucursal = isMostrarImput_FacturaTrazablesProvincia(listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].pro_isTrazable);
                                     }
-                                    if (listaSucursal[iEncabezadoSucursal] == "CB" && listaProductosBuscados[i].pro_codtpopro == "P") {
-                                        isMostrarImputCB = false;
+                                    if (isMostrarImput && listaProductosBuscados[i].pro_codtpopro == "P") {
+                                        isMostrarImputPerfu = MostrarImputPerfu(listaProductosBuscados[i].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[i].listaSucursalStocks);
                                     }
-                                    if (isMostrarImput && isMostrarImputSucursal && isMostrarImputCB) {
+                                    //if (listaSucursal[iEncabezadoSucursal] == "CB" && listaProductosBuscados[i].pro_codtpopro == "P") {
+                                    //    isMostrarImputPerfu = false;
+                                    //}
+                                    if (isMostrarImput && isMostrarImputSucursal && isMostrarImputPerfu) {
                                         // Cargar Cantidad
                                         var cantidadDeProductoEnCarrito = '';
                                         if (isSubirPedido) {
@@ -2867,17 +2870,17 @@ function detalleProducto_celular(pIndex) {
             for (var iSucursal = 0; iSucursal < listaProductosBuscados[pIndex].listaSucursalStocks.length; iSucursal++) {
                 if (listaProductosBuscados[pIndex].listaSucursalStocks[iSucursal].stk_codsuc === listaSucursal[iEncabezadoSucursal]) {
                     var isMostrarImputSucursal = true;
-                    var isMostrarImputCB = true;
+                    var isMostrarImputPerfu = true;
                     if (isMostrarImput) {
                         isMostrarImput = isMostrarImput_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
-                    }
-                    if (listaSucursal[iEncabezadoSucursal] == "CB" && listaProductosBuscados[pIndex].pro_codtpopro == "P") {
-                        isMostrarImputCB = false
                     }
                     if (isMostrarImput) {
                         isMostrarImputSucursal = isMostrarImput_FacturaTrazablesProvincia(listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].pro_isTrazable);
                     }
-                    if (isMostrarImput && isMostrarImputSucursal && isMostrarImputCB) {
+                    if (isMostrarImput && listaProductosBuscados[pIndex].pro_codtpopro == "P") {
+                        isMostrarImputPerfu = MostrarImputPerfu(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
+                    }
+                    if (isMostrarImput && isMostrarImputSucursal && isMostrarImputPerfu) {
                         // Cargar Cantidad
                         var cantidadDeProductoEnCarrito = '';
                         if (isSubirPedido) {

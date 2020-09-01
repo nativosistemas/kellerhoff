@@ -630,6 +630,18 @@ function isMostrarImput_pedirCC(pPro_codtpopro, pSucursalEvaluar, pListaSucursal
     }
     return true;
 }
+function MostrarImputPerfu(pPro_codtpopro, pSucursalEvaluar) {
+    
+    if (listaSucursales != null) {
+        for (var iSucursal = 0; iSucursal < listaSucursales.length; iSucursal++) {
+            if (listaSucursales[iSucursal].sde_sucursal === pSucursalEvaluar && listaSucursales[iSucursal].suc_trabajaPerfumeria) {
+                return true;
+                break;
+            }
+        }
+    }
+    return false;
+}
 function getCantidad_SubirArchivo_pedirCC(pPro_codtpopro, pSucursalEvaluar, pListaSucursalStocks) {
     var sucursalInfo = getSucursalClienteInfo();
     if (sucursalInfo != null) {

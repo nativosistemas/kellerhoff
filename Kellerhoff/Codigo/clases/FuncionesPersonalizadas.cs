@@ -1252,6 +1252,14 @@ namespace Kellerhoff.Codigo.clases
         public static List<cProductosGenerico> ActualizarStockListaProductos_SubirArchico(List<string> pListaSucursal, List<cProductosGenerico> pListaProductos, string pSucursalElegida)
         {
             pListaProductos = ActualizarStockListaProductos(pListaSucursal, pListaProductos);
+            List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
+            bool trabajaPerfumeria = true;
+            for (int i = 0; i< listaSucursal.Count; i++) {
+                if (listaSucursal[i].suc_codigo == pSucursalElegida) {
+                    trabajaPerfumeria = listaSucursal[i].suc_trabajaPerfumeria;
+                }
+            }
+            string sucElegida = pSucursalElegida;
             bool isActualizar = false;
             if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codrep == "S7")
                 isActualizar = true;
@@ -1259,18 +1267,25 @@ namespace Kellerhoff.Codigo.clases
             //    isActualizar = true;
             else if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa != null)
                 isActualizar = true;
-            if (isActualizar)
+            if (isActualizar || !trabajaPerfumeria)
             {
                 for (int i = 0; i < pListaProductos.Count; i++)
                 {
+                    if (pListaProductos[i].pro_codtpopro == "P" && !trabajaPerfumeria) {
+                        sucElegida = "CC";
+                    } else {
+                        sucElegida = pSucursalElegida;
+                    }
                     foreach (cSucursalStocks item in pListaProductos[i].listaSucursalStocks)
                     {
-                        if (item.stk_codsuc == pSucursalElegida)
+                        if (item.stk_codsuc == sucElegida)
                         {
                             item.cantidadSucursal = pListaProductos[i].cantidad;
                         }
                     }
                 }
+            } else {
+                
             }
             return pListaProductos;
         }

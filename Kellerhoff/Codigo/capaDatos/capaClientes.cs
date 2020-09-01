@@ -83,6 +83,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public bool suc_pedirCC_ok { get; set; }
         public string suc_pedirCC_sucursalReferencia { get; set; }
         public bool suc_pedirCC_tomaSoloPerfumeria { get; set; }
+        public bool suc_trabajaPerfumeria { get; set; }
     }
     public class cHorariosSucursal
     {
