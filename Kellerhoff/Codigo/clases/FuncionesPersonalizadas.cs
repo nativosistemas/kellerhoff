@@ -1813,7 +1813,8 @@ namespace Kellerhoff.Codigo.clases
             List<cTipoEnvioClienteFront> resultado = null;
             if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                List<cSucursalDependienteTipoEnviosCliente> lista = WebService.RecuperarTodosSucursalDependienteTipoEnvioCliente().Where(x => x.sde_sucursal == ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc && (x.tsd_idTipoEnvioCliente == null || x.env_codigo == ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codtpoenv)).ToList();
+                cClientes objCliente = ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]);
+                List<cSucursalDependienteTipoEnviosCliente> lista = WebService.RecuperarTodosSucursalDependienteTipoEnvioCliente().Where(x => x.sde_sucursal == objCliente.cli_codsuc && (x.tsd_idTipoEnvioCliente == null || x.env_codigo == objCliente.cli_codtpoenv)).ToList();
                 if (lista != null)
                 {
                     resultado = new List<cTipoEnvioClienteFront>();
@@ -1822,7 +1823,12 @@ namespace Kellerhoff.Codigo.clases
                         cTipoEnvioClienteFront obj = new cTipoEnvioClienteFront();
                         obj.sucursal = lista[i].sde_sucursalDependiente;
                         obj.tipoEnvio = lista[i].env_codigo;
-                        List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> listaTiposEnvios = WebService.RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios().Where(x => x.tdt_idSucursalDependienteTipoEnvioCliente == lista[i].tsd_id).ToList();
+
+                        List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> listaTiposEnvios = WebService.RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios_Excepciones(lista[i].tsd_id, objCliente.cli_codrep);
+                        if (listaTiposEnvios == null || listaTiposEnvios.Count == 0)
+                        {
+                            listaTiposEnvios = WebService.RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios().Where(x => x.tdt_idSucursalDependienteTipoEnvioCliente == lista[i].tsd_id).ToList();
+                        }
                         if (listaTiposEnvios != null)
                         {
                             obj.lista = new List<cTiposEnvios>();

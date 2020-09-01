@@ -4462,7 +4462,27 @@ namespace Kellerhoff
             }
             return resultado;
         }
-
+        public static List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios_Excepciones(int pIdSucursalDependienteTipoEnvioCliente, string tdr_codReparto)
+        {
+            List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                DataTable tabla = capaTiposEnvios.RecuperarTipoEnviosExcepcionesPorSucursalDependiente(pIdSucursalDependienteTipoEnvioCliente, tdr_codReparto);
+                if (tabla != null)
+                {
+                    resultado = new List<cSucursalDependienteTipoEnviosCliente_TiposEnvios>();
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        cSucursalDependienteTipoEnviosCliente_TiposEnvios obj = ConvertToTiposEnviosSucursalDependiente_TiposEnvios_Excepciones(item);
+                        if (obj != null)
+                        {
+                            resultado.Add(obj);
+                        }
+                    }
+                }
+            }
+            return resultado;
+        }
         private static cTiposEnvios ConvertToTiposEnvios(DataRow pItem)
         {
             cTiposEnvios obj = new cTiposEnvios();
@@ -4558,6 +4578,34 @@ namespace Kellerhoff
             }
             return obj;
         }
+
+        private static cSucursalDependienteTipoEnviosCliente_TiposEnvios ConvertToTiposEnviosSucursalDependiente_TiposEnvios_Excepciones(DataRow pItem)
+        {
+            cSucursalDependienteTipoEnviosCliente_TiposEnvios obj = new cSucursalDependienteTipoEnviosCliente_TiposEnvios();
+
+            if (pItem.Table.Columns.Contains("tdr_idSucursalDependienteTipoEnvioCliente") && pItem["tdr_idSucursalDependienteTipoEnvioCliente"] != DBNull.Value)
+            {
+                obj.tdt_idSucursalDependienteTipoEnvioCliente = Convert.ToInt32(pItem["tdr_idSucursalDependienteTipoEnvioCliente"]);
+            }
+            if (pItem.Table.Columns.Contains("tdr_idTipoEnvio") && pItem["tdr_idTipoEnvio"] != DBNull.Value)
+            {
+                obj.tdt_idTipoEnvio = Convert.ToInt32(pItem["tdr_idTipoEnvio"]);
+            }
+            if (pItem.Table.Columns.Contains("env_id") && pItem["env_id"] != DBNull.Value)
+            {
+                obj.env_id = Convert.ToInt32(pItem["env_id"]);
+            }
+            if (pItem.Table.Columns.Contains("env_codigo") && pItem["env_codigo"] != DBNull.Value)
+            {
+                obj.env_codigo = Convert.ToString(pItem["env_codigo"]);
+            }
+            if (pItem.Table.Columns.Contains("env_nombre") && pItem["env_nombre"] != DBNull.Value)
+            {
+                obj.env_nombre = Convert.ToString(pItem["env_nombre"]);
+            }
+            return obj;
+        }
+
         public static int InsertarActualizarProductoParametrizadoCantidad(int pCpc_cantidadParametrizada)
         {
             int resultado = -1;

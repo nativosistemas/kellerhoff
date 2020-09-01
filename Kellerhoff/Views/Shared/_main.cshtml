@@ -272,15 +272,23 @@
                                 <a href="/mvc/promocionescliente"><i class="fa fa-percent"></i>OFERTAS</a>
                             </div>
                         </li>
-                    }
-                    if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DEVOLUCIONES) && ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "CC")
-                    {
+                                    }
+                                    if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DEVOLUCIONES))
+                                    {
                         <li >
                             <a class="s_menu nuevo-celu" id="filter_6" href="#" data-fecha="2021-01-01">DEVOLUCIONES<i id="angle_filter_6" class="fa fa-angle-down"></i></a>
                             <div class="div_filter" id="d_filter_6">
                                 <a href="/devoluciones/Devoluciones"><i class="fa fa-file-text"></i>DEVOLUCIONES</a>
-                                <a href="/devoluciones/NuevaDevolucion"><i class="fa fa-reply"></i>DEVOLUCIÓN NORMAL</a>
-                                <a href="/devoluciones/NuevaDevolucionVencidos"><i class="fa fa-calendar-minus-o"></i>DEVOLUCIÓN DE VENCIDOS</a>
+                                @{
+                                    if (((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                                        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+                                        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL &&
+                                        ((Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+                                    {
+                                        <a href="/devoluciones/NuevaDevolucion"><i class="fa fa-reply"></i>DEVOLUCIÓN NORMAL</a>
+                                        <a href="/devoluciones/NuevaDevolucionVencidos"><i class="fa fa-calendar-minus-o"></i>DEVOLUCIÓN DE VENCIDOS</a>
+                                    }
+                                }
                             </div>
                         </li>
                     }

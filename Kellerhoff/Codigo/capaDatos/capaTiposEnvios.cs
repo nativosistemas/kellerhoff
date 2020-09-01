@@ -325,6 +325,35 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
+        public static DataTable RecuperarTipoEnviosExcepcionesPorSucursalDependiente(int pIdSucursalDependienteTipoEnvioCliente, string tdr_codReparto)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("TiposEnvios.spRecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+            SqlParameter paTdr_idSucursalDependienteTipoEnvioCliente = cmdComandoInicio.Parameters.Add("@tdr_idSucursalDependienteTipoEnvioCliente", SqlDbType.Int);
+            SqlParameter paTdr_codReparto = cmdComandoInicio.Parameters.Add("@tdr_codReparto", SqlDbType.NVarChar, 2);
+            paTdr_codReparto.Value = tdr_codReparto;
+            paTdr_idSucursalDependienteTipoEnvioCliente.Value = pIdSucursalDependienteTipoEnvioCliente;
+            try
+            {
+                Conn.Open();
+                DataTable dt = new DataTable();
+                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+                dt.Load(LectorSQLdata);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
         ///////////
         public static int InsertarActualizarCadeteriaRestricciones(int pTcr_id, string pTcr_codigoSucursal, int pTcr_UnidadesMinimas, int pTcr_UnidadesMaximas, double pTcr_MontoMinimo, double pTcr_MontoIgnorar)
         {
