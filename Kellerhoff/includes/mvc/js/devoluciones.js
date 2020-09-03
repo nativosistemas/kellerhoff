@@ -1036,14 +1036,15 @@ $(document).ready(function () {
                     if (response == "") {
                         mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Ha ocurrido un error al procesar la solicitud, por favor, comuníquese con el sector de <b>RECLAMOS</b> de la Droguería.</h5>");
                         hideCargandoBuscador();
-                        $("#btnProcesarPrecarga").removeAttr('disabled');
+                        $("#btnProcesarPrecargaFNE").removeAttr('disabled');
                         return false;
                     }
                     LimpiarPrecargaReclamoFNE();
-                    mensaje("<span style='color: green !important;'><i class='fa fa-thumbs-up fa-2x'></i> ÉXITO</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>" + response + ".</h5><button type='button' class='btn btn-primary pull-right' style='margin-top:1em;' id='btnGeneradaOkFNE'>ACEPTAR</button>");
+                    mensaje("<span style='color: green !important;'><i class='fa fa-thumbs-up fa-2x'></i> ÉXITO</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>" + response + "</h5><button type='button' class='btn btn-primary pull-right' style='margin-top:1em;' id='btnGeneradaOkFNE'>ACEPTAR</button>");
                     // $(".fa.fa-times").hide();
                     $("#btnGeneradaOkFNE").click(function () {
                         setTimeout(function () {
+                            $("#btnProcesarPrecargaFNE").removeAttr('disabled');
                             $("#txtNroComprobanteFNE").focus();
                         }, 100);
                     });
@@ -1471,6 +1472,50 @@ function ObtenerFacturaCliente(pNroFactura) {
                                 $("#cmbNombreProducto").focus();
                             }
                         } else {
+                            switch (ItemDevolucion.dev_numerofactura.slice(1,5)) {
+                                case "0001":
+                                case "0013":
+                                case "0021":
+                                case "0022":
+                                    ItemDevolucion.dev_idsucursal = "CC";
+                                    break;
+                                case "0006":
+                                case "0015":
+                                    ItemDevolucion.dev_idsucursal = "CH";
+                                    break;
+                                case "0012":
+                                case "0018":
+                                    ItemDevolucion.dev_idsucursal = "CB";
+                                    break;
+                                case "0010":
+                                case "0017":
+                                    ItemDevolucion.dev_idsucursal = "CD";
+                                    break;
+                                case "0003":
+                                case "0014":
+                                    ItemDevolucion.dev_idsucursal = "CO";
+                                    break;
+                                case "0035":
+                                case "0036":
+                                    ItemDevolucion.dev_idsucursal = "RC";
+                                    break;
+                                case "0007":
+                                case "0016":
+                                    ItemDevolucion.dev_idsucursal = "SF";
+                                    break;
+                                case "0023":
+                                case "0024":
+                                    ItemDevolucion.dev_idsucursal = "SN";
+                                    break;
+                                case "0019":
+                                case "0020":
+                                    ItemDevolucion.dev_idsucursal = "VH";
+                                    break;
+                                case "0032":
+                                case "0033":
+                                    ItemDevolucion.dev_idsucursal = "VM";
+                                    break;
+                            }
                             $("#txtNroComprobanteFNE").attr("disabled", "disabled");
                             $("#NombreProductoValuesFNE").html(html);
                             $("#DEVFacturaFNE").removeClass("hidden");
