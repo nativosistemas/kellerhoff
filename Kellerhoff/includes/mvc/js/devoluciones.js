@@ -2868,12 +2868,12 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
                 } else if (parseInt(response) > 0 || parseInt(CantPrecargada) > 0 || parseInt(CantPrecargadaFNE)) {
                     var CantRestante = (CantFact - response - CantPrecargada - CantPrecargadaFNE);
                     var uResp = " unidad ",uDev = " unidad ",uFNE = " unidad ", texto = "" ;
-                    msjCantMax = "El máximo de unidades que resta devolver es de " + CantRestante;
+                    msjCantMax = "El máximo de unidades que resta devolver / reclamar es de " + CantRestante;
                     if (CantRestante < 0) {
                         CantRestante = 0;
                     }
                     if (CantRestante == 0) {
-                        msjCantMax = "No quedan unidades por devolver";
+                        msjCantMax = "No quedan unidades por devolver / reclamar";
                     }
 
                     if (response > 1) {
@@ -2924,24 +2924,24 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
                     return false;
                 } else if (parseInt(response) > 0) {
                     var CantRestante = (CantFact - response);
-                    msjCantMax = "El máximo de unidades que resta devolver es de " + CantRestante;
+                    msjCantMax = "El máximo de unidades que resta devolver / reclamar es de " + CantRestante;
                     if (CantRestante < 0) {
                         CantRestante = 0;
                     }
                     if (CantRestante == 0) {
-                        msjCantMax = "No quedan unidades por devolver";
+                        msjCantMax = "No quedan unidades por devolver / reclamar";
                     }
                     mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto " + NombreProducto + " de la factura " + NumeroFactura + " ya posee solicitudes de devolución por " + response + " unidades.<br>" + msjCantMax + ".<br>Por favor, comuníquese con RECLAMOS.</h5>");
                     // $(".fa.fa-times").hide();
                     return false;
                 } else if (parseInt(CantPrecargada) > 0) {
                     var CantRestante = (CantFact - CantPrecargada);
-                    msjCantMax = "El máximo de unidades que resta devolver es de " + CantRestante;
+                    msjCantMax = "El máximo de unidades que resta devolver / reclamar es de " + CantRestante;
                     if (CantRestante < 0) {
                         CantRestante = 0;
                     }
                     if (CantRestante == 0) {
-                        msjCantMax = "No quedan unidades por devolver";
+                        msjCantMax = "No quedan unidades por devolver / reclamar";
                     }
                     mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto " + NombreProducto + " de la factura " + NumeroFactura + " ya tiene una precarga por " + CantPrecargada + " unidades.<br>" + msjCantMax + ".</h5>");
                     // $(".fa.fa-times").hide();
