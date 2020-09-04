@@ -1445,85 +1445,85 @@ function ObtenerFacturaCliente(pNroFactura) {
                             html += "<option value=\"" + objFactura.lista[i].Descripcion + "\"  data-id=\"" + i + "\">";
                             cProductosDespliegue.push(objFactura.lista[i].Descripcion);
                         }
-                        if (campoActual == "txtNroComprobante") {
-                            $("#txtNroComprobante").attr("disabled", "disabled");
-                            if (NroMotivo == 1) {
-                                $("#NombreProductoValues").html(html);
-                                $("#DEVFactura").removeClass("hidden");
-                                $("#DEVDevolver").removeClass("hidden");
-                                $("#txtCantDevolver").val("");
-                                $("#txtNombreProductoDev").val("");
-                                $("#cmbNombreProducto").val("");
-                                campoActual = "cmbNombreProducto";
-                                $("#cmbNombreProducto").focus();
-                            } else if (NroMotivo == 4) {
-                                $("#DEVDevolver").removeClass("hidden");
-                                $("#txtCantDevolver").val("");
-                                $("#txtNombreProductoDev").val("");
-                                campoActual = "txtNombreProductoDev";
-                                $("#txtNombreProductoDev").focus();
-                            } else {
-                                $("#NombreProductoValues").html(html);
-                                $("#DEVFactura").removeClass("hidden");
-                                $("#txtCantDevolver").val("");
-                                $("#txtNombreProductoDev").val("");
-                                $("#cmbNombreProducto").val("");
-                                campoActual = "cmbNombreProducto";
-                                $("#cmbNombreProducto").focus();
-                            }
+                    }
+                    if (campoActual == "txtNroComprobante") {
+                        $("#txtNroComprobante").attr("disabled", "disabled");
+                        if (NroMotivo == 1) {
+                            $("#NombreProductoValues").html(html);
+                            $("#DEVFactura").removeClass("hidden");
+                            $("#DEVDevolver").removeClass("hidden");
+                            $("#txtCantDevolver").val("");
+                            $("#txtNombreProductoDev").val("");
+                            $("#cmbNombreProducto").val("");
+                            campoActual = "cmbNombreProducto";
+                            $("#cmbNombreProducto").focus();
+                        } else if (NroMotivo == 4) {
+                            $("#DEVDevolver").removeClass("hidden");
+                            $("#txtCantDevolver").val("");
+                            $("#txtNombreProductoDev").val("");
+                            campoActual = "txtNombreProductoDev";
+                            $("#txtNombreProductoDev").focus();
                         } else {
-                            switch (ItemDevolucion.dev_numerofactura.slice(1,5)) {
-                                case "0001":
-                                case "0013":
-                                case "0021":
-                                case "0022":
-                                    ItemDevolucion.dev_idsucursal = "CC";
-                                    break;
-                                case "0006":
-                                case "0015":
-                                    ItemDevolucion.dev_idsucursal = "CH";
-                                    break;
-                                case "0012":
-                                case "0018":
-                                    ItemDevolucion.dev_idsucursal = "CB";
-                                    break;
-                                case "0010":
-                                case "0017":
-                                    ItemDevolucion.dev_idsucursal = "CD";
-                                    break;
-                                case "0003":
-                                case "0014":
-                                    ItemDevolucion.dev_idsucursal = "CO";
-                                    break;
-                                case "0035":
-                                case "0036":
-                                    ItemDevolucion.dev_idsucursal = "RC";
-                                    break;
-                                case "0007":
-                                case "0016":
-                                    ItemDevolucion.dev_idsucursal = "SF";
-                                    break;
-                                case "0023":
-                                case "0024":
-                                    ItemDevolucion.dev_idsucursal = "SN";
-                                    break;
-                                case "0019":
-                                case "0020":
-                                    ItemDevolucion.dev_idsucursal = "VH";
-                                    break;
-                                case "0032":
-                                case "0033":
-                                    ItemDevolucion.dev_idsucursal = "VM";
-                                    break;
-                            }
-                            $("#txtNroComprobanteFNE").attr("disabled", "disabled");
-                            $("#NombreProductoValuesFNE").html(html);
-                            $("#DEVFacturaFNE").removeClass("hidden");
-                            $("#txtCantDevolverFNE").val("");
-                            $("#cmbNombreProductoFNE").val("");
-                            campoActual = "cmbNombreProductoFNE";
-                            $("#cmbNombreProductoFNE").focus();
+                            $("#NombreProductoValues").html(html);
+                            $("#DEVFactura").removeClass("hidden");
+                            $("#txtCantDevolver").val("");
+                            $("#txtNombreProductoDev").val("");
+                            $("#cmbNombreProducto").val("");
+                            campoActual = "cmbNombreProducto";
+                            $("#cmbNombreProducto").focus();
                         }
+                    } else {
+                        switch (ItemDevolucion.dev_numerofactura.slice(1,5)) {
+                            case "0001":
+                            case "0013":
+                            case "0021":
+                            case "0022":
+                                ItemDevolucion.dev_idsucursal = "CC";
+                                break;
+                            case "0006":
+                            case "0015":
+                                ItemDevolucion.dev_idsucursal = "CH";
+                                break;
+                            case "0012":
+                            case "0018":
+                                ItemDevolucion.dev_idsucursal = "CB";
+                                break;
+                            case "0010":
+                            case "0017":
+                                ItemDevolucion.dev_idsucursal = "CD";
+                                break;
+                            case "0003":
+                            case "0014":
+                                ItemDevolucion.dev_idsucursal = "CO";
+                                break;
+                            case "0035":
+                            case "0036":
+                                ItemDevolucion.dev_idsucursal = "RC";
+                                break;
+                            case "0007":
+                            case "0016":
+                                ItemDevolucion.dev_idsucursal = "SF";
+                                break;
+                            case "0023":
+                            case "0024":
+                                ItemDevolucion.dev_idsucursal = "SN";
+                                break;
+                            case "0019":
+                            case "0020":
+                                ItemDevolucion.dev_idsucursal = "VH";
+                                break;
+                            case "0032":
+                            case "0033":
+                                ItemDevolucion.dev_idsucursal = "VM";
+                                break;
+                        }
+                        $("#txtNroComprobanteFNE").attr("disabled", "disabled");
+                        $("#NombreProductoValuesFNE").html(html);
+                        $("#DEVFacturaFNE").removeClass("hidden");
+                        $("#txtCantDevolverFNE").val("");
+                        $("#cmbNombreProductoFNE").val("");
+                        campoActual = "cmbNombreProductoFNE";
+                        $("#cmbNombreProductoFNE").focus();
                     }
                 } else {
                     mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 10 días hábiles de emitida.</h5>");
