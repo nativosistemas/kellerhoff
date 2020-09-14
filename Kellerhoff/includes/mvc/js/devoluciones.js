@@ -496,20 +496,9 @@ $(document).ready(function () {
                     hideCargandoBuscador();
                     ControlarSesion();
                     if (response.length > 0) {
-                        var html = "<li class='headerlotesList' data-idlote=" + i + ">Nro Lote<span class='fven'>Vencimiento</span></li>";
                         colLotes = eval('(' + response + ')');
-
-                        for (var i = 0; i < colLotes.length; i++) {
-                            var DatosFecha = colLotes[i].FechaVencimientoToString.split("/");
-                            var FechaVenc = DatosFecha[1] + "/" + DatosFecha[2];
-                            html += "<li class='lotesList' data-idlote=" + i + ">" + colLotes[i].NumeroLote + "<span class='fven'>" + FechaVenc + "</span></li>";
-                        }
-                        mensaje("Seleccione un Lote", html);
-                        // $(".fa.fa-times").hide();
-                        // $("#modalModulo").unbind("click");
-                        $(".lotesList").click(function () {
-                            var idItem = $(this).attr("data-idlote");
-                            LoteDev = colLotes[idItem];
+                        if (colLotes.length == 1) {
+                            LoteDev = colLotes[0];
                             var DFecha = LoteDev.FechaVencimientoToString.split("/"),
                                 fechaLote = new Date(DFecha[2] + "-" + DFecha[1] + "-" + DFecha[0]);
                             var ahora = new Date();
@@ -518,18 +507,18 @@ $(document).ready(function () {
                             // ahora = new Date('2020-10-15');
 
                             var fechaMin = new Date(ahora.getFullYear(), (ahora.getMonth() + 1), 0);
-                            var fechaMaxVtoCorto = new Date( ahora.getFullYear(), (ahora.getMonth() + 7),0 );
+                            var fechaMaxVtoCorto = new Date(ahora.getFullYear(), (ahora.getMonth() + 7), 0);
                             if (fechaLote < fechaMin) {
                                 mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Solo se evaluarán <b>DEVOLUCIONES</b> de los productos cuya fecha de vencimiento sea posterior al mes en curso. Caso contrario debe pasarlas por <b>DEVOLUCIONES DE VENCIDOS</b>.</h5>");
                                 $("#modalModulo").bind("click");
                                 return false;
-                            } else if ( NroMotivo == 5 && fechaLote > fechaMaxVtoCorto ) {
+                            } else if (NroMotivo == 5 && fechaLote > fechaMaxVtoCorto) {
                                 mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La <b>Fecha de Vencimiento del Lote</b> del producto para realizar una devolución por <em>Corto Vencimiento</em> debe estar dentro de los <b>seis (6) meses</b> posteriores al mes en curso.</h5>");
                                 $("#modalModulo").bind("click");
                                 return false;
                             } else {
                                 setTimeout(function () {
-                                    $("#txtNumeroLote").val(colLotes[idItem].NumeroLote);
+                                    $("#txtNumeroLote").val(colLotes[0].NumeroLote);
                                     ItemDevolucion.dev_numerolote = LoteDev.NumeroLote;
                                     ItemDevolucion.dev_fechavencimientoloteToString = DFecha[2] + "-" + DFecha[1] + "-" + DFecha[0];
                                     $("#txtNumeroLoteVenc").val(DFecha[1] + "/" + DFecha[2]);
@@ -543,7 +532,56 @@ $(document).ready(function () {
                                     $("#btnAgregarDev").focus();
                                 }, 100);
                             }
-                        });
+                        } else {
+                            var html = "<li class='headerlotesList' data-idlote=" + i + ">Nro Lote<span class='fven'>Vencimiento</span></li>";
+                            
+                            for (var i = 0; i < colLotes.length; i++) {
+                                var DatosFecha = colLotes[i].FechaVencimientoToString.split("/");
+                                var FechaVenc = DatosFecha[1] + "/" + DatosFecha[2];
+                                html += "<li class='lotesList' data-idlote=" + i + ">" + colLotes[i].NumeroLote + "<span class='fven'>" + FechaVenc + "</span></li>";
+                            }
+                            mensaje("Seleccione un Lote", html);
+                            // $(".fa.fa-times").hide();
+                            // $("#modalModulo").unbind("click");
+                            $(".lotesList").click(function () {
+                                var idItem = $(this).attr("data-idlote");
+                                LoteDev = colLotes[idItem];
+                                var DFecha = LoteDev.FechaVencimientoToString.split("/"),
+                                    fechaLote = new Date(DFecha[2] + "-" + DFecha[1] + "-" + DFecha[0]);
+                                var ahora = new Date();
+                                // Para DESARROLLO
+                                // ###########################################
+                                // ahora = new Date('2020-10-15');
+
+                                var fechaMin = new Date(ahora.getFullYear(), (ahora.getMonth() + 1), 0);
+                                var fechaMaxVtoCorto = new Date( ahora.getFullYear(), (ahora.getMonth() + 7),0 );
+                                if (fechaLote < fechaMin) {
+                                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Solo se evaluarán <b>DEVOLUCIONES</b> de los productos cuya fecha de vencimiento sea posterior al mes en curso. Caso contrario debe pasarlas por <b>DEVOLUCIONES DE VENCIDOS</b>.</h5>");
+                                    $("#modalModulo").bind("click");
+                                    return false;
+                                } else if ( NroMotivo == 5 && fechaLote > fechaMaxVtoCorto ) {
+                                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La <b>Fecha de Vencimiento del Lote</b> del producto para realizar una devolución por <em>Corto Vencimiento</em> debe estar dentro de los <b>seis (6) meses</b> posteriores al mes en curso.</h5>");
+                                    $("#modalModulo").bind("click");
+                                    return false;
+                                } else {
+                                    setTimeout(function () {
+                                        $("#txtNumeroLote").val(colLotes[idItem].NumeroLote);
+                                        ItemDevolucion.dev_numerolote = LoteDev.NumeroLote;
+                                        ItemDevolucion.dev_fechavencimientoloteToString = DFecha[2] + "-" + DFecha[1] + "-" + DFecha[0];
+                                        $("#txtNumeroLoteVenc").val(DFecha[1] + "/" + DFecha[2]);
+                                        $("#txtNumeroLoteVenc").attr("disabled", "disabled");
+                                        $("#txtNumeroLote").attr("disabled", "disabled");
+                                        modalModuloHide();
+                                        $("#modalModulo").bind("click");
+                                        $("#DEVLoteVenc").removeClass("hidden");
+                                        $("#DEVAgregar").removeClass("hidden");
+                                        $("#btnAgregarDev").removeAttr("disabled", "disabled");
+                                        $("#btnAgregarDev").focus();
+                                    }, 100);
+                                }
+                            });
+                        }
+
                     } else {
                         mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>No se encuentra Número de Lote ingresado, por favor realice una nueva búsqueda.</h5>");
                         // $(".fa.fa-times").hide();
@@ -738,20 +776,9 @@ $(document).ready(function () {
                     hideCargandoBuscador();
                     ControlarSesion();
                     if (response.length > 0) {
-                        var html = "<li class='headerlotesList' data-idlote=" + i + ">Nro Lote<span class='fven'>Vencimiento</span></li>";
                         colLotes = eval('(' + response + ')');
-
-                        for (var i = 0; i < colLotes.length; i++) {
-                            var DatosFecha = colLotes[i].FechaVencimientoToString.split("/");
-                            var FechaVenc = DatosFecha[1] + "/" + DatosFecha[2];
-                            html += "<li class='lotesList' data-idlote=" + i + ">" + colLotes[i].NumeroLote + "<span class='fven'>" + FechaVenc + "</span></li>";
-                        }
-                        mensaje("Seleccione un Lote", html);
-                        // $(".fa.fa-times").hide();
-                        //$("#modalModulo").unbind("click");
-                        $(".lotesList").click(function () {
-                            var idItem = $(this).attr("data-idlote");
-                            LoteDev = colLotes[idItem];
+                        if (colLotes.length == 1) {
+                            LoteDev = colLotes[0];
                             var DFecha = LoteDev.FechaVencimientoToString.split("/"),
                                 fechaLote = new Date(DFecha[2] + "-" + DFecha[1] + "-" + DFecha[0]);
                             var ahora = new Date();
@@ -767,7 +794,7 @@ $(document).ready(function () {
                                 return false;
                             } else {
                                 setTimeout(function () {
-                                    $("#txtNumeroLoteVencidos").val(colLotes[idItem].NumeroLote);
+                                    $("#txtNumeroLoteVencidos").val(colLotes[0].NumeroLote);
                                     ItemDevolucion.dev_numerolote = LoteDev.NumeroLote;
                                     ItemDevolucion.dev_fechavencimientoloteToString = DFecha[2] + "-" + DFecha[1] + "-" + DFecha[0];
                                     $("#txtNumeroLoteVencVencidos").val(DFecha[1] + "/" + DFecha[2]);
@@ -780,11 +807,52 @@ $(document).ready(function () {
                                     $("#btnAgregarDevVencidos").removeAttr("disabled", "disabled");
                                     $("#btnAgregarDevVencidos").focus();
                                 }, 100);
-                                
                             }
-                            
+                        } else {
+                            var html = "<li class='headerlotesList' data-idlote=" + i + ">Nro Lote<span class='fven'>Vencimiento</span></li>";
 
-                        });
+                            for (var i = 0; i < colLotes.length; i++) {
+                                var DatosFecha = colLotes[i].FechaVencimientoToString.split("/");
+                                var FechaVenc = DatosFecha[1] + "/" + DatosFecha[2];
+                                html += "<li class='lotesList' data-idlote=" + i + ">" + colLotes[i].NumeroLote + "<span class='fven'>" + FechaVenc + "</span></li>";
+                            }
+                            mensaje("Seleccione un Lote", html);
+                            // $(".fa.fa-times").hide();
+                            //$("#modalModulo").unbind("click");
+                            $(".lotesList").click(function () {
+                                var idItem = $(this).attr("data-idlote");
+                                LoteDev = colLotes[idItem];
+                                var DFecha = LoteDev.FechaVencimientoToString.split("/"),
+                                    fechaLote = new Date(DFecha[2] + "-" + DFecha[1] + "-" + DFecha[0]);
+                                var ahora = new Date();
+                                // Para DESARROLLO
+                                //###########################################
+                                //ahora = new Date('2020-10-15');
+
+                                var fechaMin = new Date(ahora.getFullYear(), (ahora.getMonth() - 1)),
+                                    fechaMax = new Date(ahora.getFullYear(), (ahora.getMonth() + 1), 0);
+                                if (fechaLote > fechaMax || fechaLote < fechaMin) {
+                                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Recuerde que solo se aceptarán <b>DEVOLUCIONES POR VENCIDOS</b> de los productos cuyo vencimiento sea en el mes en curso o en el mes anterior.</h5>");
+                                    $("#modalModulo").bind("click");
+                                    return false;
+                                } else {
+                                    setTimeout(function () {
+                                        $("#txtNumeroLoteVencidos").val(colLotes[idItem].NumeroLote);
+                                        ItemDevolucion.dev_numerolote = LoteDev.NumeroLote;
+                                        ItemDevolucion.dev_fechavencimientoloteToString = DFecha[2] + "-" + DFecha[1] + "-" + DFecha[0];
+                                        $("#txtNumeroLoteVencVencidos").val(DFecha[1] + "/" + DFecha[2]);
+                                        $("#txtNumeroLoteVencVencidos").attr("disabled", "disabled");
+                                        $("#txtNumeroLoteVencidos").attr("disabled", "disabled");
+                                        modalModuloHide();
+                                        $("#modalModulo").bind("click");
+                                        $("#DEVLoteVencVencidos").removeClass("hidden");
+                                        $("#DEVAgregarVencidos").removeClass("hidden");
+                                        $("#btnAgregarDevVencidos").removeAttr("disabled", "disabled");
+                                        $("#btnAgregarDevVencidos").focus();
+                                    }, 100);
+                                }
+                            });
+                        }
                     } else {
                         mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>No se encuentra Número de Lote ingresado, por favor realice una nueva búsqueda.</h5>");
                         // $(".fa.fa-times").hide();
@@ -1903,6 +1971,11 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                             $("#modalModulo").unbind("click");
                             return false;
                         } else if (objPRDDev.pro_isTrazable) {
+                            if (objPRDDev.pro_codtpopro == "P" && Motivo == 5) {
+                                mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Los productos de PERFUMERÍA no aceptan devoluciones por 'CORTO VENCIMIENTO'.</h5>");
+                                $("#modalModulo").unbind("click");
+                                return false;
+                            }
                             setTimeout(function () {
                                 mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>El producto que está devolviendo es un producto TRAZABLE, si usted ha CONFIRMADO la recepción del mismo, deberá trazar la devolución a la droguería como 'Envio de producto en carácter de devolución'.</h5>");
                             }, 100);
@@ -1913,6 +1986,11 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
                             campoActual = "txtCantDevolver";
                             $("#txtCantDevolver").focus();
                         } else {
+                            if (objPRDDev.pro_codtpopro == "P" && NroMotivo == 5) {
+                                mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> Información</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Los productos de PERFUMERÍA no aceptan devoluciones por <b>'CORTO VENCIMIENTO'</b>.</h5>");
+                                //$("#modalModulo").unbind("click");
+                                return false;
+                            }
                             ItemDevolucion.dev_nombreproductodevolucion = objPRDDev.pro_nombre;
                             $("#cmbNombreProducto").attr("disabled", "disabled");
                             $("#DEVCant").removeClass("hidden");
