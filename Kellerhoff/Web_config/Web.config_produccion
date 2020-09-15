@@ -102,7 +102,7 @@
     </scripting>
   </system.web.extensions>
   <connectionStrings>
-    <add name="db_conexion" connectionString="server='DKWEBP01';database=db_Kellerhoff;user id=web_kellerhoff;password=webkelle2012;" providerName="System.Data.SqlClient"/>
+    <add name="db_conexion" connectionString="server='WEBSERVER1\SQLEXPRESS';database=db_Kellerhoff;user id=web_kellerhoff;password=webkelle2012;" providerName="System.Data.SqlClient"/>
     <add name="KellerhoffEntities" connectionString="metadata=res://*/Codigo.Model.csdl|res://*/Codigo.Model.ssdl|res://*/Codigo.Model.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=WEBSERVER1\SQLEXPRESS;initial catalog=db_Kellerhoff;user id=web_kellerhoff;password=webkelle2012;integrated security=False;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient"/>
   </connectionStrings>
   <system.webServer>
