@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Default.aspx" />
+    <Content Include="archivos\LABBI.jpg" />
     <Content Include="archivos\new.png" />
     <Content Include="archivos\new2.png" />
     <Content Include="clientes\pages\devoluciones.aspx" />
