@@ -1188,6 +1188,8 @@ namespace Kellerhoff
                 obj.cli_promotor = Convert.ToString(pItem["cli_promotor"]);
             if (pItem.Table.Columns.Contains("cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto") && pItem["cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto"] != DBNull.Value)
                 obj.cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = Convert.ToDecimal(pItem["cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto"]);
+            if (pItem.Table.Columns.Contains("cli_GrupoCliente") && pItem["cli_GrupoCliente"] != DBNull.Value)
+                obj.cli_GrupoCliente = Convert.ToString(pItem["cli_GrupoCliente"]);
             return obj;
         }
         public static cProductos RecuperarProductoPorNombre(string pNombreProducto)
