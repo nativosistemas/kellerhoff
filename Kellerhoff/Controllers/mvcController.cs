@@ -546,7 +546,7 @@ namespace Kellerhoff.Controllers
                             oRepetido.Error = msgCarritoRepetido;
                             return Serializador.SerializarAJson(oRepetido);
                         }
-                        resultadoPedido = capaWebServiceDLL.TomarPedidoConIdCarrito(item.car_id,((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
+                        resultadoPedido = capaCore_decision.TomarPedidoConIdCarrito(item.car_id,((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
                         if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
                             return null;
                         if (resultadoPedido == null)
