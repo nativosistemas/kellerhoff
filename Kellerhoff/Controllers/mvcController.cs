@@ -526,12 +526,12 @@ namespace Kellerhoff.Controllers
                 {
                     if (item.codSucursal == pIdSucursal)
                     {
-                        if (capaCAR.IsCarritoEnProceso(item.car_id))
-                        {
-                            ServiceReferenceDLL.cDllPedido oEnProceso = new ServiceReferenceDLL.cDllPedido();
-                            oEnProceso.Error = msgCarritoEnProceso;
-                            return Serializador.SerializarAJson(oEnProceso);
-                        }
+                        //if (capaCAR.IsCarritoEnProceso(item.car_id))
+                        //{
+                        //    ServiceReferenceDLL.cDllPedido oEnProceso = new ServiceReferenceDLL.cDllPedido();
+                        //    oEnProceso.Error = msgCarritoEnProceso;
+                        //    return Serializador.SerializarAJson(oEnProceso);
+                        //}
                  
 
                         List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
@@ -539,13 +539,13 @@ namespace Kellerhoff.Controllers
                         {
                             listaProductos.Add(FuncionesPersonalizadas.ProductosEnCarrito_ToConvert_DllProductosAndCantidad(itemProductos));
                         }
-                        if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
-                        {
-                            capaCAR.BorrarCarritoPorId_SleepTimer(item.car_id, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
-                            ServiceReferenceDLL.cDllPedido oRepetido = new ServiceReferenceDLL.cDllPedido();
-                            oRepetido.Error = msgCarritoRepetido;
-                            return Serializador.SerializarAJson(oRepetido);
-                        }
+                        //if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
+                        //{
+                        //    capaCAR.BorrarCarritoPorId_SleepTimer(item.car_id, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
+                        //    ServiceReferenceDLL.cDllPedido oRepetido = new ServiceReferenceDLL.cDllPedido();
+                        //    oRepetido.Error = msgCarritoRepetido;
+                        //    return Serializador.SerializarAJson(oRepetido);
+                        //}
                         resultadoPedido = capaCore_decision.TomarPedidoConIdCarrito(item.car_id,((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
                         if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
                             return null;
