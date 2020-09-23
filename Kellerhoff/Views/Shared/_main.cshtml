@@ -589,8 +589,7 @@
             {
                 Session["ClientesBase_isLogeo"] = null;
                 bool isUsuarioVerMensajes_PopUp = true;
-                List<int> l_cli_codigo_bot = new List<int>() {6614,7004,7005,7006,7007,7008,7009,7010,7011,7012,7024,7378,7494,7687,7774};//clientes farmacity
-                isUsuarioVerMensajes_PopUp = l_cli_codigo_bot.Contains(oCli.cli_codigo) == false;
+                isUsuarioVerMensajes_PopUp = !(!string.IsNullOrEmpty(oCli.cli_GrupoCliente) && oCli.cli_GrupoCliente.Trim().ToUpper() == "FARMACITY");
                 if (isUsuarioVerMensajes_PopUp)
                 {
                     List<Kellerhoff.Codigo.capaDatos.cMensaje>
