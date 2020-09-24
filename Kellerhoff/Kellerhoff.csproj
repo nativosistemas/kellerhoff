@@ -150,6 +150,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Default.aspx" />
+    <Content Include="admin\pages\GestionProcedimientos.aspx" />
+    <Content Include="admin\pages\GestionRegla.aspx" />
+    <Content Include="admin\pages\GestionRol.aspx" />
+    <Content Include="admin\pages\GestionRolesYReglas.aspx" />
+    <Content Include="admin\pages\GestionUsuario.aspx" />
+    <Content Include="admin\pages\MenuPrincipal.aspx" />
     <Content Include="archivos\LABBI.jpg" />
     <Content Include="archivos\new.png" />
     <Content Include="archivos\new2.png" />
@@ -294,6 +300,11 @@
     <Content Include="img\home\no_disponible.jpg" />
     <Content Include="img\home\pin.png" />
     <Content Include="img\home\revista.png" />
+    <Content Include="img\iconos\bullet_key.png" />
+    <Content Include="img\iconos\Change.png" />
+    <Content Include="img\iconos\delete2.png" />
+    <Content Include="img\iconos\Edit.png" />
+    <Content Include="img\iconos\new.png" />
     <Content Include="img\icon_form_off.png" />
     <Content Include="img\icon_form_on.png" />
     <Content Include="img\icon_msn_off.png" />
@@ -799,6 +810,7 @@
     <Content Include="includes\home\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="archivos\FormatoArchivoTXTFacturas.pdf" />
     <Content Include="clientes\pages\devoluciones.cshtml" />
+    <Content Include="master\BaseAdmin.Master" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1082,6 +1094,42 @@
     <Compile Include="admin\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\pages\GestionProcedimientos.aspx.cs">
+      <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProcedimientos.aspx.designer.cs">
+      <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRegla.aspx.cs">
+      <DependentUpon>GestionRegla.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRegla.aspx.designer.cs">
+      <DependentUpon>GestionRegla.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRol.aspx.cs">
+      <DependentUpon>GestionRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRol.aspx.designer.cs">
+      <DependentUpon>GestionRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRolesYReglas.aspx.cs">
+      <DependentUpon>GestionRolesYReglas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRolesYReglas.aspx.designer.cs">
+      <DependentUpon>GestionRolesYReglas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionUsuario.aspx.cs">
+      <DependentUpon>GestionUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionUsuario.aspx.designer.cs">
+      <DependentUpon>GestionUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\MenuPrincipal.aspx.cs">
+      <DependentUpon>MenuPrincipal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\MenuPrincipal.aspx.designer.cs">
+      <DependentUpon>MenuPrincipal.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="clientes\pages\devoluciones.aspx.cs">
       <DependentUpon>devoluciones.aspx</DependentUpon>
@@ -1325,6 +1373,12 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\BaseAdmin.Master.cs">
+      <DependentUpon>BaseAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="master\BaseAdmin.Master.designer.cs">
+      <DependentUpon>BaseAdmin.Master</DependentUpon>
     </Compile>
     <Compile Include="master\home.Master.cs">
       <DependentUpon>home.Master</DependentUpon>
