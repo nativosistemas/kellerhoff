@@ -49,13 +49,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <HintPath>..\packages\AjaxControlToolkit.16.1.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="AjaxControlToolkit.HtmlEditor.Sanitizer, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <HintPath>..\packages\AjaxControlToolkit.HtmlEditor.Sanitizer.16.1.1.0\lib\net40\AjaxControlToolkit.HtmlEditor.Sanitizer.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="AjaxControlToolkit.HtmlEditor.Sanitizer, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.HtmlEditor.Sanitizer.20.1.0\lib\net40\AjaxControlToolkit.HtmlEditor.Sanitizer.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -63,9 +61,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HtmlAgilityPack, Version=1.11.24.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.24\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -150,6 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Default.aspx" />
+    <Content Include="admin\pages\GestionMensajeNewV4.aspx" />
+    <Content Include="admin\pages\GestionMensajeNewV4Editar.aspx" />
+    <Content Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx" />
     <Content Include="admin\pages\GestionProcedimientos.aspx" />
     <Content Include="admin\pages\GestionRegla.aspx" />
     <Content Include="admin\pages\GestionRol.aspx" />
@@ -452,6 +452,7 @@
     <Content Include="includes\css\shadowbox-3.0.3\shadowbox.css" />
     <Content Include="includes\css\shadowbox-3.0.3\shadowbox.js" />
     <Content Include="includes\css\textos.css" />
+    <Content Include="includes\css\VistaPrevia.css" />
     <Content Include="includes\css\web.css" />
     <Content Include="includes\css\webNew.css" />
     <Content Include="includes\engine1\arrows.png" />
@@ -513,6 +514,7 @@
     <Content Include="includes\js\fileuploader.js" />
     <Content Include="includes\js\Galeria.js" />
     <Content Include="includes\js\GestionHomeSlide.js" />
+    <Content Include="includes\js\GestionMensajeV3.js" />
     <Content Include="includes\js\GestionOferta.js" />
     <Content Include="includes\js\GestionPopUp.js" />
     <Content Include="includes\js\GestionProductoImagen.js" />
@@ -1094,6 +1096,27 @@
     <Compile Include="admin\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4.aspx.cs">
+      <DependentUpon>GestionMensajeNewV4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4.aspx.designer.cs">
+      <DependentUpon>GestionMensajeNewV4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4Editar.aspx.cs">
+      <DependentUpon>GestionMensajeNewV4Editar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4Editar.aspx.designer.cs">
+      <DependentUpon>GestionMensajeNewV4Editar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx.cs">
+      <DependentUpon>GestionMensajeV3VistaPreviaV2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx.designer.cs">
+      <DependentUpon>GestionMensajeV3VistaPreviaV2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\pages\GestionProcedimientos.aspx.cs">
       <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
     </Compile>
@@ -1232,6 +1255,7 @@
     <Compile Include="Codigo\capaDatos\capaHome.cs" />
     <Compile Include="Codigo\capaDatos\capaLogRegistro.cs" />
     <Compile Include="Codigo\capaDatos\capaMensaje.cs" />
+    <Compile Include="Codigo\capaDatos\capaMensajeNew.cs" />
     <Compile Include="Codigo\capaDatos\capaNoticia.cs" />
     <Compile Include="Codigo\capaDatos\capaProductos.cs" />
     <Compile Include="Codigo\capaDatos\capaRecurso.cs" />
