@@ -147,13 +147,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Default.aspx" />
+    <Content Include="admin\pages\GestionCategoriaRestriccion.aspx" />
+    <Content Include="admin\pages\GestionHorarioSucursal.aspx" />
     <Content Include="admin\pages\GestionMensajeNewV4.aspx" />
     <Content Include="admin\pages\GestionMensajeNewV4Editar.aspx" />
     <Content Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx" />
+    <Content Include="admin\pages\GestionMontoMinimo.aspx" />
     <Content Include="admin\pages\GestionProcedimientos.aspx" />
+    <Content Include="admin\pages\GestionProductoDatosExtras.aspx" />
+    <Content Include="admin\pages\GestionProductoImagen.aspx" />
+    <Content Include="admin\pages\GestionProductoImagenAgregar.aspx" />
     <Content Include="admin\pages\GestionRegla.aspx" />
     <Content Include="admin\pages\GestionRol.aspx" />
     <Content Include="admin\pages\GestionRolesYReglas.aspx" />
+    <Content Include="admin\pages\GestionSucursal.aspx" />
+    <Content Include="admin\pages\GestionTiposEnvios.aspx" />
+    <Content Include="admin\pages\GestionTiposEnviosSucursal.aspx" />
+    <Content Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx" />
     <Content Include="admin\pages\GestionUsuario.aspx" />
     <Content Include="admin\pages\MenuPrincipal.aspx" />
     <Content Include="archivos\LABBI.jpg" />
@@ -519,6 +529,7 @@
     <Content Include="includes\js\GestionPopUp.js" />
     <Content Include="includes\js\GestionProductoImagen.js" />
     <Content Include="includes\js\GestionRegla.js" />
+    <Content Include="includes\js\GestionReparto.js" />
     <Content Include="includes\js\GestionRolesYReglas.js" />
     <Content Include="includes\js\jAlert.js" />
     <Content Include="includes\js\jquery-1.7.2.min.js" />
@@ -813,6 +824,7 @@
     <Content Include="archivos\FormatoArchivoTXTFacturas.pdf" />
     <Content Include="clientes\pages\devoluciones.cshtml" />
     <Content Include="master\BaseAdmin.Master" />
+    <Content Include="master\BaseAdminJs3.Master" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1096,6 +1108,20 @@
     <Compile Include="admin\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\pages\GestionCategoriaRestriccion.aspx.cs">
+      <DependentUpon>GestionCategoriaRestriccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionCategoriaRestriccion.aspx.designer.cs">
+      <DependentUpon>GestionCategoriaRestriccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionHorarioSucursal.aspx.cs">
+      <DependentUpon>GestionHorarioSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionHorarioSucursal.aspx.designer.cs">
+      <DependentUpon>GestionHorarioSucursal.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\pages\GestionMensajeNewV4.aspx.cs">
       <DependentUpon>GestionMensajeNewV4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1117,11 +1143,39 @@
     <Compile Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx.designer.cs">
       <DependentUpon>GestionMensajeV3VistaPreviaV2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\pages\GestionMontoMinimo.aspx.cs">
+      <DependentUpon>GestionMontoMinimo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMontoMinimo.aspx.designer.cs">
+      <DependentUpon>GestionMontoMinimo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\pages\GestionProcedimientos.aspx.cs">
       <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\pages\GestionProcedimientos.aspx.designer.cs">
       <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoDatosExtras.aspx.cs">
+      <DependentUpon>GestionProductoDatosExtras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoDatosExtras.aspx.designer.cs">
+      <DependentUpon>GestionProductoDatosExtras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagen.aspx.cs">
+      <DependentUpon>GestionProductoImagen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagen.aspx.designer.cs">
+      <DependentUpon>GestionProductoImagen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagenAgregar.aspx.cs">
+      <DependentUpon>GestionProductoImagenAgregar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagenAgregar.aspx.designer.cs">
+      <DependentUpon>GestionProductoImagenAgregar.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\pages\GestionRegla.aspx.cs">
       <DependentUpon>GestionRegla.aspx</DependentUpon>
@@ -1140,6 +1194,34 @@
     </Compile>
     <Compile Include="admin\pages\GestionRolesYReglas.aspx.designer.cs">
       <DependentUpon>GestionRolesYReglas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionSucursal.aspx.cs">
+      <DependentUpon>GestionSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionSucursal.aspx.designer.cs">
+      <DependentUpon>GestionSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnvios.aspx.cs">
+      <DependentUpon>GestionTiposEnvios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnvios.aspx.designer.cs">
+      <DependentUpon>GestionTiposEnvios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal.aspx.cs">
+      <DependentUpon>GestionTiposEnviosSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal.aspx.designer.cs">
+      <DependentUpon>GestionTiposEnviosSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx.cs">
+      <DependentUpon>GestionTiposEnviosSucursal_Reparto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx.designer.cs">
+      <DependentUpon>GestionTiposEnviosSucursal_Reparto.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\pages\GestionUsuario.aspx.cs">
       <DependentUpon>GestionUsuario.aspx</DependentUpon>
@@ -1403,6 +1485,13 @@
     </Compile>
     <Compile Include="master\BaseAdmin.Master.designer.cs">
       <DependentUpon>BaseAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="master\BaseAdminJs3.Master.cs">
+      <DependentUpon>BaseAdminJs3.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="master\BaseAdminJs3.Master.designer.cs">
+      <DependentUpon>BaseAdminJs3.Master</DependentUpon>
     </Compile>
     <Compile Include="master\home.Master.cs">
       <DependentUpon>home.Master</DependentUpon>
