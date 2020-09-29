@@ -30,6 +30,7 @@ namespace Kellerhoff.Codigo.clases
                     us.NombreYApellido = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["NombreYapellido"]).Trim();
                     us.ApNombre = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["ApNombre"]).Trim();
                     us.idUsuarioLog = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["ulg_codUsuarioLog"]);
+                    us.usu_login = pLogin;
                     if (dsResultado.Tables["Login"].Rows[0]["usu_estado"] != DBNull.Value)
                     {
                         us.usu_estado = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_estado"]);

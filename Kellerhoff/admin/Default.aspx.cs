@@ -13,23 +13,23 @@ namespace Kellerhoff.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Response.Redirect("http://www.kellerhoff.com.ar:84/admin/Default.aspx");
-            if (!IsPostBack)
-            {
-                txtUsuario.Focus();
-                string isCerrarSesion = Request.QueryString["c"];
-                if (isCerrarSesion != string.Empty)
-                {
-                    if (Session["BaseAdmin_Usuario"] != null)
-                    {
-                        Codigo.clases.Seguridad.CerrarSession(((Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).idUsuarioLog);
-                    }
-                    lblMensaje.Text = string.Empty;
-                    txtPassword.Text = string.Empty;
-                    txtUsuario.Text = string.Empty;
-                    Session["BaseAdmin_Usuario"] = null;
-                }
-            }
+            Response.Redirect("http://www.kellerhoff.com.ar:84/admin/Default.aspx");
+            //if (!IsPostBack)
+            //{
+            //    txtUsuario.Focus();
+            //    string isCerrarSesion = Request.QueryString["c"];
+            //    if (isCerrarSesion != string.Empty)
+            //    {
+            //        if (Session["BaseAdmin_Usuario"] != null)
+            //        {
+            //            Codigo.clases.Seguridad.CerrarSession(((Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).idUsuarioLog);
+            //        }
+            //        lblMensaje.Text = string.Empty;
+            //        txtPassword.Text = string.Empty;
+            //        txtUsuario.Text = string.Empty;
+            //        Session["BaseAdmin_Usuario"] = null;
+            //    }
+            //}
         }
         protected void btnIngresar_Click(object sender, EventArgs e)
         {

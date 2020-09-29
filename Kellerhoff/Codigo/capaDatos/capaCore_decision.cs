@@ -10,7 +10,7 @@ namespace Kellerhoff.Codigo.capaDatos
 {
     public class capaCore_decision
     {
-        public static bool _isCore = true;
+        public static bool _isCore = false;
         public static bool isCore
         {
             get

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DKbase.generales;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Kellerhoff
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             DKbase.Helper.getConnectionStringSQL = ConfigurationManager.ConnectionStrings["db_conexion"].ConnectionString;
             DKbase.Helper.getTipoApp = "WEB";
-            DKbase.Helper.getFolder = @"C:\ArchivosSitioWEB";
+            DKbase.Helper.getFolder = Kellerhoff.Codigo.clases.Constantes.cRaizArchivos;// @"C:\ArchivosSitioWEB";
         }
         //protected void Application_Error(object sender, EventArgs e)
         //{

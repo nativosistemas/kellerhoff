@@ -593,11 +593,13 @@
                 }
             }
 
-            if (Session["ClientesBase_isLogeo"] != null && Convert.ToBoolean(Session["ClientesBase_isLogeo"]))
+            if (Session["ClientesBase_isLogeo"] != null && Convert.ToBoolean(Session["ClientesBase_isLogeo"])
+                && Session["clientesDefault_Usuario"] != null)
             {
                 Session["ClientesBase_isLogeo"] = null;
                 bool isUsuarioVerMensajes_PopUp = true;
-                isUsuarioVerMensajes_PopUp = !(!string.IsNullOrEmpty(oCli.cli_GrupoCliente) && oCli.cli_GrupoCliente.Trim().ToUpper() == "FARMACITY");
+                Kellerhoff.Codigo.capaDatos.Usuario user = (Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"];                
+                isUsuarioVerMensajes_PopUp = !(!string.IsNullOrEmpty(user.usu_login) && user.usu_login.Trim().ToUpper() == "FARMACITY");
                 if (isUsuarioVerMensajes_PopUp)
                 {
                     List<Kellerhoff.Codigo.capaDatos.cMensaje>
