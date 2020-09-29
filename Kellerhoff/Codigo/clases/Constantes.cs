@@ -427,5 +427,13 @@ namespace Kellerhoff.Codigo.clases
         {
             get { return "BORRAR CARRRITO REPETIDO"; }
         }
+        public static int cWidth_Oferta
+        {
+            get { return 300; }
+        }
+        public static int cHeight_Oferta
+        {
+            get { return 300; }
+        }
     }
 }

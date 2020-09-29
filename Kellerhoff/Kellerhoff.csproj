@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kellerhoff</RootNamespace>
     <AssemblyName>Kellerhoff</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -29,6 +29,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <Use64BitIISExpress />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,13 +49,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <HintPath>..\packages\AjaxControlToolkit.16.1.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="AjaxControlToolkit.HtmlEditor.Sanitizer, Version=16.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <HintPath>..\packages\AjaxControlToolkit.HtmlEditor.Sanitizer.16.1.1.0\lib\net40\AjaxControlToolkit.HtmlEditor.Sanitizer.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="AjaxControlToolkit.HtmlEditor.Sanitizer, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.HtmlEditor.Sanitizer.20.1.0\lib\net40\AjaxControlToolkit.HtmlEditor.Sanitizer.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -62,34 +61,66 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HtmlAgilityPack, Version=1.11.24.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.24\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -116,6 +147,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Default.aspx" />
+    <Content Include="admin\pages\GestionCategoriaRestriccion.aspx" />
+    <Content Include="admin\pages\GestionHorarioSucursal.aspx" />
+    <Content Include="admin\pages\GestionMensajeNewV4.aspx" />
+    <Content Include="admin\pages\GestionMensajeNewV4Editar.aspx" />
+    <Content Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx" />
+    <Content Include="admin\pages\GestionMontoMinimo.aspx" />
+    <Content Include="admin\pages\GestionProcedimientos.aspx" />
+    <Content Include="admin\pages\GestionProductoDatosExtras.aspx" />
+    <Content Include="admin\pages\GestionProductoImagen.aspx" />
+    <Content Include="admin\pages\GestionProductoImagenAgregar.aspx" />
+    <Content Include="admin\pages\GestionRegla.aspx" />
+    <Content Include="admin\pages\GestionRol.aspx" />
+    <Content Include="admin\pages\GestionRolesYReglas.aspx" />
+    <Content Include="admin\pages\GestionSucursal.aspx" />
+    <Content Include="admin\pages\GestionTiposEnvios.aspx" />
+    <Content Include="admin\pages\GestionTiposEnviosSucursal.aspx" />
+    <Content Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx" />
+    <Content Include="admin\pages\GestionUsuario.aspx" />
+    <Content Include="admin\pages\MenuPrincipal.aspx" />
     <Content Include="archivos\LABBI.jpg" />
     <Content Include="archivos\new.png" />
     <Content Include="archivos\new2.png" />
@@ -260,6 +310,11 @@
     <Content Include="img\home\no_disponible.jpg" />
     <Content Include="img\home\pin.png" />
     <Content Include="img\home\revista.png" />
+    <Content Include="img\iconos\bullet_key.png" />
+    <Content Include="img\iconos\Change.png" />
+    <Content Include="img\iconos\delete2.png" />
+    <Content Include="img\iconos\Edit.png" />
+    <Content Include="img\iconos\new.png" />
     <Content Include="img\icon_form_off.png" />
     <Content Include="img\icon_form_on.png" />
     <Content Include="img\icon_msn_off.png" />
@@ -407,6 +462,7 @@
     <Content Include="includes\css\shadowbox-3.0.3\shadowbox.css" />
     <Content Include="includes\css\shadowbox-3.0.3\shadowbox.js" />
     <Content Include="includes\css\textos.css" />
+    <Content Include="includes\css\VistaPrevia.css" />
     <Content Include="includes\css\web.css" />
     <Content Include="includes\css\webNew.css" />
     <Content Include="includes\engine1\arrows.png" />
@@ -468,10 +524,12 @@
     <Content Include="includes\js\fileuploader.js" />
     <Content Include="includes\js\Galeria.js" />
     <Content Include="includes\js\GestionHomeSlide.js" />
+    <Content Include="includes\js\GestionMensajeV3.js" />
     <Content Include="includes\js\GestionOferta.js" />
     <Content Include="includes\js\GestionPopUp.js" />
     <Content Include="includes\js\GestionProductoImagen.js" />
     <Content Include="includes\js\GestionRegla.js" />
+    <Content Include="includes\js\GestionReparto.js" />
     <Content Include="includes\js\GestionRolesYReglas.js" />
     <Content Include="includes\js\jAlert.js" />
     <Content Include="includes\js\jquery-1.7.2.min.js" />
@@ -765,6 +823,8 @@
     <Content Include="includes\home\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="archivos\FormatoArchivoTXTFacturas.pdf" />
     <Content Include="clientes\pages\devoluciones.cshtml" />
+    <Content Include="master\BaseAdmin.Master" />
+    <Content Include="master\BaseAdminJs3.Master" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1048,6 +1108,133 @@
     <Compile Include="admin\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\pages\GestionCategoriaRestriccion.aspx.cs">
+      <DependentUpon>GestionCategoriaRestriccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionCategoriaRestriccion.aspx.designer.cs">
+      <DependentUpon>GestionCategoriaRestriccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionHorarioSucursal.aspx.cs">
+      <DependentUpon>GestionHorarioSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionHorarioSucursal.aspx.designer.cs">
+      <DependentUpon>GestionHorarioSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4.aspx.cs">
+      <DependentUpon>GestionMensajeNewV4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4.aspx.designer.cs">
+      <DependentUpon>GestionMensajeNewV4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4Editar.aspx.cs">
+      <DependentUpon>GestionMensajeNewV4Editar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeNewV4Editar.aspx.designer.cs">
+      <DependentUpon>GestionMensajeNewV4Editar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx.cs">
+      <DependentUpon>GestionMensajeV3VistaPreviaV2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx.designer.cs">
+      <DependentUpon>GestionMensajeV3VistaPreviaV2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionMontoMinimo.aspx.cs">
+      <DependentUpon>GestionMontoMinimo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionMontoMinimo.aspx.designer.cs">
+      <DependentUpon>GestionMontoMinimo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProcedimientos.aspx.cs">
+      <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProcedimientos.aspx.designer.cs">
+      <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoDatosExtras.aspx.cs">
+      <DependentUpon>GestionProductoDatosExtras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoDatosExtras.aspx.designer.cs">
+      <DependentUpon>GestionProductoDatosExtras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagen.aspx.cs">
+      <DependentUpon>GestionProductoImagen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagen.aspx.designer.cs">
+      <DependentUpon>GestionProductoImagen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagenAgregar.aspx.cs">
+      <DependentUpon>GestionProductoImagenAgregar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagenAgregar.aspx.designer.cs">
+      <DependentUpon>GestionProductoImagenAgregar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRegla.aspx.cs">
+      <DependentUpon>GestionRegla.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRegla.aspx.designer.cs">
+      <DependentUpon>GestionRegla.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRol.aspx.cs">
+      <DependentUpon>GestionRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRol.aspx.designer.cs">
+      <DependentUpon>GestionRol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRolesYReglas.aspx.cs">
+      <DependentUpon>GestionRolesYReglas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionRolesYReglas.aspx.designer.cs">
+      <DependentUpon>GestionRolesYReglas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionSucursal.aspx.cs">
+      <DependentUpon>GestionSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionSucursal.aspx.designer.cs">
+      <DependentUpon>GestionSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnvios.aspx.cs">
+      <DependentUpon>GestionTiposEnvios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnvios.aspx.designer.cs">
+      <DependentUpon>GestionTiposEnvios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal.aspx.cs">
+      <DependentUpon>GestionTiposEnviosSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal.aspx.designer.cs">
+      <DependentUpon>GestionTiposEnviosSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx.cs">
+      <DependentUpon>GestionTiposEnviosSucursal_Reparto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx.designer.cs">
+      <DependentUpon>GestionTiposEnviosSucursal_Reparto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionUsuario.aspx.cs">
+      <DependentUpon>GestionUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionUsuario.aspx.designer.cs">
+      <DependentUpon>GestionUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\MenuPrincipal.aspx.cs">
+      <DependentUpon>MenuPrincipal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\MenuPrincipal.aspx.designer.cs">
+      <DependentUpon>MenuPrincipal.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="clientes\pages\devoluciones.aspx.cs">
       <DependentUpon>devoluciones.aspx</DependentUpon>
@@ -1142,12 +1329,15 @@
     <Compile Include="Codigo\capaDatos\capaCatalogo.cs" />
     <Compile Include="Codigo\capaDatos\capaClientes.cs" />
     <Compile Include="Codigo\capaDatos\capaContactos.cs" />
+    <Compile Include="Codigo\capaDatos\capaCore_decision.cs" />
+    <Compile Include="Codigo\capaDatos\capaCore_WebService.cs" />
     <Compile Include="Codigo\capaDatos\capaCV.cs" />
     <Compile Include="Codigo\capaDatos\capaDevoluciones.cs" />
     <Compile Include="Codigo\capaDatos\capaEF.cs" />
     <Compile Include="Codigo\capaDatos\capaHome.cs" />
     <Compile Include="Codigo\capaDatos\capaLogRegistro.cs" />
     <Compile Include="Codigo\capaDatos\capaMensaje.cs" />
+    <Compile Include="Codigo\capaDatos\capaMensajeNew.cs" />
     <Compile Include="Codigo\capaDatos\capaNoticia.cs" />
     <Compile Include="Codigo\capaDatos\capaProductos.cs" />
     <Compile Include="Codigo\capaDatos\capaRecurso.cs" />
@@ -1289,6 +1479,19 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\BaseAdmin.Master.cs">
+      <DependentUpon>BaseAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="master\BaseAdmin.Master.designer.cs">
+      <DependentUpon>BaseAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="master\BaseAdminJs3.Master.cs">
+      <DependentUpon>BaseAdminJs3.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="master\BaseAdminJs3.Master.designer.cs">
+      <DependentUpon>BaseAdminJs3.Master</DependentUpon>
     </Compile>
     <Compile Include="master\home.Master.cs">
       <DependentUpon>home.Master</DependentUpon>
@@ -1471,6 +1674,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DKbase\DKbase.csproj">
+      <Project>{fd26b2b9-152b-4573-9dff-9db44343725e}</Project>
+      <Name>DKbase</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -24,11 +24,13 @@ namespace Kellerhoff.Codigo.clases
                 else
                 {
                     Usuario us = new Usuario();
+                    capaCore_WebService.setDatosLogin(pLogin, pPassword);
                     us.id = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_codigo"]);
                     us.idRol = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_codRol"]);
                     us.NombreYApellido = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["NombreYapellido"]).Trim();
                     us.ApNombre = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["ApNombre"]).Trim();
                     us.idUsuarioLog = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["ulg_codUsuarioLog"]);
+                    us.usu_login = pLogin;
                     if (dsResultado.Tables["Login"].Rows[0]["usu_estado"] != DBNull.Value)
                     {
                         us.usu_estado = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_estado"]);

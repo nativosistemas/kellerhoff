@@ -58,7 +58,12 @@ namespace Kellerhoff.Codigo.capaDatos
             get;
             set;
         }
-    }
+        public string usu_login
+        {
+            get;
+            set;
+        }
+}
     public class cUsuario
     {
         public int usu_codigo { get; set; }

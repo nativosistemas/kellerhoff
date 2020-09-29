@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DKbase.generales;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,6 +18,9 @@ namespace Kellerhoff
             // Código que se ejecuta al iniciar la aplicación
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            DKbase.Helper.getConnectionStringSQL = ConfigurationManager.ConnectionStrings["db_conexion"].ConnectionString;
+            DKbase.Helper.getTipoApp = "WEB";
+            DKbase.Helper.getFolder = Kellerhoff.Codigo.clases.Constantes.cRaizArchivos;// @"C:\ArchivosSitioWEB";
         }
         //protected void Application_Error(object sender, EventArgs e)
         //{
@@ -45,8 +50,8 @@ namespace Kellerhoff
                 Parameters += ((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idUsuarioLog;
                 Parameters += "</" + "idUsuarioLog" + ">";
             }
-           // Codigo.clases.FuncionesPersonalizadas.grabarLog(System.Reflection.MethodBase.GetCurrentMethod(), exception, DateTime.Now, login, codigoCliente, idUsuarioLog);
-            Codigo.clases.FuncionesPersonalizadas.grabarLog_generico(System.Reflection.MethodBase.GetCurrentMethod().Name, exception, DateTime.Now,  Parameters, "WEB");
+            // Codigo.clases.FuncionesPersonalizadas.grabarLog(System.Reflection.MethodBase.GetCurrentMethod(), exception, DateTime.Now, login, codigoCliente, idUsuarioLog);
+            DKbase.generales.Log.grabarLog_generico(System.Reflection.MethodBase.GetCurrentMethod().Name, exception, DateTime.Now,  Parameters, "WEB");
             Response.Clear();
 
             HttpException httpException = exception as HttpException;
