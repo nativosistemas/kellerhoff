@@ -2605,7 +2605,7 @@ function filtrarPor() {
             } else {
                 $("#tblDevoluciones").html('');
                 html = "<tr>";
-                html += "<td colspan='8' class='text-center color_red'><p class='color_red'>Por favor, seleccione los campos para filtrar las devoluciones</p></td>";
+                html += "<td colspan='9' class='text-center color_red'><p class='color_red'>Por favor, seleccione los campos para filtrar las devoluciones</p></td>";
                 html += "</tr>";
                 $("#tblDevoluciones").append(html);
             }
