@@ -62,9 +62,7 @@
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionRolesYReglas.aspx" Text="Gestión reglas y roles" />
                             </asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionProcedimientos.aspx" Text="Procedimientos" />
-                            <asp:MenuItem Text="Mensajes">
-                                <asp:MenuItem NavigateUrl="~/admin/pages/GestionMensajeNewV4.aspx" Text="Alertas" />
-                            </asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/admin/pages/GestionMensajeNewV4.aspx" Text="Mensajes" />
                             <asp:MenuItem Text="Productos">
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionProductoDatosExtras.aspx" Text="Productos Datos Extras" />
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionProductoImagen.aspx" Text="Productos Imagenes" />
@@ -77,7 +75,7 @@
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionTiposEnviosSucursal.aspx" Text="Tipos de Envíos Sucursal" />
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionCategoriaRestriccion.aspx" Text="Cadeteria - Parámetro" />
                             </asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="~/admin/pages/GestionContacto.aspx" Text="Contacto" />
+                          <%--  <asp:MenuItem NavigateUrl="~/admin/pages/GestionContacto.aspx" Text="Contacto" />--%>
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionCatalogo.aspx" Text="Catálogo" />
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionCurriculumVitae_v2.aspx" Text="Curriculum Vitae" />
                             <asp:MenuItem Text="Ofertas">

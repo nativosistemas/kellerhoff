@@ -6,6 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Services;
+using Kellerhoff.Codigo;
+using Kellerhoff.Codigo.clases;
+using Kellerhoff.Codigo.capaDatos;
 
 namespace Kellerhoff.admin
 {
@@ -13,23 +17,71 @@ namespace Kellerhoff.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("http://www.kellerhoff.com.ar:84/admin/Default.aspx");
-            //if (!IsPostBack)
-            //{
-            //    txtUsuario.Focus();
-            //    string isCerrarSesion = Request.QueryString["c"];
-            //    if (isCerrarSesion != string.Empty)
-            //    {
-            //        if (Session["BaseAdmin_Usuario"] != null)
-            //        {
-            //            Codigo.clases.Seguridad.CerrarSession(((Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).idUsuarioLog);
-            //        }
-            //        lblMensaje.Text = string.Empty;
-            //        txtPassword.Text = string.Empty;
-            //        txtUsuario.Text = string.Empty;
-            //        Session["BaseAdmin_Usuario"] = null;
-            //    }
-            //}
+            //Response.Redirect("http://www.kellerhoff.com.ar:84/admin/Default.aspx");
+            if (!IsPostBack)
+            {
+                txtUsuario.Focus();
+                string isCerrarSesion = Request.QueryString["c"];
+                if (isCerrarSesion != string.Empty)
+                {
+                    if (Session["BaseAdmin_Usuario"] != null)
+                    {
+                        Codigo.clases.Seguridad.CerrarSession(((Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).idUsuarioLog);
+                    }
+                    lblMensaje.Text = string.Empty;
+                    txtPassword.Text = string.Empty;
+                    txtUsuario.Text = string.Empty;
+                    Session["BaseAdmin_Usuario"] = null;
+                }
+            }
+        }
+        [WebMethod(EnableSession = true)]
+        public static string LoginAdmin(string pName, string pPass)
+        {
+            string resultado = null;
+            string userAgent = System.Web.HttpContext.Current.Request.UserAgent;
+            string ip = System.Web.HttpContext.Current.Server.HtmlEncode(System.Web.HttpContext.Current.Request.UserHostAddress);
+            string hostName = System.Web.HttpContext.Current.Request.UserHostName;
+            Usuario user = Seguridad.Login(pName, pPass, ip, hostName, userAgent);
+            if (user != null)
+            {
+                if (user.id != -1)
+                {
+                    if (user.usu_estado == Constantes.cESTADO_ACTIVO)
+                    {
+                        if (user.idRol != Constantes.cROL_ADMINISTRADORCLIENTE && user.idRol != Constantes.cROL_OPERADORCLIENTE)
+                        {
+                            System.Web.HttpContext.Current.Session["BaseAdmin_Usuario"] = user;
+                            Autenticacion objAutenticacion = new Autenticacion();
+                            objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
+                            objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
+                            WebService.CredencialAutenticacion = objAutenticacion;
+                            cBaseAdmin.CargarAccionesEnVariableSession();
+                            //Response.Redirect("~/admin/pages/MenuPrincipal.aspx");
+                            resultado = "OK";
+                        }
+                        else
+                        {
+                            resultado = "Usuario con rol sin permiso";
+                        }
+                    }
+                    else
+                    {
+                        resultado = "Usuario inactivo";
+                    }
+                }
+                else
+                {
+                    resultado = "Usuario o contraseña erróneo";
+                }
+            }
+            else
+            {
+                resultado = "Error en el servidor";
+            }
+
+            return resultado;
+           // return resultado == null ? string.Empty : Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(resultado);
         }
         protected void btnIngresar_Click(object sender, EventArgs e)
         {

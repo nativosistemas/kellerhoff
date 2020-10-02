@@ -9,6 +9,7 @@ using Kellerhoff.Codigo;
 using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.clases.Generales;
+using static Kellerhoff.Codigo.capaDatos.cCurriculumVitae;
 
 namespace Kellerhoff
 {
@@ -4137,6 +4138,14 @@ namespace Kellerhoff
             {
                 obj.tcv_fechaPresentacion = Convert.ToDateTime(pItem["tcv_fechaPresentacion"]);
                 obj.tcv_fechaPresentacionToString = ((DateTime)obj.tcv_fechaPresentacion).ToString();
+            }
+            List<cArchivo> listaArchivo = WebService.RecuperarTodosArchivos(obj.tcv_codCV, Constantes.cTABLA_CV, string.Empty);
+            if (listaArchivo != null)
+            {
+                if (listaArchivo.Count > 0)
+                {
+                    obj.arc_nombre = listaArchivo[0].arc_nombre;
+                }
             }
             return obj;
         }

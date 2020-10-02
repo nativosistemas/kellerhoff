@@ -38,9 +38,15 @@
               margin-left:130px;
             }
     </style>
+        <script src="../../includes/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="../../includes/js/Libreria.js?n=1" type="text/javascript"></script>
+       <script src="../../includes/js/loginAdmin.js?n=1" type="text/javascript"></script>
 </head>
 <body>
     <form id="form1" runat="server">
+             <asp:ScriptManager runat="server" EnablePartialRendering="true"
+            EnablePageMethods="true" EnableScriptGlobalization="True">
+        </asp:ScriptManager>
     <div class="contenedorLogin">
         <div class="divParte">
             <asp:Label ID="lblMail" runat="server" Text="Usuario:" Width="130" CssClass="csslbl"></asp:Label>
@@ -63,8 +69,9 @@
             </div>
     </div>
     <div class="divParte">
-        <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" CssClass="boton" 
-            onclick="btnIngresar_Click" />
+    <%--    <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" CssClass="boton" 
+            onclick="btnIngresar_Click" />--%>
+         <button  id="btnIngresar" name="btnIngresar" onclick="onclickIngresar(); return false;" >Ingresar</button>
     </div>
     </div>
     </form>

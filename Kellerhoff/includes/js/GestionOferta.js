@@ -192,7 +192,6 @@ function VolverOferta() {
     return false;
 }
 function IrVistaPrevia() {
-    //location.href = '../../home/index.aspx';
     window.open(
   '../../home/index.aspx',
   '_blank' // <- This is what makes it open in a new window.
@@ -200,9 +199,9 @@ function IrVistaPrevia() {
     return false;
 }
 function IrVistaPreviaId(pId) {
-    //location.href = '../../home/index.aspx';
     window.open(
   '../../home/vistapreviaoferta.aspx?id=' + pId,
+   // 'http://www.kellerhoff.com.ar/home/vistapreviaoferta.aspx?id=' + pId,
   '_blank' // <- This is what makes it open in a new window.
 );
     return false;
@@ -231,26 +230,7 @@ function OnFailInsertarActualizarOferta(er)
 function OnCallBackInsertarActualizarOferta(args) {
     VolverOferta();
 }
-//function CargarDatosOfertaEditar() {
-//    var titulo = $('#hiddenOfe_titulo').val();
-//    if (typeof titulo == 'undefined') {
-//        titulo = null;
-//    } else {
-//        $('#txt_titulo').val(titulo);
-//    }
-//    var descr = $('#hiddenOfe_descr').val();
-//    if (typeof descr == 'undefined') {
-//        descr = null;
-//    } else {
-//        $('#txt_descr').val(descr);
-//    }
-//    var descuento = $('#hiddenOfe_descuento').val();
-//    if (typeof descuento == 'undefined') {
-//        descuento = null;
-//    } else {
-//        $('#txt_descuento').val(descr);
-//    }
-//}
+
 function AgregarOfertaFolleto(pValor) {
     location.href = 'AgregarArchivoGenerico.aspx?id=' + pValor + '&t=ofertaspdf';
     return false;
