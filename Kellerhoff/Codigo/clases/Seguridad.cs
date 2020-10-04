@@ -24,7 +24,7 @@ namespace Kellerhoff.Codigo.clases
                 else
                 {
                     Usuario us = new Usuario();
-                    capaCore_WebService.setDatosLogin(pLogin, pPassword);
+                    //capaCore_WebService.setDatosLogin(pLogin, pPassword);
                     us.id = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_codigo"]);
                     us.idRol = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_codRol"]);
                     us.NombreYApellido = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["NombreYapellido"]).Trim();
