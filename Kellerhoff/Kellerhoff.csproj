@@ -343,6 +343,7 @@
     <Content Include="img\iconos\Change.png" />
     <Content Include="img\iconos\delete2.png" />
     <Content Include="img\iconos\Edit.png" />
+    <Content Include="img\iconos\events.png" />
     <Content Include="img\iconos\new.png" />
     <Content Include="img\icon_form_off.png" />
     <Content Include="img\icon_form_on.png" />

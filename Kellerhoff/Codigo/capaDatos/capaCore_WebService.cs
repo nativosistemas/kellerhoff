@@ -55,7 +55,7 @@ namespace Kellerhoff.Codigo.capaDatos
                     return response;
                 if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), new Exception("StatusCode == HttpStatusCode.Unauthorized"), DateTime.Now, name, pParameter);
+                    DKbase.generales.Log.LogError(MethodBase.GetCurrentMethod(), "StatusCode == HttpStatusCode.Unauthorized", DateTime.Now, name, pParameter);
                     if (isRepeatBecauseNotAuthorized)
                     {
                         await SetAuthorization();
