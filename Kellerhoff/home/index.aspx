@@ -125,7 +125,7 @@
                                         <u>Mostrador</u>: 0341-4203363<br />
                                         <u>Jefatura de ventas</u>: Joaquín Gamborena<br />
                                         <u>Promotores</u>: Mario Palacios - Néstor Perez - Facundo Angelini<br />
-                                        <u>Farmacéutica</u>: Cristina Kellerhoff<br />
+                                        <u>Farmacéutica</u>: Paola Iribarren<br />
                                         <u>Domicilio</u>: Pueyrredon 1149<br />
                                         <u>C.P.A.</u>: S2000QIG<br />
                                         <u>WhatsApp</u>: 341 3163291<br />
