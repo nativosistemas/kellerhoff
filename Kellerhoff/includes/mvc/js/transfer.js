@@ -597,13 +597,14 @@ function AgregarTransferHtmlAlPopUp(pIndex) {
             var btn_confirmar_class = '';
             if (cantBotonesSucursales == 0)
                 btn_confirmar_class = ' no-margin-r';
-            if (listaSucursalesDependienteInfo[iSucursalNombre].sde_sucursal != "CB") {
+            //if (listaSucursalesDependienteInfo[iSucursalNombre].sde_sucursal != "CB") {
+            //    strHtmlTransfer += '<a class="btn_confirmar' + btn_confirmar_class + '" href="#"  onclick="onClickTransfer(' + pIndex + ',' + iSucursalNombre + '); return false;">' + btn_confirmar_sucursal + '<span class="hidden-xs">' + btn_confirmar_confirmar + '</span></a>';
+            //    cantBotonesSucursales++;
+            //} else 
+            //if (listaTransfer[pIndex].listaDetalle[iSucursalNombre].pro_codtpopro != "P") {
                 strHtmlTransfer += '<a class="btn_confirmar' + btn_confirmar_class + '" href="#"  onclick="onClickTransfer(' + pIndex + ',' + iSucursalNombre + '); return false;">' + btn_confirmar_sucursal + '<span class="hidden-xs">' + btn_confirmar_confirmar + '</span></a>';
                 cantBotonesSucursales++;
-            } else if (listaTransfer[pIndex].listaDetalle[iSucursalNombre].pro_codtpopro != "P" ) {
-                strHtmlTransfer += '<a class="btn_confirmar' + btn_confirmar_class + '" href="#"  onclick="onClickTransfer(' + pIndex + ',' + iSucursalNombre + '); return false;">' + btn_confirmar_sucursal + '<span class="hidden-xs">' + btn_confirmar_confirmar + '</span></a>';
-                cantBotonesSucursales++;
-            }
+            //}
         }
     }
     if (listaTransfer[pIndex].tfr_mospap == 1) {//class="carro-btn-confirmarTransfer"
