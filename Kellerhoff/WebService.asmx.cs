@@ -2419,6 +2419,7 @@ namespace Kellerhoff
                         resultado.Add(obj);
                     }
                 }
+                resultado.RemoveAll(x => x.listaTransfer.Sum(x1 => x1.listaProductos.Count) == 0);
                 return resultado;
             }
             return null;
@@ -2530,21 +2531,6 @@ namespace Kellerhoff
                         }
                         if (isAgregar)
                         {
-                            //cSucursal obj = new cSucursal();
-                            //if (tabla.Rows[i]["suc_codigo"] != DBNull.Value)
-                            //{
-                            //    obj.suc_codigo = tabla.Rows[i]["suc_codigo"].ToString();
-                            //    obj.sde_sucursal = tabla.Rows[i]["suc_codigo"].ToString();
-                            //}
-                            //if (tabla.Rows[i]["suc_nombre"] != DBNull.Value)
-                            //{
-                            //    obj.suc_nombre = tabla.Rows[i]["suc_nombre"].ToString();
-                            //}
-                            //if (tabla.Rows[i]["suc_montoMinimo"] != DBNull.Value)
-                            //{
-                            //    obj.suc_montoMinimo = Convert.ToDecimal(tabla.Rows[i]["suc_montoMinimo"]);
-                            //}                        
-                            //resultado.Add(obj);
                             resultado.Add(ConvertToSucursal(tabla.Rows[i]));
                         }
                     }

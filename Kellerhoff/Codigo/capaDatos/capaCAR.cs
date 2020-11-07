@@ -11,6 +11,7 @@ namespace Kellerhoff.Codigo.capaDatos
 {
     public class capaCAR
     {
+        public static bool isCAR_carritoPorEstado = false;
         public static bool AgregarProductoAlCarrito(string pSucursal, string pIdProducto, int pCantidadProducto, int pIdCliente, int? pIdUsuario)
         {
             return AgregarProductoAlCarrito_generica(pSucursal, pIdProducto, pCantidadProducto, Constantes.cTipo_Carrito, pIdCliente, pIdUsuario);
@@ -22,7 +23,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public static bool AgregarProductoAlCarrito_generica(string pSucursal, string pIdProducto, int pCantidadProducto, string pTipo, int pIdCliente, int? pIdUsuario)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spCargarCarritoProductoSucursal", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spCargarCarritoProductoSucursal" + (isCAR_carritoPorEstado ? "_estado" : ""), Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@codSucursal", SqlDbType.NVarChar, 2);
@@ -85,7 +86,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public static DataSet RecuperarCarritosPorSucursalYProductos_generica(int pIdCliente, string pTipo)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spRecuperarCarritosPorSucursalYProductos", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spRecuperarCarritosPorSucursalYProductos" + (isCAR_carritoPorEstado ? "_estado" : ""), Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@car_codCliente", SqlDbType.Int);
@@ -113,29 +114,10 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        //public static int BorrarCarrito_SleepTimer(int pIdCliente, string pSucursal, string pTipo, string pAccion)
-        //{
-        //    int idCarrito = BorrarCarrito(pIdCliente, pSucursal, pTipo, pAccion);
-        //    if (idCarrito == -1)
-        //    {
-        //        Random rd = new Random(DateTime.Now.Millisecond);
-        //        int n = 0;
-        //        while (n < 7)
-        //        {
-        //            System.Threading.Thread.Sleep(rd.Next(1000, 5000));
-        //            idCarrito = BorrarCarrito(pIdCliente, pSucursal, pTipo, pAccion);
-        //            if (idCarrito != -1)
-        //                break;
-        //            n++;
-        //        }
-        //    }
-        //    return idCarrito;
-        //}
-
         public static int BorrarCarrito(int pIdCliente, string pSucursal, string pTipo, string pAccion)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spBorrarCarrito", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spBorrarCarrito" + (isCAR_carritoPorEstado? "_estado":""), Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paCtr_codCliente = cmdComandoInicio.Parameters.Add("@codCliente", SqlDbType.Int);
@@ -202,7 +184,7 @@ namespace Kellerhoff.Codigo.capaDatos
             //return false;
            // /*
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spBorrarCarritoPorId", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spBorrarCarritoPorId" + (isCAR_carritoPorEstado ? "_estado" : ""), Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paCar_id = cmdComandoInicio.Parameters.Add("@car_id", SqlDbType.Int);
@@ -337,7 +319,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public static DataSet RecuperarCarritoTransferPorIdCliente(int pIdCliente, string pTipo)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spRecuperarCarritoTransferPorIdCliente", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spRecuperarCarritoTransferPorIdCliente" + (isCAR_carritoPorEstado ? "_estado" : ""), Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@lrc_codCliente", SqlDbType.Int);
@@ -368,7 +350,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public static bool AgregarProductosTransfersAlCarrito(DataTable pTablaDetalleProductos, int pIdCliente, int pIdUsuario, int pIdTransfers, string pCodSucursal, string pTipo)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spCargarCarritoTransferPorDetalles", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spCargarCarritoTransferPorDetalles" + (isCAR_carritoPorEstado ? "_estado" : ""), Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paIdUsuario = cmdComandoInicio.Parameters.Add("@idUsuario", SqlDbType.Int);
@@ -413,7 +395,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public static bool SubirPedido(string pTablaXml, int pIdCliente, int pIdUsuario, string pTipoCarrito, string pTipoCarritoTransfer)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spSubirPedido", Conn);
+            SqlCommand cmdComandoInicio = new SqlCommand("CAR.spSubirPedido" + (isCAR_carritoPorEstado ? "_estado" : ""), Conn);
             cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
             SqlParameter paIdUsuario = cmdComandoInicio.Parameters.Add("@idUsuario", SqlDbType.Int);
