@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Kellerhoff.Codigo.capaDatos
 {
-    public class cClientes
+    public class cClientes : DKbase.web.capaDatos.cClientes
     {
         public cClientes()
         {
@@ -19,46 +19,6 @@ namespace Kellerhoff.Codigo.capaDatos
             cli_nombre = pCli_nombre;
             cli_tipo = string.Empty;
         }
-        public int cli_codigo { get; set; }
-        public string cli_nombre { get; set; }
-        public string cli_dirección { get; set; }
-        public string cli_estado { get; set; }
-        public string cli_telefono { get; set; }
-        public string cli_codprov { get; set; }
-        public string cli_localidad { get; set; }
-        public string cli_email { get; set; }
-        public string cli_password { get; set; }
-        public string cli_paginaweb { get; set; }
-        public string cli_codsuc { get; set; }
-        public decimal cli_pordesespmed { get; set; }
-        public decimal cli_pordesbetmed { get; set; }
-        public decimal cli_pordesnetos { get; set; }
-        public decimal cli_pordesfinperfcyo { get; set; }
-        public decimal cli_pordescomperfcyo { get; set; }
-        public bool cli_deswebespmed { get; set; }
-        public bool cli_deswebnetmed { get; set; }
-        public bool cli_deswebnetacc { get; set; }
-        public bool cli_deswebnetperpropio { get; set; }
-        public bool cli_deswebnetpercyo { get; set; }
-        public bool cli_mostraremail { get; set; }
-        public bool cli_mostrartelefono { get; set; }
-        public bool cli_mostrardireccion { get; set; }
-        public bool cli_mostrarweb { get; set; }
-        public decimal cli_destransfer { get; set; }
-        public string cli_login { get; set; }
-        public string cli_codtpoenv { get; set; }
-        public string cli_codrep { get; set; }
-        public bool cli_isGLN { get; set; }
-        public bool cli_tomaOfertas { get; set; }
-        public bool cli_tomaPerfumeria { get; set; }
-        public bool cli_tomaTransfers { get; set; }
-        public string cli_tipo { get; set; }
-        public string cli_IdSucursalAlternativa { get; set; }
-        private bool _cli_AceptaPsicotropicos = true;
-        public bool cli_AceptaPsicotropicos { get { return _cli_AceptaPsicotropicos; } set {  _cli_AceptaPsicotropicos = value; } }
-        public string cli_promotor { get; set; }
-        public decimal? cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto { get; set; }
-        public string cli_GrupoCliente { get; set; }
     }
     public class cSucursal
     {
@@ -323,34 +283,34 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataTable spRecuperarTodosClientesByPromotor(string pPromotor)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Clientes.spRecuperarTodosClientesByPromotor", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //public static DataTable spRecuperarTodosClientesByPromotor(string pPromotor)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Clientes.spRecuperarTodosClientesByPromotor", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paPromotor = cmdComandoInicio.Parameters.Add("@cli_promotor", SqlDbType.NVarChar, 75);
-            paPromotor.Value = pPromotor;
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //    SqlParameter paPromotor = cmdComandoInicio.Parameters.Add("@cli_promotor", SqlDbType.NVarChar, 75);
+        //    paPromotor.Value = pPromotor;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
         public static DataTable RecuperarClientePorId(int pIdCliente)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

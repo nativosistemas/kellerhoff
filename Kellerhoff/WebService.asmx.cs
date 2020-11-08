@@ -1353,7 +1353,7 @@ namespace Kellerhoff
             List<cClientes> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tablaClientes = capaClientes.spRecuperarTodosClientesByPromotor(pPromotor);
+                DataTable tablaClientes = DKbase.web.capaDatos.capaClientes.spRecuperarTodosClientesByPromotor(pPromotor);
                 if (tablaClientes != null)
                 {
                     resultado = new List<cClientes>();
