@@ -22,7 +22,7 @@ namespace Kellerhoff.admin
             //    {
             //        if (Session["BaseAdmin_Usuario"] != null)
             //        {
-            //            Seguridad.CerrarSession(((Usuario)Session["BaseAdmin_Usuario"]).idUsuarioLog);
+            //            Codigo.clases.Seguridad.CerrarSession(((Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).idUsuarioLog);
             //        }
             //        lblMensaje.Text = string.Empty;
             //        txtPassword.Text = string.Empty;

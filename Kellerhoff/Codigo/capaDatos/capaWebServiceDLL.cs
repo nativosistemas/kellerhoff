@@ -742,7 +742,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             try
             {
-                capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
+                //capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
                 ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
                 ServiceReferenceDLL.ArrayOfCDllProductosAndCantidad listaArray = new ServiceReferenceDLL.ArrayOfCDllProductosAndCantidad();
                 foreach (var item in pListaProducto)
@@ -757,10 +757,10 @@ namespace Kellerhoff.Codigo.capaDatos
                 FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pIdCarrito, pLoginCliente, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pListaProducto, pIsUrgente);
                 return null;
             }
-            finally
-            {
-                capaCAR.EndCarritoEnProceso(pIdCarrito);
-            }
+            //finally
+            //{
+            //    capaCAR.EndCarritoEnProceso(pIdCarrito);
+            //}
         }
         public static List<ServiceReferenceDLL.cDllPedidoTransfer> TomarPedidoDeTransfersConIdCarrito(int pIdCarrito, string pLoginCliente, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, List<ServiceReferenceDLL.cDllProductosAndCantidad> pListaProducto)
         {
