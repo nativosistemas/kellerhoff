@@ -228,6 +228,7 @@
     <Content Include="Global.asax" />
     <Content Include="home\contacto.aspx" />
     <Content Include="home\contactocv.aspx" />
+    <Content Include="home\videoinstitucional.aspx" />
     <Content Include="home\empresa.aspx" />
     <Content Include="home\index.aspx" />
     <Content Include="home\promociones.aspx" />
@@ -859,6 +860,8 @@
     <Content Include="clientes\pages\devoluciones.cshtml" />
     <Content Include="master\BaseAdmin.Master" />
     <Content Include="master\BaseAdminJs3.Master" />
+    <Content Include="archivos\video_institucional_110años.MP4" />
+    <Content Include="archivos\video_institucional.MP4" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1534,6 +1537,13 @@
     </Compile>
     <Compile Include="home\contactocv.aspx.designer.cs">
       <DependentUpon>contactocv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\videoinstitucional.aspx.cs">
+      <DependentUpon>videoinstitucional.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\videoinstitucional.aspx.designer.cs">
+      <DependentUpon>videoinstitucional.aspx</DependentUpon>
     </Compile>
     <Compile Include="home\empresa.aspx.cs">
       <DependentUpon>empresa.aspx</DependentUpon>

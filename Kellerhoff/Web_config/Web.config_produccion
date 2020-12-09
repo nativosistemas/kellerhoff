@@ -115,6 +115,10 @@
   </connectionStrings>
   <system.webServer>
     <validation validateIntegratedModeConfiguration="false" />
+    <staticContent>
+      <mimeMap fileExtension=".mp4" mimeType="video/mp4" />
+      <mimeMap fileExtension=".m4v" mimeType="video/m4v" />
+    </staticContent>
   </system.webServer>
   <runtime>
     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
