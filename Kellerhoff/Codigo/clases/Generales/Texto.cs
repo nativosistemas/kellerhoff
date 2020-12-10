@@ -44,7 +44,10 @@ namespace Kellerhoff.Codigo.clases.Generales
 
         private const string consignos = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇÑ";
         private const string sinsignos = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcCN";
-
+        public static string limpiarNombreArchivo(string str)
+        {
+            return Regex.Replace(str, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled);
+        }
         public static string removerSignosAcentos(String texto)
         {
             StringBuilder textoSinAcentos = new StringBuilder(texto.Length);

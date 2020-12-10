@@ -589,6 +589,7 @@ function AgregarTransferHtmlAlPopUp(pIndex) {
         if (!strOcultar) {
             var btn_confirmar_sucursal = '';
             var btn_confirmar_confirmar = 'CONFIRMAR';
+            console.log(listaTransfer[pIndex].listaDetalle);
             if (!(cli_codsuc() == 'CC' && cli_IdSucursalAlternativa() == null)) {
                 btn_confirmar_sucursal = ConvertirSucursalParaColumna(listaSucursalesDependienteInfo[iSucursalNombre].sde_sucursal);
                 btn_confirmar_confirmar = '- CONFIRMAR'
@@ -596,13 +597,14 @@ function AgregarTransferHtmlAlPopUp(pIndex) {
             var btn_confirmar_class = '';
             if (cantBotonesSucursales == 0)
                 btn_confirmar_class = ' no-margin-r';
-            if (listaSucursalesDependienteInfo[iSucursalNombre].sde_sucursal != "CB") {
+            //if (listaSucursalesDependienteInfo[iSucursalNombre].sde_sucursal != "CB") {
+            //    strHtmlTransfer += '<a class="btn_confirmar' + btn_confirmar_class + '" href="#"  onclick="onClickTransfer(' + pIndex + ',' + iSucursalNombre + '); return false;">' + btn_confirmar_sucursal + '<span class="hidden-xs">' + btn_confirmar_confirmar + '</span></a>';
+            //    cantBotonesSucursales++;
+            //} else 
+            //if (listaTransfer[pIndex].listaDetalle[iSucursalNombre].pro_codtpopro != "P") {
                 strHtmlTransfer += '<a class="btn_confirmar' + btn_confirmar_class + '" href="#"  onclick="onClickTransfer(' + pIndex + ',' + iSucursalNombre + '); return false;">' + btn_confirmar_sucursal + '<span class="hidden-xs">' + btn_confirmar_confirmar + '</span></a>';
                 cantBotonesSucursales++;
-            } else if (listaTransfer[pIndex].listaDetalle[4].pro_codtpopro != "P" ) {
-                strHtmlTransfer += '<a class="btn_confirmar' + btn_confirmar_class + '" href="#"  onclick="onClickTransfer(' + pIndex + ',' + iSucursalNombre + '); return false;">' + btn_confirmar_sucursal + '<span class="hidden-xs">' + btn_confirmar_confirmar + '</span></a>';
-                cantBotonesSucursales++;
-            }
+            //}
         }
     }
     if (listaTransfer[pIndex].tfr_mospap == 1) {//class="carro-btn-confirmarTransfer"

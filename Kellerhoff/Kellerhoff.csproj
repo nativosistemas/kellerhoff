@@ -147,16 +147,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Default.aspx" />
+    <Content Include="admin\pages\AgregarArchivo.aspx" />
+    <Content Include="admin\pages\AgregarArchivoGenerico.aspx" />
+    <Content Include="admin\pages\GestionCatalogo.aspx" />
     <Content Include="admin\pages\GestionCategoriaRestriccion.aspx" />
+    <Content Include="admin\pages\GestionCurriculumVitae_v2.aspx" />
+    <Content Include="admin\pages\GestionHomeSlide.aspx" />
+    <Content Include="admin\pages\GestionHomeSlideEditar.aspx" />
     <Content Include="admin\pages\GestionHorarioSucursal.aspx" />
     <Content Include="admin\pages\GestionMensajeNewV4.aspx" />
     <Content Include="admin\pages\GestionMensajeNewV4Editar.aspx" />
     <Content Include="admin\pages\GestionMensajeV3VistaPreviaV2.aspx" />
     <Content Include="admin\pages\GestionMontoMinimo.aspx" />
+    <Content Include="admin\pages\GestionOferta.aspx" />
+    <Content Include="admin\pages\GestionOfertaEditar.aspx" />
+    <Content Include="admin\pages\GestionOfertaHome.aspx" />
+    <Content Include="admin\pages\GestionPopUp.aspx" />
     <Content Include="admin\pages\GestionProcedimientos.aspx" />
     <Content Include="admin\pages\GestionProductoDatosExtras.aspx" />
     <Content Include="admin\pages\GestionProductoImagen.aspx" />
     <Content Include="admin\pages\GestionProductoImagenAgregar.aspx" />
+    <Content Include="admin\pages\GestionReCall.aspx" />
+    <Content Include="admin\pages\GestionReCallAgregar.aspx" />
     <Content Include="admin\pages\GestionRegla.aspx" />
     <Content Include="admin\pages\GestionRol.aspx" />
     <Content Include="admin\pages\GestionRolesYReglas.aspx" />
@@ -165,6 +177,23 @@
     <Content Include="admin\pages\GestionTiposEnviosSucursal.aspx" />
     <Content Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx" />
     <Content Include="admin\pages\GestionUsuario.aspx" />
+    <Content Include="admin\pages\lib\css\bootstrap-responsive.css" />
+    <Content Include="admin\pages\lib\css\bootstrap-responsive.min.css" />
+    <Content Include="admin\pages\lib\css\bootstrap-wysihtml5.css" />
+    <Content Include="admin\pages\lib\css\bootstrap.css" />
+    <Content Include="admin\pages\lib\css\bootstrap.min.css" />
+    <Content Include="admin\pages\lib\css\prettify.css" />
+    <Content Include="admin\pages\lib\css\wysiwyg-color.css" />
+    <Content Include="admin\pages\lib\img\glyphicons-halflings-white.png" />
+    <Content Include="admin\pages\lib\img\glyphicons-halflings.png" />
+    <Content Include="admin\pages\lib\js\bootstrap-button.js" />
+    <Content Include="admin\pages\lib\js\bootstrap-wysihtml5.js" />
+    <Content Include="admin\pages\lib\js\bootstrap.js" />
+    <Content Include="admin\pages\lib\js\bootstrap.min.js" />
+    <Content Include="admin\pages\lib\js\jquery-1.7.2.min.js" />
+    <Content Include="admin\pages\lib\js\prettify.js" />
+    <Content Include="admin\pages\lib\js\wysihtml5-0.3.0.js" />
+    <Content Include="admin\pages\lib\js\wysihtml5-0.3.0.min.js" />
     <Content Include="admin\pages\MenuPrincipal.aspx" />
     <Content Include="archivos\LABBI.jpg" />
     <Content Include="archivos\new.png" />
@@ -199,6 +228,7 @@
     <Content Include="Global.asax" />
     <Content Include="home\contacto.aspx" />
     <Content Include="home\contactocv.aspx" />
+    <Content Include="home\videoinstitucional.aspx" />
     <Content Include="home\empresa.aspx" />
     <Content Include="home\index.aspx" />
     <Content Include="home\promociones.aspx" />
@@ -314,6 +344,7 @@
     <Content Include="img\iconos\Change.png" />
     <Content Include="img\iconos\delete2.png" />
     <Content Include="img\iconos\Edit.png" />
+    <Content Include="img\iconos\events.png" />
     <Content Include="img\iconos\new.png" />
     <Content Include="img\icon_form_off.png" />
     <Content Include="img\icon_form_on.png" />
@@ -523,11 +554,13 @@
     <Content Include="includes\js\Ficha.js" />
     <Content Include="includes\js\fileuploader.js" />
     <Content Include="includes\js\Galeria.js" />
+    <Content Include="includes\js\GestionCurriculumVitae_v2.js" />
     <Content Include="includes\js\GestionHomeSlide.js" />
     <Content Include="includes\js\GestionMensajeV3.js" />
     <Content Include="includes\js\GestionOferta.js" />
     <Content Include="includes\js\GestionPopUp.js" />
     <Content Include="includes\js\GestionProductoImagen.js" />
+    <Content Include="includes\js\GestionReCall.js" />
     <Content Include="includes\js\GestionRegla.js" />
     <Content Include="includes\js\GestionReparto.js" />
     <Content Include="includes\js\GestionRolesYReglas.js" />
@@ -539,10 +572,12 @@
     <Content Include="includes\js\jquery.easing.1.3.js" />
     <Content Include="includes\js\jquery.js" />
     <Content Include="includes\js\Libreria.js" />
+    <Content Include="includes\js\loginAdmin.js" />
     <Content Include="includes\js\NO_Galeria.js" />
     <Content Include="includes\js\NO_PedidosBuscador_v2.js" />
     <Content Include="includes\js\obrasocial.js" />
     <Content Include="includes\js\Paginador.js" />
+    <Content Include="includes\js\paginador_admin.js" />
     <Content Include="includes\js\PedidosBuscador.js" />
     <Content Include="includes\js\PedidosTransfer.js" />
     <Content Include="includes\js\promocionescliente.js" />
@@ -825,6 +860,8 @@
     <Content Include="clientes\pages\devoluciones.cshtml" />
     <Content Include="master\BaseAdmin.Master" />
     <Content Include="master\BaseAdminJs3.Master" />
+    <Content Include="archivos\video_institucional_110años.MP4" />
+    <Content Include="archivos\video_institucional.MP4" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1111,12 +1148,54 @@
     <Compile Include="admin\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\pages\AgregarArchivo.aspx.cs">
+      <DependentUpon>AgregarArchivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\AgregarArchivo.aspx.designer.cs">
+      <DependentUpon>AgregarArchivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\AgregarArchivoGenerico.aspx.cs">
+      <DependentUpon>AgregarArchivoGenerico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\AgregarArchivoGenerico.aspx.designer.cs">
+      <DependentUpon>AgregarArchivoGenerico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionCatalogo.aspx.cs">
+      <DependentUpon>GestionCatalogo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionCatalogo.aspx.designer.cs">
+      <DependentUpon>GestionCatalogo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\pages\GestionCategoriaRestriccion.aspx.cs">
       <DependentUpon>GestionCategoriaRestriccion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="admin\pages\GestionCategoriaRestriccion.aspx.designer.cs">
       <DependentUpon>GestionCategoriaRestriccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionCurriculumVitae_v2.aspx.cs">
+      <DependentUpon>GestionCurriculumVitae_v2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionCurriculumVitae_v2.aspx.designer.cs">
+      <DependentUpon>GestionCurriculumVitae_v2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionHomeSlide.aspx.cs">
+      <DependentUpon>GestionHomeSlide.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionHomeSlide.aspx.designer.cs">
+      <DependentUpon>GestionHomeSlide.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionHomeSlideEditar.aspx.cs">
+      <DependentUpon>GestionHomeSlideEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionHomeSlideEditar.aspx.designer.cs">
+      <DependentUpon>GestionHomeSlideEditar.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\pages\GestionHorarioSucursal.aspx.cs">
       <DependentUpon>GestionHorarioSucursal.aspx</DependentUpon>
@@ -1153,6 +1232,34 @@
     <Compile Include="admin\pages\GestionMontoMinimo.aspx.designer.cs">
       <DependentUpon>GestionMontoMinimo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\pages\GestionOferta.aspx.cs">
+      <DependentUpon>GestionOferta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionOferta.aspx.designer.cs">
+      <DependentUpon>GestionOferta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionOfertaEditar.aspx.cs">
+      <DependentUpon>GestionOfertaEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionOfertaEditar.aspx.designer.cs">
+      <DependentUpon>GestionOfertaEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionOfertaHome.aspx.cs">
+      <DependentUpon>GestionOfertaHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionOfertaHome.aspx.designer.cs">
+      <DependentUpon>GestionOfertaHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionPopUp.aspx.cs">
+      <DependentUpon>GestionPopUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionPopUp.aspx.designer.cs">
+      <DependentUpon>GestionPopUp.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\pages\GestionProcedimientos.aspx.cs">
       <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
     </Compile>
@@ -1179,6 +1286,20 @@
     </Compile>
     <Compile Include="admin\pages\GestionProductoImagenAgregar.aspx.designer.cs">
       <DependentUpon>GestionProductoImagenAgregar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionReCall.aspx.cs">
+      <DependentUpon>GestionReCall.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionReCall.aspx.designer.cs">
+      <DependentUpon>GestionReCall.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionReCallAgregar.aspx.cs">
+      <DependentUpon>GestionReCallAgregar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionReCallAgregar.aspx.designer.cs">
+      <DependentUpon>GestionReCallAgregar.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\pages\GestionRegla.aspx.cs">
       <DependentUpon>GestionRegla.aspx</DependentUpon>
@@ -1419,6 +1540,13 @@
     </Compile>
     <Compile Include="home\contactocv.aspx.designer.cs">
       <DependentUpon>contactocv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\videoinstitucional.aspx.cs">
+      <DependentUpon>videoinstitucional.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\videoinstitucional.aspx.designer.cs">
+      <DependentUpon>videoinstitucional.aspx</DependentUpon>
     </Compile>
     <Compile Include="home\empresa.aspx.cs">
       <DependentUpon>empresa.aspx</DependentUpon>

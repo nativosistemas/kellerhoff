@@ -242,5 +242,27 @@ public class cPageClientes : System.Web.UI.Page
         public string nombreArchivo { get; set; }
         public bool isOk { get; set; }
     }
+    public class Class_Admin
+    {
 
+        public class cPaginador //: ICloneable
+        {
+            public cPaginador() { }
+            public cPaginador(List<cCurriculumVitae> pValue)
+            {
+                //listaSucursal = pValue.listaSucursal;
+                listaCurriculumVitae = pValue;
+                CantidadRegistroTotal = pValue.Count;
+            }
+            public cPaginador(cPaginador pValue)
+            {
+                //listaSucursal = pValue.listaSucursal;
+                listaCurriculumVitae = pValue.listaCurriculumVitae;
+                CantidadRegistroTotal = pValue.CantidadRegistroTotal;
+            }
+            // public List<string> listaSucursal { get; set; }
+            public List<cCurriculumVitae> listaCurriculumVitae { get; set; }
+            public int CantidadRegistroTotal { get; set; }
+        }
+    }
 }
