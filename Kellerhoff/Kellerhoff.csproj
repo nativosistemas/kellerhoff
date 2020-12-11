@@ -177,6 +177,8 @@
     <Content Include="admin\pages\GestionTiposEnviosSucursal.aspx" />
     <Content Include="admin\pages\GestionTiposEnviosSucursal_Reparto.aspx" />
     <Content Include="admin\pages\GestionUsuario.aspx" />
+    <Content Include="admin\pages\Laboratorio.aspx" />
+    <Content Include="admin\pages\LaboratorioEditar.aspx" />
     <Content Include="admin\pages\lib\css\bootstrap-responsive.css" />
     <Content Include="admin\pages\lib\css\bootstrap-responsive.min.css" />
     <Content Include="admin\pages\lib\css\bootstrap-wysihtml5.css" />
@@ -195,6 +197,9 @@
     <Content Include="admin\pages\lib\js\wysihtml5-0.3.0.js" />
     <Content Include="admin\pages\lib\js\wysihtml5-0.3.0.min.js" />
     <Content Include="admin\pages\MenuPrincipal.aspx" />
+    <Content Include="admin\pages\Modulo.aspx" />
+    <Content Include="admin\pages\ModuloEditar.aspx" />
+    <Content Include="admin\pages\SinPermiso.aspx" />
     <Content Include="archivos\LABBI.jpg" />
     <Content Include="archivos\new.png" />
     <Content Include="archivos\new2.png" />
@@ -570,8 +575,10 @@
     <Content Include="includes\js\jquery-ui.js" />
     <Content Include="includes\js\jquery.easing.1.3.js" />
     <Content Include="includes\js\jquery.js" />
+    <Content Include="includes\js\Laboratorio.js" />
     <Content Include="includes\js\Libreria.js" />
     <Content Include="includes\js\loginAdmin.js" />
+    <Content Include="includes\js\Modulo.js" />
     <Content Include="includes\js\NO_Galeria.js" />
     <Content Include="includes\js\NO_PedidosBuscador_v2.js" />
     <Content Include="includes\js\obrasocial.js" />
@@ -1347,11 +1354,46 @@
     <Compile Include="admin\pages\GestionUsuario.aspx.designer.cs">
       <DependentUpon>GestionUsuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\pages\Laboratorio.aspx.cs">
+      <DependentUpon>Laboratorio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\Laboratorio.aspx.designer.cs">
+      <DependentUpon>Laboratorio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\LaboratorioEditar.aspx.cs">
+      <DependentUpon>LaboratorioEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\LaboratorioEditar.aspx.designer.cs">
+      <DependentUpon>LaboratorioEditar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\pages\MenuPrincipal.aspx.cs">
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\pages\MenuPrincipal.aspx.designer.cs">
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\Modulo.aspx.cs">
+      <DependentUpon>Modulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\Modulo.aspx.designer.cs">
+      <DependentUpon>Modulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\ModuloEditar.aspx.cs">
+      <DependentUpon>ModuloEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\ModuloEditar.aspx.designer.cs">
+      <DependentUpon>ModuloEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\SinPermiso.aspx.cs">
+      <DependentUpon>SinPermiso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\SinPermiso.aspx.designer.cs">
+      <DependentUpon>SinPermiso.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="clientes\pages\devoluciones.aspx.cs">

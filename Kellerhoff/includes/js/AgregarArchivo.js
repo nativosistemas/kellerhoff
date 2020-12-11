@@ -24,6 +24,9 @@ function onclickVolverAgregarArchivo() {
         case 'slider':
             location.href = 'GestionHomeSlide.aspx';
             break;
+        case 'app':
+            location.href = 'Laboratorio.aspx';
+            break;
         default:
             break;
     }
