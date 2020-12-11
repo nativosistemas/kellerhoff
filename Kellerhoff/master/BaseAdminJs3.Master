@@ -4,14 +4,14 @@
 
 <html>
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Droguería Kellerhoff</title>
     <script type="text/javascript">
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
             }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-91993710-1', 'auto');
@@ -33,7 +33,8 @@
 <body>
     <form id="Form2" runat="server">
         <asp:ScriptManager runat="server" EnablePartialRendering="true"
-            EnablePageMethods="true" EnableScriptGlobalization="True" ></asp:ScriptManager>
+            EnablePageMethods="true" EnableScriptGlobalization="True">
+        </asp:ScriptManager>
         <div class="page">
             <div class="header">
                 <div class="headerTituloAndSession">
@@ -75,7 +76,7 @@
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionTiposEnviosSucursal.aspx" Text="Tipos de Envíos Sucursal" />
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionCategoriaRestriccion.aspx" Text="Cadeteria - Parámetro" />
                             </asp:MenuItem>
-                          <%--  <asp:MenuItem NavigateUrl="~/admin/pages/GestionContacto.aspx" Text="Contacto" />--%>
+                            <%--  <asp:MenuItem NavigateUrl="~/admin/pages/GestionContacto.aspx" Text="Contacto" />--%>
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionCatalogo.aspx" Text="Catálogo" />
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionCurriculumVitae_v2.aspx" Text="Curriculum Vitae" />
                             <asp:MenuItem Text="Ofertas">
@@ -85,6 +86,10 @@
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionHomeSlide.aspx" Text="Home Slide" />
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionPopUp.aspx" Text="PopUp" />
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionReCall.aspx" Text="ReCall" />
+                            <asp:MenuItem Text="App">
+                                <asp:MenuItem NavigateUrl="~/admin/pages/Laboratorio.aspx" Text="Laboratorio" />
+                                <asp:MenuItem NavigateUrl="~/admin/pages/Modulo.aspx" Text="Modulo" />
+                            </asp:MenuItem>
                         </Items>
                     </asp:Menu>
                 </div>
