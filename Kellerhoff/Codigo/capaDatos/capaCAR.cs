@@ -11,7 +11,7 @@ namespace Kellerhoff.Codigo.capaDatos
 {
     public class capaCAR
     {
-        public static bool isCAR_carritoPorEstado = false;
+        public static bool isCAR_carritoPorEstado = true;
         public static bool AgregarProductoAlCarrito(string pSucursal, string pIdProducto, int pCantidadProducto, int pIdCliente, int? pIdUsuario)
         {
             return AgregarProductoAlCarrito_generica(pSucursal, pIdProducto, pCantidadProducto, Constantes.cTipo_Carrito, pIdCliente, pIdUsuario);
