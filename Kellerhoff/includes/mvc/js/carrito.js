@@ -337,26 +337,13 @@ function OnCallBackTomarPedidoCarrito(args) {
         args = eval('(' + args + ')');
     }
     if (args == null) {
-        //alert(mensajeCuandoSeMuestraError);
         mensaje_alert_base(mensajeCuandoSeMuestraError, 'volverBuscador()');
-        //if (isCarritoDiferido) {
-        //    location.href = '../mvc/Diferido';
-        //} else {
-        //    location.href = '../mvc/Buscador';
-        //}
     } else {
         // Error dsd dll pedido
         if (args.Error != '') {
-            //alert(args.Error);
             mensaje_alert_base(args.Error, 'volverBuscador()');
-            //if (isCarritoDiferido) {
-            //    location.href = '../mvc/Diferido';
-            //} else {
-            //    location.href = '../mvc/Buscador';
-            //}
             // Fin Error dsd dll pedido
         } else {
-
             isHacerBorradoCarritos = true;
             CargarRespuestaDePedido(args);
         }
@@ -550,7 +537,6 @@ function HacerLimpiezaDeCarritosDspDeConfirmarPedido() {
 function onclickVaciarCarrito_ButtonOK(pIndexCarrito) {
     $('#hiddenIndexCarrito').val(pIndexCarrito);
 
-    //BorrarCarritoPorId(listaCarritos[pIndexCarrito].car_id, 'OnCallBackBorrarCarrito');
     if (isCarritoDiferido) {
         BorrarCarritosDiferidos(listaCarritos[pIndexCarrito].lrc_id, listaCarritos[pIndexCarrito].codSucursal);
     } else {
@@ -644,16 +630,11 @@ function onblurInputCarrito(pValor) {
                     }
                     //Fin Cantidad producto parametrizada
                     if (!isCantidadMaximaParametrizada) {
-                        if (isCarritoDiferido) {
-                            CargarOActualizarListaCarrito(listaCarritos[columna].codSucursal, listaCarritos[columna].listaProductos[fila].codProducto, cantidadProducto, false);
-                            CargarHtmlCantidadDeCarritoABuscador(listaCarritos[columna].codSucursal, listaCarritos[columna].listaProductos[fila].codProducto, cantidadProducto);
-                        } else {
                             cantidadAnterior_carrito = listaCarritos[columna].listaProductos[fila].cantidad;
                             var cantidadFinalCarrito = CargarProductoCantidadDependiendoTransferCarrito(fila, columna, cantidadProducto);
                             if (cantidadFinalCarrito != cantidadProducto) {
                                 pValor.value = cantidadFinalCarrito;
                             }
-                        }
                     }
                 } else {
                     //alert(MostrarTextoSuperaCantidadMaxima(listaCarritos[columna].listaProductos[fila].pro_nombre, listaCarritos[columna].listaProductos[fila].pro_canmaxima));
@@ -712,13 +693,8 @@ function funExcedeImporteCancelarCarrito() {
 }
 function funExcedeImporteAceptarCarrito() {
     if (ExcedeImporteColumnaCarrito != null && ExcedeImporteFilaCarrito != null && ExcedeImporteValorCarrito != null) {
-        if (isCarritoDiferido) {
-            CargarOActualizarListaCarrito(listaCarritos[ExcedeImporteColumnaCarrito].codSucursal, listaCarritos[ExcedeImporteColumnaCarrito].listaProductos[ExcedeImporteFilaCarrito].codProducto, ExcedeImporteValorCarrito, false);
-            CargarHtmlCantidadDeCarritoABuscador(listaCarritos[ExcedeImporteColumnaCarrito].codSucursal, listaCarritos[ExcedeImporteColumnaCarrito].listaProductos[ExcedeImporteFilaCarrito].codProducto, ExcedeImporteValorCarrito);
-        } else {
             var cantidadFinalCarrito = CargarProductoCantidadDependiendoTransferCarrito(ExcedeImporteFilaCarrito, ExcedeImporteColumnaCarrito, ExcedeImporteValorCarrito);
             if (cantidadFinalCarrito != ExcedeImporteValorCarrito) {
-                //pValor.value = cantidadFinalCarrito;
                 var objCarrito = $("#inputCarrito" + ExcedeImporteIndiceCarrito + "_" + ExcedeImporteIndiceCarritoProducto);
                 if (objCarrito.length > 0) {
                 } else {
@@ -728,9 +704,6 @@ function funExcedeImporteAceptarCarrito() {
                     objCarrito.val(cantidadFinalCarrito);
                 }
             }
-        }
-        //document.getElementById('divContenedorExcedeImporte').style.display = 'none';
-        //document.getElementById('divConfirmarExcedeImporteContenedorGeneralCarrito').style.display = 'none';
         $('#modalModulo').modal('hide');
 
         setTimeout('ActualizarFocusCarritoExcedeImporte()', 5);

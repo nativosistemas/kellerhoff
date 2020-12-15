@@ -1112,6 +1112,7 @@
     <Content Include="SQLscript\nativosistemas_2020_06_23.sql" />
     <Content Include="SQLscript\nativosistemas_2020_06_30.sql" />
     <Content Include="SQLscript\nativosistemas_2020_09_15.sql" />
+    <Content Include="SQLscript\nativosistemas_2020_12_15.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
     <Content Include="WebService.asmx" />
