@@ -9,6 +9,7 @@ using Kellerhoff.Codigo;
 using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.clases.Generales;
+using static Kellerhoff.Codigo.capaDatos.cCurriculumVitae;
 
 namespace Kellerhoff
 {
@@ -106,12 +107,12 @@ namespace Kellerhoff
             return resultado;
         }
 
-        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> RecuperarDevolucionesPorClientePorNumero(string pNumeroDevolucion,string pLoginWeb)
+        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> RecuperarDevolucionesPorClientePorNumero(string pNumeroDevolucion, string pLoginWeb)
         {
             List<ServiceReferenceDLL.cDevolucionItemPrecarga> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                resultado = capaWebServiceDLL.ObtenerDevolucionesPorClientePorNumero(pNumeroDevolucion,pLoginWeb);
+                resultado = capaWebServiceDLL.ObtenerDevolucionesPorClientePorNumero(pNumeroDevolucion, pLoginWeb);
             }
             return resultado;
         }
@@ -133,7 +134,7 @@ namespace Kellerhoff
             if (VerificarPermisos(CredencialAutenticacion))
             {
 
-                resultado = capaWebServiceDLL.ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(NombreProducto,NumeroFactura, pLoginWeb);
+                resultado = capaWebServiceDLL.ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(NombreProducto, NumeroFactura, pLoginWeb);
             }
             return resultado;
         }
@@ -1188,6 +1189,8 @@ namespace Kellerhoff
                 obj.cli_promotor = Convert.ToString(pItem["cli_promotor"]);
             if (pItem.Table.Columns.Contains("cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto") && pItem["cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto"] != DBNull.Value)
                 obj.cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = Convert.ToDecimal(pItem["cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto"]);
+            if (pItem.Table.Columns.Contains("cli_GrupoCliente") && pItem["cli_GrupoCliente"] != DBNull.Value)
+                obj.cli_GrupoCliente = Convert.ToString(pItem["cli_GrupoCliente"]);
             return obj;
         }
         public static cProductos RecuperarProductoPorNombre(string pNombreProducto)
@@ -1350,7 +1353,7 @@ namespace Kellerhoff
             List<cClientes> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tablaClientes = capaClientes.spRecuperarTodosClientesByPromotor(pPromotor);
+                DataTable tablaClientes = DKbase.web.capaDatos.capaClientes.spRecuperarTodosClientesByPromotor(pPromotor);
                 if (tablaClientes != null)
                 {
                     resultado = new List<cClientes>();
@@ -2416,6 +2419,7 @@ namespace Kellerhoff
                         resultado.Add(obj);
                     }
                 }
+                resultado.RemoveAll(x => x.listaTransfer.Sum(x1 => x1.listaProductos.Count) == 0);
                 return resultado;
             }
             return null;
@@ -2527,21 +2531,6 @@ namespace Kellerhoff
                         }
                         if (isAgregar)
                         {
-                            //cSucursal obj = new cSucursal();
-                            //if (tabla.Rows[i]["suc_codigo"] != DBNull.Value)
-                            //{
-                            //    obj.suc_codigo = tabla.Rows[i]["suc_codigo"].ToString();
-                            //    obj.sde_sucursal = tabla.Rows[i]["suc_codigo"].ToString();
-                            //}
-                            //if (tabla.Rows[i]["suc_nombre"] != DBNull.Value)
-                            //{
-                            //    obj.suc_nombre = tabla.Rows[i]["suc_nombre"].ToString();
-                            //}
-                            //if (tabla.Rows[i]["suc_montoMinimo"] != DBNull.Value)
-                            //{
-                            //    obj.suc_montoMinimo = Convert.ToDecimal(tabla.Rows[i]["suc_montoMinimo"]);
-                            //}                        
-                            //resultado.Add(obj);
                             resultado.Add(ConvertToSucursal(tabla.Rows[i]));
                         }
                     }
@@ -3246,7 +3235,7 @@ namespace Kellerhoff
                     objTransferDetalle.CargarTransfer(ConvertToTransfer(itemTransferDetalle));
                     listaTransferDetalle.Add(objTransferDetalle);
                 }
-                resultado = ConvertDataTableAClase(dsResultado.Tables[0], dsResultado.Tables[2],listaTransferDetalle, oCliente);
+                resultado = ConvertDataTableAClase(dsResultado.Tables[0], dsResultado.Tables[2], listaTransferDetalle, oCliente);
                 return resultado;
             }
             else
@@ -4140,6 +4129,14 @@ namespace Kellerhoff
                 obj.tcv_fechaPresentacion = Convert.ToDateTime(pItem["tcv_fechaPresentacion"]);
                 obj.tcv_fechaPresentacionToString = ((DateTime)obj.tcv_fechaPresentacion).ToString();
             }
+            List<cArchivo> listaArchivo = WebService.RecuperarTodosArchivos(obj.tcv_codCV, Constantes.cTABLA_CV, string.Empty);
+            if (listaArchivo != null)
+            {
+                if (listaArchivo.Count > 0)
+                {
+                    obj.arc_nombre = listaArchivo[0].arc_nombre;
+                }
+            }
             return obj;
         }
         public static int InsertarCurriculumVitae(string tcv_nombre, string tcv_comentario, string tcv_mail, string tcv_dni, string tcv_puesto, string tcv_sucursal, DateTime? tcv_fechaPresentacion)
@@ -4328,6 +4325,92 @@ namespace Kellerhoff
             }
             return resultado;
         }
+        public static int InsertarEliminarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones(int? pIsEliminar, int? pTdr_idSucursalDependienteTipoEnvioCliente, int? pTdr_idTipoEnvio, String pTdr_codReparto)
+        {
+            int resultado = -1;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaTiposEnvios.InsertarEliminarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones(pIsEliminar, pTdr_idSucursalDependienteTipoEnvioCliente, pTdr_idTipoEnvio, pTdr_codReparto);
+            }
+            return resultado;
+        }
+        public static List<cCombo> RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones_paraAdmin(int pIdSucursalDependienteTipoEnvioCliente, string pTdr_codReparto)
+        {
+            List<cCombo> resultado = null;// new List<SitioBase.clases.cCombo>();
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                DataTable tabla = capaTiposEnvios.RecuperarTipoEnviosExcepcionesPorSucursalDependiente(pIdSucursalDependienteTipoEnvioCliente, pTdr_codReparto);
+                if (tabla != null)
+                {
+                    resultado = new List<cCombo>();
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        cCombo obj = new cCombo();
+                        if (item["tdr_idTipoEnvio"] != DBNull.Value)
+                        {
+                            obj.id = Convert.ToInt32(item["tdr_idTipoEnvio"]);
+                        }
+                        if (item["env_nombre"] != DBNull.Value)
+                        {
+                            obj.nombre = Convert.ToString(item["env_nombre"]);
+                        }
+                        resultado.Add(obj);
+                    }
+                }
+            }
+            return resultado;
+        }
+        public static List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_TodasLasExcepciones(int pIdSucursalDependienteTipoEnvioCliente)
+        {
+            List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                DataTable tabla = capaTiposEnvios.RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_TodasLasExcepciones(pIdSucursalDependienteTipoEnvioCliente);
+                if (tabla != null)
+                {
+                    resultado = new List<cSucursalDependienteTipoEnviosCliente_TiposEnvios>();
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        cSucursalDependienteTipoEnviosCliente_TiposEnvios obj = ConvertToTiposEnviosSucursalDependiente_TiposEnvios_Excepciones(item);
+                        if (obj != null)
+                        {
+                            resultado.Add(obj);
+                        }
+                    }
+                }
+            }
+            return resultado;
+        }
+        private static cSucursalDependienteTipoEnviosCliente_TiposEnvios ConvertToTiposEnviosSucursalDependiente_TiposEnvios_Excepciones(DataRow pItem)
+        {
+            cSucursalDependienteTipoEnviosCliente_TiposEnvios obj = new cSucursalDependienteTipoEnviosCliente_TiposEnvios();
+
+            if (pItem.Table.Columns.Contains("tdr_idSucursalDependienteTipoEnvioCliente") && pItem["tdr_idSucursalDependienteTipoEnvioCliente"] != DBNull.Value)
+            {
+                obj.tdt_idSucursalDependienteTipoEnvioCliente = Convert.ToInt32(pItem["tdr_idSucursalDependienteTipoEnvioCliente"]);
+            }
+            if (pItem.Table.Columns.Contains("tdr_idTipoEnvio") && pItem["tdr_idTipoEnvio"] != DBNull.Value)
+            {
+                obj.tdt_idTipoEnvio = Convert.ToInt32(pItem["tdr_idTipoEnvio"]);
+            }
+            if (pItem.Table.Columns.Contains("env_id") && pItem["env_id"] != DBNull.Value)
+            {
+                obj.env_id = Convert.ToInt32(pItem["env_id"]);
+            }
+            if (pItem.Table.Columns.Contains("env_codigo") && pItem["env_codigo"] != DBNull.Value)
+            {
+                obj.env_codigo = Convert.ToString(pItem["env_codigo"]);
+            }
+            if (pItem.Table.Columns.Contains("env_nombre") && pItem["env_nombre"] != DBNull.Value)
+            {
+                obj.env_nombre = Convert.ToString(pItem["env_nombre"]);
+            }
+            if (pItem.Table.Columns.Contains("tdr_codReparto") && pItem["tdr_codReparto"] != DBNull.Value)
+            {
+                obj.tdr_codReparto = Convert.ToString(pItem["tdr_codReparto"]);
+            }
+            return obj;
+        }
         public static bool EliminarSucursalDependienteTipoEnvioCliente(int pTsd_id)
         {
             bool resultado = false;
@@ -4496,34 +4579,6 @@ namespace Kellerhoff
             }
             return obj;
         }
-
-        private static cSucursalDependienteTipoEnviosCliente_TiposEnvios ConvertToTiposEnviosSucursalDependiente_TiposEnvios_Excepciones(DataRow pItem)
-        {
-            cSucursalDependienteTipoEnviosCliente_TiposEnvios obj = new cSucursalDependienteTipoEnviosCliente_TiposEnvios();
-
-            if (pItem.Table.Columns.Contains("tdr_idSucursalDependienteTipoEnvioCliente") && pItem["tdr_idSucursalDependienteTipoEnvioCliente"] != DBNull.Value)
-            {
-                obj.tdt_idSucursalDependienteTipoEnvioCliente = Convert.ToInt32(pItem["tdr_idSucursalDependienteTipoEnvioCliente"]);
-            }
-            if (pItem.Table.Columns.Contains("tdr_idTipoEnvio") && pItem["tdr_idTipoEnvio"] != DBNull.Value)
-            {
-                obj.tdt_idTipoEnvio = Convert.ToInt32(pItem["tdr_idTipoEnvio"]);
-            }
-            if (pItem.Table.Columns.Contains("env_id") && pItem["env_id"] != DBNull.Value)
-            {
-                obj.env_id = Convert.ToInt32(pItem["env_id"]);
-            }
-            if (pItem.Table.Columns.Contains("env_codigo") && pItem["env_codigo"] != DBNull.Value)
-            {
-                obj.env_codigo = Convert.ToString(pItem["env_codigo"]);
-            }
-            if (pItem.Table.Columns.Contains("env_nombre") && pItem["env_nombre"] != DBNull.Value)
-            {
-                obj.env_nombre = Convert.ToString(pItem["env_nombre"]);
-            }
-            return obj;
-        }
-
         public static int InsertarActualizarProductoParametrizadoCantidad(int pCpc_cantidadParametrizada)
         {
             int resultado = -1;
@@ -5767,7 +5822,7 @@ namespace Kellerhoff
                     {
                         foreach (cMensajeNew m in lista_aux)
                         {
-                            cMensaje o = new cMensaje() { tme_asunto = m.tmn_asunto,tme_mensaje =m.tmn_mensaje};
+                            cMensaje o = new cMensaje() { tme_asunto = m.tmn_asunto, tme_mensaje = m.tmn_mensaje };
                             lista.Add(o);
                         }
                     }
@@ -5787,6 +5842,132 @@ namespace Kellerhoff
                 resultado = capaWebServiceDLL.ObtenerVencimientosResumenPorFecha(pNumeroResumen, pFechaVencimiento);
             }
             return resultado;
+        }
+        //
+        private static cMensaje ConvertToMensajeNewV4(DataRow pItem)
+        {
+            cMensaje obj = new cMensaje();
+            if (pItem["tmn_codigo"] != DBNull.Value)
+            {
+                obj.tme_codigo = Convert.ToInt32(pItem["tmn_codigo"]);
+            }
+            if (pItem["tmn_fecha"] != DBNull.Value)
+            {
+                obj.tme_fecha = Convert.ToDateTime(pItem["tmn_fecha"]);
+                obj.tme_fechaToString = Convert.ToDateTime(pItem["tmn_fecha"]).ToShortDateString();
+            }
+            if (pItem["tmn_asunto"] != DBNull.Value)
+            {
+                obj.tme_asunto = pItem["tmn_asunto"].ToString();
+            }
+            if (pItem["tmn_mensaje"] != DBNull.Value)
+            {
+                obj.tme_mensaje = pItem["tmn_mensaje"].ToString();
+            }
+            if (pItem.Table.Columns.Contains("tmn_importante") && pItem["tmn_importante"] != DBNull.Value)
+            {
+                obj.tme_importante = Convert.ToBoolean(pItem["tmn_importante"]);
+            }
+            obj.tme_fechaDesde = null;// DateTime.MinValue;
+            obj.tme_fechaDesdeToString = string.Empty;
+            if (pItem.Table.Columns.Contains("tmn_fechaDesde") && pItem["tmn_fechaDesde"] != DBNull.Value)
+            {
+                obj.tme_fechaDesde = Convert.ToDateTime(pItem["tmn_fechaDesde"]);
+                obj.tme_fechaDesdeToString = ((DateTime)obj.tme_fechaDesde).ToShortDateString();
+
+            }
+            obj.tme_fechaHasta = null;//DateTime.MinValue;
+            obj.tme_fechaHastaToString = string.Empty;
+            if (pItem.Table.Columns.Contains("tmn_fechaHasta") && pItem["tmn_fechaHasta"] != DBNull.Value)
+            {
+                obj.tme_fechaHasta = Convert.ToDateTime(pItem["tmn_fechaHasta"]);
+                obj.tme_fechaHastaToString = ((DateTime)obj.tme_fechaHasta).ToShortDateString();
+
+            }
+            if (obj.tme_importante)
+            {
+                obj.tme_importanteToString = "Si";
+            }
+            else
+            {
+                obj.tme_importanteToString = "No";
+            }
+
+            if (pItem.Table.Columns.Contains("tmn_todosSucursales") && pItem["tmn_todosSucursales"] != DBNull.Value)
+            {
+                obj.tmn_todosSucursales = pItem["tmn_todosSucursales"].ToString();
+            }
+            return obj;
+        }
+        public static List<cMensaje> RecuperarTodosMensajeNewV4()
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                List<cMensaje> lista = new List<cMensaje>();
+                DataTable tabla = capaMensajeNew.RecuperartTodosMensajes();
+                if (tabla != null)
+                {
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        cMensaje obj = ConvertToMensajeNewV4(item);
+                        lista.Add(obj);
+                    }
+                }
+                return lista;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public static cMensaje RecuperarMensajeNewV4PorId(int pIdMensaje)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                DataTable tabla = capaMensajeNew.RecuperarMensajeNewPorId(pIdMensaje);
+                if (tabla != null && tabla.Rows.Count > 0)
+                {
+                    cMensaje obj = ConvertToMensajeNewV4(tabla.Rows[0]);
+                    return obj;
+                }
+            }
+            return null;
+
+        }
+        public static void ElimimarMensajeNewPorId(int pIdMensaje)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                capaMensajeNew.ElimimarMensajeNewPorId(pIdMensaje);
+            }
+        }
+        public static int ActualizarInsertarMensajeNew(int pIdMensaje, string pAsunto, string pMensaje, DateTime? pFechaDesde, DateTime? pFechaHasta, bool pImportante, string pSucursales)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                return capaMensajeNew.ActualizarInsertarMensajeNew(pIdMensaje, pAsunto, pMensaje, pFechaDesde, pFechaHasta, pImportante, pSucursales);
+            }
+            return -1;
+        }
+        public static List<DKbase.Entities.Laboratorio> GetLaboratorios()
+        {
+            return DKbase.app.accesoApp.GetLaboratorios();
+        }
+        public static void DeleteLaboratorios(int id)
+        {
+            DKbase.app.accesoApp.DeleteLaboratorios(id);
+        }
+        public static int AddUpdateLaboratorios(int id, string nombre)
+        {
+            return DKbase.app.accesoApp.AddUpdateLaboratorios(id, nombre);
+        }
+        public static List<DKbase.Entities.Modulo> GetModulos()
+        {
+            return DKbase.app.accesoApp.RecuperarTodosModulos();
+        }
+        public static void DeleteModulo(int id)
+        {
+            DKbase.app.accesoApp.DeleteModulo(id);
         }
     }
     public class Autenticacion : SoapHeader

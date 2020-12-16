@@ -10,10 +10,6 @@ namespace Kellerhoff.Codigo.capaDatos
 {
     public class capaCAR_WebService
     {
-        //public static cCarrito RecuperarCarritoPorIdClienteIdSucursal(int pIdCliente, string pIdSucursal)
-        //{
-        //    return RecuperarCarritosPorSucursalYProductos(pIdCliente).Where(x => x.codSucursal == pIdSucursal).FirstOrDefault();
-        //}
         public static List<cCarrito> RecuperarCarritosPorSucursalYProductos(int pIdCliente)
         {
             return RecuperarCarritosPorSucursalYProductos_generica(pIdCliente, Constantes.cTipo_Carrito);
@@ -85,6 +81,7 @@ namespace Kellerhoff.Codigo.capaDatos
                     }
                     item.listaProductos = listaProductoCarrtios;
                 }
+                listaSucursal.RemoveAll(x => x.listaProductos.Count == 0);
                 return listaSucursal;
             }
             // sin no valida la credencial
@@ -94,42 +91,6 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             return RecuperarCarritosPorSucursalYProductos_generica(pIdCliente, Constantes.cTipo_CarritoDiferido);
         }
-        //public static List<cCarrito> RecuperarCarritosDiferidosPorCliente_aux(int pIdCliente)
-        //{
-        //    cClientes objClientes = WebService.RecuperarClientePorId(pIdCliente);
-        //    DataSet dsProductoCarrito = capaCAR.RecuperarCarritosDiferidosPorCliente(pIdCliente);
-        //    List<cCarrito> listaSucursal = (from item in dsProductoCarrito.Tables[1].AsEnumerable()
-        //                                    select new cCarrito { car_id = item.Field<int>("car_id"), lrc_id = item.Field<int>("car_id"), codSucursal = item.Field<string>("car_codSucursal") }).ToList();
-        //    foreach (cCarrito item in listaSucursal)
-        //    {
-        //        item.proximoHorarioEntrega = FuncionesPersonalizadas.ObtenerHorarioCierre(objClientes.cli_codsuc, item.codSucursal, objClientes.cli_codrep);
-        //        List<cProductosGenerico> listaProductoCarrtios = (from itemProductoCarrtios in dsProductoCarrito.Tables[0].AsEnumerable()
-        //                                                          where itemProductoCarrtios.Field<int>("cad_codCarrito") == item.lrc_id
-        //                                                          select new cProductosGenerico
-        //                                                          {
-        //                                                              codProducto = itemProductoCarrtios.Field<string>("cad_codProducto"),
-        //                                                              cantidad = itemProductoCarrtios.Field<int>("cad_cantidad"),
-        //                                                              pro_nombre = itemProductoCarrtios.Field<string>("pro_nombre"),
-        //                                                              pro_precio = itemProductoCarrtios.Field<decimal>("pro_precio"),
-        //                                                              pro_preciofarmacia = itemProductoCarrtios.Field<decimal>("pro_preciofarmacia"),
-        //                                                              pro_neto = itemProductoCarrtios.Field<bool>("pro_neto"),
-        //                                                              pro_codtpopro = itemProductoCarrtios.Field<string>("pro_codtpopro"),
-        //                                                              pro_descuentoweb = itemProductoCarrtios.IsNull("pro_descuentoweb") ? 0 : itemProductoCarrtios.Field<decimal>("pro_descuentoweb"),
-        //                                                              pro_ofeunidades = itemProductoCarrtios.IsNull("pro_ofeunidades") ? 0 : itemProductoCarrtios.Field<int>("pro_ofeunidades"),
-        //                                                              pro_ofeporcentaje = itemProductoCarrtios.IsNull("pro_ofeporcentaje") ? 0 : itemProductoCarrtios.Field<decimal>("pro_ofeporcentaje"),
-        //                                                              stk_stock = itemProductoCarrtios.Field<string>("stk_stock"),
-        //                                                              pro_canmaxima = itemProductoCarrtios.IsNull("pro_canmaxima") ? (int?)null : itemProductoCarrtios.Field<int>("pro_canmaxima")
-        //                                                          }).ToList();
-        //        for (int iPrecioFinal = 0; iPrecioFinal < listaProductoCarrtios.Count; iPrecioFinal++)
-        //        {
-        //            listaProductoCarrtios[iPrecioFinal].PrecioFinal = FuncionesPersonalizadas.ObtenerPrecioFinal(objClientes, listaProductoCarrtios[iPrecioFinal]);
-        //        }
-        //        item.listaProductos = listaProductoCarrtios;
-        //    }
-
-
-        //    return listaSucursal;
-        //}
 
         public static int BorrarCarritoTransfer(int pIdCliente, string pSucursal, string pAccion)
         {

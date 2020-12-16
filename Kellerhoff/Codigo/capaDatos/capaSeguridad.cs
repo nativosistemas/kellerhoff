@@ -9,7 +9,7 @@ using Kellerhoff.Codigo.clases;
 
 namespace Kellerhoff.Codigo.capaDatos
 {
-    public class Usuario
+    public class Usuario:DKbase.web.Usuario
     {
         public Usuario()
         {
@@ -18,122 +18,26 @@ namespace Kellerhoff.Codigo.capaDatos
             NombreYApellido = string.Empty;
             idUsuarioLog = -1;
         }
-        public int id
-        {
-            get;
-            set;
-        }
-        public int idRol
-        {
-            get;
-            set;
-        }
-        public string NombreYApellido
-        {
-            get;
-            set;
-        }
-        public string ApNombre
-        {
-            get;
-            set;
-        }
-        public string usu_pswDesencriptado
-        {
-            get;
-            set;
-        }
-        public int idUsuarioLog
-        {
-            get;
-            set;
-        }
-        public int usu_estado
-        {
-            get;
-            set;
-        }
-        public int? usu_codCliente
-        {
-            get;
-            set;
-        }
-    }
-    public class cUsuario
+
+}
+    public class cUsuario : DKbase.web.cUsuario
     {
-        public int usu_codigo { get; set; }
-        public int usu_codRol { get; set; }
-        public int? usu_codCliente { get; set; }
-        public string rol_Nombre { get; set; }
-        public string NombreYapellido { get; set; }
-        public string ApNombre { get; set; }
-        public string usu_nombre { get; set; }
-        public string usu_apellido { get; set; }
-        public string usu_login { get; set; }
-        public string usu_mail { get; set; }
-        public string usu_pswDesencriptado { get; set; }
-        public string usu_observacion { get; set; }
-        public int usu_estado { get; set; }
-        public string usu_estadoToString { get; set; }
-        public string cli_nombre { get; set; }
-        public List<string> listaPermisoDenegados { get; set; }
     }
-    public class cRegla
+    public class cRegla : DKbase.web.cRegla
     {
         public cRegla()
         {
 
         }
-        public int rgl_codRegla { get; set; }
-        public string rgl_Descripcion { get; set; }
-        public string rgl_PalabraClave { get; set; }
-        public bool? rgl_IsAgregarSoporta { get; set; }
-        public bool? rgl_IsEditarSoporta { get; set; }
-        public bool? rgl_IsEliminarSoporta { get; set; }
-        public int? rgl_codReglaPadre { get; set; }
+
     }
-    public class cRol
+    public class cRol : DKbase.web.cRol
     {
-        public int rol_codRol { get; set; }
-        public string rol_Nombre { get; set; }
+
     }
-    public class AcccionesRol
+    public class AcccionesRol : DKbase.web.AcccionesRol
     {
-        public int idRegla
-        {
-            get;
-            set;
-        }
-        public int? idReglaRol
-        {
-            get;
-            set;
-        }
-        public string palabraClave
-        {
-            get;
-            set;
-        }
-        public bool isActivo
-        {
-            get;
-            set;
-        }
-        public bool isAgregar
-        {
-            get;
-            set;
-        }
-        public bool isEditar
-        {
-            get;
-            set;
-        }
-        public bool isEliminar
-        {
-            get;
-            set;
-        }
+
 
     }
     public class ListaAcccionesRol

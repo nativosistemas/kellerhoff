@@ -2874,6 +2874,9 @@ function detalleProducto_celular(pIndex) {
                     if (isMostrarImput) {
                         isMostrarImput = isMostrarImput_pedirCC(listaProductosBuscados[pIndex].pro_codtpopro, listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].listaSucursalStocks);
                     }
+                    //if (listaSucursal[iEncabezadoSucursal] == "CB" && listaProductosBuscados[pIndex].pro_codtpopro == "P") {
+                    //    isMostrarImputCB = false
+                    //}
                     if (isMostrarImput) {
                         isMostrarImputSucursal = isMostrarImput_FacturaTrazablesProvincia(listaSucursal[iEncabezadoSucursal], listaProductosBuscados[pIndex].pro_isTrazable);
                     }

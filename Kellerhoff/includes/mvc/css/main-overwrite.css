@@ -308,7 +308,7 @@ color: #66abd8 !important;
 
 #divPanelNroComprobante {
     padding-bottom: 10px;
-    border-bottom: 1px solid #999;
+    /*border-bottom: 1px solid #999;*/
     margin-bottom: 1em;
 }
 
@@ -472,4 +472,24 @@ header .nav li {
 .tr_thead>td {
   
      border-right: none !important;
+}
+
+#labbi {
+    max-width: 80px;
+    position: absolute;
+    top: 3px;
+}
+
+@media (min-width : 992px) {
+    #labbi {
+        top: 35px;
+        right: 0;
+    }
+}
+
+@media (min-width : 1020px) {
+    #labbi {
+        top: 3px;
+        right: auto;
+    }
 }
