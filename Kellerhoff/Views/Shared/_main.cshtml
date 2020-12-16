@@ -31,7 +31,7 @@
     @RenderSection("head", required: false)
     <link href="../includes/mvc/css/main.css?n=21" rel="stylesheet">
     <link href="../includes/mvc/css/select2.min.css?n=2" rel="stylesheet">
-    <link href="../includes/mvc/css/main-overwrite.css?n=49" rel="stylesheet">
+    <link href="../includes/mvc/css/main-overwrite.css?n=50" rel="stylesheet">
 </head>
 @{
     if (Session["clientesDefault_Usuario"] != null &&
@@ -293,6 +293,7 @@
                                     {
                                         <a href="/devoluciones/NuevaDevolucion"><i class="fa fa-reply"></i>DEVOLUCIÓN NORMAL</a>
                                         <a href="/devoluciones/NuevaDevolucionVencidos"><i class="fa fa-calendar-minus-o"></i>DEVOLUCIÓN DE VENCIDOS</a>
+                                        <a href="/devoluciones/DevolucionesFacturadoNoEnviado" class="nuevo-celu" data-fecha="2021-06-01"><i class="fa fa-calendar-minus-o"></i>FACTURADO NO ENVIADO</a>
                                     }
                                 }
                             </div>
@@ -628,7 +629,7 @@
 
     <script src="~/includes/mvc/js/libreria.js?n=21" type="text/javascript"></script>
     <script src="~/includes/mvc/js/oferta.js?n=14" type="text/javascript"></script>
-    <script src="~/includes/mvc/js/kellerhoff.js?n=48" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/kellerhoff.js?n=50" type="text/javascript"></script>
     <script src="~/includes/mvc/js/ajax.js?n=42" type="text/javascript"></script>
     <script src="~/includes/mvc/js/mensaje.js?n=27" type="text/javascript"></script>
     <script src="~/includes/mvc/js/promotores.js?n=3" type="text/javascript"></script>

@@ -398,6 +398,16 @@ color: #66abd8 !important;
     top: -2px;
 }
 
+.nuevo-sublink::after {
+    content: '';
+    background-image: url(/archivos/new2.png);
+    width: 58px !important;
+    height: 18px;
+    position: absolute;
+    margin-left: 10px;
+    top: 10px;
+}
+
 .sidebar-nav li a.nuevo-celu::after {
     content: '';
     background-image: url(/archivos/new.png);
