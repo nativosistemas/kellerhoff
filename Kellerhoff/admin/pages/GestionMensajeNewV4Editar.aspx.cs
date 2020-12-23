@@ -129,6 +129,7 @@ namespace Kellerhoff.admin.pages
                 txt_asunto.Text = mensaje.tme_asunto;
                 txt_mensaje.Text = mensaje.tme_mensaje;// txt_mensaje.Content = mensaje.tme_mensaje;
                 HiddenField_mensaje.Value = mensaje.tme_mensaje;
+                HiddenField_loadMsg.Value = "1";
                 if (!string.IsNullOrEmpty(mensaje.tmn_todosSucursales))
                 {
                     RadioButtonSucursal.Checked = true;
