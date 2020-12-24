@@ -1,0 +1,76 @@
+﻿@Html.Partial("_nav_ctacte")
+@section Scripts{
+    @Html.Partial("_scriptsConsultaAplicaciones")
+    <script type="text/javascript">
+        //jQuery(document).ready(function () {
+        //    CargarHtmlPanelSaldos();
+        //});
+
+    </script>
+}
+<div class="row">
+    <div class="col-xs-12 padding_l-10">
+        <div class="clear15 hidden-lg"></div>
+        @{
+            string LoginCliente = ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login;
+
+            <input type="hidden" name="txtLoginCliente" id="txtLoginCliente" value="@{ WriteLiteral(LoginCliente); }" />
+        }
+        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+            <label for="cmbMotivo" class="col-xs-12 no-padding">Tipo de Comprobante</label>
+            <div class="col-xs-12 no-padding">
+                <input type="text" name="cboTipoCbte" id="cboTipoCbte" list="TipoCbteValues" class="form-control" autocomplete="off" />
+
+                <datalist id="TipoCbteValues">
+                    <option value="Nota de Crédito A" data-id="1">
+                    <option value="Nota de Crédito B" data-id="2">
+                    <option value="Recibo" data-id="3">
+                    <option value="Resumen" data-id="4">
+                </datalist>
+            </div>
+            @*<div class="col-xs-2 col-sm-3 col-md-2 text-center">
+                    <a class="refresh-input text-center" data-id="cboTipoCbte"> <i class="fa fa-refresh fa-lg"></i> </a>
+                </div>*@
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3" id="DEVNroComprobante">
+            <label for="txtNroComprobante" class="col-xs-12 no-padding">Número de comprobante completo</label>
+            <div class="col-xs-12 no-padding">
+                <input id="txtNroComprobante" type="text" class="form-control" autocomplete="off" />
+            </div>
+            @*<div class="col-xs-2 col-sm-3 text-center">
+                    <a class="refresh-input text-center" data-id="txtNroComprobante"> <i class="fa fa-refresh fa-lg"></i> </a>
+                </div>*@
+        </div>
+        @*<div class="clear15 visible-xs"></div>*@
+        @*<div class="col-lg-3 col-sm-5 col-xs-12"><div class="est_ped"><button class="btn_emp" onclick="return onclickCompocisionSaldo();">CONSULTAR</button></div> </div>*@
+        <div class="col-sm-3 col-xs-6 col-md-2 text-right" id="DEVAgregar">
+            <label style="color:#ededed;">Boton</label>
+            <button class="btn btn-primary btn-block btnConsultarAplicaciones" id="btnConsultarAplicaciones">
+                CONSULTAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-caret-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="clear15"></div>
+<div class="row hidden" id="tblResultado">
+    <div class="col-xs-12 padding_l-10 table-responsive">
+        @*<p class="tit_secund">Devoluciones Precargadas</p>*@
+        <table class="table table-striped tablaDevoluciones">
+            <thead>
+                <tr>
+                    <th class="text-center">Tipo</th>
+                    <th>Número Cbte</th>
+                    <th class="text-center">Cuota</th>
+                    <th>Fecha Cbte</th>
+                    <th class="text-right">Monto</th>
+                    <th>Motivo</th>
+                    <th>Fecha Aplicado</th>
+                    <th class="text-right">Monto Aplicado</th>
+                </tr>
+            </thead>
+            <tbody id="tblAplicaciones"></tbody>
+
+        </table>
+    </div>
+</div>

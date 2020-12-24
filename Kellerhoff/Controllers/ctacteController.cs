@@ -50,6 +50,21 @@ namespace Kellerhoff.Controllers
         {
             return View();
         }
+
+        [AuthorizePermisoAttribute(Permiso = "CUENTASCORRIENTES")]
+        public ActionResult ConsultaDeAplicacionDeComprobantes()
+        {
+            return View();
+        }
+        [AuthorizePermisoAttribute(Permiso = "CUENTASCORRIENTES")]
+        public ActionResult ConsultaDeAplicacionDeComprobantesResultado(string t, string id)
+        {
+            Session["clientes_pages_Aplicacion_ID"] = id;
+            Session["clientes_pages_Aplicacion_TIPO"] = t.ToUpper();
+            //Documento.aspx?t=RES&id=X000101933698
+            //System.Web.HttpContext.Current.Session["url_type"] = "Documento";
+            return View();
+        }
         [AuthorizePermisoAttribute(Permiso = "CUENTASCORRIENTES")]
         public ActionResult composicionsaldoCtaCte()
         {
@@ -400,5 +415,32 @@ namespace Kellerhoff.Controllers
                 return resultado;
             }
         }
+        public string ObtenerAplicacionesDeComprobantesPorTipoYNumero(string TipoComprobante, string NumeroComprobante, string Login)
+        {
+            string resultado = string.Empty;
+            List<ServiceReferenceDLL.cCtaCteMovimiento> l = WebService.ObtenerAplicacionesDeComprobantesPorTipoYNumero(TipoComprobante, NumeroComprobante, Login);
+            if (l != null)
+            {
+                return Serializador.SerializarAJson(l);
+            }
+            else
+            {
+                return resultado;
+            }
+        }
+        public string ObtenerMovimientoPorTipoYNumeroDeComprobante(string TipoComprobante, string NumeroComprobante, string Login)
+        {
+            string resultado = string.Empty;
+            ServiceReferenceDLL.cCtaCteMovimiento l = WebService.ObtenerMovimientoPorTipoYNumeroDeComprobante(TipoComprobante, NumeroComprobante, Login);
+            if (l != null)
+            {
+                return Serializador.SerializarAJson(l);
+            }
+            else
+            {
+                return resultado;
+            }
+        }
+
     }
 }

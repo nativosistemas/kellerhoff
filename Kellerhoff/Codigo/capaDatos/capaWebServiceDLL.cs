@@ -728,6 +728,36 @@ namespace Kellerhoff.Codigo.capaDatos
                 return null;
             }
         }
+
+        public static List<ServiceReferenceDLL.cCtaCteMovimiento> ObtenerAplicacionesDeComprobantesPorTipoYNumero(string TipoComprobante, string NumeroComprobante, string Login)
+        {
+            try
+            {
+                ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
+                List<ServiceReferenceDLL.cCtaCteMovimiento> resultado = objServicio.ObtenerAplicacionesDeComprobantesPorTipoYNumero(TipoComprobante, NumeroComprobante, Login);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, TipoComprobante, NumeroComprobante, Login);
+                return null;
+            }
+        }
+
+        public static ServiceReferenceDLL.cCtaCteMovimiento ObtenerMovimientoPorTipoYNumeroDeComprobante(string TipoComprobante, string NumeroComprobante, string Login)
+        {
+            try
+            {
+                ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
+                ServiceReferenceDLL.cCtaCteMovimiento resultado = objServicio.ObtenerMovimientoPorTipoYNumeroDeComprobante(TipoComprobante, NumeroComprobante, Login);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, TipoComprobante, NumeroComprobante, Login);
+                return null;
+            }
+        }
     }
 
 

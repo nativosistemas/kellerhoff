@@ -2,6 +2,7 @@
     string classFichaDebeHaberSaldo = "";
     string classDescargaResumenes = "";
     string classComposicionsaldo = "";
+    string classConsultaDeAplicacionDeComprobantes = "";
     string classConsultaDeComprobantes = "";
     string classObraSocial = "";
     string classDeudaVencida = "";
@@ -34,6 +35,10 @@
         case "deudaVencida":
             classDeudaVencida = " class=\"active\" ";
             break;
+        case "ConsultaDeAplicacionDeComprobantes":
+        case "ConsultaDeAplicacionDeComprobantesResultado":
+            classConsultaDeAplicacionDeComprobantes = " class=\"active\" ";
+            break;
         default:
             break;
     }
@@ -46,6 +51,8 @@
             <a href="/ctacte/deudaVencida" @{ WriteLiteral(classDeudaVencida);}><i class="fa fa-calendar-times-o" title="DEUDA VENCIDA"></i><span class="hidden-sm hidden-xs">DEUDA VENCIDA</span></a>
             <div class="separate"></div>
             <a href="#" onclick="onclickCreditoDisponible(); return false;"><i class="fa fa-usd" title="CREDITO DISPONIBLE"></i><span class="hidden-sm hidden-xs">CREDITO DISPONIBLE</span></a>
+            <div class="separate"></div>
+            <a href="/ctacte/ConsultaDeAplicacionDeComprobantes" @{ WriteLiteral(classConsultaDeAplicacionDeComprobantes);}><span  class="nuevo-submenu"></span><i class="fa fa-tags" title="APLICACIÓN DE COMPROBANTES"></i><span class="hidden-sm hidden-xs">APLICACION DE COMPROBANTES</span></a>
             <div class="separate"></div>
             <a href="/ctacte/composicionsaldo" @{ WriteLiteral(classComposicionsaldo);}><i class="fa fa-balance-scale" title="COMPOSICIÓN DE SALDOS"></i><span class="hidden-sm hidden-xs">COMPOSICI&Oacute;N DE SALDOS</span></a>
             <div class="separate"></div>

@@ -5839,6 +5839,24 @@ namespace Kellerhoff
             }
             return resultado;
         }
+        public static List<ServiceReferenceDLL.cCtaCteMovimiento> ObtenerAplicacionesDeComprobantesPorTipoYNumero(string TipoComprobante, string NumeroComprobante, string Login)
+        {
+            List<ServiceReferenceDLL.cCtaCteMovimiento> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumero(TipoComprobante, NumeroComprobante, Login);
+            }
+            return resultado;
+        }
+        public static ServiceReferenceDLL.cCtaCteMovimiento ObtenerMovimientoPorTipoYNumeroDeComprobante(string TipoComprobante, string NumeroComprobante, string Login)
+        {
+            ServiceReferenceDLL.cCtaCteMovimiento resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobante(TipoComprobante, NumeroComprobante, Login);
+            }
+            return resultado;
+        }
         //
         private static cMensaje ConvertToMensajeNewV4(DataRow pItem)
         {

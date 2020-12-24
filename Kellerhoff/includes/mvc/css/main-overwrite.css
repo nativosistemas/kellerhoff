@@ -398,6 +398,15 @@ color: #66abd8 !important;
     top: -2px;
 }
 
+.nuevo-submenu {
+    content: '';
+    background-image: url(/archivos/new2.png);
+    width: 58px !important;
+    height: 18px;
+    position: absolute;
+    left: -60px;
+    top: -2px;
+}
 .sidebar-nav li a.nuevo-celu::after {
     content: '';
     background-image: url(/archivos/new.png);
@@ -472,6 +481,10 @@ header .nav li {
 .tr_thead>td {
   
      border-right: none !important;
+}
+
+.btnConsultarAplicaciones {
+    padding: 4px 10px;
 }
 
 #labbi {

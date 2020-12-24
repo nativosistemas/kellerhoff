@@ -1,0 +1,61 @@
+﻿@Html.Partial("_nav_ctacte")
+@section Scripts{
+    @Html.Partial("_scriptsConsultaAplicaciones")
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            cargarAplicaciones();
+        });
+
+    </script>
+}
+
+<div class="row hidden" id="tblResultadoCabecera">
+    @{
+        string LoginCliente = ((Kellerhoff.Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login;
+
+
+        <input type="hidden" name="txtLoginCliente" id="txtLoginCliente" value="@{ WriteLiteral(LoginCliente); }" />
+        <input type="hidden" name="txtNroCbte" id="txtNroCbte" value="@{ WriteLiteral(Session["clientes_pages_Aplicacion_ID"]); }" />
+        <input type="hidden" name="txtTipoCbte" id="txtTipoCbte" value="@{ WriteLiteral(Session["clientes_pages_Aplicacion_TIPO"]); }" />
+    }
+    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+        <a class="btn_volver float-left" href="#" onclick="volver(); return false;"><i class="fa fa-play"></i> VOLVER</a>
+        <div class="clear visible-xs"></div>
+        <div class="pad_7">
+            <div id="divTituloDocumento" class="tit_secund"></div>
+        </div>
+    </div>
+    <div class="clear5 visible-xs"></div>
+    <div class="clear20 hidden-xs"></div>
+    <div class="clear10 visible-xs"></div>
+    <div id="divContenedorDocumentoCabecera" class="col-xs-12">
+
+    </div>
+</div>
+<div class="clear15"></div>
+<div class="row hidden" id="tblResultado">
+    <div class="col-xs-12 padding_l-10 table-responsive">
+        @*<p class="tit_secund">Devoluciones Precargadas</p>*@
+        <table class="table table-striped tablaDevoluciones">
+            <thead>
+                <tr>
+                    <th class="text-center">Tipo</th>
+                    <th>Número Cbte</th>
+                    <th class="text-center">Cuota</th>
+                    <th>Fecha Cbte</th>
+                    <th class="text-right">Monto</th>
+                    <th>Motivo</th>
+                    <th>Fecha Aplicado</th>
+                    <th class="text-right">Monto Aplicado</th>
+                </tr>
+            </thead>
+            <tbody id="tblAplicaciones"></tbody>
+        </table>
+    </div>
+</div>
+<div class="clear15"></div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+        <a class="btn_volver float-left" href="#" onclick="volver(); return false;"><i class="fa fa-play"></i> VOLVER</a>
+    </div>
+</div>

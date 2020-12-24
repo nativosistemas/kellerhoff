@@ -604,6 +604,7 @@
     <Content Include="includes\mvc\js\composicionsaldo.js" />
     <Content Include="includes\mvc\js\comprobantes.js" />
     <Content Include="includes\mvc\js\config.js" />
+    <Content Include="includes\mvc\js\consultaaplicaciones.js" />
     <Content Include="includes\mvc\js\ctacte.js" />
     <Content Include="includes\mvc\js\devoluciones.js" />
     <Content Include="includes\mvc\js\documento.js" />
@@ -1094,6 +1095,9 @@
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCResumen.datasource" />
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerComprobantesAImprimirEnBaseAResumenResponse.datasource" />
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerUltimos10ResumenesDePuntoDeVentaResponse.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.cCtaCteMovimiento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceReferenceDLL\Service1.disco" />
     <None Include="Service References\ServiceReferenceDLL\Service2.disco" />
     <Content Include="servicios\descargarArchivo.aspx" />
@@ -1141,6 +1145,9 @@
     <Content Include="Views\devoluciones\NuevaDevolucionFacturaCompleta.cshtml" />
     <Content Include="Views\devoluciones\_scriptsDevsDaterangepicker.cshtml" />
     <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
+    <Content Include="Views\ctacte\ConsultaDeAplicacionDeComprobantes.cshtml" />
+    <Content Include="Views\ctacte\_scriptsConsultaAplicaciones.cshtml" />
+    <Content Include="Views\ctacte\ConsultaDeAplicacionDeComprobantesResultado.cshtml" />
     <None Include="Web_config\Web.config_produccion">
       <SubType>Designer</SubType>
     </None>
