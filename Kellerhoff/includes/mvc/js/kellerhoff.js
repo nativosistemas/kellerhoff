@@ -565,16 +565,18 @@ function funLog() {
 }
 
 function novedades() {
-    var html = $('.nuevo').attr('data-fecha'),
-        fechaDissmis = new Date($('.nuevo').attr('data-fecha')),
-        htmlCel = $('.nuevo-celu').html(),
+    var fechaDissmis = new Date($('.nuevo').attr('data-fecha')),
         fechaDissmisCel = new Date($('.nuevo-celu').attr('data-fecha')),
+        fechaDissmisSubLink = new Date($('.nuevo-sublink').attr('data-fecha')),
         hoy = new Date();
     if (fechaDissmis < hoy) {
         $('.nuevo').removeClass('nuevo');
     }
-    if (fechaDissmisCel < hoy) {
+    if (fechaDissmisSubLink < hoy) {
         $('.nuevo-celu').removeClass('nuevo-celu');
+    }
+    if (fechaDissmisCel < hoy) {
+        $('.nuevo-sublink').removeClass('nuevo-sublink');
     }
 }
 function isMostrarImput_FacturaTrazablesProvincia(pSucursal, pIsProductoTrazable) {
