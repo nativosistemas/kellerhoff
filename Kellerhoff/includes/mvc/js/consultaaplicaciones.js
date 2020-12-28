@@ -42,59 +42,28 @@ $(document).ready(function () {
         $("#" + campoActual).focus();
     });
 
-    $("#cboTipoCbte").change(function (e) {
-        ControlarSesion();
-        var Tipo = $(this).val().trim();
-        var obj = $("#TipoCbteValues").find("option[value='" + Tipo + "']");
-        if (obj != null && obj.length > 0) {
-            var TipoId = obj[0].dataset.id;
-            // console.log(TipoCbte);
-            switch (TipoId) {
-                case "1":
-                    TipoCbte = "FAC";
-                    NroCbte = "A";
-                    break;
-                case "2":
-                    TipoCbte = "FAC";
-                    NroCbte = "B";
-                    break;
-                case "3":
-                    TipoCbte = "NCR";
-                    NroCbte = "A";
-                    break;
-                case "4":
-                    TipoCbte = "NCR";
-                    NroCbte = "B";
-                    break;
-                case "5":
-                    TipoCbte = "NDE";
-                    NroCbte = "A";
-                    break;
-                case "6":
-                    TipoCbte = "NDE";
-                    NroCbte = "B";
-                    break;
-                case "7":
-                    TipoCbte = "REC";
-                    NroCbte = "X";
-                    break;
-                case "8":
-                    TipoCbte = "RES";
-                    NroCbte = "X";
-                    break;
-                default:
-                    console.log(obj[0].dataset.id)
+    $("#cboTipoCbte").keypress(function (e) {
+        if (e.which == 13 || e.which == 9) {
+
+            ControlarSesion();
+
+            var Tipo = $(this).val().trim();
+            var obj = Tipo.split("_")
+            if (obj != null && obj.length > 0) {
+                
+                TipoCbte = obj[0];
+                NroCbte = obj[1];
+
+                setTimeout(function () {
+                    campoActual = "txtNroComprobante";
+                    $("#txtNroComprobante").focus();
+                }, 100);
+            } else {
+                setTimeout(function () {
                     mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Seleccione un Tipo de Comprobante válido</h5>");
-                    break;
-                    return false;
+                }, 100);
+                // $(".fa.fa-times").hide();
             }
-            setTimeout(function () {
-                campoActual = "txtNroComprobante";
-                $("#txtNroComprobante").focus();
-            }, 100);
-        } else {
-            mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Seleccione un Tipo de Comprobante válido</h5>");
-            // $(".fa.fa-times").hide();
         }
     });
 
@@ -115,33 +84,16 @@ $(document).ready(function () {
 
     $("#btnConsultarAplicaciones").click(function () {
         var Tipo = $("#cboTipoCbte").val().trim();
-        var obj = $("#TipoCbteValues").find("option[value='" + Tipo + "']");
+        var obj = Tipo.split("_")
         if (obj != null && obj.length > 0) {
-            var TipoId = obj[0].dataset.id;
-            // console.log(TipoCbte);
-            switch (TipoId) {
-                case "1":
-                    TipoCbte = "NCR";
-                    NroCbte = "A";
-                    break;
-                case "2":
-                    TipoCbte = "NCR";
-                    NroCbte = "B";
-                    break;
-                case "3":
-                    TipoCbte = "REC";
-                    NroCbte = "X";
-                    break;
-                case "4":
-                    TipoCbte = "RES";
-                    NroCbte = "X";
-                    break;
-                default:
-                    console.log(obj[0].dataset.id)
-                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Seleccione un Tipo de Comprobante válido</h5>");
-                    break;
-                    return false;
-            }
+
+            TipoCbte = obj[0];
+            NroCbte = obj[1];
+        } else {
+            setTimeout(function () {
+                mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>Seleccione un Tipo de Comprobante válido</h5>");
+            }, 100);
+            // $(".fa.fa-times").hide();
         }
         NroCbte = NroCbte.slice(0, 1);
         NroCbte += ('000000000000' + $('#txtNroComprobante').val()).slice(-12);
