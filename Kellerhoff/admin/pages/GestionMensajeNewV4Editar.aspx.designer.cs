@@ -33,6 +33,24 @@ namespace Kellerhoff.admin.pages
         protected global::System.Web.UI.WebControls.Button cmd_cancelar;
 
         /// <summary>
+        /// Control HiddenField_mensaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenField_mensaje;
+
+        /// <summary>
+        /// Control HiddenField_loadMsg.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenField_loadMsg;
+
+        /// <summary>
         /// Control RequiredFieldValidator2.
         /// </summary>
         /// <remarks>

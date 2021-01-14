@@ -5951,11 +5951,11 @@ namespace Kellerhoff
         }
         public static void DeleteLaboratorios(int id)
         {
-            DKbase.app.accesoApp.DeleteLaboratorios(id);
+           // DKbase.app.accesoApp.DeleteLaboratorios(id);
         }
         public static int AddUpdateLaboratorios(int id, string nombre)
         {
-            return DKbase.app.accesoApp.AddUpdateLaboratorios(id, nombre);
+            return 1;// DKbase.app.accesoApp.AddUpdateLaboratorios(id, nombre);
         }
         public static List<DKbase.Entities.Modulo> GetModulos()
         {
