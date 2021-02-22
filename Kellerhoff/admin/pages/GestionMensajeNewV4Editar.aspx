@@ -1,18 +1,30 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/BaseAdmin.Master" AutoEventWireup="true" CodeBehind="GestionMensajeNewV4Editar.aspx.cs" Inherits="Kellerhoff.admin.pages.GestionMensajeNewV4Editar" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/BaseAdmin.Master" AutoEventWireup="true" CodeBehind="GestionMensajeNewV4Editar.aspx.cs" Inherits="Kellerhoff.admin.pages.GestionMensajeNewV4Editar" ValidateRequest="false" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../../includes/css/jquery-ui.css" rel="stylesheet"
         type="text/css" />
     <style type="text/css">
         .ajax__html_editor_extender_container {
-        width: 100% !important;
+            width: 100% !important;
         }
     </style>
     <script src="../../includes/js/jquery-ui.js" type="text/javascript"></script>
     <script type="text/javascript">
         var isPrimero = true;
         jQuery(document).ready(function () {
-
+            if ($('#HiddenField_loadMsg').val() == '1') {
+                $('#txt_mensaje').val($('#HiddenField_mensaje').val());
+                $('#HiddenField_loadMsg').val('');
+            }
         });
+        beforeSubmit = function () {
+            var htmlEditorExtender = $('.ajax__html_editor_extender_texteditor');
+            var cuerpo = htmlEditorExtender.html();
+            $('#HiddenField_mensaje').val(cuerpo);
+            //alert(cuerpo);
+            //$("#Form2").submit();
+            return true;
+        }
         function MostrarMensajeTest(pAsunto, pCuerpo) {
             if (isPrimero) {
                 $("#dialogMensaje")[0].title = pAsunto;
@@ -64,10 +76,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="botones_form">
-        <asp:Button ID="cmd_guardar" runat="server" Text="GUARDAR" CssClass="btn_abm" OnClick="cmd_guardar_Click" />
+        <asp:Button ID="cmd_guardar" runat="server" Text="GUARDAR" CssClass="btn_abm" OnClick="cmd_guardar_Click" OnClientClick=" return beforeSubmit();" />
         <asp:Button ID="cmd_cancelar" runat="server" Text="VOLVER" CssClass="btn_abm" CausesValidation="False"
             OnClick="cmd_cancelar_Click" />
     </div>
+    <asp:HiddenField ID="HiddenField_mensaje" runat="server" ClientIDMode="Static" />
+    <asp:HiddenField ID="HiddenField_loadMsg" runat="server" ClientIDMode="Static" />
     <div class="form_datos" style="width: 100%;">
         <div class="ele_abm">
             <div class="lbl_abm">
@@ -96,10 +110,10 @@
                 Mensaje
             </div>
             <div class="html_editor">
-                        <asp:TextBox ID="txt_mensaje" runat="server"  Height="200px"
-                                            Width="700px"></asp:TextBox>
-                                         <ajaxToolkit:HtmlEditorExtender ID="HtmlEditorExtender1" runat="server"  TargetControlID="txt_mensaje"></ajaxToolkit:HtmlEditorExtender>
-           <%--     <HTMLEditor:Editor runat="server" ID="txt_mensaje" NoUnicode="True" Height="200px"
+                <asp:TextBox ID="txt_mensaje" runat="server" Height="200px" ClientIDMode="Static"
+                    Width="700px"></asp:TextBox>
+                <ajaxToolkit:HtmlEditorExtender ID="HtmlEditorExtender1" runat="server" TargetControlID="txt_mensaje"></ajaxToolkit:HtmlEditorExtender>
+                <%--     <HTMLEditor:Editor runat="server" ID="txt_mensaje" NoUnicode="True" Height="200px"
                     Width="100%" />--%>
             </div>
         </div>

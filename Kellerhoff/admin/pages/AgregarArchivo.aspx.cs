@@ -8,6 +8,7 @@ using System.Web.Services;
 using Kellerhoff.Codigo;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.capaDatos;
+using System.IO;
 
 namespace Kellerhoff.admin.pages
 {
@@ -131,6 +132,10 @@ namespace Kellerhoff.admin.pages
                             parteNueva = cont.ToString();
                             nombreFinal = CacheNombreArchivo + parteNueva + "." + CacheExtencionArchivo;
                         }
+                        if (Directory.Exists(path) == false)
+                        {
+                            Directory.CreateDirectory(path);
+                        }
 
                         FileUpload1.PostedFile.SaveAs(path + nombreFinal);
 
@@ -146,6 +151,9 @@ namespace Kellerhoff.admin.pages
                         {
                             case "ofertas":
                                 Response.Redirect("GestionOferta.aspx");
+                                break;
+                            case "app":
+                                Response.Redirect("Laboratorio.aspx");
                                 break;
                             case "slider":
                                 WebService.ActualizarImagenHomeSlide(obj.id, obj.codRecurso, obj.ancho == 700 ? 2 : 1);

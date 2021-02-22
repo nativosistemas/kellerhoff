@@ -113,25 +113,6 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        //public static int BorrarCarrito_SleepTimer(int pIdCliente, string pSucursal, string pTipo, string pAccion)
-        //{
-        //    int idCarrito = BorrarCarrito(pIdCliente, pSucursal, pTipo, pAccion);
-        //    if (idCarrito == -1)
-        //    {
-        //        Random rd = new Random(DateTime.Now.Millisecond);
-        //        int n = 0;
-        //        while (n < 7)
-        //        {
-        //            System.Threading.Thread.Sleep(rd.Next(1000, 5000));
-        //            idCarrito = BorrarCarrito(pIdCliente, pSucursal, pTipo, pAccion);
-        //            if (idCarrito != -1)
-        //                break;
-        //            n++;
-        //        }
-        //    }
-        //    return idCarrito;
-        //}
-
         public static int BorrarCarrito(int pIdCliente, string pSucursal, string pTipo, string pAccion)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

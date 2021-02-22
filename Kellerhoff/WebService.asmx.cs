@@ -107,12 +107,12 @@ namespace Kellerhoff
             return resultado;
         }
 
-        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> RecuperarDevolucionesPorClientePorNumero(string pNumeroDevolucion,string pLoginWeb)
+        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> RecuperarDevolucionesPorClientePorNumero(string pNumeroDevolucion, string pLoginWeb)
         {
             List<ServiceReferenceDLL.cDevolucionItemPrecarga> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                resultado = capaWebServiceDLL.ObtenerDevolucionesPorClientePorNumero(pNumeroDevolucion,pLoginWeb);
+                resultado = capaWebServiceDLL.ObtenerDevolucionesPorClientePorNumero(pNumeroDevolucion, pLoginWeb);
             }
             return resultado;
         }
@@ -165,7 +165,7 @@ namespace Kellerhoff
             if (VerificarPermisos(CredencialAutenticacion))
             {
 
-                resultado = capaWebServiceDLL.ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(NombreProducto,NumeroFactura, pLoginWeb);
+                resultado = capaWebServiceDLL.ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(NombreProducto, NumeroFactura, pLoginWeb);
             }
             return resultado;
         }
@@ -2450,6 +2450,7 @@ namespace Kellerhoff
                         resultado.Add(obj);
                     }
                 }
+                resultado.RemoveAll(x => x.listaTransfer.Sum(x1 => x1.listaProductos.Count) == 0);
                 return resultado;
             }
             return null;
@@ -2561,21 +2562,6 @@ namespace Kellerhoff
                         }
                         if (isAgregar)
                         {
-                            //cSucursal obj = new cSucursal();
-                            //if (tabla.Rows[i]["suc_codigo"] != DBNull.Value)
-                            //{
-                            //    obj.suc_codigo = tabla.Rows[i]["suc_codigo"].ToString();
-                            //    obj.sde_sucursal = tabla.Rows[i]["suc_codigo"].ToString();
-                            //}
-                            //if (tabla.Rows[i]["suc_nombre"] != DBNull.Value)
-                            //{
-                            //    obj.suc_nombre = tabla.Rows[i]["suc_nombre"].ToString();
-                            //}
-                            //if (tabla.Rows[i]["suc_montoMinimo"] != DBNull.Value)
-                            //{
-                            //    obj.suc_montoMinimo = Convert.ToDecimal(tabla.Rows[i]["suc_montoMinimo"]);
-                            //}                        
-                            //resultado.Add(obj);
                             resultado.Add(ConvertToSucursal(tabla.Rows[i]));
                         }
                     }
@@ -3276,7 +3262,7 @@ namespace Kellerhoff
                     objTransferDetalle.CargarTransfer(ConvertToTransfer(itemTransferDetalle));
                     listaTransferDetalle.Add(objTransferDetalle);
                 }
-                resultado = ConvertDataTableAClase(dsResultado.Tables[0], dsResultado.Tables[2],listaTransferDetalle, oCliente);
+                resultado = ConvertDataTableAClase(dsResultado.Tables[0], dsResultado.Tables[2], listaTransferDetalle, oCliente);
                 return resultado;
             }
             else
@@ -5918,7 +5904,7 @@ namespace Kellerhoff
                     {
                         foreach (cMensajeNew m in lista_aux)
                         {
-                            cMensaje o = new cMensaje() { tme_asunto = m.tmn_asunto,tme_mensaje =m.tmn_mensaje};
+                            cMensaje o = new cMensaje() { tme_asunto = m.tmn_asunto, tme_mensaje = m.tmn_mensaje };
                             lista.Add(o);
                         }
                     }
@@ -6044,6 +6030,26 @@ namespace Kellerhoff
                 return capaMensajeNew.ActualizarInsertarMensajeNew(pIdMensaje, pAsunto, pMensaje, pFechaDesde, pFechaHasta, pImportante, pSucursales);
             }
             return -1;
+        }
+        public static List<DKbase.Entities.Laboratorio> GetLaboratorios()
+        {
+            return DKbase.app.accesoApp.GetLaboratorios();
+        }
+        public static void DeleteLaboratorios(int id)
+        {
+           // DKbase.app.accesoApp.DeleteLaboratorios(id);
+        }
+        public static int AddUpdateLaboratorios(int id, string nombre)
+        {
+            return 1;// DKbase.app.accesoApp.AddUpdateLaboratorios(id, nombre);
+        }
+        public static List<DKbase.Entities.Modulo> GetModulos()
+        {
+            return DKbase.app.accesoApp.RecuperarTodosModulos();
+        }
+        public static void DeleteModulo(int id)
+        {
+            DKbase.app.accesoApp.DeleteModulo(id);
         }
     }
     public class Autenticacion : SoapHeader
