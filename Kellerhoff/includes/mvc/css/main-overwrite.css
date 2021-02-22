@@ -404,8 +404,9 @@ color: #66abd8 !important;
     width: 58px !important;
     height: 18px;
     position: absolute;
-    margin-left: 10px;
-    top: 10px;
+    margin-left: -20px;
+    top: 0px;
+    transform: rotate(45deg);
 }
 
 .sidebar-nav li a.nuevo-celu::after {
