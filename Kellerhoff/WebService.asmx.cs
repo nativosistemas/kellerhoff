@@ -5925,6 +5925,17 @@ namespace Kellerhoff
             }
             return resultado;
         }
+
+        public static double ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(string NombreProducto, string NumeroFactura, string pLoginWeb)
+        {
+            double resultado = 0;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+
+                resultado = capaWebServiceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(NumeroFactura, NombreProducto, pLoginWeb);
+            }
+            return resultado;
+        }
         //
         private static cMensaje ConvertToMensajeNewV4(DataRow pItem)
         {

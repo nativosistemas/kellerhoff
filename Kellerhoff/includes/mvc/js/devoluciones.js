@@ -973,6 +973,7 @@ $(document).ready(function () {
             }
             ItemDevolucion.dev_nombreproductofactura = NombreProductoFact;
             ItemDevolucion.dev_numeroitemfactura = objFactura.lista[NroItem].NumeroItem;
+            ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(ItemDevolucion.dev_numerofactura, ItemDevolucion.dev_nombreproductofactura);
             $("#cmbNombreProductoFNE").attr("disabled", "disabled");
             $("#DEVCantFNE").removeClass("hidden");
             campoActual = "txtCantDevolverFNE";
@@ -1011,6 +1012,8 @@ $(document).ready(function () {
                                 }
                                 ItemDevolucion.dev_nombreproductofactura = NombreProductoFact;
                                 ItemDevolucion.dev_numeroitemfactura = objFactura.lista[NroItem].NumeroItem;
+                                ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(ItemDevolucion.dev_numerofactura, ItemDevolucion.dev_nombreproductofactura);
+
                                 $("#cmbNombreProductoFNE").attr("disabled", "disabled");
                                 $("#DEVCantFNE").removeClass("hidden");
                                 campoActual = "txtCantDevolverFNE";
@@ -1108,7 +1111,7 @@ $(document).ready(function () {
                         return false;
                     }
                     LimpiarPrecargaReclamoFNE();
-                    mensaje("<span style='color: green !important;'><i class='fa fa-thumbs-up fa-2x'></i> ÉXITO</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>" + response + "</h5><button type='button' class='btn btn-primary pull-right' style='margin-top:1em;' id='btnGeneradaOkFNE'>ACEPTAR</button>");
+                    mensaje("<span style='color: green !important;'><i class='fa fa-thumbs-up fa-2x'></i> ÉXITO</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>" + response.replace(/X0001/g,'<br>X0001') + "</h5><button type='button' class='btn btn-primary pull-right' style='margin-top:1em;' id='btnGeneradaOkFNE'>ACEPTAR</button>");
                     // $(".fa.fa-times").hide();
                     $("#btnGeneradaOkFNE").click(function () {
                         setTimeout(function () {
@@ -1348,48 +1351,50 @@ function OnCallBackIsBanderaUsarDll_ComprobanteNro(args) {
                 url: "/devoluciones/ObtenerFacturasPorUltimosNumeros",
                 data: { Cbte },
                 success: function (response) {
-                    var cFacturas = eval('(' + response + ')');
-                    if (cFacturas.length > 0) {
-                        //console.log(eval('(' + response + ')'));
-                        if (cFacturas.length == 1) {
-                            Cbte = cFacturas[0].Numero;
-                            //$("#cmbTipoComprobante").val('FAC-' + Cbte.slice(0, 5));
-                            if (campoActual == "txtNroComprobante") {
-                                $("#txtNroComprobante").val(Cbte);
+                    console.log(response);
+                    if (response.length > 0) {
+                        var cFacturas = eval('(' + response + ')');
+                        if (cFacturas.length > 0) {
+                            //console.log(eval('(' + response + ')'));
+                            if (cFacturas.length == 1) {
+                                Cbte = cFacturas[0].Numero;
+                                //$("#cmbTipoComprobante").val('FAC-' + Cbte.slice(0, 5));
+                                if (campoActual == "txtNroComprobante") {
+                                    $("#txtNroComprobante").val(Cbte);
+                                } else {
+                                    $("#txtNroComprobanteFNE").val(Cbte);
+                                }
+                                ObtenerFacturaCliente(Cbte);
                             } else {
-                                $("#txtNroComprobanteFNE").val(Cbte);
-                            }
-                            ObtenerFacturaCliente(Cbte);
-                        } else {
-                            var html = "";
+                                var html = "";
 
-                            for (var i = 0; i < cFacturas.length; i++) {
-                                html += "<li class='msjList' data-NroFactura=" + cFacturas[i].Numero + ">" + cFacturas[i].Numero + "</span></li>";
-                            }
-                            hideCargandoBuscador();
-                            mensaje("Seleccione una Factura", html);
-                            $(".msjList").click(function () {
-                                Cbte = $(this).attr("data-NroFactura");
-                                modalModuloHide();
-                                setTimeout(function () {
-                                    //$("#cmbTipoComprobante").val('FAC-' + Cbte.slice(0, 5));
-                                    if (campoActual == "txtNroComprobante") {
-                                        $("#txtNroComprobante").val(Cbte);
-                                    } else {
-                                        $("#txtNroComprobanteFNE").val(Cbte);
-                                    }
-                                    ObtenerFacturaCliente(Cbte);
-                                }, 100);
+                                for (var i = 0; i < cFacturas.length; i++) {
+                                    html += "<li class='msjList' data-NroFactura=" + cFacturas[i].Numero + ">" + cFacturas[i].Numero + "</span></li>";
+                                }
+                                hideCargandoBuscador();
+                                mensaje("Seleccione una Factura", html);
+                                $(".msjList").click(function () {
+                                    Cbte = $(this).attr("data-NroFactura");
+                                    modalModuloHide();
+                                    setTimeout(function () {
+                                        //$("#cmbTipoComprobante").val('FAC-' + Cbte.slice(0, 5));
+                                        if (campoActual == "txtNroComprobante") {
+                                            $("#txtNroComprobante").val(Cbte);
+                                        } else {
+                                            $("#txtNroComprobanteFNE").val(Cbte);
+                                        }
+                                        ObtenerFacturaCliente(Cbte);
+                                    }, 100);
 
-                            });
-                        }
+                                });
+                            }
+                        } 
                     } else {
                         mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>No se encontraron facturas con la terminación " + nro + ".</h5>");
                         // $(".fa.fa-times").hide();
                         hideCargandoBuscador();
                         return false;
                     }
-
                 }
             })
         } else {
@@ -1480,26 +1485,45 @@ function ObtenerFacturaCliente(pNroFactura) {
 
                 var diff = parseInt((ahora - FechaFactura) / (1000 * 60 * 60 * 24));
                 var fechaOK = false;
-                switch (dia) {
-                    case 6:
-                    case 0:
-                        if (diff <= 13) {
-                            fechaOK = true;
-                        }
-                        break;
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                        if (diff <= 14) {
-                            fechaOK = true;
-                        }
-                        break;
+                if (campoActual == "txtNroComprobanteFNE") {
+                    switch (dia) {
+                        case 6:
+                        case 0:
+                        case 1:
+                        case 2:
+                            if (diff <= 5) {
+                                fechaOK = true;
+                            }
+                            break;
+                        case 3:
+                        case 4:
+                        case 5:
+                            if (diff <= 3) {
+                                fechaOK = true;
+                            }
+                            break;
+                    }
+                } else {
+                    switch (dia) {
+                        case 6:
+                        case 0:
+                            if (diff <= 13) {
+                                fechaOK = true;
+                            }
+                            break;
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                            if (diff <= 14) {
+                                fechaOK = true;
+                            }
+                            break;
+                    }
                 }
-
                 // DESARROLLO -> dejo pasar cualquier factura por fechas
-                fechaOK = true;
+                // fechaOK = true;
                 // DESARROLLO
 
                 if (fechaOK) {
@@ -1594,8 +1618,11 @@ function ObtenerFacturaCliente(pNroFactura) {
                         $("#cmbNombreProductoFNE").focus();
                     }
                 } else {
-                    mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 10 días hábiles de emitida.</h5>");
-                    // $(".fa.fa-times").hide();
+                    if (campoActual == "txtNroComprobanteFNE") {
+                        mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 72 horas hábiles de emitida.</h5>");
+                    } else {
+                        mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no puede tener mas de 10 días hábiles de emitida.</h5>");
+                    }
                 }
             } else {
                 mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>La factura no corresponde</h5>");
@@ -2304,12 +2331,14 @@ function RecuperarReclamosFNEPorCliente() {
             var html = "";
             $("#tblDevoluciones").html("");
             //console.log(response);
-            Devoluciones = eval('(' + response + ')');
-            //console.log(Devoluciones.sort(Devoluciones.dev_estado, -1));
-            //desplegarDevoluciones(Devoluciones);
+            if (response.length > 0) {
+                Devoluciones = eval('(' + response + ')');
+                //console.log(Devoluciones.sort(Devoluciones.dev_estado, -1));
+                //desplegarDevoluciones(Devoluciones);
 
-            if ($("#btn-consultar").length > 0) {
-                reiniciarOrden();
+                if ($("#btn-consultar").length > 0) {
+                    reiniciarOrden();
+                }
             }
         }
     });
@@ -3583,4 +3612,28 @@ function OnCallBackComprobantePDF(args) {
 function funSetarFechaComprobante(pDesde, pHasta) {
     dateComprobanteDesde = new Date(pDesde);
     dateComprobanteHasta = new Date(pHasta);
+}
+
+function ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(NumeroFactura, NombreProducto) {
+    $.ajax({
+        type: "POST",
+        url: "/devoluciones/ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial",
+        data: {
+            NumeroFactura,
+            NombreProducto
+        },
+        success: function (response) {
+            console.log(response);
+
+            if ( response > 0 ) {
+                var msj = "<h5 style='text-align: center; line - height: 1.5em; font - weight: 300; font - size: 16px;'>El Producto " + NombreProducto + " de la factura " + NumeroFactura + " ya posee " + response;
+                if (response == 1) {
+                    msj += " unidad en Solicitud de Facturado No Enviado";
+                } else {
+                    msj += " unidades en Solicitud de Facturado No Enviado";
+                }
+                mensaje("<span style='color: steelblue !important;'><i class='fa fa-exclamation-triangle fa-2x'></i> INFORMACIÓN</span>", msj);
+            }
+        }
+    });
 }

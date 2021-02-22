@@ -827,6 +827,22 @@ namespace Kellerhoff.Codigo.capaDatos
                 return null;
             }
         }
+
+        public static double ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(string pNumeroFactura,string pNombreProducto,  string pLoginWeb)
+        {
+            try
+            {
+                ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
+                double resultado = objServicio.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(pNumeroFactura,pNombreProducto,pLoginWeb);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pNombreProducto, pNumeroFactura, pLoginWeb);
+                return 0;
+            }
+
+        }
     }
 
 

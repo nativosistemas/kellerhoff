@@ -411,6 +411,19 @@ namespace Kellerhoff.Controllers
             }
         }
 
+        public double? ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(string NumeroFactura, string NombreProducto)
+        {
+            long? resultado = null;
+
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                resultado = WebService.ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(NombreProducto, NumeroFactura, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login);
+            }
+
+            return resultado;
+        }
+
     }
+
 
 }
