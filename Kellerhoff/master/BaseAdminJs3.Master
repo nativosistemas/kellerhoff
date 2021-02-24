@@ -88,7 +88,6 @@
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionReCall.aspx" Text="ReCall" />
                             <asp:MenuItem Text="App">
                                 <asp:MenuItem NavigateUrl="~/admin/pages/Laboratorio.aspx" Text="Laboratorio" />
-                                <asp:MenuItem NavigateUrl="~/admin/pages/Modulo.aspx" Text="Modulo" />
                             </asp:MenuItem>
                         </Items>
                     </asp:Menu>

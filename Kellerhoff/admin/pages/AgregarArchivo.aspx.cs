@@ -89,6 +89,10 @@ namespace Kellerhoff.admin.pages
                 Label1.Text = "";
                 Boolean fileOK = false;
                 String path = Constantes.cRaizArchivos + @"\archivos\" + obj.tipo + @"\";
+                if (Directory.Exists(path) == false)
+                {
+                    Directory.CreateDirectory(path);
+                }
                 if (FileUpload1.HasFile)
                 {
                     String fileExtension =
@@ -152,7 +156,7 @@ namespace Kellerhoff.admin.pages
                             case "ofertas":
                                 Response.Redirect("GestionOferta.aspx");
                                 break;
-                            case "app":
+                            case "laboratorio":
                                 Response.Redirect("Laboratorio.aspx");
                                 break;
                             case "slider":

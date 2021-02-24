@@ -347,9 +347,9 @@
                     <tr>
                         <td align="right" class="ftr_firma">Desarrollo&nbsp;&nbsp;&nbsp;</td>
                         <td>
-                            <a style="display: inline-block; width: auto; margin-top: 7px;" class="float-left" href="http://www.nativosistemas.com/" target="_blank" title="Nativo Sistemas">
+                            <a style="display: inline-block; width: auto; margin-top: 7px;" class="float-left" href="http://www.nativosistemas.com.ar/" target="_blank" title="Nativo Sistemas">
                                 <img src="../img/home/logos/nativo.png" height="28px" /></a>
-                            <%-- <a class="nativo" href="http://www.nativosistemas.com/" target="_blank" title="Nativo Sistemas"> </a>--%>
+                            <%-- <a class="nativo" href="http://www.nativosistemas.com.ar/" target="_blank" title="Nativo Sistemas"> </a>--%>
                             
                         </td>
                         <td align="center" class="ftr_firma">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -357,7 +357,7 @@
                         <td><a class="mtz" href="http://mestizosweb.com/" target="_blank" title="Mestizos Comunicaci&oacute;n"></a></td>
                     </tr>
                 </table>
-                <div class="col-xs-12 text-center visible-xs"><a href="http://www.nativosistemas.com/" target="_blank" title="Nativo Sistemas">
+                <div class="col-xs-12 text-center visible-xs"><a href="http://www.nativosistemas.com.ar/" target="_blank" title="Nativo Sistemas">
                     <img src="../img/mvc/logos/nativo.png" style="height: 28px;" /></a></div>
             </div>
         </div>
