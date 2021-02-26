@@ -23,7 +23,7 @@ function OnCallBackGetAll(args) {
                 strHtml += '<td>';
                // strHtml += '<button type="button" class="btn btn-warning" onclick="return Editar(\'' + args[i].id + '\');">Modificar</button>' + '&nbsp;' + '&nbsp;';
                // strHtml += '<button type="button" class="btn btn-danger" onclick="return Elimimar(\'' + args[i].id + '\');">Eliminar</button>' + '&nbsp;' + '&nbsp;';
-                //strHtml += '<button type="button" class="btn btn-info" onclick="return AgregarImagen(\'' + args[i].id + '\');">Imagen</button>' + '&nbsp;' + '&nbsp;';
+                strHtml += '<button type="button" class="btn btn-info" onclick="return AgregarImagen(\'' + args[i].idParaArchivo + '\');">Imagen</button>' + '&nbsp;' + '&nbsp;';
                 //strHtml += '<button type="button" class="btn btn-info" onclick="return AgregarOfertaFolleto(\'' + args[i].ofe_idOferta + '\');">Folleto</button>' + '&nbsp;' + '&nbsp;';
                 //strHtml += '<button type="button" class="btn btn-warning" onclick="return IrVistaPreviaId(\'' + args[i].ofe_idOferta + '\');">Vista Previa</button>';  //
                 strHtml += '</td>';
