@@ -1336,6 +1336,7 @@ $(document).ready(function () {
 });
 
 function OnCallBackIsBanderaUsarDll_ComprobanteNro(args) {
+    args = true;
     if (args) {
         showCargandoBuscador();
         
@@ -1485,23 +1486,94 @@ function ObtenerFacturaCliente(pNroFactura) {
 
                 var diff = parseInt((ahora - FechaFactura) / (1000 * 60 * 60 * 24));
                 var fechaOK = false;
+                ItemDevolucion.dev_numerofactura = objFactura.Numero;
                 if (campoActual == "txtNroComprobanteFNE") {
-                    switch (dia) {
-                        case 6:
-                        case 0:
-                        case 1:
-                        case 2:
-                            if (diff <= 5) {
-                                fechaOK = true;
-                            }
+                    var IdSucCli = $("#txtIdSucursalCliente").val().trim();
+                    switch (ItemDevolucion.dev_numerofactura.slice(1, 5)) {
+                        case "0001":
+                        case "0013":
+                        case "0021":
+                        case "0022":
+                            ItemDevolucion.dev_idsucursal = "CC";
                             break;
-                        case 3:
-                        case 4:
-                        case 5:
-                            if (diff <= 3) {
-                                fechaOK = true;
-                            }
+                        case "0006":
+                        case "0015":
+                            ItemDevolucion.dev_idsucursal = "CH";
                             break;
+                        case "0012":
+                        case "0018":
+                            ItemDevolucion.dev_idsucursal = "CB";
+                            break;
+                        case "0010":
+                        case "0017":
+                            ItemDevolucion.dev_idsucursal = "CD";
+                            break;
+                        case "0003":
+                        case "0014":
+                            ItemDevolucion.dev_idsucursal = "CO";
+                            break;
+                        case "0035":
+                        case "0036":
+                            ItemDevolucion.dev_idsucursal = "RC";
+                            break;
+                        case "0007":
+                        case "0016":
+                            ItemDevolucion.dev_idsucursal = "SF";
+                            break;
+                        case "0023":
+                        case "0024":
+                            ItemDevolucion.dev_idsucursal = "SN";
+                            break;
+                        case "0019":
+                        case "0020":
+                            ItemDevolucion.dev_idsucursal = "VH";
+                            break;
+                        case "0032":
+                        case "0033":
+                            ItemDevolucion.dev_idsucursal = "VM";
+                            break;
+                    }
+
+                    if (ItemDevolucion.dev_idsucursal == "CC" && IdSucCli != "CC" ) {
+                        switch (dia) {
+                            case 1:
+                                if (diff <= 10) {
+                                    fechaOK = true;
+                                }
+                                break;
+                            case 0:
+                                if (diff <= 9) {
+                                    fechaOK = true;
+                                }
+                                break;
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                                if (diff <= 8) {
+                                    fechaOK = true;
+                                }
+                                break;
+                        }
+                    } else {
+                        switch (dia) {
+                            case 6:
+                            case 0:
+                            case 1:
+                            case 2:
+                                if (diff <= 5) {
+                                    fechaOK = true;
+                                }
+                                break;
+                            case 3:
+                            case 4:
+                            case 5:
+                                if (diff <= 3) {
+                                    fechaOK = true;
+                                }
+                                break;
+                        }
                     }
                 } else {
                     switch (dia) {
@@ -1522,9 +1594,9 @@ function ObtenerFacturaCliente(pNroFactura) {
                             break;
                     }
                 }
-                // DESARROLLO -> dejo pasar cualquier factura por fechas
-                // fechaOK = true;
-                // DESARROLLO
+                 //DESARROLLO -> dejo pasar cualquier factura por fechas
+                 //fechaOK = true;
+                 //DESARROLLO
 
                 if (fechaOK) {
                     var html = "";
@@ -1565,50 +1637,7 @@ function ObtenerFacturaCliente(pNroFactura) {
                             $("#cmbNombreProducto").focus();
                         }
                     } else {
-                        switch (ItemDevolucion.dev_numerofactura.slice(1,5)) {
-                            case "0001":
-                            case "0013":
-                            case "0021":
-                            case "0022":
-                                ItemDevolucion.dev_idsucursal = "CC";
-                                break;
-                            case "0006":
-                            case "0015":
-                                ItemDevolucion.dev_idsucursal = "CH";
-                                break;
-                            case "0012":
-                            case "0018":
-                                ItemDevolucion.dev_idsucursal = "CB";
-                                break;
-                            case "0010":
-                            case "0017":
-                                ItemDevolucion.dev_idsucursal = "CD";
-                                break;
-                            case "0003":
-                            case "0014":
-                                ItemDevolucion.dev_idsucursal = "CO";
-                                break;
-                            case "0035":
-                            case "0036":
-                                ItemDevolucion.dev_idsucursal = "RC";
-                                break;
-                            case "0007":
-                            case "0016":
-                                ItemDevolucion.dev_idsucursal = "SF";
-                                break;
-                            case "0023":
-                            case "0024":
-                                ItemDevolucion.dev_idsucursal = "SN";
-                                break;
-                            case "0019":
-                            case "0020":
-                                ItemDevolucion.dev_idsucursal = "VH";
-                                break;
-                            case "0032":
-                            case "0033":
-                                ItemDevolucion.dev_idsucursal = "VM";
-                                break;
-                        }
+                        
                         $("#txtNroComprobanteFNE").attr("disabled", "disabled");
                         $("#NombreProductoValuesFNE").html(html);
                         $("#DEVFacturaFNE").removeClass("hidden");
@@ -2054,7 +2083,7 @@ function RecuperarItemsDevolucionPrecargaPorCliente() {
             var html = "";
             $("#tblDevolucion").html("");
             ItemsPrecargados = eval('(' + response + ')');
-
+            console.log(ItemsPrecargados);
             if (ItemsPrecargados.length > 0) {
                 for (i = 0; i < ItemsPrecargados.length; i++) {
                     if (ItemsPrecargados[i].dev_fechavencimientoloteToString != null) {
