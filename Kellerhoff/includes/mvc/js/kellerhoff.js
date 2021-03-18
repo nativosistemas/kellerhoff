@@ -305,6 +305,9 @@ function isDetalleComprobante(pValor) {
         case "OSC":
             return true;
             break;
+        case "REC":
+            return true;
+            break;
         default:
             return false;
             break;
