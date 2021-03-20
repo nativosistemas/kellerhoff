@@ -668,6 +668,20 @@ namespace Kellerhoff.Codigo.capaDatos
                 return null;
             }
         }
+        public static ServiceReferenceDLL.cRecibo ObtenerRecibo(string pNumeroDoc, string pLoginWeb)
+        {
+            try
+            {
+                ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
+                ServiceReferenceDLL.cRecibo resultado = objServicio.ObtenerRecibo(pNumeroDoc, pLoginWeb);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                FuncionesPersonalizadas.grabarLog(MethodBase.GetCurrentMethod(), ex, DateTime.Now, pNumeroDoc, pLoginWeb);
+                return null;
+            }
+        }
         public static List<ServiceReferenceDLL.cResumen> ObtenerUltimos10ResumenesDePuntoDeVenta(string pLoginWeb)
         {
             try

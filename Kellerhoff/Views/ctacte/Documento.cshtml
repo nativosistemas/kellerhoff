@@ -35,6 +35,9 @@
                 case "OSC":
                     resultadoObj = WebService.ObtenerObraSocialCliente(Session["clientes_pages_Documento_ID"].ToString(), ((Kellerhoff.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
                     break;
+                case "REC":
+                    resultadoObj = WebService.ObtenerRecibo(Session["clientes_pages_Documento_ID"].ToString(), ((Kellerhoff.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
+                    break;
                 default:
                     break;
             }

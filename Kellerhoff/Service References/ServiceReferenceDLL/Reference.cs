@@ -2869,6 +2869,9 @@ namespace Kellerhoff.ServiceReferenceDLL {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TipoComprobanteToStringField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Kellerhoff.ServiceReferenceDLL.ArrayOfCVencimientoResumen listaField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -3083,6 +3086,164 @@ namespace Kellerhoff.ServiceReferenceDLL {
                 if ((object.ReferenceEquals(this.TipoComprobanteToStringField, value) != true)) {
                     this.TipoComprobanteToStringField = value;
                     this.RaisePropertyChanged("TipoComprobanteToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCVencimientoResumen lista {
+            get {
+                return this.listaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.listaField, value) != true)) {
+                    this.listaField = value;
+                    this.RaisePropertyChanged("lista");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ArrayOfCVencimientoResumen", Namespace="http://tempuri.org/", ItemName="cVencimientoResumen")]
+    [System.SerializableAttribute()]
+    public class ArrayOfCVencimientoResumen : System.Collections.Generic.List<Kellerhoff.ServiceReferenceDLL.cVencimientoResumen> {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="cVencimientoResumen", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class cVencimientoResumen : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TipoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NumeroComprobanteField;
+        
+        private System.Nullable<System.DateTime> FechaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FechaToStringField;
+        
+        private System.Nullable<System.DateTime> FechaVencimientoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FechaVencimientoToStringField;
+        
+        private System.Nullable<double> ImporteField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Tipo {
+            get {
+                return this.TipoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TipoField, value) != true)) {
+                    this.TipoField = value;
+                    this.RaisePropertyChanged("Tipo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string NumeroComprobante {
+            get {
+                return this.NumeroComprobanteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumeroComprobanteField, value) != true)) {
+                    this.NumeroComprobanteField = value;
+                    this.RaisePropertyChanged("NumeroComprobante");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public System.Nullable<System.DateTime> Fecha {
+            get {
+                return this.FechaField;
+            }
+            set {
+                if ((this.FechaField.Equals(value) != true)) {
+                    this.FechaField = value;
+                    this.RaisePropertyChanged("Fecha");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string FechaToString {
+            get {
+                return this.FechaToStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechaToStringField, value) != true)) {
+                    this.FechaToStringField = value;
+                    this.RaisePropertyChanged("FechaToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        public System.Nullable<System.DateTime> FechaVencimiento {
+            get {
+                return this.FechaVencimientoField;
+            }
+            set {
+                if ((this.FechaVencimientoField.Equals(value) != true)) {
+                    this.FechaVencimientoField = value;
+                    this.RaisePropertyChanged("FechaVencimiento");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string FechaVencimientoToString {
+            get {
+                return this.FechaVencimientoToStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechaVencimientoToStringField, value) != true)) {
+                    this.FechaVencimientoToStringField = value;
+                    this.RaisePropertyChanged("FechaVencimientoToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        public System.Nullable<double> Importe {
+            get {
+                return this.ImporteField;
+            }
+            set {
+                if ((this.ImporteField.Equals(value) != true)) {
+                    this.ImporteField = value;
+                    this.RaisePropertyChanged("Importe");
                 }
             }
         }
@@ -5213,37 +5374,63 @@ namespace Kellerhoff.ServiceReferenceDLL {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ArrayOfCVencimientoResumen", Namespace="http://tempuri.org/", ItemName="cVencimientoResumen")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="cRecibo", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
-    public class ArrayOfCVencimientoResumen : System.Collections.Generic.List<Kellerhoff.ServiceReferenceDLL.cVencimientoResumen> {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="cVencimientoResumen", Namespace="http://tempuri.org/")]
-    [System.SerializableAttribute()]
-    public partial class cVencimientoResumen : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class cRecibo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TipoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NumeroComprobanteField;
+        private string NumeroField;
         
         private System.Nullable<System.DateTime> FechaField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FechaToStringField;
         
-        private System.Nullable<System.DateTime> FechaVencimientoField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FechaAnulacionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FechaVencimientoToStringField;
+        private string DestinatarioField;
         
-        private System.Nullable<double> ImporteField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DireccionDestinatarioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LocalidadDestinatarioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CondicionIVADestinatarioToStringField;
+        
+        private double CuitDestinatarioField;
+        
+        private int NumeroClienteField;
+        
+        private int NumeroCuentaCorrienteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TipoEnvioToStringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodigoRepartoField;
+        
+        private decimal MontoTotalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MontoTOTALenLetrasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CantidadHojasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MontoEnDolaresField;
+        
+        private bool ComprobantePAMIField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Kellerhoff.ServiceReferenceDLL.ArrayOfCReciboDetalle listaField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -5256,32 +5443,19 @@ namespace Kellerhoff.ServiceReferenceDLL {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string Tipo {
+        public string Numero {
             get {
-                return this.TipoField;
+                return this.NumeroField;
             }
             set {
-                if ((object.ReferenceEquals(this.TipoField, value) != true)) {
-                    this.TipoField = value;
-                    this.RaisePropertyChanged("Tipo");
+                if ((object.ReferenceEquals(this.NumeroField, value) != true)) {
+                    this.NumeroField = value;
+                    this.RaisePropertyChanged("Numero");
                 }
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string NumeroComprobante {
-            get {
-                return this.NumeroComprobanteField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NumeroComprobanteField, value) != true)) {
-                    this.NumeroComprobanteField = value;
-                    this.RaisePropertyChanged("NumeroComprobante");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
         public System.Nullable<System.DateTime> Fecha {
             get {
                 return this.FechaField;
@@ -5294,7 +5468,7 @@ namespace Kellerhoff.ServiceReferenceDLL {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
         public string FechaToString {
             get {
                 return this.FechaToStringField;
@@ -5307,41 +5481,341 @@ namespace Kellerhoff.ServiceReferenceDLL {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
-        public System.Nullable<System.DateTime> FechaVencimiento {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string FechaAnulacion {
             get {
-                return this.FechaVencimientoField;
+                return this.FechaAnulacionField;
             }
             set {
-                if ((this.FechaVencimientoField.Equals(value) != true)) {
-                    this.FechaVencimientoField = value;
-                    this.RaisePropertyChanged("FechaVencimiento");
+                if ((object.ReferenceEquals(this.FechaAnulacionField, value) != true)) {
+                    this.FechaAnulacionField = value;
+                    this.RaisePropertyChanged("FechaAnulacion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Destinatario {
+            get {
+                return this.DestinatarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DestinatarioField, value) != true)) {
+                    this.DestinatarioField = value;
+                    this.RaisePropertyChanged("Destinatario");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
-        public string FechaVencimientoToString {
+        public string DireccionDestinatario {
             get {
-                return this.FechaVencimientoToStringField;
+                return this.DireccionDestinatarioField;
             }
             set {
-                if ((object.ReferenceEquals(this.FechaVencimientoToStringField, value) != true)) {
-                    this.FechaVencimientoToStringField = value;
-                    this.RaisePropertyChanged("FechaVencimientoToString");
+                if ((object.ReferenceEquals(this.DireccionDestinatarioField, value) != true)) {
+                    this.DireccionDestinatarioField = value;
+                    this.RaisePropertyChanged("DireccionDestinatario");
                 }
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
-        public System.Nullable<double> Importe {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string LocalidadDestinatario {
+            get {
+                return this.LocalidadDestinatarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LocalidadDestinatarioField, value) != true)) {
+                    this.LocalidadDestinatarioField = value;
+                    this.RaisePropertyChanged("LocalidadDestinatario");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string CondicionIVADestinatarioToString {
+            get {
+                return this.CondicionIVADestinatarioToStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CondicionIVADestinatarioToStringField, value) != true)) {
+                    this.CondicionIVADestinatarioToStringField = value;
+                    this.RaisePropertyChanged("CondicionIVADestinatarioToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=8)]
+        public double CuitDestinatario {
+            get {
+                return this.CuitDestinatarioField;
+            }
+            set {
+                if ((this.CuitDestinatarioField.Equals(value) != true)) {
+                    this.CuitDestinatarioField = value;
+                    this.RaisePropertyChanged("CuitDestinatario");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
+        public int NumeroCliente {
+            get {
+                return this.NumeroClienteField;
+            }
+            set {
+                if ((this.NumeroClienteField.Equals(value) != true)) {
+                    this.NumeroClienteField = value;
+                    this.RaisePropertyChanged("NumeroCliente");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
+        public int NumeroCuentaCorriente {
+            get {
+                return this.NumeroCuentaCorrienteField;
+            }
+            set {
+                if ((this.NumeroCuentaCorrienteField.Equals(value) != true)) {
+                    this.NumeroCuentaCorrienteField = value;
+                    this.RaisePropertyChanged("NumeroCuentaCorriente");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
+        public string TipoEnvioToString {
+            get {
+                return this.TipoEnvioToStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TipoEnvioToStringField, value) != true)) {
+                    this.TipoEnvioToStringField = value;
+                    this.RaisePropertyChanged("TipoEnvioToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
+        public string CodigoReparto {
+            get {
+                return this.CodigoRepartoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodigoRepartoField, value) != true)) {
+                    this.CodigoRepartoField = value;
+                    this.RaisePropertyChanged("CodigoReparto");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=13)]
+        public decimal MontoTotal {
+            get {
+                return this.MontoTotalField;
+            }
+            set {
+                if ((this.MontoTotalField.Equals(value) != true)) {
+                    this.MontoTotalField = value;
+                    this.RaisePropertyChanged("MontoTotal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        public string MontoTOTALenLetras {
+            get {
+                return this.MontoTOTALenLetrasField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MontoTOTALenLetrasField, value) != true)) {
+                    this.MontoTOTALenLetrasField = value;
+                    this.RaisePropertyChanged("MontoTOTALenLetras");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
+        public string CantidadHojas {
+            get {
+                return this.CantidadHojasField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CantidadHojasField, value) != true)) {
+                    this.CantidadHojasField = value;
+                    this.RaisePropertyChanged("CantidadHojas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
+        public string MontoEnDolares {
+            get {
+                return this.MontoEnDolaresField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MontoEnDolaresField, value) != true)) {
+                    this.MontoEnDolaresField = value;
+                    this.RaisePropertyChanged("MontoEnDolares");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=17)]
+        public bool ComprobantePAMI {
+            get {
+                return this.ComprobantePAMIField;
+            }
+            set {
+                if ((this.ComprobantePAMIField.Equals(value) != true)) {
+                    this.ComprobantePAMIField = value;
+                    this.RaisePropertyChanged("ComprobantePAMI");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=18)]
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCReciboDetalle lista {
+            get {
+                return this.listaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.listaField, value) != true)) {
+                    this.listaField = value;
+                    this.RaisePropertyChanged("lista");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ArrayOfCReciboDetalle", Namespace="http://tempuri.org/", ItemName="cReciboDetalle")]
+    [System.SerializableAttribute()]
+    public class ArrayOfCReciboDetalle : System.Collections.Generic.List<Kellerhoff.ServiceReferenceDLL.cReciboDetalle> {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="cReciboDetalle", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class cReciboDetalle : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NumeroReciboField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NumeroHojaField;
+        
+        private int NumeroItemField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescripcionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ImporteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string NumeroRecibo {
+            get {
+                return this.NumeroReciboField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumeroReciboField, value) != true)) {
+                    this.NumeroReciboField = value;
+                    this.RaisePropertyChanged("NumeroRecibo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string NumeroHoja {
+            get {
+                return this.NumeroHojaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumeroHojaField, value) != true)) {
+                    this.NumeroHojaField = value;
+                    this.RaisePropertyChanged("NumeroHoja");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public int NumeroItem {
+            get {
+                return this.NumeroItemField;
+            }
+            set {
+                if ((this.NumeroItemField.Equals(value) != true)) {
+                    this.NumeroItemField = value;
+                    this.RaisePropertyChanged("NumeroItem");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Descripcion {
+            get {
+                return this.DescripcionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescripcionField, value) != true)) {
+                    this.DescripcionField = value;
+                    this.RaisePropertyChanged("Descripcion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Importe {
             get {
                 return this.ImporteField;
             }
             set {
-                if ((this.ImporteField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.ImporteField, value) != true)) {
                     this.ImporteField = value;
                     this.RaisePropertyChanged("Importe");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IDField, value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
                 }
             }
         }
@@ -5359,6 +5833,13 @@ namespace Kellerhoff.ServiceReferenceDLL {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceDLL.ServiceSoap")]
     public interface ServiceSoap {
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento HelloWorldResult del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.HelloWorldResponse HelloWorld(Kellerhoff.ServiceReferenceDLL.HelloWorldRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.HelloWorldResponse> HelloWorldAsync(Kellerhoff.ServiceReferenceDLL.HelloWorldRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento pNombre del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Login", ReplyAction="*")]
@@ -5492,6 +5973,12 @@ namespace Kellerhoff.ServiceReferenceDLL {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldoResumenAbierto", ReplyAction="*")]
         System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerSaldoResumenAbiertoResponse> ObtenerSaldoResumenAbiertoAsync(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoResumenAbiertoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldosPresentacionParaComposicion_Prueba", ReplyAction="*")]
+        void ObtenerSaldosPresentacionParaComposicion_Prueba();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldosPresentacionParaComposicion_Prueba", ReplyAction="*")]
+        System.Threading.Tasks.Task ObtenerSaldosPresentacionParaComposicion_PruebaAsync();
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento pLoginWeb del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldosPresentacionParaComposicion", ReplyAction="*")]
@@ -5742,6 +6229,81 @@ namespace Kellerhoff.ServiceReferenceDLL {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObj" +
             "etoComercial", ReplyAction="*")]
         System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse> ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialAsync(Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento ObtenerRecibo_PruebaResult del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerRecibo_Prueba", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse ObtenerRecibo_Prueba(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerRecibo_Prueba", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse> ObtenerRecibo_PruebaAsync(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento pNumeroDoc del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerRecibo", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse ObtenerRecibo(Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerRecibo", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse> ObtenerReciboAsync(Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class HelloWorldRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="HelloWorld", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.HelloWorldRequestBody Body;
+        
+        public HelloWorldRequest() {
+        }
+        
+        public HelloWorldRequest(Kellerhoff.ServiceReferenceDLL.HelloWorldRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class HelloWorldRequestBody {
+        
+        public HelloWorldRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class HelloWorldResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="HelloWorldResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.HelloWorldResponseBody Body;
+        
+        public HelloWorldResponse() {
+        }
+        
+        public HelloWorldResponse(Kellerhoff.ServiceReferenceDLL.HelloWorldResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class HelloWorldResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string HelloWorldResult;
+        
+        public HelloWorldResponseBody() {
+        }
+        
+        public HelloWorldResponseBody(string HelloWorldResult) {
+            this.HelloWorldResult = HelloWorldResult;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -9646,6 +10208,139 @@ namespace Kellerhoff.ServiceReferenceDLL {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerRecibo_PruebaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerRecibo_Prueba", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequestBody Body;
+        
+        public ObtenerRecibo_PruebaRequest() {
+        }
+        
+        public ObtenerRecibo_PruebaRequest(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class ObtenerRecibo_PruebaRequestBody {
+        
+        public ObtenerRecibo_PruebaRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerRecibo_PruebaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerRecibo_PruebaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponseBody Body;
+        
+        public ObtenerRecibo_PruebaResponse() {
+        }
+        
+        public ObtenerRecibo_PruebaResponse(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerRecibo_PruebaResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string ObtenerRecibo_PruebaResult;
+        
+        public ObtenerRecibo_PruebaResponseBody() {
+        }
+        
+        public ObtenerRecibo_PruebaResponseBody(string ObtenerRecibo_PruebaResult) {
+            this.ObtenerRecibo_PruebaResult = ObtenerRecibo_PruebaResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerReciboRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerRecibo", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequestBody Body;
+        
+        public ObtenerReciboRequest() {
+        }
+        
+        public ObtenerReciboRequest(Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerReciboRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string pNumeroDoc;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string pLoginWeb;
+        
+        public ObtenerReciboRequestBody() {
+        }
+        
+        public ObtenerReciboRequestBody(string pNumeroDoc, string pLoginWeb) {
+            this.pNumeroDoc = pNumeroDoc;
+            this.pLoginWeb = pLoginWeb;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerReciboResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerReciboResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponseBody Body;
+        
+        public ObtenerReciboResponse() {
+        }
+        
+        public ObtenerReciboResponse(Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerReciboResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.cRecibo ObtenerReciboResult;
+        
+        public ObtenerReciboResponseBody() {
+        }
+        
+        public ObtenerReciboResponseBody(Kellerhoff.ServiceReferenceDLL.cRecibo ObtenerReciboResult) {
+            this.ObtenerReciboResult = ObtenerReciboResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ServiceSoapChannel : Kellerhoff.ServiceReferenceDLL.ServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -9671,6 +10366,29 @@ namespace Kellerhoff.ServiceReferenceDLL {
         
         public ServiceSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.HelloWorldResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.HelloWorld(Kellerhoff.ServiceReferenceDLL.HelloWorldRequest request) {
+            return base.Channel.HelloWorld(request);
+        }
+        
+        public string HelloWorld() {
+            Kellerhoff.ServiceReferenceDLL.HelloWorldRequest inValue = new Kellerhoff.ServiceReferenceDLL.HelloWorldRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.HelloWorldRequestBody();
+            Kellerhoff.ServiceReferenceDLL.HelloWorldResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).HelloWorld(inValue);
+            return retVal.Body.HelloWorldResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.HelloWorldResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.HelloWorldAsync(Kellerhoff.ServiceReferenceDLL.HelloWorldRequest request) {
+            return base.Channel.HelloWorldAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.HelloWorldResponse> HelloWorldAsync() {
+            Kellerhoff.ServiceReferenceDLL.HelloWorldRequest inValue = new Kellerhoff.ServiceReferenceDLL.HelloWorldRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.HelloWorldRequestBody();
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).HelloWorldAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -10196,6 +10914,14 @@ namespace Kellerhoff.ServiceReferenceDLL {
             inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerSaldoResumenAbiertoRequestBody();
             inValue.Body.pLoginWeb = pLoginWeb;
             return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerSaldoResumenAbiertoAsync(inValue);
+        }
+        
+        public void ObtenerSaldosPresentacionParaComposicion_Prueba() {
+            base.Channel.ObtenerSaldosPresentacionParaComposicion_Prueba();
+        }
+        
+        public System.Threading.Tasks.Task ObtenerSaldosPresentacionParaComposicion_PruebaAsync() {
+            return base.Channel.ObtenerSaldosPresentacionParaComposicion_PruebaAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -11164,6 +11890,56 @@ namespace Kellerhoff.ServiceReferenceDLL {
             inValue.Body.ObjetoComercial = ObjetoComercial;
             inValue.Body.LoginWeb = LoginWeb;
             return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerRecibo_Prueba(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest request) {
+            return base.Channel.ObtenerRecibo_Prueba(request);
+        }
+        
+        public string ObtenerRecibo_Prueba() {
+            Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequestBody();
+            Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerRecibo_Prueba(inValue);
+            return retVal.Body.ObtenerRecibo_PruebaResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerRecibo_PruebaAsync(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest request) {
+            return base.Channel.ObtenerRecibo_PruebaAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse> ObtenerRecibo_PruebaAsync() {
+            Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequestBody();
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerRecibo_PruebaAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerRecibo(Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest request) {
+            return base.Channel.ObtenerRecibo(request);
+        }
+        
+        public Kellerhoff.ServiceReferenceDLL.cRecibo ObtenerRecibo(string pNumeroDoc, string pLoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequestBody();
+            inValue.Body.pNumeroDoc = pNumeroDoc;
+            inValue.Body.pLoginWeb = pLoginWeb;
+            Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerRecibo(inValue);
+            return retVal.Body.ObtenerReciboResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerReciboAsync(Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest request) {
+            return base.Channel.ObtenerReciboAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse> ObtenerReciboAsync(string pNumeroDoc, string pLoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequestBody();
+            inValue.Body.pNumeroDoc = pNumeroDoc;
+            inValue.Body.pLoginWeb = pLoginWeb;
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerReciboAsync(inValue);
         }
     }
 }
