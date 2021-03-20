@@ -1111,7 +1111,11 @@ function CargarHtmlRecibo() {
                 strHtml += objDocumento.lista[i].Descripcion;
                 strHtml += '</td>';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center">';
-                strHtml += objDocumento.lista[i].Importe;
+                var strImporte = '&nbsp;';
+                if (isNotNullEmpty(objDocumento.lista[i].Importe)) {
+                    strImporte = '$&nbsp;' + FormatoDecimalConDivisorMiles(parseFloat(objDocumento.lista[i].Importe.replace(",", ".")).toFixed(2));
+                }
+                strHtml += strImporte;//objDocumento.lista[i].Importe;
                 strHtml += '</td>';
                 strHtml += '</tr>';
                 strDocumentoNumero = objDocumento.lista[i].NumeroObraSocialCliente;
@@ -1128,11 +1132,11 @@ function CargarHtmlRecibo() {
         $('#divContenedorDocumento').html(strHtml);
         //
         var httpRaiz = $('#hiddenRaiz').val();
-        var strHtmlDescarga = '';
+        //var strHtmlDescarga = '';
 
-        strHtmlDescarga += '<a class="btn_download float-right" href="' + httpRaiz + 'servicios/generar_archivoPdf.aspx?tipo=' + objTipoDocumento + '&nro=' + strDocumentoNumero + '"  onclick="return funImprimirComprobantePdf(' + '\'' + strDocumentoNumero + '\'' + ');"  data-toggle="tooltip" data-placement="bottom" title="Descargar en pdf" data-original-title="Descargar en pdf">PDF</a>';
-        strHtmlDescarga += '<div class="float-right pad_7 hidden-xs">Descargas:</div>';
-        $('#divContenedorDocumentoDescarga').append(strHtmlDescarga);
+        //strHtmlDescarga += '<a class="btn_download float-right" href="' + httpRaiz + 'servicios/generar_archivoPdf.aspx?tipo=' + objTipoDocumento + '&nro=' + strDocumentoNumero + '"  onclick="return funImprimirComprobantePdf(' + '\'' + strDocumentoNumero + '\'' + ');"  data-toggle="tooltip" data-placement="bottom" title="Descargar en pdf" data-original-title="Descargar en pdf">PDF</a>';
+        //strHtmlDescarga += '<div class="float-right pad_7 hidden-xs">Descargas:</div>';
+        //$('#divContenedorDocumentoDescarga').append(strHtmlDescarga);
 
     } else {
         strHtml += '<table class="footable table table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="1" cellpadding="5" border="0">';
