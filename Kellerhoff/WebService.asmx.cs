@@ -4951,6 +4951,15 @@ namespace Kellerhoff
             }
             return resultado;
         }
+        public static ServiceReferenceDLL.cRecibo ObtenerRecibo(string pNumeroDoc, string pLoginWeb)
+        {
+            ServiceReferenceDLL.cRecibo resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerRecibo(pNumeroDoc, pLoginWeb);
+            }
+            return resultado;
+        }
         //public static List<ServiceReferenceDLL.cObraSocialClienteItem> ObtenerItemsDeObraSocialCliente(string pNumeroObraSocialCliente)
         //{
         //    List<ServiceReferenceDLL.cObraSocialClienteItem> resultado = null;

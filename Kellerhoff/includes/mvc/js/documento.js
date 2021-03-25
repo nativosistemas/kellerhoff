@@ -71,7 +71,10 @@ jQuery(document).ready(function () {
                 $('#divTituloDocumento').html('Obra Social');
                 CargarHtmlObraSocialCliente();
                 break;
-
+            case 'REC':
+                $('#divTituloDocumento').html('Recibo');
+                CargarHtmlRecibo();
+                break;
             default:
                 break;
         }
@@ -1051,7 +1054,100 @@ function MostrarVencimientos(cVencimientosResumen) {
     // $(".fa.fa-times").hide();
     //$("#modalModulo").unbind("click");
 }
+//function CargarHtmlCabeceraRecibo(objDocumento) {
+//    var strHtml = '';
 
+//    strHtml += '<div class="div_cont_ctacte">';
+//    strHtml += '<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 doc_info"><span>Número:</span>' + getParameterByName('id') + '</div>';
+//    strHtml += '<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 doc_info"><span>Fecha:</span>' + objDocumento.FechaToString + '</div>';
+//    var strMontoTotal = '&nbsp;';
+//    if (isNotNullEmpty(objDocumento.MontoTotal)) {
+//        strMontoTotal = '$&nbsp;' + FormatoDecimalConDivisorMiles(objDocumento.MontoTotal.toFixed(2));
+//    }
+//    strHtml += '<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 doc_info"><span>Total:</span>' + strMontoTotal + '</div>';
+//    strHtml += '<div class="clear10 visible-lg"></div>';
+//    strHtml += '<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 doc_info"><span>Nombre Plan:</span>' + objDocumento.NombrePlan + '</div>';
+//    strHtml += '<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 doc_info"><span>Número Planilla:</span>' + objDocumento.NumeroPlanilla + '</div>';
+//    strHtml += '<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 doc_info"><span>Destinatario:</span>' + objDocumento.Destinatario + '</div>';
+//    strHtml += '<div class="clear0"></div>';
+//    strHtml += '</div>';
+//    return strHtml;
+//}
+function CargarHtmlRecibo() {
+    if (objDocumento != null) {
+        var strHtml = '';
+
+       // $('#divContenedorDocumentoCabecera').append(CargarHtmlCabeceraRecibo(objDocumento));
+        $('#divContenedorDocumentoCabecera').append(CargarHtmlCabecera_Generico(objDocumento)); 
+
+        strHtml += '<table class="footable table tbl_ch table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="1" cellpadding="5" border="0">';
+        strHtml += '<thead>';
+        strHtml += '<tr>';
+        strHtml += '<tr>';
+        strHtml += '<th class="col-lg-9 col-md-9 col-sm-9 col-xs-9 text-center no-padding">';
+        strHtml += '<table  width="100%" cellpadding="0" cellspacing="0">';
+        strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+        strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Descripcion</td></tr>';
+        strHtml += '</table>';
+        strHtml += '</th>';
+        strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+        strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+        strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+        strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Importe</td></tr>';
+        strHtml += '</table>';
+        strHtml += '</th>';
+        strHtml += '</tr>';
+        strHtml += '</thead>';
+        strHtml += '<tbody>';
+        var strDocumentoNumero = '';
+        if (objDocumento.lista != null) {
+            for (var i = 0; i < objDocumento.lista.length; i++) {
+                var strHtmlColorFondo = 'wht';
+                if (i % 2 != 0) {
+                    strHtmlColorFondo = 'grs';
+                }
+                strHtml += '<tr class="' + strHtmlColorFondo + '">';
+                strHtml += '<td class="col-lg-9 col-md-9 col-sm-9 col-xs-9 text-left">';
+                strHtml += objDocumento.lista[i].Descripcion;
+                strHtml += '</td>';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 text-center">';
+                var strImporte = '&nbsp;';
+                if (isNotNullEmpty(objDocumento.lista[i].Importe)) {
+                    strImporte = '$&nbsp;' + FormatoDecimalConDivisorMiles(parseFloat(objDocumento.lista[i].Importe.replace(",", ".")).toFixed(2));
+                }
+                strHtml += strImporte;//objDocumento.lista[i].Importe;
+                strHtml += '</td>';
+                strHtml += '</tr>';
+                strDocumentoNumero = objDocumento.lista[i].NumeroObraSocialCliente;
+            }
+        }
+        strHtml += '</tbody>';
+        strHtml += '</table>';
+
+        if (objDocumento.lista != null) {
+            if (objDocumento.lista.length > cantFilaParaEnCabezado) {
+                strHtml += '<a class="btn_volver float-left" href="#" onclick="volver(); return false;"><i class="fa fa-play"></i> VOLVER</a>';
+            }
+        }
+        $('#divContenedorDocumento').html(strHtml);
+        //
+        var httpRaiz = $('#hiddenRaiz').val();
+        //var strHtmlDescarga = '';
+
+        //strHtmlDescarga += '<a class="btn_download float-right" href="' + httpRaiz + 'servicios/generar_archivoPdf.aspx?tipo=' + objTipoDocumento + '&nro=' + strDocumentoNumero + '"  onclick="return funImprimirComprobantePdf(' + '\'' + strDocumentoNumero + '\'' + ');"  data-toggle="tooltip" data-placement="bottom" title="Descargar en pdf" data-original-title="Descargar en pdf">PDF</a>';
+        //strHtmlDescarga += '<div class="float-right pad_7 hidden-xs">Descargas:</div>';
+        //$('#divContenedorDocumentoDescarga').append(strHtmlDescarga);
+
+    } else {
+        strHtml += '<table class="footable table table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="1" cellpadding="5" border="0">';
+        strHtml += '<tbody>';
+        strHtml += '<tr><td  class="text-center"><p class="color_red">' + objMensajeNoEncontrado + '</p></td></tr>';
+        strHtml += '</tbody>';
+        strHtml += '</table>';
+        $('#divContenedorDocumento').html(strHtml);
+    }
+    $('.footable').footable();
+}
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
