@@ -656,19 +656,7 @@ namespace Kellerhoff.Codigo.capaDatos
         }
         public static string obtenerStringEstado(int pIdEstado)
         {
-            string resultado = string.Empty;
-            switch (pIdEstado.ToString())
-            {
-                case "1":
-                    return Constantes.cESTADO_STRING_SINESTADO;
-                case "2":
-                    return Constantes.cESTADO_STRING_ACTIVO;
-                case "3":
-                    return Constantes.cESTADO_STRING_INACTIVO;
-                default:
-                    break;
-            }
-            return resultado;
+            return DKbase.web.capaDatos.capaSeguridad.obtenerStringEstado(pIdEstado);
         }
         public static int CambiarContraseñaPersonal(int pUsu_codigo, string pPasswordViejo, string pPasswordNuevo)
         {
