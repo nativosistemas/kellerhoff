@@ -1389,7 +1389,12 @@ function OnCallBackIsBanderaUsarDll_ComprobanteNro(args) {
 
                                 });
                             }
-                        } 
+                        } else {
+                            mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>No se encontraron facturas con la terminación " + nro + ".</h5>");
+                            // $(".fa.fa-times").hide();
+                            hideCargandoBuscador();
+                            return false;
+                        }
                     } else {
                         mensaje("<span style='color: red !important;'><i class='fa fa-times-circle fa-2x'></i> ERROR</span>", "<h5 style='text-align:center;line-height:1.5em;font-weight:300;font-size:16px;'>No se encontraron facturas con la terminación " + nro + ".</h5>");
                         // $(".fa.fa-times").hide();
