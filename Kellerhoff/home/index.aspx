@@ -97,7 +97,7 @@
 								donde XX debe ser el ID del div conla informacion, segun se indica abajo
 								-->
                                         <a data-role="expand-info" data-info="1" href="">ROSARIO</a>
-                                        <a data-role="expand-info" data-info="10" href="">DK HOSPITALARIOS</a>
+                                        <a data-role="expand-info" data-info="10" href="">DK INSTITUCIONALES / ALTO COSTO</a>
                                         <a data-role="expand-info" data-info="7" href="">SAN NICOLAS</a>
                                         <a data-role="expand-info" data-info="2" href="">CHA&Ntilde;AR LADEADO</a>
                                         <a data-role="expand-info" data-info="6" href="">SANTA FE</a>
@@ -118,144 +118,153 @@
                             -->
                                     <div class="info_mapa hidden" data-info="1">
                                         <b>ROSARIO</b><br />
-                                        <u>Conmutador General</u>: 0341-4203300<br />
-                                        <u>Venta líneas Rotativas</u>: 0341-4203311<br />
-                                        <u>Cuentas Corrientes</u>: 0341-4203329 / 0341-4203336<br />
-                                        <u>Reclamos</u>: 0341-4203314<br />
-                                        <u>Mostrador</u>: 0341-4203363<br />
-                                        <u>Jefatura de ventas</u>: Joaquín Gamborena<br />
-                                        <u>Promotores</u>: Mario Palacios - Néstor Perez - Facundo Angelini<br />
+                                        <u>Supervisor Comercial</u>: Franco Viola - Joaquín Gamborena<br />
+                                        <u>Promotores</u>: Mario Palacios - Néstor Perez - Facundo Angelini - Magali Notto<br />
                                         <u>Farmacéutica</u>: Paola Iribarren<br />
+                                        <u>Ctas. Ctes.</u>: Nanci Giussani - Haylin Scarbeli<br />
                                         <u>Domicilio</u>: Pueyrredon 1149<br />
                                         <u>C.P.A.</u>: S2000QIG<br />
+                                        <u>Conmutador General</u>: 0341-4203300<br />
+                                        <u>Venta líneas Rotativas</u>: 0341-4203311<br />
+                                        <u>Cuentas Corrientes</u>: 0341-4203329 / 0341-4203336 / 0341-4203350<br />
                                         <u>WhatsApp</u>: 341 3163291<br />
-                                        <u>Fax</u>: 0341-4203377<br />
+                                        <u>Reclamos</u>: 0341-4203314<br />
+                                        <u>Mostrador</u>: 0341-4203363<br />
                                         <u>E-mail</u>: drogueria@kellerhoff.com.ar<br />
+                                        <u>Administración</u>: L a V : 8:00 a 17:00 hs.<br />
+                                        <u>Toma de Pedido</u>: L a V : 7:00 a 22:00 hs.<br />
+                                        Sáb: 7:00 a 14:00 hs.
+                                        <br />
                                     </div>
                                     <div class="info_mapa hidden" data-info="2">
                                         <b>CHA&Ntilde;EAR LADEADO</b><br />
                                         <u>Encargado</u>: Juan Carlos Ferraris<br />
+                                        <u>Supervisor Comercial</u>: Franco Viola<br />
                                         <u>Promotor</u>: Alexis Ronzani<br />
                                         <u>Ctas. Ctes.</u>: Carlos Filipuzzi<br />
                                         <u>Farmacéutico</u>: Juan Carlos Ferraris<br />
                                         <u>Domicilio</u>: Belgrano 245<br />
                                         <u>C.P.A.</u>: S2139AFE<br />
-                                        <u>Teléfonos</u>: 03468-481881 (Tel/Fax) / 481117<br />
-                                        <u>WhatsApp</u>: 3468 648933<br />
+                                        <u>Teléfonos</u>: 03468-481881 /03468- 481117<br />
+                                        <u>WhatsApp Cta/Cte</u>: 3468-648933<br />
                                         <u>E-Mail</u>: sucursalchanarladeado@kellerhoff.com.ar<br />
                                         <u>Horarios</u>: L a V : 8:00 a 13:00 hs. / 16:00 a 20:30 hs.<br />
-                                        Sáb : 8:30 a 13:00 hs.<br />
+                                        Sáb: 8:30 a 13:00 hs.<br />
                                     </div>
                                     <div class="info_mapa hidden" data-info="3">
                                         <b>CONCEPCI&#211;N DEL URUGUAY</b><br />
                                         <u>Encargado</u>: Eduardo Gutierrez<br />
+                                        <u>Supervisor Comercial</u>: Julio Culler<br />
                                         <u>Promotor</u>: Oscar Moyano<br />
                                         <u>Ctas. Ctes.</u>: Nadia Saade<br />
                                         <u>Farmacéutico</u>: Roberto O. Bracco<br />
                                         <u>Domicilio</u>: Posadas 976<br />
                                         <u>C.P.A.</u>: E3260ATF<br />
-                                        <u>Teléfonos</u>: 03442-423103 y Rotativas / 03442-427888 (Fax)<br />
-                                        <u>WhatsApp</u>: 3442 567240<br />
+                                        <u>Teléfonos</u>: 03442-423103 Rotativas<br />
+                                        <u>WhatsApp Cta/Cte</u>: 3442-567240<br />
                                         <u>E-Mail</u>: sucursalconcepcion@kellerhoff.com.ar<br />
                                         <u>Horarios</u>: L a V : 8:00 a 13:00 hs. / 16:00 a 21:00 hs.<br />
-                                        Sáb :  8:00 a 13:00 hs. / 17:00 a 19:00 hs.<br />
+                                        Sáb: 8:00 a 13:00 hs. / 17:00 a 19:00 hs.<br />
                                     </div>
                                     <div class="info_mapa hidden" data-info="4">
                                         <b>CONCORDIA</b><br />
                                         <u>Encargado</u>: Adrián Caglieris<br />
+                                        <u>Supervisor Comercial</u>: Julio Culler<br />
+                                        <u>Promotor</u>: Hernan Siegwart<br />
                                         <u>Farmacéutico</u>: Nicolás Cian<br />
                                         <u>Domicilio</u>: Sarmiento 642<br />
                                         <u>C.P.A.</u>: E3202AGL<br />
                                         <u>Teléfonos</u>: 0345-4222545 (Tel/Fax)<br />
-                                        <u>WhatsApp</u>: 3442 567240<br />
+                                        <u>WhatsApp Cta/Cte</u>: 3442-567240<br />
                                         <u>E-Mail</u>: sucursalconcordia@kellerhoff.com.ar<br />
                                         <u>Horarios</u>: L a V : 8:00 a 12:30 hs. / 16:30 a 20:30 hs.<br />
-                                        Sáb : 8:00 a 12:30 hs.<br />
+                                        Sáb: 8:00 a 12:30 hs.<br />
                                     </div>
                                     <div class="info_mapa hidden" data-info="5">
                                         <b>C&#211;RDOBA</b><br />
                                         <u>Encargado</u>: Marcelo Bravin<br />
-                                        <u>Promotor</u>: José Portelli - Olga Echenique - Juan Pablo Martellotto<br />
-                                        <u>Ctas. Ctes.</u>: Carolina Beretta<br />
+                                        <u>Supervisor Comercial</u>: Juan Jose Giovagnorio<br />
+                                        <u>Promotor</u>: Olga Echenique - Juan Pablo Martellotto – Rodrigo Echenique<br />
+                                        <u>Ctas. Ctes.</u>: Carolina Beretta – Maria Elena Merlo – Monica Aquino<br />
                                         <u>Farmacéutico</u>: Karina Nieddu<br />
-                                        <u>Supervisor de Ventas</u>: Edgar Martinelli<br />
-                                        <%--DOMICILIO: RAYO CORTADO 2275 - Bº EMPALME
-CPA: X5006IMG
-TELEFONO: 0351-5236100 / 0351-5236111 (PEDIDOS)--%>
                                         <u>Domicilio</u>: RAYO CORTADO 2275 - Bº EMPALME<br />
                                         <u>C.P.A.</u>: X5006IMG<br />
                                         <u>Teléfonos</u>: 0351-5236100 / 0351-5236111 (PEDIDOS)<br />
-                                        <%--                                        <u>Domicilio</u>: Libertad 248<br />
-                                        <u>C.P.A.</u>: X5000FGF<br />
-                                        <u>Teléfonos</u>: 0351-4251118 y Rotativas<br />--%>
-                                        <u>WhatsApp</u>: 351 6523189<br />
+                                        <u>WhatsApp Cta/Cte</u>: 351-6523189<br />
                                         <u>E-Mail</u>: sucursalcordoba@kellerhoff.com.ar<br />
                                         <u>Horarios</u>: L a V : 8:00 a 20:30 hs.<br />
-                                        Sáb : 8:00 a 13:00 hs. / 17.30 a 19.00 hs.<br />
+                                        Sáb: 8:00 a 13:00 hs. / 17.30 a 19.00 hs.<br />
                                     </div>
                                     <div class="info_mapa hidden" data-info="6">
                                         <b>SANTA FE</b><br />
                                         <u>Encargado</u>: Walter Cesar Luque<br />
-                                        <u>Promotor</u>: Maximiliano Flores<br />
-                                        <u>Ctas. Ctes.</u>: Daniela Cardozo – Claudia Campagnucci<br />
+                                        <u>Supervisor Comercial</u>: Julio Culler<br />
+                                        <u>Promotor</u>: Maximiliano Flores – Mora Sebastian<br />
+                                        <u>Ctas. Ctes.</u>: Claudia Campagnucci  - Daniela Cardozo
+                                        <br />
                                         <u>Farmacéutico</u>: Patricia Borrelli<br />
                                         <u>Domicilio</u>: Av. Blas Parera 6633<br />
                                         <u>C.P.A.</u>: S3000FCC<br />
-                                        <u>Teléfonos</u>: 0342-4587900 y Rotativas<br />
-                                        <u>WhatsApp</u>: 342 4070448<br />
+                                        <u>Teléfonos</u>: 0342-4587900 Rotativas<br />
+                                        <u>WhatsApp Cta/Cte</u>: 342-4070448<br />
                                         <u>E-Mail</u>: sucursalsantafe@kellerhoff.com.ar<br />
                                         <u>Horarios</u>: L a V : 08:00 a 21:00 hs.<br />
-                                        Sáb : 08:00 a 15:00 hs.<br />
+                                        Sáb: 08:00 a 15:00 hs.<br />
                                     </div>
                                     <div class="info_mapa hidden" data-info="7">
                                         <b>SAN NICOLAS</b><br />
                                         <u>Encargado</u>: Guillermo Díaz<br />
+                                        <u>Supervisor Comercial</u>: Franco Viola<br />
                                         <u>Promotor</u>: German Gonzalez<br />
-                                        <u>Ctas. Ctes.</u>: Nanci Giussani<br />
                                         <u>Farmacéutico</u>: Pablo Prado<br />
                                         <u>Domicilio</u>: Pte Perón 1445<br />
                                         <u>C.P.A.</u>: B2902AGE<br />
-                                        <u>Teléfonos</u>: 0336-4443006<br />
+                                        <u>Teléfonos</u>: 0336-4443006 / 0336-4440055<br />
+                                        <u>WhatsApp Cta/Cte</u>: 341-3163291<br />
                                         <u>E-Mail</u>: sucursalsannicolas@kellerhoff.com.ar<br />
-                                        <u>Horarios</u>: L a V de 10:00 a 12:00 y de 18:00 a 20:00 hs.<br />
-                                        Sáb :  10:00 a 12:00 hs.<br />
+                                        <u>Horarios</u>:: L a V de 10:00 a 12:00 y de 18:00 a 20:00 hs.<br />
+                                        Sáb: 10:00 a 12:00 hs.<br />
                                     </div>
                                     <div class="info_mapa hidden" data-info="8">
                                         <b>VILLA MARÍA</b><br />
                                         <u>Encargado</u>: Manuel Vinzón<br />
-                                        <u>Farmacéutico</u>: Lucía Sánchez<br />
-                                        <u>Promotor</u>: Agustín Arias<br />
+                                        <u>Supervisor Comercial</u>: Juan Jose Giovagnorio<br />
+                                        <u>Farmacéutico</u>: Maria Luciana Colusso<br />
+                                        <u>Promotor</u>: Marcelo Govannini<br />
                                         <u>Domicilio</u>: Leandro N Alem 330<br />
                                         <u>C.P.A.</u>: X5900JAQ<br />
                                         <u>Teléfonos</u>: 0353-4548519 / 0353-4546570<br />
                                         <u>E-Mail</u>: sucursalvillamaria@kellerhoff.com.ar<br />
-                                        <u>Horarios</u>: L a V de  8:30 a 12:30 y de 16:30 a 20:30 hs.<br />
-                                        Sáb :  8:30 a 12:30 hs.<br />
+                                        <u>Horarios</u>: L a V de 8:30 a 12:30 y de 16:30 a 20:30 hs.<br />
+                                        Sáb: 8:30 a 12:30 hs.<br />
                                     </div>
                                     <div class="info_mapa hidden" data-info="9">
                                         <b>RÍO CUARTO</b><br />
                                         <u>Encargado</u>: Gustavo Oscar Antonucci<br />
+                                        <u>Supervisor Comercial</u>: Juan Jose Giovagnorio<br />
                                         <u>Farmacéutico</u>: Guillermo Canónico<br />
                                         <u>Promotor</u>: Agustín Arias<br />
                                         <u>Domicilio</u>: Buenos Aires 264<br />
                                         <u>C.P.A.</u>: X5800DIF<br />
                                         <u>Teléfonos</u>: 0358-4633632 / 4650717 / 4654048 / 4702634<br />
                                         <u>E-Mail</u>: sucursalriocuarto@kellerhoff.com.ar<br />
-                                        <u>Horarios</u>: L a V de 8:30 a 21:00  hs.<br />
-                                        Sáb :  8:30 a 13:00 hs.<br />
+                                        <u>Horarios</u>: L a V de 8:30 a 21:00 hs.<br />
+                                        Sáb: 8:30 a 13:00 hs.<br />
                                     </div>
                                     <div class="info_mapa hidden" data-info="10">
-                                        <b>DK HOSPITALARIOS</b><br />
-                                        <u>Conmutador General</u>: 0341-4239280/4239280<br />
-                                        <u>Cuentas Corrientes</u>: 0341-4203329 / 0341-4203336<br />
+                                        <b>DK INSTITUCIONALES / ALTO COSTO</b><br />
                                         <u>Gerente de Ventas</u>: Carlos Mira<br />
-                                        <u>Responsable Administrativa</u>: María Alejandra Vitali<br />
-                                        <u>Promotores</u>: Maximiliano Frontera - Walter Pasquinelli - Federico Gauna - Esteban Cohen<br />
+                                        <u>Responsable Administrativa</u>: Soledad Casanovas<br />
+                                        <u>Promotores</u>: Maximiliano Frontera - Walter Pasquinelli - Federico Gauna - Esteban Cohen - Martin Maragni<br />
                                         <u>Farmacéutico</u>: Sofía Deharbe<br />
                                         <u>Domicilio</u>: Uriburu 1923/1927<br />
                                         <u>C.P.A.</u>: S2001CFM<br />
-                                        <u>Fax</u>: 0341-4239288<br />
+                                        <u>Conmutador General</u>: 0341-4239234/4239280<br />
+                                        <u>Cuentas Corrientes</u>: 0341-4203329 / 0341-4203336<br />
+                                        <u>WhatsApp Ventas Alto Costo</u>: 341-3631749<br />
                                         <u>E-mail</u>: dkinstitucional@kellerhoff.com.ar<br />
+                                        <u>Horarios</u>: L a V de 08:00 a 17:00
+                                        <br />
                                     </div>
                                 </div>
                             </div>
