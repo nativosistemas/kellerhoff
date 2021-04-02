@@ -58,6 +58,7 @@ var indexSucursalTransferSeleccionado = null;
 // fin Transfer
 var intColumnaOrdenar = -2;
 var timerProductoFacturacionDirecta = null;
+var htmlAltoCosto = '<span class="p_trazable">Alto Costo-Ventas al <i class="fa fa-whatsapp linkWP_icon"></i><a class="linkWP" href="tel:3413631749">341 3631749</a></span>';//'<div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:3413631749">341 3631749</a></div>';
 
 $(document).ready(function () {
     $(document).keydown(function (e) {
@@ -651,6 +652,11 @@ function getHtmlTablaResolucionCelular() {
                 if (listaProductosBuscados[i].pro_vtasolotransfer) {
                     strHtml += '<span class="p_trazable">Se vende solo por transfer</span>';// '<span class="spanProductoTrazableCLiSinGLN" >&nbsp;&nbsp;&nbsp;Se vende solo por transfer</span>';
                 }
+            }
+            // Alto Costo
+            if (listaProductosBuscados[i].pro_AltoCosto) {
+                strHtml += htmlAltoCosto;
+                isMostrarImput = false;
             }
             // Vale Psicotropicos
             if (listaProductosBuscados[i].isValePsicotropicos) {
@@ -1572,6 +1578,12 @@ function OnCallBackRecuperarProductos(args) {
                             strHtml += '<span class="p_trazable">Se vende solo por transfer</span>';// '<span class="spanProductoTrazableCLiSinGLN" >&nbsp;&nbsp;&nbsp;Se vende solo por transfer</span>';
                         }
                     }
+                    // Alto Costo
+                    if (listaProductosBuscados[i].pro_AltoCosto) {
+                        strHtml += htmlAltoCosto;
+                        isMostrarImput = false;
+                    }
+
                     // Vale Psicotropicos
                     if (listaProductosBuscados[i].isValePsicotropicos) {
                         strHtml += '<span class="p_trazable" >Requiere Vale</span>';
@@ -2620,6 +2632,12 @@ function detalleProducto_celular(pIndex) {
             nombre_principal += '<span class="p_trazable">Se vende solo por transfer</span>';
         }
     }
+    // Alto Costo
+    if (listaProductosBuscados[pIndex].pro_AltoCosto) {
+        nombre_principal += htmlAltoCosto;
+        isMostrarImput = false;
+    }
+
     // Vale Psicotropicos
     if (listaProductosBuscados[pIndex].isValePsicotropicos) {
         nombre_principal += '<span class="p_trazable" >Requiere Vale</span>';

@@ -503,3 +503,18 @@ header .nav li {
         right: auto;
     }
 }
+.linkWP {
+    color: #1abc9c;
+}
+.linkWP:active {
+    color: #1abc9c;
+}
+.linkWP:hover {
+   color: #1abc9c;
+}
+
+.linkWP_icon {
+    padding-right: 5px;
+    padding-left: 3px;
+    font-size: 12px;
+}

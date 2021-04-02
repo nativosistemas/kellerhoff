@@ -164,6 +164,10 @@ namespace Kellerhoff.Codigo.clases
                         {
                             obj.pro_PorcARestarDelDtoDeCliente = Convert.ToDecimal(item["pro_PorcARestarDelDtoDeCliente"]);
                         }
+                        if (item.Table.Columns.Contains("pro_AltoCosto") && item["pro_AltoCosto"] != DBNull.Value)
+                        {
+                            obj.pro_AltoCosto = Convert.ToBoolean(item["pro_AltoCosto"]);
+                        }
                         obj.isProductoFacturacionDirecta = false;
                         if (item.Table.Columns.Contains("pro_NoTransfersEnClientesPerf") && item["pro_NoTransfersEnClientesPerf"] != DBNull.Value)
                         {
