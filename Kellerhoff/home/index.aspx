@@ -127,7 +127,7 @@
                                         <u>Conmutador General</u>: 0341-4203300<br />
                                         <u>Venta líneas Rotativas</u>: 0341-4203311<br />
                                         <u>Cuentas Corrientes</u>: 0341-4203329 / 0341-4203336 / 0341-4203350<br />
-                                        <u>WhatsApp</u>: 341 3163291<br />
+                                        <u>WhatsApp Cta/Cte</u>: 341-3163291<br />
                                         <u>Reclamos</u>: 0341-4203314<br />
                                         <u>Mostrador</u>: 0341-4203363<br />
                                         <u>E-mail</u>: drogueria@kellerhoff.com.ar<br />
@@ -229,8 +229,8 @@
                                         <b>VILLA MARÍA</b><br />
                                         <u>Encargado</u>: Manuel Vinzón<br />
                                         <u>Supervisor Comercial</u>: Juan Jose Giovagnorio<br />
-                                        <u>Farmacéutico</u>: Maria Luciana Colusso<br />
                                         <u>Promotor</u>: Marcelo Govannini<br />
+                                        <u>Farmacéutico</u>: Maria Luciana Colusso<br />                                       
                                         <u>Domicilio</u>: Leandro N Alem 330<br />
                                         <u>C.P.A.</u>: X5900JAQ<br />
                                         <u>Teléfonos</u>: 0353-4548519 / 0353-4546570<br />
@@ -242,8 +242,8 @@
                                         <b>RÍO CUARTO</b><br />
                                         <u>Encargado</u>: Gustavo Oscar Antonucci<br />
                                         <u>Supervisor Comercial</u>: Juan Jose Giovagnorio<br />
-                                        <u>Farmacéutico</u>: Guillermo Canónico<br />
                                         <u>Promotor</u>: Agustín Arias<br />
+                                        <u>Farmacéutico</u>: Guillermo Canónico<br />                                        
                                         <u>Domicilio</u>: Buenos Aires 264<br />
                                         <u>C.P.A.</u>: X5800DIF<br />
                                         <u>Teléfonos</u>: 0358-4633632 / 4650717 / 4654048 / 4702634<br />
