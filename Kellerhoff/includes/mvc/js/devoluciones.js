@@ -281,7 +281,7 @@ $(document).ready(function () {
 
     $("#cmbNombreProducto").change(function () {
         var seleccion = $(this).val().trim();
-        var obj = $("#NombreProductoValues").find("option[value='" + seleccion + "']");
+        var obj = $("#NombreProductoValues").find('option[value="' + seleccion + '"]');
         campoActual = $(this).attr("id");
         ControlarSesion();
         if (obj != null && obj.length > 0) {
@@ -953,7 +953,7 @@ $(document).ready(function () {
 
     $("#cmbNombreProductoFNE").change(function () {
         var seleccion = $(this).val().trim();
-        var obj = $("#NombreProductoValuesFNE").find("option[value='" + seleccion + "']");
+        var obj = $("#NombreProductoValuesFNE").find('option[value="' + seleccion + '"]');
         campoActual = $(this).attr("id");
         ControlarSesion();
         if (obj != null && obj.length > 0) {
