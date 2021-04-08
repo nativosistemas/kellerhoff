@@ -512,7 +512,14 @@ header .nav li {
 .linkWP:hover {
    color: #1abc9c;
 }
+    .linkWP:link {
+        color: #1abc9c;
+    }
 
+/* visited link */
+    .linkWP:visited {
+        color: #1abc9c;
+    }
 .linkWP_icon {
     padding-right: 5px;
     padding-left: 3px;
