@@ -348,10 +348,22 @@ function ObtenerLinkDeDocumentoDesdeStr(pValor) {
             case 'OSC':
                 resultado = '<a href="' + 'Documento?t=' + tipo + '&id=' + nro + '" >' + pValor + '</a>';
                 break;
+            case 'REC':
+                resultado = '<a href="' + 'Documento?t=' + tipo + '&id=' + nro + '" >' + pValor + '</a>';
+                break;
             default:
                 break;
         }
 
+    }
+    return resultado;
+}
+function getFormatoDocumentoRecibo(pValor) {
+    var resultado = pValor;
+    if (pValor.length === 14) {
+        var tipo = 'REC';
+        var nro = $.trim(pValor.replace('-', ''));
+        resultado = '<a href="' + 'Documento?t=' + tipo + '&id=' + nro + '" >' + pValor + '</a>';
     }
     return resultado;
 }
