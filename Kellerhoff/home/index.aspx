@@ -244,7 +244,7 @@
                                         <u>Supervisor Comercial</u>: Juan Jose Giovagnorio<br />
                                         <u>Promotor</u>: Agustín Arias<br />
                                         <u>Farmacéutico</u>: Guillermo Canónico<br />                                        
-                                        <u>Domicilio</u>: Buenos Aires 264<br />
+                                        <u>Domicilio</u>: Buenos Aires 254/264<br />
                                         <u>C.P.A.</u>: X5800DIF<br />
                                         <u>Teléfonos</u>: 0358-4633632 / 4650717 / 4654048 / 4702634<br />
                                         <u>E-Mail</u>: sucursalriocuarto@kellerhoff.com.ar<br />
