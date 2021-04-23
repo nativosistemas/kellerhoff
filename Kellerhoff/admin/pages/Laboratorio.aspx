@@ -11,7 +11,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2 class="sub-header">Laborario</h2>
+    <h2 class="sub-header">Laboratorio</h2>
     <%--<button type="button" class="btn btn-warning" onclick="return Editar(0);">Agregar</button>--%>
     <div id="divContenedorGrilla"></div>
 </asp:Content>
