@@ -281,7 +281,7 @@
     <%--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj5tbgIz5_otRZz97proggQAnX0p1ZyRU"></script>
     <script type="text/javascript" src="../includes/home/js/jquery/maps.js"></script>--%>
     <script src="../includes/home/js/oferta.js?n=9"></script>
-    <script src="../includes/home/js/slider.js?n=15"></script>
+    <script src="../includes/home/js/slider.js?n=16"></script>
     <script src="../includes/home/js/index.js?n=4"></script>
     <script type="text/javascript">
         $(window).on('resize', function () {
