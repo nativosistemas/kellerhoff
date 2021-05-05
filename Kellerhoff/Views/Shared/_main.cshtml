@@ -598,9 +598,8 @@
                 && Session["clientesDefault_Usuario"] != null)
             {
                 Session["ClientesBase_isLogeo"] = null;
-                bool isUsuarioVerMensajes_PopUp = true;
-                Kellerhoff.Codigo.capaDatos.Usuario user = (Kellerhoff.Codigo.capaDatos.Usuario)Session["clientesDefault_Usuario"];                
-                isUsuarioVerMensajes_PopUp = !(!string.IsNullOrEmpty(user.usu_login) && user.usu_login.Trim().ToUpper() == "FARMACITY");
+                bool isUsuarioVerMensajes_PopUp = true;                
+                isUsuarioVerMensajes_PopUp = !(!string.IsNullOrEmpty(oCli.cli_GrupoCliente) && oCli.cli_GrupoCliente.Trim().ToUpper() == "FARMACITY");
                 if (isUsuarioVerMensajes_PopUp)
                 {
                     List<Kellerhoff.Codigo.capaDatos.cMensaje>
