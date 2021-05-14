@@ -164,6 +164,10 @@ namespace Kellerhoff.Codigo.clases
                         {
                             obj.pro_PorcARestarDelDtoDeCliente = Convert.ToDecimal(item["pro_PorcARestarDelDtoDeCliente"]);
                         }
+                        if (item.Table.Columns.Contains("pro_AltoCosto") && item["pro_AltoCosto"] != DBNull.Value)
+                        {
+                            obj.pro_AltoCosto = Convert.ToBoolean(item["pro_AltoCosto"]);
+                        }
                         obj.isProductoFacturacionDirecta = false;
                         if (item.Table.Columns.Contains("pro_NoTransfersEnClientesPerf") && item["pro_NoTransfersEnClientesPerf"] != DBNull.Value)
                         {
@@ -243,7 +247,7 @@ namespace Kellerhoff.Codigo.clases
         }
         public static void grabarLog(MethodBase method, Exception pException, DateTime pFechaActual, params object[] values)
         {
-            DKbase.generales.Log.LogError(method,  pException,  pFechaActual, values);
+            DKbase.generales.Log.LogError(method, pException, pFechaActual, values);
         }
         public static List<cClientes> RecuperarTodosClientesActivosYSinClientes()
         {

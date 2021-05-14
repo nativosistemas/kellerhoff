@@ -225,7 +225,7 @@
                     </div>--%>
                     <div class="clear55"></div>
                     <div class="hospitalario">
-                        <h1>DK HOSPITALARIOS</h1>
+                        <h1>DK INSTITUCIONALES / ALTO COSTO</h1>
                     </div>
                     <div class="clear10"></div>
                     <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80</a></div>
@@ -295,7 +295,7 @@
                     </div>
                     <div class="col-lg-6 col-sm-6 col-xs-12 div_nav_ftr">
                         <div>RÍO CUARTO</div>
-                        <div><i class="fa fa-map-marker fa_contacto_ftr"></i>Buenos Aires 264 &bull; X5800DIF</div>
+                        <div><i class="fa fa-map-marker fa_contacto_ftr"></i>Buenos Aires 254/264 &bull; X5800DIF</div>
                         <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0358-4633632">0358-4633632 / 4650717 / 4654048 / 4702634</a></div>
                         <div><i class="fa fa-envelope fa_contacto_ftr"></i><a href="mailto:sucursalriocuarto@kellerhoff.com.arr">sucursalriocuarto@kellerhoff.com.ar</a></div>
                         <div class="clear15"></div>
@@ -325,7 +325,7 @@
                     <a class="hidden-xs hidden-sm" href="#" target="_F960AFIPInfo"><img src="../img/home/dataweb.jpg" height="90" border="0"></a>--%>
                         <div class="clear55"></div>
                         <div class="hospitalario">
-                            <h1>DK HOSPITALARIOS</h1>
+                            <h1>DK INSTITUCIONALES / ALTO COSTO</h1>
                         </div>
                         <div class="clear10"></div>
                         <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80</a></div>
@@ -347,9 +347,9 @@
                     <tr>
                         <td align="right" class="ftr_firma">Desarrollo&nbsp;&nbsp;&nbsp;</td>
                         <td>
-                            <a style="display: inline-block; width: auto; margin-top: 7px;" class="float-left" href="http://www.nativosistemas.com/" target="_blank" title="Nativo Sistemas">
+                            <a style="display: inline-block; width: auto; margin-top: 7px;" class="float-left" href="http://www.nativosistemas.com.ar/" target="_blank" title="Nativo Sistemas">
                                 <img src="../img/home/logos/nativo.png" height="28px" /></a>
-                            <%-- <a class="nativo" href="http://www.nativosistemas.com/" target="_blank" title="Nativo Sistemas"> </a>--%>
+                            <%-- <a class="nativo" href="http://www.nativosistemas.com.ar/" target="_blank" title="Nativo Sistemas"> </a>--%>
                             
                         </td>
                         <td align="center" class="ftr_firma">&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -357,7 +357,7 @@
                         <td><a class="mtz" href="http://mestizosweb.com/" target="_blank" title="Mestizos Comunicaci&oacute;n"></a></td>
                     </tr>
                 </table>
-                <div class="col-xs-12 text-center visible-xs"><a href="http://www.nativosistemas.com/" target="_blank" title="Nativo Sistemas">
+                <div class="col-xs-12 text-center visible-xs"><a href="http://www.nativosistemas.com.ar/" target="_blank" title="Nativo Sistemas">
                     <img src="../img/mvc/logos/nativo.png" style="height: 28px;" /></a></div>
             </div>
         </div>

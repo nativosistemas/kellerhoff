@@ -82,6 +82,9 @@
     <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -1094,6 +1097,9 @@
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ArrayOfCResumen.datasource" />
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerComprobantesAImprimirEnBaseAResumenResponse.datasource" />
     <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.ObtenerUltimos10ResumenesDePuntoDeVentaResponse.datasource" />
+    <Content Include="Service References\ServiceReferenceDLL\Kellerhoff.ServiceReferenceDLL.cCtaCteMovimiento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceReferenceDLL\Service1.disco" />
     <None Include="Service References\ServiceReferenceDLL\Service2.disco" />
     <Content Include="servicios\descargarArchivo.aspx" />
@@ -1140,6 +1146,9 @@
     <Content Include="Views\devoluciones\NotaDevolucion.cshtml" />
     <Content Include="Views\devoluciones\NuevaDevolucionFacturaCompleta.cshtml" />
     <Content Include="Views\devoluciones\_scriptsDevsDaterangepicker.cshtml" />
+    <Content Include="Views\devoluciones\_nav_secundario_fne.cshtml" />
+    <Content Include="Views\devoluciones\DevolucionesFacturadoNoEnviado.cshtml" />
+    <Content Include="Views\devoluciones\ReclamoFacturadoNoEnviado.cshtml" />
     <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
     <None Include="Web_config\Web.config_produccion">
       <SubType>Designer</SubType>

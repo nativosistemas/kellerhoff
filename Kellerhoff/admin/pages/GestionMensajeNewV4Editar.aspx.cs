@@ -15,7 +15,7 @@ namespace Kellerhoff.admin.pages
         public const string consPalabraClave = "gestionmensaje";
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             Seguridad(consPalabraClave);
             if (!IsPostBack)
             {
@@ -65,9 +65,7 @@ namespace Kellerhoff.admin.pages
                     }
                     //List<string> listaSucursal = new List<string>();
                     string sucursales = string.Empty;
-                    //if (Convert.ToBoolean(Session["GestionMensajeNewV4_isNuevo"]) == true)
-                    //{
-                    if (CheckBoxListSucursales.Items != null)
+                    if (RadioButtonSucursal.Checked && CheckBoxListSucursales.Items != null)
                     {
                         for (int i = 0; i < CheckBoxListSucursales.Items.Count; i++)
                         {
@@ -78,9 +76,8 @@ namespace Kellerhoff.admin.pages
                             }
                         }
                     }
-                    //}
-                    //string sucursales = null;
-                    int resultado = WebService.ActualizarInsertarMensajeNew(codigoMensaje, txt_asunto.Text, txt_mensaje.Text, fechaDesde, fechaHasta, importante, sucursales);
+                    string mensajeHTML = HiddenField_mensaje.Value;//mensajeHTML
+                    int resultado = WebService.ActualizarInsertarMensajeNew(codigoMensaje, txt_asunto.Text, mensajeHTML, fechaDesde, fechaHasta, importante, sucursales);
                     Response.Redirect("~/admin/pages/GestionMensajeNewV4.aspx");
                 }
             }
@@ -101,7 +98,7 @@ namespace Kellerhoff.admin.pages
             //cmbEstado.SelectedIndex = -1;
             txt_asunto.Text = string.Empty;
             txt_mensaje.Text = string.Empty;//txt_mensaje.Content = string.Empty;
-            //
+            HiddenField_mensaje.Value = string.Empty;
             //SetearComboSucursalCliente();
             CheckRadioButton();
         }
@@ -131,6 +128,8 @@ namespace Kellerhoff.admin.pages
                 }
                 txt_asunto.Text = mensaje.tme_asunto;
                 txt_mensaje.Text = mensaje.tme_mensaje;// txt_mensaje.Content = mensaje.tme_mensaje;
+                HiddenField_mensaje.Value = mensaje.tme_mensaje;
+                HiddenField_loadMsg.Value = "1";
                 if (!string.IsNullOrEmpty(mensaje.tmn_todosSucursales))
                 {
                     RadioButtonSucursal.Checked = true;

@@ -58,6 +58,7 @@ var indexSucursalTransferSeleccionado = null;
 // fin Transfer
 var intColumnaOrdenar = -2;
 var timerProductoFacturacionDirecta = null;
+var htmlAltoCosto = '<span class="p_trazable">Alto Costo - Ventas comunicarse al <i class="fa fa-whatsapp linkWP_icon"></i><a class="linkWP" href="tel:3413631749">341 3631749</a></span>';//'<div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:3413631749">341 3631749</a></div>';
 
 $(document).ready(function () {
     $(document).keydown(function (e) {
@@ -652,6 +653,11 @@ function getHtmlTablaResolucionCelular() {
                     strHtml += '<span class="p_trazable">Se vende solo por transfer</span>';// '<span class="spanProductoTrazableCLiSinGLN" >&nbsp;&nbsp;&nbsp;Se vende solo por transfer</span>';
                 }
             }
+            // Alto Costo
+            if (listaProductosBuscados[i].pro_AltoCosto) {
+                strHtml += htmlAltoCosto;
+                isMostrarImput = false;
+            }
             // Vale Psicotropicos
             if (listaProductosBuscados[i].isValePsicotropicos) {
                 strHtml += '<span class="p_trazable" >Requiere Vale</span>';
@@ -686,15 +692,16 @@ function getHtmlTablaResolucionCelular() {
             }
 
             strHtml += '<td class="col-xs-2 text-center">' + precioPublico + '</td>';
-            //strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioFinal.toFixed(2)) + '</td>';
-            // 15/02/2018 mail de luciana para el producto
+
+            var precioHabitual = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioFinal.toFixed(2));
             if (listaProductosBuscados[i].pro_nombre.match("^PAÑAL PAMI AD")) {
-                strHtml += '<td class="col-xs-2 text-center">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].pro_preciofarmacia.toFixed(2)) + '</td>';
+                precioHabitual = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].pro_preciofarmacia.toFixed(2));
             }
-            else {
-                strHtml += '<td class="col-xs-2 text-center">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioFinal.toFixed(2)) + '</td>';
+            if (listaProductosBuscados[i].pro_AltoCosto) {
+                precioHabitual = '';
             }
-            // fin 15/02/2018 mail de luciana para el producto
+            strHtml += '<td class="col-xs-2 text-center">' + precioHabitual + '</td>';
+       
 
             strHtml += '</tr>';
         }
@@ -1572,6 +1579,12 @@ function OnCallBackRecuperarProductos(args) {
                             strHtml += '<span class="p_trazable">Se vende solo por transfer</span>';// '<span class="spanProductoTrazableCLiSinGLN" >&nbsp;&nbsp;&nbsp;Se vende solo por transfer</span>';
                         }
                     }
+                    // Alto Costo
+                    if (listaProductosBuscados[i].pro_AltoCosto) {
+                        strHtml += htmlAltoCosto;
+                        isMostrarImput = false;
+                    }
+
                     // Vale Psicotropicos
                     if (listaProductosBuscados[i].isValePsicotropicos) {
                         strHtml += '<span class="p_trazable" >Requiere Vale</span>';
@@ -1617,14 +1630,17 @@ function OnCallBackRecuperarProductos(args) {
 
                     strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center">' + precioPublico + '</td>';
 
-                    // 15/02/2018 mail de luciana para el producto
+
+
+                    var precioHabitual = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioFinal.toFixed(2));
                     if (listaProductosBuscados[i].pro_nombre.match("^PAÑAL PAMI AD")) {
-                        strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center tdSeparadorGrilla">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].pro_preciofarmacia.toFixed(2)) + '</td>';
+                        precioHabitual = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].pro_preciofarmacia.toFixed(2));
                     }
-                    else {
-                        strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center tdSeparadorGrilla">$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[i].PrecioFinal.toFixed(2)) + '</td>';
+                    if (listaProductosBuscados[i].pro_AltoCosto) {
+                        precioHabitual = '';
                     }
-                    // fin 15/02/2018 mail de luciana para el producto
+                    strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center tdSeparadorGrilla">' + precioHabitual + '</td>';
+
 
                     var varOfeunidades = ' &nbsp; ';
                     var varOfeporcentaje = ' &nbsp; ';
@@ -2623,6 +2639,12 @@ function detalleProducto_celular(pIndex) {
             nombre_principal += '<span class="p_trazable">Se vende solo por transfer</span>';
         }
     }
+    // Alto Costo
+    if (listaProductosBuscados[pIndex].pro_AltoCosto) {
+        nombre_principal += htmlAltoCosto;
+        isMostrarImput = false;
+    }
+
     // Vale Psicotropicos
     if (listaProductosBuscados[pIndex].isValePsicotropicos) {
         nombre_principal += '<span class="p_trazable" >Requiere Vale</span>';
@@ -2783,13 +2805,14 @@ function detalleProducto_celular(pIndex) {
         precioPublico = '';
     }
     strHtml += '<div class="col-xs-12 mpbxs_dsc">Público<span class="float-right">' + precioPublico + '</span></div>';
-    var precioCliente = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[pIndex].PrecioFinal.toFixed(2));
-    // 15/02/2018 mail de luciana para el producto
+    var precioHabitual = '$&nbsp;' + FormatoDecimalConDivisorMiles(listaProductosBuscados[pIndex].PrecioFinal.toFixed(2));
     if (listaProductosBuscados[pIndex].pro_nombre.match("^PAÑAL PAMI AD")) {
-        precioCliente = FormatoDecimalConDivisorMiles(listaProductosBuscados[pIndex].pro_preciofarmacia.toFixed(2));
+        precioHabitual = FormatoDecimalConDivisorMiles(listaProductosBuscados[pIndex].pro_preciofarmacia.toFixed(2));
     }
-    // fin 15/02/2018 mail de luciana para el producto
-    strHtml += '<div class="col-xs-12 mpbxs_dsc">Precio<span class="float-right">' + precioCliente + '</span></div>';
+    if (listaProductosBuscados[pIndex].pro_AltoCosto) {
+        precioHabitual = '';
+    }
+    strHtml += '<div class="col-xs-12 mpbxs_dsc">Precio<span class="float-right">' + precioHabitual + '</span></div>';
 
 
     var varOfeunidades = ' &nbsp; ';

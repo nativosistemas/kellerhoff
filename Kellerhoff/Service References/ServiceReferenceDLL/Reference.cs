@@ -5372,9 +5372,474 @@ namespace Kellerhoff.ServiceReferenceDLL {
     public class ArrayOfCFactura : System.Collections.Generic.List<Kellerhoff.ServiceReferenceDLL.cFactura> {
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="cRecibo", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class cRecibo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NumeroField;
+        
+        private System.Nullable<System.DateTime> FechaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FechaToStringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FechaAnulacionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DestinatarioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DireccionDestinatarioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LocalidadDestinatarioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CondicionIVADestinatarioToStringField;
+        
+        private double CuitDestinatarioField;
+        
+        private int NumeroClienteField;
+        
+        private int NumeroCuentaCorrienteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TipoEnvioToStringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodigoRepartoField;
+        
+        private decimal MontoTotalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MontoTOTALenLetrasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CantidadHojasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MontoEnDolaresField;
+        
+        private bool ComprobantePAMIField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Kellerhoff.ServiceReferenceDLL.ArrayOfCReciboDetalle listaField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Numero {
+            get {
+                return this.NumeroField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumeroField, value) != true)) {
+                    this.NumeroField = value;
+                    this.RaisePropertyChanged("Numero");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public System.Nullable<System.DateTime> Fecha {
+            get {
+                return this.FechaField;
+            }
+            set {
+                if ((this.FechaField.Equals(value) != true)) {
+                    this.FechaField = value;
+                    this.RaisePropertyChanged("Fecha");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string FechaToString {
+            get {
+                return this.FechaToStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechaToStringField, value) != true)) {
+                    this.FechaToStringField = value;
+                    this.RaisePropertyChanged("FechaToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string FechaAnulacion {
+            get {
+                return this.FechaAnulacionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FechaAnulacionField, value) != true)) {
+                    this.FechaAnulacionField = value;
+                    this.RaisePropertyChanged("FechaAnulacion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Destinatario {
+            get {
+                return this.DestinatarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DestinatarioField, value) != true)) {
+                    this.DestinatarioField = value;
+                    this.RaisePropertyChanged("Destinatario");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string DireccionDestinatario {
+            get {
+                return this.DireccionDestinatarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DireccionDestinatarioField, value) != true)) {
+                    this.DireccionDestinatarioField = value;
+                    this.RaisePropertyChanged("DireccionDestinatario");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string LocalidadDestinatario {
+            get {
+                return this.LocalidadDestinatarioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LocalidadDestinatarioField, value) != true)) {
+                    this.LocalidadDestinatarioField = value;
+                    this.RaisePropertyChanged("LocalidadDestinatario");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string CondicionIVADestinatarioToString {
+            get {
+                return this.CondicionIVADestinatarioToStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CondicionIVADestinatarioToStringField, value) != true)) {
+                    this.CondicionIVADestinatarioToStringField = value;
+                    this.RaisePropertyChanged("CondicionIVADestinatarioToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=8)]
+        public double CuitDestinatario {
+            get {
+                return this.CuitDestinatarioField;
+            }
+            set {
+                if ((this.CuitDestinatarioField.Equals(value) != true)) {
+                    this.CuitDestinatarioField = value;
+                    this.RaisePropertyChanged("CuitDestinatario");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
+        public int NumeroCliente {
+            get {
+                return this.NumeroClienteField;
+            }
+            set {
+                if ((this.NumeroClienteField.Equals(value) != true)) {
+                    this.NumeroClienteField = value;
+                    this.RaisePropertyChanged("NumeroCliente");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
+        public int NumeroCuentaCorriente {
+            get {
+                return this.NumeroCuentaCorrienteField;
+            }
+            set {
+                if ((this.NumeroCuentaCorrienteField.Equals(value) != true)) {
+                    this.NumeroCuentaCorrienteField = value;
+                    this.RaisePropertyChanged("NumeroCuentaCorriente");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
+        public string TipoEnvioToString {
+            get {
+                return this.TipoEnvioToStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TipoEnvioToStringField, value) != true)) {
+                    this.TipoEnvioToStringField = value;
+                    this.RaisePropertyChanged("TipoEnvioToString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
+        public string CodigoReparto {
+            get {
+                return this.CodigoRepartoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodigoRepartoField, value) != true)) {
+                    this.CodigoRepartoField = value;
+                    this.RaisePropertyChanged("CodigoReparto");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=13)]
+        public decimal MontoTotal {
+            get {
+                return this.MontoTotalField;
+            }
+            set {
+                if ((this.MontoTotalField.Equals(value) != true)) {
+                    this.MontoTotalField = value;
+                    this.RaisePropertyChanged("MontoTotal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        public string MontoTOTALenLetras {
+            get {
+                return this.MontoTOTALenLetrasField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MontoTOTALenLetrasField, value) != true)) {
+                    this.MontoTOTALenLetrasField = value;
+                    this.RaisePropertyChanged("MontoTOTALenLetras");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
+        public string CantidadHojas {
+            get {
+                return this.CantidadHojasField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CantidadHojasField, value) != true)) {
+                    this.CantidadHojasField = value;
+                    this.RaisePropertyChanged("CantidadHojas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
+        public string MontoEnDolares {
+            get {
+                return this.MontoEnDolaresField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MontoEnDolaresField, value) != true)) {
+                    this.MontoEnDolaresField = value;
+                    this.RaisePropertyChanged("MontoEnDolares");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=17)]
+        public bool ComprobantePAMI {
+            get {
+                return this.ComprobantePAMIField;
+            }
+            set {
+                if ((this.ComprobantePAMIField.Equals(value) != true)) {
+                    this.ComprobantePAMIField = value;
+                    this.RaisePropertyChanged("ComprobantePAMI");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=18)]
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCReciboDetalle lista {
+            get {
+                return this.listaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.listaField, value) != true)) {
+                    this.listaField = value;
+                    this.RaisePropertyChanged("lista");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ArrayOfCReciboDetalle", Namespace="http://tempuri.org/", ItemName="cReciboDetalle")]
+    [System.SerializableAttribute()]
+    public class ArrayOfCReciboDetalle : System.Collections.Generic.List<Kellerhoff.ServiceReferenceDLL.cReciboDetalle> {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="cReciboDetalle", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class cReciboDetalle : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NumeroReciboField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NumeroHojaField;
+        
+        private int NumeroItemField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescripcionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ImporteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string NumeroRecibo {
+            get {
+                return this.NumeroReciboField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumeroReciboField, value) != true)) {
+                    this.NumeroReciboField = value;
+                    this.RaisePropertyChanged("NumeroRecibo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string NumeroHoja {
+            get {
+                return this.NumeroHojaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumeroHojaField, value) != true)) {
+                    this.NumeroHojaField = value;
+                    this.RaisePropertyChanged("NumeroHoja");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public int NumeroItem {
+            get {
+                return this.NumeroItemField;
+            }
+            set {
+                if ((this.NumeroItemField.Equals(value) != true)) {
+                    this.NumeroItemField = value;
+                    this.RaisePropertyChanged("NumeroItem");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Descripcion {
+            get {
+                return this.DescripcionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescripcionField, value) != true)) {
+                    this.DescripcionField = value;
+                    this.RaisePropertyChanged("Descripcion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Importe {
+            get {
+                return this.ImporteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImporteField, value) != true)) {
+                    this.ImporteField = value;
+                    this.RaisePropertyChanged("Importe");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IDField, value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceDLL.ServiceSoap")]
     public interface ServiceSoap {
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento HelloWorldResult del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.HelloWorldResponse HelloWorld(Kellerhoff.ServiceReferenceDLL.HelloWorldRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/HelloWorld", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.HelloWorldResponse> HelloWorldAsync(Kellerhoff.ServiceReferenceDLL.HelloWorldRequest request);
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento pNombre del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Login", ReplyAction="*")]
@@ -5508,6 +5973,12 @@ namespace Kellerhoff.ServiceReferenceDLL {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldoResumenAbierto", ReplyAction="*")]
         System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerSaldoResumenAbiertoResponse> ObtenerSaldoResumenAbiertoAsync(Kellerhoff.ServiceReferenceDLL.ObtenerSaldoResumenAbiertoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldosPresentacionParaComposicion_Prueba", ReplyAction="*")]
+        void ObtenerSaldosPresentacionParaComposicion_Prueba();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldosPresentacionParaComposicion_Prueba", ReplyAction="*")]
+        System.Threading.Tasks.Task ObtenerSaldosPresentacionParaComposicion_PruebaAsync();
         
         // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento pLoginWeb del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerSaldosPresentacionParaComposicion", ReplyAction="*")]
@@ -5714,6 +6185,125 @@ namespace Kellerhoff.ServiceReferenceDLL {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerVencimientosResumenPorFecha", ReplyAction="*")]
         System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaResponse> ObtenerVencimientosResumenPorFechaAsync(Kellerhoff.ServiceReferenceDLL.ObtenerVencimientosResumenPorFechaRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento colSDC del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarReclamoFacturadoNoEnviado", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoResponse AgregarReclamoFacturadoNoEnviado(Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AgregarReclamoFacturadoNoEnviado", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoResponse> AgregarReclamoFacturadoNoEnviadoAsync(Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento LoginWeb del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerReclamosFacturadoNoEnviadoPorCliente", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteResponse ObtenerReclamosFacturadoNoEnviadoPorCliente(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerReclamosFacturadoNoEnviadoPorCliente", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteResponse> ObtenerReclamosFacturadoNoEnviadoPorClienteAsync(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento NumeroReclamo del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse> ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroAsync(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento TipoComprobante del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerAplicacionesDeComprobantesPorTipoYNumero", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse ObtenerAplicacionesDeComprobantesPorTipoYNumero(Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerAplicacionesDeComprobantesPorTipoYNumero", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse> ObtenerAplicacionesDeComprobantesPorTipoYNumeroAsync(Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento TipoComprobante del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerMovimientoPorTipoYNumeroDeComprobante", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse ObtenerMovimientoPorTipoYNumeroDeComprobante(Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerMovimientoPorTipoYNumeroDeComprobante", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse> ObtenerMovimientoPorTipoYNumeroDeComprobanteAsync(Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento NumeroFactura del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObj" +
+            "etoComercial", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObj" +
+            "etoComercial", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse> ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialAsync(Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento ObtenerRecibo_PruebaResult del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerRecibo_Prueba", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse ObtenerRecibo_Prueba(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerRecibo_Prueba", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse> ObtenerRecibo_PruebaAsync(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento pNumeroDoc del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerRecibo", ReplyAction="*")]
+        Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse ObtenerRecibo(Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerRecibo", ReplyAction="*")]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse> ObtenerReciboAsync(Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class HelloWorldRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="HelloWorld", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.HelloWorldRequestBody Body;
+        
+        public HelloWorldRequest() {
+        }
+        
+        public HelloWorldRequest(Kellerhoff.ServiceReferenceDLL.HelloWorldRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class HelloWorldRequestBody {
+        
+        public HelloWorldRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class HelloWorldResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="HelloWorldResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.HelloWorldResponseBody Body;
+        
+        public HelloWorldResponse() {
+        }
+        
+        public HelloWorldResponse(Kellerhoff.ServiceReferenceDLL.HelloWorldResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class HelloWorldResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string HelloWorldResult;
+        
+        public HelloWorldResponseBody() {
+        }
+        
+        public HelloWorldResponseBody(string HelloWorldResult) {
+            this.HelloWorldResult = HelloWorldResult;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -9177,6 +9767,580 @@ namespace Kellerhoff.ServiceReferenceDLL {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AgregarReclamoFacturadoNoEnviadoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="AgregarReclamoFacturadoNoEnviado", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequestBody Body;
+        
+        public AgregarReclamoFacturadoNoEnviadoRequest() {
+        }
+        
+        public AgregarReclamoFacturadoNoEnviadoRequest(Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class AgregarReclamoFacturadoNoEnviadoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga colSDC;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string LoginWeb;
+        
+        public AgregarReclamoFacturadoNoEnviadoRequestBody() {
+        }
+        
+        public AgregarReclamoFacturadoNoEnviadoRequestBody(Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga colSDC, string LoginWeb) {
+            this.colSDC = colSDC;
+            this.LoginWeb = LoginWeb;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class AgregarReclamoFacturadoNoEnviadoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="AgregarReclamoFacturadoNoEnviadoResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoResponseBody Body;
+        
+        public AgregarReclamoFacturadoNoEnviadoResponse() {
+        }
+        
+        public AgregarReclamoFacturadoNoEnviadoResponse(Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class AgregarReclamoFacturadoNoEnviadoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string AgregarReclamoFacturadoNoEnviadoResult;
+        
+        public AgregarReclamoFacturadoNoEnviadoResponseBody() {
+        }
+        
+        public AgregarReclamoFacturadoNoEnviadoResponseBody(string AgregarReclamoFacturadoNoEnviadoResult) {
+            this.AgregarReclamoFacturadoNoEnviadoResult = AgregarReclamoFacturadoNoEnviadoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerReclamosFacturadoNoEnviadoPorClienteRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerReclamosFacturadoNoEnviadoPorCliente", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequestBody Body;
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClienteRequest() {
+        }
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClienteRequest(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerReclamosFacturadoNoEnviadoPorClienteRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string LoginWeb;
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClienteRequestBody() {
+        }
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClienteRequestBody(string LoginWeb) {
+            this.LoginWeb = LoginWeb;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerReclamosFacturadoNoEnviadoPorClienteResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerReclamosFacturadoNoEnviadoPorClienteResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteResponseBody Body;
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClienteResponse() {
+        }
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClienteResponse(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerReclamosFacturadoNoEnviadoPorClienteResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga ObtenerReclamosFacturadoNoEnviadoPorClienteResult;
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClienteResponseBody() {
+        }
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClienteResponseBody(Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga ObtenerReclamosFacturadoNoEnviadoPorClienteResult) {
+            this.ObtenerReclamosFacturadoNoEnviadoPorClienteResult = ObtenerReclamosFacturadoNoEnviadoPorClienteResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequestBody Body;
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest() {
+        }
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string NumeroReclamo;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string LoginWeb;
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequestBody() {
+        }
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequestBody(string NumeroReclamo, string LoginWeb) {
+            this.NumeroReclamo = NumeroReclamo;
+            this.LoginWeb = LoginWeb;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponseBody Body;
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse() {
+        }
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResult;
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponseBody() {
+        }
+        
+        public ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponseBody(Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResult) {
+            this.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResult = ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerAplicacionesDeComprobantesPorTipoYNumero", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequestBody Body;
+        
+        public ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest() {
+        }
+        
+        public ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest(Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string TipoComprobante;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string NumeroComprobante;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string pLoginWeb;
+        
+        public ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequestBody() {
+        }
+        
+        public ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequestBody(string TipoComprobante, string NumeroComprobante, string pLoginWeb) {
+            this.TipoComprobante = TipoComprobante;
+            this.NumeroComprobante = NumeroComprobante;
+            this.pLoginWeb = pLoginWeb;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponseBody Body;
+        
+        public ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse() {
+        }
+        
+        public ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse(Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCCtaCteMovimiento ObtenerAplicacionesDeComprobantesPorTipoYNumeroResult;
+        
+        public ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponseBody() {
+        }
+        
+        public ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponseBody(Kellerhoff.ServiceReferenceDLL.ArrayOfCCtaCteMovimiento ObtenerAplicacionesDeComprobantesPorTipoYNumeroResult) {
+            this.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResult = ObtenerAplicacionesDeComprobantesPorTipoYNumeroResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerMovimientoPorTipoYNumeroDeComprobante", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequestBody Body;
+        
+        public ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest() {
+        }
+        
+        public ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest(Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerMovimientoPorTipoYNumeroDeComprobanteRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string TipoComprobante;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string NumeroComprobante;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string pLoginWeb;
+        
+        public ObtenerMovimientoPorTipoYNumeroDeComprobanteRequestBody() {
+        }
+        
+        public ObtenerMovimientoPorTipoYNumeroDeComprobanteRequestBody(string TipoComprobante, string NumeroComprobante, string pLoginWeb) {
+            this.TipoComprobante = TipoComprobante;
+            this.NumeroComprobante = NumeroComprobante;
+            this.pLoginWeb = pLoginWeb;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteResponseBody Body;
+        
+        public ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse() {
+        }
+        
+        public ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse(Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerMovimientoPorTipoYNumeroDeComprobanteResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.cCtaCteMovimiento ObtenerMovimientoPorTipoYNumeroDeComprobanteResult;
+        
+        public ObtenerMovimientoPorTipoYNumeroDeComprobanteResponseBody() {
+        }
+        
+        public ObtenerMovimientoPorTipoYNumeroDeComprobanteResponseBody(Kellerhoff.ServiceReferenceDLL.cCtaCteMovimiento ObtenerMovimientoPorTipoYNumeroDeComprobanteResult) {
+            this.ObtenerMovimientoPorTipoYNumeroDeComprobanteResult = ObtenerMovimientoPorTipoYNumeroDeComprobanteResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequestBody Body;
+        
+        public ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest() {
+        }
+        
+        public ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest(Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string NumeroFactura;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string ObjetoComercial;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string LoginWeb;
+        
+        public ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequestBody() {
+        }
+        
+        public ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequestBody(string NumeroFactura, string ObjetoComercial, string LoginWeb) {
+            this.NumeroFactura = NumeroFactura;
+            this.ObjetoComercial = ObjetoComercial;
+            this.LoginWeb = LoginWeb;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRespons" +
+            "e", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponseBody Body;
+        
+        public ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse() {
+        }
+        
+        public ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse(Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public double ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResult;
+        
+        public ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponseBody() {
+        }
+        
+        public ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponseBody(double ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResult) {
+            this.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResult = ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerRecibo_PruebaRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerRecibo_Prueba", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequestBody Body;
+        
+        public ObtenerRecibo_PruebaRequest() {
+        }
+        
+        public ObtenerRecibo_PruebaRequest(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class ObtenerRecibo_PruebaRequestBody {
+        
+        public ObtenerRecibo_PruebaRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerRecibo_PruebaResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerRecibo_PruebaResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponseBody Body;
+        
+        public ObtenerRecibo_PruebaResponse() {
+        }
+        
+        public ObtenerRecibo_PruebaResponse(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerRecibo_PruebaResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string ObtenerRecibo_PruebaResult;
+        
+        public ObtenerRecibo_PruebaResponseBody() {
+        }
+        
+        public ObtenerRecibo_PruebaResponseBody(string ObtenerRecibo_PruebaResult) {
+            this.ObtenerRecibo_PruebaResult = ObtenerRecibo_PruebaResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerReciboRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerRecibo", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequestBody Body;
+        
+        public ObtenerReciboRequest() {
+        }
+        
+        public ObtenerReciboRequest(Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerReciboRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string pNumeroDoc;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string pLoginWeb;
+        
+        public ObtenerReciboRequestBody() {
+        }
+        
+        public ObtenerReciboRequestBody(string pNumeroDoc, string pLoginWeb) {
+            this.pNumeroDoc = pNumeroDoc;
+            this.pLoginWeb = pLoginWeb;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ObtenerReciboResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ObtenerReciboResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponseBody Body;
+        
+        public ObtenerReciboResponse() {
+        }
+        
+        public ObtenerReciboResponse(Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ObtenerReciboResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Kellerhoff.ServiceReferenceDLL.cRecibo ObtenerReciboResult;
+        
+        public ObtenerReciboResponseBody() {
+        }
+        
+        public ObtenerReciboResponseBody(Kellerhoff.ServiceReferenceDLL.cRecibo ObtenerReciboResult) {
+            this.ObtenerReciboResult = ObtenerReciboResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ServiceSoapChannel : Kellerhoff.ServiceReferenceDLL.ServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -9202,6 +10366,29 @@ namespace Kellerhoff.ServiceReferenceDLL {
         
         public ServiceSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.HelloWorldResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.HelloWorld(Kellerhoff.ServiceReferenceDLL.HelloWorldRequest request) {
+            return base.Channel.HelloWorld(request);
+        }
+        
+        public string HelloWorld() {
+            Kellerhoff.ServiceReferenceDLL.HelloWorldRequest inValue = new Kellerhoff.ServiceReferenceDLL.HelloWorldRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.HelloWorldRequestBody();
+            Kellerhoff.ServiceReferenceDLL.HelloWorldResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).HelloWorld(inValue);
+            return retVal.Body.HelloWorldResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.HelloWorldResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.HelloWorldAsync(Kellerhoff.ServiceReferenceDLL.HelloWorldRequest request) {
+            return base.Channel.HelloWorldAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.HelloWorldResponse> HelloWorldAsync() {
+            Kellerhoff.ServiceReferenceDLL.HelloWorldRequest inValue = new Kellerhoff.ServiceReferenceDLL.HelloWorldRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.HelloWorldRequestBody();
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).HelloWorldAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -9727,6 +10914,14 @@ namespace Kellerhoff.ServiceReferenceDLL {
             inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerSaldoResumenAbiertoRequestBody();
             inValue.Body.pLoginWeb = pLoginWeb;
             return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerSaldoResumenAbiertoAsync(inValue);
+        }
+        
+        public void ObtenerSaldosPresentacionParaComposicion_Prueba() {
+            base.Channel.ObtenerSaldosPresentacionParaComposicion_Prueba();
+        }
+        
+        public System.Threading.Tasks.Task ObtenerSaldosPresentacionParaComposicion_PruebaAsync() {
+            return base.Channel.ObtenerSaldosPresentacionParaComposicion_PruebaAsync();
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -10529,6 +11724,222 @@ namespace Kellerhoff.ServiceReferenceDLL {
             inValue.Body.NumeroComprobante = NumeroComprobante;
             inValue.Body.FechaVencimiento = FechaVencimiento;
             return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerVencimientosResumenPorFechaAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.AgregarReclamoFacturadoNoEnviado(Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequest request) {
+            return base.Channel.AgregarReclamoFacturadoNoEnviado(request);
+        }
+        
+        public string AgregarReclamoFacturadoNoEnviado(Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga colSDC, string LoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequest inValue = new Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequestBody();
+            inValue.Body.colSDC = colSDC;
+            inValue.Body.LoginWeb = LoginWeb;
+            Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).AgregarReclamoFacturadoNoEnviado(inValue);
+            return retVal.Body.AgregarReclamoFacturadoNoEnviadoResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.AgregarReclamoFacturadoNoEnviadoAsync(Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequest request) {
+            return base.Channel.AgregarReclamoFacturadoNoEnviadoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoResponse> AgregarReclamoFacturadoNoEnviadoAsync(Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga colSDC, string LoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequest inValue = new Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.AgregarReclamoFacturadoNoEnviadoRequestBody();
+            inValue.Body.colSDC = colSDC;
+            inValue.Body.LoginWeb = LoginWeb;
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).AgregarReclamoFacturadoNoEnviadoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerReclamosFacturadoNoEnviadoPorCliente(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequest request) {
+            return base.Channel.ObtenerReclamosFacturadoNoEnviadoPorCliente(request);
+        }
+        
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga ObtenerReclamosFacturadoNoEnviadoPorCliente(string LoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequestBody();
+            inValue.Body.LoginWeb = LoginWeb;
+            Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerReclamosFacturadoNoEnviadoPorCliente(inValue);
+            return retVal.Body.ObtenerReclamosFacturadoNoEnviadoPorClienteResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerReclamosFacturadoNoEnviadoPorClienteAsync(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequest request) {
+            return base.Channel.ObtenerReclamosFacturadoNoEnviadoPorClienteAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteResponse> ObtenerReclamosFacturadoNoEnviadoPorClienteAsync(string LoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClienteRequestBody();
+            inValue.Body.LoginWeb = LoginWeb;
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerReclamosFacturadoNoEnviadoPorClienteAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest request) {
+            return base.Channel.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(request);
+        }
+        
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCDevolucionItemPrecarga ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(string NumeroReclamo, string LoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequestBody();
+            inValue.Body.NumeroReclamo = NumeroReclamo;
+            inValue.Body.LoginWeb = LoginWeb;
+            Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(inValue);
+            return retVal.Body.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroAsync(Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest request) {
+            return base.Channel.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse> ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroAsync(string NumeroReclamo, string LoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroRequestBody();
+            inValue.Body.NumeroReclamo = NumeroReclamo;
+            inValue.Body.LoginWeb = LoginWeb;
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerAplicacionesDeComprobantesPorTipoYNumero(Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest request) {
+            return base.Channel.ObtenerAplicacionesDeComprobantesPorTipoYNumero(request);
+        }
+        
+        public Kellerhoff.ServiceReferenceDLL.ArrayOfCCtaCteMovimiento ObtenerAplicacionesDeComprobantesPorTipoYNumero(string TipoComprobante, string NumeroComprobante, string pLoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequestBody();
+            inValue.Body.TipoComprobante = TipoComprobante;
+            inValue.Body.NumeroComprobante = NumeroComprobante;
+            inValue.Body.pLoginWeb = pLoginWeb;
+            Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerAplicacionesDeComprobantesPorTipoYNumero(inValue);
+            return retVal.Body.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerAplicacionesDeComprobantesPorTipoYNumeroAsync(Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest request) {
+            return base.Channel.ObtenerAplicacionesDeComprobantesPorTipoYNumeroAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse> ObtenerAplicacionesDeComprobantesPorTipoYNumeroAsync(string TipoComprobante, string NumeroComprobante, string pLoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerAplicacionesDeComprobantesPorTipoYNumeroRequestBody();
+            inValue.Body.TipoComprobante = TipoComprobante;
+            inValue.Body.NumeroComprobante = NumeroComprobante;
+            inValue.Body.pLoginWeb = pLoginWeb;
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerAplicacionesDeComprobantesPorTipoYNumeroAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerMovimientoPorTipoYNumeroDeComprobante(Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest request) {
+            return base.Channel.ObtenerMovimientoPorTipoYNumeroDeComprobante(request);
+        }
+        
+        public Kellerhoff.ServiceReferenceDLL.cCtaCteMovimiento ObtenerMovimientoPorTipoYNumeroDeComprobante(string TipoComprobante, string NumeroComprobante, string pLoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequestBody();
+            inValue.Body.TipoComprobante = TipoComprobante;
+            inValue.Body.NumeroComprobante = NumeroComprobante;
+            inValue.Body.pLoginWeb = pLoginWeb;
+            Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerMovimientoPorTipoYNumeroDeComprobante(inValue);
+            return retVal.Body.ObtenerMovimientoPorTipoYNumeroDeComprobanteResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerMovimientoPorTipoYNumeroDeComprobanteAsync(Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest request) {
+            return base.Channel.ObtenerMovimientoPorTipoYNumeroDeComprobanteAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse> ObtenerMovimientoPorTipoYNumeroDeComprobanteAsync(string TipoComprobante, string NumeroComprobante, string pLoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerMovimientoPorTipoYNumeroDeComprobanteRequestBody();
+            inValue.Body.TipoComprobante = TipoComprobante;
+            inValue.Body.NumeroComprobante = NumeroComprobante;
+            inValue.Body.pLoginWeb = pLoginWeb;
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerMovimientoPorTipoYNumeroDeComprobanteAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest request) {
+            return base.Channel.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(request);
+        }
+        
+        public double ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(string NumeroFactura, string ObjetoComercial, string LoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequestBody();
+            inValue.Body.NumeroFactura = NumeroFactura;
+            inValue.Body.ObjetoComercial = ObjetoComercial;
+            inValue.Body.LoginWeb = LoginWeb;
+            Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(inValue);
+            return retVal.Body.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialAsync(Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest request) {
+            return base.Channel.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse> ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialAsync(string NumeroFactura, string ObjetoComercial, string LoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialRequestBody();
+            inValue.Body.NumeroFactura = NumeroFactura;
+            inValue.Body.ObjetoComercial = ObjetoComercial;
+            inValue.Body.LoginWeb = LoginWeb;
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerRecibo_Prueba(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest request) {
+            return base.Channel.ObtenerRecibo_Prueba(request);
+        }
+        
+        public string ObtenerRecibo_Prueba() {
+            Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequestBody();
+            Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerRecibo_Prueba(inValue);
+            return retVal.Body.ObtenerRecibo_PruebaResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerRecibo_PruebaAsync(Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest request) {
+            return base.Channel.ObtenerRecibo_PruebaAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaResponse> ObtenerRecibo_PruebaAsync() {
+            Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerRecibo_PruebaRequestBody();
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerRecibo_PruebaAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerRecibo(Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest request) {
+            return base.Channel.ObtenerRecibo(request);
+        }
+        
+        public Kellerhoff.ServiceReferenceDLL.cRecibo ObtenerRecibo(string pNumeroDoc, string pLoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequestBody();
+            inValue.Body.pNumeroDoc = pNumeroDoc;
+            inValue.Body.pLoginWeb = pLoginWeb;
+            Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse retVal = ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerRecibo(inValue);
+            return retVal.Body.ObtenerReciboResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse> Kellerhoff.ServiceReferenceDLL.ServiceSoap.ObtenerReciboAsync(Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest request) {
+            return base.Channel.ObtenerReciboAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<Kellerhoff.ServiceReferenceDLL.ObtenerReciboResponse> ObtenerReciboAsync(string pNumeroDoc, string pLoginWeb) {
+            Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest inValue = new Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequest();
+            inValue.Body = new Kellerhoff.ServiceReferenceDLL.ObtenerReciboRequestBody();
+            inValue.Body.pNumeroDoc = pNumeroDoc;
+            inValue.Body.pLoginWeb = pLoginWeb;
+            return ((Kellerhoff.ServiceReferenceDLL.ServiceSoap)(this)).ObtenerReciboAsync(inValue);
         }
     }
 }

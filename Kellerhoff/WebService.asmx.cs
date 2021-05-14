@@ -128,6 +128,37 @@ namespace Kellerhoff
             return resultado;
         }
 
+        public static string AgregarReclamoFacturadoNoEnviadoCliente(List<cDevolucionItemPrecarga> Item, string pLoginWeb)
+        {
+            string resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+
+                resultado = capaWebServiceDLL.AgregarReclamoFacturadoNoEnviadoCliente(Item, pLoginWeb);
+            }
+            return resultado;
+        }
+
+        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> ObtenerReclamosFacturadoNoEnviadoPorCliente(string pLoginWeb)
+        {
+            List<ServiceReferenceDLL.cDevolucionItemPrecarga> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerReclamosFacturadoNoEnviadoPorCliente(pLoginWeb);
+            }
+            return resultado;
+        }
+
+        public static List<ServiceReferenceDLL.cDevolucionItemPrecarga> ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(string pNumeroDevolucion, string pLoginWeb)
+        {
+            List<ServiceReferenceDLL.cDevolucionItemPrecarga> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero(pNumeroDevolucion, pLoginWeb);
+            }
+            return resultado;
+        }
+
         public static long ObtenerCantidadSolicitadaDevolucionPorProductoFacturaYCliente(string NombreProducto, string NumeroFactura, string pLoginWeb)
         {
             long resultado = 0;
@@ -1010,188 +1041,7 @@ namespace Kellerhoff
         }
         private static cClientes ConvertToCliente(DataRow pItem)
         {
-            cClientes obj = new cClientes();
-            if (pItem["cli_codigo"] != DBNull.Value)
-            {
-                obj.cli_codigo = Convert.ToInt32(pItem["cli_codigo"]);
-            }
-            if (pItem["cli_nombre"] != DBNull.Value)
-            {
-                obj.cli_nombre = pItem["cli_nombre"].ToString();
-            }
-            if (pItem["cli_dirección"] != DBNull.Value)
-            {
-                obj.cli_dirección = pItem["cli_dirección"].ToString();
-            }
-            if (pItem["cli_Telefono"] != DBNull.Value)
-            {
-                obj.cli_telefono = pItem["cli_Telefono"].ToString();
-            }
-            if (pItem["cli_localidad"] != DBNull.Value)
-            {
-                obj.cli_localidad = pItem["cli_localidad"].ToString();
-            }
-            if (pItem["cli_codprov"] != DBNull.Value)
-            {
-                obj.cli_codprov = pItem["cli_codprov"].ToString();
-            }
-            if (pItem["cli_email"] != DBNull.Value)
-            {
-                obj.cli_email = pItem["cli_email"].ToString();
-            }
-            if (pItem["cli_paginaweb"] != DBNull.Value)
-            {
-                obj.cli_paginaweb = pItem["cli_paginaweb"].ToString();
-            }
-            if (pItem["cli_codsuc"] != DBNull.Value)
-            {
-                obj.cli_codsuc = pItem["cli_codsuc"].ToString();
-            }
-            if (pItem["cli_pordesespmed"] != DBNull.Value)
-            {
-                obj.cli_pordesespmed = Convert.ToDecimal(pItem["cli_pordesespmed"]);
-            }
-            if (pItem["cli_pordesbetmed"] != DBNull.Value)
-            {
-                obj.cli_pordesbetmed = Convert.ToDecimal(pItem["cli_pordesbetmed"]);
-            }
-            if (pItem["cli_pordesnetos"] != DBNull.Value)
-            {
-                obj.cli_pordesnetos = Convert.ToDecimal(pItem["cli_pordesnetos"]);
-            }
-            if (pItem["cli_pordesfinperfcyo"] != DBNull.Value)
-            {
-                obj.cli_pordesfinperfcyo = Convert.ToDecimal(pItem["cli_pordesfinperfcyo"]);
-            }
-            if (pItem["cli_pordescomperfcyo"] != DBNull.Value)
-            {
-                obj.cli_pordescomperfcyo = Convert.ToDecimal(pItem["cli_pordescomperfcyo"]);
-            }
-            if (pItem["cli_deswebespmed"] != DBNull.Value)
-            {
-                obj.cli_deswebespmed = Convert.ToBoolean(pItem["cli_deswebespmed"]);
-            }
-            if (pItem["cli_deswebnetmed"] != DBNull.Value)
-            {
-                obj.cli_deswebnetmed = Convert.ToBoolean(pItem["cli_deswebnetmed"]);
-            }
-            if (pItem["cli_deswebnetacc"] != DBNull.Value)
-            {
-                obj.cli_deswebnetacc = Convert.ToBoolean(pItem["cli_deswebnetacc"]);
-            }
-            if (pItem["cli_deswebnetperpropio"] != DBNull.Value)
-            {
-                obj.cli_deswebnetperpropio = Convert.ToBoolean(pItem["cli_deswebnetperpropio"]);
-            }
-            if (pItem["cli_deswebnetpercyo"] != DBNull.Value)
-            {
-                obj.cli_deswebnetpercyo = Convert.ToBoolean(pItem["cli_deswebnetpercyo"]);
-            }
-            if (pItem["cli_destransfer"] != DBNull.Value)
-            {
-                obj.cli_destransfer = Convert.ToDecimal(pItem["cli_destransfer"]);
-            }
-            if (pItem["cli_login"] != DBNull.Value)
-            {
-                obj.cli_login = pItem["cli_login"].ToString();
-            }
-            if (pItem["cli_codtpoenv"] != DBNull.Value)
-            {
-                obj.cli_codtpoenv = pItem["cli_codtpoenv"].ToString();
-            }
-            if (pItem["cli_codrep"] != DBNull.Value)
-            {
-                obj.cli_codrep = pItem["cli_codrep"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("cli_isGLN"))
-            {
-                if (pItem["cli_isGLN"] != DBNull.Value)
-                {
-                    obj.cli_isGLN = Convert.ToBoolean(pItem["cli_isGLN"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_tomaOfertas"))
-            {
-                if (pItem["cli_tomaOfertas"] != DBNull.Value)
-                {
-                    obj.cli_tomaOfertas = Convert.ToBoolean(pItem["cli_tomaOfertas"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_tomaPerfumeria"))
-            {
-                if (pItem["cli_tomaPerfumeria"] != DBNull.Value)
-                {
-                    obj.cli_tomaPerfumeria = Convert.ToBoolean(pItem["cli_tomaPerfumeria"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_tomaTransfers"))
-            {
-                if (pItem["cli_tomaTransfers"] != DBNull.Value)
-                {
-                    obj.cli_tomaTransfers = Convert.ToBoolean(pItem["cli_tomaTransfers"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_password"))
-            {
-                if (pItem["cli_password"] != DBNull.Value)
-                {
-                    obj.cli_password = Convert.ToString(pItem["cli_password"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_estado"))
-            {
-                if (pItem["cli_estado"] != DBNull.Value)
-                {
-                    obj.cli_estado = Convert.ToString(pItem["cli_estado"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_tipo"))
-            {
-                if (pItem["cli_tipo"] != DBNull.Value)
-                {
-                    obj.cli_tipo = Convert.ToString(pItem["cli_tipo"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_mostrardireccion"))
-            {
-                if (pItem["cli_mostrardireccion"] != DBNull.Value)
-                {
-                    obj.cli_mostrardireccion = Convert.ToBoolean(pItem["cli_mostrardireccion"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_mostrarweb"))
-            {
-                if (pItem["cli_mostrarweb"] != DBNull.Value)
-                {
-                    obj.cli_mostrarweb = Convert.ToBoolean(pItem["cli_mostrarweb"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_mostrartelefono"))
-            {
-                if (pItem["cli_mostrartelefono"] != DBNull.Value)
-                {
-                    obj.cli_mostrartelefono = Convert.ToBoolean(pItem["cli_mostrartelefono"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_mostraremail"))
-            {
-                if (pItem["cli_mostraremail"] != DBNull.Value)
-                {
-                    obj.cli_mostraremail = Convert.ToBoolean(pItem["cli_mostraremail"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("cli_IdSucursalAlternativa") && pItem["cli_IdSucursalAlternativa"] != DBNull.Value)
-                obj.cli_IdSucursalAlternativa = Convert.ToString(pItem["cli_IdSucursalAlternativa"]);
-
-            if (pItem.Table.Columns.Contains("cli_AceptaPsicotropicos") && pItem["cli_AceptaPsicotropicos"] != DBNull.Value)
-                obj.cli_AceptaPsicotropicos = Convert.ToBoolean(pItem["cli_AceptaPsicotropicos"]);
-            if (pItem.Table.Columns.Contains("cli_promotor") && pItem["cli_promotor"] != DBNull.Value)
-                obj.cli_promotor = Convert.ToString(pItem["cli_promotor"]);
-            if (pItem.Table.Columns.Contains("cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto") && pItem["cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto"] != DBNull.Value)
-                obj.cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto = Convert.ToDecimal(pItem["cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto"]);
-            if (pItem.Table.Columns.Contains("cli_GrupoCliente") && pItem["cli_GrupoCliente"] != DBNull.Value)
-                obj.cli_GrupoCliente = Convert.ToString(pItem["cli_GrupoCliente"]);
-            return obj;
+            return Codigo.clases.Generales.Serializador.DeserializarJson<cClientes>(Codigo.clases.Generales.Serializador.SerializarAJson(DKbase.web.acceso.ConvertToCliente(pItem)));
         }
         public static cProductos RecuperarProductoPorNombre(string pNombreProducto)
         {
@@ -2808,12 +2658,12 @@ namespace Kellerhoff
                 obj.tde_PrecioConDescuentoDirecto = Convert.ToDecimal(pItem["tde_PrecioConDescuentoDirecto"]);
             if (pItem.Table.Columns.Contains("tde_PorcARestarDelDtoDeCliente") && pItem["tde_PorcARestarDelDtoDeCliente"] != DBNull.Value)
                 obj.tde_PorcARestarDelDtoDeCliente = Convert.ToDecimal(pItem["tde_PorcARestarDelDtoDeCliente"]);
-            //
             if (pItem.Table.Columns.Contains("pro_PrecioBase") && pItem["pro_PrecioBase"] != DBNull.Value)
                 obj.pro_PrecioBase = Convert.ToDecimal(pItem["pro_PrecioBase"]);
             if (pItem.Table.Columns.Contains("pro_PorcARestarDelDtoDeCliente") && pItem["pro_PorcARestarDelDtoDeCliente"] != DBNull.Value)
                 obj.pro_PorcARestarDelDtoDeCliente = Convert.ToDecimal(pItem["pro_PorcARestarDelDtoDeCliente"]);
-            //
+            if (pItem.Table.Columns.Contains("pro_AltoCosto") && pItem["pro_AltoCosto"] != DBNull.Value)
+                obj.pro_AltoCosto = Convert.ToBoolean(pItem["pro_AltoCosto"]);
             return obj;
         }
         public static List<cTransfer> RecuperarTodosTransferMasDetallePorIdProducto(string pNombreProducto, cClientes pClientes)
@@ -3404,6 +3254,27 @@ namespace Kellerhoff
             }
         }
 
+        public static List<cDevolucionItemPrecarga> RecuperarItemsReclamoFacturadoNoEnviado(int pIdCliente)
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                List<cDevolucionItemPrecarga> resultado = new List<cDevolucionItemPrecarga>();
+                DataTable tabla = capaDevoluciones.RecuperarItemsReclamoFacturadoNoEnviado(pIdCliente);
+                if (tabla != null)
+                {
+                    foreach (DataRow item in tabla.Rows)
+                    {
+                        resultado.Add(ConvertToItemDevPrecarga(item));
+                    }
+                }
+                return resultado;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static bool AgregarDevolucionItemPrecarga(cDevolucionItemPrecarga Item)
         {
 
@@ -3415,6 +3286,17 @@ namespace Kellerhoff
             return result;
         }
 
+        public static bool AgregarReclamoFacturadoNoEnviadoItemPrecarga(cDevolucionItemPrecarga Item)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.AgregarReclamoFacturadoNoEnviadoItemPrecarga(Item);
+            }
+            return result;
+        }
+        
         public static bool EliminarDevolucionItemPrecarga(int NumeroItem)
         {
 
@@ -3422,6 +3304,17 @@ namespace Kellerhoff
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 result = capaDevoluciones.EliminarDevolucionItemPrecarga(NumeroItem);
+            }
+            return result;
+        }
+        
+        public static bool ElimminarItemReclamoFNEPrecarga(int NumeroItem)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.ElimminarItemReclamoFNEPrecarga(NumeroItem);
             }
             return result;
         }
@@ -3458,6 +3351,18 @@ namespace Kellerhoff
             }
             return result;
         }
+        
+        public static bool EliminarPrecargaReclamoFNEPorCliente(int NumeroCliente)
+        {
+
+            bool result = false;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                result = capaDevoluciones.EliminarPrecargaReclamoFNEPorCliente(NumeroCliente);
+            }
+            return result;
+        }
+
 
         //public static List<cDevolucionItemPrecarga> RecuperarDevolucionesPorCliente(int pIdCliente)
         //{
@@ -4869,6 +4774,15 @@ namespace Kellerhoff
             }
             return resultado;
         }
+        public static ServiceReferenceDLL.cRecibo ObtenerRecibo(string pNumeroDoc, string pLoginWeb)
+        {
+            ServiceReferenceDLL.cRecibo resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaWebServiceDLL.ObtenerRecibo(pNumeroDoc, pLoginWeb);
+            }
+            return resultado;
+        }
         //public static List<ServiceReferenceDLL.cObraSocialClienteItem> ObtenerItemsDeObraSocialCliente(string pNumeroObraSocialCliente)
         //{
         //    List<ServiceReferenceDLL.cObraSocialClienteItem> resultado = null;
@@ -5677,80 +5591,7 @@ namespace Kellerhoff
         //
         public static cProductos ConvertToProductos(DataRow pItem)
         {
-            cProductos obj = new cProductos();
-            if (pItem.Table.Columns.Contains("pro_codigo") && pItem["pro_codigo"] != DBNull.Value)
-            {
-                obj.pro_codigo = pItem["pro_codigo"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("pro_nombre") && pItem["pro_nombre"] != DBNull.Value)
-            {
-                obj.pro_nombre = pItem["pro_nombre"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("pro_precio") && pItem["pro_precio"] != DBNull.Value)
-            {
-                obj.pro_precio = Convert.ToDecimal(pItem["pro_precio"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_preciofarmacia") && pItem["pro_preciofarmacia"] != DBNull.Value)
-            {
-                obj.pro_preciofarmacia = Convert.ToDecimal(pItem["pro_preciofarmacia"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_ofeunidades") && pItem["pro_ofeunidades"] != DBNull.Value)
-            {
-                obj.pro_ofeunidades = Convert.ToInt32(pItem["pro_ofeunidades"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_ofeporcentaje") && pItem["pro_ofeporcentaje"] != DBNull.Value)
-            {
-                obj.pro_ofeporcentaje = Convert.ToDecimal(pItem["pro_ofeporcentaje"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_neto") && pItem["pro_neto"] != DBNull.Value)
-            {
-                obj.pro_neto = Convert.ToBoolean(pItem["pro_neto"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_codtpopro") && pItem["pro_codtpopro"] != DBNull.Value)
-            {
-                obj.pro_codtpopro = pItem["pro_codtpopro"].ToString().ToUpper();
-            }
-            if (pItem.Table.Columns.Contains("pro_descuentoweb") && pItem["pro_descuentoweb"] != DBNull.Value)
-            {
-                obj.pro_descuentoweb = Convert.ToDecimal(pItem["pro_descuentoweb"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_laboratorio") && pItem["pro_laboratorio"] != DBNull.Value)
-            {
-                obj.pro_laboratorio = pItem["pro_laboratorio"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("pro_monodroga") && pItem["pro_monodroga"] != DBNull.Value)
-            {
-                obj.pro_monodroga = pItem["pro_monodroga"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("pro_codigobarra") && pItem["pro_codigobarra"] != DBNull.Value)
-            {
-                obj.pro_codigobarra = pItem["pro_codigobarra"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("pro_codigoalfabeta") && pItem["pro_codigoalfabeta"] != DBNull.Value)
-            {
-                obj.pro_codigoalfabeta = pItem["pro_codigoalfabeta"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("pro_isTrazable") && pItem["pro_isTrazable"] != DBNull.Value)
-            {
-                obj.pro_isTrazable = Convert.ToBoolean(pItem["pro_isTrazable"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_isCadenaFrio") && pItem["pro_isCadenaFrio"] != DBNull.Value)
-            {
-                obj.pro_isCadenaFrio = Convert.ToBoolean(pItem["pro_isCadenaFrio"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_acuerdo") && pItem["pro_acuerdo"] != DBNull.Value)
-            {
-                obj.pro_acuerdo = Convert.ToInt32(pItem["pro_acuerdo"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_PrecioBase") && pItem["pro_PrecioBase"] != DBNull.Value)
-            {
-                obj.pro_PrecioBase = Convert.ToDecimal(pItem["pro_PrecioBase"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_PorcARestarDelDtoDeCliente") && pItem["pro_PorcARestarDelDtoDeCliente"] != DBNull.Value)
-            {
-                obj.pro_PorcARestarDelDtoDeCliente = Convert.ToDecimal(pItem["pro_PorcARestarDelDtoDeCliente"]);
-            }
-            return obj;
+            return Codigo.clases.Generales.Serializador.DeserializarJson<cProductos>(Codigo.clases.Generales.Serializador.SerializarAJson(DKbase.web.acceso.ConvertToProductos(pItem)));
         }
 
         private static cMensajeNew ConvertToMensajeNew(DataRow pItem)
@@ -5840,6 +5681,17 @@ namespace Kellerhoff
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 resultado = capaWebServiceDLL.ObtenerVencimientosResumenPorFecha(pNumeroResumen, pFechaVencimiento);
+            }
+            return resultado;
+        }
+
+        public static double ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(string NombreProducto, string NumeroFactura, string pLoginWeb)
+        {
+            double resultado = 0;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+
+                resultado = capaWebServiceDLL.ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial(NumeroFactura, NombreProducto, pLoginWeb);
             }
             return resultado;
         }
@@ -5955,11 +5807,11 @@ namespace Kellerhoff
         }
         public static void DeleteLaboratorios(int id)
         {
-            DKbase.app.accesoApp.DeleteLaboratorios(id);
+           // DKbase.app.accesoApp.DeleteLaboratorios(id);
         }
         public static int AddUpdateLaboratorios(int id, string nombre)
         {
-            return DKbase.app.accesoApp.AddUpdateLaboratorios(id, nombre);
+            return 1;// DKbase.app.accesoApp.AddUpdateLaboratorios(id, nombre);
         }
         public static List<DKbase.Entities.Modulo> GetModulos()
         {

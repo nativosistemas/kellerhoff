@@ -305,6 +305,9 @@ function isDetalleComprobante(pValor) {
         case "OSC":
             return true;
             break;
+        case "REC":
+            return true;
+            break;
         default:
             return false;
             break;
@@ -345,10 +348,22 @@ function ObtenerLinkDeDocumentoDesdeStr(pValor) {
             case 'OSC':
                 resultado = '<a href="' + 'Documento?t=' + tipo + '&id=' + nro + '" >' + pValor + '</a>';
                 break;
+            case 'REC':
+                resultado = '<a href="' + 'Documento?t=' + tipo + '&id=' + nro + '" >' + pValor + '</a>';
+                break;
             default:
                 break;
         }
 
+    }
+    return resultado;
+}
+function getFormatoDocumentoRecibo(pValor) {
+    var resultado = pValor;
+    if (pValor.length === 14) {
+        var tipo = 'REC';
+        var nro = $.trim(pValor.replace('-', ''));
+        resultado = '<a href="' + 'Documento?t=' + tipo + '&id=' + nro + '" >' + pValor + '</a>';
     }
     return resultado;
 }
@@ -565,16 +580,18 @@ function funLog() {
 }
 
 function novedades() {
-    var html = $('.nuevo').attr('data-fecha'),
-        fechaDissmis = new Date($('.nuevo').attr('data-fecha')),
-        htmlCel = $('.nuevo-celu').html(),
+    var fechaDissmis = new Date($('.nuevo').attr('data-fecha')),
         fechaDissmisCel = new Date($('.nuevo-celu').attr('data-fecha')),
+        fechaDissmisSubLink = new Date($('.nuevo-sublink').attr('data-fecha')),
         hoy = new Date();
     if (fechaDissmis < hoy) {
         $('.nuevo').removeClass('nuevo');
     }
     if (fechaDissmisCel < hoy) {
         $('.nuevo-celu').removeClass('nuevo-celu');
+    }
+    if (fechaDissmisSubLink < hoy) {
+        $('.nuevo-sublink').removeClass('nuevo-sublink');
     }
 }
 function isMostrarImput_FacturaTrazablesProvincia(pSucursal, pIsProductoTrazable) {

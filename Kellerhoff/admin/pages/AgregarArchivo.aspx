@@ -3,9 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../../includes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="../../includes/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../../includes/js/AgregarArchivo.js?n=1" type="text/javascript"></script>
+    <script src="../../includes/js/AgregarArchivo.js?n=2" type="text/javascript"></script>
     <script type="text/javascript">
-
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

@@ -22,8 +22,8 @@
     <MetadataSource Address="http://172.16.0.4/Service.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service2.disco" MetadataType="Disco" ID="1535ce63-d73a-4841-9e09-565001ca931b" SourceId="1" SourceUrl="http://172.16.0.4/Service.asmx?disco" />
-    <MetadataFile FileName="Service2.wsdl" MetadataType="Wsdl" ID="f464ed15-cde4-4f33-ac0c-6315e59cc9cf" SourceId="1" SourceUrl="http://172.16.0.4/Service.asmx?wsdl" />
+    <MetadataFile FileName="Service2.disco" MetadataType="Disco" ID="225a3983-2123-4b3b-867f-6b6c8191c9ce" SourceId="1" SourceUrl="http://172.16.0.4/Service.asmx?disco" />
+    <MetadataFile FileName="Service2.wsdl" MetadataType="Wsdl" ID="1bda0333-10c3-4b87-ac10-96ce8a73c6c4" SourceId="1" SourceUrl="http://172.16.0.4/Service.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

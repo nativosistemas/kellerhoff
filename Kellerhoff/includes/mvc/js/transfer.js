@@ -545,7 +545,7 @@ function AgregarTransferHtmlAlPopUp(pIndex) {
                         // 25/02/2018
                         var strOcultar = false;
                         if (listaTransfer[pIndex].tfr_nombre == 'TRANSFER PAÑALES PAMI') {
-                            if ((cli_codsuc() == 'CO' || cli_codsuc() == 'CD' || cli_codsuc() == 'SF' || cli_codsuc() == 'CB')
+                            if ((cli_codsuc() == 'CO' || cli_codsuc() == 'CD' || cli_codsuc() == 'SF' || cli_codsuc() == 'CB' || cli_codsuc() == 'VM' || cli_codsuc() == 'RC')
                                 && listaSucursalesDependienteInfo[iSucursalNombre].sde_sucursal == 'CC') {
                                 strOcultar = true;
                             }
@@ -580,7 +580,7 @@ function AgregarTransferHtmlAlPopUp(pIndex) {
         // 25/02/2018
         var strOcultar = false;
         if (listaTransfer[pIndex].tfr_nombre == 'TRANSFER PAÑALES PAMI') {
-            if ((cli_codsuc() == 'CO' || cli_codsuc() == 'CD' || cli_codsuc() == 'SF' || cli_codsuc() == 'CB')
+            if ((cli_codsuc() == 'CO' || cli_codsuc() == 'CD' || cli_codsuc() == 'SF' || cli_codsuc() == 'CB' || cli_codsuc() == 'VM' || cli_codsuc() == 'RC')
                 && listaSucursalesDependienteInfo[iSucursalNombre].sde_sucursal == 'CC') {
                 strOcultar = true;
             }

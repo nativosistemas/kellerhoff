@@ -2,6 +2,16 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="Login">
         <s:complexType>
           <s:sequence>
@@ -664,6 +674,12 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ObtenerSaldosPresentacionParaComposicion_Prueba">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerSaldosPresentacionParaComposicion_PruebaResponse">
+        <s:complexType />
+      </s:element>
       <s:element name="ObtenerSaldosPresentacionParaComposicion">
         <s:complexType>
           <s:sequence>
@@ -1288,8 +1304,169 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AgregarReclamoFacturadoNoEnviado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="colSDC" type="tns:ArrayOfCDevolucionItemPrecarga" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarReclamoFacturadoNoEnviadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarReclamoFacturadoNoEnviadoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerReclamosFacturadoNoEnviadoPorCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerReclamosFacturadoNoEnviadoPorClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerReclamosFacturadoNoEnviadoPorClienteResult" type="tns:ArrayOfCDevolucionItemPrecarga" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroReclamo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResult" type="tns:ArrayOfCDevolucionItemPrecarga" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerAplicacionesDeComprobantesPorTipoYNumero">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TipoComprobante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroComprobante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerAplicacionesDeComprobantesPorTipoYNumeroResult" type="tns:ArrayOfCCtaCteMovimiento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerMovimientoPorTipoYNumeroDeComprobante">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TipoComprobante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroComprobante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerMovimientoPorTipoYNumeroDeComprobanteResult" type="tns:cCtaCteMovimiento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NumeroFactura" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ObjetoComercial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResult" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerRecibo_Prueba">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerRecibo_PruebaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerRecibo_PruebaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerRecibo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pNumeroDoc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pLoginWeb" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerReciboResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerReciboResult" type="tns:cRecibo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="cRecibo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Numero" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FechaAnulacion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destinatario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DireccionDestinatario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocalidadDestinatario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CondicionIVADestinatarioToString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CuitDestinatario" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroCliente" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroCuentaCorriente" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipoEnvioToString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoReparto" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MontoTotal" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MontoTOTALenLetras" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CantidadHojas" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MontoEnDolares" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ComprobantePAMI" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="lista" type="tns:ArrayOfCReciboDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCReciboDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="cReciboDetalle" nillable="true" type="tns:cReciboDetalle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="cReciboDetalle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroRecibo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroHoja" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroItem" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Importe" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
   <wsdl:message name="LoginSoapIn">
     <wsdl:part name="parameters" element="tns:Login" />
   </wsdl:message>
@@ -1403,6 +1580,12 @@
   </wsdl:message>
   <wsdl:message name="ObtenerSaldoResumenAbiertoSoapOut">
     <wsdl:part name="parameters" element="tns:ObtenerSaldoResumenAbiertoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldosPresentacionParaComposicion_PruebaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldosPresentacionParaComposicion_Prueba" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerSaldosPresentacionParaComposicion_PruebaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerSaldosPresentacionParaComposicion_PruebaResponse" />
   </wsdl:message>
   <wsdl:message name="ObtenerSaldosPresentacionParaComposicionSoapIn">
     <wsdl:part name="parameters" element="tns:ObtenerSaldosPresentacionParaComposicion" />
@@ -1578,7 +1761,59 @@
   <wsdl:message name="ObtenerVencimientosResumenPorFechaSoapOut">
     <wsdl:part name="parameters" element="tns:ObtenerVencimientosResumenPorFechaResponse" />
   </wsdl:message>
+  <wsdl:message name="AgregarReclamoFacturadoNoEnviadoSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarReclamoFacturadoNoEnviado" />
+  </wsdl:message>
+  <wsdl:message name="AgregarReclamoFacturadoNoEnviadoSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarReclamoFacturadoNoEnviadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerReclamosFacturadoNoEnviadoPorClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerReclamosFacturadoNoEnviadoPorCliente" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerReclamosFacturadoNoEnviadoPorClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerReclamosFacturadoNoEnviadoPorClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerAplicacionesDeComprobantesPorTipoYNumeroSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerAplicacionesDeComprobantesPorTipoYNumero" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerAplicacionesDeComprobantesPorTipoYNumeroSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerAplicacionesDeComprobantesPorTipoYNumeroResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerMovimientoPorTipoYNumeroDeComprobanteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerMovimientoPorTipoYNumeroDeComprobante" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerMovimientoPorTipoYNumeroDeComprobanteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerMovimientoPorTipoYNumeroDeComprobanteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerRecibo_PruebaSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerRecibo_Prueba" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerRecibo_PruebaSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerRecibo_PruebaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerReciboSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerRecibo" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerReciboSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerReciboResponse" />
+  </wsdl:message>
   <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="Login">
       <wsdl:input message="tns:LoginSoapIn" />
       <wsdl:output message="tns:LoginSoapOut" />
@@ -1654,6 +1889,10 @@
     <wsdl:operation name="ObtenerSaldoResumenAbierto">
       <wsdl:input message="tns:ObtenerSaldoResumenAbiertoSoapIn" />
       <wsdl:output message="tns:ObtenerSaldoResumenAbiertoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldosPresentacionParaComposicion_Prueba">
+      <wsdl:input message="tns:ObtenerSaldosPresentacionParaComposicion_PruebaSoapIn" />
+      <wsdl:output message="tns:ObtenerSaldosPresentacionParaComposicion_PruebaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ObtenerSaldosPresentacionParaComposicion">
       <wsdl:input message="tns:ObtenerSaldosPresentacionParaComposicionSoapIn" />
@@ -1771,9 +2010,50 @@
       <wsdl:input message="tns:ObtenerVencimientosResumenPorFechaSoapIn" />
       <wsdl:output message="tns:ObtenerVencimientosResumenPorFechaSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AgregarReclamoFacturadoNoEnviado">
+      <wsdl:input message="tns:AgregarReclamoFacturadoNoEnviadoSoapIn" />
+      <wsdl:output message="tns:AgregarReclamoFacturadoNoEnviadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerReclamosFacturadoNoEnviadoPorCliente">
+      <wsdl:input message="tns:ObtenerReclamosFacturadoNoEnviadoPorClienteSoapIn" />
+      <wsdl:output message="tns:ObtenerReclamosFacturadoNoEnviadoPorClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero">
+      <wsdl:input message="tns:ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroSoapIn" />
+      <wsdl:output message="tns:ObtenerReclamosFacturadoNoEnviadoPorClientePorNumeroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAplicacionesDeComprobantesPorTipoYNumero">
+      <wsdl:input message="tns:ObtenerAplicacionesDeComprobantesPorTipoYNumeroSoapIn" />
+      <wsdl:output message="tns:ObtenerAplicacionesDeComprobantesPorTipoYNumeroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMovimientoPorTipoYNumeroDeComprobante">
+      <wsdl:input message="tns:ObtenerMovimientoPorTipoYNumeroDeComprobanteSoapIn" />
+      <wsdl:output message="tns:ObtenerMovimientoPorTipoYNumeroDeComprobanteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial">
+      <wsdl:input message="tns:ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialSoapIn" />
+      <wsdl:output message="tns:ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercialSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerRecibo_Prueba">
+      <wsdl:input message="tns:ObtenerRecibo_PruebaSoapIn" />
+      <wsdl:output message="tns:ObtenerRecibo_PruebaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerRecibo">
+      <wsdl:input message="tns:ObtenerReciboSoapIn" />
+      <wsdl:output message="tns:ObtenerReciboSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Login">
       <soap:operation soapAction="http://tempuri.org/Login" style="document" />
       <wsdl:input>
@@ -1938,6 +2218,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerSaldoResumenAbierto">
       <soap:operation soapAction="http://tempuri.org/ObtenerSaldoResumenAbierto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldosPresentacionParaComposicion_Prueba">
+      <soap:operation soapAction="http://tempuri.org/ObtenerSaldosPresentacionParaComposicion_Prueba" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2206,9 +2495,90 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AgregarReclamoFacturadoNoEnviado">
+      <soap:operation soapAction="http://tempuri.org/AgregarReclamoFacturadoNoEnviado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerReclamosFacturadoNoEnviadoPorCliente">
+      <soap:operation soapAction="http://tempuri.org/ObtenerReclamosFacturadoNoEnviadoPorCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero">
+      <soap:operation soapAction="http://tempuri.org/ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAplicacionesDeComprobantesPorTipoYNumero">
+      <soap:operation soapAction="http://tempuri.org/ObtenerAplicacionesDeComprobantesPorTipoYNumero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMovimientoPorTipoYNumeroDeComprobante">
+      <soap:operation soapAction="http://tempuri.org/ObtenerMovimientoPorTipoYNumeroDeComprobante" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial">
+      <soap:operation soapAction="http://tempuri.org/ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerRecibo_Prueba">
+      <soap:operation soapAction="http://tempuri.org/ObtenerRecibo_Prueba" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerRecibo">
+      <soap:operation soapAction="http://tempuri.org/ObtenerRecibo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Login">
       <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
       <wsdl:input>
@@ -2373,6 +2743,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerSaldoResumenAbierto">
       <soap12:operation soapAction="http://tempuri.org/ObtenerSaldoResumenAbierto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSaldosPresentacionParaComposicion_Prueba">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerSaldosPresentacionParaComposicion_Prueba" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2634,6 +3013,78 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerVencimientosResumenPorFecha">
       <soap12:operation soapAction="http://tempuri.org/ObtenerVencimientosResumenPorFecha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarReclamoFacturadoNoEnviado">
+      <soap12:operation soapAction="http://tempuri.org/AgregarReclamoFacturadoNoEnviado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerReclamosFacturadoNoEnviadoPorCliente">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerReclamosFacturadoNoEnviadoPorCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerReclamosFacturadoNoEnviadoPorClientePorNumero" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAplicacionesDeComprobantesPorTipoYNumero">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerAplicacionesDeComprobantesPorTipoYNumero" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMovimientoPorTipoYNumeroDeComprobante">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerMovimientoPorTipoYNumeroDeComprobante" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerUnidadesEnSolicitudesNCFactNoEnvNoAnuladasDeFacturayObjetoComercial" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerRecibo_Prueba">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerRecibo_Prueba" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerRecibo">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerRecibo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
