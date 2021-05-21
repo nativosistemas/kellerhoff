@@ -459,7 +459,12 @@ function AgregarTransferHtmlAlPopUp(pIndex) {
     strHtmlTransfer += '<div class="col-md-2 col-xs-6 no-padding">' + tituloTrfUnidadesFijas + ' ' + valorTrfUnidadesFijas + '</div>';
     strHtmlTransfer += '<div class="clear15"></div>';
     //
+    var tienePerfu = false;
     for (var y = 0; y < listaTransfer[pIndex].listaDetalle.length; y++) {
+        console.log(listaTransfer[pIndex].listaDetalle[y]);
+        if (listaTransfer[pIndex].listaDetalle[y].pro_codtpopro == "P") {
+            tienePerfu = true;
+        }
         var cssDivContenedorProducto = '';
         if (listaTransfer[pIndex].tfr_mospap) {// == 1
             if (productoSeleccionado == listaTransfer[pIndex].listaDetalle[y].tde_codpro) {
@@ -597,7 +602,7 @@ function AgregarTransferHtmlAlPopUp(pIndex) {
             var btn_confirmar_class = '';
             if (cantBotonesSucursales == 0)
                 btn_confirmar_class = ' no-margin-r';
-            if (listaSucursalesDependienteInfo[iSucursalNombre].suc_trabajaPerfumeria) {
+            if (listaSucursalesDependienteInfo[iSucursalNombre].suc_trabajaPerfumeria || (!listaSucursalesDependienteInfo[iSucursalNombre].suc_trabajaPerfumeria && !tienePerfu)) {
                 strHtmlTransfer += '<a class="btn_confirmar' + btn_confirmar_class + '" href="#"  onclick="onClickTransfer(' + pIndex + ',' + iSucursalNombre + '); return false;">' + btn_confirmar_sucursal + '<span class="hidden-xs">' + btn_confirmar_confirmar + '</span></a>';
                 cantBotonesSucursales++;
             }
