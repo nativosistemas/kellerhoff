@@ -1802,6 +1802,7 @@ function ObtenerFacturaClienteFacturaCompleta(pNroFactura) {
 }
 
 function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBuscarConOferta, pIsBuscarConTransfer) {
+    pTxtBuscador = pTxtBuscador.replace("'", "''");
     $.ajax({
         type: "POST",
         url: "/mvc/RecuperarProductosVariasColumnas",
@@ -1809,7 +1810,7 @@ function RecuperarProductosParaDevoluciones(pTxtBuscador, pListaColumna, pIsBusc
         success:
             function (response) {
                 listaPRD = eval('(' + response + ')');
-                //console.log(listaPRD);
+                console.log(listaPRD);
                 var html = "";
                 if (campoActual == "txtNombreProductoDev") {
                     if (listaPRD.listaProductos.length > 0) {
@@ -2088,7 +2089,7 @@ function RecuperarItemsDevolucionPrecargaPorCliente() {
             var html = "";
             $("#tblDevolucion").html("");
             ItemsPrecargados = eval('(' + response + ')');
-            console.log(ItemsPrecargados);
+            //console.log(ItemsPrecargados);
             if (ItemsPrecargados.length > 0) {
                 for (i = 0; i < ItemsPrecargados.length; i++) {
                     if (ItemsPrecargados[i].dev_fechavencimientoloteToString != null) {
@@ -2932,7 +2933,7 @@ function ObtenerCantidadPendiente(NombreProducto, NumeroFactura, CantFact, CantA
             NumeroFactura
         },
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             var CantPrecargada = 0, CantPrecargadaFNE = 0;
             var msjCantMax = "";
             for (var i = 0; i < ItemsPrecargados.length; i++) {

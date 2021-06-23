@@ -16,6 +16,7 @@
 //    });
 //}
 function RecuperarProductosVariasColumnas(pTxtBuscador, pListaColumna, pIsBuscarConOferta, pIsBuscarConTransfer) {
+    pTxtBuscador = pTxtBuscador.replace("'", "''");
     $.ajax({
         type: "POST",
         url: "/mvc/RecuperarProductosVariasColumnas",
