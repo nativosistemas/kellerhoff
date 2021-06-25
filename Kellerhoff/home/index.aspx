@@ -119,7 +119,7 @@
                                     <div class="info_mapa hidden" data-info="1">
                                         <b>ROSARIO</b><br />
                                         <u>Supervisor Comercial</u>: Franco Viola - Joaquín Gamborena<br />
-                                        <u>Promotores</u>: Mario Palacios - Néstor Perez - Facundo Angelini - Magali Notto<br />
+                                        <u>Promotores</u>: Mario Palacios - Walter Pasquinelli - Facundo Angelini - Magali Notto<br />
                                         <u>Farmacéutica</u>: Paola Iribarren<br />
                                         <u>Ctas. Ctes.</u>: Nanci Giussani - Haylin Scarbeli<br />
                                         <u>Domicilio</u>: Pueyrredon 1149<br />
@@ -255,7 +255,9 @@
                                         <b>DK INSTITUCIONALES / ALTO COSTO</b><br />
                                         <u>Gerente de Ventas</u>: Carlos Mira<br />
                                         <u>Responsable Administrativa</u>: Soledad Casanovas<br />
-                                        <u>Promotores</u>: Maximiliano Frontera - Walter Pasquinelli - Federico Gauna - Esteban Cohen - Martin Maragni<br />
+                                        <u>Promotores</u>: Maximiliano Frontera - Federico Gauna - Esteban Cohen<br />
+                                        <u>Promotor (Alto Costo)</u>: Martín Maragni 0351-6600707 (Córdoba)<br />
+                                        <u>Promotor (Alto Costo)</u>: Luis Camposarcuno 0341-2503999 (Santa Fe-Entre Ríos)<br />
                                         <u>Farmacéutico</u>: Sofía Deharbe<br />
                                         <u>Domicilio</u>: Uriburu 1923/1927<br />
                                         <u>C.P.A.</u>: S2001CFM<br />
@@ -263,8 +265,7 @@
                                         <u>Cuentas Corrientes</u>: 0341-4203329 / 0341-4203336<br />
                                         <u>WhatsApp Ventas Alto Costo</u>: 341-3631749<br />
                                         <u>E-mail</u>: dkinstitucional@kellerhoff.com.ar<br />
-                                        <u>Horarios</u>: L a V de 08:00 a 17:00
-                                        <br />
+                                        <u>Horarios</u>: L a J de 08:00 a 17:00 - Viernes de 08:00 a 16:00<br />
                                     </div>
                                 </div>
                             </div>

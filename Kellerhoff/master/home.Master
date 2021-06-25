@@ -229,6 +229,14 @@
                     </div>
                     <div class="clear10"></div>
                     <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80</a></div>
+                    <div class="clear10"></div>
+                    <div class="hospitalario">
+                        <h1>ALTO COSTO</h1>
+                    </div>
+                    <div class="clear10"></div>
+                    <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0351-6600707">0351 6600707 (Córdoba)</a></div>
+                    <div class="clear10"></div>
+                    <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-2503999">0341 2503999 (Santa Fe-Entre Ríos)</a></div>
                 </div>
                 <div class="clear55 visible-sm visible-md"></div>
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ftr_contacto">
@@ -329,6 +337,14 @@
                         </div>
                         <div class="clear10"></div>
                         <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80</a></div>
+                        <div class="clear10"></div>
+                        <div class="hospitalario">
+                            <h1>ALTO COSTO</h1>
+                        </div>
+                        <div class="clear10"></div>
+                        <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0351-6600707">0351 6600707 (Córdoba)</a></div>
+                        <div class="clear10"></div>
+                        <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-2503999">0341 2503999 (Santa Fe-Entre Ríos)</a></div>
 
                     </div>
                 </div>
@@ -357,8 +373,10 @@
                         <td><a class="mtz" href="http://mestizosweb.com/" target="_blank" title="Mestizos Comunicaci&oacute;n"></a></td>
                     </tr>
                 </table>
-                <div class="col-xs-12 text-center visible-xs"><a href="http://www.nativosistemas.com.ar/" target="_blank" title="Nativo Sistemas">
-                    <img src="../img/mvc/logos/nativo.png" style="height: 28px;" /></a></div>
+                <div class="col-xs-12 text-center visible-xs">
+                    <a href="http://www.nativosistemas.com.ar/" target="_blank" title="Nativo Sistemas">
+                        <img src="../img/mvc/logos/nativo.png" style="height: 28px;" /></a>
+                </div>
             </div>
         </div>
     </div>
