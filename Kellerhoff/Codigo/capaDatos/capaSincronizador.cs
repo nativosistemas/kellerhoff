@@ -139,6 +139,28 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
+        public static void SincronizarModulosApp()
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("app.spSincronizarModulos", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                Conn.Open();
+                cmdComandoInicio.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                AccesoDisco.LogError("capaSincronizador.SincronizarModulosApp()", ex.Message.ToString());
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
         //public static void SincronizarTransfersDetalle()
         //{
         //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

@@ -89,6 +89,10 @@
                     <br />
                     <asp:Button ID="btnTransfersTodos" runat="server" CssClass="btn_abm" Width="250"
                         Text="Sincronizar transfers todos" OnClick="btnTransfersTodos_Click" /><asp:Label ID="lblTransfersTodos" runat="server" CssClass="lblFechasUltimasActualizacion"  Text=""></asp:Label>
+                    <br />
+                    <br />
+                    <asp:Button ID="btnModulosApp" runat="server" CssClass="btn_abm" Width="250"
+                        Text="Sincronizar módulos app" OnClick="btnModulosApp_Click" /><asp:Label ID="lblModulosApp" runat="server" CssClass="lblFechasUltimasActualizacion"  Text=""></asp:Label>
                 </div>
                    <div style="width: 700px; margin: auto; padding-top:40px;">
                        <hr />

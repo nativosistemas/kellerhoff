@@ -7,13 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Kellerhoff.admin.pages
-{
-
-
-    public partial class GestionProcedimientos
-    {
-
+namespace Kellerhoff.admin.pages {
+    
+    
+    public partial class GestionProcedimientos {
+        
         /// <summary>
         /// Control up_prog_0.
         /// </summary>
@@ -22,7 +20,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress up_prog_0;
-
+        
         /// <summary>
         /// Control up_general.
         /// </summary>
@@ -31,7 +29,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel up_general;
-
+        
         /// <summary>
         /// Control panelMensaje.
         /// </summary>
@@ -40,7 +38,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel panelMensaje;
-
+        
         /// <summary>
         /// Control btnVolver.
         /// </summary>
@@ -49,7 +47,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVolver;
-
+        
         /// <summary>
         /// Control panelBotonesSicronizar.
         /// </summary>
@@ -58,7 +56,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel panelBotonesSicronizar;
-
+        
         /// <summary>
         /// Control btnClientes.
         /// </summary>
@@ -67,7 +65,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClientes;
-
+        
         /// <summary>
         /// Control lblClientes.
         /// </summary>
@@ -76,7 +74,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblClientes;
-
+        
         /// <summary>
         /// Control btnClientesTodos.
         /// </summary>
@@ -85,7 +83,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClientesTodos;
-
+        
         /// <summary>
         /// Control lblClientesTodos.
         /// </summary>
@@ -94,7 +92,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblClientesTodos;
-
+        
         /// <summary>
         /// Control btnProducto.
         /// </summary>
@@ -103,7 +101,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnProducto;
-
+        
         /// <summary>
         /// Control lblProductos.
         /// </summary>
@@ -112,7 +110,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblProductos;
-
+        
         /// <summary>
         /// Control btnProductoTodos.
         /// </summary>
@@ -121,7 +119,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnProductoTodos;
-
+        
         /// <summary>
         /// Control lblProductosTodos.
         /// </summary>
@@ -130,7 +128,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblProductosTodos;
-
+        
         /// <summary>
         /// Control btnProductoOfertas.
         /// </summary>
@@ -139,7 +137,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnProductoOfertas;
-
+        
         /// <summary>
         /// Control lblProductoOfertas.
         /// </summary>
@@ -148,7 +146,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblProductoOfertas;
-
+        
         /// <summary>
         /// Control btnProductoOfertasTodos.
         /// </summary>
@@ -157,7 +155,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnProductoOfertasTodos;
-
+        
         /// <summary>
         /// Control lblProductoOfertasTodos.
         /// </summary>
@@ -166,7 +164,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblProductoOfertasTodos;
-
+        
         /// <summary>
         /// Control btnProductoPrecios.
         /// </summary>
@@ -175,7 +173,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnProductoPrecios;
-
+        
         /// <summary>
         /// Control lblProductoPrecios.
         /// </summary>
@@ -184,7 +182,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblProductoPrecios;
-
+        
         /// <summary>
         /// Control btnProductoStocks.
         /// </summary>
@@ -193,7 +191,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnProductoStocks;
-
+        
         /// <summary>
         /// Control lblProductoStocks.
         /// </summary>
@@ -202,7 +200,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblProductoStocks;
-
+        
         /// <summary>
         /// Control btnProductoValesTodos.
         /// </summary>
@@ -211,7 +209,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnProductoValesTodos;
-
+        
         /// <summary>
         /// Control lblProductoValesTodos.
         /// </summary>
@@ -220,7 +218,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblProductoValesTodos;
-
+        
         /// <summary>
         /// Control btnTransfers.
         /// </summary>
@@ -229,7 +227,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnTransfers;
-
+        
         /// <summary>
         /// Control lblTransfers.
         /// </summary>
@@ -238,7 +236,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTransfers;
-
+        
         /// <summary>
         /// Control btnTransfersTodos.
         /// </summary>
@@ -247,7 +245,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnTransfersTodos;
-
+        
         /// <summary>
         /// Control lblTransfersTodos.
         /// </summary>
@@ -256,7 +254,25 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTransfersTodos;
-
+        
+        /// <summary>
+        /// Control btnModulosApp.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModulosApp;
+        
+        /// <summary>
+        /// Control lblModulosApp.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblModulosApp;
+        
         /// <summary>
         /// Control pnl_grilla.
         /// </summary>
@@ -265,7 +281,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnl_grilla;
-
+        
         /// <summary>
         /// Control txt_buscar.
         /// </summary>
@@ -274,7 +290,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_buscar;
-
+        
         /// <summary>
         /// Control cmd_buscar.
         /// </summary>
@@ -283,7 +299,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button cmd_buscar;
-
+        
         /// <summary>
         /// Control gv_datos.
         /// </summary>
@@ -292,7 +308,7 @@ namespace Kellerhoff.admin.pages
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gv_datos;
-
+        
         /// <summary>
         /// Control odsHistoricos.
         /// </summary>

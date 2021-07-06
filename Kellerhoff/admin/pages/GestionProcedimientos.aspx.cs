@@ -31,6 +31,7 @@ namespace Kellerhoff.admin.pages
             btnProductoValesTodos.Attributes.Add("onclick", "javascritp:return DeseaSincronizar();");
             btnTransfers.Attributes.Add("onclick", "javascritp:return DeseaSincronizar();");
             btnTransfersTodos.Attributes.Add("onclick", "javascritp:return DeseaSincronizar();");
+            btnModulosApp.Attributes.Add("onclick", "javascritp:return DeseaSincronizar();");
             CargarFechasUltimaActualizacion();
             cmd_buscar.Focus();
         }
@@ -115,6 +116,17 @@ namespace Kellerhoff.admin.pages
                 panelBotonesSicronizar.Visible = false; Session["GestionProcedimientos"] = null;
             }
         }
+        protected void btnModulosApp_Click(object sender, EventArgs e)
+        {
+            if (Session["GestionProcedimientos"] == null)
+            {
+                Session["GestionProcedimientos"] = string.Empty;
+                WebService.SincronizarModulosApp();
+                panelMensaje.Visible = true;
+                panelBotonesSicronizar.Visible = false; Session["GestionProcedimientos"] = null;
+            }
+        }
+
         protected void btnVolver_Click(object sender, EventArgs e)
         {
             if (Session["GestionProcedimientos"] == null)
@@ -135,6 +147,7 @@ namespace Kellerhoff.admin.pages
             lblProductoValesTodos.Text = string.Empty;
             lblTransfers.Text = string.Empty;
             lblTransfersTodos.Text = string.Empty;
+            lblModulosApp.Text = string.Empty;
             List<string> fechasUltimaActualizacion = new List<string>();
             List<Kellerhoff.Codigo.capaDatos.cHistorialProcesos> lista = WebService.RecuperarTodasLasSincronizaciones();
 
@@ -187,6 +200,9 @@ namespace Kellerhoff.admin.pages
                         break;
                     case "Transfers.spSincronizarTransfers_Todos":
                         lblTransfersTodos.Text = "Última actualización: " + item.Fecha.Value.ToString();
+                        break;
+                    case "App.spSincronizarModulos":
+                        lblModulosApp.Text = "Última actualización: " + item.Fecha.Value.ToString();
                         break;
                     default:
                         break;

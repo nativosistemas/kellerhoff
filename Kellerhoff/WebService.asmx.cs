@@ -1039,6 +1039,13 @@ namespace Kellerhoff
                 capaSincronizador.SincronizarTransfers_Todos();
             }
         }
+        public static void SincronizarModulosApp()
+        {
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                capaSincronizador.SincronizarModulosApp();
+            }
+        }
         private static cClientes ConvertToCliente(DataRow pItem)
         {
             return Codigo.clases.Generales.Serializador.DeserializarJson<cClientes>(Codigo.clases.Generales.Serializador.SerializarAJson(DKbase.web.acceso.ConvertToCliente(pItem)));
