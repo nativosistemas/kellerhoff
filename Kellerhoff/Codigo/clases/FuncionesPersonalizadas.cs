@@ -342,90 +342,39 @@ namespace Kellerhoff.Codigo.clases
                                               select ob.hbp_Palabra.ToUpper()).Distinct().ToList();
             return listaStrPalabrasSinRepetir;
         }
-        //public static decimal ObtenerPrecioFinal(cClientes pClientes, cProductos pProductos)
-        //{
-        //    //   pClientes.cli_deswebespmed // Cli_DesWebEspMed 
-        //    decimal resultado = new decimal(0.0);
-        //    if (pProductos.pro_neto)
-        //    {   // Neto        
-        //        switch (pProductos.pro_codtpopro)
-        //        {
-        //            case "M": // medicamento
-        //                resultado = pProductos.pro_preciofarmacia;
-
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesbetmed / Convert.ToDecimal(100)));
-        //                if (pClientes.cli_deswebnetmed)
-        //                {
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //                }
-        //                break;
-        //            case "P": // Perfumeria
-        //                resultado = pProductos.pro_preciofarmacia;
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesnetos / Convert.ToDecimal(100)));
-        //                if (pClientes.cli_deswebnetperpropio)
-        //                {
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //                }
-        //                break;
-        //            case "A": // Accesorio
-        //                resultado = pProductos.pro_preciofarmacia;
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesnetos / Convert.ToDecimal(100)));
-        //                if (pClientes.cli_deswebnetacc)
-        //                {
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //                }
-        //                break;
-        //            case "V": // Accesorio
-        //                resultado = pProductos.pro_preciofarmacia;
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesnetos / Convert.ToDecimal(100)));
-        //                if (pClientes.cli_deswebnetacc)
-        //                {
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //                }
-        //                break;
-        //            case "F": // Perfumería Cuenta y Orden
-        //                resultado = pProductos.pro_preciofarmacia;
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordescomperfcyo / Convert.ToDecimal(100)));
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesfinperfcyo / Convert.ToDecimal(100)));
-        //                if (pClientes.cli_deswebnetpercyo)
-        //                {
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //                }
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //    else
-        //    {  // No neto      
-        //        resultado = pProductos.pro_preciofarmacia;
-        //        resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesespmed / Convert.ToDecimal(100)));
-        //        if (pClientes.cli_deswebespmed)
-        //        {
-        //            resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //        }
-        //    }
-        //    return resultado;
-        //}
         public static decimal ObtenerPrecioFinal(cClientes pClientes, cProductos pProductos)
         {
             decimal resultado = new decimal(0.0);
-            if (pProductos.pro_acuerdo == Constantes.cAcuerdo_SinAcuerdo)
+            if (pProductos.pro_neto)
             {
-                resultado = ObtenerPrecioFinal_acuerdo_SinACUERDO(pClientes, pProductos);
-            }
-            else if (pProductos.pro_acuerdo == Constantes.cAcuerdo_GENOMA)
-            {
-                resultado = ObtenerPrecioFinal_acuerdo_GENOMA(pClientes, pProductos);
-            }
-            else if (pProductos.pro_acuerdo == Constantes.cAcuerdo_ADEM)
-            {
-                resultado = ObtenerPrecioFinal_acuerdo_ADEM(pClientes, pProductos);
+                switch (pProductos.pro_codtpopro)
+                {
+                    case "M": // medicamento
+                        resultado = getPrecioBaseConDescuento(pProductos, pClientes.cli_pordesbetmed);
+                        break;
+                    case "P": // Perfumeria
+                    case "A": // Accesorio
+                    case "V": // Accesorio
+                        resultado = getPrecioBaseConDescuento(pProductos, pClientes.cli_pordesnetos);
+                        break;
+                    default:
+                        break;
+                }
             }
             else
-            {
-                // resultado = ObtenerPrecioFinal_acuerdo_SinACUERDO(pClientes, pProductos);
+            {  // No neto   
+                resultado = getPrecioBaseConDescuento(pProductos, pClientes.cli_PorcentajeDescuentoDeEspecialidadesMedicinalesDirecto);
             }
+            return resultado;
+        }
+        private static decimal getPrecioBaseConDescuento(cProductos pProductos, decimal? pDescuentoRestar)
+        {
+            decimal descuentoRestarTemp = pDescuentoRestar == null ? 0 : pDescuentoRestar.Value;
+            decimal descuento = descuentoRestarTemp - pProductos.pro_PorcARestarDelDtoDeCliente;
+            if (descuento < 0)
+                descuento = 0;
+            decimal resultado = pProductos.pro_PrecioBase;
+            resultado = resultado * (Convert.ToDecimal(1) - (descuento / Convert.ToDecimal(100)));
             return resultado;
         }
         public static decimal ObtenerPrecioFinal_acuerdo_SinACUERDO(cClientes pClientes, cProductos pProductos)
@@ -510,77 +459,6 @@ namespace Kellerhoff.Codigo.clases
                 descuento = 0;
             decimal resultado = pProductos.pro_PrecioBase;
             resultado = resultado * (Convert.ToDecimal(1) - (descuento / Convert.ToDecimal(100)));
-            return resultado;
-        }
-
-        public static decimal ObtenerPrecioFinal_acuerdo_GENOMA(cClientes pClientes, cProductos pProductos)
-        {
-            //   pClientes.cli_deswebespmed // Cli_DesWebEspMed 
-            decimal resultado = new decimal(0.0);
-            if (pProductos.pro_neto)
-            {   // Neto        
-                switch (pProductos.pro_codtpopro)
-                {
-                    case "M": // medicamento
-                        resultado = pProductos.pro_preciofarmacia;
-                        if (pClientes.cli_deswebnetmed)
-                        {
-                            resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-                        }
-                        break;
-                    case "P": // Perfumeria
-                        resultado = pProductos.pro_preciofarmacia;
-                        if (pClientes.cli_deswebnetperpropio)
-                        {
-                            resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-                        }
-                        break;
-                    case "A": // Accesorio
-                        resultado = pProductos.pro_preciofarmacia;
-                        if (pClientes.cli_deswebnetacc)
-                        {
-                            resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-                        }
-                        break;
-                    case "V": // Accesorio
-                        resultado = pProductos.pro_preciofarmacia;
-                        if (pClientes.cli_deswebnetacc)
-                        {
-                            resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-                        }
-                        break;
-                    case "F": // Perfumería Cuenta y Orden
-                        resultado = pProductos.pro_preciofarmacia;
-                        if (pClientes.cli_deswebnetpercyo)
-                        {
-                            resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {  // No neto      
-                resultado = pProductos.pro_preciofarmacia;
-                if (pClientes.cli_deswebespmed)
-                {
-                    resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-                }
-            }
-            return resultado;
-        }
-        public static decimal ObtenerPrecioFinal_acuerdo_ADEM(cClientes pClientes, cProductos pProductos)
-        {
-            decimal resultado = new decimal(0.0);
-            // No neto      
-            resultado = pProductos.pro_preciofarmacia;
-            resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesespmed / Convert.ToDecimal(100)));
-            if (pClientes.cli_deswebespmed)
-            {
-                resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-            }
-
             return resultado;
         }
         public static decimal ObtenerPrecioUnitarioConDescuentoOferta(decimal pPrecioFinal, cProductos pProductos)
@@ -723,101 +601,6 @@ namespace Kellerhoff.Codigo.clases
             resultado = resultado.Replace("9", string.Empty);
             return resultado;
         }
-        //public static decimal ObtenerPrecioFinal(cClientes pClientes, cProductos pProductos)
-        //{
-        //    decimal resultado = new decimal(0.0);
-        //    if (pProductos.pro_neto)
-        //    {   // Neto        
-        //        switch (pProductos.pro_codtpopro)
-        //        {
-        //            case "M": // medicamento
-        //                resultado = ObtenerPrecioDescuentoFarmacia(pClientes, pProductos);
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //                break;
-        //            case "P": // Perfumeria
-        //                resultado = ObtenerPrecioDescuentoFarmacia(pClientes, pProductos);
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //                break;
-        //            case "A": // Accesorio
-        //                resultado = ObtenerPrecioDescuentoFarmacia(pClientes, pProductos);
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //                break;
-        //            case "V": // Accesorio
-        //                resultado = ObtenerPrecioDescuentoFarmacia(pClientes, pProductos);
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //                break;
-        //            case "F": // Perfumería Cuenta y Orden
-        //                resultado = ObtenerPrecioDescuentoFarmacia(pClientes, pProductos);
-        //                resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //    else
-        //    {  // No neto      
-        //        resultado = ObtenerPrecioDescuentoFarmacia(pClientes, pProductos);
-        //        resultado = resultado * (Convert.ToDecimal(1) - (pProductos.pro_descuentoweb / Convert.ToDecimal(100)));
-        //    }
-        //    return resultado;
-        //}
-        //public static decimal ObtenerPrecioDescuentoFarmacia(cClientes pClientes, cProductos pProductos)
-        //{
-        //    decimal resultado = new decimal(0.0);
-        //    if (pProductos.pro_neto)
-        //    {   // Neto        
-        //        switch (pProductos.pro_codtpopro)
-        //        {
-        //            case "M": // medicamento
-        //                resultado = pProductos.pro_preciofarmacia;
-        //                if (pClientes.cli_deswebnetmed)
-        //                {
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesbetmed / Convert.ToDecimal(100)));
-        //                }
-        //                break;
-        //            case "P": // Perfumeria
-        //                resultado = pProductos.pro_preciofarmacia;
-        //                if (pClientes.cli_deswebnetperpropio)
-        //                {
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesnetos / Convert.ToDecimal(100)));
-        //                }
-        //                break;
-        //            case "A": // Accesorio
-        //                resultado = pProductos.pro_preciofarmacia;
-        //                if (pClientes.cli_deswebnetacc)
-        //                {
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesnetos / Convert.ToDecimal(100)));
-        //                }
-        //                break;
-        //            case "V": // Accesorio
-        //                resultado = pProductos.pro_preciofarmacia;
-        //                if (pClientes.cli_deswebnetacc)
-        //                {
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesnetos / Convert.ToDecimal(100)));
-        //                }
-        //                break;
-        //            case "F": // Perfumería Cuenta y Orden
-        //                resultado = pProductos.pro_preciofarmacia;
-        //                if (pClientes.cli_deswebnetpercyo)
-        //                {
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordescomperfcyo / Convert.ToDecimal(100)));
-        //                    resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesfinperfcyo / Convert.ToDecimal(100)));
-        //                }
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //    else
-        //    {  // No neto      
-        //        resultado = pProductos.pro_preciofarmacia;
-        //        if (pClientes.cli_deswebespmed)
-        //        {
-        //            resultado = resultado * (Convert.ToDecimal(1) - (pClientes.cli_pordesespmed / Convert.ToDecimal(100)));
-        //        }
-        //    }
-        //    return resultado;
-        //}
         public static DataTable ConvertProductosAndCantidadToDataTable(List<cProductosAndCantidad> pListaProductosMasCantidad)
         {
 
@@ -833,10 +616,6 @@ namespace Kellerhoff.Codigo.clases
             }
             return pTablaDetalle;
         }
-
-
-
-
         public static DataTable ConvertNombresSeccionToDataTable(List<string> pListaNombreSeccion)
         {
             DataTable pTablaDetalle = new DataTable();
