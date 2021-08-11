@@ -3303,7 +3303,7 @@ namespace Kellerhoff
             }
             return result;
         }
-        
+
         public static bool EliminarDevolucionItemPrecarga(int NumeroItem)
         {
 
@@ -3314,7 +3314,7 @@ namespace Kellerhoff
             }
             return result;
         }
-        
+
         public static bool ElimminarItemReclamoFNEPrecarga(int NumeroItem)
         {
 
@@ -3358,7 +3358,7 @@ namespace Kellerhoff
             }
             return result;
         }
-        
+
         public static bool EliminarPrecargaReclamoFNEPorCliente(int NumeroCliente)
         {
 
@@ -4861,6 +4861,9 @@ namespace Kellerhoff
                 obj.ofe_fechaFinOferta = Convert.ToDateTime(pItem["ofe_fechaFinOferta"]);
                 obj.ofe_fechaFinOfertaToString = obj.ofe_fechaFinOferta.Value.ToString("dd'/'MM'/'yyyy");
             }
+            if (pItem.Table.Columns.Contains("ofe_nuevosLanzamiento") && pItem["ofe_nuevosLanzamiento"] != DBNull.Value)
+                obj.ofe_nuevosLanzamiento = Convert.ToBoolean(pItem["ofe_nuevosLanzamiento"]);
+
             return obj;
         }
         private static cOfertaDetalle ConvertToOfertaDetalle(DataRow pItem)
@@ -4907,7 +4910,7 @@ namespace Kellerhoff
             }
             return resultado;
         }
-        public static List<cOferta> RecuperarTodasOfertaPublicar()
+        public static List<cOferta> RecuperarTodasOfertaPublicar(bool isNuevosLanzamiento=false)
         {
             List<cOferta> resultado = null;
             DataTable tabla = capaHome.RecuperarTodasOfertaPublicar();
@@ -4918,6 +4921,9 @@ namespace Kellerhoff
                 {
                     resultado.Add(ConvertToOferta(fila));
                 }
+            }
+            if (resultado != null) {
+                resultado = resultado.Where(x => x.ofe_nuevosLanzamiento == isNuevosLanzamiento).ToList();
             }
             return resultado;
         }
@@ -4962,11 +4968,11 @@ namespace Kellerhoff
                 resultado = capaHome.CambiarEstadoPublicarOferta(pIdOferta);
             return resultado;
         }
-        public static bool? InsertarActualizarOferta(int pOfe_idOferta, string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int pOfe_tipo, string ofe_nombreTransfer, DateTime? ofe_fechaFinOferta)
+        public static bool? InsertarActualizarOferta(int pOfe_idOferta, string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int pOfe_tipo, string ofe_nombreTransfer, DateTime? ofe_fechaFinOferta, bool ofe_nuevosLanzamiento)
         {
             bool? resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
-                resultado = capaHome.InsertarActualizarOferta(pOfe_idOferta, pOfe_titulo, pOfe_descr, pOfe_descuento, pOfe_etiqueta, pOfe_etiquetaColor, pOfe_tipo, ofe_nombreTransfer, ofe_fechaFinOferta);
+                resultado = capaHome.InsertarActualizarOferta(pOfe_idOferta, pOfe_titulo, pOfe_descr, pOfe_descuento, pOfe_etiqueta, pOfe_etiquetaColor, pOfe_tipo, ofe_nombreTransfer, ofe_fechaFinOferta, ofe_nuevosLanzamiento);
             return resultado;
         }
         public static bool? InsertarActualizarOfertaDetalle(int pIdOfertaDetalle, int pOfd_idOferta, string pProductoCodigo, string pProductoNombre)
@@ -5814,7 +5820,7 @@ namespace Kellerhoff
         }
         public static void DeleteLaboratorios(int id)
         {
-           // DKbase.app.accesoApp.DeleteLaboratorios(id);
+            // DKbase.app.accesoApp.DeleteLaboratorios(id);
         }
         public static int AddUpdateLaboratorios(int id, string nombre)
         {

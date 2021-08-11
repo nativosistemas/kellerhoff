@@ -154,7 +154,7 @@ namespace Kellerhoff.admin.pages
                         switch (obj.tipo)
                         {
                             case "ofertas":
-                                Response.Redirect("GestionOferta.aspx");
+                                Response.Redirect("GestionOferta.aspx?isVolver=1");
                                 break;
                             case "laboratorio":
                                 Response.Redirect("Laboratorio.aspx");

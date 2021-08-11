@@ -233,7 +233,7 @@ function CargarHtmlPromocionesClientes() {
             }
             if (isNotNullEmpty(listaPromocionesClientes[i].nameImagen)) {
                 // strHtml += '<div class="div_ImagenPromo" style="' + 'background-image: url(../../servicios/thumbnail.aspx?r=ofertas&n=' + listaPromocionesClientes[i].nameImagen + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF);' + '"></div>';
-                strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + listOferta[i].nameImagen + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF' + '" alt="oferta" title=" alt="oferta">';
+                strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + listaPromocionesClientes[i].nameImagen + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF' + '" alt="oferta" title=" alt="oferta">';
             }
             else {
                 // strHtml += '<div class="div_ImagenPromo" style="' + 'background-image: url(../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF);' + '"></div>';

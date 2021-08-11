@@ -208,8 +208,10 @@ namespace Kellerhoff.Controllers
             return View();
         }
         [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
-        public ActionResult promocionescliente()
+        public ActionResult promocionescliente(string t)
         {
+            Session["promocionescliente_TIPO"] = t;
+            
             return View();
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]

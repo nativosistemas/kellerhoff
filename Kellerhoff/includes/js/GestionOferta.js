@@ -69,7 +69,7 @@ function PublicarOferta(pValor)
     PageMethods.CambiarEstadoPublicarOferta(pValor, OnCallBackCambiarEstadoPublicarOferta, OnFail);
 }
 function OnCallBackCambiarEstadoPublicarOferta(args) {
-    location.href = 'GestionOferta.aspx';
+    location.href = 'GestionOferta.aspx?isVolver=1';
 }
 function EditarOferta(pValor) {
     location.href = 'GestionOfertaEditar.aspx?id=' + pValor;
@@ -188,7 +188,7 @@ function RecuperarTodasOfertaDetalles() {
     PageMethods.RecuperarTodasOfertaDetalles(OnCallBackAgregarProducto, OnFail);
 }
 function VolverOferta() {
-    location.href = 'GestionOferta.aspx';
+    location.href = 'GestionOferta.aspx?isVolver=1';
     return false;
 }
 function IrVistaPrevia() {
@@ -221,8 +221,9 @@ function GuardarOferta() {
     var tipo = $('input[name=opciones]:checked', '#Form2').val();
     var nombreTransfer = $('#cmdTransfer').val();
     var ofe_fechaFinOferta = $('#txt_fechaFin').val();
+    var ofe_nuevosLanzamiento = document.getElementById('txt_nuevosLanzamiento').checked;//$('#txt_nuevosLanzamiento').val();
 
-    PageMethods.InsertarActualizarOferta(titulo, descr, descuento, etiqueta, etiquetaColor, tipo, nombreTransfer, ofe_fechaFinOferta, OnCallBackInsertarActualizarOferta, OnFailInsertarActualizarOferta);
+    PageMethods.InsertarActualizarOferta(titulo, descr, descuento, etiqueta, etiquetaColor, tipo, nombreTransfer, ofe_fechaFinOferta, ofe_nuevosLanzamiento, OnCallBackInsertarActualizarOferta, OnFailInsertarActualizarOferta);
 
 }
 function OnFailInsertarActualizarOferta(er)
@@ -242,7 +243,7 @@ function AgregarOfertaImagen(pValor) {
     return false;
 }
 function onclickVolverOfertaImagen() {
-    location.href = 'GestionOferta.aspx';//?text=' + $('#hiddenText').val();
+    location.href = 'GestionOferta.aspx?isVolver=1';//?text=' + $('#hiddenText').val();
     return false;
 }
 function GuardarOfertaHome() {

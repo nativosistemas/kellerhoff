@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../../includes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="../../includes/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../../includes/js/AgregarArchivoGenerico.js?n=4" type="text/javascript"></script>
+    <script src="../../includes/js/AgregarArchivoGenerico.js?n=5" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2 class="sub-header">Agregar archivo

@@ -97,7 +97,7 @@ function OnCallBackEliminarArchivoPorId(args) {
 function onclickVolverAgregarArchivo() {
     switch (file.tipo) {
         case 'ofertaspdf':
-            location.href = 'GestionOferta.aspx';
+            location.href = 'GestionOferta.aspx?isVolver=1';
             break;
         case 'recallpdf':
             location.href = 'GestionReCall.aspx';

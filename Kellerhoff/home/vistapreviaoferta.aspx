@@ -15,15 +15,15 @@
 
 </head>
 <body>
-      <form id="form1" name="form1" runat="server">
+    <form id="form1" name="form1" runat="server">
 
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true"
             EnablePageMethods="true" EnableScriptGlobalization="True">
         </asp:ScriptManager>
 
-        <div id="divContenedorOfertas" ></div>
+        <div id="divContenedorOfertas"></div>
     </form>
-              <script src="../includes/js/jquery-3.1.0.min.js"></script>
+    <script src="../includes/js/jquery-3.1.0.min.js"></script>
     <script src="../includes/js/bootstrap.min.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="../includes/home/js/jquery/function.js"></script>
@@ -31,12 +31,12 @@
     <script type="text/javascript" src="../includes/home/js/jquery/function_forms.js"></script>
     <script type="text/javascript" src="../includes/home/js/jquery/owl.carousel.min.js"></script>
     <script src="../includes/js/Libreria.js?n=13"></script>
-  <script src="../includes/home/js/oferta.js"></script>
-        <script type="text/javascript">
+    <script src="../includes/home/js/oferta.js"></script>
+    <script type="text/javascript">
         jQuery(document).ready(function () {
             prepararListaOfertas($('#hiddenListaOfertas').val());
         });
     </script>
-     <%  AgregarHtmlOculto(); %>
+    <%  AgregarHtmlOculto(); %>
 </body>
 </html>

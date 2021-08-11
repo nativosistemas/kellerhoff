@@ -65,7 +65,7 @@ namespace Kellerhoff.admin.pages
             return RecuperarTodasOfertaDetalles();
         }
         [WebMethod(EnableSession = true)]
-        public static string InsertarActualizarOferta(string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int tipo, string ofe_nombreTransfer, string ofe_fechaFinOferta_string)
+        public static string InsertarActualizarOferta(string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int tipo, string ofe_nombreTransfer, string ofe_fechaFinOferta_string, bool ofe_nuevosLanzamiento)
         {
             if (HttpContext.Current.Session["GestionOfertaEditar_idOferta"] != null)
             {
@@ -74,7 +74,7 @@ namespace Kellerhoff.admin.pages
                 {
                     ofe_fechaFinOferta = Convert.ToDateTime(ofe_fechaFinOferta_string);
                 }
-                bool? resultado = WebService.InsertarActualizarOferta(Convert.ToInt32(HttpContext.Current.Session["GestionOfertaEditar_idOferta"]), pOfe_titulo, pOfe_descr, pOfe_descuento, pOfe_etiqueta, pOfe_etiquetaColor, tipo, ofe_nombreTransfer, ofe_fechaFinOferta);
+                bool? resultado = WebService.InsertarActualizarOferta(Convert.ToInt32(HttpContext.Current.Session["GestionOfertaEditar_idOferta"]), pOfe_titulo, pOfe_descr, pOfe_descuento, pOfe_etiqueta, pOfe_etiquetaColor, tipo, ofe_nombreTransfer, ofe_fechaFinOferta, ofe_nuevosLanzamiento);
             }
             return RecuperarTodasOfertaDetalles();
         }
@@ -96,7 +96,13 @@ namespace Kellerhoff.admin.pages
                 resultado += "<input type=\"hidden\" id=\"hiddenOfe_tipo\" value=\"" + Server.HtmlEncode(objOferta.ofe_tipo.ToString()) + "\" />";
                 resultado += "<input type=\"hidden\" id=\"hiddenOfe_nombreTransfer\" value=\"" + Server.HtmlEncode(objOferta.ofe_nombreTransfer == null ? "" : objOferta.ofe_nombreTransfer) + "\" />";
                 resultado += "<input type=\"hidden\" id=\"hiddenOfe_fechaFin\" value=\"" + Server.HtmlEncode(string.IsNullOrEmpty(objOferta.ofe_fechaFinOfertaToString) ? "" : objOferta.ofe_fechaFinOfertaToString) + "\" />";
+                resultado += "<input type=\"hidden\" id=\"hiddenOfe_nuevosLanzamiento\" value=\"" + Server.HtmlEncode(objOferta.ofe_nuevosLanzamiento ? "1" : "0") + "\" />";
 
+            }
+
+            if (HttpContext.Current.Session["GestionOferta_isNuevoLanzamiento"] != null)
+            {
+                resultado += "<input type=\"hidden\" id=\"hiddenIsNuevosLanzamiento\" value=\"" + Server.HtmlEncode(Convert.ToBoolean(HttpContext.Current.Session["GestionOferta_isNuevoLanzamiento"]) ? "1" : "0") + "\" />";
             }
             Response.Write(resultado);
         }

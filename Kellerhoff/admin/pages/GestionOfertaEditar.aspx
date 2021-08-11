@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/BaseAdminJs3.Master" AutoEventWireup="true" CodeBehind="GestionOfertaEditar.aspx.cs" Inherits="Kellerhoff.admin.pages.GestionOfertaEditar" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../../includes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="../../includes/js/bootstrap.min.js" type="text/javascript"></script>
-    <link  rel="stylesheet" type="text/css"  href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-    <script src="../../includes/js/GestionOferta.js?n=2" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../../includes/js/GestionOferta.js?n=3" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             RecuperarTodasOfertaDetalles();
@@ -52,10 +53,35 @@
             if (typeof nombreTransfer == 'undefined') {
                 nombreTransfer = null;
             } else {
-          
+
                 $('#cmdTransfer').val(nombreTransfer);
             }
+            //
+            $('#txt_nuevosLanzamiento').attr('checked', false);
+            var nuevosLanzamiento = $('#hiddenOfe_nuevosLanzamiento').val();
+            if (typeof nuevosLanzamiento == 'undefined') {
+                nuevosLanzamiento = null;
+            } else {
+                if (nuevosLanzamiento === '1') {
+                    $('#txt_nuevosLanzamiento').attr('checked', true);
+                }
+            }
+            var isNuevosLanzamiento = false;
+            var hidden_NuevosLanzamiento = $('#hiddenIsNuevosLanzamiento').val();
+            if (typeof hidden_NuevosLanzamiento == 'undefined') {
+                hidden_NuevosLanzamiento = null;
+            } else {
+                if (hidden_NuevosLanzamiento === '1') {
+                    isNuevosLanzamiento = true;
+                }
+            }
 
+            if (idOferta != null) {
+                if (parseInt(idOferta) == 0 && isNuevosLanzamiento) {
+                    $('#txt_nuevosLanzamiento').attr('checked', true);
+                }
+            }
+            //
             if (parseInt(idOferta) != 0) {
                 var idTipo = $('#hiddenOfe_tipo').val();
                 if (typeof idTipo == 'undefined') {
@@ -70,8 +96,8 @@
                     }
                 }
                 onclickRadio();
-            } 
-            $('#txt_fechaFin').datepicker();       
+            }
+            $('#txt_fechaFin').datepicker();
         });
         function onclickRadio() {
             var val = $('input[name=opciones]:checked', '#Form2').val();
@@ -92,6 +118,10 @@
     <button type="button" class="btn btn-info" onclick="GuardarOferta();  return false;">Guardar</button>
     &nbsp;&nbsp;
     <button type="button" class="btn btn-info" onclick="return VolverOferta();">Volver</button>
+    <div class="form-check" style="visibility: hidden">
+        <label for="txt_nuevosLanzamiento" class="form-check-label">Nuevo Lanzamiento:</label>
+        <input type="checkbox" class="form-check-input" id="txt_nuevosLanzamiento" disabled="disabled" />
+    </div>
     <div class="form-group">
         <label for="txt_titulo">Título:</label>
         <input type="text" class="form-control" id="txt_titulo" style="text-transform: uppercase;" />
@@ -116,9 +146,10 @@
         </select>
 
     </div>
+
     <div class="form-group">
         <label for="txt_fechaFin">Fecha Fin:</label>
-        <input type="text" class="form-control" id="txt_fechaFin"  />
+        <input type="text" class="form-control" id="txt_fechaFin" />
     </div>
 
     <div id="contenedorProductoTransfer" class="row">
@@ -139,7 +170,7 @@
                 </h4>
                 <div class="form-group">
                     <label for="txtBuscar">Palabra clave:</label>
-                    <input type="text" class="form-control" id="txtBuscar"  onkeypress="onkeypressAgregarBuscar(event)"/>
+                    <input type="text" class="form-control" id="txtBuscar" onkeypress="onkeypressAgregarBuscar(event)" />
                 </div>
                 <button id="btnBuscar" type="button" class="btn btn-primary" onclick="return busOferta();">Buscar</button>
 
@@ -168,18 +199,18 @@
     </div>
     <%  AgregarHtmlOculto(); %>
 
-     <script type="text/javascript">
-         jQuery(document).ready(function () {
-             var ofe_fechaFin = $('#hiddenOfe_fechaFin').val();
-             if (typeof ofe_fechaFin == 'undefined') {
-                 ofe_fechaFin = null;
-             } else {
-             }
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            var ofe_fechaFin = $('#hiddenOfe_fechaFin').val();
+            if (typeof ofe_fechaFin == 'undefined') {
+                ofe_fechaFin = null;
+            } else {
+            }
 
-             var $datepicker = $('#txt_fechaFin');
-             $datepicker.datepicker("option", "dateFormat", 'dd/mm/yy');
-             if (ofe_fechaFin != null)
-                 $datepicker.datepicker('setDate', ofe_fechaFin);
-         });
-     </script>
+            var $datepicker = $('#txt_fechaFin');
+            $datepicker.datepicker("option", "dateFormat", 'dd/mm/yy');
+            if (ofe_fechaFin != null)
+                $datepicker.datepicker('setDate', ofe_fechaFin);
+        });
+    </script>
 </asp:Content>

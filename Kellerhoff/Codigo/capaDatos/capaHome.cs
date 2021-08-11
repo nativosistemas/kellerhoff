@@ -28,8 +28,9 @@ namespace Kellerhoff.Codigo.capaDatos
         public int Rating { get; set; }
         public DateTime? ofe_fechaFinOferta { get; set; }
         public string ofe_fechaFinOfertaToString { get; set; }
+        public bool ofe_nuevosLanzamiento { get; set; }
 
-    }
+}
 
     public class cOfertaDetalle
     {
@@ -323,7 +324,7 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static bool InsertarActualizarOferta(int pOfe_idOferta, string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int pOfe_tipo, string ofe_nombreTransfer, DateTime? ofe_fechaFinOferta)
+        public static bool InsertarActualizarOferta(int pOfe_idOferta, string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int pOfe_tipo, string ofe_nombreTransfer, DateTime? ofe_fechaFinOferta, bool ofe_nuevosLanzamiento)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("dbo.spInsertarActualizarOferta", Conn);
@@ -337,7 +338,7 @@ namespace Kellerhoff.Codigo.capaDatos
             SqlParameter paOfe_etiqueta = cmdComandoInicio.Parameters.Add("@ofe_etiqueta", SqlDbType.NVarChar, 50);
             SqlParameter paOfe_etiquetaColor = cmdComandoInicio.Parameters.Add("@ofe_etiquetaColor", SqlDbType.NVarChar, 10);
             SqlParameter paOfe_fechaFinOferta = cmdComandoInicio.Parameters.Add("@ofe_fechaFinOferta", SqlDbType.DateTime);
-            //SqlParameter paOfe_activo = cmdComandoInicio.Parameters.Add("@ofe_activo", SqlDbType.Bit);
+            SqlParameter paOfe_nuevosLanzamiento = cmdComandoInicio.Parameters.Add("@ofe_nuevosLanzamiento", SqlDbType.Bit);
             paIdOferta.Value = pOfe_idOferta;
             paOfe_titulo.Value = pOfe_titulo;
             paOfe_descr.Value = pOfe_descr;
@@ -365,6 +366,7 @@ namespace Kellerhoff.Codigo.capaDatos
             else
                 paOfe_fechaFinOferta.Value = ofe_fechaFinOferta;
 
+            paOfe_nuevosLanzamiento.Value = ofe_nuevosLanzamiento;
             try
             {
                 Conn.Open();

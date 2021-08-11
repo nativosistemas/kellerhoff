@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
 function onclickVolverAgregarArchivo() {
     switch (file.tipo) {
         case 'ofertas':
-            location.href = 'GestionOferta.aspx';
+            location.href = 'GestionOferta.aspx?isVolver=1';
             break;
         case 'slider':
             location.href = 'GestionHomeSlide.aspx';

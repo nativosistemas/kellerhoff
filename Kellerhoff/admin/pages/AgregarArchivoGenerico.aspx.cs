@@ -125,7 +125,7 @@ namespace Kellerhoff.admin.pages
                         switch (obj.tipo)
                         {
                             case "ofertaspdf":
-                                Response.Redirect("GestionOferta.aspx");
+                                Response.Redirect("GestionOferta.aspx?isVolver=1");
                                 break;
                             case "recallpdf":
                                 Response.Redirect("GestionReCall.aspx");
@@ -166,7 +166,7 @@ namespace Kellerhoff.admin.pages
                     switch (obj.tipo)
                     {
                         case "ofertaspdf":
-                            Response.Redirect("GestionOferta.aspx");
+                            Response.Redirect("GestionOferta.aspx?isVolver=1");
                             break;
                         case "recallpdf":
                             Response.Redirect("GestionReCall.aspx");
