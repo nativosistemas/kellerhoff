@@ -2,9 +2,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../../includes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="lib/css/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-wysihtml5.css" />
     <script src="../../includes/js/bootstrap.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="lib/js/wysihtml5-0.3.0.js" type="text/javascript"></script>
+    <script src="lib/js/prettify.js" type="text/javascript"></script>
+    <script src="lib/js/bootstrap-wysihtml5.js" type="text/javascript"></script>
     <script src="../../includes/js/GestionOferta.js?n=3" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
@@ -98,6 +103,19 @@
                 onclickRadio();
             }
             $('#txt_fechaFin').datepicker();
+
+            if (isNuevosLanzamiento) {
+                var varHtml = $('#hidden_descrHtml').val();
+                if (typeof varHtml == 'undefined') {
+                    varHtml = '';
+                }
+                $('#textareaHtml').wysihtml5({
+                    "html": true, //Button which allows you to edit the generated HTML. Default false
+                    "color": true
+                }).html(varHtml);
+            } else {
+                $('.divformGroupTxtHtml').hide();
+            }
         });
         function onclickRadio() {
             var val = $('input[name=opciones]:checked', '#Form2').val();
@@ -146,7 +164,10 @@
         </select>
 
     </div>
-
+    <div class="form-group divformGroupTxtHtml">
+        <label for="txtHtml">Html:</label>
+        <textarea id="textareaHtml" class="textarea" placeholder="" style="width: 810px; height: 200px"></textarea>
+    </div>
     <div class="form-group">
         <label for="txt_fechaFin">Fecha Fin:</label>
         <input type="text" class="form-control" id="txt_fechaFin" />

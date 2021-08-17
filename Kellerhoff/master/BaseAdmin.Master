@@ -76,10 +76,10 @@
                             <%--<asp:MenuItem NavigateUrl="~/admin/pages/GestionContacto.aspx" Text="Contacto" />--%>
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionCatalogo.aspx" Text="Catálogo" />
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionCurriculumVitae_v2.aspx" Text="Curriculum Vitae" />
-                            <asp:MenuItem Text="Ofertas">
+                            <asp:MenuItem Text="Ofertas y Lanzamientos">
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionOferta.aspx" Text="Ofertas" />
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionOferta.aspx?isNuevoLanzamiento=1" Text="Nuevos Lanzamientos" />
-                                <asp:MenuItem NavigateUrl="~/admin/pages/GestionOfertaHome.aspx" Text="Ofertas Home" />
+                                <asp:MenuItem NavigateUrl="~/admin/pages/GestionOfertaHome.aspx" Text="Configuración Home" />
                             </asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionHomeSlide.aspx" Text="Home Slide" />
                             <asp:MenuItem NavigateUrl="~/admin/pages/GestionPopUp.aspx" Text="PopUp" />

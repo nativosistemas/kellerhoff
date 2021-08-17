@@ -20,7 +20,7 @@ namespace Kellerhoff.admin.pages
             if (Request.QueryString.AllKeys.Contains("id"))
             {
                 HttpContext.Current.Session["GestionOfertaEditar_idOferta"] = Request.QueryString.Get("id");
-                cOferta objOferta = WebService.RecuperarTodasOfertas().FirstOrDefault(x => x.ofe_idOferta == Convert.ToInt32(HttpContext.Current.Session["GestionOfertaEditar_idOferta"]));
+                cOferta objOferta = WebService.RecuperarTodasOfertas_generico().FirstOrDefault(x => x.ofe_idOferta == Convert.ToInt32(HttpContext.Current.Session["GestionOfertaEditar_idOferta"]));
                 HttpContext.Current.Session["GestionOfertaEditar_objOferta"] = objOferta;
             }
         }
@@ -65,7 +65,7 @@ namespace Kellerhoff.admin.pages
             return RecuperarTodasOfertaDetalles();
         }
         [WebMethod(EnableSession = true)]
-        public static string InsertarActualizarOferta(string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int tipo, string ofe_nombreTransfer, string ofe_fechaFinOferta_string, bool ofe_nuevosLanzamiento)
+        public static string InsertarActualizarOferta(string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int tipo, string ofe_nombreTransfer, string ofe_fechaFinOferta_string, bool ofe_nuevosLanzamiento, string ofe_descrHtml)
         {
             if (HttpContext.Current.Session["GestionOfertaEditar_idOferta"] != null)
             {
@@ -74,7 +74,7 @@ namespace Kellerhoff.admin.pages
                 {
                     ofe_fechaFinOferta = Convert.ToDateTime(ofe_fechaFinOferta_string);
                 }
-                bool? resultado = WebService.InsertarActualizarOferta(Convert.ToInt32(HttpContext.Current.Session["GestionOfertaEditar_idOferta"]), pOfe_titulo, pOfe_descr, pOfe_descuento, pOfe_etiqueta, pOfe_etiquetaColor, tipo, ofe_nombreTransfer, ofe_fechaFinOferta, ofe_nuevosLanzamiento);
+                bool? resultado = WebService.InsertarActualizarOferta(Convert.ToInt32(HttpContext.Current.Session["GestionOfertaEditar_idOferta"]), pOfe_titulo, pOfe_descr, pOfe_descuento, pOfe_etiqueta, pOfe_etiquetaColor, tipo, ofe_nombreTransfer, ofe_fechaFinOferta, ofe_nuevosLanzamiento, ofe_descrHtml);
             }
             return RecuperarTodasOfertaDetalles();
         }
@@ -97,6 +97,7 @@ namespace Kellerhoff.admin.pages
                 resultado += "<input type=\"hidden\" id=\"hiddenOfe_nombreTransfer\" value=\"" + Server.HtmlEncode(objOferta.ofe_nombreTransfer == null ? "" : objOferta.ofe_nombreTransfer) + "\" />";
                 resultado += "<input type=\"hidden\" id=\"hiddenOfe_fechaFin\" value=\"" + Server.HtmlEncode(string.IsNullOrEmpty(objOferta.ofe_fechaFinOfertaToString) ? "" : objOferta.ofe_fechaFinOfertaToString) + "\" />";
                 resultado += "<input type=\"hidden\" id=\"hiddenOfe_nuevosLanzamiento\" value=\"" + Server.HtmlEncode(objOferta.ofe_nuevosLanzamiento ? "1" : "0") + "\" />";
+                resultado += "<input type=\"hidden\" id=\"hidden_descrHtml\" value=\"" + Server.HtmlEncode(objOferta.ofe_descrHtml) + "\" />";
 
             }
 

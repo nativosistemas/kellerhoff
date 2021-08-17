@@ -4864,6 +4864,9 @@ namespace Kellerhoff
             if (pItem.Table.Columns.Contains("ofe_nuevosLanzamiento") && pItem["ofe_nuevosLanzamiento"] != DBNull.Value)
                 obj.ofe_nuevosLanzamiento = Convert.ToBoolean(pItem["ofe_nuevosLanzamiento"]);
 
+            if (pItem.Table.Columns.Contains("ofe_descrHtml") && pItem["ofe_descrHtml"] != DBNull.Value)
+                obj.ofe_descrHtml = Convert.ToString(pItem["ofe_descrHtml"]);
+
             return obj;
         }
         private static cOfertaDetalle ConvertToOfertaDetalle(DataRow pItem)
@@ -4896,7 +4899,17 @@ namespace Kellerhoff
             }
             return obj;
         }
-        public static List<cOferta> RecuperarTodasOfertas()
+        public static List<cOferta> RecuperarTodasOfertas(bool isNuevosLanzamiento = false)
+        {
+            List<cOferta> resultado = RecuperarTodasOfertas_generico();
+ 
+            if (resultado != null)
+            {
+                resultado = resultado.Where(x => x.ofe_nuevosLanzamiento == isNuevosLanzamiento).ToList();
+            }
+            return resultado;
+        }
+        public static List<cOferta> RecuperarTodasOfertas_generico()
         {
             List<cOferta> resultado = null;
             DataTable tabla = capaHome.RecuperarTodasOfertas();
@@ -4968,11 +4981,11 @@ namespace Kellerhoff
                 resultado = capaHome.CambiarEstadoPublicarOferta(pIdOferta);
             return resultado;
         }
-        public static bool? InsertarActualizarOferta(int pOfe_idOferta, string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int pOfe_tipo, string ofe_nombreTransfer, DateTime? ofe_fechaFinOferta, bool ofe_nuevosLanzamiento)
+        public static bool? InsertarActualizarOferta(int pOfe_idOferta, string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int pOfe_tipo, string ofe_nombreTransfer, DateTime? ofe_fechaFinOferta, bool ofe_nuevosLanzamiento,string ofe_descrHtml)
         {
             bool? resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
-                resultado = capaHome.InsertarActualizarOferta(pOfe_idOferta, pOfe_titulo, pOfe_descr, pOfe_descuento, pOfe_etiqueta, pOfe_etiquetaColor, pOfe_tipo, ofe_nombreTransfer, ofe_fechaFinOferta, ofe_nuevosLanzamiento);
+                resultado = capaHome.InsertarActualizarOferta(pOfe_idOferta, pOfe_titulo, pOfe_descr, pOfe_descuento, pOfe_etiqueta, pOfe_etiquetaColor, pOfe_tipo, ofe_nombreTransfer, ofe_fechaFinOferta, ofe_nuevosLanzamiento, ofe_descrHtml);
             return resultado;
         }
         public static bool? InsertarActualizarOfertaDetalle(int pIdOfertaDetalle, int pOfd_idOferta, string pProductoCodigo, string pProductoNombre)
@@ -5090,7 +5103,11 @@ namespace Kellerhoff
                 obj.ofe_fechaFinOferta = Convert.ToDateTime(pItem["ofe_fechaFinOferta"]);
                 obj.ofe_fechaFinOfertaToString = obj.ofe_fechaFinOferta.Value.ToString("dd'/'MM'/'yyyy");
             }
+            if (pItem.Table.Columns.Contains("ofe_nuevosLanzamiento") && pItem["ofe_nuevosLanzamiento"] != DBNull.Value)
+                obj.ofe_nuevosLanzamiento = Convert.ToBoolean(pItem["ofe_nuevosLanzamiento"]);
 
+            if (pItem.Table.Columns.Contains("ofe_descrHtml") && pItem["ofe_descrHtml"] != DBNull.Value)
+                obj.ofe_descrHtml = Convert.ToString(pItem["ofe_descrHtml"]);
 
             return obj;
         }

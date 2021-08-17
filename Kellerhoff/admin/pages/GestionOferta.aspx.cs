@@ -41,7 +41,7 @@ namespace Kellerhoff.admin.pages
             {
                 isNuevoLanzamiento = Convert.ToBoolean(HttpContext.Current.Session["GestionOferta_isNuevoLanzamiento"]);
             }
-            List<cOferta> resultado = WebService.RecuperarTodasOfertas().Where(x => x.ofe_nuevosLanzamiento == isNuevoLanzamiento).ToList();
+            List<cOferta> resultado = WebService.RecuperarTodasOfertas(isNuevoLanzamiento);
             return resultado == null ? string.Empty : Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(resultado);
         }
         [WebMethod(EnableSession = true)]

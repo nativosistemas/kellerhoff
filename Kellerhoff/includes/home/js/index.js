@@ -63,6 +63,7 @@ window.onload = function () {
 
 jQuery(document).ready(function () {
     prepararListaOfertas($('#hiddenListaOfertas').val());
+    prepararListaLanzamiento($('#hiddenListaLanzamiento').val());
     prepararListaSlider($('#hiddenListaSlider').val());
     prepararListaReCallIndex($('#hiddenListaReCallIndex').val());
 

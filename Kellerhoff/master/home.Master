@@ -31,7 +31,7 @@
     <link href="../includes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
     <link href="../includes/home/css/main.css?n=10" rel="stylesheet" />
-    <link href="../includes/home/css/main-overwrite.css?n=3" rel="stylesheet" />
+    <link href="../includes/home/css/main-overwrite.css?n=4" rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" />
 
@@ -43,6 +43,7 @@
     <script type="text/javascript" src="../includes/home/js/jquery/validate.js"></script>
     <script type="text/javascript" src="../includes/home/js/jquery/function_forms.js"></script>
 
+    <script type="text/javascript" src="../includes/mvc/js/mensaje.js?n=29"></script>
     <script type="text/javascript" src="../includes/home/js/jquery/owl.carousel.min.js"></script>
     <script type="text/javascript" src="../includes/home/js/master.js?n=9"></script>
     <script src="../includes/js/Libreria.js?n=2"></script>
@@ -53,6 +54,7 @@
 <body class="<% htmlCssBody(); %>">
     <%--onresize="onresizeCarrusel()"--%>
     <%--bd_home bd_sec--%>
+     <div id="modalModulo" class="modal md-effect-1 md-content portfolio-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
     <div class="container-fluid hdr_nd hidden-xs">
         <div class="row">
             <div class="col-lg-5 col-md-5 text-left hidden-sm hidden-xs">

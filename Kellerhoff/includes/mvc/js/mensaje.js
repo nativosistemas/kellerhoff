@@ -371,7 +371,7 @@ function mensaje_SaldoFinalADiciembre(pSaldo) {
     var anio = (new Date()).getFullYear() - 1;
     strHtml += '<div class="SaldoFinalADiciembreH4 siImprimir">' + 'Droguería Kellerhoff' + '</div>';
     strHtml += '<div class="SaldoFinalADiciembreH5 siImprimir">SALDO AL 31/12/' + anio.toString() + '</div>';
-    strHtml += '<h4 class="noImprimir">SALDO AL 31/12/' + anio.toString() +'</h4>';
+    strHtml += '<h4 class="noImprimir">SALDO AL 31/12/' + anio.toString() + '</h4>';
     strHtml += '</div>';
     strHtml += '</div>';
     strHtml += '<div class="close-modal noImprimir" data-dismiss="modal"><i class="fa fa-times"></i></div>';
@@ -407,8 +407,7 @@ function mensaje_ConsultasCtaCte() {
     //strHtml += '<form id="" name="" action="">';
     strHtml += '<div class="col-xs-12">';
     var mail = cli_email();
-    if (mail == null)
-    {
+    if (mail == null) {
         mail = '';
     }
     //
@@ -429,4 +428,64 @@ function mensaje_ConsultasCtaCte() {
     strHtml += '</div></div>';
     $('#modalModulo').html(strHtml);
     $('#modalModulo').modal();
+}
+function mensaje_NuevosLanzamientos(pObjeto) {//,pTexto
+
+    // if (listaPopUp != null && listaPopUp.length > 0 && listaPopUp[pIndex].arc_nombre != null) {
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-popUp"><div class="modal-content">'; // modal-md
+    strHtml += '<div class="modal-header no-padding-bottom">';
+    strHtml += '<div class="row divContenedorPopUp">';
+    // strHtml += '<img class="imgPopUp" src="../../servicios/thumbnail.aspx?r=popup&n=' + listaPopUp[pIndex].arc_nombre + '&an=497&al=463">';
+    strHtml += '<img class="imgPopUp" src="../../servicios/thumbnail.aspx?r=ofertas&n=' + pObjeto.nameImagen + '&an=1024&al=768">';
+    //
+    strHtml += '<div>';
+    strHtml += pObjeto.ofe_descrHtml ;
+    strHtml += '</div>';
+    //
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '</div></div>';
+    $('#modalModulo').html(strHtml);
+    $('#modalModulo').modal();
+    /*
+            if ($(window).width() < (listaPopUp[pIndex].ancho + 60)) {
+                $('.imgPopUp').css('width', '90%');
+            } else {
+                $('.modal-popUp').css('width', String(listaPopUp[pIndex].ancho + 60) + 'px');
+            }
+            */
+    // }
+}
+function onclickNuevoLanzamiento(pIdOferta) {
+    $.ajax({
+        type: "POST",
+        url: "../config/RecuperarOferta",
+        data: { pId: pIdOferta },
+        success:
+            function (response) {
+                OnCallBackRecuperarOferta(response);
+            },
+        failure: function (response) {
+            OnFail(response);
+        },
+        error: function (response) {
+            OnFail(response);
+        }
+    });
+    //pNombreImg, pMsg
+    //localStorage.setItem('objOferta_popup', 'Chris');
+    //mensaje_NuevosLanzamientos(pIdOferta);
+
+}
+function OnCallBackRecuperarOferta(args) {
+    var obj = eval('(' + args + ')');
+    if (typeof obj == 'undefined') {
+        obj = null;
+    }
+    if (obj != null && obj.length > 0) { 
+        mensaje_NuevosLanzamientos(obj[0]);
+    }
 }

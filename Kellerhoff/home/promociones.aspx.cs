@@ -14,12 +14,25 @@ namespace Kellerhoff.home
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString.AllKeys.Contains("isNuevoLanzamiento"))
+            {
+                HttpContext.Current.Session["promociones_isNuevoLanzamiento"] = true;
+            }
+            else
+            {
+                HttpContext.Current.Session["promociones_isNuevoLanzamiento"] = false;
+            }
             HttpContext.Current.Session["homeBodyCss"] = "bd_sec";
         }
         [WebMethod(EnableSession = true)]
         public static string RecuperarTodasOfertas()
         {
-            List<cOferta> resultado = WebService.RecuperarTodasOfertaPublicar();
+            bool isNuevoLanzamiento = false;
+            if (HttpContext.Current.Session["promociones_isNuevoLanzamiento"] != null)
+            {
+                isNuevoLanzamiento = Convert.ToBoolean(HttpContext.Current.Session["promociones_isNuevoLanzamiento"]);
+            }
+            List<cOferta> resultado = WebService.RecuperarTodasOfertaPublicar(isNuevoLanzamiento);
             return resultado == null ? string.Empty : Serializador.SerializarAJson(resultado);
         }
         public void AgregarHtmlOculto()

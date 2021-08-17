@@ -1,5 +1,6 @@
 ﻿using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
+using Kellerhoff.Codigo.clases.Generales;
 using Kellerhoff.Filters;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,26 @@ namespace Kellerhoff.Controllers
 {
     public class configController : Controller
     {
-
+        public string RecuperarOferta(int pId)
+        {
+            int? id = pId;
+            List<cOferta> resultado = new List<cOferta>();
+            cOferta o = WebService.RecuperarTodasOfertas_generico().FirstOrDefault(x => x.ofe_idOferta == id);
+            if (o != null)
+                resultado.Add(o);
+            foreach (var item in resultado)
+            {
+                List<cArchivo> listaArchivo = WebService.RecuperarTodosArchivos(item.ofe_idOferta, "ofertas", string.Empty);
+                if (listaArchivo != null)
+                {
+                    if (listaArchivo.Count > 0)
+                    {
+                        item.nameImagen = listaArchivo[0].arc_nombre;
+                    }
+                }
+            }
+            return resultado == null ? string.Empty : Serializador.SerializarAJson(resultado);
+        }
         public string loginCarrito(string pName, string pPass, int pIdOferta)
         {
             string resultado = null;

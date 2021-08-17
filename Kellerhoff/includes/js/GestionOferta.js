@@ -13,7 +13,7 @@ function OnCallBackRecuperarTodasOfertas(args) {
             strHtml += '<thead>';
             strHtml += '<tr>';
             strHtml += '<th>Título</th>';
-           // strHtml += '<th>Descripción</th>';
+            // strHtml += '<th>Descripción</th>';
             strHtml += '<th>Descuento</th>';
             //strHtml += '<th>Tipo</th>';
             strHtml += '<th>Publicar </th>';
@@ -48,7 +48,9 @@ function OnCallBackRecuperarTodasOfertas(args) {
                 strHtml += '<button type="button" class="btn btn-warning" onclick="return EditarOferta(\'' + args[i].ofe_idOferta + '\');">Modificar</button>' + '&nbsp;' + '&nbsp;';
                 strHtml += '<button type="button" class="btn btn-danger" onclick="return ElimimarOferta(\'' + args[i].ofe_idOferta + '\');">Eliminar</button>' + '&nbsp;' + '&nbsp;';
                 strHtml += '<button type="button" class="btn btn-info" onclick="return AgregarOfertaImagen(\'' + args[i].ofe_idOferta + '\');">Imagen</button>' + '&nbsp;' + '&nbsp;';
-                strHtml += '<button type="button" class="btn btn-info" onclick="return AgregarOfertaFolleto(\'' + args[i].ofe_idOferta + '\');">Folleto</button>' + '&nbsp;' + '&nbsp;';
+                if (!args[i].ofe_nuevosLanzamiento) {
+                    strHtml += '<button type="button" class="btn btn-info" onclick="return AgregarOfertaFolleto(\'' + args[i].ofe_idOferta + '\');">Folleto</button>' + '&nbsp;' + '&nbsp;';
+                }
                 strHtml += '<button type="button" class="btn btn-warning" onclick="return IrVistaPreviaId(\'' + args[i].ofe_idOferta + '\');">Vista Previa</button>';  //
                 strHtml += '</td>';
 
@@ -64,8 +66,7 @@ function OnCallBackRecuperarTodasOfertas(args) {
         }
     }
 }
-function PublicarOferta(pValor)
-{
+function PublicarOferta(pValor) {
     PageMethods.CambiarEstadoPublicarOferta(pValor, OnCallBackCambiarEstadoPublicarOferta, OnFail);
 }
 function OnCallBackCambiarEstadoPublicarOferta(args) {
@@ -88,10 +89,10 @@ function ElimimarOferta(pValor) {
             Cancelar: function () {
                 //$.alert('Canceled!');
             }
-            
+
         }
     });
-  
+
     return false;
 }
 function OnCallBackElimimarOfertaPorId(args) {
@@ -136,10 +137,10 @@ function OnCallBackRecuperarProductos(args) {
             strHtml += '</div>';
             $('#divContenedorGrilla').html(strHtml);
         }
-      
+
     }
     if (isClearHtml)
-       $('#divContenedorGrilla').html('');
+        $('#divContenedorGrilla').html('');
 }
 function AgregarProductoOferta(pValue) {
     PageMethods.AgregarProducto(pValue, OnCallBackAgregarProducto, OnFail);
@@ -193,17 +194,17 @@ function VolverOferta() {
 }
 function IrVistaPrevia() {
     window.open(
-  '../../home/index.aspx',
-  '_blank' // <- This is what makes it open in a new window.
-);
+        '../../home/index.aspx',
+        '_blank' // <- This is what makes it open in a new window.
+    );
     return false;
 }
 function IrVistaPreviaId(pId) {
     window.open(
-  '../../home/vistapreviaoferta.aspx?id=' + pId,
-   // 'http://www.kellerhoff.com.ar/home/vistapreviaoferta.aspx?id=' + pId,
-  '_blank' // <- This is what makes it open in a new window.
-);
+        '../../home/vistapreviaoferta.aspx?id=' + pId,
+        // 'http://www.kellerhoff.com.ar/home/vistapreviaoferta.aspx?id=' + pId,
+        '_blank' // <- This is what makes it open in a new window.
+    );
     return false;
 }
 function GuardarOferta() {
@@ -222,12 +223,12 @@ function GuardarOferta() {
     var nombreTransfer = $('#cmdTransfer').val();
     var ofe_fechaFinOferta = $('#txt_fechaFin').val();
     var ofe_nuevosLanzamiento = document.getElementById('txt_nuevosLanzamiento').checked;//$('#txt_nuevosLanzamiento').val();
+    var ofe_descrHtml = $('#textareaHtml').val();
 
-    PageMethods.InsertarActualizarOferta(titulo, descr, descuento, etiqueta, etiquetaColor, tipo, nombreTransfer, ofe_fechaFinOferta, ofe_nuevosLanzamiento, OnCallBackInsertarActualizarOferta, OnFailInsertarActualizarOferta);
+    PageMethods.InsertarActualizarOferta(titulo, descr, descuento, etiqueta, etiquetaColor, tipo, nombreTransfer, ofe_fechaFinOferta, ofe_nuevosLanzamiento, ofe_descrHtml, OnCallBackInsertarActualizarOferta, OnFailInsertarActualizarOferta);
 
 }
-function OnFailInsertarActualizarOferta(er)
-{ VolverOferta(); }
+function OnFailInsertarActualizarOferta(er) { VolverOferta(); }
 function OnCallBackInsertarActualizarOferta(args) {
     VolverOferta();
 }
@@ -248,10 +249,9 @@ function onclickVolverOfertaImagen() {
 }
 function GuardarOfertaHome() {
 
-    PageMethods.InsertarActualizarOfertaHome(parseInt( $('#cmdOfertaHome_1').val()),parseInt( $('#cmdOfertaHome_2').val()),parseInt( $('#cmdOfertaHome_3').val()),parseInt( $('#cmdOfertaHome_4').val()),  OnCallBackInsertarActualizarOfertaHome, OnFail);
+    PageMethods.InsertarActualizarOfertaHome(parseInt($('#cmdOfertaHome_1').val()), parseInt($('#cmdOfertaHome_2').val()), parseInt($('#cmdOfertaHome_3').val()), parseInt($('#cmdOfertaHome_4').val()), parseInt($('#cmdLanzamientoHome_1').val()), parseInt($('#cmdLanzamientoHome_2').val()), parseInt($('#cmdLanzamientoHome_3').val()), parseInt($('#cmdLanzamientoHome_4').val()), OnCallBackInsertarActualizarOfertaHome, OnFail);
 }
-function OnCallBackInsertarActualizarOfertaHome(args)
-{
+function OnCallBackInsertarActualizarOfertaHome(args) {
 
 }
 function onkeypressAgregarBuscar(e) {

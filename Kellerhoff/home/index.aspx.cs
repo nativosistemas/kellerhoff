@@ -54,9 +54,18 @@ namespace Kellerhoff.home
             }
         }
         [WebMethod(EnableSession = true)]
-        public static string RecuperarTodasOfertas()
+        public static string RecuperarTodasOfertas(List<cOfertaHome> pResultado, bool isNuevoLanzamiento = false)
         {
-            List<cOfertaHome> resultado = WebService.RecuperarTodasOfertaParaHome();
+            List<cOfertaHome> resultado = pResultado;
+            if (isNuevoLanzamiento)
+            {
+                resultado =  resultado.Where(x => x.ofh_orden > 4).ToList();
+              
+            }
+            else
+            {
+                resultado =  resultado.Where(x => x.ofh_orden <= 4).ToList();
+            }
             return resultado == null ? string.Empty : Serializador.SerializarAJson(resultado);
         }
         public void htmlPublicarRevista()
@@ -82,12 +91,17 @@ namespace Kellerhoff.home
         public void AgregarHtmlOculto()
         {
             string resultado = string.Empty;
-            resultado += "<input type=\"hidden\" id=\"hiddenListaOfertas\" value=\"" + Server.HtmlEncode(RecuperarTodasOfertas()) + "\" />";
+            List<cOfertaHome> resultado_lista_OfertaHome = WebService.RecuperarTodasOfertaParaHome();
+            if (resultado_lista_OfertaHome == null) {
+                resultado_lista_OfertaHome = new List<cOfertaHome>();
+            }
+            resultado += "<input type=\"hidden\" id=\"hiddenListaOfertas\" value=\"" + Server.HtmlEncode(RecuperarTodasOfertas(resultado_lista_OfertaHome,false)) + "\" />";
+            resultado += "<input type=\"hidden\" id=\"hiddenListaLanzamiento\" value=\"" + Server.HtmlEncode(RecuperarTodasOfertas(resultado_lista_OfertaHome,true)) + "\" />";
             resultado += "<input type=\"hidden\" id=\"hiddenListaSlider\" value=\"" + Server.HtmlEncode(RecuperarTodasHomeSlide()) + "\" />";
             List<Codigo.tbl_Recall> l = WebService.RecuperarTodaReCall();
             if (l != null)
             {
-                l = l.Where(x=> x.rec_visible.HasValue && x.rec_visible.Value).OrderByDescending(x => x.rec_FechaNoticia.HasValue ? x.rec_FechaNoticia : x.rec_Fecha).Take(3).ToList();
+                l = l.Where(x => x.rec_visible.HasValue && x.rec_visible.Value).OrderByDescending(x => x.rec_FechaNoticia.HasValue ? x.rec_FechaNoticia : x.rec_Fecha).Take(3).ToList();
                 resultado += "<input type=\"hidden\" id=\"hiddenListaReCallIndex\" value=\"" + Server.HtmlEncode(Serializador.SerializarAJson(l)) + "\" />";
             }
 

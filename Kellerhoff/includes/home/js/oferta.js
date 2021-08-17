@@ -5,13 +5,36 @@ function prepararListaOfertas(pValor) {
     if (typeof listOferta == 'undefined') {
         listOferta = null;
     }
-    CargarHtmlOfertasEnHome();
+    CargarHtmlOfertasEnHome(listOferta);
 }
-function CargarHtmlOfertasEnHome() {
-    if (listOferta != null) {
-        var strHtml = '';       
-        strHtml += '<div class="row">';      
-        for (var i = 0; i < listOferta.length; i++) {
+function prepararListaLanzamiento(pValor) {
+    var listLanzamientos = eval('(' + pValor + ')');
+    if (typeof listLanzamientos == 'undefined') {
+        listLanzamientos = null;
+    }
+    CargarHtmlLanzamientosEnHome(listLanzamientos);
+}
+
+function CargarHtmlLanzamientosEnHome(pListaOfertaLanzamiento) {
+    if (pListaOfertaLanzamiento == null || pListaOfertaLanzamiento.length == 0) {
+        $('.cssLanzamientos').addClass('cssHomeDisplayNone');
+    } else { 
+        $('#divContenedorNuevosLanzamientos').html(CargarHtmlOfertasEnHome_generico(pListaOfertaLanzamiento));
+    }
+}
+function CargarHtmlOfertasEnHome(pListaOfertaLanzamiento) {
+    if (pListaOfertaLanzamiento == null || pListaOfertaLanzamiento.length == 0) {
+        $('.cssOfertas').addClass('cssHomeDisplayNone');
+    } else {
+        $('#divContenedorOfertas').html(CargarHtmlOfertasEnHome_generico(pListaOfertaLanzamiento));
+    }
+}
+function CargarHtmlOfertasEnHome_generico(pListaOfertaLanzamiento) {
+    var result = '';
+    if (pListaOfertaLanzamiento != null) {
+        var strHtml = '';
+        strHtml += '<div class="row">';
+        for (var i = 0; i < pListaOfertaLanzamiento.length; i++) {
             if (multiple(i, 4) && i != 0) {
                 strHtml += '</div>';
                 strHtml += '<div class="row">';
@@ -19,44 +42,46 @@ function CargarHtmlOfertasEnHome() {
             strHtml += '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">';
             strHtml += '<div class="col-item">';
             strHtml += '<div class="photo">';
-            if (isNotNullEmpty(listOferta[i].ofe_etiqueta)) {
+            if (isNotNullEmpty(pListaOfertaLanzamiento[i].ofe_etiqueta)) {
                 var colorEtiqueta = '';
-                if (isNotNullEmpty(listOferta[i].ofe_etiquetaColor))
-                    colorEtiqueta = 'style="background-color: #' + listOferta[i].ofe_etiquetaColor + '"';
-                strHtml += '<div class="etiqueta" ' + colorEtiqueta + '>' + listOferta[i].ofe_etiqueta + '</div>';
+                if (isNotNullEmpty(pListaOfertaLanzamiento[i].ofe_etiquetaColor))
+                    colorEtiqueta = 'style="background-color: #' + pListaOfertaLanzamiento[i].ofe_etiquetaColor + '"';
+                strHtml += '<div class="etiqueta" ' + colorEtiqueta + '>' + pListaOfertaLanzamiento[i].ofe_etiqueta + '</div>';
             }
-            if (isNotNullEmpty(listOferta[i].namePdf)) { 
-               // strHtml += '<a target="_blank" href="../../archivos/' + 'ofertaspdf' + '/' + listOferta[i].namePdf + '"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
-                strHtml += '<a target="_blank" href="../../servicios/descargarArchivo.aspx?t=' + 'ofertaspdf' + '&n=' + listOferta[i].namePdf + '&inline=yes"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
-
+            if (!pListaOfertaLanzamiento[i].ofe_nuevosLanzamiento && isNotNullEmpty(pListaOfertaLanzamiento[i].namePdf)) {
+                strHtml += '<a target="_blank" href="../../servicios/descargarArchivo.aspx?t=' + 'ofertaspdf' + '&n=' + pListaOfertaLanzamiento[i].namePdf + '&inline=yes"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
+            }else if (pListaOfertaLanzamiento[i].ofe_nuevosLanzamiento && isNotNullEmpty(pListaOfertaLanzamiento[i].ofe_descrHtml)) {
+                strHtml += '<a  href="#" onclick="onclickNuevoLanzamiento(' + pListaOfertaLanzamiento[i].ofe_idOferta + '); return false;"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
             }
-            if (isNotNullEmpty(listOferta[i].nameImagen))
-                strHtml += '<img class="img-responsive"  src="' + '../../../servicios/thumbnail.aspx?r=' + 'ofertas' + '&n=' + listOferta[i].nameImagen + '&an=' + tamanioOferta_img + '&al=' + tamanioOferta_img + '&c=FFFFFF" alt="oferta" title="" />';
+            if (isNotNullEmpty(pListaOfertaLanzamiento[i].nameImagen))
+                strHtml += '<img class="img-responsive"  src="' + '../../../servicios/thumbnail.aspx?r=' + 'ofertas' + '&n=' + pListaOfertaLanzamiento[i].nameImagen + '&an=' + tamanioOferta_img + '&al=' + tamanioOferta_img + '&c=FFFFFF" alt="oferta" title="" />';
             else
                 strHtml += '<img class="img-responsive"  src="' + '../../../servicios/thumbnail.aspx?r=' + 'ofertas' + '&n=' + 'productosinfoto.png' + '&an=' + tamanioOferta_img + '&al=' + tamanioOferta_img + '&c=FFFFFF" alt="oferta" title=""/>';
-            if (isNotNullEmpty(listOferta[i].namePdf)) {
+            if (!pListaOfertaLanzamiento[i].ofe_nuevosLanzamiento && isNotNullEmpty(pListaOfertaLanzamiento[i].namePdf)) {
+                strHtml += '</a>';
+            }else if (pListaOfertaLanzamiento[i].ofe_nuevosLanzamiento && isNotNullEmpty(pListaOfertaLanzamiento[i].ofe_descrHtml)) {
                 strHtml += '</a>';
             }
             strHtml += '</div>'; //<div class="photo">
             strHtml += '<div class="info">';
             strHtml += '<div class="row">';
             strHtml += '<div class="price col-lg-12">';
-            strHtml += '<h5>' + listOferta[i].ofe_titulo + '</h5>';
-            strHtml += '<p>' + listOferta[i].ofe_descr + '</p>';
+            strHtml += '<h5>' + pListaOfertaLanzamiento[i].ofe_titulo + '</h5>';
+            strHtml += '<p>' + pListaOfertaLanzamiento[i].ofe_descr + '</p>';
             var descuento = '';
-            if (isNotNullEmpty(listOferta[i].ofe_descuento))
-                descuento = listOferta[i].ofe_descuento;
+            if (isNotNullEmpty(pListaOfertaLanzamiento[i].ofe_descuento))
+                descuento = pListaOfertaLanzamiento[i].ofe_descuento;
             strHtml += '<div class="desc">' + descuento + '</div>';
             var txtAñadirCarrito = 'AÑADIR AL CARRITO';
-            //if (isNotNullEmpty(listOferta[i].namePdf))
+            //if (isNotNullEmpty(pListaOfertaLanzamiento[i].namePdf))
             //{
             //    txtAñadirCarrito = 'AÑADIR';
-            //    strHtml += '<a class="btn_ampliar  float-right" target ="_blank" href="../../archivos/' + 'ofertaspdf' + '/' + listOferta[i].namePdf + '">AMPLIAR</a>';//AMPLIAR
+            //    strHtml += '<a class="btn_ampliar  float-right" target ="_blank" href="../../archivos/' + 'ofertaspdf' + '/' + pListaOfertaLanzamiento[i].namePdf + '">AMPLIAR</a>';//AMPLIAR
             //}
-            if (listOferta[i].ofe_tipo == 1 && listOferta[i].countOfertaDetalles > 0)
-                strHtml += '<a class="btn_carrito" onclick="onclickCarrito(' + listOferta[i].ofe_idOferta + ');" >' + txtAñadirCarrito + '</a>';//AÑADIR AL CARRITO
-            else if (listOferta[i].ofe_tipo == 2 && listOferta[i].ofe_nombreTransfer != null)
-                strHtml += '<a class="btn_carrito" onclick="onclickCarrito(' + listOferta[i].ofe_idOferta + ');" >' + txtAñadirCarrito + '</a>';
+            if (pListaOfertaLanzamiento[i].ofe_tipo == 1 && pListaOfertaLanzamiento[i].countOfertaDetalles > 0)
+                strHtml += '<a class="btn_carrito" onclick="onclickCarrito(' + pListaOfertaLanzamiento[i].ofe_idOferta + ');" >' + txtAñadirCarrito + '</a>';//AÑADIR AL CARRITO
+            else if (pListaOfertaLanzamiento[i].ofe_tipo == 2 && pListaOfertaLanzamiento[i].ofe_nombreTransfer != null)
+                strHtml += '<a class="btn_carrito" onclick="onclickCarrito(' + pListaOfertaLanzamiento[i].ofe_idOferta + ');" >' + txtAñadirCarrito + '</a>';
 
             strHtml += '</div>'; //<div class="price col-lg-12">
             strHtml += '<div class="clearfix"></div>';
@@ -67,9 +92,11 @@ function CargarHtmlOfertasEnHome() {
             strHtml += '</div>'; //'<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">'
         }
         strHtml += '</div>'; // '<div class="row">';
-        $('#divContenedorOfertas').html(strHtml);
+        result = strHtml;// $('#divContenedorOfertas').html(strHtml);
     }
+    return result;
 }
+
 function onclickCarrito(pValor) {
     idOferta = pValor;
     //$('#name_carrito').val('');

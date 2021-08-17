@@ -11,7 +11,7 @@
 
     <section class="section-gris-claro" id="destacados">
         <div class="container">
-            <div class="row">
+            <div class="row cssOfertas">
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12">
@@ -26,9 +26,27 @@
                     </div>
                 </div>
             </div>
-            <div class="clear55 hidden-xs clear55_ofertas"></div>
-            <div class="clear20 visible-xs"></div>
-            <div id="divContenedorOfertas"></div>
+            <div class="clear55 hidden-xs clear55_ofertas cssOfertas"></div>
+            <div class="clear20 visible-xs cssOfertas"></div>
+            <div id="divContenedorOfertas" class="cssOfertas"></div>
+            <div class="row cssLanzamientos">               
+			   <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12">
+                            <h2 class="text-left color_emp_nd hidden-xs">NUEVOS LANZAMIENTOS</h2>
+                            <h2 class="text-center color_emp_nd visible-xs">NUEVOS LANZAMIENTOS</h2>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                            <div class="clear5 hidden-sm"></div>
+                            <a class="btn_emp float-right hidden-xs" href="promociones.aspx?isNuevoLanzamiento=1">VER TODAS</a>
+                            <p class="text-center visible-xs"><a href="promociones.aspx?isNuevoLanzamiento=1">Ver todos los nuevos lanzamientos</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear55 hidden-xs clear55_ofertas cssLanzamientos"></div>
+            <div class="clear20 visible-xs cssLanzamientos"></div>
+            <div id="divContenedorNuevosLanzamientos" class="cssLanzamientos"></div>
         </div>
     </section>
 
@@ -281,9 +299,9 @@
 
     <%--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj5tbgIz5_otRZz97proggQAnX0p1ZyRU"></script>
     <script type="text/javascript" src="../includes/home/js/jquery/maps.js"></script>--%>
-    <script src="../includes/home/js/oferta.js?n=9"></script>
+    <script src="../includes/home/js/oferta.js?n=12"></script>
     <script src="../includes/home/js/slider.js?n=17"></script>
-    <script src="../includes/home/js/index.js?n=4"></script>
+    <script src="../includes/home/js/index.js?n=5"></script>
     <script type="text/javascript">
         $(window).on('resize', function () {
             // Set interval until timer is cleared, indicating end of the resize event

@@ -29,8 +29,9 @@ namespace Kellerhoff.Codigo.capaDatos
         public DateTime? ofe_fechaFinOferta { get; set; }
         public string ofe_fechaFinOfertaToString { get; set; }
         public bool ofe_nuevosLanzamiento { get; set; }
+        public string ofe_descrHtml { get; set; }
 
-}
+    }
 
     public class cOfertaDetalle
     {
@@ -324,7 +325,7 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static bool InsertarActualizarOferta(int pOfe_idOferta, string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int pOfe_tipo, string ofe_nombreTransfer, DateTime? ofe_fechaFinOferta, bool ofe_nuevosLanzamiento)
+        public static bool InsertarActualizarOferta(int pOfe_idOferta, string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int pOfe_tipo, string ofe_nombreTransfer, DateTime? ofe_fechaFinOferta, bool ofe_nuevosLanzamiento,string ofe_descrHtml)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("dbo.spInsertarActualizarOferta", Conn);
@@ -339,6 +340,8 @@ namespace Kellerhoff.Codigo.capaDatos
             SqlParameter paOfe_etiquetaColor = cmdComandoInicio.Parameters.Add("@ofe_etiquetaColor", SqlDbType.NVarChar, 10);
             SqlParameter paOfe_fechaFinOferta = cmdComandoInicio.Parameters.Add("@ofe_fechaFinOferta", SqlDbType.DateTime);
             SqlParameter paOfe_nuevosLanzamiento = cmdComandoInicio.Parameters.Add("@ofe_nuevosLanzamiento", SqlDbType.Bit);
+            SqlParameter paOfe_descrHtml = cmdComandoInicio.Parameters.Add("@ofe_descrHtml", SqlDbType.NVarChar,-1);
+
             paIdOferta.Value = pOfe_idOferta;
             paOfe_titulo.Value = pOfe_titulo;
             paOfe_descr.Value = pOfe_descr;
@@ -365,6 +368,11 @@ namespace Kellerhoff.Codigo.capaDatos
                 paOfe_fechaFinOferta.Value = DBNull.Value;
             else
                 paOfe_fechaFinOferta.Value = ofe_fechaFinOferta;
+
+            if (ofe_descrHtml == null)
+                paOfe_descrHtml.Value = DBNull.Value;
+            else
+                paOfe_descrHtml.Value = ofe_descrHtml;
 
             paOfe_nuevosLanzamiento.Value = ofe_nuevosLanzamiento;
             try

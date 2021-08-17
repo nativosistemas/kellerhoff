@@ -66,9 +66,9 @@ function CargarHtmlOfertasEnHome() {
                 strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + listOferta[i].nameImagen + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF' + '" alt="oferta" title=" alt="oferta">';
             else
                 strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF' + '" alt="oferta" title=" alt="oferta">';
-            if (isNotNullEmpty(listOferta[i].namePdf)) {
-                strHtml += '</a>';
-            }
+            //if (isNotNullEmpty(listOferta[i].namePdf)) {
+            //    strHtml += '</a>';
+            //}
             strHtml += '</div>'; //<div class="col-xs-4 item_img">
 
 
@@ -226,10 +226,10 @@ function CargarHtmlPromocionesClientes() {
                     colorEtiqueta = 'style="background-color: #' + listaPromocionesClientes[i].ofe_etiquetaColor + '"';
                 strHtml += '<div class="etiqueta" ' + colorEtiqueta + '>' + listaPromocionesClientes[i].ofe_etiqueta + '</div>';
             }
-            if (isNotNullEmpty(listaPromocionesClientes[i].namePdf)) {
-                // strHtml += '<a target="_blank" href="../../archivos/' + 'ofertaspdf' + '/' + listaPromocionesClientes[i].namePdf + '"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
-                //        window.open('../../servicios/generar_archivoPdf.aspx?tipo=' + objTipoDocumento + '&nro=' + nroDocumento, '_parent');
+            if (!listaPromocionesClientes[i].ofe_nuevosLanzamiento && isNotNullEmpty(listaPromocionesClientes[i].namePdf)) {
                 strHtml += '<a target="_blank" href="../../servicios/descargarArchivo.aspx?t=' + 'ofertaspdf' + '&n=' + listaPromocionesClientes[i].namePdf + '&inline=yes"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
+            } else if (listaPromocionesClientes[i].ofe_nuevosLanzamiento && isNotNullEmpty(listaPromocionesClientes[i].ofe_descrHtml)) {
+                strHtml += '<a  href="#" onclick="onclickNuevoLanzamiento(' + listaPromocionesClientes[i].ofe_idOferta + '); return false;"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
             }
             if (isNotNullEmpty(listaPromocionesClientes[i].nameImagen)) {
                 // strHtml += '<div class="div_ImagenPromo" style="' + 'background-image: url(../../servicios/thumbnail.aspx?r=ofertas&n=' + listaPromocionesClientes[i].nameImagen + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF);' + '"></div>';
@@ -239,7 +239,9 @@ function CargarHtmlPromocionesClientes() {
                 // strHtml += '<div class="div_ImagenPromo" style="' + 'background-image: url(../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF);' + '"></div>';
                 strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF' + '" alt="oferta" title=" alt="oferta">';
             }
-            if (isNotNullEmpty(listaPromocionesClientes[i].namePdf)) {
+            if (!listaPromocionesClientes[i].ofe_nuevosLanzamiento &&isNotNullEmpty(listaPromocionesClientes[i].namePdf)) {
+                strHtml += '</a>';
+            } else if (listaPromocionesClientes[i].ofe_nuevosLanzamiento && isNotNullEmpty(listaPromocionesClientes[i].ofe_descrHtml)) {
                 strHtml += '</a>';
             }
             strHtml += '</div>'; //<div class="photo">

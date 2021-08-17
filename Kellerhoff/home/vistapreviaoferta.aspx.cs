@@ -28,7 +28,7 @@ namespace Kellerhoff.home
                 id = Convert.ToInt32(HttpContext.Current.Session["vistapreviaoferta_idOferta"]);
 
             List<cOferta> resultado = new List<cOferta>();
-            cOferta o = WebService.RecuperarTodasOfertas().FirstOrDefault(x => x.ofe_idOferta == id);
+            cOferta o = WebService.RecuperarTodasOfertas_generico().FirstOrDefault(x => x.ofe_idOferta == id);
             if (o != null)
                 resultado.Add(o);
             foreach (var item in resultado)

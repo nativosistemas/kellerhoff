@@ -16,7 +16,7 @@
 </head>
 <body>
     <form id="form1" name="form1" runat="server">
-
+         <div id="modalModulo" class="modal md-effect-1 md-content portfolio-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true"
             EnablePageMethods="true" EnableScriptGlobalization="True">
         </asp:ScriptManager>
@@ -31,7 +31,8 @@
     <script type="text/javascript" src="../includes/home/js/jquery/function_forms.js"></script>
     <script type="text/javascript" src="../includes/home/js/jquery/owl.carousel.min.js"></script>
     <script src="../includes/js/Libreria.js?n=13"></script>
-    <script src="../includes/home/js/oferta.js"></script>
+  <script type="text/javascript" src="../includes/mvc/js/mensaje.js?n=29"></script>
+    <script src="../includes/home/js/oferta.js?n=13"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             prepararListaOfertas($('#hiddenListaOfertas').val());
