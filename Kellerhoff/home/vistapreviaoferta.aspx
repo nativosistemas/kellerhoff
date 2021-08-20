@@ -31,8 +31,8 @@
     <script type="text/javascript" src="../includes/home/js/jquery/function_forms.js"></script>
     <script type="text/javascript" src="../includes/home/js/jquery/owl.carousel.min.js"></script>
     <script src="../includes/js/Libreria.js?n=13"></script>
-  <script type="text/javascript" src="../includes/mvc/js/mensaje.js?n=29"></script>
-    <script src="../includes/home/js/oferta.js?n=13"></script>
+  <script type="text/javascript" src="../includes/mvc/js/mensaje.js?n=30"></script>
+    <script src="../includes/home/js/oferta.js?n=14"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             prepararListaOfertas($('#hiddenListaOfertas').val());

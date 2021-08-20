@@ -299,7 +299,7 @@
 
     <%--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj5tbgIz5_otRZz97proggQAnX0p1ZyRU"></script>
     <script type="text/javascript" src="../includes/home/js/jquery/maps.js"></script>--%>
-    <script src="../includes/home/js/oferta.js?n=12"></script>
+    <script src="../includes/home/js/oferta.js?n=13"></script>
     <script src="../includes/home/js/slider.js?n=17"></script>
     <script src="../includes/home/js/index.js?n=5"></script>
     <script type="text/javascript">
