@@ -284,3 +284,31 @@ function CargarHtmlPromocionesClientes() {
         $('#divContenedorOfertasPromocionesClientes').html(strHtml);
     }
 }
+function prepararListaMsgLanzamiento(args) {
+    var strHtml = '';
+    var listaLanzamiento = eval('(' + args + ')');
+    if (typeof listaLanzamiento == 'undefined') {
+        listaLanzamiento = null;
+    }
+    if (listaLanzamiento != null && listaLanzamiento.length > 0) {
+        strHtml += '<div class="modal-background">&nbsp;</div>';
+        strHtml += '<div class="modal-dialog modal-popUp"><div class="modal-content">'; // modal-md
+        strHtml += '<div class="modal-header no-padding-bottom">';
+        strHtml += '<div class="row divContenedorPopUp">';
+        if (isNotNullEmpty(listaLanzamiento[0].nameImagen))
+            strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + listaLanzamiento[0].nameImagen + '&an=1024&al=768' + '" alt="oferta" title=" alt="oferta">';
+        else
+            strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=1024&al=768' + '" alt="oferta" title=" alt="oferta">';
+        strHtml += '<div>';
+        strHtml += listaLanzamiento[0].ofe_descrHtml;
+        strHtml += '</div>';
+        //
+        strHtml += '</div>';
+        //strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+        strHtml += '</div>';
+        strHtml += '</div></div>';
+    }
+
+
+    $('#divContenedorOfertas').html(strHtml);
+}

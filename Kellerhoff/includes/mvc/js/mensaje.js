@@ -460,6 +460,9 @@ function mensaje_NuevosLanzamientos(pObjeto) {//,pTexto
     // }
 }
 function onclickNuevoLanzamiento(pIdOferta) {
+    var url = '../home/lanzamiento.aspx?id=' + pIdOferta;
+    window.open(url, '_blank').focus();
+        /*
     $.ajax({
         type: "POST",
         url: "../config/RecuperarOferta",
@@ -475,9 +478,7 @@ function onclickNuevoLanzamiento(pIdOferta) {
             OnFail(response);
         }
     });
-    //pNombreImg, pMsg
-    //localStorage.setItem('objOferta_popup', 'Chris');
-    //mensaje_NuevosLanzamientos(pIdOferta);
+    */
 
 }
 function OnCallBackRecuperarOferta(args) {
