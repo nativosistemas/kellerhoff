@@ -67,6 +67,7 @@
                             <asp:MenuItem Text="Productos">
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionProductoDatosExtras.aspx" Text="Productos Datos Extras" />
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionProductoImagen.aspx" Text="Productos Imagenes" />
+                               <asp:MenuItem NavigateUrl="~/admin/pages/GestionProductoImagenProceso.aspx" Text="Productos Imagenes Proceso Tamaño Ampliar" /> 
                             </asp:MenuItem>
                             <asp:MenuItem Text="Sucursales">
                                 <asp:MenuItem NavigateUrl="~/admin/pages/GestionSucursal.aspx" Text="Sucursales dependencia" />

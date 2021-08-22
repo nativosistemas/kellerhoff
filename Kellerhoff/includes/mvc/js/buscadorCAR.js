@@ -681,7 +681,7 @@ function getHtmlTablaResolucionCelular() {
             //strHtml += '</td>'; 
 
             // strHtml += '<td class="col-lg-1 col-md-1 col-sm-1 text-center"  OnMouseMove="OnMouseMoveProdructo(event)" OnMouseOver="OnMouseOverProdructo(' + i + ')" OnMouseOut="OnMouseOutProdructo()" onclick="RecuperarTransfer(' + i + ')" class="' + strHtmlColorFondo + ' cssFilaBuscadorDesmarcar cssFilaBuscador_' + i + ' porCamara_cabeceraYfila">';
-            if (listaProductosBuscados[i].pri_nombreArchivo !== null) {
+            if (listaProductosBuscados[i].pri_nombreArchivo !== null) {// onclick="onclickAmpliarImagen(\'' + listaProductosBuscados[i].pri_nombreArchivo + '\');"
                 strHtml += '<i class="fa fa-camera color_emp_st pull-right"></i>';//style="width:20px;height:20px; "
             }
             strHtml += '</td>';
@@ -1606,8 +1606,8 @@ function OnCallBackRecuperarProductos(args) {
                         isMostrarImput = false;
                     }
 
-                    if (listaProductosBuscados[i].pri_nombreArchivo !== null) {
-                        strHtml += '<i class="fa fa-camera color_emp_st pull-right"></i>';//style="width:20px;height:20px; "
+                    if (listaProductosBuscados[i].pri_nombreArchivo !== null) {//onclickAmpliarImagen(\'' + listaProductosBuscados[i].pri_nombreArchivo + '\')
+                        strHtml += '<i class="fa fa-camera color_emp_st pull-right" onclick="onclickAmpliarImagen(' + i + ');"></i>';//style="width:20px;height:20px; "
                     }
                     if (isSubirPedido) {
                         strHtml += '</div>';
@@ -3083,3 +3083,6 @@ function CargarDatosProductosFacturacionDirecta(pIndice) {
     }
 }
 /// Fin facturacion directa detalle muestra
+function onclickAmpliarImagen(pIndice) {
+    mensaje_AmpliarImagen(listaProductosBuscados[pIndice]);
+}

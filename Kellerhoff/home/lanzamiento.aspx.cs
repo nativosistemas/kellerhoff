@@ -19,6 +19,7 @@ namespace Kellerhoff.home
                 HttpContext.Current.Session["lanzamiento_idOferta"] = Request.QueryString.Get("id");
 
             }
+            //WebService.ActualizarAnchoAltoImagenProductosAlAmpliar();
         }
         [WebMethod(EnableSession = true)]
         public static string RecuperarTodasOfertas()

@@ -4718,6 +4718,14 @@ namespace Kellerhoff
             {
                 obj.pri_nombreArchivo = Convert.ToString(pItem["pri_nombreArchivo"]);
             }
+            if (pItem.Table.Columns.Contains("pri_ancho_ampliar") && pItem["pri_ancho_ampliar"] != DBNull.Value)
+            {
+                obj.pri_ancho_ampliar = Convert.ToInt32(pItem["pri_ancho_ampliar"]);
+            }
+            if (pItem.Table.Columns.Contains("pri_alto_ampliar") && pItem["pri_alto_ampliar"] != DBNull.Value)
+            {
+                obj.pri_alto_ampliar = Convert.ToInt32(pItem["pri_alto_ampliar"]);
+            }
             return obj;
         }
         public static List<cProductos> ObtenerProductosImagenesBusqueda(string pTxtBuscador)
@@ -4902,7 +4910,7 @@ namespace Kellerhoff
         public static List<cOferta> RecuperarTodasOfertas(bool isNuevosLanzamiento = false)
         {
             List<cOferta> resultado = RecuperarTodasOfertas_generico();
- 
+
             if (resultado != null)
             {
                 resultado = resultado.Where(x => x.ofe_nuevosLanzamiento == isNuevosLanzamiento).ToList();
@@ -4923,7 +4931,7 @@ namespace Kellerhoff
             }
             return resultado;
         }
-        public static List<cOferta> RecuperarTodasOfertaPublicar(bool isNuevosLanzamiento=false)
+        public static List<cOferta> RecuperarTodasOfertaPublicar(bool isNuevosLanzamiento = false)
         {
             List<cOferta> resultado = null;
             DataTable tabla = capaHome.RecuperarTodasOfertaPublicar();
@@ -4935,7 +4943,8 @@ namespace Kellerhoff
                     resultado.Add(ConvertToOferta(fila));
                 }
             }
-            if (resultado != null) {
+            if (resultado != null)
+            {
                 resultado = resultado.Where(x => x.ofe_nuevosLanzamiento == isNuevosLanzamiento).ToList();
             }
             return resultado;
@@ -4981,7 +4990,7 @@ namespace Kellerhoff
                 resultado = capaHome.CambiarEstadoPublicarOferta(pIdOferta);
             return resultado;
         }
-        public static bool? InsertarActualizarOferta(int pOfe_idOferta, string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int pOfe_tipo, string ofe_nombreTransfer, DateTime? ofe_fechaFinOferta, bool ofe_nuevosLanzamiento,string ofe_descrHtml)
+        public static bool? InsertarActualizarOferta(int pOfe_idOferta, string pOfe_titulo, string pOfe_descr, string pOfe_descuento, string pOfe_etiqueta, string pOfe_etiquetaColor, int pOfe_tipo, string ofe_nombreTransfer, DateTime? ofe_fechaFinOferta, bool ofe_nuevosLanzamiento, string ofe_descrHtml)
         {
             bool? resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
@@ -5850,6 +5859,30 @@ namespace Kellerhoff
         public static void DeleteModulo(int id)
         {
             DKbase.app.accesoApp.DeleteModulo(id);
+        }
+        public static void ActualizarAnchoAltoImagenProductosAlAmpliar()
+        {
+            List<cProductos> l = ObtenerProductosImagenes();
+            if (l != null)
+            {
+                foreach (var item in l)
+                {
+                    ProcesarImagenParaObtenerYGrabarAnchoAlto(item.pro_codigo, item.pri_nombreArchivo);
+                }
+            }
+        }
+        public static void ProcesarImagenParaObtenerYGrabarAnchoAlto(string pri_codigo, string pri_nombreArchivo)
+        {
+            string RutaCompleta = Constantes.cRaizArchivos + @"\archivos\" + "productos" + @"\";
+            string RutaCompletaNombreArchivo = RutaCompleta + pri_nombreArchivo;
+            if (System.IO.File.Exists(RutaCompletaNombreArchivo) && System.Text.RegularExpressions.Regex.IsMatch(pri_nombreArchivo.ToLower(), @"^.*\.(jpg|gif|png|jpeg|bmp)$"))
+            {
+                System.Drawing.Image origImagen = cThumbnail.obtenerImagen("productos", pri_nombreArchivo, "1024", "768", "", false); 
+                int pri_ancho_ampliar = origImagen.Width;
+                int pri_alto_ampliar = origImagen.Height;
+                capaProductos.ActualizarProductosImagenAnchoAlto(pri_codigo, pri_ancho_ampliar, pri_alto_ampliar);
+            }
+
         }
     }
     public class Autenticacion : SoapHeader

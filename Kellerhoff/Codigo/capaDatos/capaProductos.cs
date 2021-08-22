@@ -957,6 +957,36 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
+        public static bool ActualizarProductosImagenAnchoAlto(string pri_codigo, int pri_ancho_ampliar, int pri_alto_ampliar)
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("spActualizarProductosImagenAnchoAlto", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter paPri_codigo = cmdComandoInicio.Parameters.Add("@pri_codigo", SqlDbType.NVarChar, 50);
+            SqlParameter paPri_ancho_ampliar = cmdComandoInicio.Parameters.Add("@pri_ancho_ampliar", SqlDbType.Int);
+            SqlParameter paPri_alto_ampliar = cmdComandoInicio.Parameters.Add("@pri_alto_ampliar", SqlDbType.Int);
+            paPri_codigo.Value = pri_codigo;
+            paPri_ancho_ampliar.Value = pri_ancho_ampliar;
+            paPri_alto_ampliar.Value = pri_alto_ampliar;
+            try
+            {
+                Conn.Open();
+                cmdComandoInicio.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
         public static bool ElimimarProductoImagenPorId(string pCodigoProducto)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

@@ -81,9 +81,10 @@ namespace Kellerhoff.admin.pages
 
                             cThumbnail.obtenerImagen("productos", nombreFinal, Constantes.cWidth_Oferta.ToString(), Constantes.cHeight_Oferta.ToString(), "#FFFFFF", false);
 
-
-                            WebService.ActualizarInsertarProductosImagen(HttpContext.Current.Session["GestionProductoImagenAgregar_Numero"].ToString(), nombreFinal);
-                            //Label1.Text = "File uploaded!";
+                            string pri_codigo = HttpContext.Current.Session["GestionProductoImagenAgregar_Numero"].ToString();
+                            string pri_nombreArchivo = nombreFinal;
+                            WebService.ActualizarInsertarProductosImagen(pri_codigo, pri_nombreArchivo);
+                            WebService.ProcesarImagenParaObtenerYGrabarAnchoAlto(pri_codigo, pri_nombreArchivo);
 
                             HttpContext.Current.Session["GestionProductoImagenAgregar_Nombre"] = null;
                             HttpContext.Current.Session["GestionProductoImagenAgregar_Numero"] = null;

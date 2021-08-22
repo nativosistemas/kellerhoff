@@ -441,7 +441,7 @@ function mensaje_NuevosLanzamientos(pObjeto) {//,pTexto
     strHtml += '<img class="imgPopUp" src="../../servicios/thumbnail.aspx?r=ofertas&n=' + pObjeto.nameImagen + '&an=1024&al=768">';
     //
     strHtml += '<div>';
-    strHtml += pObjeto.ofe_descrHtml ;
+    strHtml += pObjeto.ofe_descrHtml;
     strHtml += '</div>';
     //
     strHtml += '</div>';
@@ -462,23 +462,23 @@ function mensaje_NuevosLanzamientos(pObjeto) {//,pTexto
 function onclickNuevoLanzamiento(pIdOferta) {
     var url = '../home/lanzamiento.aspx?id=' + pIdOferta;
     window.open(url, '_blank').focus();
-        /*
-    $.ajax({
-        type: "POST",
-        url: "../config/RecuperarOferta",
-        data: { pId: pIdOferta },
-        success:
-            function (response) {
-                OnCallBackRecuperarOferta(response);
-            },
-        failure: function (response) {
-            OnFail(response);
+    /*
+$.ajax({
+    type: "POST",
+    url: "../config/RecuperarOferta",
+    data: { pId: pIdOferta },
+    success:
+        function (response) {
+            OnCallBackRecuperarOferta(response);
         },
-        error: function (response) {
-            OnFail(response);
-        }
-    });
-    */
+    failure: function (response) {
+        OnFail(response);
+    },
+    error: function (response) {
+        OnFail(response);
+    }
+});
+*/
 
 }
 function OnCallBackRecuperarOferta(args) {
@@ -486,7 +486,32 @@ function OnCallBackRecuperarOferta(args) {
     if (typeof obj == 'undefined') {
         obj = null;
     }
-    if (obj != null && obj.length > 0) { 
+    if (obj != null && obj.length > 0) {
         mensaje_NuevosLanzamientos(obj[0]);
     }
+}
+function mensaje_AmpliarImagen(pObjeto) {
+
+    // if (listaPopUp != null && listaPopUp.length > 0 && listaPopUp[pIndex].arc_nombre != null) {
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-popUp"><div class="modal-content">'; // modal-md
+    strHtml += '<div class="modal-header no-padding-bottom">';
+    strHtml += '<div class="row divContenedorPopUp">';
+    //pObjeto.pri_nombreArchivo
+    strHtml += '<img class="imgPopUp" src="../../servicios/thumbnail.aspx?r=productos&n=' + pObjeto.pri_nombreArchivo + '&an=1024&al=1024">';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '</div></div>';
+    $('#modalModulo').html(strHtml);
+    $('#modalModulo').modal();
+    var ancho = pObjeto.pri_ancho_ampliar + 60;
+    if ($(window).width() < ancho) {
+        $('.imgPopUp').css('width', '90%');
+    } else {
+        $('.modal-popUp').css('width', String(ancho) + 'px');
+    }
+
+    // }
 }

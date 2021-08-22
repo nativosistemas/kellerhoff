@@ -170,6 +170,7 @@
     <Content Include="admin\pages\GestionProductoDatosExtras.aspx" />
     <Content Include="admin\pages\GestionProductoImagen.aspx" />
     <Content Include="admin\pages\GestionProductoImagenAgregar.aspx" />
+    <Content Include="admin\pages\GestionProductoImagenProceso.aspx" />
     <Content Include="admin\pages\GestionReCall.aspx" />
     <Content Include="admin\pages\GestionReCallAgregar.aspx" />
     <Content Include="admin\pages\GestionRegla.aspx" />
@@ -1120,6 +1121,7 @@
     <Content Include="SQLscript\nativosistemas_2020_06_30.sql" />
     <Content Include="SQLscript\nativosistemas_2020_09_15.sql" />
     <Content Include="SQLscript\nativosistemas_2020_12_15.sql" />
+    <Content Include="SQLscript\nativosistemas_2021_08_22.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_07_30.sql" />
     <Content Include="SQLscript\pablobrunodw_2019_09_26.sql" />
     <Content Include="WebService.asmx" />
@@ -1301,6 +1303,13 @@
     </Compile>
     <Compile Include="admin\pages\GestionProductoImagenAgregar.aspx.designer.cs">
       <DependentUpon>GestionProductoImagenAgregar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagenProceso.aspx.cs">
+      <DependentUpon>GestionProductoImagenProceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\pages\GestionProductoImagenProceso.aspx.designer.cs">
+      <DependentUpon>GestionProductoImagenProceso.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\pages\GestionReCall.aspx.cs">
       <DependentUpon>GestionReCall.aspx</DependentUpon>
