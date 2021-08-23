@@ -22,7 +22,11 @@ namespace Kellerhoff.admin.pages
         }
         protected void Button1_Click(object sender,   EventArgs e)
         {
-            WebService.ActualizarAnchoAltoImagenProductosAlAmpliar();
+            WebService.ActualizarAnchoAltoImagenProductosAlAmpliar(CheckBoxTodosLosNull.Checked);
+        }
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            WebService.BorrarAnchoAltoImagen();
         }
     }
 }

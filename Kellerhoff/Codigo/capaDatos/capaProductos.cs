@@ -987,6 +987,29 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
+        public static bool BorrarAnchoAltoImagen()
+        {
+            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+            SqlCommand cmdComandoInicio = new SqlCommand("spBorrarAnchoAltoImagen", Conn);
+            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                Conn.Open();
+                cmdComandoInicio.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                if (Conn.State == ConnectionState.Open)
+                {
+                    Conn.Close();
+                }
+            }
+        }
         public static bool ElimimarProductoImagenPorId(string pCodigoProducto)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

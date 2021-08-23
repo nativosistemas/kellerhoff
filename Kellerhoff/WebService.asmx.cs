@@ -4720,10 +4720,12 @@ namespace Kellerhoff
             }
             if (pItem.Table.Columns.Contains("pri_ancho_ampliar") && pItem["pri_ancho_ampliar"] != DBNull.Value)
             {
+                obj.pri_ancho_ampliar_original = Convert.ToInt32(pItem["pri_ancho_ampliar"]);
                 obj.pri_ancho_ampliar = Convert.ToInt32(pItem["pri_ancho_ampliar"]);
             }
             if (pItem.Table.Columns.Contains("pri_alto_ampliar") && pItem["pri_alto_ampliar"] != DBNull.Value)
             {
+                obj.pri_alto_ampliar_original = Convert.ToInt32(pItem["pri_alto_ampliar"]);
                 obj.pri_alto_ampliar = Convert.ToInt32(pItem["pri_alto_ampliar"]);
             }
             return obj;
@@ -5860,11 +5862,15 @@ namespace Kellerhoff
         {
             DKbase.app.accesoApp.DeleteModulo(id);
         }
-        public static void ActualizarAnchoAltoImagenProductosAlAmpliar()
+        public static void ActualizarAnchoAltoImagenProductosAlAmpliar(bool isOnlyNull = true)
         {
             List<cProductos> l = ObtenerProductosImagenes();
             if (l != null)
             {
+                if (isOnlyNull)
+                {
+                    l = l.Where(x => x.pri_ancho_ampliar_original == null).ToList();
+                }
                 foreach (var item in l)
                 {
                     ProcesarImagenParaObtenerYGrabarAnchoAlto(item.pro_codigo, item.pri_nombreArchivo);
@@ -5877,12 +5883,22 @@ namespace Kellerhoff
             string RutaCompletaNombreArchivo = RutaCompleta + pri_nombreArchivo;
             if (System.IO.File.Exists(RutaCompletaNombreArchivo) && System.Text.RegularExpressions.Regex.IsMatch(pri_nombreArchivo.ToLower(), @"^.*\.(jpg|gif|png|jpeg|bmp)$"))
             {
-                System.Drawing.Image origImagen = cThumbnail.obtenerImagen("productos", pri_nombreArchivo, "1024", "768", "", false); 
+                System.Drawing.Image origImagen = cThumbnail.obtenerImagen("productos", pri_nombreArchivo, DKbase.generales.Constantes.cImg_ancho_ampliar_dafault.ToString(), DKbase.generales.Constantes.cImg_alto_ampliar_dafault.ToString(), "", false);
                 int pri_ancho_ampliar = origImagen.Width;
                 int pri_alto_ampliar = origImagen.Height;
+                /*if (origImagen.Height > DKbase.generales.Constantes.cImg_alto_ampliar_dafault)
+                {
+                    origImagen = cThumbnail.obtenerImagen("productos", pri_nombreArchivo, DKbase.generales.Constantes.cImg_ancho_ampliar_dafault.ToString(), DKbase.generales.Constantes.cImg_alto_ampliar_dafault.ToString(), "", true);
+                    pri_ancho_ampliar = origImagen.Width;
+                    pri_alto_ampliar = origImagen.Height;
+                }*/
                 capaProductos.ActualizarProductosImagenAnchoAlto(pri_codigo, pri_ancho_ampliar, pri_alto_ampliar);
             }
 
+        }
+        public static void BorrarAnchoAltoImagen()
+        {
+            capaProductos.BorrarAnchoAltoImagen();
         }
     }
     public class Autenticacion : SoapHeader
