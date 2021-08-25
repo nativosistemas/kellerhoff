@@ -499,7 +499,7 @@ function mensaje_AmpliarImagen(pObjeto) {
     strHtml += '<div class="modal-header no-padding-bottom">';
     strHtml += '<div class="row divContenedorPopUp">';
     //pObjeto.pri_nombreArchivo
-    strHtml += '<img class="imgPopUp" src="../../servicios/thumbnail.aspx?r=productos&n=' + pObjeto.pri_nombreArchivo + '&an=1024&al=1024">';
+    strHtml += '<img class="imgPopUp" src="../../servicios/thumbnail.aspx?r=productos&n=' + pObjeto.pri_nombreArchivo + '&an=' + pObjeto.pri_ancho_ampliar + '&al=' + pObjeto.pri_alto_ampliar + '">';
     strHtml += '</div>';
     strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
     strHtml += '</div>';

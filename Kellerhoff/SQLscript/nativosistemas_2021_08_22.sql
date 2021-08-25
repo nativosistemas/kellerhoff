@@ -28,6 +28,17 @@ set [pri_ancho_ampliar] =@pri_ancho_ampliar
   
 GO	
 ---
+IF OBJECT_ID ( 'spBorrarAnchoAltoImagen', 'P' ) IS NOT NULL 
+    DROP PROCEDURE spBorrarAnchoAltoImagen;
+GO
+CREATE PROCEDURE  [spBorrarAnchoAltoImagen]
+AS 
+update  [dbo].[tbl_ProductosImagen]
+set [pri_ancho_ampliar] = NULL
+      ,[pri_alto_ampliar] = NULL
+  
+GO
+---
 ALTER procedure [dbo].[spRecuperarTodasOferta]
  AS
 
