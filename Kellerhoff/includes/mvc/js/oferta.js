@@ -228,7 +228,7 @@ function CargarHtmlPromocionesClientes() {
             }
             if (!listaPromocionesClientes[i].ofe_nuevosLanzamiento && isNotNullEmpty(listaPromocionesClientes[i].namePdf)) {
                 strHtml += '<a target="_blank" href="../../servicios/descargarArchivo.aspx?t=' + 'ofertaspdf' + '&n=' + listaPromocionesClientes[i].namePdf + '&inline=yes"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
-            } else if (listaPromocionesClientes[i].ofe_nuevosLanzamiento && isNotNullEmpty(listaPromocionesClientes[i].ofe_descrHtml)) {
+            } else if (listaPromocionesClientes[i].ofe_nuevosLanzamiento && isNotNullEmpty(listaPromocionesClientes[i].nameImagenAmpliar)) {
                 strHtml += '<a  href="#" onclick="onclickNuevoLanzamiento(' + listaPromocionesClientes[i].ofe_idOferta + '); return false;"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
             }
             if (isNotNullEmpty(listaPromocionesClientes[i].nameImagen)) {
@@ -239,9 +239,9 @@ function CargarHtmlPromocionesClientes() {
                 // strHtml += '<div class="div_ImagenPromo" style="' + 'background-image: url(../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF);' + '"></div>';
                 strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=' + tamanio + '&al=' + tamanio + '&c=FFFFFF' + '" alt="oferta" title=" alt="oferta">';
             }
-            if (!listaPromocionesClientes[i].ofe_nuevosLanzamiento &&isNotNullEmpty(listaPromocionesClientes[i].namePdf)) {
+            if (!listaPromocionesClientes[i].ofe_nuevosLanzamiento && isNotNullEmpty(listaPromocionesClientes[i].namePdf)) {
                 strHtml += '</a>';
-            } else if (listaPromocionesClientes[i].ofe_nuevosLanzamiento && isNotNullEmpty(listaPromocionesClientes[i].ofe_descrHtml)) {
+            } else if (listaPromocionesClientes[i].ofe_nuevosLanzamiento && isNotNullEmpty(listaPromocionesClientes[i].nameImagenAmpliar)) {
                 strHtml += '</a>';
             }
             strHtml += '</div>'; //<div class="photo">
@@ -292,13 +292,18 @@ function prepararListaMsgLanzamiento(args) {
     }
     if (listaLanzamiento != null && listaLanzamiento.length > 0) {
         strHtml += '<div class="modal-background">&nbsp;</div>';
-        strHtml += '<div class="modal-dialog modal-popUp"><div class="modal-content">'; // modal-md
+        strHtml += '<div class="modal-dialog modal-lanzamiento"><div class="modal-content">'; // modal-md
         strHtml += '<div class="modal-header no-padding-bottom">';
-        strHtml += '<div class="row divContenedorPopUp">';
-        if (isNotNullEmpty(listaLanzamiento[0].nameImagen))
-            strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + listaLanzamiento[0].nameImagen + '&an=1024&al=768' + '" alt="oferta" title=" alt="oferta">';
-        else
-            strHtml += '<img class="img-responsive" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=1024&al=768' + '" alt="oferta" title=" alt="oferta">';
+        strHtml += '<div class="row divContenedorLanzamiento">';
+        if (isNotNullEmpty(listaLanzamiento[0].nameImagenAmpliar)) {
+            strHtml += '<img class="img-responsive img-responsive-lanzamiento" src="' + '../../servicios/thumbnail.aspx?r=ofertasampliar&n=' + listaLanzamiento[0].nameImagenAmpliar + '&an=1024&al=768' + '" alt="oferta" title=" alt="oferta">';
+        }
+        else if (isNotNullEmpty(listaLanzamiento[0].nameImagen)) {
+            strHtml += '<img class="img-responsive img-responsive-lanzamiento" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + listaLanzamiento[0].nameImagen + '&an=1024&al=768' + '" alt="oferta" title=" alt="oferta">';
+        }
+        else {
+            strHtml += '<img class="img-responsive img-responsive-lanzamiento" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=1024&al=768' + '" alt="oferta" title=" alt="oferta">';
+        }
         strHtml += '<div>';
         strHtml += listaLanzamiento[0].ofe_descrHtml;
         strHtml += '</div>';

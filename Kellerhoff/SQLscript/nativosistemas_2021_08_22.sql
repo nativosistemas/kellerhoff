@@ -60,6 +60,7 @@ SELECT [ofe_idOferta]
 	  ,countRating as 'Rating'
 	  ,tbImg.[arc_nombre] as 'nameImagen'
 	  ,tbPdf.[arc_nombre] as 'namePdf'
+	  ,tbImgAmpliar.[arc_nombre] as 'nameImagenAmpliar'
 	  ,ofe_fechaFinOferta
   FROM [dbo].[tbl_Oferta] as ofe
   left join [dbo].[tbl_OfertaDetalle] on [ofd_idOferta] = [ofe_idOferta]
@@ -67,6 +68,7 @@ SELECT [ofe_idOferta]
   left join [dbo].[tbl_Transfers] on tfr_nombre = ofe_nombreTransfer
   left join [Recursos].[tbl_archivos] as tbImg on [ofe_idOferta] = tbImg.[arc_codRelacion] and tbImg.[arc_galeria] = 'ofertas'
   left join [Recursos].[tbl_archivos] as tbPdf on [ofe_idOferta] = tbPdf.[arc_codRelacion] and tbPdf.[arc_galeria] = 'ofertaspdf'
+  left join [Recursos].[tbl_archivos] as tbImgAmpliar on [ofe_idOferta] = tbImgAmpliar.[arc_codRelacion] and tbImgAmpliar.[arc_galeria] = 'ofertasampliar'
   group by [ofe_idOferta]
       ,[ofe_titulo]
       ,[ofe_descr]
@@ -83,6 +85,7 @@ SELECT [ofe_idOferta]
 	  ,tfr_codigo
 	  ,tbImg.[arc_nombre]
 	  ,tbPdf.[arc_nombre] 
+	  ,tbImgAmpliar.[arc_nombre] 
 	  ,ofe_fechaFinOferta
 	  ,countRating
 GO
@@ -164,6 +167,7 @@ SELECT [ofe_idOferta]
 	  ,count([ofd_idOfertaDetalle]) 'countOfertaDetalles'
 	  ,tbImg.[arc_nombre] as 'nameImagen'
 	  ,tbPdf.[arc_nombre] as 'namePdf'
+	  ,tbImgAmpliar.[arc_nombre] as 'nameImagenAmpliar'
 	  ,ofe_fechaFinOferta
 	  ,ofe_nuevosLanzamiento
 	  ,ofe_descrHtml
@@ -172,6 +176,7 @@ SELECT [ofe_idOferta]
   left join [dbo].[tbl_Transfers] on tfr_nombre = ofe_nombreTransfer
   left join [Recursos].[tbl_archivos] as tbImg on [ofe_idOferta] = tbImg.[arc_codRelacion] and tbImg.[arc_galeria] = 'ofertas'
   left join [Recursos].[tbl_archivos] as tbPdf on [ofe_idOferta] = tbPdf.[arc_codRelacion] and tbPdf.[arc_galeria] = 'ofertaspdf'
+  left join [Recursos].[tbl_archivos] as tbImgAmpliar on [ofe_idOferta] = tbImgAmpliar.[arc_codRelacion] and tbImgAmpliar.[arc_galeria] = 'ofertasampliar'
   where ofe_publicar = 1 and (ofe_fechaFinOferta is NULL or ofe_fechaFinOferta >= CONVERT (date, GETDATE()))
   group by [ofe_idOferta]
       ,[ofe_titulo]
@@ -187,6 +192,7 @@ SELECT [ofe_idOferta]
 	  ,tfr_codigo
 	  ,tbImg.[arc_nombre]
 	  ,tbPdf.[arc_nombre] 
+	  ,tbImgAmpliar.[arc_nombre]
 	  ,ofe_fechaFinOferta
 	  ,ofe_nuevosLanzamiento
 	  ,ofe_descrHtml
@@ -214,6 +220,7 @@ SELECT [ofe_idOferta]
       ,[ofh_idOferta]
 	  ,tbImg.[arc_nombre] as 'nameImagen'
 	  ,tbPdf.[arc_nombre] as 'namePdf'
+	  ,tbImgAmpliar.[arc_nombre] as 'nameImagenAmpliar'
 	  ,ofe_fechaFinOferta
 	  ,ofe_nuevosLanzamiento
 	  ,ofe_descrHtml
@@ -224,6 +231,7 @@ SELECT [ofe_idOferta]
   left join [dbo].[tbl_Transfers] on tfr_nombre = ofe_nombreTransfer
   left join [Recursos].[tbl_archivos] as tbImg on [ofe_idOferta] = tbImg.[arc_codRelacion] and tbImg.[arc_galeria] = 'ofertas'
   left join [Recursos].[tbl_archivos] as tbPdf on [ofe_idOferta] = tbPdf.[arc_codRelacion] and tbPdf.[arc_galeria] = 'ofertaspdf'
+  left join [Recursos].[tbl_archivos] as tbImgAmpliar on [ofe_idOferta] = tbImgAmpliar.[arc_codRelacion] and tbImgAmpliar.[arc_galeria] = 'ofertasampliar'
   where ofe_publicar = 1 and (ofe_fechaFinOferta is NULL or ofe_fechaFinOferta >= CONVERT (date, GETDATE()))
   group by [ofe_idOferta]
       ,[ofe_titulo]
@@ -242,6 +250,7 @@ SELECT [ofe_idOferta]
       ,[ofh_idOferta]
 	  ,tbImg.[arc_nombre]
 	  ,tbPdf.[arc_nombre] 
+	  ,tbImgAmpliar.[arc_nombre]
 	  ,ofe_fechaFinOferta
 	  ,ofe_nuevosLanzamiento
 	  ,ofe_descrHtml

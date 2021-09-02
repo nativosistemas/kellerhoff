@@ -21,6 +21,9 @@ function onclickVolverAgregarArchivo() {
         case 'ofertas':
             location.href = 'GestionOferta.aspx?isVolver=1';
             break;
+        case 'ofertasampliar':
+            location.href = 'GestionOferta.aspx?isVolver=1';
+            break;
         case 'slider':
             location.href = 'GestionHomeSlide.aspx';
             break;

@@ -48,7 +48,9 @@ function OnCallBackRecuperarTodasOfertas(args) {
                 strHtml += '<button type="button" class="btn btn-warning" onclick="return EditarOferta(\'' + args[i].ofe_idOferta + '\');">Modificar</button>' + '&nbsp;' + '&nbsp;';
                 strHtml += '<button type="button" class="btn btn-danger" onclick="return ElimimarOferta(\'' + args[i].ofe_idOferta + '\');">Eliminar</button>' + '&nbsp;' + '&nbsp;';
                 strHtml += '<button type="button" class="btn btn-info" onclick="return AgregarOfertaImagen(\'' + args[i].ofe_idOferta + '\');">Imagen</button>' + '&nbsp;' + '&nbsp;';
-                if (!args[i].ofe_nuevosLanzamiento) {
+                if (args[i].ofe_nuevosLanzamiento) {
+                    strHtml += '<button type="button" class="btn btn-info" onclick="return AgregarOfertaImagenAmpliada(\'' + args[i].ofe_idOferta + '\');">Imagen ampliada</button>' + '&nbsp;' + '&nbsp;';
+                } else {
                     strHtml += '<button type="button" class="btn btn-info" onclick="return AgregarOfertaFolleto(\'' + args[i].ofe_idOferta + '\');">Folleto</button>' + '&nbsp;' + '&nbsp;';
                 }
                 strHtml += '<button type="button" class="btn btn-warning" onclick="return IrVistaPreviaId(\'' + args[i].ofe_idOferta + '\');">Vista Previa</button>';  //
@@ -241,6 +243,10 @@ function AgregarOfertaFolleto(pValor) {
 function AgregarOfertaImagen(pValor) {
     //location.href = 'GestionOfertaEditarAgregar.aspx?id=' + pValor;
     location.href = 'AgregarArchivo.aspx?id=' + pValor + '&t=ofertas&an=300&al=300';
+    return false;
+}
+function AgregarOfertaImagenAmpliada(pValor) {
+    location.href = 'AgregarArchivo.aspx?id=' + pValor + '&t=ofertasampliar&an=300&al=300';
     return false;
 }
 function onclickVolverOfertaImagen() {

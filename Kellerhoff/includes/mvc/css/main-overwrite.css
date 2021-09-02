@@ -582,6 +582,16 @@ header .nav li {
             color: #fff !important;
             
         }
+
+.divContenedorLanzamiento {
+    margin:10px;
+}
+.img-responsive-lanzamiento {
+margin:auto;
+}
+.modal-lanzamiento {
+    width:auto;
+}
 /* fin nuevo lanzamientos */
 a.mtz {
     z-index: 0;

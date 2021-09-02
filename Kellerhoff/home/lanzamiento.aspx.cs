@@ -32,7 +32,7 @@ namespace Kellerhoff.home
             cOferta o = WebService.RecuperarTodasOfertas_generico().FirstOrDefault(x => x.ofe_idOferta == id);
             if (o != null)
                 resultado.Add(o);
-            foreach (var item in resultado)
+            /*foreach (var item in resultado)
             {
                 List<cArchivo> listaArchivo = WebService.RecuperarTodosArchivos(item.ofe_idOferta, "ofertas", string.Empty);
                 if (listaArchivo != null)
@@ -42,7 +42,16 @@ namespace Kellerhoff.home
                         item.nameImagen = listaArchivo[0].arc_nombre;
                     }
                 }
-            }
+                List<cArchivo> listaArchivo_ampliada = WebService.RecuperarTodosArchivos(item.ofe_idOferta, "ofertasampliar", string.Empty);
+                if (listaArchivo_ampliada != null)
+                {
+                    if (listaArchivo_ampliada.Count > 0)
+                    {
+                        item.nameImagenAmpliada = listaArchivo_ampliada[0].arc_nombre;
+                    }
+                }
+                
+            }*/
 
 
             return resultado == null ? string.Empty : Serializador.SerializarAJson(resultado);

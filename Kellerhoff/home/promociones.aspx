@@ -42,7 +42,7 @@
           padding-bottom: 20px;
         }
     </style>--%>
-    <script type="text/javascript" src="../includes/home/js/oferta.js?n=10"></script>
+    <script type="text/javascript" src="../includes/home/js/oferta.js?n=11"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             // RecuperarTodasOfertas();

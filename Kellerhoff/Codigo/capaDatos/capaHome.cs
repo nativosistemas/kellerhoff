@@ -23,6 +23,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public DateTime ofe_fecha { get; set; }
         public string ofe_fechaToString { get; set; }
         public string nameImagen { get; set; }
+        public string nameImagenAmpliar { get; set; }
         public string namePdf { get; set; }
         public int countOfertaDetalles { get; set; }
         public int Rating { get; set; }

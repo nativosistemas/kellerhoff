@@ -55,6 +55,7 @@ namespace Kellerhoff.admin.pages
                             obj.descr = "";
                             break;
                         case "ofertas":
+                        case "ofertasampliar":
                             List<cArchivo> listaArchivo = WebService.RecuperarTodosArchivos(obj.id, obj.tipo, string.Empty);
                             if (listaArchivo != null)
                             {
@@ -154,6 +155,7 @@ namespace Kellerhoff.admin.pages
                         switch (obj.tipo)
                         {
                             case "ofertas":
+                            case "ofertasampliar":
                                 Response.Redirect("GestionOferta.aspx?isVolver=1");
                                 break;
                             case "laboratorio":

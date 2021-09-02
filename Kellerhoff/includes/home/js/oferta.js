@@ -50,7 +50,7 @@ function CargarHtmlOfertasEnHome_generico(pListaOfertaLanzamiento) {
             }
             if (!pListaOfertaLanzamiento[i].ofe_nuevosLanzamiento && isNotNullEmpty(pListaOfertaLanzamiento[i].namePdf)) {
                 strHtml += '<a target="_blank" href="../../servicios/descargarArchivo.aspx?t=' + 'ofertaspdf' + '&n=' + pListaOfertaLanzamiento[i].namePdf + '&inline=yes"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
-            }else if (pListaOfertaLanzamiento[i].ofe_nuevosLanzamiento && isNotNullEmpty(pListaOfertaLanzamiento[i].ofe_descrHtml)) {
+            }else if (pListaOfertaLanzamiento[i].ofe_nuevosLanzamiento && isNotNullEmpty(pListaOfertaLanzamiento[i].nameImagenAmpliar)) {
                 strHtml += '<a  href="#" onclick="onclickNuevoLanzamiento(' + pListaOfertaLanzamiento[i].ofe_idOferta + '); return false;"><div class="bg_promo"></div><div class="btn_bg_promo">AMPLIAR</div>';
             }
             if (isNotNullEmpty(pListaOfertaLanzamiento[i].nameImagen))
@@ -59,7 +59,7 @@ function CargarHtmlOfertasEnHome_generico(pListaOfertaLanzamiento) {
                 strHtml += '<img class="img-responsive"  src="' + '../../../servicios/thumbnail.aspx?r=' + 'ofertas' + '&n=' + 'productosinfoto.png' + '&an=' + tamanioOferta_img + '&al=' + tamanioOferta_img + '&c=FFFFFF" alt="oferta" title=""/>';
             if (!pListaOfertaLanzamiento[i].ofe_nuevosLanzamiento && isNotNullEmpty(pListaOfertaLanzamiento[i].namePdf)) {
                 strHtml += '</a>';
-            }else if (pListaOfertaLanzamiento[i].ofe_nuevosLanzamiento && isNotNullEmpty(pListaOfertaLanzamiento[i].ofe_descrHtml)) {
+            }else if (pListaOfertaLanzamiento[i].ofe_nuevosLanzamiento && isNotNullEmpty(pListaOfertaLanzamiento[i].nameImagenAmpliar)) {
                 strHtml += '</a>';
             }
             strHtml += '</div>'; //<div class="photo">

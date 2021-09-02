@@ -10,7 +10,7 @@
     <script src="lib/js/wysihtml5-0.3.0.js" type="text/javascript"></script>
     <script src="lib/js/prettify.js" type="text/javascript"></script>
     <script src="lib/js/bootstrap-wysihtml5.js" type="text/javascript"></script>
-    <script src="../../includes/js/GestionOferta.js?n=3" type="text/javascript"></script>
+    <script src="../../includes/js/GestionOferta.js?n=4" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             RecuperarTodasOfertaDetalles();

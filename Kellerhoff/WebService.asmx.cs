@@ -4866,6 +4866,8 @@ namespace Kellerhoff
                 obj.nameImagen = Convert.ToString(pItem["nameImagen"]);
             if (pItem.Table.Columns.Contains("namePdf") && pItem["namePdf"] != DBNull.Value)
                 obj.namePdf = Convert.ToString(pItem["namePdf"]);
+            if (pItem.Table.Columns.Contains("nameImagenAmpliar") && pItem["nameImagenAmpliar"] != DBNull.Value)
+                obj.nameImagenAmpliar = Convert.ToString(pItem["nameImagenAmpliar"]); 
             if (pItem.Table.Columns.Contains("ofe_fechaFinOferta") && pItem["ofe_fechaFinOferta"] != DBNull.Value)
             {
                 obj.ofe_fechaFinOferta = Convert.ToDateTime(pItem["ofe_fechaFinOferta"]);
@@ -5109,6 +5111,8 @@ namespace Kellerhoff
                 obj.nameImagen = Convert.ToString(pItem["nameImagen"]);
             if (pItem.Table.Columns.Contains("namePdf") && pItem["namePdf"] != DBNull.Value)
                 obj.namePdf = Convert.ToString(pItem["namePdf"]);
+            if (pItem.Table.Columns.Contains("nameImagenAmpliar") && pItem["nameImagenAmpliar"] != DBNull.Value)
+                obj.nameImagenAmpliar = Convert.ToString(pItem["nameImagenAmpliar"]);
             if (pItem.Table.Columns.Contains("ofe_fechaFinOferta") && pItem["ofe_fechaFinOferta"] != DBNull.Value)
             {
                 obj.ofe_fechaFinOferta = Convert.ToDateTime(pItem["ofe_fechaFinOferta"]);
