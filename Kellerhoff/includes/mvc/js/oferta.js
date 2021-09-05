@@ -294,7 +294,9 @@ function prepararListaMsgLanzamiento(args) {
         strHtml += '<div class="modal-background">&nbsp;</div>';
         strHtml += '<div class="modal-dialog modal-lanzamiento"><div class="modal-content">'; // modal-md
         strHtml += '<div class="modal-header no-padding-bottom">';
+        strHtml += '<div class="container">';
         strHtml += '<div class="row divContenedorLanzamiento">';
+        strHtml += '<div class="col-sm-12 col-md-8 col-xs-8">';
         if (isNotNullEmpty(listaLanzamiento[0].nameImagenAmpliar)) {
             strHtml += '<img class="img-responsive img-responsive-lanzamiento" src="' + '../../servicios/thumbnail.aspx?r=ofertasampliar&n=' + listaLanzamiento[0].nameImagenAmpliar + '&an=1024&al=768' + '" alt="oferta" title=" alt="oferta">';
         }
@@ -304,11 +306,13 @@ function prepararListaMsgLanzamiento(args) {
         else {
             strHtml += '<img class="img-responsive img-responsive-lanzamiento" src="' + '../../servicios/thumbnail.aspx?r=ofertas&n=' + 'productosinfoto.png' + '&an=1024&al=768' + '" alt="oferta" title=" alt="oferta">';
         }
-        strHtml += '<div>';
+        strHtml += '</div>';
+        strHtml += '<div class="col-sm-12 col-md-4 col-xs-4 divFondoDescLanzamiento">';
         strHtml += listaLanzamiento[0].ofe_descrHtml;
         strHtml += '</div>';
         //
         strHtml += '</div>';
+        strHtml += '</div>';//'<div class="container">';
         //strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
         strHtml += '</div>';
         strHtml += '</div></div>';
