@@ -582,12 +582,15 @@ header .nav li {
             color: #fff !important;
             
         }
-
+.divFondoLanzamiento {
+    background-color: rgb(212,212,212);
+    /*rgba(255, 255, 255, 0.5);*/
+}
 .divContenedorLanzamiento {
     margin:10px;
 }
 .divFondoDescLanzamiento {
-    background-color: rgba(255, 255, 255, 0.5);
+    /*background-color: rgba(255, 255, 255, 0.5);*/
 }
 .img-responsive-lanzamiento {
 margin:auto;

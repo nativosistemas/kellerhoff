@@ -18,7 +18,7 @@
 
     <link href="../includes/mvc/css/main.css?n=22" rel="stylesheet" />
     <link href="../includes/mvc/css/select2.min.css?n=3" rel="stylesheet" />
-    <link href="../includes/mvc/css/main-overwrite.css?n=56" rel="stylesheet" />
+    <link href="../includes/mvc/css/main-overwrite.css?n=58" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="../admin/pages/lib/css/wysiwyg-color.css" />
     <title></title>
 </head>
@@ -37,7 +37,7 @@
     <script type="text/javascript" src="../includes/home/js/jquery/owl.carousel.min.js"></script>
     <script src="../includes/js/Libreria.js?n=13"></script>
   <script type="text/javascript" src="../includes/mvc/js/mensaje.js?n=30"></script>
-    <script src="../includes/mvc/js/oferta.js?n=17"></script>
+    <script src="../includes/mvc/js/oferta.js?n=19"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             prepararListaMsgLanzamiento($('#hiddenListaOfertas').val());
