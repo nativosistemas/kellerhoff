@@ -63,6 +63,8 @@ namespace Kellerhoff.admin.pages
                                 {
                                     obj.arc_nombre = listaArchivo[0].arc_nombre;
                                     obj.codRecurso = listaArchivo[0].arc_codRecurso;
+                                    obj.titulo = listaArchivo[0].arc_titulo;
+                                    obj.descr = listaArchivo[0].arc_descripcion;
                                 }
                             }
 
@@ -75,6 +77,8 @@ namespace Kellerhoff.admin.pages
                                 {
                                     obj.arc_nombre = listaArchivo_default[0].arc_nombre;
                                     obj.codRecurso = listaArchivo_default[0].arc_codRecurso;
+                                    obj.titulo = listaArchivo_default[0].arc_titulo;
+                                    obj.descr = listaArchivo_default[0].arc_descripcion;
                                 }
                             }
 
@@ -181,6 +185,12 @@ namespace Kellerhoff.admin.pages
                 }
 
             }
+        }
+        [WebMethod(EnableSession = true)]
+        public static bool EliminarArchivoPorId(int pArc_codRecurso)
+        {
+            WebService.EliminarArchivoPorId(pArc_codRecurso);
+            return true;
         }
         public void AgregarHtmlOculto()
         {

@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../../includes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="../../includes/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../../includes/js/AgregarArchivo.js?n=4" type="text/javascript"></script>
+    <script src="../../includes/js/AgregarArchivo.js?n=5" type="text/javascript"></script>
     <script type="text/javascript">
 </script>
 </asp:Content>
@@ -21,6 +21,10 @@
     <div id="divContenedorImg" class="form-group" style="display: none">
         <label for="txt_descr">Imagen:</label>
         <div id="divImg"></div>
+    </div>
+    <div id="divContenedorArchivoGenerico" class="form-group" style="display: none">
+        <label for="txt_descr">Archivo:</label>
+        <div id="divArchivoGenerico"></div>
     </div>
     <asp:FileUpload ID="FileUpload1" runat="server" />
     <br />

@@ -12,10 +12,24 @@ jQuery(document).ready(function () {
             var strHtml = '<img   src="' + '../../../servicios/thumbnail.aspx?r=' + file.tipo + '&n=' + file.arc_nombre + '&an=' + String(300) + '&al=' + String(300) + '&c=FFFFFF" />';
             $('#divImg').html(strHtml);
             $('#divContenedorImg').css('display', 'block');
+            //
+            var strHtml = '<a href="../../servicios/descargarArchivo.aspx?t=' + file.tipo + '&n=' + file.arc_nombre + '">' + file.arc_nombre + '</a>';
+
+            strHtml += '&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger" onclick="EliminarArchivoPorId(' + file.codRecurso + '); return false;">Eliminar</button>';
+
+            $('#divArchivoGenerico').html(strHtml);
+            $('#divContenedorArchivoGenerico').css('display', 'block');
         }
     }
 
 });
+function EliminarArchivoPorId(pValue) {
+    PageMethods.EliminarArchivoPorId(pValue, OnCallBackEliminarArchivoPorId, OnFail);
+}
+function OnCallBackEliminarArchivoPorId(args) {
+    //$('#divArchivoGenerico').html('');
+    onclickVolverAgregarArchivo();
+}
 function onclickVolverAgregarArchivo() {
     switch (file.tipo) {
         case 'ofertas':
