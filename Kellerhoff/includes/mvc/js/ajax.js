@@ -542,7 +542,8 @@ function RecuperarProductosHomeOferta(pIdOferta) {
         data: { pIdOferta: pIdOferta },
         success:
         function (response) {
-            OnCallBackRecuperarProductos(response);
+            //OnCallBackRecuperarProductos(response);
+            OnCallBackRecuperarProductosConPaginador(response);
             hideCargandoBuscador();
         },
         failure: function (response) {
