@@ -102,6 +102,7 @@
                                 string classMediosDePagos = "";
                                 string classDescargas = "";
                                 string classDevo = "";
+                                string classRevista = "";
                                 string strController = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
                                 switch (strController)
                                 {
@@ -186,6 +187,7 @@
                                     <li><a href="/ctacte/composicionsaldo" @{ WriteLiteral(classCuentasCorrientes);}><h3>CUENTAS CORRIENTES</h3></a></li>
                                 }
                                 <li class="hidden-sm"><a @{ WriteLiteral(classMediosDePagos);} href="/config/mediosdepago1"><h3>MEDIOS DE PAGOS</h3></a></li>
+                                <li class="hidden-sm"><a @{ WriteLiteral(classRevista);} target="_blank" @{WriteLiteral(Kellerhoff.Codigo.clases.FuncionesPersonalizadas.getHrefRevista());}><h3>REVISTA ONLINE</h3></a></li>
                                 if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DESCARGAS))
                                 {
                                     <li class="hidden-sm"><a href="/config/catalogo" @{ WriteLiteral(classDescargas);}><h3>DESCARGAS</h3></a></li>

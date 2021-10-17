@@ -1316,6 +1316,15 @@ namespace Kellerhoff.Codigo.clases
             }
             return resultado;
         }
+        public static string getHrefRevista()
+        {
+            string resultado = "href=\"" +"#"+ "\""; ;
+            if (HttpContext.Current.Session["href_Revista"] != null)
+            {
+                resultado = (string)HttpContext.Current.Session["href_Revista"];
+            }
+            return resultado;
+        }
         public static List<cTipoEnvioClienteFront> RecuperarTiposDeEnvios()
         {
             List<cTipoEnvioClienteFront> resultado = null;

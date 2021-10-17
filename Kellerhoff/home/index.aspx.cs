@@ -41,7 +41,7 @@ namespace Kellerhoff.home
                     if (oArchivo != null)
                     {
                         Panel_Revista.Visible = true;
-                        //HttpContext.Current.Session["homeIndex_Revista"] = "<a  class=\"pdf\" target =\"_blank\" href =\"../../" + Constantes.cArchivo_Raiz + "/" + Constantes.cTABLA_CATALOGO + "/" + oArchivo.arc_nombre + "\" >DESCARGAR</a>";
+                        HttpContext.Current.Session["href_Revista"] = "href =\"../../" + "servicios/descargarArchivo.aspx?t=" + Constantes.cTABLA_CATALOGO + "&n=" + oArchivo.arc_nombre + "&inline=yes" + "\"";
                         HttpContext.Current.Session["homeIndex_Revista"] = "<a  class=\"pdf\" target =\"_blank\" href =\"../../" + "servicios/descargarArchivo.aspx?t=" + Constantes.cTABLA_CATALOGO + "&n=" + oArchivo.arc_nombre + "&inline=yes" + "\" >DESCARGAR</a>";
                     }
 
