@@ -156,6 +156,28 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td valign="top">
+                    <div class="ele_abm">
+                        <div class="lbl_abm">
+
+                            <asp:RadioButton ID="RadioButtonReparto" runat="server" GroupName="selectClienteSucursal" AutoPostBack="True" Text="Reparto" OnCheckedChanged="RadioButtonSucursal_CheckedChanged" />
+                            Elegir código reparto:
+                        </div>
+
+                    </div>
+                </td>
+                <td valign="top">
+
+                    <div class="html_editor">
+                        <asp:HiddenField runat="server"></asp:HiddenField>
+                        <asp:CheckBoxList ID="CheckBoxListReparto" runat="server" DataSourceID="ObjectDataSource2" DataTextField="nombre" DataValueField="nombre" OnDataBound="CheckBoxListReparto_DataBound"></asp:CheckBoxList>
+                        <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" SelectMethod="CargarComboTodosCodigoReparto"
+                            TypeName="Kellerhoff.WebService"></asp:ObjectDataSource>
+
+                    </div>
+                </td>
+            </tr>
         </table>
         <div class="ele_sep">
         </div>

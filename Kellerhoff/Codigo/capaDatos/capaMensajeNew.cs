@@ -92,7 +92,7 @@ namespace Kellerhoff.Codigo.capaDatos
             }
         }
 
-        public static int ActualizarInsertarMensajeNew(int pIdMensaje, string pAsunto, string pMensaje, DateTime? pFechaDesde, DateTime? pFechaHasta, bool pImportante, string pSucursales)
+        public static int ActualizarInsertarMensajeNew(int pIdMensaje, string pAsunto, string pMensaje, DateTime? pFechaDesde, DateTime? pFechaHasta, bool pImportante, string pSucursales, string pRepartos, string pTipo)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
             SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spActualizarInsertarMensajeNew", Conn);
@@ -109,6 +109,8 @@ namespace Kellerhoff.Codigo.capaDatos
             SqlParameter paFechaHasta = cmdComandoInicio.Parameters.Add("@fechaHasta", SqlDbType.DateTime);
             SqlParameter paImportante = cmdComandoInicio.Parameters.Add("@importante", SqlDbType.Bit);
             SqlParameter paTmn_todosSucursales = cmdComandoInicio.Parameters.Add("@todosSucursales", SqlDbType.NVarChar, 500);
+            SqlParameter paTmn_todosRepartos = cmdComandoInicio.Parameters.Add("@todosRepartos", SqlDbType.NVarChar, 500);
+            SqlParameter paTmn_tipo = cmdComandoInicio.Parameters.Add("@tipo", SqlDbType.NVarChar, 100);
             if (pFechaDesde == null)
             {
                 paFechaDesde.Value = DBNull.Value;
@@ -126,17 +128,6 @@ namespace Kellerhoff.Codigo.capaDatos
                 paFechaHasta.Value = pFechaHasta;
             }
             paImportante.Value = pImportante;
-            //SqlParameter paArray_codsuc = cmdComandoInicio.Parameters.Add("@array_codsuc", SqlDbType.NVarChar, -1);
-            //string arraySucursal = string.Empty;
-            //if (pListaSucursal != null) { 
-            //    for (int i = 0; i < pListaSucursal.Count(); i++)
-            //    {
-            //        if (string.IsNullOrEmpty(arraySucursal))
-            //            arraySucursal += pListaSucursal[i];
-            //        else
-            //            arraySucursal += "," + pListaSucursal[i];
-            //    }
-            //}
             if (string.IsNullOrEmpty(pSucursales))
             {
                 paTmn_todosSucursales.Value = DBNull.Value;
@@ -144,6 +135,22 @@ namespace Kellerhoff.Codigo.capaDatos
             else
             {
                 paTmn_todosSucursales.Value = pSucursales;
+            }
+            if (string.IsNullOrEmpty(pRepartos))
+            {
+                paTmn_todosRepartos.Value = DBNull.Value;
+            }
+            else
+            {
+                paTmn_todosRepartos.Value = pRepartos;
+            }
+            if (string.IsNullOrEmpty(pTipo))
+            {
+                paTmn_tipo.Value = DBNull.Value;
+            }
+            else
+            {
+                paTmn_tipo.Value = pTipo;
             }
 
             try

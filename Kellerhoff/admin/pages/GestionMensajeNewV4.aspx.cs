@@ -163,7 +163,7 @@ namespace Kellerhoff.admin.pages
                         }
                     }
                     string sucursales = null;
-                    int resultado = WebService.ActualizarInsertarMensajeNew(codigoMensaje, txt_asunto.Text, txt_mensaje.Text, fechaDesde, fechaHasta, importante, sucursales);
+                  //  int resultado = WebService.ActualizarInsertarMensajeNew(codigoMensaje, txt_asunto.Text, txt_mensaje.Text, fechaDesde, fechaHasta, importante, sucursales);
                 }
             }
             gv_datos.DataBind();

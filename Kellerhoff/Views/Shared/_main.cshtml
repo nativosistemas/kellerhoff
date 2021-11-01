@@ -605,7 +605,7 @@
                 if (isUsuarioVerMensajes_PopUp)
                 {
                     List<Kellerhoff.Codigo.capaDatos.cMensaje>
-                        listaMensaje = WebService.RecuperartTodosMensajeNewPorSucursal(oCli.cli_codsuc);
+                        listaMensaje = WebService.RecuperartTodosMensajeNewPorSucursal(oCli.cli_codsuc,oCli.cli_codrep);
                     resultado += "<input type=\"hidden\" id=\"hiddenListaMensajeImportante\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaMensaje)) + "\" />";
                     List<Kellerhoff.Codigo.capaDatos.cArchivo> listaPopUp = WebService.RecuperarPopUpPorCliente(oCli.cli_codigo, oCli.cli_codsuc);
                     resultado += "<input type=\"hidden\" id=\"hiddenListaPopUp\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaPopUp)) + "\" />";

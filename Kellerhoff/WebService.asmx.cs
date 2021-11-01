@@ -1242,6 +1242,18 @@ namespace Kellerhoff
             }
             return resultado;
         }
+        public static List<cCombo> CargarComboTodosCodigoReparto()
+        {
+            List<cCombo> resultado = new List<cCombo>();
+            List<string> lista = WebService.RecuperarTodosCodigoReparto();
+            foreach (string item in lista)
+            {
+                cCombo obj = new cCombo();
+                obj.nombre = item;
+                resultado.Add(obj);
+            }
+            return resultado;
+        }
         public static cClientes RecuperarClientePorId(int pIdCliente)
         {
             cClientes resultado = null;
@@ -5688,15 +5700,23 @@ namespace Kellerhoff
             {
                 obj.tmn_todosSucursales = pItem["tmn_todosSucursales"].ToString();
             }
+            if (pItem.Table.Columns.Contains("tmn_tipo") && pItem["tmn_tipo"] != DBNull.Value)
+            {
+                obj.tmn_tipo = pItem["tmn_tipo"].ToString();
+            }
+            if (pItem.Table.Columns.Contains("tmn_todosRepartos") && pItem["tmn_todosRepartos"] != DBNull.Value)
+            {
+                obj.tmn_todosRepartos = pItem["tmn_todosRepartos"].ToString();
+            }
             return obj;
         }
-        public static List<cMensaje> RecuperartTodosMensajeNewPorSucursal(string pSucursal)
+        public static List<cMensaje> RecuperartTodosMensajeNewPorSucursal(string pSucursal,string pReparto)
         {
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 List<cMensaje> lista = new List<cMensaje>();
                 List<cMensajeNew> lista_aux = new List<cMensajeNew>();
-                DataTable tabla = capaMensaje.RecuperartTodosMensajeNewPorSucursal(pSucursal);
+                DataTable tabla = capaMensaje.RecuperartTodosMensajeNewPorSucursal(pSucursal, pReparto);
                 if (tabla != null)
                 {
                     foreach (DataRow item in tabla.Rows)
@@ -5794,6 +5814,14 @@ namespace Kellerhoff
             {
                 obj.tmn_todosSucursales = pItem["tmn_todosSucursales"].ToString();
             }
+            if (pItem.Table.Columns.Contains("tmn_tipo") && pItem["tmn_tipo"] != DBNull.Value)
+            {
+                obj.tmn_tipo = pItem["tmn_tipo"].ToString();
+            }
+            if (pItem.Table.Columns.Contains("tmn_todosRepartos") && pItem["tmn_todosRepartos"] != DBNull.Value)
+            {
+                obj.tmn_todosRepartos = pItem["tmn_todosRepartos"].ToString();
+            }
             return obj;
         }
         public static List<cMensaje> RecuperarTodosMensajeNewV4()
@@ -5838,11 +5866,11 @@ namespace Kellerhoff
                 capaMensajeNew.ElimimarMensajeNewPorId(pIdMensaje);
             }
         }
-        public static int ActualizarInsertarMensajeNew(int pIdMensaje, string pAsunto, string pMensaje, DateTime? pFechaDesde, DateTime? pFechaHasta, bool pImportante, string pSucursales)
+        public static int ActualizarInsertarMensajeNew(int pIdMensaje, string pAsunto, string pMensaje, DateTime? pFechaDesde, DateTime? pFechaHasta, bool pImportante, string pSucursales, string pRepartos, string pTipo)
         {
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                return capaMensajeNew.ActualizarInsertarMensajeNew(pIdMensaje, pAsunto, pMensaje, pFechaDesde, pFechaHasta, pImportante, pSucursales);
+                return capaMensajeNew.ActualizarInsertarMensajeNew(pIdMensaje, pAsunto, pMensaje, pFechaDesde, pFechaHasta, pImportante, pSucursales,pRepartos,pTipo);
             }
             return -1;
         }
