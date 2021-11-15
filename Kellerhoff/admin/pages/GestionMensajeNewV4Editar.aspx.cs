@@ -65,19 +65,42 @@ namespace Kellerhoff.admin.pages
                     }
                     //List<string> listaSucursal = new List<string>();
                     string sucursales = string.Empty;
+                    string tipo = string.Empty;
+                    if (RadioButtonSucursal.Checked)
+                    {
+                        tipo = DKbase.generales.Constantes.cTipoMensaje_Sucursal;
+                    }
+                    else if (RadioButtonCliente.Checked)
+                    {
+                        tipo = DKbase.generales.Constantes.cTipoMensaje_Cliente;
+                    }
+                    else if (RadioButtonReparto.Checked)
+                    {
+                        tipo = DKbase.generales.Constantes.cTipoMensaje_Reparto;
+                    }
                     if (RadioButtonSucursal.Checked && CheckBoxListSucursales.Items != null)
                     {
                         for (int i = 0; i < CheckBoxListSucursales.Items.Count; i++)
                         {
                             if (CheckBoxListSucursales.Items[i].Selected)
                             {
-                                //listaSucursal.Add(CheckBoxListSucursales.Items[i].Value);
                                 sucursales += "<" + CheckBoxListSucursales.Items[i].Value + ">";
                             }
                         }
                     }
+                    string repartos = string.Empty;
+                    if (RadioButtonReparto.Checked && CheckBoxListReparto.Items != null)
+                    {
+                        for (int i = 0; i < CheckBoxListReparto.Items.Count; i++)
+                        {
+                            if (CheckBoxListReparto.Items[i].Selected)
+                            {
+                                repartos += "<" + CheckBoxListReparto.Items[i].Value + ">";
+                            }
+                        }
+                    }
                     string mensajeHTML = HiddenField_mensaje.Value;//mensajeHTML
-                    int resultado = WebService.ActualizarInsertarMensajeNew(codigoMensaje, txt_asunto.Text, mensajeHTML, fechaDesde, fechaHasta, importante, sucursales);
+                    int resultado = WebService.ActualizarInsertarMensajeNew(codigoMensaje, txt_asunto.Text, mensajeHTML, fechaDesde, fechaHasta, importante, sucursales, repartos, tipo);
                     Response.Redirect("~/admin/pages/GestionMensajeNewV4.aspx");
                 }
             }
@@ -130,24 +153,14 @@ namespace Kellerhoff.admin.pages
                 txt_mensaje.Text = mensaje.tme_mensaje;// txt_mensaje.Content = mensaje.tme_mensaje;
                 HiddenField_mensaje.Value = mensaje.tme_mensaje;
                 HiddenField_loadMsg.Value = "1";
-                if (!string.IsNullOrEmpty(mensaje.tmn_todosSucursales))
+                if (!string.IsNullOrEmpty(mensaje.tmn_todosSucursales) && (string.IsNullOrEmpty(mensaje.tmn_tipo) && mensaje.tmn_tipo == DKbase.generales.Constantes.cTipoMensaje_Sucursal))
                 {
                     RadioButtonSucursal.Checked = true;
-                    //CheckRadioButton();
-                    //if (CheckBoxListSucursales.Items != null)
-                    //{
-                    //    for (int i = 0; i < CheckBoxListSucursales.Items.Count; i++)
-                    //    {
-                    //        if (mensaje.tmn_todosSucursales.Contains(CheckBoxListSucursales.Items[i].Value))
-                    //        {
-                    //            CheckBoxListSucursales.Items[i].Selected = true;
-                    //        }
-                    //    }
-                    //}
                 }
-                //else {
-                //    CheckRadioButton();
-                //}
+                else if (mensaje.tmn_tipo == DKbase.generales.Constantes.cTipoMensaje_Reparto)
+                {
+                    RadioButtonReparto.Checked = true;
+                }
                 CheckRadioButton();
 
             }
@@ -158,7 +171,7 @@ namespace Kellerhoff.admin.pages
             {
                 cMensaje mensaje = (cMensaje)Session["GestionMensajeNewV4_mensaje"];
                 //Session["GestionMensajeNewV4_tme_todosSucursales"] = mensaje;
-                if (!string.IsNullOrEmpty(mensaje.tmn_todosSucursales))
+                if (!string.IsNullOrEmpty(mensaje.tmn_todosSucursales) && (string.IsNullOrEmpty(mensaje.tmn_tipo) && mensaje.tmn_tipo == DKbase.generales.Constantes.cTipoMensaje_Sucursal))
                 {
                     //RadioButtonSucursal.Checked = true;
                     //CheckRadioButton();
@@ -169,6 +182,26 @@ namespace Kellerhoff.admin.pages
                             if (mensaje.tmn_todosSucursales.Contains(CheckBoxListSucursales.Items[i].Value))
                             {
                                 CheckBoxListSucursales.Items[i].Selected = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        protected void CheckBoxListReparto_DataBound(object sender, EventArgs e)
+        {
+            if (Session["GestionMensajeNewV4_mensaje"] != null)
+            {
+                cMensaje mensaje = (cMensaje)Session["GestionMensajeNewV4_mensaje"];
+                if (!string.IsNullOrEmpty(mensaje.tmn_todosRepartos) && mensaje.tmn_tipo == DKbase.generales.Constantes.cTipoMensaje_Reparto)
+                {
+                    if (CheckBoxListReparto.Items != null)
+                    {
+                        for (int i = 0; i < CheckBoxListReparto.Items.Count; i++)
+                        {
+                            if (mensaje.tmn_todosRepartos.Contains(CheckBoxListReparto.Items[i].Value))
+                            {
+                                CheckBoxListReparto.Items[i].Selected = true;
                             }
                         }
                     }
@@ -217,13 +250,18 @@ namespace Kellerhoff.admin.pages
         {
             if (RadioButtonSucursal.Checked)
             {
-                //cmbClientes.Enabled = false;
                 CheckBoxListSucursales.Enabled = true;
+                CheckBoxListReparto.Enabled = false;
             }
-            else
+            else if (RadioButtonCliente.Checked)
             {
-                //cmbClientes.Enabled = true;
                 CheckBoxListSucursales.Enabled = false;
+                CheckBoxListReparto.Enabled = false;
+            }
+            else if (RadioButtonReparto.Checked)
+            {
+                CheckBoxListSucursales.Enabled = false;
+                CheckBoxListReparto.Enabled = true;
             }
         }
     }

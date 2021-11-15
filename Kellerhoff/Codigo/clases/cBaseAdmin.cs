@@ -214,15 +214,7 @@ namespace Kellerhoff.Codigo.clases
         }
         public List<cCombo> CargarComboTodosCodigoReparto()
         {
-            List<cCombo> resultado = new List<cCombo>();
-            List<string> lista = WebService.RecuperarTodosCodigoReparto();
-            foreach (string item in lista)
-            {
-                cCombo obj = new cCombo();
-                obj.nombre = item;
-                resultado.Add(obj);
-            }
-            return resultado;
+            return WebService.CargarComboTodosCodigoReparto();
         }
 
     }
