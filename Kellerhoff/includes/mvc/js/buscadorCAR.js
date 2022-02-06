@@ -673,7 +673,7 @@ function getHtmlTablaResolucionCelular() {
                 strHtml += '<span class="p_erronero">REGISTRO ERRONEO</span>';
             }
             // Ver si mostrar input solo producto Transfer 
-            if (listaProductosBuscados[i].pro_vtasolotransfer) {
+            if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) {
                 isMostrarImput = false;
             }
 
