@@ -2657,7 +2657,7 @@ function detalleProducto_celular(pIndex) {
     }
     // FIN + IVA
     // Ver si mostrar input solo producto Transfer 
-    if (listaProductosBuscados[pIndex].pro_vtasolotransfer) {
+    if (listaProductosBuscados[pIndex].pro_vtasolotransfer && !listaProductosBuscados[pIndex].isTablaTransfersClientes) {
         isMostrarImput = false;
     }
     //strHtml += '<div id="modalProd_xs_1" class="modal md-effect-1 md-content portfolio-modal in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
