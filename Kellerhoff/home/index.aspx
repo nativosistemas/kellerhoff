@@ -137,7 +137,7 @@
                                     <div class="info_mapa hidden" data-info="1">
                                         <b>ROSARIO</b><br />
                                         <u>Supervisor Comercial</u>: Franco Viola - Joaquín Gamborena<br />
-                                        <u>Promotores</u>: Mario Palacios - Walter Pasquinelli - Facundo Angelini - Magali Notto<br />
+                                        <u>Promotores</u>: Mario Palacios - Walter Pasquinelli - Facundo Angelini - Mariela Bengoechea<br />
                                         <u>Farmacéutica</u>: Paola Iribarren<br />
                                         <u>Ctas. Ctes.</u>: Nanci Giussani - Haylin Scarbeli<br />
                                         <u>Domicilio</u>: Pueyrredon 1149<br />
@@ -201,7 +201,7 @@
                                     <div class="info_mapa hidden" data-info="5">
                                         <b>C&#211;RDOBA</b><br />
                                         <u>Encargado</u>: Marcelo Bravin<br />
-                                        <u>Supervisor Comercial</u>: Juan Jose Giovagnorio<br />
+                                        <u>Supervisor Comercial</u>: Alejandro Chaui<br />
                                         <u>Promotor</u>: Olga Echenique - Juan Pablo Martellotto – Rodrigo Echenique<br />
                                         <u>Ctas. Ctes.</u>: Carolina Beretta – Maria Elena Merlo – Monica Aquino<br />
                                         <u>Farmacéutico</u>: Karina Nieddu<br />
@@ -217,8 +217,8 @@
                                         <b>SANTA FE</b><br />
                                         <u>Encargado</u>: Walter Cesar Luque<br />
                                         <u>Supervisor Comercial</u>: Julio Culler<br />
-                                        <u>Promotor</u>: Maximiliano Flores – Mora Sebastian<br />
-                                        <u>Ctas. Ctes.</u>: Claudia Campagnucci  - Daniela Cardozo
+                                        <u>Promotor</u>: Gastón Edward - Milton Córdoba<br />
+                                        <u>Ctas. Ctes.</u>: Claudia Campagnucci - Daniela Cardozo
                                         <br />
                                         <u>Farmacéutico</u>: Patricia Borrelli<br />
                                         <u>Domicilio</u>: Av. Blas Parera 6633<br />
@@ -246,7 +246,7 @@
                                     <div class="info_mapa hidden" data-info="8">
                                         <b>VILLA MARÍA</b><br />
                                         <u>Encargado</u>: Manuel Vinzón<br />
-                                        <u>Supervisor Comercial</u>: Juan Jose Giovagnorio<br />
+                                        <u>Supervisor Comercial</u>: Alejandro Chaui<br />
                                         <u>Promotor</u>: Marcelo Govannini<br />
                                         <u>Farmacéutico</u>: Maria Luciana Colusso<br />                                       
                                         <u>Domicilio</u>: Leandro N Alem 330<br />
@@ -259,7 +259,7 @@
                                     <div class="info_mapa hidden" data-info="9">
                                         <b>RÍO CUARTO</b><br />
                                         <u>Encargado</u>: Gustavo Oscar Antonucci<br />
-                                        <u>Supervisor Comercial</u>: Juan Jose Giovagnorio<br />
+                                        <u>Supervisor Comercial</u>: Alejandro Chaui<br />
                                         <u>Promotor</u>: Agustín Arias<br />
                                         <u>Farmacéutico</u>: Guillermo Canónico<br />                                        
                                         <u>Domicilio</u>: Buenos Aires 254/264<br />
