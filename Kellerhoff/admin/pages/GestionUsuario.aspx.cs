@@ -169,7 +169,7 @@ namespace Kellerhoff.admin.pages
             {
                 int codigoUsuarioEnSession = ((Kellerhoff.Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).id;
                 Kellerhoff.Codigo.capaDatos.cUsuario objUsuario = null;
-                Kellerhoff.Codigo.capaDatos.cClientes objCliente = null;
+                DKbase.web.capaDatos.cClientes objCliente = null;
                 objUsuario = Kellerhoff.Codigo.clases.Seguridad.RecuperarUsuarioPorId(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]));
                 Kellerhoff.Codigo.clases.Seguridad.CambiarContraseñaUsuario(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]), txtContraseñaCambiar.Text, codigoUsuarioEnSession);
                 if (objUsuario.usu_codRol == Constantes.cROL_ADMINISTRADORCLIENTE)

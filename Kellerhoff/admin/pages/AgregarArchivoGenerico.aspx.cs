@@ -9,6 +9,7 @@ using System.Web.Services;
 using Kellerhoff.Codigo;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.capaDatos;
+using DKbase.web.capaDatos;
 
 namespace Kellerhoff.admin.pages
 {

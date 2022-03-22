@@ -9,7 +9,7 @@
     string resultadoHidden = string.Empty;
     if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
     {
-        List<Kellerhoff.Codigo.capaDatos.cHistorialArchivoSubir> listaHistorial = WebService.RecuperarHistorialSubirArchivo(((Kellerhoff.Codigo.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
+        List<Kellerhoff.Codigo.capaDatos.cHistorialArchivoSubir> listaHistorial = WebService.RecuperarHistorialSubirArchivo(((DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
         if (listaHistorial != null && listaHistorial.Count > 0)
         {
             resultadoHidden += "<input type=\"hidden\" id=\"hiddenPrimerArchivoSubidos\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaHistorial.OrderBy(x=> x.has_fecha).Last())) + "\" />";

@@ -1,4 +1,5 @@
-﻿using Kellerhoff.Codigo.capaDatos;
+﻿using DKbase.web.capaDatos;
+using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.clases.Generales;
 using Kellerhoff.Filters;
@@ -75,10 +76,10 @@ namespace Kellerhoff.Controllers
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 Parameters += "<" + "login" + ">";
-                Parameters += ((Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login;
+                Parameters += ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login;
                 Parameters += "</" + "login" + ">";
                 Parameters += "<" + "codigoCliente" + ">";
-                Parameters += ((Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo;
+                Parameters += ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo;
                 Parameters += "</" + "codigoCliente" + ">";
 
             }
@@ -297,7 +298,7 @@ namespace Kellerhoff.Controllers
             if ((System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensaje"] == null ||
                 System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"] == null)
                 && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-                Codigo.clases.FuncionesPersonalizadas.CargarMensajeActualizado(((Codigo.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
+                Codigo.clases.FuncionesPersonalizadas.CargarMensajeActualizado(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
             if (System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensaje"] != null)
                 resultado = Convert.ToInt32(System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensaje"]);
             return resultado;
@@ -483,7 +484,7 @@ namespace Kellerhoff.Controllers
         {
             if (Session["clientesDefault_Cliente"] == null)
                 return null;
-            List<Kellerhoff.Codigo.capaDatos.cUsuario> lista = Kellerhoff.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((Kellerhoff.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
+            List<Kellerhoff.Codigo.capaDatos.cUsuario> lista = Kellerhoff.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
             return Codigo.clases.Generales.Serializador.SerializarAJson(lista);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]

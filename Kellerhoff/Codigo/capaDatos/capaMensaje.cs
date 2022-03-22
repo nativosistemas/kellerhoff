@@ -7,13 +7,6 @@ using System.Web;
 
 namespace Kellerhoff.Codigo.capaDatos
 {
-
-    public class cMensaje: DKbase.web.capaDatos.cMensaje
-    {
-    }
-    public class cMensajeNew:DKbase.web.capaDatos.cMensajeNew
-    {
-    }
     /// <summary>
     /// Summary description for capaMensaje
     /// </summary>

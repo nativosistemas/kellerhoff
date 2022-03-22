@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DKbase.web.capaDatos;
 using Kellerhoff.Codigo.capaDatos;
 
 namespace Kellerhoff.Codigo.clases
@@ -267,7 +268,7 @@ namespace Kellerhoff.Codigo.clases
             }
             return query;
         }
-        public static List<capaDatos.cArchivo> GetArchivos(int pArc_codRelacion, string pArc_galeria, string pFiltro, string sortExpression)
+        public static List<cArchivo> GetArchivos(int pArc_codRelacion, string pArc_galeria, string pFiltro, string sortExpression)
         {
             //string sortExpression = "arc_titulo"; 
             ordenamientoExpresion order = new ordenamientoExpresion(sortExpression);

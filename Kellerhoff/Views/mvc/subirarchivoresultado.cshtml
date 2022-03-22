@@ -30,7 +30,7 @@
         string resultadoHidden = string.Empty;
         if (HttpContext.Current.Session["subirpedido_ListaProductos"] != null)
         {
-            Kellerhoff.Codigo.clases.cjSonBuscadorProductos obj = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarProductosGeneralSubirPedidos((List<Kellerhoff.Codigo.capaDatos.cProductosGenerico>)HttpContext.Current.Session["subirpedido_ListaProductos"]);
+            Kellerhoff.Codigo.clases.cjSonBuscadorProductos obj = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarProductosGeneralSubirPedidos((List<DKbase.web.capaDatos.cProductosGenerico>)HttpContext.Current.Session["subirpedido_ListaProductos"]);
             System.Web.HttpContext.Current.Session["PedidosBuscador_productosTodos"] = new Kellerhoff.Codigo.clases.cjSonBuscadorProductos(obj);
             int pPage = 1;
             System.Web.HttpContext.Current.Session["PedidosBuscador_pPage"] = pPage;

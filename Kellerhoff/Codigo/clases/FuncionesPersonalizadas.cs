@@ -6,6 +6,7 @@ using System.Data;
 using System.IO;
 using Kellerhoff.Codigo.capaDatos;
 using System.Reflection;
+using DKbase.web.capaDatos;
 
 namespace Kellerhoff.Codigo.clases
 {

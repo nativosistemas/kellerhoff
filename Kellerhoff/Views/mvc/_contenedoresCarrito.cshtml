@@ -3,7 +3,7 @@
 
     if (Session["clientesDefault_Cliente"] != null)
     {
-        List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursalDependiente = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((Kellerhoff.Codigo.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
+        List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursalDependiente = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
         //// Inicio S7
         List<string> ListaSucursal = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
         //// Fin S7
