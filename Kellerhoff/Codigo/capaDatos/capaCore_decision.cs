@@ -1,4 +1,5 @@
-﻿using Kellerhoff.Codigo.clases;
+﻿using DKbase.web.capaDatos;
+using Kellerhoff.Codigo.clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             try
             {
-                capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
+                capaCAR_base.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
                 if (isCore)
                 {
                     List<DKbase.dll.cDllProductosAndCantidad> l_Productos = Codigo.clases.Generales.Serializador.DeserializarJson<List<DKbase.dll.cDllProductosAndCantidad>>(Codigo.clases.Generales.Serializador.SerializarAJson(pListaProducto));
@@ -47,7 +48,7 @@ namespace Kellerhoff.Codigo.capaDatos
             }
             finally
             {
-                capaCAR.EndCarritoEnProceso(pIdCarrito);
+                capaCAR_base.EndCarritoEnProceso(pIdCarrito);
             }
         }
     }

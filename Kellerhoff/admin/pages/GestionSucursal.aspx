@@ -102,8 +102,8 @@
                             <select id="jCmbSucursal" style="width: 300px;" onchange="someFunction();" >
                                 <%                       
                                     string strHtmlCombo = string.Empty;
-                                    List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursales = Kellerhoff.WebService.RecuperarTodasSucursales();
-                                    foreach (Kellerhoff.Codigo.capaDatos.cSucursal item in listaSucursales)
+                                    List<DKbase.web.cSucursal> listaSucursales = Kellerhoff.WebService.RecuperarTodasSucursales();
+                                    foreach (DKbase.web.cSucursal item in listaSucursales)
                                     {
                                         strHtmlCombo += "<option value=\"" + item.sde_sucursal + "\" >" + item.sde_sucursal + "</option>";
                                     }

@@ -54,7 +54,7 @@ namespace Kellerhoff.admin.pages
                 if ((codigoMensaje == 0 && Kellerhoff.Codigo.clases.cBaseAdmin.isAgregar(consPalabraClave)) || (codigoMensaje != 0 && Kellerhoff.Codigo.clases.cBaseAdmin.isEditar(consPalabraClave)))
                 {
 
-                    int codigoUsuarioEnSession = ((Kellerhoff.Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).id;
+                    int codigoUsuarioEnSession = ((DKbase.web.Usuario)Session["BaseAdmin_Usuario"]).id;
                     DateTime? fechaDesde = null;
                     DateTime? fechaHasta = null;
                     bool importante = checkboxImportante.Checked;

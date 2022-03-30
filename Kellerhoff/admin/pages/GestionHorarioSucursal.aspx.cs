@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Web.Services;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.capaDatos;
+using DKbase.web.capaDatos;
+using DKbase.web;
 
 namespace Kellerhoff.admin.pages
 {
@@ -37,13 +39,13 @@ namespace Kellerhoff.admin.pages
         public static List<string> ListaDiaSemana()
         {
             List<string> resultado = new List<string>();
-            resultado.Add(Constantes.cDIASEMANA_Lunes);
-            resultado.Add(Constantes.cDIASEMANA_Martes);
-            resultado.Add(Constantes.cDIASEMANA_Miercoles);
-            resultado.Add(Constantes.cDIASEMANA_Jueves);
-            resultado.Add(Constantes.cDIASEMANA_Viernes);
-            resultado.Add(Constantes.cDIASEMANA_Sabado);
-            resultado.Add(Constantes.cDIASEMANA_Domingo);
+            resultado.Add(DKbase.generales.Constantes.cDIASEMANA_Lunes);
+            resultado.Add(DKbase.generales.Constantes.cDIASEMANA_Martes);
+            resultado.Add(DKbase.generales.Constantes.cDIASEMANA_Miercoles);
+            resultado.Add(DKbase.generales.Constantes.cDIASEMANA_Jueves);
+            resultado.Add(DKbase.generales.Constantes.cDIASEMANA_Viernes);
+            resultado.Add(DKbase.generales.Constantes.cDIASEMANA_Sabado);
+            resultado.Add(DKbase.generales.Constantes.cDIASEMANA_Domingo);
             return resultado;
         }
 

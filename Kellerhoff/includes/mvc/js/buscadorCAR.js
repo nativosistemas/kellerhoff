@@ -673,9 +673,9 @@ function getHtmlTablaResolucionCelular() {
                 strHtml += '<span class="p_erronero">REGISTRO ERRONEO</span>';
             }
             // Ver si mostrar input solo producto Transfer 
-            if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) {
+            /*if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) {
                 isMostrarImput = false;
-            }
+            }*/
 
             //strHtml += '</div>';
             //strHtml += '</td>'; 
@@ -701,7 +701,7 @@ function getHtmlTablaResolucionCelular() {
                 precioHabitual = '';
             }
             strHtml += '<td class="col-xs-2 text-center">' + precioHabitual + '</td>';
-       
+
 
             strHtml += '</tr>';
         }
@@ -890,19 +890,22 @@ function onblurSucursal_base(pCantidad, pFila, pColumna) {
                 if (isExcedeImporte) {
 
                 } else {
-                    isCambioValor_SubirPedido = true;
-                    if (isSubirPedido) {
-                        Log('onblurSucursal_base:' + '1');
-                        AgregarAlHistorialProductoCarrito(fila, columna, pCantidad, true);
-                        isModificoBD = true;
-                        setearValorInputBuscador(pCantidad, fila, columna);
-                    } else {
-                        Log('onblurSucursal_base:' + '2' + ' - pCantidad: ' + pCantidad);
-                        var resultadoCantidadCambio = CargarProductoCantidadDependiendoTransfer(fila, columna, pCantidad);
-                        isModificoBD = true;
-                        //if (resultadoCantidadCambio != pCantidad) {
-                        setearValorInputBuscador(resultadoCantidadCambio, fila, columna);
-                        //}
+                    var isValidarSoloTransferFacturacionDirecta = funValidarSoloTransferFacturacionDirecta(listaProductosBuscados[fila], listaSucursal[columna], pCantidad, true);
+                    if (isValidarSoloTransferFacturacionDirecta) {
+                        isCambioValor_SubirPedido = true;
+                        if (isSubirPedido) {
+                            Log('onblurSucursal_base:' + '1');
+                            AgregarAlHistorialProductoCarrito(fila, columna, pCantidad, true);
+                            isModificoBD = true;
+                            setearValorInputBuscador(pCantidad, fila, columna);
+                        } else {
+                            Log('onblurSucursal_base:' + '2' + ' - pCantidad: ' + pCantidad);
+                            var resultadoCantidadCambio = CargarProductoCantidadDependiendoTransfer(fila, columna, pCantidad);
+                            isModificoBD = true;
+                            //if (resultadoCantidadCambio != pCantidad) {
+                            setearValorInputBuscador(resultadoCantidadCambio, fila, columna);
+                            //}
+                        }
                     }
                 }
             } else {
@@ -974,7 +977,16 @@ function onblurSucursal_base(pCantidad, pFila, pColumna) {
         }
     }
 }
-
+function funValidarSoloTransferFacturacionDirecta(pProducto, pIdSucursal, pCantidad, pIsDesdeBuscador) {
+    var result = true;
+    if (pProducto.pro_vtasolotransfer == 1 && pProducto.tfr_facturaciondirecta == 1 && pProducto.tde_minuni != null && pProducto.tde_minuni > pCantidad && pCantidad != 0) {
+        result = false;
+        volverCantidadAnterior_buscador(pIdSucursal, pProducto.pro_codigo);
+        var htmlMensaje = '<p>' + cuerpo_error + '</p><ul><li>' + pProducto.pro_codigo + '</li></ul>';
+        mensaje_error(titulo_error, htmlMensaje);
+    }
+    return result;
+}
 function MostrarTextoSuperaCantidadMaxima(pNombreProducto, pCantidadMaxima) {
     //return 'El producto: ' + pNombreProducto + ' \n' + 'Supera la cantidad máxima: ' + pCantidadMaxima;
     return 'El producto: ' + pNombreProducto + '  <br/>' + 'Supera la cantidad máxima: ' + pCantidadMaxima;
@@ -1602,9 +1614,9 @@ function OnCallBackRecuperarProductos(args) {
                     }
 
                     // Ver si mostrar input solo producto Transfer 
-                    if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) {
+                    /*if (listaProductosBuscados[i].pro_vtasolotransfer && !listaProductosBuscados[i].isTablaTransfersClientes) {
                         isMostrarImput = false;
-                    }
+                    }*/
 
                     if (listaProductosBuscados[i].pri_nombreArchivo !== null) {//onclickAmpliarImagen(\'' + listaProductosBuscados[i].pri_nombreArchivo + '\')
                         strHtml += '<i class="fa fa-camera color_emp_st pull-right" onclick="onclickAmpliarImagen(' + i + ');"></i>';//style="width:20px;height:20px; "
@@ -1927,9 +1939,6 @@ function AgregarAlHistorialProductoCarrito(pIndexProducto, pIndexSucursal, pCant
         AgregarAlHistorialProductoCarrito_SubirPedido(pIndexProducto, pIndexSucursal, pCantidadProducto, pIsSumarCantidad);
     }
     else {
-        //if (!isCarritoDiferido) {
-        //    HistorialProductoCarrito(listaProductosBuscados[pIndexProducto].pro_codigo, listaProductosBuscados[pIndexProducto].pro_nombre, listaSucursal[pIndexSucursal], pCantidadProducto);
-        //}
         Log('AgregarAlHistorialProductoCarrito:' + '1' + ' - pCantidad: ' + pCantidadProducto);
         CargarOActualizarListaCarrito(listaSucursal[pIndexSucursal], listaProductosBuscados[pIndexProducto].pro_codigo, pCantidadProducto, true);
     }
@@ -2658,9 +2667,9 @@ function detalleProducto_celular(pIndex) {
     }
     // FIN + IVA
     // Ver si mostrar input solo producto Transfer 
-    if (listaProductosBuscados[pIndex].pro_vtasolotransfer && !listaProductosBuscados[pIndex].isTablaTransfersClientes) {
+    /*if (listaProductosBuscados[pIndex].pro_vtasolotransfer && !listaProductosBuscados[pIndex].isTablaTransfersClientes) {
         isMostrarImput = false;
-    }
+    }*/
     //strHtml += '<div id="modalProd_xs_1" class="modal md-effect-1 md-content portfolio-modal in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
     strHtml += '<div class="modal-background">&nbsp;</div>';
     strHtml += '<div class="modal-dialog modal-lg"><div class="modal-content">';

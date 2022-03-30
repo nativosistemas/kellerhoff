@@ -10,6 +10,7 @@ using System.Web.Services;
 using Kellerhoff.Codigo;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.capaDatos;
+using DKbase.web;
 
 namespace Kellerhoff.admin
 {
@@ -26,7 +27,7 @@ namespace Kellerhoff.admin
                 {
                     if (Session["BaseAdmin_Usuario"] != null)
                     {
-                        Codigo.clases.Seguridad.CerrarSession(((Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).idUsuarioLog);
+                        Codigo.clases.Seguridad.CerrarSession(((Usuario)Session["BaseAdmin_Usuario"]).idUsuarioLog);
                     }
                     lblMensaje.Text = string.Empty;
                     txtPassword.Text = string.Empty;

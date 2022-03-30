@@ -293,34 +293,6 @@ namespace Kellerhoff.Codigo.clases
         {
             get { return System.Configuration.ConfigurationManager.AppSettings["raiz_archivos"].ToString(); }
         }
-        public static string cDIASEMANA_Lunes
-        {
-            get { return "LU"; }
-        }
-        public static string cDIASEMANA_Martes
-        {
-            get { return "MA"; }
-        }
-        public static string cDIASEMANA_Miercoles
-        {
-            get { return "MI"; }
-        }
-        public static string cDIASEMANA_Jueves
-        {
-            get { return "JU"; }
-        }
-        public static string cDIASEMANA_Viernes
-        {
-            get { return "VI"; }
-        }
-        public static string cDIASEMANA_Sabado
-        {
-            get { return "SA"; }
-        }
-        public static string cDIASEMANA_Domingo
-        {
-            get { return "DO"; }
-        }
         public static string cESTADO_HAB
         {
             get { return "HAB"; }

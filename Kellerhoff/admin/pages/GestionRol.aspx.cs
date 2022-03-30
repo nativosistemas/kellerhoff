@@ -41,7 +41,7 @@ namespace Kellerhoff.admin.pages
         }
         public override void Eliminar(int pIdRol)
         {
-            List<Kellerhoff.Codigo.capaDatos.cUsuario> listaUsuarioTemp = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodosUsuarios(string.Empty);
+            List<DKbase.web.cUsuario> listaUsuarioTemp = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodosUsuarios(string.Empty);
             listaUsuarioTemp = listaUsuarioTemp.Where(x => x.usu_codRol == pIdRol).ToList();
             if (listaUsuarioTemp.Count == 0)
             {

@@ -1,4 +1,5 @@
-﻿using DKbase.web.capaDatos;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
 using Kellerhoff.Codigo.capaDatos;
 using System;
 using System.Collections.Generic;

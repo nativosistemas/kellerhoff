@@ -1,4 +1,5 @@
-﻿using DKbase.web.capaDatos;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
 using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
 using System;
@@ -101,7 +102,7 @@ namespace Kellerhoff.Codigo.capaDatos
             if (isCAR)
             {
                 //int idCarrito = capaCAR.BorrarCarrito((int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, pSucursal, pTipo, Constantes.cAccionCarrito_TOMAR);
-                capaCAR.BorrarCarritoPorId_SleepTimer(car_id, Constantes.cAccionCarrito_TOMAR);
+                capaCAR_base.BorrarCarritoPorId_SleepTimer(car_id, Constantes.cAccionCarrito_TOMAR);
                 capaCAR.guardarPedido(pListaProductos, car_id, pSucursal, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
             }
             else
@@ -114,7 +115,7 @@ namespace Kellerhoff.Codigo.capaDatos
             if (isCAR)
             {
                 // capaCAR.BorrarCarrito((int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, pCarrito.codSucursal, pTipo, Constantes.cAccionCarrito_TOMAR);
-                capaCAR.BorrarCarritoPorId_SleepTimer(pCarrito.car_id, Constantes.cAccionCarrito_TOMAR);
+                capaCAR_base.BorrarCarritoPorId_SleepTimer(pCarrito.car_id, Constantes.cAccionCarrito_TOMAR);
                 capaCAR.guardarPedido(pCarrito, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
             }
             else if (pTipo == Constantes.cTipo_Carrito)
@@ -145,8 +146,8 @@ namespace Kellerhoff.Codigo.capaDatos
             {
                 if (WebService.VerificarPermisos(WebService.CredencialAutenticacion))
                 {
-                    DataTable pTablaDetalle = FuncionesPersonalizadas.ConvertProductosAndCantidadToDataTable(pListaProductosMasCantidad);
-                    return capaCAR.AgregarProductosTransfersAlCarrito(pTablaDetalle, pIdCliente, pIdUsuario, pIdTransfers, pCodSucursal, pTipo);
+                    DataTable pTablaDetalle = DKbase.web.FuncionesPersonalizadas_base.ConvertProductosAndCantidadToDataTable(pListaProductosMasCantidad);
+                    return capaCAR_base.AgregarProductosTransfersAlCarrito(pTablaDetalle, pIdCliente, pIdUsuario, pIdTransfers, pCodSucursal, pTipo);
                 }
                 return false;
             }
@@ -170,7 +171,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             if (isCAR)
             {
-                return capaCAR.CargarCarritoDiferido(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
+                return capaCAR_base.CargarCarritoDiferido(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
             }
             else
             {
@@ -181,7 +182,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             if (isCAR)
             {
-                return capaCAR.AgregarProductoAlCarrito(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
+                return capaCAR_base.AgregarProductoAlCarrito(pSucursal, pIdProducto, pCantidadProducto, pIdCliente, pIdUsuario);
             }
             else
             {

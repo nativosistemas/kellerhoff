@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using DKbase.web.capaDatos;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.ServiceReferenceDLL;
 
@@ -780,7 +781,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             try
             {
-                capaCAR.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
+                capaCAR_base.InicioCarritoEnProceso(pIdCarrito, Constantes.cAccionCarrito_TOMAR);
                 ServiceReferenceDLL.ServiceSoapClient objServicio = Instacia();
                 ServiceReferenceDLL.ArrayOfCDllProductosAndCantidad listaArray = new ServiceReferenceDLL.ArrayOfCDllProductosAndCantidad();
                 foreach (var item in pListaProducto)
@@ -797,7 +798,7 @@ namespace Kellerhoff.Codigo.capaDatos
             }
             finally
             {
-                capaCAR.EndCarritoEnProceso(pIdCarrito);
+                capaCAR_base.EndCarritoEnProceso(pIdCarrito);
             }
         }
         public static bool ValidarExistenciaDeCarritoWebPasado(int pIdCarrito)

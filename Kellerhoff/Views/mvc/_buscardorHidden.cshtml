@@ -3,16 +3,16 @@
     string resultado = string.Empty;
     if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null )
     {
-        List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
+        List<DKbase.web.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
         // Optimizar
-        List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursalInfoAux = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
-        List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursalInfo = new List<Kellerhoff.Codigo.capaDatos.cSucursal>();
+        List<DKbase.web.cSucursal> listaSucursalInfoAux = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
+        List<DKbase.web.cSucursal> listaSucursalInfo = new List<DKbase.web.cSucursal>();
         //// Inicio S7
         List<string> ListaSucursalOptimizar = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
         //// Fin S7
         foreach (string itemSucursalOptimizar in ListaSucursalOptimizar)
         {
-            foreach (Kellerhoff.Codigo.capaDatos.cSucursal itemSucursalInfoAux in listaSucursal)
+            foreach (DKbase.web.cSucursal itemSucursalInfoAux in listaSucursal)
             {
                 if (itemSucursalOptimizar == itemSucursalInfoAux.sde_sucursal)
                 {
@@ -23,11 +23,11 @@
         }
         // Fin Optimizar
         resultado += "<input type=\"hidden\" id=\"hiddenListaSucursalesDependienteInfo\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaSucursalInfo)) + "\" />";
-        List<Kellerhoff.Codigo.clases.cCarrito> listaCarrito = new List<Kellerhoff.Codigo.clases.cCarrito>();
+        List<DKbase.web.capaDatos.cCarrito> listaCarrito = new List<DKbase.web.capaDatos.cCarrito>();
         if (Kellerhoff.Controllers.mvcController.isDiferido())
         {
-            Session["clientesDefault_CarritoDiferido"] = Kellerhoff.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosDiferidosPorCliente((int)((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
-            listaCarrito = (List<Kellerhoff.Codigo.clases.cCarrito>)Session["clientesDefault_CarritoDiferido"];
+            Session["clientesDefault_CarritoDiferido"] = Kellerhoff.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosDiferidosPorCliente((int)((DKbase.web.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
+            listaCarrito = (List<DKbase.web.capaDatos.cCarrito>)Session["clientesDefault_CarritoDiferido"];
             resultado += "<input type=\"hidden\" id=\"hiddenIsCarritoDiferido\" value=\"" + Server.HtmlEncode("true") + "\" />";
             if (Kellerhoff.Codigo.capaDatos.capaCAR_decision.isCAR) {
                 resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(Kellerhoff.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(((DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), Kellerhoff.Codigo.clases.Constantes.cTipo_CarritoDiferidoTransfers))) + "\" />";
@@ -36,8 +36,8 @@
         }
         else if (Kellerhoff.Controllers.mvcController.isBuscador())
         {
-            Session["clientesDefault_Carrito"] = Kellerhoff.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosPorSucursalYProductos((int)((Kellerhoff.Codigo.capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
-            listaCarrito = (List<Kellerhoff.Codigo.clases.cCarrito>)Session["clientesDefault_Carrito"];
+            Session["clientesDefault_Carrito"] = Kellerhoff.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosPorSucursalYProductos((int)((DKbase.web.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
+            listaCarrito = (List<DKbase.web.capaDatos.cCarrito>)Session["clientesDefault_Carrito"];
             resultado += "<input type=\"hidden\" id=\"hiddenListaCarritosTransferPorSucursal\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(Kellerhoff.Codigo.capaDatos.capaCAR_decision.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(((DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]),Kellerhoff.Codigo.clases.Constantes.cTipo_CarritoTransfers))) + "\" />";
 
         }

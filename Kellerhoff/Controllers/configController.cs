@@ -1,4 +1,5 @@
-﻿using DKbase.web.capaDatos;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
 using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.clases.Generales;
@@ -86,7 +87,7 @@ namespace Kellerhoff.Controllers
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
                 Parameters += "<" + "idUsuarioLog" + ">";
-                Parameters += ((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idUsuarioLog;
+                Parameters += ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idUsuarioLog;
                 Parameters += "</" + "idUsuarioLog" + ">";
             }
             string funFlecha = string.Empty;
@@ -103,7 +104,7 @@ namespace Kellerhoff.Controllers
             string userAgent = System.Web.HttpContext.Current.Request.UserAgent;
             string ip = System.Web.HttpContext.Current.Server.HtmlEncode(System.Web.HttpContext.Current.Request.UserHostAddress);
             string hostName = System.Web.HttpContext.Current.Request.UserHostName;
-            Codigo.capaDatos.Usuario user = Codigo.clases.Seguridad.Login(pName, pPass, ip, hostName, userAgent);
+            Usuario user = Codigo.clases.Seguridad.Login(pName, pPass, ip, hostName, userAgent);
             if (user != null)
             {
                 if (user.id != -1)
@@ -121,7 +122,7 @@ namespace Kellerhoff.Controllers
                             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                             {
                                 System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
                                 System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
                                 CargarAccionesEnVariableSession();
                                 System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
@@ -151,7 +152,7 @@ namespace Kellerhoff.Controllers
                                 if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                                 {
                                     System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
                                     System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
                                     CargarAccionesEnVariableSession();
                                     System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
@@ -175,7 +176,7 @@ namespace Kellerhoff.Controllers
                                 if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                                 {
                                     System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
                                     System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
                                     CargarAccionesEnVariableSession();
                                     System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
@@ -201,7 +202,7 @@ namespace Kellerhoff.Controllers
                                 if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                                 {
                                     System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
                                     System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
                                     CargarAccionesEnVariableSession();
                                     System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
@@ -227,7 +228,7 @@ namespace Kellerhoff.Controllers
                                 if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                                 {
                                     System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Codigo.capaDatos.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
                                     System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
                                     CargarAccionesEnVariableSession();
                                     System.Web.HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
@@ -270,7 +271,7 @@ namespace Kellerhoff.Controllers
         {
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
-                ListaAcccionesRol listaAcciones = Codigo.clases.Seguridad.RecuperarTodasAccionesPorIdRol((((Codigo.capaDatos.Usuario)(System.Web.HttpContext.Current.Session["clientesDefault_Usuario"])).idRol));
+                ListaAcccionesRol listaAcciones = Codigo.clases.Seguridad.RecuperarTodasAccionesPorIdRol((((Usuario)(System.Web.HttpContext.Current.Session["clientesDefault_Usuario"])).idRol));
                 System.Web.HttpContext.Current.Session["BaseAdmin_PermisosRol"] = listaAcciones;
             }
         }
@@ -484,7 +485,7 @@ namespace Kellerhoff.Controllers
         {
             if (Session["clientesDefault_Cliente"] == null)
                 return null;
-            List<Kellerhoff.Codigo.capaDatos.cUsuario> lista = Kellerhoff.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
+            List<DKbase.web.cUsuario> lista = Kellerhoff.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
             return Codigo.clases.Generales.Serializador.SerializarAJson(lista);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]

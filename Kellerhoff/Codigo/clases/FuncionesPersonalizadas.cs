@@ -7,6 +7,7 @@ using System.IO;
 using Kellerhoff.Codigo.capaDatos;
 using System.Reflection;
 using DKbase.web.capaDatos;
+using DKbase.web;
 
 namespace Kellerhoff.Codigo.clases
 {
@@ -137,21 +138,6 @@ namespace Kellerhoff.Codigo.clases
             resultado = resultado.Replace("8", string.Empty);
             resultado = resultado.Replace("9", string.Empty);
             return resultado;
-        }
-        public static DataTable ConvertProductosAndCantidadToDataTable(List<cProductosAndCantidad> pListaProductosMasCantidad)
-        {
-
-            DataTable pTablaDetalle = new DataTable();
-            pTablaDetalle.Columns.Add(new DataColumn("codProducto", System.Type.GetType("System.String")));
-            pTablaDetalle.Columns.Add(new DataColumn("cantidad", System.Type.GetType("System.Int32")));
-            foreach (cProductosAndCantidad item in pListaProductosMasCantidad)
-            {
-                DataRow fila = pTablaDetalle.NewRow();
-                fila["codProducto"] = item.codProductoNombre;
-                fila["cantidad"] = item.cantidad;
-                pTablaDetalle.Rows.Add(fila);
-            }
-            return pTablaDetalle;
         }
         public static DataTable ConvertNombresSeccionToDataTable(List<string> pListaNombreSeccion)
         {
@@ -348,7 +334,7 @@ namespace Kellerhoff.Codigo.clases
                 {
                     listaProductos.Add(new cProductosAndCantidad { codProductoNombre = item.pro_codigo });
                 }
-                DataTable table = capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(pListaSucursal), ConvertProductosAndCantidadToDataTable(listaProductos));
+                DataTable table = capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(pListaSucursal), DKbase.web.FuncionesPersonalizadas_base.ConvertProductosAndCantidadToDataTable(listaProductos));
                 if (table != null)
                     for (int i = 0; i < pListaProductos.Count; i++)
                     {
@@ -361,7 +347,7 @@ namespace Kellerhoff.Codigo.clases
         public static List<cProductosGenerico> ActualizarStockListaProductos_SubirArchico(List<string> pListaSucursal, List<cProductosGenerico> pListaProductos, string pSucursalElegida)
         {
             pListaProductos = ActualizarStockListaProductos(pListaSucursal, pListaProductos);
-            List<Kellerhoff.Codigo.capaDatos.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
+            List<DKbase.web.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
             bool trabajaPerfumeria = true;
             for (int i = 0; i< listaSucursal.Count; i++) {
                 if (listaSucursal[i].suc_codigo == pSucursalElegida) {
@@ -414,7 +400,7 @@ namespace Kellerhoff.Codigo.clases
 
                 listaProductos.Add(new cProductosAndCantidad { codProductoNombre = pro_codigo });
                 List<string> ListaSucursal = RecuperarSucursalesParaBuscadorDeCliente();
-                DataTable table = capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(ListaSucursal), ConvertProductosAndCantidadToDataTable(listaProductos));
+                DataTable table = capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(ListaSucursal), DKbase.web.FuncionesPersonalizadas_base.ConvertProductosAndCantidadToDataTable(listaProductos));
                 if (table != null)
                     result = (from r in table.Select("stk_codpro = '" + pro_codigo + "'").AsEnumerable()
                               select new cSucursalStocks { stk_codpro = r["stk_codpro"].ToString(), stk_codsuc = r["stk_codsuc"].ToString(), stk_stock = r["stk_stock"].ToString() }).ToList();
@@ -543,7 +529,7 @@ namespace Kellerhoff.Codigo.clases
             if (!string.IsNullOrEmpty(pTxtBuscador) || pIdOferta != null)
             {
                 if (!string.IsNullOrEmpty(pTxtBuscador) && pTxtBuscador.Trim() != string.Empty && HttpContext.Current.Session["clientesDefault_Usuario"] != null)
-                    HttpContext.Current.Session["clientesPages_Buscador"] = WebService.InsertarPalabraBuscada(pTxtBuscador.ToUpper(), ((capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id, Constantes.cTABLA_PRODUCTO);
+                    HttpContext.Current.Session["clientesPages_Buscador"] = WebService.InsertarPalabraBuscada(pTxtBuscador.ToUpper(), ((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id, Constantes.cTABLA_PRODUCTO);
 
                 resultado = FuncionesPersonalizadas.RecuperarProductosGeneral_V3(pIdOferta, pTxtBuscador, pListaColumna, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tomaOfertas, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tomaTransfers);
                 if (pIsBuscarConOferta || pIsBuscarConTransfer)
@@ -608,257 +594,13 @@ namespace Kellerhoff.Codigo.clases
         //    }
         //    return resultado;
         //}
-
-        public static string ObtenerHorarioCierre_base(string pSucursal, string pSucursalDependiente, string pCodigoReparto, DateTime fechaActual)
-        {
-            string resultado = null;
-            List<cHorariosSucursal> listaHorariosSucursal = WebService.RecuperarTodosHorariosSucursalDependiente().Where(x => x.sdh_sucursal == pSucursal && x.sdh_sucursalDependiente == pSucursalDependiente && x.sdh_codReparto == pCodigoReparto).ToList();
-            string day = string.Empty;
-            bool isEncontroEnFechaHoy = false;
-            switch (fechaActual.DayOfWeek)
-            {
-                case DayOfWeek.Monday:
-                    day = Constantes.cDIASEMANA_Lunes;
-                    break;
-                case DayOfWeek.Tuesday:
-                    day = Constantes.cDIASEMANA_Martes;
-                    break;
-                case DayOfWeek.Wednesday:
-                    day = Constantes.cDIASEMANA_Miercoles;
-                    break;
-                case DayOfWeek.Thursday:
-                    day = Constantes.cDIASEMANA_Jueves;
-                    break;
-                case DayOfWeek.Friday:
-                    day = Constantes.cDIASEMANA_Viernes;
-                    break;
-                case DayOfWeek.Saturday:
-                    day = Constantes.cDIASEMANA_Sabado;
-                    break;
-                case DayOfWeek.Sunday:
-                    day = Constantes.cDIASEMANA_Domingo;
-                    break;
-                default:
-                    break;
-            }
-            if (day != string.Empty)
-            {
-                foreach (cHorariosSucursal itemHorariosSucursal in listaHorariosSucursal)
-                {
-                    if (itemHorariosSucursal.sdh_diaSemana == day)
-                    {
-                        if (itemHorariosSucursal.listaHorarios != null)
-                        {
-                            foreach (string itemHorarios in itemHorariosSucursal.listaHorarios)
-                            {
-                                string[] tiempo = itemHorarios.Split(':');
-                                if (tiempo.Count() > 1)
-                                {
-                                    DateTime fechaCierre = new DateTime(fechaActual.Year, fechaActual.Month, fechaActual.Day, Convert.ToInt32(tiempo[0]), Convert.ToInt32(tiempo[1]), 30);
-                                    if (fechaCierre > fechaActual)
-                                    {
-                                        isEncontroEnFechaHoy = true;
-                                        resultado = itemHorarios + " hs. ";
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    }
-                }
-
-            }
-            int SumaDia = 0;
-            while (!isEncontroEnFechaHoy)
-            {
-                day = string.Empty;
-                SumaDia += 1;
-                //DateTime fechaOtroDia = new DateTime(fechaActual.Year, fechaActual.Month, fechaActual.Day + SumaDia, fechaActual.Hour, fechaActual.Minute, fechaActual.Second);
-                DateTime fechaOtroDia = fechaActual.AddDays(SumaDia);
-                switch (fechaOtroDia.DayOfWeek)
-                {
-                    case DayOfWeek.Monday:
-                        day = Constantes.cDIASEMANA_Lunes;
-                        break;
-                    case DayOfWeek.Tuesday:
-                        day = Constantes.cDIASEMANA_Martes;
-                        break;
-                    case DayOfWeek.Wednesday:
-                        day = Constantes.cDIASEMANA_Miercoles;
-                        break;
-                    case DayOfWeek.Thursday:
-                        day = Constantes.cDIASEMANA_Jueves;
-                        break;
-                    case DayOfWeek.Friday:
-                        day = Constantes.cDIASEMANA_Viernes;
-                        break;
-                    case DayOfWeek.Saturday:
-                        day = Constantes.cDIASEMANA_Sabado;
-                        break;
-                    case DayOfWeek.Sunday:
-                        day = Constantes.cDIASEMANA_Domingo;
-                        break;
-                    default:
-                        break;
-                }
-                if (day != string.Empty)
-                {
-                    foreach (cHorariosSucursal itemHorariosSucursal in listaHorariosSucursal)
-                    {
-                        if (itemHorariosSucursal.sdh_diaSemana == day)
-                        {
-                            if (itemHorariosSucursal.listaHorarios != null)
-                            {
-                                foreach (string itemHorarios in itemHorariosSucursal.listaHorarios)
-                                {
-                                    string[] tiempo = itemHorarios.Split(':');
-                                    if (tiempo.Count() > 1)
-                                    {
-                                        DateTime fechaCierre = new DateTime(fechaOtroDia.Year, fechaOtroDia.Month, fechaOtroDia.Day, Convert.ToInt32(tiempo[0]), Convert.ToInt32(tiempo[1]), 30);
-                                        if (fechaCierre > fechaActual)
-                                        {
-                                            isEncontroEnFechaHoy = true;
-                                            resultado = itemHorarios + " hs. " + day;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-
-                            break;
-                        }
-                    }
-                }
-                if (SumaDia > 7)
-                {
-                    isEncontroEnFechaHoy = true;
-                }
-            } // fin while (!isEncontroEnFechaHoy)
-
-            // Inicio S7
-            if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codrep == "S7" && pSucursalDependiente == "SF")
-            {
-                DateTime fechaCierre = new DateTime(fechaActual.Year, fechaActual.Month, fechaActual.Day, 22, 15, 30);
-                resultado = "22:15" + " hs. ";
-                switch (fechaActual.DayOfWeek)
-                {
-                    case DayOfWeek.Monday:
-                        if (fechaCierre < fechaActual)
-                            resultado = "22:15" + " hs. " + "MA";
-                        break;
-                    case DayOfWeek.Tuesday:
-                        if (fechaCierre < fechaActual)
-                            resultado = "22:15" + " hs. " + "MI";
-                        break;
-                    case DayOfWeek.Wednesday:
-                        if (fechaCierre < fechaActual)
-                            resultado = "22:15" + " hs. " + "JU";
-                        break;
-                    case DayOfWeek.Thursday:
-                        if (fechaCierre < fechaActual)
-                            resultado = "22:15" + " hs. " + "VI";
-                        break;
-                    case DayOfWeek.Friday:
-                        if (fechaCierre < fechaActual)
-                            resultado = "22:15" + " hs. " + "LU";
-                        break;
-                    case DayOfWeek.Saturday:
-                        resultado = "22:15" + " hs. " + "LU";
-                        break;
-                    case DayOfWeek.Sunday:
-                        resultado = "22:15" + " hs. " + "LU";
-                        break;
-                    default:
-                        break;
-                }
-            }
-            // Fin S7
-            return resultado;
-        }
-
         public static string ObtenerHorarioCierre(string pSucursal, string pSucursalDependiente, string pCodigoReparto)
         {
-            return ObtenerHorarioCierre_base(pSucursal, pSucursalDependiente, pCodigoReparto, DateTime.Now);
+            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierre(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), pSucursal,  pSucursalDependiente, pCodigoReparto);
         }
         public static string ObtenerHorarioCierreAnterior(string pSucursal, string pSucursalDependiente, string pCodigoReparto, string pHorarioCierre)
         {
-            if (string.IsNullOrEmpty(pHorarioCierre))
-                return string.Empty;
-            string result = string.Empty;
-            try
-            {
-
-
-                DateTime fechaCuentaRegresiva;
-                DateTime hoy = DateTime.Now;
-                if (pHorarioCierre.Length == 12)
-                {
-                    var diaSemana = pHorarioCierre.Substring(10, 2);
-                    var diaSemanaNro = -1;
-                    //Note: Sunday is 0, Monday is 1, and so on || from 0 to 6
-                    // LU = 1
-                    // MA = 2
-                    // MI = 3
-                    // JU = 4
-                    // VI = 5
-                    // SA = 6
-                    // DO = 0
-                    switch (diaSemana)
-                    {
-                        case "LU":
-                            diaSemanaNro = 1;
-                            break;
-                        case "MA":
-                            diaSemanaNro = 2;
-                            break;
-                        case "MI":
-                            diaSemanaNro = 3;
-                            break;
-                        case "JU":
-                            diaSemanaNro = 4;
-                            break;
-                        case "VI":
-                            diaSemanaNro = 5;
-                            break;
-                        case "SA":
-                            diaSemanaNro = 6;
-                            break;
-                        case "DO":
-                            diaSemanaNro = 0;
-                            break;
-                        default:
-                            break;
-                    }
-                    pHorarioCierre = pHorarioCierre.Replace(" hs. " + diaSemana, "");
-                    var values = pHorarioCierre.Split(':');
-                    var d = new DateTime(hoy.Year, hoy.Month, hoy.Day, Convert.ToInt32(values[0]), Convert.ToInt32(values[1]), 0);// mes 0 = enero
-                                                                                                                                  //var n = d.DayOfWeek;
-                    var sumaDia = 0;
-                    while ((int)d.DayOfWeek != diaSemanaNro)
-                    {
-                        sumaDia++;
-                        d = new DateTime(hoy.Year, hoy.Month, hoy.Day + sumaDia, Convert.ToInt32(values[0]), Convert.ToInt32(values[1]), 50);// mes 0 = enero
-                        if (sumaDia > 7 || (int)d.DayOfWeek == diaSemanaNro)
-                            break;
-                    }
-                    fechaCuentaRegresiva = d;
-
-                }
-                else
-                {
-                    pHorarioCierre = pHorarioCierre.Replace(" hs.", "");
-                    var values = pHorarioCierre.Split(':');
-                    fechaCuentaRegresiva = new DateTime(hoy.Year, hoy.Month, hoy.Day, Convert.ToInt32(values[0]), Convert.ToInt32(values[1]), 50);// mes 0 = enero
-                }
-                result = ObtenerHorarioCierre_base(pSucursal, pSucursalDependiente, pCodigoReparto, fechaCuentaRegresiva);
-            }
-            catch (Exception ex)
-            {
-
-                var oo = 1;
-            }
-            return result;
+            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), pSucursal,  pSucursalDependiente,  pCodigoReparto,  pHorarioCierre);
         }
         public static void GenerarCSV()
         {

@@ -7,47 +7,6 @@ using System.Web;
 
 namespace Kellerhoff.Codigo.capaDatos
 {
-    public class cSucursal
-    {
-        public cSucursal()
-        {
-        }
-        public cSucursal(int pSde_codigo, string pSde_sucursal, string pSde_sucursalDependiente)
-        {
-            sde_codigo = pSde_codigo;
-            sde_sucursal = pSde_sucursal;
-            sde_sucursalDependiente = pSde_sucursalDependiente;
-        }
-        public int sde_codigo { get; set; }
-        public string sde_sucursal { get; set; }
-        public decimal suc_montoMinimo { get; set; }
-        public string suc_codigo { get; set; }
-        public string suc_nombre { get; set; }
-        public string suc_provincia { get; set; }
-        public bool suc_facturaTrazables { get; set; }
-        public bool suc_facturaTrazablesEnOtrasProvincias { get; set; }
-        public string sde_sucursalDependiente { get; set; }
-        public string sucursal_sucursalDependiente { get; set; }
-        public bool suc_pedirCC_ok { get; set; }
-        public string suc_pedirCC_sucursalReferencia { get; set; }
-        public bool suc_pedirCC_tomaSoloPerfumeria { get; set; }
-        public bool suc_trabajaPerfumeria { get; set; }
-    }
-    public class cHorariosSucursal
-    {
-        public cHorariosSucursal()
-        {
-        }
-        public int sdh_SucursalDependienteHorario { get; set; }
-        public string sdh_sucursal { get; set; }
-        public string sdh_sucursalDependiente { get; set; }
-        public string sdh_codReparto { get; set; }
-        public string sdh_diaSemana { get; set; }
-        public string sdh_horario { get; set; }
-        public List<string> listaHorarios { get; set; }
-        //public string sde_sucursal { get; set; }
-        //public string sde_sucursalDependiente { get; set; }
-    }
     /// <summary>
     /// Summary description for capaClientes
     /// </summary>
@@ -568,91 +527,7 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataSet GestiónSucursalDependienteHorarios(int? sdh_SucursalDependienteHorario, string sdh_sucursal, string sdh_sucursalDependiente, string sdh_codReparto, string sdh_diaSemana, string sdh_horario, string accion)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Clientes.spGestionSucursalHorarios", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paSdh_SucursalDependienteHorario = cmdComandoInicio.Parameters.Add("@sdh_SucursalDependienteHorario", SqlDbType.Int);
-            SqlParameter paSdh_sucursal = cmdComandoInicio.Parameters.Add("@sdh_sucursal", SqlDbType.NVarChar, 2);
-            SqlParameter paSdh_sucursalDependiente = cmdComandoInicio.Parameters.Add("@sdh_sucursalDependiente", SqlDbType.NVarChar, 2);
-            SqlParameter paSdh_codReparto = cmdComandoInicio.Parameters.Add("@sdh_codReparto", SqlDbType.NVarChar, 2);
-            SqlParameter paSdh_diaSemana = cmdComandoInicio.Parameters.Add("@sdh_diaSemana", SqlDbType.NVarChar, 2);
-            SqlParameter paSdh_horario = cmdComandoInicio.Parameters.Add("@sdh_horario", SqlDbType.NVarChar, 500);
-            SqlParameter paAccion = cmdComandoInicio.Parameters.Add("@accion", SqlDbType.NVarChar, 50);
-
-            if (sdh_SucursalDependienteHorario == null)
-            {
-                paSdh_SucursalDependienteHorario.Value = DBNull.Value;
-            }
-            else
-            {
-                paSdh_SucursalDependienteHorario.Value = sdh_SucursalDependienteHorario;
-            }
-            if (sdh_sucursal == null)
-            {
-                paSdh_sucursal.Value = DBNull.Value;
-            }
-            else
-            {
-                paSdh_sucursal.Value = sdh_sucursal;
-            }
-            if (sdh_sucursalDependiente == null)
-            {
-                paSdh_sucursalDependiente.Value = DBNull.Value;
-            }
-            else
-            {
-                paSdh_sucursalDependiente.Value = sdh_sucursalDependiente;
-            }
-            if (sdh_codReparto == null)
-            {
-                paSdh_codReparto.Value = DBNull.Value;
-            }
-            else
-            {
-                paSdh_codReparto.Value = sdh_codReparto;
-            }
-
-            if (sdh_diaSemana == null)
-            {
-                paSdh_diaSemana.Value = DBNull.Value;
-            }
-            else
-            {
-                paSdh_diaSemana.Value = sdh_diaSemana;
-            }
-            if (sdh_horario == null)
-            {
-                paSdh_horario.Value = DBNull.Value;
-            }
-            else
-            {
-                paSdh_horario.Value = sdh_horario;
-            }
-            paAccion.Value = accion;
-
-            try
-            {
-                Conn.Open();
-                DataSet dsResultado = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
-                da.Fill(dsResultado, "SucursalHorario");
-                return dsResultado;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+  
         public static bool AgregarMontoMinimo(string suc_codigo, decimal suc_montoMinimo)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

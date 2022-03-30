@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.Services;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.capaDatos;
+using DKbase.web;
 
 namespace Kellerhoff.admin.pages
 {

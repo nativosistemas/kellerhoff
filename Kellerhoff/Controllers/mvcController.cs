@@ -1,4 +1,5 @@
-﻿using DKbase.web.capaDatos;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
 using Kellerhoff.Codigo;
 using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
@@ -529,7 +530,7 @@ namespace Kellerhoff.Controllers
                 {
                     if (item.codSucursal == pIdSucursal)
                     {
-                        if (capaCAR.IsCarritoEnProceso(item.car_id))
+                        if (capaCAR_base.IsCarritoEnProceso(item.car_id))
                         {
                             ServiceReferenceDLL.cDllPedido oEnProceso = new ServiceReferenceDLL.cDllPedido();
                             oEnProceso.Error = msgCarritoEnProceso;
@@ -544,7 +545,7 @@ namespace Kellerhoff.Controllers
                         }
                         if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
                         {
-                            capaCAR.BorrarCarritoPorId_SleepTimer(item.car_id, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
+                            capaCAR_base.BorrarCarritoPorId_SleepTimer(item.car_id, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
                             ServiceReferenceDLL.cDllPedido oRepetido = new ServiceReferenceDLL.cDllPedido();
                             oRepetido.Error = msgCarritoRepetido;
                             return Serializador.SerializarAJson(oRepetido);
@@ -614,7 +615,7 @@ namespace Kellerhoff.Controllers
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public int BorrarCarritoTransferDiferido(string pSucursal)
         {
-            return capaCAR.BorrarCarrito(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, pSucursal, Constantes.cTipo_CarritoDiferidoTransfers, Constantes.cAccionCarrito_VACIAR);
+            return capaCAR_base.BorrarCarrito(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, pSucursal, Constantes.cTipo_CarritoDiferidoTransfers, Constantes.cAccionCarrito_VACIAR);
 
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
@@ -659,7 +660,7 @@ namespace Kellerhoff.Controllers
                         }
                     }
                 } // fin   foreach (cCarritoTransfer item in listaCarrito)
-                if (capaCAR.IsCarritoEnProceso(car_id_aux))
+                if (capaCAR_base.IsCarritoEnProceso(car_id_aux))
                 {
                     ServiceReferenceDLL.cDllPedidoTransfer oEnProceso = new ServiceReferenceDLL.cDllPedidoTransfer();
                     oEnProceso.Error = msgCarritoEnProceso;
@@ -669,7 +670,7 @@ namespace Kellerhoff.Controllers
                 }
                 if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
                 {
-                    capaCAR.BorrarCarritoPorId_SleepTimer(car_id_aux, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
+                    capaCAR_base.BorrarCarritoPorId_SleepTimer(car_id_aux, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
                     ServiceReferenceDLL.cDllPedidoTransfer oRepetido = new ServiceReferenceDLL.cDllPedidoTransfer();
                     oRepetido.Error = msgCarritoRepetido;
                     resultadoPedido = new List<ServiceReferenceDLL.cDllPedidoTransfer>();

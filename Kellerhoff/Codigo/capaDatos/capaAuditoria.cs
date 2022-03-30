@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Xml.Linq;
+using DKbase.web;
 using DKbase.web.capaDatos;
 using Kellerhoff.Codigo.clases;
 
@@ -29,7 +30,7 @@ namespace Kellerhoff.Codigo.capaDatos
             SqlParameter paStrXML = cmdComandoInicio.Parameters.Add("@strXML", SqlDbType.Xml);
             paLrc_id.Value = pCarrito.lrc_id;
             paLrc_codSucursal.Value = pCarrito.codSucursal;
-            palrc_codCliente.Value = (int)((capaDatos.Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente;
+            palrc_codCliente.Value = (int)((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente;
             paFechaPedido.Value = DateTime.Now;
             if (pMensajeEnFactura == null)
             {

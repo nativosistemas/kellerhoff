@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.Services;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.capaDatos;
+using DKbase.web;
 
 namespace Kellerhoff.admin.pages
 {
@@ -46,7 +47,7 @@ namespace Kellerhoff.admin.pages
         [WebMethod(EnableSession = true)]
         public static string RecuperarExcepciones(int pIdSucursalDependienteTipoEnvioCliente, string pTdr_codReparto)
         {
-            List<Kellerhoff.Codigo.clases.Generales.cCombo> resultado = WebService.RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones_paraAdmin(pIdSucursalDependienteTipoEnvioCliente, pTdr_codReparto);
+            List<cCombo> resultado = WebService.RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones_paraAdmin(pIdSucursalDependienteTipoEnvioCliente, pTdr_codReparto);
             return Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(resultado);
         }
         [WebMethod(EnableSession = true)]

@@ -1,4 +1,5 @@
-﻿using DKbase.web.capaDatos;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
 using Kellerhoff.Codigo.clases;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,11 @@ namespace Kellerhoff.Codigo.capaDatos
                 DataSet dsProductoCarrito = new DataSet();
                 if (pTipo == Constantes.cTipo_Carrito)
                 {
-                    dsProductoCarrito = capaCAR.RecuperarCarritosPorSucursalYProductos(pIdCliente);
+                    dsProductoCarrito = capaCAR_base.RecuperarCarritosPorSucursalYProductos(pIdCliente);
                 }
                 else if (pTipo == Constantes.cTipo_CarritoDiferido)
                 {
-                    dsProductoCarrito = capaCAR.RecuperarCarritosDiferidosPorCliente(pIdCliente);
+                    dsProductoCarrito = capaCAR_base.RecuperarCarritosDiferidosPorCliente(pIdCliente);
                 }
 
                 List<cCarrito> listaSucursal = (from item in dsProductoCarrito.Tables[1].AsEnumerable()
@@ -97,7 +98,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             if (WebService.VerificarPermisos(WebService.CredencialAutenticacion))
             {
-                return capaCAR.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_CarritoTransfers, pAccion);
+                return capaCAR_base.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_CarritoTransfers, pAccion);
             }
             return -1;
         }
@@ -105,7 +106,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             if (WebService.VerificarPermisos(WebService.CredencialAutenticacion))
             {
-                return capaCAR.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_Carrito, pAccion);
+                return capaCAR_base.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_Carrito, pAccion);
             }
             return -1;
         }
@@ -113,7 +114,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             if (WebService.VerificarPermisos(WebService.CredencialAutenticacion))
             {
-                return capaCAR.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_CarritoDiferido, pAccion);
+                return capaCAR_base.BorrarCarrito(pIdCliente, pSucursal, Constantes.cTipo_CarritoDiferido, pAccion);
             }
             return -1;
         }
@@ -122,8 +123,8 @@ namespace Kellerhoff.Codigo.capaDatos
             if (WebService.VerificarPermisos(WebService.CredencialAutenticacion))
             {
 
-                DataSet dsProductoCarrito = capaCAR.RecuperarCarritoTransferPorIdCliente(pCliente.cli_codigo, pTipo);
-                return WebService.convertDataSetToSucursalCarritoTransfer(pCliente, dsProductoCarrito);
+                DataSet dsProductoCarrito = capaCAR_base.RecuperarCarritoTransferPorIdCliente(pCliente.cli_codigo, pTipo);
+                return acceso.convertDataSetToSucursalCarritoTransfer(pCliente, dsProductoCarrito);
             }
             // sin no valida la credencial
             return null;
@@ -146,7 +147,7 @@ namespace Kellerhoff.Codigo.capaDatos
                 strXML += nodo.ToString();
             }
             strXML += "</Root>";
-            return capaCAR.SubirPedido(strXML, pIdCliente, pIdUsuario, Constantes.cTipo_Carrito, Constantes.cTipo_CarritoTransfers);
+            return capaCAR_base.SubirPedido(strXML, pIdCliente, pIdUsuario, Constantes.cTipo_Carrito, Constantes.cTipo_CarritoTransfers);
         }
     }
 }

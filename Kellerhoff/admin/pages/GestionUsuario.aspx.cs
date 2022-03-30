@@ -57,7 +57,7 @@ namespace Kellerhoff.admin.pages
         public override void Modificar(int pIdUsuario)
         {
             Session["GestionUsuario_Usu_codigo"] = pIdUsuario;
-            Kellerhoff.Codigo.capaDatos.cUsuario usuario = Kellerhoff.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
+            DKbase.web.cUsuario usuario = Kellerhoff.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
             txtNombre.Text = usuario.usu_nombre;
             txtApellido.Text = usuario.usu_apellido;
             txtObservaciones1.Text = usuario.usu_observacion;
@@ -108,8 +108,8 @@ namespace Kellerhoff.admin.pages
         {
             if (Session["BaseAdmin_Usuario"] != null)
             {
-                int codigoUsuarioEnSession = ((Kellerhoff.Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).id;
-                Kellerhoff.Codigo.capaDatos.cUsuario usuario = Kellerhoff.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
+                int codigoUsuarioEnSession = ((DKbase.web.Usuario)Session["BaseAdmin_Usuario"]).id;
+                DKbase.web.cUsuario usuario = Kellerhoff.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
                 int estadoUsuario = usuario.usu_estado == Constantes.cESTADO_ACTIVO ? Constantes.cESTADO_INACTIVO : Constantes.cESTADO_ACTIVO;
                 Kellerhoff.Codigo.clases.Seguridad.CambiarEstadoUsuarioPorId(usuario.usu_codigo, estadoUsuario, codigoUsuarioEnSession);
                 gv_datos.DataBind();
@@ -132,7 +132,7 @@ namespace Kellerhoff.admin.pages
                     if ((codUsuario == 0 && Kellerhoff.Codigo.clases.cBaseAdmin.isAgregar(consPalabraClave)) || (codUsuario != 0 && Kellerhoff.Codigo.clases.cBaseAdmin.isEditar(consPalabraClave)))
                     {
                         int? codCliente = Convert.ToInt32(cmbCliente.SelectedValue) != -1 ? (int?)Convert.ToInt32(cmbCliente.SelectedValue) : null;
-                        int? codigoUsuarioEnSession = ((Kellerhoff.Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).id;
+                        int? codigoUsuarioEnSession = ((DKbase.web.Usuario)Session["BaseAdmin_Usuario"]).id;
                         Kellerhoff.Codigo.clases.Seguridad.InsertarActualizarUsuario(codUsuario, Convert.ToInt32(cmbRol.SelectedValue), codCliente, txtNombre.Text, txtApellido.Text, txtMail.Text, txtLogin.Text, txtContraseña.Text, txtObservaciones1.Text, codigoUsuarioEnSession);
                     }
                 }
@@ -167,8 +167,8 @@ namespace Kellerhoff.admin.pages
         {
             if (Session["GestionUsuario_Usu_codigo"] != null && Session["BaseAdmin_Usuario"] != null)
             {
-                int codigoUsuarioEnSession = ((Kellerhoff.Codigo.capaDatos.Usuario)Session["BaseAdmin_Usuario"]).id;
-                Kellerhoff.Codigo.capaDatos.cUsuario objUsuario = null;
+                int codigoUsuarioEnSession = ((DKbase.web.Usuario)Session["BaseAdmin_Usuario"]).id;
+                DKbase.web.cUsuario objUsuario = null;
                 DKbase.web.capaDatos.cClientes objCliente = null;
                 objUsuario = Kellerhoff.Codigo.clases.Seguridad.RecuperarUsuarioPorId(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]));
                 Kellerhoff.Codigo.clases.Seguridad.CambiarContraseñaUsuario(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]), txtContraseñaCambiar.Text, codigoUsuarioEnSession);
