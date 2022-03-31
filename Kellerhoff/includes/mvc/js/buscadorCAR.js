@@ -58,7 +58,7 @@ var indexSucursalTransferSeleccionado = null;
 // fin Transfer
 var intColumnaOrdenar = -2;
 var timerProductoFacturacionDirecta = null;
-var htmlAltoCosto = '<span class="p_trazable">Alto Costo - Ventas comunicarse al <i class="fa fa-whatsapp linkWP_icon"></i><a class="linkWP" href="tel:3413631749">341 3631749</a></span>';//'<div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:3413631749">341 3631749</a></div>';
+var htmlAltoCosto = '<span class="p_trazable">Alto Costo - Ventas comunicarse al <i class="fa fa-whatsapp linkWP_icon"></i><a class="linkWP" href="tel:3416100365">341 6100365</a></span>';
 
 $(document).ready(function () {
     $(document).keydown(function (e) {
