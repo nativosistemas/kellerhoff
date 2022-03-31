@@ -1,4 +1,5 @@
-﻿using DKbase.web.capaDatos;
+﻿using DKbase.web;
+using DKbase.web.capaDatos;
 using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.clases.Generales;

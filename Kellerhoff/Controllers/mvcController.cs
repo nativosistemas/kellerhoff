@@ -377,6 +377,7 @@ namespace Kellerhoff.Controllers
                 objResult.isNotError = capaCAR_decision.AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id, pIdTransfers, pCodSucursal, Constantes.cTipo_CarritoTransfers);
                 objResult.oSucursalCarritoTransfer = capaCAR_decision.RecuperarCarritosTransferPorIdClienteIdSucursal(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]), pCodSucursal, Constantes.cTipo_CarritoTransfers);
                 objResult.listProductosAndCantidadError = pListaProductosMasCantidad;
+                objResult.codSucursal = pCodSucursal;
                 resultado = Serializador.SerializarAJson(objResult);
             }
             return resultado;
@@ -392,6 +393,7 @@ namespace Kellerhoff.Controllers
                 objResult.isNotError = capaCAR_decision.AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id, pIdTransfers, pCodSucursal, Constantes.cTipo_CarritoDiferidoTransfers);
                 objResult.oSucursalCarritoTransfer = capaCAR_decision.RecuperarCarritosTransferPorIdClienteIdSucursal(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]), pCodSucursal, Constantes.cTipo_CarritoDiferidoTransfers);
                 objResult.listProductosAndCantidadError = pListaProductosMasCantidad;
+                objResult.codSucursal = pCodSucursal;
                 resultado = Serializador.SerializarAJson(objResult);
             }
             return resultado;

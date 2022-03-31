@@ -11,22 +11,6 @@ namespace Kellerhoff.Codigo.clases
     /// <summary>
     /// Summary description for ClasesPersonalizadas
     /// </summary>
-    public class ResultTransfer
-    {
-        public bool isNotError { get; set; }
-        public cSucursalCarritoTransfer oSucursalCarritoTransfer { get; set; }
-        public List<cProductosAndCantidad> listProductosAndCantidadError { get; set; }
-    }
-    public class ResultCargaProducto
-    {
-        public bool isOk { get; set; }
-        public cCarrito oCarrito { get; set; }
-    }
-    public class ResultCreditoDisponible
-    {
-        public decimal? CreditoDisponibleSemanal { get; set; }
-     public decimal? CreditoDisponibleTotal { get; set; }
-}
 public class cPageClientes : System.Web.UI.Page
     {
         [WebMethod(EnableSession = true)]

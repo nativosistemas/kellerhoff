@@ -979,11 +979,18 @@ function onblurSucursal_base(pCantidad, pFila, pColumna) {
 }
 function funValidarSoloTransferFacturacionDirecta(pProducto, pIdSucursal, pCantidad, pIsDesdeBuscador) {
     var result = true;
-    if (pProducto.pro_vtasolotransfer == 1 && pProducto.tfr_facturaciondirecta == 1 && pProducto.tde_minuni != null && pProducto.tde_minuni > pCantidad && pCantidad != 0) {
+    if (isSoloTransferFacturacionDirecta(pProducto, pIdSucursal, pCantidad, pIsDesdeBuscador) && pProducto.tde_minuni > pCantidad && pCantidad != 0) {
         result = false;
         volverCantidadAnterior_buscador(pIdSucursal, pProducto.pro_codigo);
         var htmlMensaje = '<p>' + cuerpo_error + '</p><ul><li>' + pProducto.pro_codigo + '</li></ul>';
         mensaje_error(titulo_error, htmlMensaje);
+    }
+    return result;
+}
+function isSoloTransferFacturacionDirecta(pProducto, pIdSucursal, pCantidad, pIsDesdeBuscador) {
+    var result = false;
+    if (pProducto.pro_vtasolotransfer == 1 && pProducto.tfr_facturaciondirecta == 1 && pProducto.tde_minuni != null) {
+        result = true;
     }
     return result;
 }
