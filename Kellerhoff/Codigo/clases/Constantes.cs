@@ -8,12 +8,6 @@ namespace Kellerhoff.Codigo.clases
 
     public static class Constantes
     {
-        //isDesdeBuscador;
-        //isDesdeBuscador_OfertaTransfer
-        //isSubirArchivo
-        //isDesdeTabla
-     public  enum CargarProductosBuscador { isDesdeBuscador = 1, isDesdeBuscador_OfertaTransfer, isSubirArchivo, isDesdeTabla, isRecuperadorFaltaCredito };
-
         public static string cSQL_INSERT
         {
             get { return "INSERT"; }
@@ -253,14 +247,6 @@ namespace Kellerhoff.Codigo.clases
         {
             get { return "ImagenesRedimensionadas"; }
         }
-        //public static string cEstadoCarrito_EnProceso
-        //{
-        //    get { return "P"; }
-        //}
-        //public static string cEstadoCarrito_Enviado
-        //{
-        //    get { return "E"; }
-        //}
         public static string cTIPOPRODUCTO_Medicamento
         {
             get { return "M"; }

@@ -93,66 +93,6 @@ public class cPageClientes : System.Web.UI.Page
         public string dia { get; set; }
         public string hora { get; set; }
     }
-    
-    public class cjSonBuscadorProductos //: ICloneable
-    {
-        public cjSonBuscadorProductos(){}
-        public cjSonBuscadorProductos(cjSonBuscadorProductos pValue) {
-            listaSucursal = pValue.listaSucursal;
-            listaProductos = pValue.listaProductos;
-            CantidadRegistroTotal = pValue.CantidadRegistroTotal;
-        }
-        public List<string> listaSucursal { get; set; }
-        public List<cProductosGenerico> listaProductos { get; set; }
-        public int CantidadRegistroTotal { get; set; }
-        //public object Clone()
-        //{
-        //    return Kellerhoff.Codigo.clases.Generales.Clonar.Copiar(this);
-        //}
-    }
-    public class cjSonBuscadorProductosTransfer
-    {
-        public List<string> listaSucursal { get; set; }
-        public List<cTransfer> listaProductos { get; set; }
-        public int CantidadRegistroTotal { get; set; }
-    }
-    //public class cProductosEnCarrito : cTransferDetalle
-    //{
-    //    public string codProducto { get; set; }
-    //    public int cantidad { get; set; }
-    //    public int idUsuario { get; set; }
-    //    public string stk_stock { get; set; }
-    //    public bool isProductoFacturacionDirecta { get; set; }
-    //    public void CargarTransferYTransferDetalle(cTransferDetalle pValor)
-    //    {
-    //        base.tde_codpro = pValor.tde_codpro;
-    //        base.tde_codtfr = pValor.tde_codtfr;
-    //        base.tde_descripcion = pValor.tde_descripcion;
-    //        base.tde_fijuni = pValor.tde_fijuni;
-    //        base.tde_maxuni = pValor.tde_maxuni;
-    //        base.tde_minuni = pValor.tde_minuni;
-    //        base.tde_muluni = pValor.tde_muluni;
-    //        base.tde_predescuento = pValor.tde_predescuento;
-    //        base.tde_prepublico = pValor.tde_prepublico;
-    //        base.tde_proobligatorio = pValor.tde_proobligatorio;
-    //        base.tde_unidadesbonificadas = pValor.tde_unidadesbonificadas;
-    //        base.tde_unidadesbonificadasdescripcion = pValor.tde_unidadesbonificadasdescripcion;
-    //        base.tfr_codigo = pValor.tfr_codigo;
-    //        base.tfr_accion = pValor.tfr_accion;
-    //        base.tfr_nombre = pValor.tfr_nombre;
-    //        base.tfr_deshab = pValor.tfr_deshab;
-    //        base.tfr_pordesadi = pValor.tfr_pordesadi;
-    //        base.tfr_tipo = pValor.tfr_tipo;
-    //        base.tfr_mospap = pValor.tfr_mospap;
-    //        base.tfr_minrenglones = pValor.tfr_minrenglones;
-    //        base.tfr_minunidades = pValor.tfr_minunidades;
-    //        base.tfr_maxunidades = pValor.tfr_maxunidades;
-    //        base.tfr_mulunidades = pValor.tfr_mulunidades;
-    //        base.tfr_fijunidades = pValor.tfr_fijunidades;
-    //        base.tfr_facturaciondirecta = pValor.tfr_facturaciondirecta;
-    //        base.tfr_descripcion = pValor.tfr_descripcion;
-    //    }
-    //}
     public class cUsuarioSinPermisosIntranet
     {
         public int usp_id { get; set; }

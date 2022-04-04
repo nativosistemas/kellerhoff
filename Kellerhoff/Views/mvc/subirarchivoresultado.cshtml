@@ -30,8 +30,8 @@
         string resultadoHidden = string.Empty;
         if (HttpContext.Current.Session["subirpedido_ListaProductos"] != null)
         {
-            Kellerhoff.Codigo.clases.cjSonBuscadorProductos obj = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarProductosGeneralSubirPedidos((List<DKbase.web.capaDatos.cProductosGenerico>)HttpContext.Current.Session["subirpedido_ListaProductos"]);
-            System.Web.HttpContext.Current.Session["PedidosBuscador_productosTodos"] = new Kellerhoff.Codigo.clases.cjSonBuscadorProductos(obj);
+            DKbase.web.cjSonBuscadorProductos obj = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarProductosGeneralSubirPedidos((List<DKbase.web.capaDatos.cProductosGenerico>)HttpContext.Current.Session["subirpedido_ListaProductos"]);
+            System.Web.HttpContext.Current.Session["PedidosBuscador_productosTodos"] = new DKbase.web.cjSonBuscadorProductos(obj);
             int pPage = 1;
             System.Web.HttpContext.Current.Session["PedidosBuscador_pPage"] = pPage;
             resultadoHidden += "<input type=\"hidden\" id=\"hiddenArchivoSubirListaProductos\" value=\"" + Server.HtmlEncode(Kellerhoff.Controllers.mvcController.RecuperarProductos_generarPaginador(obj, pPage)) + "\" />";

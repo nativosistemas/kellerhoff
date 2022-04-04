@@ -1272,41 +1272,6 @@ namespace Kellerhoff
             }
             return resultado;
         }
-        public static List<cProductosGenerico> RecuperarTodosProductosDesdeBuscadorV3(int? pIdOferta, string pTxtBuscador, List<string> pListaColumna, string pSucursal, int? pIdCliente, bool pIsOferta, bool pIsTransfer, string pCli_codprov)
-        {
-            List<cProductosGenerico> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataSet dsResultado = null;
-                if (pIdOferta == null)
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorV3(pTxtBuscador, pListaColumna, pSucursal, pIdCliente, pCli_codprov);
-                else
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorOferta(pIdOferta.Value, pSucursal, pIdCliente, pCli_codprov);
-                if (dsResultado != null)
-                {
-                    DataTable tablaProductos = dsResultado.Tables[2];
-                    DataTable tablaSucursalStocks = dsResultado.Tables[1];// (pIsOferta || pIsTransfer) ? dsResultado.Tables[1] : dsResultado.Tables[1];              
-                    tablaProductos.Merge(dsResultado.Tables[0]);
-                    List<cTransferDetalle> listaTransferDetalle = null;
-                    if (pIsTransfer)
-                    {
-                        if (dsResultado.Tables.Count > 3)
-                        {
-                            listaTransferDetalle = new List<cTransferDetalle>();
-                            DataTable tablaTransferDetalle = dsResultado.Tables[3];
-                            foreach (DataRow itemTransferDetalle in tablaTransferDetalle.Rows)
-                            {
-                                cTransferDetalle objTransferDetalle = ConvertToTransferDetalle(itemTransferDetalle);
-                                objTransferDetalle.CargarTransfer(ConvertToTransfer(itemTransferDetalle));
-                                listaTransferDetalle.Add(objTransferDetalle);
-                            }
-                        }
-                    }
-                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, DKbase.generales.Constantes.CargarProductosBuscador.isDesdeBuscador, null);
-                }
-            }
-            return resultado;
-        }
         public static List<cProductosGenerico> RecuperarTodosProductosDesdeBuscador_OfertaTransfer(string pSucursal, int? pIdCliente, bool pIsOferta, bool pIsTransfer, string pCli_codprov)
         {
             List<cProductosGenerico> resultado = null;
@@ -2242,40 +2207,8 @@ namespace Kellerhoff
             return resultado;
         }
         public static List<cSucursal> RecuperarTodasSucursalesDependientes()
-        {
-            List<cSucursal> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataSet dsResultado = capaClientes.GestiónSucursal(null, null, null, Constantes.cSQL_SELECT);
-
-                if (dsResultado != null)
-                {
-                    resultado = new List<cSucursal>();
-                    for (int i = 0; i < dsResultado.Tables["Sucursal"].Rows.Count; i++)
-                    {
-                        cSucursal obj = new cSucursal();
-                        if (dsResultado.Tables["Sucursal"].Rows[i]["sde_codigo"] != DBNull.Value)
-                        {
-                            obj.sde_codigo = Convert.ToInt32(dsResultado.Tables["Sucursal"].Rows[i]["sde_codigo"]);
-                        }
-                        if (dsResultado.Tables["Sucursal"].Rows[i]["sde_sucursal"] != DBNull.Value)
-                        {
-                            obj.sde_sucursal = dsResultado.Tables["Sucursal"].Rows[i]["sde_sucursal"].ToString();
-                        }
-                        if (dsResultado.Tables["Sucursal"].Rows[i]["sde_sucursalDependiente"] != DBNull.Value)
-                        {
-                            obj.sde_sucursalDependiente = dsResultado.Tables["Sucursal"].Rows[i]["sde_sucursalDependiente"].ToString();
-                        }
-                        if (dsResultado.Tables["Sucursal"].Rows[i]["sde_sucursalDependiente"] != DBNull.Value && dsResultado.Tables["Sucursal"].Rows[i]["sde_sucursal"] != DBNull.Value)
-                        {
-                            obj.sucursal_sucursalDependiente = obj.sde_sucursal + " - " + obj.sde_sucursalDependiente;
-                        }
-                        resultado.Add(obj);
-                    }
-
-                }
-            }
-            return resultado;
+        {    
+            return DKbase.web.FuncionesPersonalizadas_base.RecuperarTodasSucursalesDependientes();
         }
         public static bool AgregarMontoMinimo(string suc_codigo, decimal suc_montoMinimo)
         {
@@ -4430,33 +4363,7 @@ namespace Kellerhoff
         }
         private static cProductos ConvertToProductosImagen(DataRow pItem)
         {
-            cProductos obj = new cProductos();
-            if (pItem["pro_codigo"] != DBNull.Value)
-            {
-                obj.pro_codigo = Convert.ToString(pItem["pro_codigo"]);
-            }
-            if (pItem.Table.Columns.Contains("pro_nombre"))
-            {
-                if (pItem["pro_nombre"] != DBNull.Value)
-                {
-                    obj.pro_nombre = Convert.ToString(pItem["pro_nombre"]);
-                }
-            }
-            if (pItem["pri_nombreArchivo"] != DBNull.Value)
-            {
-                obj.pri_nombreArchivo = Convert.ToString(pItem["pri_nombreArchivo"]);
-            }
-            if (pItem.Table.Columns.Contains("pri_ancho_ampliar") && pItem["pri_ancho_ampliar"] != DBNull.Value)
-            {
-                obj.pri_ancho_ampliar_original = Convert.ToInt32(pItem["pri_ancho_ampliar"]);
-                obj.pri_ancho_ampliar = Convert.ToInt32(pItem["pri_ancho_ampliar"]);
-            }
-            if (pItem.Table.Columns.Contains("pri_alto_ampliar") && pItem["pri_alto_ampliar"] != DBNull.Value)
-            {
-                obj.pri_alto_ampliar_original = Convert.ToInt32(pItem["pri_alto_ampliar"]);
-                obj.pri_alto_ampliar = Convert.ToInt32(pItem["pri_alto_ampliar"]);
-            }
-            return obj;
+            return DKbase.web.acceso.ConvertToProductosImagen(pItem);
         }
         public static List<cProductos> ObtenerProductosImagenesBusqueda(string pTxtBuscador)
         {
@@ -4482,7 +4389,7 @@ namespace Kellerhoff
             List<cProductos> resultado = null;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tabla = capaProductos.ObtenerProductosImagenes();
+                DataTable tabla = capaProductos_base.ObtenerProductosImagenes();
                 if (tabla != null)
                 {
                     resultado = new List<cProductos>();

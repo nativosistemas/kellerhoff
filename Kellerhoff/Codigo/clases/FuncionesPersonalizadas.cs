@@ -44,74 +44,7 @@ namespace Kellerhoff.Codigo.clases
             resultado.AddRange(WebService.RecuperarTodosClientes());
             return resultado;
         }
-        public static string GenerarWhereLikeConColumna(string pTxtBuscador, string pColumna)
-        {
-            string where = string.Empty;
-            string[] palabras = pTxtBuscador.Split(new char[] { ' ' });
-            bool isPrimerWhere = true;
-            foreach (string item in palabras)
-            {
-                if (item != string.Empty)
-                {
-                    if (isPrimerWhere)
-                    {
-                        isPrimerWhere = false;
-                    }
-                    else
-                    {
-                        where += " AND ";
-                    }
-                    where += " " + pColumna + " collate SQL_Latin1_General_Cp1_CI_AI like '%" + item + "%' ";
-                }
-            }
-            return where;
-        }
-        public static string GenerarWhereLikeConColumna_EmpiezaCon(string pTxtBuscador, string pColumna)
-        {
-            string where = string.Empty;
-            string[] palabras = pTxtBuscador.Split(new char[] { ' ' });
-            //bool isPrimerWhere = true;
-            foreach (string item in palabras)
-            {
-                if (item != string.Empty)
-                {
-                    where += " " + pColumna + " collate SQL_Latin1_General_Cp1_CI_AI like '" + item + "%' ";
-                    break;
-                }
-            }
-            return where;
-        }
-        public static string GenerarWhereLikeConVariasColumnas(string pTxtBuscador, List<string> pListaColumna)
-        {
-            string where = string.Empty;
-            string[] palabras = pTxtBuscador.Split(new char[] { ' ' });
-            bool isPrimerWhere = true;
-            foreach (string item in palabras)
-            {
-                if (item != string.Empty)
-                {
-                    if (isPrimerWhere)
-                    {
-                        isPrimerWhere = false;
-                        where += " ( ";
-                    }
-                    else
-                    {
-                        where += " AND ( ";
-                    }
-                    for (int i = 0; i < pListaColumna.Count; i++)
-                    {
-                        if (i != 0)
-                        {
-                            where += " OR ";
-                        }
-                        where += " " + pListaColumna[i] + " collate SQL_Latin1_General_Cp1_CI_AI like '%" + item + "%' ";
-                    }
-                    where += " ) ";
-                }
-            }
-            return where;
-        }
+
         public static List<string> RecuperarPalabrasYaBuscadaSinRepetir(int? pIdUsuario, string pNombreTabla)
         {
             var listaPalabras = WebService.RecuperarTodasPalabrasYaBuscada(pIdUsuario, pNombreTabla);
@@ -141,18 +74,7 @@ namespace Kellerhoff.Codigo.clases
         }
         public static DataTable ConvertNombresSeccionToDataTable(List<string> pListaNombreSeccion)
         {
-            DataTable pTablaDetalle = new DataTable();
-            pTablaDetalle.Columns.Add(new DataColumn("NombreSeccion", System.Type.GetType("System.String")));
-            if (pListaNombreSeccion != null)
-            {
-                foreach (string item in pListaNombreSeccion)
-                {
-                    DataRow fila = pTablaDetalle.NewRow();
-                    fila["NombreSeccion"] = item;
-                    pTablaDetalle.Rows.Add(fila);
-                }
-            }
-            return pTablaDetalle;
+            return DKbase.web.FuncionesPersonalizadas_base.ConvertNombresSeccionToDataTable(pListaNombreSeccion);
         }
         public static DataTable ObtenerDataTableProductosCarritoArchivosPedidos()
         {
@@ -237,6 +159,7 @@ namespace Kellerhoff.Codigo.clases
             cjSonBuscadorProductos resultado = null;
             if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
+                cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
                 List<cProductosGenerico> listaProductosBuscador = listaProductosBuscador = WebService.RecuperarTodosProductosDesdeBuscador_OfertaTransfer(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, pIsOrfeta, pIsTransfer, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov);
                 if (listaProductosBuscador != null)
                 {
@@ -261,7 +184,7 @@ namespace Kellerhoff.Codigo.clases
                         listaProductosBuscador[iPrecioFinal].PrecioConDescuentoOferta = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioUnitarioConDescuentoOferta(listaProductosBuscador[iPrecioFinal].PrecioFinal, listaProductosBuscador[iPrecioFinal]);
                     }
 
-                    List<string> ListaSucursal = RecuperarSucursalesParaBuscadorDeCliente();
+                    List<string> ListaSucursal = DKbase.web.FuncionesPersonalizadas_base.RecuperarSucursalesParaBuscadorDeCliente(oClientes);
                     listaProductosBuscador = ActualizarStockListaProductos(ListaSucursal, listaProductosBuscador);
 
                     // Fin 17/02/2016
@@ -273,50 +196,12 @@ namespace Kellerhoff.Codigo.clases
             }
             return resultado;
         }
-
         public static List<string> RecuperarSucursalesParaBuscadorDeCliente()
         {
-            // Optimizar
-            List<string> ListaSucursal = new List<string>();
-            ListaSucursal.Add(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc);
+            cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+            return DKbase.web.FuncionesPersonalizadas_base.RecuperarSucursalesParaBuscadorDeCliente(oClientes);
 
-            if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codrep == "S7")//((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codtpoenv == "R" && 
-            {
-                if (!ListaSucursal.Contains("SF"))
-                    ListaSucursal.Add("SF");
-                if (!ListaSucursal.Contains("CC"))
-                    ListaSucursal.Add("CC");
-            }
-            //else if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "CD" && ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov != "ENTRE RIOS")// cli_codsuc == "CD" concordia y de la provincia de entre rios
-            //{
-            //    List<cSucursal> listaSucursalesAUX = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
-            //    foreach (cSucursal itemSucursalesAUX in listaSucursalesAUX)
-            //    {
-            //        if (itemSucursalesAUX.sde_sucursalDependiente != ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc && itemSucursalesAUX.sde_sucursalDependiente != "CO") // CO = Concepción del Uruguay
-            //        {
-            //            ListaSucursal.Add(itemSucursalesAUX.sde_sucursalDependiente);
-            //        }
-            //    }
-            //}
-            else
-            {
-                List<cSucursal> listaSucursalesAUX = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
-                foreach (cSucursal itemSucursalesAUX in listaSucursalesAUX)
-                {
-                    if (itemSucursalesAUX.sde_sucursalDependiente != ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc)
-                    {
-                        ListaSucursal.Add(itemSucursalesAUX.sde_sucursalDependiente);
-                    }
-                }
-                if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa != null &&
-                    !ListaSucursal.Contains(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa))
-                {
-                    ListaSucursal.Add(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa);
-                }
-            }
-            return ListaSucursal;
-            // Fin Optimizar
-        }
+}
         //
         public static List<cProductosGenerico> ActualizarStockListaProductos(List<string> pListaSucursal, List<cProductosGenerico> pListaProductos)
         {
@@ -349,8 +234,10 @@ namespace Kellerhoff.Codigo.clases
             pListaProductos = ActualizarStockListaProductos(pListaSucursal, pListaProductos);
             List<DKbase.web.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
             bool trabajaPerfumeria = true;
-            for (int i = 0; i< listaSucursal.Count; i++) {
-                if (listaSucursal[i].suc_codigo == pSucursalElegida) {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].suc_codigo == pSucursalElegida)
+                {
                     trabajaPerfumeria = listaSucursal[i].suc_trabajaPerfumeria;
                 }
             }
@@ -366,9 +253,12 @@ namespace Kellerhoff.Codigo.clases
             {
                 for (int i = 0; i < pListaProductos.Count; i++)
                 {
-                    if (pListaProductos[i].pro_codtpopro == "P" && !trabajaPerfumeria) {
+                    if (pListaProductos[i].pro_codtpopro == "P" && !trabajaPerfumeria)
+                    {
                         sucElegida = "CC";
-                    } else {
+                    }
+                    else
+                    {
                         sucElegida = pSucursalElegida;
                     }
                     foreach (cSucursalStocks item in pListaProductos[i].listaSucursalStocks)
@@ -379,27 +269,30 @@ namespace Kellerhoff.Codigo.clases
                         }
                     }
                 }
-            } else {
-                
+            }
+            else
+            {
+
             }
             return pListaProductos;
         }
         public static List<cSucursalStocks> ActualizarStockListaProductos_Transfer(string pro_codigo, List<cSucursalStocks> pSucursalStocks)
         {
+            cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
             List<cSucursalStocks> result = pSucursalStocks;
             bool isActualizar = false;
-            if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codrep == "S7")
+            if (oClientes.cli_codrep == "S7")
                 isActualizar = true;
             //else if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc == "CD" && ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov != "ENTRE RIOS")// cli_codsuc == "CD" concordia y de la provincia de entre rios        
             //    isActualizar = true;
-            else if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa != null)
+            else if (oClientes.cli_IdSucursalAlternativa != null)
                 isActualizar = true;
             if (isActualizar)
             {
                 List<cProductosAndCantidad> listaProductos = new List<cProductosAndCantidad>();
 
                 listaProductos.Add(new cProductosAndCantidad { codProductoNombre = pro_codigo });
-                List<string> ListaSucursal = RecuperarSucursalesParaBuscadorDeCliente();
+                List<string> ListaSucursal = DKbase.web.FuncionesPersonalizadas_base.RecuperarSucursalesParaBuscadorDeCliente(oClientes);
                 DataTable table = capaProductos.RecuperarStockPorProductosAndSucursal(ConvertNombresSeccionToDataTable(ListaSucursal), DKbase.web.FuncionesPersonalizadas_base.ConvertProductosAndCantidadToDataTable(listaProductos));
                 if (table != null)
                     result = (from r in table.Select("stk_codpro = '" + pro_codigo + "'").AsEnumerable()
@@ -420,54 +313,8 @@ namespace Kellerhoff.Codigo.clases
             cjSonBuscadorProductos resultado = null;
             if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-
-                List<cProductosGenerico> listaProductosBuscador = WebService.RecuperarTodosProductosDesdeBuscadorV3(pIdOferta, pTxtBuscador, pListaColumna, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, pIsOrfeta, pIsTransfer, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov);
-                if (listaProductosBuscador != null)
-                {
-                    // TIPO CLIENTE
-                    if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tipo == Constantes.cTipoCliente_Perfumeria) // Solamente perfumeria
-                    {
-                        listaProductosBuscador = listaProductosBuscador.Where(x => x.pro_codtpopro == Constantes.cTIPOPRODUCTO_Perfumeria || x.pro_codtpopro == Constantes.cTIPOPRODUCTO_PerfumeriaCuentaYOrden).ToList();
-                    }
-                    else if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tipo == Constantes.cTipoCliente_Todos) // Todos los productos
-                    {
-                        // Si el cliente no toma perfumeria
-                        if (!((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tomaPerfumeria)
-                        {
-                            listaProductosBuscador = listaProductosBuscador.Where(x => x.pro_codtpopro != Constantes.cTIPOPRODUCTO_Perfumeria && x.pro_codtpopro != Constantes.cTIPOPRODUCTO_PerfumeriaCuentaYOrden).ToList();
-                        }
-                        // fin Si el cliente no toma perfumeria
-                    }
-                    // FIN TIPO CLIENTE
-                    for (int iPrecioFinal = 0; iPrecioFinal < listaProductosBuscador.Count; iPrecioFinal++)
-                    {
-                        listaProductosBuscador[iPrecioFinal].PrecioFinal = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinal(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), listaProductosBuscador[iPrecioFinal]);
-                        listaProductosBuscador[iPrecioFinal].PrecioConDescuentoOferta = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioUnitarioConDescuentoOferta(listaProductosBuscador[iPrecioFinal].PrecioFinal, listaProductosBuscador[iPrecioFinal]);
-                    }
-
-                    List<cProductos> listaProductosConImagen = WebService.ObtenerProductosImagenes();
-                    for (int iImagen = 0; iImagen < listaProductosBuscador.Count; iImagen++)
-                    {
-                        cProductos objImagen = listaProductosConImagen.Where(x => x.pro_codigo == listaProductosBuscador[iImagen].pro_codigo).FirstOrDefault();
-                        if (objImagen != null) { 
-                            listaProductosBuscador[iImagen].pri_nombreArchivo = objImagen.pri_nombreArchivo;
-                            listaProductosBuscador[iImagen].pri_ancho_ampliar = objImagen.pri_ancho_ampliar;
-                            listaProductosBuscador[iImagen].pri_alto_ampliar = objImagen.pri_alto_ampliar;
-                            listaProductosBuscador[iImagen].pri_ancho_ampliar_original = objImagen.pri_ancho_ampliar_original;
-                            listaProductosBuscador[iImagen].pri_alto_ampliar_original = objImagen.pri_alto_ampliar_original;
-                        }
-                    }
-
-                    // Inicio 17/02/2016
-                    List<string> ListaSucursal = RecuperarSucursalesParaBuscadorDeCliente();
-                    listaProductosBuscador = ActualizarStockListaProductos(ListaSucursal, listaProductosBuscador);
-                    // Fin 17/02/2016
-
-                    cjSonBuscadorProductos ResultadoObj = new cjSonBuscadorProductos();
-                    ResultadoObj.listaSucursal = ListaSucursal;
-                    ResultadoObj.listaProductos = listaProductosBuscador;
-                    resultado = ResultadoObj;
-                }
+                cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                resultado = DKbase.web.FuncionesPersonalizadas_base.RecuperarProductosGeneral_V3(oClientes, pIdOferta, pTxtBuscador, pListaColumna, pIsOrfeta, pIsTransfer);
             }
             return resultado;
         }
@@ -476,7 +323,7 @@ namespace Kellerhoff.Codigo.clases
             cjSonBuscadorProductos resultado = null;
             if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-
+                cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
                 List<cProductosGenerico> listaProductosBuscador = pListaProveedor;
                 // fin Si el cliente no toma perfumeria
                 for (int iPrecioFinal = 0; iPrecioFinal < listaProductosBuscador.Count; iPrecioFinal++)
@@ -497,7 +344,7 @@ namespace Kellerhoff.Codigo.clases
                 //}
                 //// Fin Optimizar
                 // Inicio 17/02/2016
-                List<string> ListaSucursal = RecuperarSucursalesParaBuscadorDeCliente();
+                List<string> ListaSucursal = DKbase.web.FuncionesPersonalizadas_base.RecuperarSucursalesParaBuscadorDeCliente(oClientes);
                 listaProductosBuscador = ActualizarStockListaProductos_SubirArchico(ListaSucursal, listaProductosBuscador, HttpContext.Current.Session["subirpedido_SucursalEleginda"].ToString());
                 // Fin 17/02/2016
                 cjSonBuscadorProductos ResultadoObj = new cjSonBuscadorProductos();
@@ -596,11 +443,11 @@ namespace Kellerhoff.Codigo.clases
         //}
         public static string ObtenerHorarioCierre(string pSucursal, string pSucursalDependiente, string pCodigoReparto)
         {
-            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierre(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), pSucursal,  pSucursalDependiente, pCodigoReparto);
+            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierre(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), pSucursal, pSucursalDependiente, pCodigoReparto);
         }
         public static string ObtenerHorarioCierreAnterior(string pSucursal, string pSucursalDependiente, string pCodigoReparto, string pHorarioCierre)
         {
-            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), pSucursal,  pSucursalDependiente,  pCodigoReparto,  pHorarioCierre);
+            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), pSucursal, pSucursalDependiente, pCodigoReparto, pHorarioCierre);
         }
         public static void GenerarCSV()
         {
@@ -681,7 +528,7 @@ namespace Kellerhoff.Codigo.clases
         }
         public static string getHrefRevista()
         {
-            string resultado = "href=\"" +"#"+ "\""; ;
+            string resultado = "href=\"" + "#" + "\""; ;
             if (HttpContext.Current.Session["href_Revista"] != null)
             {
                 resultado = (string)HttpContext.Current.Session["href_Revista"];
