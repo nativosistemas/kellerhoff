@@ -1840,10 +1840,7 @@ function OnCallBackRecuperarProductos(args) {
             document.getElementById('divResultadoBuscador').innerHTML = strHtml + getHtmlTablaResolucionCelular();
             // Elejir el primer producto
             $(".btn_buscar").focus();
-            if ($('#inputSuc0_0').length) {
-                $('#inputSuc0_0').focus();
-                selectedInput = document.getElementById('inputSuc0_0');
-            }
+            focusPrimerProductoHabilitado();
             if (isSubirPedido) {
                 setTimeout(function () { CargarUnidadesRenglones(); }, 300);
                 setTimeout(function () { ReAjustarColumnasBuscador(); }, 40);
@@ -3103,4 +3100,23 @@ function CargarDatosProductosFacturacionDirecta(pIndice) {
 /// Fin facturacion directa detalle muestra
 function onclickAmpliarImagen(pIndice) {
     mensaje_AmpliarImagen(listaProductosBuscados[pIndice]);
+}
+function focusPrimerProductoHabilitado() {
+    var isFocusFind = false;
+    if (listaProductosBuscados != null && listaProductosBuscados.length > 0) {
+        for (var iSucursal = 0; iSucursal < listaSucursal.length; iSucursal++) {
+            for (var iProducto = 0; iProducto < listaProductosBuscados.length; iProducto++) {
+                var nameInput = 'inputSuc' + iProducto + '_' + iSucursal;
+                if ($('#' + nameInput).length) {
+                    $('#' + nameInput).focus();
+                    selectedInput = document.getElementById(nameInput);
+                    isFocusFind = true;
+                    break;
+                }
+            }
+            if (isFocusFind) {
+                break;
+            }
+        }
+    }
 }
