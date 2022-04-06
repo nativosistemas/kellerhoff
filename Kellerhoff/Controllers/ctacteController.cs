@@ -402,5 +402,10 @@ namespace Kellerhoff.Controllers
                 return resultado;
             }
         }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public int enviarSolicitudSobresRemesa()
+        {
+            return WebService.enviarSolicitudSobresRemesa();
+        }
     }
 }

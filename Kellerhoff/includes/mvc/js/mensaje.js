@@ -544,3 +544,26 @@ function mensaje_AmpliarImagen(pObjeto) {
 
     // }
 }
+function mensaje_SolicitudSobreRemesa() {
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';//
+    strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
+    strHtml += '<div class="modal-header no-padding-bottom">';
+    strHtml += '<div class="row">';
+    strHtml += '<div class="col-lg-12">';
+    strHtml += '<div class="modulo_icon mensaje"></div>';
+    strHtml += '<h4>Solicitud Sobres/Remesa</h4>';
+    strHtml += '</div>';//'<div class="col-lg-12">';
+    strHtml += '</div>';//'<div class="row">';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';//'<div class="modal-header no-padding-bottom">';
+    strHtml += '<div class="modal-body">';
+    //
+    strHtml += 'Se envió la solicitad.';
+    //
+    strHtml += '</div>';//'<div class="modal-body">';
+    strHtml += '<div class="clear"></div>';
+    strHtml += '</div></div>';
+    $('#modalModulo').html(strHtml);
+    $('#modalModulo').modal();
+}

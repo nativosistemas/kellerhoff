@@ -1182,3 +1182,27 @@ function ObtenerSaldoFinalADiciembrePorCliente(pCli_login) {
         }
     });
 }
+function enviarSolicitudSobresRemesa() {
+    showCargandoBuscador();
+    $.ajax({
+        type: "POST",
+        url: "/ctacte/enviarSolicitudSobresRemesa",
+        //data: { pMail: pMail, pComentario: pComentario },
+        success:
+            function (response) {
+                //modalModuloHide();
+                hideCargandoBuscador();
+                mensaje_SolicitudSobreRemesa();
+            },
+        failure: function (response) {
+            //modalModuloHide();
+            hideCargandoBuscador();
+            OnFail(response);
+        },
+        error: function (response) {
+            //modalModuloHide();
+            hideCargandoBuscador();
+            OnFail(response);
+        }
+    });
+}

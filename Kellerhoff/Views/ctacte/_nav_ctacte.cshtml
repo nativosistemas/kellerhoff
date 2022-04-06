@@ -58,6 +58,8 @@
             <a href="/ctacte/descargaResumenes" @{ WriteLiteral(classDescargaResumenes);}><i class="fa fa-file-pdf-o" title="RESUMENES"></i><span class="hidden-sm hidden-xs">RESUMENES</span></a>
             <div class="separate"></div>
             <a href="#" onclick="onclickObtenerSaldoFinalADiciembrePorCliente(); return false;" class="oferta"><i class="fa fa-usd" title="SALDO AL 31/12"></i><span class="hidden-sm hidden-xs">SALDO AL 31/12</span></a>
+            <div class="separate"></div>
+            <a href="#" onclick="enviarSolicitudSobresRemesa(); return false;"><i class="fa fa-edit" title="SOLICITAR ENVÍO SOBRES/REMESA"></i><span class="hidden-sm hidden-xs">SOLICITAR ENVÍO SOBRES/REMESA</span></a>
 
             @{
                 if (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&

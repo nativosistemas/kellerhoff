@@ -5555,6 +5555,17 @@ namespace Kellerhoff
         {
             capaProductos.BorrarAnchoAltoImagen();
         }
+        public static int enviarSolicitudSobresRemesa()
+        {
+            int resultado = 0;
+            string NombreYApellido = string.Empty;
+            if (HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+            {
+                NombreYApellido = ((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).NombreYApellido;
+            }
+            cMail.enviarMail(System.Configuration.ConfigurationManager.AppSettings["mail_solicitudSobresRemesa"], "Solicitud Sobres/Remesa", "El cliente " + NombreYApellido + " a solicitado el envio Sobres/Remesas<br/>");
+            return resultado;
+        }
     }
     public class Autenticacion : SoapHeader
     {
