@@ -38,6 +38,7 @@ var Ascender_PrecioConTransfer = true;
 var Ascender_nroordenamiento = true;
 var listaSucursales = null;
 var listaSucursalesDependienteInfo = null;
+var titulo_transferDirecto = "El producto se vende solo por transfer.";
 var titulo_error = "Ha ocurrido un error, por favor intente de nuevo.";
 var cuerpo_error = "Los siguientes productos no se pudieron agregar correctamente:";
 var mensajeCantidadSuperaElMaximoParametrizado1 = '¿Seguro que desea pedir más de ';
@@ -979,20 +980,245 @@ function onblurSucursal_base(pCantidad, pFila, pColumna) {
 }
 function funValidarSoloTransferFacturacionDirecta(pProducto, pIdSucursal, pCantidad, pIsDesdeBuscador) {
     var result = true;
-    if (isSoloTransferFacturacionDirecta(pProducto, pIdSucursal, pCantidad, pIsDesdeBuscador) && pProducto.tde_minuni > pCantidad && pCantidad != 0) {
+    if (isSoloTransferFacturacionDirecta(pProducto, pIdSucursal, pCantidad, pIsDesdeBuscador) && pCantidad != 0) {
         result = false;
         volverCantidadAnterior_buscador(pIdSucursal, pProducto.pro_codigo);
-        var htmlMensaje = '<p>' + cuerpo_error + '</p><ul><li>' + pProducto.pro_codigo + '</li></ul>';
-        mensaje_error(titulo_error, htmlMensaje);
+        var htmlMensaje = '<p>' + cuerpo_error + '</p><ul><li>' + pProducto.pro_nombre + '</li></ul>';
+        mensaje_error(titulo_transferDirecto, htmlMensaje);
     }
     return result;
 }
 function isSoloTransferFacturacionDirecta(pProducto, pIdSucursal, pCantidad, pIsDesdeBuscador) {
     var result = false;
-    if (pProducto.pro_vtasolotransfer == 1 && pProducto.tfr_facturaciondirecta == 1 && pProducto.tde_minuni != null) {
-        result = true;
+    if (pProducto.pro_vtasolotransfer == 1 && pProducto.tfr_facturaciondirecta == 1) {
+        var cantidadCarritoComun = isSoloTransferFacturacionDirecta_logica_return_CantidadCarritoComun(pProducto, pIdSucursal, pCantidad, false);
+        if (cantidadCarritoComun > 0) { 
+            result = true;
+        }
     }
     return result;
+}
+function isSoloTransferFacturacionDirecta_logica_return_CantidadCarritoComun(pProducto, pIdSucursal, pCantidad, pIsSubirPedido) {
+
+    var resultadoReturn = pCantidad;
+    var isPasarDirectamente = false;
+    var cantidadCarritoTransfer = 0;
+    var cantidadCarritoComun = 0;
+    var ProductoIsTransferDirecto_subirPedido = false;
+    var IsProductoMostrarFaltaCantidadOferta_subirPedido = false;
+
+    if (pProducto.isProductoFacturacionDirecta) { // facturacion directa
+        // Combiene transfer o promocion                      
+        var precioConDescuentoDependiendoCantidad = CalcularPrecioProductosEnCarrito(pProducto.PrecioFinal, pCantidad, pProducto.pro_ofeunidades, pProducto.pro_ofeporcentaje);
+        if (pCantidad == 0) {
+            //
+        } else {
+            precioConDescuentoDependiendoCantidad = precioConDescuentoDependiendoCantidad / pCantidad;
+        }
+        if (parseFloat(precioConDescuentoDependiendoCantidad) >= parseFloat(pProducto.PrecioFinalTransfer)) {
+            var isSumarTransfer = false;
+
+            if (pProducto.tde_muluni != null && pProducto.tde_unidadesbonificadas != null) {
+                ProductoIsTransferDirecto_subirPedido = true;
+                /// UNIDAD MULTIPLO Y BONIFICADA
+                if ((pCantidad >= pProducto.tde_muluni) && (pCantidad <= (pProducto.tde_muluni + pProducto.tde_unidadesbonificadas))) {
+                    // es multiplo
+                    isSumarTransfer = true;
+                    cantidadCarritoTransfer = pProducto.tde_muluni + pProducto.tde_unidadesbonificadas;
+                } else if (pCantidad > (pProducto.tde_muluni + pProducto.tde_unidadesbonificadas)) {
+                    isSumarTransfer = true;
+                    var cantidadMultiplicar = parseInt(pCantidad / pProducto.tde_muluni);
+                    cantidadCarritoTransfer = cantidadMultiplicar * (pProducto.tde_muluni + pProducto.tde_unidadesbonificadas);
+                    //
+                    for (var iCantMulti = 0; iCantMulti < cantidadMultiplicar; iCantMulti++) {
+                        var cantTemp = iCantMulti * (pProducto.tde_muluni + pProducto.tde_unidadesbonificadas);
+                        if (cantTemp >= pCantidad) {
+                            cantidadCarritoTransfer = cantTemp; //  iCantMulti * (pProducto.tde_muluni + pProducto.tde_unidadesbonificadas);
+                            break;
+                        }
+                    }
+                    //
+                    if (cantidadCarritoTransfer == pCantidad) {
+
+                    } else {
+                        if (pCantidad < cantidadCarritoTransfer) {
+                            //resultadoReturn = cantidadCarritoTransfer;
+                            cantidadCarritoComun = 0;
+                        } else {
+                            cantidadCarritoComun = pCantidad - cantidadCarritoTransfer;
+                        }
+                        if ((cantidadCarritoComun >= pProducto.tde_muluni) && (cantidadCarritoComun <= (pProducto.tde_muluni + pProducto.tde_unidadesbonificadas))) {
+                            cantidadCarritoTransfer += pProducto.tde_muluni + pProducto.tde_unidadesbonificadas;
+                            cantidadCarritoComun = 0;
+                        }
+                    }
+                }
+                if (isSumarTransfer) {
+                    if (!pIsSubirPedido) {
+                        // sumar a transfer
+                        var tempListaProductos = [];
+                        var objProducto = new jcTransfersProductos();
+                        objProducto.codProductoNombre = pProducto.tde_codpro; // Para la funcion en el servidor
+                        objProducto.tde_codpro = pProducto.tde_codpro;
+                        objProducto.cantidad = cantidadCarritoTransfer;
+                        tempListaProductos.push(objProducto);
+
+                        if (cantidadCarritoComun == 0) {
+                            var cantidad = ObtenerCantidadProducto(pIdSucursal, pProducto.pro_codigo);
+                            if (cantidad != '') {
+
+                            }
+                        } else {
+
+                        }
+                    }
+                } else {
+                    isPasarDirectamente = true;
+                }
+                /// FIN UNIDAD MULTIPLO Y BONIFICADA
+            } // fin if (pProducto.tde_muluni != null && pProducto.tde_unidadesbonificadas != null){
+            else if (pProducto.tde_fijuni != null) {
+                ProductoIsTransferDirecto_subirPedido = true;
+                // UNIDAD FIJA
+                if (pCantidad == pProducto.tde_fijuni) {
+                    isSumarTransfer = true;
+                    cantidadCarritoTransfer = pProducto.tde_fijuni;
+                } else if (pCantidad > pProducto.tde_fijuni) {
+                    isSumarTransfer = true;
+                    cantidadCarritoTransfer = pProducto.tde_fijuni;
+                    cantidadCarritoComun = pCantidad - pProducto.tde_fijuni;
+                }
+                if (isSumarTransfer) {
+                    if (!pIsSubirPedido) {
+                        // sumar a transfer
+                        var tempListaProductos = [];
+                        var objProducto = new jcTransfersProductos();
+                        objProducto.codProductoNombre = pProducto.tde_codpro; // Para la funcion en el servidor
+                        objProducto.tde_codpro = pProducto.tde_codpro;
+                        objProducto.cantidad = cantidadCarritoTransfer;
+                        tempListaProductos.push(objProducto);
+
+                        if (cantidadCarritoComun == 0) {
+                            var cantidad = ObtenerCantidadProducto(pIdSucursal, pProducto.pro_codigo);
+                            if (cantidad != '') {
+
+                            }
+                        } else {
+
+                        }
+                    }
+                } else {
+                    isPasarDirectamente = true;
+                }
+                // FIN UNIDAD FIJA
+            } else if (pProducto.tde_minuni != null && pProducto.tde_maxuni != null) {
+                ProductoIsTransferDirecto_subirPedido = true;
+                // UNIDAD MAXIMA Y MINIMA
+                if (pProducto.tde_minuni <= pCantidad && pProducto.tde_maxuni >= pCantidad) {
+                    isSumarTransfer = true;
+                    cantidadCarritoTransfer = pCantidad;
+                } else if (pProducto.tde_maxuni < pCantidad) {
+                    isSumarTransfer = true;
+                    cantidadCarritoTransfer = pProducto.tde_maxuni;
+                    cantidadCarritoComun = pCantidad - pProducto.tde_maxuni;
+                }
+                if (isSumarTransfer) {
+                    if (!pIsSubirPedido) {
+                        // sumar a transfer
+                        var tempListaProductos = [];
+                        var objProducto = new jcTransfersProductos();
+                        objProducto.codProductoNombre = pProducto.tde_codpro; // Para la funcion en el servidor
+                        objProducto.tde_codpro = pProducto.tde_codpro;
+                        objProducto.cantidad = cantidadCarritoTransfer;
+                        tempListaProductos.push(objProducto);
+
+                        if (cantidadCarritoComun == 0) {
+                            var cantidad = ObtenerCantidadProducto(pIdSucursal, pProducto.pro_codigo);
+                            if (cantidad != '') {
+
+                            }
+                        } else {
+
+                        }
+                    }
+                } else {
+                    isPasarDirectamente = true;
+                }
+                // FIN UNIDAD MAXIMA Y MINIMA
+            }
+            else if (pProducto.tde_minuni != null) {
+                ProductoIsTransferDirecto_subirPedido = true;
+                // UNIDAD MINIMA
+                if (pProducto.tde_minuni <= pCantidad) {
+                    isSumarTransfer = true;
+                    cantidadCarritoTransfer = pCantidad;
+                }
+                if (isSumarTransfer) {
+                    if (!pIsSubirPedido) {
+                        // sumar a transfer
+                        var tempListaProductos = [];
+                        var objProducto = new jcTransfersProductos();
+                        objProducto.codProductoNombre = pProducto.tde_codpro; // Para la funcion en el servidor
+                        objProducto.tde_codpro = pProducto.tde_codpro;
+                        objProducto.cantidad = cantidadCarritoTransfer;
+                        tempListaProductos.push(objProducto);
+                        if (cantidadCarritoComun == 0) {
+                            var cantidad = ObtenerCantidadProducto(pIdSucursal, pProducto.pro_codigo);
+                            if (cantidad != '') {
+
+                            }
+                        } else {
+
+                        }
+                    }
+                } else {
+                    isPasarDirectamente = true;
+                }
+                // FIN UNIDAD MINIMA
+            }
+        } // fin if (pProducto.PrecioConDescuentoOferta > pProducto.PrecioFinalTransfer){
+        else {
+            isPasarDirectamente = true;
+            if (pIsSubirPedido) {
+                // is oferta
+                if (pCantidad < pProducto.pro_ofeunidades) {
+                    IsProductoMostrarFaltaCantidadOferta_subirPedido = true;
+                }
+            }
+        }
+    } else {
+        isPasarDirectamente = true;
+        if (pIsSubirPedido) {
+            if (pCantidad < pProducto.pro_ofeunidades) {
+                IsProductoMostrarFaltaCantidadOferta_subirPedido = true;
+            }
+        }
+    }
+    if (isPasarDirectamente) {
+        cantidadCarritoComun = parseInt(pCantidad);
+        if (!pIsSubirPedido) {
+            var cantidadTransfer = ObtenerCantidadProductoTransfer(pIdSucursal, pProducto.pro_nombre);
+            if (cantidadTransfer != '') {
+                var tempListaProductos = [];
+                var objProducto = new jcTransfersProductos();
+                objProducto.codProductoNombre = pProducto.tde_codpro; // Para la funcion en el servidor
+                objProducto.tde_codpro = pProducto.tde_codpro;
+                objProducto.cantidad = 0;
+                tempListaProductos.push(objProducto);
+            }
+        }
+    }
+    if (pIsSubirPedido) {
+        var resultadoReturn_subirPedido = [];
+        resultadoReturn_subirPedido.push(cantidadCarritoComun);
+        resultadoReturn_subirPedido.push(cantidadCarritoTransfer);
+        resultadoReturn_subirPedido.push(ProductoIsTransferDirecto_subirPedido);
+        resultadoReturn_subirPedido.push(IsProductoMostrarFaltaCantidadOferta_subirPedido);
+        return resultadoReturn_subirPedido;
+    } else {
+        resultadoReturn = parseInt(cantidadCarritoComun);//= parseInt(cantidadCarritoTransfer) + parseInt(cantidadCarritoComun);
+        return resultadoReturn;
+    }
 }
 function MostrarTextoSuperaCantidadMaxima(pNombreProducto, pCantidadMaxima) {
     //return 'El producto: ' + pNombreProducto + ' \n' + 'Supera la cantidad máxima: ' + pCantidadMaxima;
