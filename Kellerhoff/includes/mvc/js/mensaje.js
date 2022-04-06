@@ -215,6 +215,35 @@ function mensaje_informacion(pMensaje) {
     $('#modalModuloAlert').modal();
     scrollModalPrincipal();
 }
+function mensaje_transfer(pTitulo, pMensaje) {
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
+    strHtml += '<div class="modal-header no-padding-bottom">';
+    strHtml += '<div class="row">';
+    strHtml += '<div class="col-lg-12">';
+    strHtml += '<div class="modulo_icon alert"></div>';
+    strHtml += '<h4 class="color_red">INFORMACIÓN</h4>';
+    strHtml += '</div>';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '<div class="modal-body">';
+    strHtml += '<div class="col-lg-12">';
+    strHtml += '<p class="text-center"><b>' + pTitulo + '</b></p>';
+    strHtml += '<div class="clear20"></div>';
+    strHtml += pMensaje;
+    strHtml += '<div class="clear10"></div>';
+    strHtml += '<div class="clear20"></div>';
+    strHtml += '<a class="btn_confirmar" href="#"  onclick="modalModuloAlertHide(); return false;" >ACEPTAR</a>';
+    strHtml += '</div>';//<div class="col-lg-12">
+    strHtml += '</div>';
+    strHtml += '<div class="clear"></div>';
+    strHtml += '</div></div>';
+    $('#modalModuloAlert').html(strHtml);
+    $('#modalModuloAlert').modal();
+    scrollModalPrincipal();
+}
 function mensaje_error(pTitulo, pMensaje) {
     var strHtml = '';
     strHtml += '<div class="modal-background">&nbsp;</div>';

@@ -984,7 +984,7 @@ function funValidarSoloTransferFacturacionDirecta(pProducto, pIdSucursal, pCanti
         result = false;
         volverCantidadAnterior_buscador(pIdSucursal, pProducto.pro_codigo);
         var htmlMensaje = '<p>' + cuerpo_error + '</p><ul><li>' + pProducto.pro_nombre + '</li></ul>';
-        mensaje_error(titulo_transferDirecto, htmlMensaje);
+        mensaje_transfer(titulo_transferDirecto, htmlMensaje);
     }
     return result;
 }
