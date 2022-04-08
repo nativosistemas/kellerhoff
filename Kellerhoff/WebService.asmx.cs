@@ -5563,7 +5563,12 @@ namespace Kellerhoff
             {
                 NombreYApellido = ((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).NombreYApellido;
             }
-            cMail.enviarMail(System.Configuration.ConfigurationManager.AppSettings["mail_solicitudSobresRemesa"], "Solicitud Sobres/Remesa", "El cliente " + NombreYApellido + " a solicitado el envio Sobres/Remesas<br/>");
+            string l_mail = System.Configuration.ConfigurationManager.AppSettings["mail_solicitudSobresRemesa"];
+            if (!string.IsNullOrEmpty(l_mail))
+            {
+                string[] valores = l_mail.Split(';');
+                cMail.enviarMail_generico(valores.ToList(), "Solicitud Sobres/Remesa", "El cliente " + NombreYApellido + " a solicitado el envio Sobres/Remesas<br/>");
+            }
             return resultado;
         }
     }

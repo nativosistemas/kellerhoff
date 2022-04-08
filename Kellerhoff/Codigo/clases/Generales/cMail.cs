@@ -20,19 +20,28 @@ namespace Kellerhoff.Codigo.clases.Generales
 
         public static bool enviarMail(string pCorreoMail, string pAsunto, string pCuerpo)
         {
+            List<string> listaCorreoMail = new List<string>();
+            listaCorreoMail.Add(pCorreoMail);
+            return enviarMail_generico(listaCorreoMail, pAsunto, pCuerpo);
+        }
+        public static bool enviarMail_generico(List<string> pListaCorreoMail, string pAsunto, string pCuerpo)
+        {
             bool resultado = true;
             try
             {
-                //String mail = System.Configuration.ConfigurationManager.AppSettings["mailRegistracion"].ToString();
                 String mail_from = System.Configuration.ConfigurationManager.AppSettings["mail_from"].ToString();
                 String mail_pass = System.Configuration.ConfigurationManager.AppSettings["mail_pass"].ToString();
                 string SMTP_SERVER = System.Configuration.ConfigurationManager.AppSettings["SMTP_SERVER"].ToString();
-                int SMTP_PORT = Convert.ToInt32( System.Configuration.ConfigurationManager.AppSettings["SMTP_PORT"].ToString());
+                int SMTP_PORT = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SMTP_PORT"].ToString());
 
                 MailMessage correo = new System.Net.Mail.MailMessage();
                 string asunto = pAsunto;
                 correo.From = new MailAddress(mail_from);
-                correo.To.Add(pCorreoMail);
+                foreach (var itemCorreoMail in pListaCorreoMail)
+                {
+                    correo.To.Add(itemCorreoMail);
+                }
+
                 correo.Subject = asunto;
                 correo.Body = pCuerpo;
                 correo.IsBodyHtml = true;
@@ -44,7 +53,7 @@ namespace Kellerhoff.Codigo.clases.Generales
                 smtp.UseDefaultCredentials = false;
                 smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
                 smtp.Credentials = new System.Net.NetworkCredential(mail_from, mail_pass);
-                  // smtp.EnableSsl = true;
+                // smtp.EnableSsl = true;
 
                 smtp.Send(correo);
             }

@@ -559,7 +559,7 @@ function mensaje_SolicitudSobreRemesa() {
     strHtml += '</div>';//'<div class="modal-header no-padding-bottom">';
     strHtml += '<div class="modal-body">';
     //
-    strHtml += 'Se envió la solicitad.';
+    strHtml += 'Se envió la solicitud.';
     //
     strHtml += '</div>';//'<div class="modal-body">';
     strHtml += '<div class="clear"></div>';
