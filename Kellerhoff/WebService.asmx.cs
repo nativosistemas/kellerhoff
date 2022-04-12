@@ -2207,7 +2207,7 @@ namespace Kellerhoff
             return resultado;
         }
         public static List<cSucursal> RecuperarTodasSucursalesDependientes()
-        {    
+        {
             return DKbase.web.FuncionesPersonalizadas_base.RecuperarTodasSucursalesDependientes();
         }
         public static bool AgregarMontoMinimo(string suc_codigo, decimal suc_montoMinimo)
@@ -4502,7 +4502,7 @@ namespace Kellerhoff
             if (pItem.Table.Columns.Contains("namePdf") && pItem["namePdf"] != DBNull.Value)
                 obj.namePdf = Convert.ToString(pItem["namePdf"]);
             if (pItem.Table.Columns.Contains("nameImagenAmpliar") && pItem["nameImagenAmpliar"] != DBNull.Value)
-                obj.nameImagenAmpliar = Convert.ToString(pItem["nameImagenAmpliar"]); 
+                obj.nameImagenAmpliar = Convert.ToString(pItem["nameImagenAmpliar"]);
             if (pItem.Table.Columns.Contains("ofe_fechaFinOferta") && pItem["ofe_fechaFinOferta"] != DBNull.Value)
             {
                 obj.ofe_fechaFinOferta = Convert.ToDateTime(pItem["ofe_fechaFinOferta"]);
@@ -5333,7 +5333,7 @@ namespace Kellerhoff
             }
             return obj;
         }
-        public static List<cMensaje> RecuperartTodosMensajeNewPorSucursal(string pSucursal,string pReparto)
+        public static List<cMensaje> RecuperartTodosMensajeNewPorSucursal(string pSucursal, string pReparto)
         {
             if (VerificarPermisos(CredencialAutenticacion))
             {
@@ -5493,7 +5493,7 @@ namespace Kellerhoff
         {
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                return capaMensajeNew.ActualizarInsertarMensajeNew(pIdMensaje, pAsunto, pMensaje, pFechaDesde, pFechaHasta, pImportante, pSucursales,pRepartos,pTipo);
+                return capaMensajeNew.ActualizarInsertarMensajeNew(pIdMensaje, pAsunto, pMensaje, pFechaDesde, pFechaHasta, pImportante, pSucursales, pRepartos, pTipo);
             }
             return -1;
         }
@@ -5558,16 +5558,35 @@ namespace Kellerhoff
         public static int enviarSolicitudSobresRemesa()
         {
             int resultado = 0;
-            string NombreYApellido = string.Empty;
-            if (HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+            string nombre = string.Empty;
+            string localidad = string.Empty;
+            string reparto = string.Empty;
+            string numeroCliente = string.Empty;
+            string strHtml = string.Empty;
+            if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                NombreYApellido = ((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).NombreYApellido;
+                cClientes oCliente = ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]);
+                nombre = oCliente.cli_nombre;
+                localidad = oCliente.cli_localidad;
+                reparto = oCliente.cli_codrep;
+                numeroCliente = oCliente.cli_codigo.ToString();
+
+
+                strHtml += "El cliente " + nombre  + " a solicitado el envio Sobres/Remesas<br/>";
+                strHtml += "Localidad: " + localidad + "<br/>";
+                strHtml += "Código de reparto: " + reparto + "<br/>";
+                strHtml += "Número de cliente: " + numeroCliente + "<br/>";
+                //Nombre del cliente...
+                //Localidad...y
+                //Reparto...y
+                //Número de cliente...
+                //strHtml += " a solicitado el envio Sobres/Remesas<br/>";
             }
             string l_mail = System.Configuration.ConfigurationManager.AppSettings["mail_solicitudSobresRemesa"];
             if (!string.IsNullOrEmpty(l_mail))
             {
                 string[] valores = l_mail.Split(';');
-                cMail.enviarMail_generico(valores.ToList(), "Solicitud Sobres/Remesa", "El cliente " + NombreYApellido + " a solicitado el envio Sobres/Remesas<br/>");
+                cMail.enviarMail_generico(valores.ToList(), "Solicitud Sobres/Remesa", strHtml);
             }
             return resultado;
         }
