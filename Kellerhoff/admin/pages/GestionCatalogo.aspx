@@ -62,6 +62,7 @@
                     Visible="false" />
                 <asp:BoundField DataField="tbc_estadoToString" HeaderText="Estado" SortExpression="tbc_estadoToString" />
                 <asp:BoundField DataField="tbc_publicarHomeToString" HeaderText="Publicar" SortExpression="tbc_publicarHomeToString" />
+                <asp:BoundField DataField="arc_rating" HeaderText="Rating" SortExpression="arc_rating" />
             </Columns>
             <HeaderStyle CssClass="enc_grilla" />
             <PagerStyle CssClass="pag_grilla" />
