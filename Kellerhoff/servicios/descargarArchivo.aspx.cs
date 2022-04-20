@@ -22,6 +22,10 @@ namespace Kellerhoff.servicios
             }
             if (!string.IsNullOrEmpty(tipo) && !string.IsNullOrEmpty(name))
             {
+                if (tipo == "catalogo") {
+                    // name
+                    DKbase.web.capaDatos.capaRecurso_base.spRatingArchivos(tipo, name);
+                }
                 string nombreArchivo = name;
                 String path = Constantes.cRaizArchivos + @"/archivos/" + tipo + @"/" + nombreArchivo;
 

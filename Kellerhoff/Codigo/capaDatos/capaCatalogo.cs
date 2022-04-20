@@ -20,6 +20,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public bool? tbc_publicarHome { get; set; }
         public string tbc_publicarHomeToString { get; set; }
         public string tbc_estadoToString { get; set; }
+        public int arc_rating { get; set; }
     }
     /// <summary>
     /// Summary description for capaCatalogo
