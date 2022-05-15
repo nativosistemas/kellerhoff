@@ -1469,24 +1469,6 @@ namespace Kellerhoff
             }
             return null;
         }
-        private static cPalabraBusqueda ConvertToPalabrasBusquedas(DataRow pItem)
-        {
-            cPalabraBusqueda obj = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                obj = new cPalabraBusqueda();
-                obj.hbp_id = Convert.ToInt32(pItem["hbp_id"]);
-                if (pItem["hbp_Palabra"] != DBNull.Value)
-                {
-                    obj.hbp_Palabra = pItem["hbp_Palabra"].ToString();
-                }
-                //if (pItem["hbp_PalabraElegida"] != DBNull.Value)
-                //{
-                //    obj.hbp_PalabraElegida = pItem["hbp_PalabraElegida"].ToString();
-                //}
-            }
-            return obj;
-        }
         public static List<cPalabraBusqueda> RecuperarTodasPalabrasYaBuscada(int? pIdUsuario, string pNombreTabla)
         {
             if (VerificarPermisos(CredencialAutenticacion))
@@ -1497,7 +1479,7 @@ namespace Kellerhoff
                     List<cPalabraBusqueda> lista = new List<cPalabraBusqueda>();
                     foreach (DataRow item in tabla.Rows)
                     {
-                        lista.Add(ConvertToPalabrasBusquedas(item));
+                        lista.Add(DKbase.web.acceso.ConvertToPalabrasBusquedas(item));
                     }
                     return lista;
                 }
