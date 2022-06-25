@@ -23,6 +23,10 @@ namespace Kellerhoff
             DKbase.Helper.getConnectionStringSQL = ConfigurationManager.ConnectionStrings["db_conexion"].ConnectionString;
             DKbase.Helper.getTipoApp = "WEB";
             DKbase.Helper.getFolder = Kellerhoff.Codigo.clases.Constantes.cRaizArchivos;// @"C:\ArchivosSitioWEB";
+            DKbase.Helper.getMail_from = System.Configuration.ConfigurationManager.AppSettings["mail_from"].ToString();
+            DKbase.Helper.getMail_pass = System.Configuration.ConfigurationManager.AppSettings["mail_pass"].ToString();
+            DKbase.Helper.getSMTP_SERVER = System.Configuration.ConfigurationManager.AppSettings["SMTP_SERVER"].ToString();
+            DKbase.Helper.getSMTP_PORT = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SMTP_PORT"].ToString());
         }
         //protected void Application_Error(object sender, EventArgs e)
         //{
