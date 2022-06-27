@@ -133,7 +133,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             if (isCAR)
             {
-                return capaCAR_WebService.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo).Where(x => x.Sucursal == pCodSucursal).FirstOrDefault();
+                return capaCAR_WebService_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo).Where(x => x.Sucursal == pCodSucursal).FirstOrDefault();
             }
             else
             {
@@ -215,7 +215,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             if (isCAR)
             {
-                return capaCAR_WebService.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo);
+                return capaCAR_WebService_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo);
             }
             else
             {
@@ -226,7 +226,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             if (isCAR)
             {
-                cSucursalCarritoTransfer o = capaCAR_WebService.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo).Where(x => x.Sucursal == pIdSucursal).FirstOrDefault();
+                cSucursalCarritoTransfer o = capaCAR_WebService_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo).Where(x => x.Sucursal == pIdSucursal).FirstOrDefault();
                 return o == null ? null : o.listaTransfer;//new List<cCarritoTransfer>()
             }
             else

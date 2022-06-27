@@ -567,3 +567,38 @@ function mensaje_SolicitudSobreRemesa() {
     $('#modalModulo').html(strHtml);
     $('#modalModulo').modal();
 }
+function mensaje_informacion_buscador(pMensaje) {
+    var strHtml = '';
+    strHtml += '<div class="modal-background">&nbsp;</div>';
+    strHtml += '<div class="modal-dialog modal-md"><div class="modal-content">';
+    strHtml += '<div class="modal-header no-padding-bottom">';
+    strHtml += '<div class="row">';
+    strHtml += '<div class="col-lg-6">';
+    strHtml += '<div class="modulo_icon alert"></div>';
+    strHtml += '<h4 class="color_red">INFORMACIÓN</h4>';
+    strHtml += '</div>';
+    strHtml += '</div>';
+    strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
+    strHtml += '</div>';
+    strHtml += '<div class="modal-body">';
+    strHtml += '<div class="col-lg-12">';
+    strHtml += '<p class="text-center"><b>' + pMensaje + '</b></p>';
+    strHtml += '<div class="clear10"></div>';
+    strHtml += '<div class="clear20"></div>';
+    strHtml += '<a id="btn_confirmar_buscar" class="btn_confirmar" href="#"  onclick="return onclick_cerrar_mensaje_informacion_buscador();" >ACEPTAR</a>';
+    strHtml += '</div>';
+    strHtml += '</div>';
+    strHtml += '<div class="clear"></div>';
+    strHtml += '</div></div>';
+    $('#modalModuloAlert').html(strHtml);
+    $('#modalModuloAlert').modal();
+    scrollModalPrincipal();
+     document.getElementById("btn_confirmar_buscar").focus();
+    //setTimeout(function () { $("#btn_confirmar_buscar").focus(); }, 50);
+    
+}
+function onclick_cerrar_mensaje_informacion_buscador() {
+    modalModuloAlertHide(); 
+    document.getElementById('txtBuscador').focus();
+    return false;
+}

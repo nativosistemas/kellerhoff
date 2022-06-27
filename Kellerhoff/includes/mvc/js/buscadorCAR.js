@@ -398,7 +398,7 @@ function onClickBuscar() {
         //
         varPalabraBuscador = jQuery("#txtBuscador").val().trim();
         if (varPalabraBuscador !== '') {
-            if (varPalabraBuscador.length > 0) {
+            if (varPalabraBuscador.length > 2) {
                 var isTransferSeleccionado = false;
                 //if (isCarritoDiferido) {
                 //    isTransferSeleccionado = false;
@@ -445,6 +445,8 @@ function onClickBuscar() {
                     mensaje_informacion('Seleccione por lo menos una opción de búsqueda');
                 }
                 isBuscar = true;
+            } else {
+                mensaje_informacion_buscador('Ingrese 3 caracteres mínimos');
             }
 
         }

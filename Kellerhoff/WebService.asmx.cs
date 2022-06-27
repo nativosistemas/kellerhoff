@@ -5180,7 +5180,7 @@ namespace Kellerhoff
         //
         public static cProductos ConvertToProductos(DataRow pItem)
         {
-            return Codigo.clases.Generales.Serializador.DeserializarJson<cProductos>(Codigo.clases.Generales.Serializador.SerializarAJson(DKbase.web.acceso.ConvertToProductos(pItem)));
+            return DKbase.web.acceso.ConvertToProductos(pItem);
         }
 
         private static cMensajeNew ConvertToMensajeNew(DataRow pItem)
