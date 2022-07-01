@@ -5,10 +5,10 @@
     {
         List<DKbase.web.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
         // Optimizar
-        List<DKbase.web.cSucursal> listaSucursalInfoAux = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
+        //List<DKbase.web.cSucursal> listaSucursalInfoAux = WebService.RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == ((DKbase.web.capaDatos.cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc).ToList();
         List<DKbase.web.cSucursal> listaSucursalInfo = new List<DKbase.web.cSucursal>();
         //// Inicio S7
-        List<string> ListaSucursalOptimizar = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
+        List<string> ListaSucursalOptimizar = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesDelCliente();
         //// Fin S7
         foreach (string itemSucursalOptimizar in ListaSucursalOptimizar)
         {
@@ -44,7 +44,7 @@
         resultado += "<input type=\"hidden\" id=\"hiddenListaCarritos\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaCarrito)) + "\" />";
         resultado += "<input type=\"hidden\" id=\"hiddenListaSucursalesInfo\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaSucursal)) + "\" />";
         DKbase.web.capaDatos.cClientes oCliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
-        resultado += "<input type=\"hidden\" id=\"hiddenCliente\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(oCliente)) + "\" />";
+        //resultado += "<input type=\"hidden\" id=\"hiddenCliente\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(oCliente)) + "\" />";
         resultado += "<input type=\"hidden\" id=\"hiddenCantidadProductoParametrizado\" value=\"" + Server.HtmlEncode(WebService.RecuperarProductoParametrizadoCantidad().ToString()) + "\" />";
         resultado += "<input type=\"hidden\" id=\"hiddenListaTipoEnviosSucursales\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarTiposDeEnvios())) + "\" />";
         resultado += "<input type=\"hidden\" id=\"hiddenListaCadeteriaRestricciones\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson((WebService.RecuperarTodosCadeteriaRestricciones()))) + "\" />";

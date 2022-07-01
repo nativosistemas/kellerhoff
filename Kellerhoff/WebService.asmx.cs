@@ -1195,241 +1195,6 @@ namespace Kellerhoff
             }
             return resultado;
         }
-        public static List<cProductosGenerico> RecuperarTodosProductosDesdeBuscador_OfertaTransfer(string pSucursal, int? pIdCliente, bool pIsOferta, bool pIsTransfer, string pCli_codprov)
-        {
-            List<cProductosGenerico> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataSet dsResultado = null;
-                if (pIsOferta)
-                {
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorEnOferta(pSucursal, pIdCliente, pCli_codprov);
-                }
-                else if (pIsTransfer)
-                {
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorEnTransfer(pSucursal, pIdCliente, pCli_codprov);
-                }
-                if (dsResultado != null)
-                {
-                    DataTable tablaProductos = dsResultado.Tables[0];
-                    DataTable tablaSucursalStocks = dsResultado.Tables[1];
-                    List<cTransferDetalle> listaTransferDetalle = null;
-                    //int index = pIsTransfer ? 3 : 2;
-                    if (dsResultado.Tables.Count > 2)
-                    {
-                        listaTransferDetalle = new List<cTransferDetalle>();
-                        DataTable tablaTransferDetalle = dsResultado.Tables[2];
-                        foreach (DataRow itemTransferDetalle in tablaTransferDetalle.Rows)
-                        {
-                            cTransferDetalle objTransferDetalle = ConvertToTransferDetalle(itemTransferDetalle);
-                            objTransferDetalle.CargarTransfer(ConvertToTransfer(itemTransferDetalle));
-                            listaTransferDetalle.Add(objTransferDetalle);
-                        }
-                    }
-                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, DKbase.generales.Constantes.CargarProductosBuscador.isDesdeBuscador_OfertaTransfer, null);
-                }
-                if (resultado != null && pIsTransfer)
-                    resultado = resultado.Where(x => x.isMostrarTransfersEnClientesPerf).OrderBy(x => x.pro_nombre).ToList();
-            }
-            return resultado;
-        }
-        public static List<cProductosGenerico> RecuperarTodosProductosDesdeBuscador(string pTxtBuscador, List<string> pListaColumna, string pSucursal, int? pIdCliente, bool pIsOferta, bool pIsTransfer, string pCli_codprov)
-        {
-            List<cProductosGenerico> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataSet dsResultado = null;
-                if (pIsOferta)
-                {
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorEnOferta(pSucursal, pIdCliente, pCli_codprov);
-                }
-                else if (pIsTransfer)
-                {
-                    dsResultado = capaProductos.RecuperarTodosProductosBuscadorEnTransfer(pSucursal, pIdCliente, pCli_codprov);
-                }
-                else
-                {
-                    if (pListaColumna == null)
-                    {
-                        dsResultado = capaProductos.RecuperarTodosProductosBuscador(pTxtBuscador, pSucursal, pIdCliente, pCli_codprov);
-                    }
-                    else
-                    {
-                        dsResultado = capaProductos.RecuperarTodosProductosBuscadorConVariasColumnas(pTxtBuscador, pListaColumna, pSucursal, pIdCliente, pCli_codprov);
-                    }
-                }
-                if (dsResultado != null)
-                {
-                    DataTable tablaProductos = dsResultado.Tables[0];
-                    DataTable tablaSucursalStocks = dsResultado.Tables[1];
-                    resultado = new List<cProductosGenerico>();
-                    foreach (DataRow item in tablaProductos.Rows)
-                    {
-                        if (item["pro_codigo"] != DBNull.Value)
-                        {
-                            List<cSucursalStocks> tempListaSucursalStocks = new List<cSucursalStocks>();
-                            tempListaSucursalStocks = (from r in tablaSucursalStocks.Select("stk_codpro = '" + item["pro_codigo"].ToString() + "'").AsEnumerable()
-                                                       select new cSucursalStocks { stk_codpro = r["stk_codpro"].ToString(), stk_codsuc = r["stk_codsuc"].ToString(), stk_stock = r["stk_stock"].ToString() }).ToList();
-                            if (tempListaSucursalStocks.Count > 0)
-                            {
-                                cProductosGenerico obj = new cProductosGenerico();
-                                obj.pro_codigo = item["pro_codigo"].ToString();
-                                if (item["pro_nombre"] != DBNull.Value)
-                                {
-                                    obj.pro_nombre = item["pro_nombre"].ToString();
-                                }
-                                if (item["pro_precio"] != DBNull.Value)
-                                {
-                                    obj.pro_precio = Convert.ToDecimal(item["pro_precio"]);
-                                }
-                                if (item["pro_preciofarmacia"] != DBNull.Value)
-                                {
-                                    obj.pro_preciofarmacia = Convert.ToDecimal(item["pro_preciofarmacia"]);
-                                }
-                                if (item["pro_ofeunidades"] != DBNull.Value)
-                                {
-                                    obj.pro_ofeunidades = Convert.ToInt32(item["pro_ofeunidades"]);
-                                }
-                                if (item["pro_ofeporcentaje"] != DBNull.Value)
-                                {
-                                    obj.pro_ofeporcentaje = Convert.ToDecimal(item["pro_ofeporcentaje"]);
-                                }
-                                if (item["pro_neto"] != DBNull.Value)
-                                {
-                                    obj.pro_neto = Convert.ToBoolean(item["pro_neto"]);
-                                }
-                                if (item["pro_codtpopro"] != DBNull.Value)
-                                {
-                                    obj.pro_codtpopro = item["pro_codtpopro"].ToString().ToUpper();
-                                }
-                                if (item["pro_descuentoweb"] != DBNull.Value)
-                                {
-                                    obj.pro_descuentoweb = Convert.ToDecimal(item["pro_descuentoweb"]);
-                                }
-                                if (item["pro_laboratorio"] != DBNull.Value)
-                                {
-                                    obj.pro_laboratorio = item["pro_laboratorio"].ToString();
-                                }
-                                if (item["pro_monodroga"] != DBNull.Value)
-                                {
-                                    obj.pro_monodroga = item["pro_monodroga"].ToString();
-                                }
-                                if (item["pro_codigobarra"] != DBNull.Value)
-                                {
-                                    obj.pro_codigobarra = item["pro_codigobarra"].ToString();
-                                }
-                                if (item["pro_codigoalfabeta"] != DBNull.Value)
-                                {
-                                    obj.pro_codigoalfabeta = item["pro_codigoalfabeta"].ToString();
-                                }
-                                if (item["pro_Ranking"] != DBNull.Value)
-                                {
-                                    obj.pro_Ranking = Convert.ToInt32(item["pro_Ranking"]);
-                                }
-                                if (item["pro_codtpovta"] != DBNull.Value)
-                                {
-                                    obj.pro_codtpovta = Convert.ToString(item["pro_codtpovta"]);
-                                }
-                                if (item["isTransfer"] == DBNull.Value)
-                                {
-                                    obj.isTieneTransfer = false;
-                                }
-                                else
-                                {
-                                    obj.isTieneTransfer = true;
-                                }
-                                if (item["pro_isTrazable"] != DBNull.Value)
-                                {
-                                    obj.pro_isTrazable = Convert.ToBoolean(item["pro_isTrazable"]);
-                                }
-                                if (item["pro_isCadenaFrio"] != DBNull.Value)
-                                {
-                                    obj.pro_isCadenaFrio = Convert.ToBoolean(item["pro_isCadenaFrio"]);
-                                }
-                                if (item["pro_canmaxima"] != DBNull.Value)
-                                {
-                                    obj.pro_canmaxima = Convert.ToInt32(item["pro_canmaxima"]);
-                                }
-                                // Default = false
-                                if (item["pro_entransfer"] != DBNull.Value)
-                                {
-                                    obj.pro_entransfer = Convert.ToBoolean(item["pro_entransfer"]);
-                                }
-                                if (item["pro_vtasolotransfer"] != DBNull.Value)
-                                {
-                                    obj.pro_vtasolotransfer = Convert.ToBoolean(item["pro_vtasolotransfer"]);
-                                }
-                                if (item["RequiereVale"] != DBNull.Value)
-                                {
-                                    obj.isValePsicotropicos = Convert.ToBoolean(item["RequiereVale"]);
-                                }
-                                if (item.Table.Columns.Contains("pro_acuerdo"))
-                                {
-                                    if (item["pro_acuerdo"] != DBNull.Value)
-                                    {
-                                        obj.pro_acuerdo = Convert.ToInt32(item["pro_acuerdo"]);
-                                    }
-                                }
-                                obj.listaSucursalStocks = tempListaSucursalStocks;
-                                resultado.Add(obj);
-                            }
-                        }
-                    }
-                }
-            }
-            return resultado;
-        }
-        public static List<cProductosGenerico> RecuperarTodosProductosDesdeBuscadorOptimizado(string pTxtBuscador, string pSucursal, int? pIdCliente)
-        {
-            List<cProductosGenerico> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                // Recuperar sucursales dependientes
-                List<cSucursal> listaSucursalDependiente = RecuperarTodasSucursalesDependientes().Where(x => x.sde_sucursal == pSucursal).ToList();
-                DataSet dsResultado = capaProductos.RecuperarTodosProductosBuscadorOptimizado(pTxtBuscador);
-                if (dsResultado != null)
-                {
-                    DataTable tablaProductos = dsResultado.Tables[0];
-                    resultado = new List<cProductosGenerico>();
-
-                    foreach (DataRow item in tablaProductos.Rows)
-                    {
-                        if (item["pro_codigo"] != DBNull.Value)
-                        {
-                            List<cSucursalStocks> tempListaSucursalStocks = new List<cSucursalStocks>();
-                            if (item["pop_ListaStocks"] != DBNull.Value)
-                            {
-                                string strSucursalStock = item["pop_ListaStocks"].ToString();
-                                int cantSucursalStock = item["pop_ListaStocks"].ToString().Length;
-                                for (int i = 0; i < cantSucursalStock; i = i + 3)
-                                {
-                                    int cantIS = listaSucursalDependiente.Where(x => x.sde_sucursalDependiente == strSucursalStock.Substring(i, 2)).Count();
-                                    if (cantIS > 0)
-                                    {
-                                        tempListaSucursalStocks.Add(new cSucursalStocks { stk_codpro = item["pro_codigo"].ToString(), stk_codsuc = strSucursalStock.Substring(i, 2), stk_stock = strSucursalStock.Substring(i + 2, 1) });
-                                    }
-                                }
-                            }
-                            if (tempListaSucursalStocks.Count > 0)
-                            {
-                                cProductosGenerico obj = new cProductosGenerico(ConvertToProductos(item));
-                                if (item["pro_Ranking"] != DBNull.Value)
-                                {
-                                    obj.pro_Ranking = Convert.ToInt32(item["pro_Ranking"]);
-                                }
-                                if (item["pop_isTransfer"] != DBNull.Value)
-                                {
-                                    obj.isTieneTransfer = Convert.ToBoolean(item["pop_isTransfer"]);
-                                }
-                                obj.listaSucursalStocks = tempListaSucursalStocks;
-                                resultado.Add(obj);
-                            }
-                        }
-                    }
-                }
-            }
-            return resultado;
-        }
         private static cHistorialProcesos ConvertToHistorialProcesos(DataRow pItem)
         {
             cHistorialProcesos obj = new cHistorialProcesos();
@@ -1541,314 +1306,13 @@ namespace Kellerhoff
                 capaLogRegistro.AgregarProductosBuscadosDelCarritoTransfer(pIdCliente, pTablaDetalle, pIdUsuario);
             }
         }
-        //public static void AgregarProductoAlCarritoDesdeArchivoPedidos(string pSucursal, DataTable pTabla, string pTipoDeArchivo, int pIdCliente, int? pIdUsuario)
-        //{
-        //    if (VerificarPermisos(CredencialAutenticacion))
-        //    {
-        //        capaLogRegistro.AgregarProductoAlCarritoDesdeArchivoPedidos(pSucursal, pTabla, pTipoDeArchivo, pIdCliente, pIdUsuario);
-        //    }
-        //}
-        //public static void AgregarProductoAlCarritoDesdeArchivoPedidos(string pSucursal, DataTable pTabla, string pTipoDeArchivo, int pIdCliente, string pCli_codprov, int? pIdUsuario)
-        //{
-        //    if (VerificarPermisos(CredencialAutenticacion))
-        //    {
-        //        capaLogRegistro.AgregarProductoAlCarritoDesdeArchivoPedidosV2(pSucursal, pTabla, pTipoDeArchivo, pIdCliente,pCli_codprov, pIdUsuario);
-        //    }
-        //}
-        //public static void AgregarProductoAlCarritoDesdeArchivoPedidosV3(string pSucursal, DataTable pTabla, string pTipoDeArchivo, int pIdCliente, string pCli_codprov, bool pCli_isGLN, int? pIdUsuario)
-        //{
-        //    if (VerificarPermisos(CredencialAutenticacion))
-        //    {
-        //        capaLogRegistro.AgregarProductoAlCarritoDesdeArchivoPedidosV3(pSucursal, pTabla, pTipoDeArchivo, pIdCliente, pCli_codprov, pCli_isGLN, pIdUsuario);
-        //    }
-        //}
-        //public static List<cProductosBuscador> AgregarProductoAlCarritoDesdeArchivoPedidosV4(string pSucursalElejida, string pSucursalCliente, DataTable pTabla, string pTipoDeArchivo, int pIdCliente, string pCli_codprov, bool pCli_isGLN, int? pIdUsuario)
-        //{
-        //    List<cProductosBuscador> resultado = null;
-        //    if (VerificarPermisos(CredencialAutenticacion))
-        //    {
-        //        DataSet DataSetResultado = capaLogRegistro.AgregarProductoAlCarritoDesdeArchivoPedidosV4(pSucursalElejida, pSucursalCliente, pTabla, pTipoDeArchivo, pIdCliente, pCli_codprov, pCli_isGLN, pIdUsuario);
-        //        resultado = ConvertToProductoBuscador(DataSetResultado);
-        //    }
-        //    return resultado;
-        //}
         public static List<cProductosGenerico> AgregarProductoAlCarritoDesdeArchivoPedidosV5(string pSucursalElejida, string pSucursalCliente, DataTable pTabla, string pTipoDeArchivo, int pIdCliente, string pCli_codprov, bool pCli_isGLN, int? pIdUsuario)
         {
             List<cProductosGenerico> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
+            if (VerificarPermisos(CredencialAutenticacion) && HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                DataSet DataSetResultado = capaLogRegistro.AgregarProductoAlCarritoDesdeArchivoPedidosV5(pSucursalElejida, pSucursalCliente, pTabla, pTipoDeArchivo, pIdCliente, pCli_codprov, pCli_isGLN, pIdUsuario);
-                resultado = ConvertToProductoBuscadorV5(DataSetResultado, pSucursalElejida);
-
-                if (resultado != null)
-                {
-                    // TIPO CLIENTE
-                    if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tipo == Constantes.cTipoCliente_Perfumeria) // Solamente perfumeria
-                    {
-                        //resultado = resultado.Where(x => x.pro_codtpopro == Constantes.cTIPOPRODUCTO_Perfumeria || x.pro_codtpopro == Constantes.cTIPOPRODUCTO_PerfumeriaCuentaYOrden).ToList();
-                        foreach (var item in resultado.Where(x => x.pro_codtpopro != Constantes.cTIPOPRODUCTO_Perfumeria && x.pro_codtpopro != Constantes.cTIPOPRODUCTO_PerfumeriaCuentaYOrden))
-                        {
-                            item.isPermitirPedirProducto = false;
-                        }
-                    }
-                    else if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tipo == Constantes.cTipoCliente_Todos) // Todos los productos
-                    {
-                        //// Si el cliente no toma perfumeria
-                        //if (!((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tomaPerfumeria)
-                        //{
-                        //    resultado = resultado.Where(x => x.pro_codtpopro != Constantes.cTIPOPRODUCTO_Perfumeria && x.pro_codtpopro != Constantes.cTIPOPRODUCTO_PerfumeriaCuentaYOrden).ToList();
-                        //}
-                        //// fin Si el cliente no toma perfumeria
-                        if (!((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tomaPerfumeria)
-                        {
-                            foreach (var item in resultado.Where(x => x.pro_codtpopro == Constantes.cTIPOPRODUCTO_Perfumeria || x.pro_codtpopro == Constantes.cTIPOPRODUCTO_PerfumeriaCuentaYOrden))
-                            {
-                                item.isPermitirPedirProducto = false;
-                            }
-                        }
-                    }
-                    // FIN TIPO CLIENTE
-                    resultado = resultado.OrderBy(x => x.nroordenamiento).ToList();
-                }
-            }
-            return resultado;
-        }
-        public static List<cProductosGenerico> ConvertToProductoBuscador(DataSet DataSetResultado)
-        {
-            List<cProductosGenerico> resultado = null;
-            if (DataSetResultado != null)
-            {
-                if (DataSetResultado.Tables.Count > 1)
-                {
-                    DataTable tablaProductos = DataSetResultado.Tables[0];
-                    DataTable tablaSucursalStocks = DataSetResultado.Tables[1];
-                    resultado = new List<cProductosGenerico>();
-                    foreach (DataRow item in tablaProductos.Rows)
-                    {
-                        if (item["pro_codigo"] != DBNull.Value)
-                        {
-                            List<cSucursalStocks> tempListaSucursalStocks = new List<cSucursalStocks>();
-                            tempListaSucursalStocks = (from r in tablaSucursalStocks.Select("stk_codpro = '" + item["pro_codigo"].ToString() + "'").AsEnumerable()
-                                                       select new cSucursalStocks { stk_codpro = r["stk_codpro"].ToString(), stk_codsuc = r["stk_codsuc"].ToString(), stk_stock = r["stk_stock"].ToString() }).ToList();
-                            if (tempListaSucursalStocks.Count > 0)
-                            {
-                                cProductosGenerico obj = new cProductosGenerico();
-                                obj.pro_codigo = item["pro_codigo"].ToString();
-                                if (item["pro_nombre"] != DBNull.Value)
-                                {
-                                    obj.pro_nombre = item["pro_nombre"].ToString();
-                                }
-                                if (item["pro_precio"] != DBNull.Value)
-                                {
-                                    obj.pro_precio = Convert.ToDecimal(item["pro_precio"]);
-                                }
-                                if (item["pro_preciofarmacia"] != DBNull.Value)
-                                {
-                                    obj.pro_preciofarmacia = Convert.ToDecimal(item["pro_preciofarmacia"]);
-                                }
-                                if (item["pro_ofeunidades"] != DBNull.Value)
-                                {
-                                    obj.pro_ofeunidades = Convert.ToInt32(item["pro_ofeunidades"]);
-                                }
-                                if (item["pro_ofeporcentaje"] != DBNull.Value)
-                                {
-                                    obj.pro_ofeporcentaje = Convert.ToDecimal(item["pro_ofeporcentaje"]);
-                                }
-                                if (item["pro_neto"] != DBNull.Value)
-                                {
-                                    obj.pro_neto = Convert.ToBoolean(item["pro_neto"]);
-                                }
-                                if (item["pro_codtpopro"] != DBNull.Value)
-                                {
-                                    obj.pro_codtpopro = item["pro_codtpopro"].ToString().ToUpper();
-                                }
-                                if (item["pro_descuentoweb"] != DBNull.Value)
-                                {
-                                    obj.pro_descuentoweb = Convert.ToDecimal(item["pro_descuentoweb"]);
-                                }
-                                if (item["pro_laboratorio"] != DBNull.Value)
-                                {
-                                    obj.pro_laboratorio = item["pro_laboratorio"].ToString();
-                                }
-                                if (item["pro_monodroga"] != DBNull.Value)
-                                {
-                                    obj.pro_monodroga = item["pro_monodroga"].ToString();
-                                }
-                                if (item["pro_codigobarra"] != DBNull.Value)
-                                {
-                                    obj.pro_codigobarra = item["pro_codigobarra"].ToString();
-                                }
-                                if (item["pro_codigoalfabeta"] != DBNull.Value)
-                                {
-                                    obj.pro_codigoalfabeta = item["pro_codigoalfabeta"].ToString();
-                                }
-                                if (item["pro_troquel"] != DBNull.Value)
-                                {
-                                    obj.pro_troquel = item["pro_troquel"].ToString();
-                                }
-                                if (item.Table.Columns.Contains("pro_Ranking"))
-                                {
-                                    if (item["pro_Ranking"] != DBNull.Value)
-                                    {
-                                        obj.pro_Ranking = Convert.ToInt32(item["pro_Ranking"]);
-                                    }
-                                }
-                                if (item["pro_codtpovta"] != DBNull.Value)
-                                {
-                                    obj.pro_codtpovta = Convert.ToString(item["pro_codtpovta"]);
-                                }
-                                if (item["isTransfer"] == DBNull.Value)
-                                {
-                                    obj.isTieneTransfer = false;
-                                }
-                                else
-                                {
-                                    obj.isTieneTransfer = true;
-                                }
-                                if (item["pro_isTrazable"] != DBNull.Value)
-                                {
-                                    obj.pro_isTrazable = Convert.ToBoolean(item["pro_isTrazable"]);
-                                }
-                                if (item["pro_isCadenaFrio"] != DBNull.Value)
-                                {
-                                    obj.pro_isCadenaFrio = Convert.ToBoolean(item["pro_isCadenaFrio"]);
-                                }
-                                if (item["pro_canmaxima"] != DBNull.Value)
-                                {
-                                    obj.pro_canmaxima = Convert.ToInt32(item["pro_canmaxima"]);
-                                }
-                                if (item["pro_entransfer"] != DBNull.Value)
-                                {
-                                    obj.pro_entransfer = Convert.ToBoolean(item["pro_entransfer"]);
-                                }
-                                if (item["pro_vtasolotransfer"] != DBNull.Value)
-                                {
-                                    obj.pro_vtasolotransfer = Convert.ToBoolean(item["pro_vtasolotransfer"]);
-                                }
-                                if (item["RequiereVale"] != DBNull.Value)
-                                {
-                                    obj.isValePsicotropicos = Convert.ToBoolean(item["RequiereVale"]);
-                                }
-                                if (item.Table.Columns.Contains("cantidad"))
-                                {
-                                    if (item["cantidad"] != DBNull.Value)
-                                    {
-                                        obj.cantidad = Convert.ToInt32(item["cantidad"]);
-                                    }
-                                }
-                                if (item.Table.Columns.Contains("nroordenamiento"))
-                                {
-                                    if (item["nroordenamiento"] != DBNull.Value)
-                                    {
-                                        obj.nroordenamiento = Convert.ToInt32(item["nroordenamiento"]);
-                                    }
-                                }
-                                if (item.Table.Columns.Contains("pro_acuerdo"))
-                                {
-                                    if (item["pro_acuerdo"] != DBNull.Value)
-                                    {
-                                        obj.pro_acuerdo = Convert.ToInt32(item["pro_acuerdo"]);
-                                    }
-                                }
-                                obj.listaSucursalStocks = tempListaSucursalStocks;
-                                resultado.Add(obj);
-                            }
-
-                        }
-
-                    }//foreach (DataRow item in tablaProductos.Rows)
-                }
-            }
-            return resultado;
-        }
-        public static List<cProductosGenerico> ConvertToProductoBuscadorV5(DataSet DataSetResultado, string pSucursalElejida)
-        {
-            List<cProductosGenerico> resultado = null;
-            if (DataSetResultado != null)
-            {
-                if (DataSetResultado.Tables.Count > 1)
-                {
-                    DataTable tablaProductos = DataSetResultado.Tables[0];
-                    DataTable tablaSucursalStocks = DataSetResultado.Tables[1];
-                    DataTable tablaProductosNoEncontrado = DataSetResultado.Tables[2];
-                    DataTable tablaTransferDetalle = DataSetResultado.Tables[3];
-                    List<cTransferDetalle> listaTransferDetalle = new List<cTransferDetalle>();
-                    foreach (DataRow itemTransferDetalle in tablaTransferDetalle.Rows)
-                    {
-                        cTransferDetalle objTransferDetalle = ConvertToTransferDetalle(itemTransferDetalle);
-                        objTransferDetalle.CargarTransfer(ConvertToTransfer(itemTransferDetalle));
-                        listaTransferDetalle.Add(objTransferDetalle);
-                    }
-                    resultado = FuncionesPersonalizadas.cargarProductosBuscadorArchivos(tablaProductos, tablaSucursalStocks, listaTransferDetalle, DKbase.generales.Constantes.CargarProductosBuscador.isSubirArchivo, pSucursalElejida);
-                    //////////////
-                    foreach (DataRow item in tablaProductosNoEncontrado.Rows)
-                    {
-                        if (item["nombreNoEncontrado"] != DBNull.Value)
-                        {
-                            cProductosGenerico obj = new cProductosGenerico();
-                            obj.isProductoNoEncontrado = true;
-                            obj.pro_codigo = "-1";
-                            if (item["nombreNoEncontrado"] != DBNull.Value)
-                            {
-                                obj.pro_nombre = "<b> Código producto: </b>" + item["nombreNoEncontrado"].ToString();
-                            }
-                            string nombreVer = string.Empty;
-                            if (item.Table.Columns.Contains("codigobarra"))
-                            {
-                                if (item["codigobarra"] != DBNull.Value)
-                                {
-                                    if (item["codigobarra"].ToString() != string.Empty)
-                                    {
-                                        nombreVer += "<b> Código Barra: </b>" + Convert.ToString(item["codigobarra"]);
-                                    }
-                                }
-                            }
-                            if (item.Table.Columns.Contains("troquel"))
-                            {
-                                if (item["troquel"] != DBNull.Value)
-                                {
-                                    if (item["troquel"].ToString() != string.Empty)
-                                    {
-                                        nombreVer += "<b> Troquel: </b>" + Convert.ToString(item["troquel"]);
-                                    }
-                                }
-                            }
-                            if (item.Table.Columns.Contains("codigoalfabeta"))
-                            {
-                                if (item["codigoalfabeta"] != DBNull.Value)
-                                {
-                                    if (item["codigoalfabeta"].ToString() != string.Empty)
-                                    {
-                                        nombreVer += "<b> Código Alfabeta: </b>" + Convert.ToString(item["codigoalfabeta"]);
-                                    }
-                                }
-                            }
-                            if (nombreVer != string.Empty)
-                            {
-                                obj.pro_nombre = nombreVer;
-                            }
-                            if (item.Table.Columns.Contains("cantidad"))
-                            {
-                                if (item["cantidad"] != DBNull.Value)
-                                {
-                                    obj.cantidad = Convert.ToInt32(item["cantidad"]);
-                                }
-                            }
-                            if (item.Table.Columns.Contains("nroordenamiento"))
-                            {
-                                if (item["nroordenamiento"] != DBNull.Value)
-                                {
-                                    obj.nroordenamiento = Convert.ToInt32(item["nroordenamiento"]);
-                                }
-                            }
-                            resultado.Add(obj);
-                        }
-
-                        //}
-
-                    }
-                    //////////////
-                }
+                cClientes oCliente = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                resultado = DKbase.web.capaDatos.capaCAR_WebService_base.AgregarProductoAlCarritoDesdeArchivoPedidosV5(oCliente, pSucursalElejida, pSucursalCliente, pTabla, pTipoDeArchivo, pIdCliente, pCli_codprov, pCli_isGLN, pIdUsuario);
             }
             return resultado;
         }
@@ -2113,7 +1577,17 @@ namespace Kellerhoff
         }
         public static List<cSucursal> RecuperarTodasSucursalesDependientes()
         {
-            return DKbase.web.FuncionesPersonalizadas_base.RecuperarTodasSucursalesDependientes();
+            List<cSucursal> result = null;
+            if (HttpContext.Current.Session["todasSucursalesDependientes"] != null)
+            {
+                result = (List<cSucursal>)HttpContext.Current.Session["todasSucursalesDependientes"];
+            }
+            else
+            {
+                result = DKbase.web.FuncionesPersonalizadas_base.RecuperarTodasSucursalesDependientes();
+                HttpContext.Current.Session["todasSucursalesDependientes"] = result;
+            }
+            return result;
         }
         public static bool AgregarMontoMinimo(string suc_codigo, decimal suc_montoMinimo)
         {
@@ -2132,7 +1606,7 @@ namespace Kellerhoff
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 List<cCadeteriaRestricciones> listaCadeteriaRestricciones = RecuperarTodosCadeteriaRestricciones();
-                DataTable tabla = capaClientes.RecuperarTodasSucursales();
+                DataTable tabla = capaClientes_base.RecuperarTodasSucursales();
 
                 if (tabla != null)
                 {
@@ -2150,8 +1624,27 @@ namespace Kellerhoff
                         }
                         if (isAgregar)
                         {
-                            resultado.Add(ConvertToSucursal(tabla.Rows[i]));
+                            resultado.Add(DKbase.web.acceso.ConvertToSucursal(tabla.Rows[i]));
                         }
+                    }
+
+                }
+            }
+            return resultado;
+        }
+        public static List<cSucursal> RecuperarTodasSucursales_base()
+        {
+            List<cSucursal> resultado = null;
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                DataTable tabla = capaClientes_base.RecuperarTodasSucursales();
+
+                if (tabla != null)
+                {
+                    resultado = new List<cSucursal>();
+                    for (int i = 0; i < tabla.Rows.Count; i++)
+                    {
+                        resultado.Add(DKbase.web.acceso.ConvertToSucursal(tabla.Rows[i]));
                     }
 
                 }
@@ -2160,69 +1653,17 @@ namespace Kellerhoff
         }
         public static List<cSucursal> RecuperarTodasSucursales()
         {
-            List<cSucursal> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
+            List<cSucursal> result = null;
+            if (HttpContext.Current.Session["todasSucursales"] != null)
             {
-                DataTable tabla = capaClientes.RecuperarTodasSucursales();
-
-                if (tabla != null)
-                {
-                    resultado = new List<cSucursal>();
-                    for (int i = 0; i < tabla.Rows.Count; i++)
-                    {
-                        resultado.Add(ConvertToSucursal(tabla.Rows[i]));
-                    }
-
-                }
+                result = (List<cSucursal>)HttpContext.Current.Session["todasSucursales"];
             }
-            return resultado;
-        }
-        public static cSucursal ConvertToSucursal(DataRow pItem)
-        {
-            cSucursal obj = new cSucursal();
-            if (pItem.Table.Columns.Contains("suc_codigo") && pItem["suc_codigo"] != DBNull.Value)
+            else
             {
-                obj.suc_codigo = pItem["suc_codigo"].ToString();
-                obj.sde_sucursal = pItem["suc_codigo"].ToString();
+                result = RecuperarTodasSucursales_base();
+                HttpContext.Current.Session["todasSucursales"] = result;
             }
-            if (pItem.Table.Columns.Contains("suc_nombre") && pItem["suc_nombre"] != DBNull.Value)
-            {
-                obj.suc_nombre = pItem["suc_nombre"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("suc_montoMinimo") && pItem["suc_montoMinimo"] != DBNull.Value)
-            {
-                obj.suc_montoMinimo = Convert.ToDecimal(pItem["suc_montoMinimo"]);
-            }
-            //
-            if (pItem.Table.Columns.Contains("suc_provincia") && pItem["suc_provincia"] != DBNull.Value)
-            {
-                obj.suc_provincia = pItem["suc_provincia"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("suc_facturaTrazables") && pItem["suc_facturaTrazables"] != DBNull.Value)
-            {
-                obj.suc_facturaTrazables = Convert.ToBoolean(pItem["suc_facturaTrazables"]);
-            }
-            if (pItem.Table.Columns.Contains("suc_facturaTrazablesEnOtrasProvincias") && pItem["suc_facturaTrazablesEnOtrasProvincias"] != DBNull.Value)
-            {
-                obj.suc_facturaTrazablesEnOtrasProvincias = Convert.ToBoolean(pItem["suc_facturaTrazablesEnOtrasProvincias"]);
-            }
-            if (pItem.Table.Columns.Contains("suc_pedirCC_ok") && pItem["suc_pedirCC_ok"] != DBNull.Value)
-            {
-                obj.suc_pedirCC_ok = Convert.ToBoolean(pItem["suc_pedirCC_ok"]);
-            }
-            if (pItem.Table.Columns.Contains("suc_pedirCC_sucursalReferencia") && pItem["suc_pedirCC_sucursalReferencia"] != DBNull.Value)
-            {
-                obj.suc_pedirCC_sucursalReferencia = Convert.ToString(pItem["suc_pedirCC_sucursalReferencia"]);
-            }
-            if (pItem.Table.Columns.Contains("suc_pedirCC_tomaSoloPerfumeria") && pItem["suc_pedirCC_tomaSoloPerfumeria"] != DBNull.Value)
-            {
-                obj.suc_pedirCC_tomaSoloPerfumeria = Convert.ToBoolean(pItem["suc_pedirCC_tomaSoloPerfumeria"]);
-            }
-            if (pItem.Table.Columns.Contains("suc_trabajaPerfumeria") && pItem["suc_trabajaPerfumeria"] != DBNull.Value)
-            {
-                obj.suc_trabajaPerfumeria = Convert.ToBoolean(pItem["suc_trabajaPerfumeria"]);
-            }
-            return obj;
+            return result;
         }
         public static void EliminarSucursal(int sde_codigo)
         {
@@ -3515,8 +2956,8 @@ namespace Kellerhoff
                 }
             }
             if (pItem.Table.Columns.Contains("arc_rating") && pItem["arc_rating"] != DBNull.Value)
-            {           
-                obj.arc_rating = Convert.ToInt32(pItem["arc_rating"]);                      
+            {
+                obj.arc_rating = Convert.ToInt32(pItem["arc_rating"]);
             }
             return obj;
         }
@@ -3924,6 +3365,21 @@ namespace Kellerhoff
             }
             return resultado;
         }
+        public static List<cSucursalDependienteTipoEnviosCliente> RecuperarTodosSucursalDependienteTipoEnvioCliente_cliente()
+        {
+            List<cSucursalDependienteTipoEnviosCliente> result = null;
+            if (HttpContext.Current.Session["TodosSucursalDependienteTipoEnvioCliente"] != null)
+            {
+                result = (List<cSucursalDependienteTipoEnviosCliente>)HttpContext.Current.Session["TodosSucursalDependienteTipoEnvioCliente"];
+            }
+            else if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                result = RecuperarTodosSucursalDependienteTipoEnvioCliente().Where(x => x.sde_sucursal == oClientes.cli_codsuc && (x.tsd_idTipoEnvioCliente == null || x.env_codigo == oClientes.cli_codtpoenv)).ToList(); ;
+                HttpContext.Current.Session["TodosSucursalDependienteTipoEnvioCliente"] = result;
+            }
+            return result;
+        }
         public static List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios()
         {
             List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> resultado = null;
@@ -4113,7 +3569,11 @@ namespace Kellerhoff
         public static List<cCadeteriaRestricciones> RecuperarTodosCadeteriaRestricciones()
         {
             List<cCadeteriaRestricciones> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
+            if (HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"] != null)
+            {
+                resultado = (List<cCadeteriaRestricciones>)HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"];
+            }
+            else
             {
                 DataTable tabla = capaTiposEnvios.RecuperarTodosCadeteriaRestricciones();
                 if (tabla != null)
@@ -4128,6 +3588,7 @@ namespace Kellerhoff
                         }
                     }
                 }
+                HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"] = resultado;
             }
             return resultado;
         }
@@ -5481,7 +4942,7 @@ namespace Kellerhoff
                 numeroCliente = oCliente.cli_codigo.ToString();
 
 
-                strHtml += "El cliente " + nombre  + " a solicitado el envio Sobres/Remesas<br/>";
+                strHtml += "El cliente " + nombre + " a solicitado el envio Sobres/Remesas<br/>";
                 strHtml += "Localidad: " + localidad + "<br/>";
                 strHtml += "Código de reparto: " + reparto + "<br/>";
                 strHtml += "Número de cliente: " + numeroCliente + "<br/>";

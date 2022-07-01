@@ -64,6 +64,12 @@ namespace Kellerhoff.Controllers
             System.Web.HttpContext.Current.Session["isMostrarOferta"] = null;
             System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = null;
             System.Web.HttpContext.Current.Session["BaseAdmin_PermisosRol"] = null;
+            System.Web.HttpContext.Current.Session["sucursalesDelCliente"] = null;
+            System.Web.HttpContext.Current.Session["todasSucursalesDependientes"] = null;
+            System.Web.HttpContext.Current.Session["todasSucursales"] = null;
+            System.Web.HttpContext.Current.Session["TodosSucursalDependienteTipoEnvioCliente"] = null;
+            System.Web.HttpContext.Current.Session["RecuperarTiposDeEnvios"] = null;
+            System.Web.HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"] = null;
             return Content("Ok");
         }
         //public ActionResult loginTest(string pName, string pPass)
