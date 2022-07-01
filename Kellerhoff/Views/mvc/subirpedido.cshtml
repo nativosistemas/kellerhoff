@@ -46,7 +46,7 @@
                     string resultado = string.Empty;
                     if (Session["clientesDefault_Cliente"] != null)
                     {
-                        List<string> ListaSucursal = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesParaBuscadorDeCliente();
+                        List<string> ListaSucursal = Kellerhoff.Codigo.clases.FuncionesPersonalizadas.RecuperarSucursalesDelCliente();
 
                         List<DKbase.web.cSucursal> listaSucursal = WebService.RecuperarTodasSucursales();
                         bool isChecked = true;

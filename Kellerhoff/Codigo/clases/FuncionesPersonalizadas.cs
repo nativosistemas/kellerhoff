@@ -219,7 +219,30 @@ namespace Kellerhoff.Codigo.clases
         //
 
 
-
+        public static cjSonBuscadorProductos RecuperarProductosGeneralSubirPedidos(List<cProductosGenerico> pListaProveedor)
+        {
+            cjSonBuscadorProductos resultado = null;
+            if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            {
+                cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                List<cProductosGenerico> listaProductosBuscador = pListaProveedor;
+                // fin Si el cliente no toma perfumeria
+                //for (int iPrecioFinal = 0; iPrecioFinal < listaProductosBuscador.Count; iPrecioFinal++)
+                //{
+                //    listaProductosBuscador[iPrecioFinal].PrecioFinal = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinal(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), listaProductosBuscador[iPrecioFinal]);
+                //    listaProductosBuscador[iPrecioFinal].PrecioConDescuentoOferta = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioUnitarioConDescuentoOferta(listaProductosBuscador[iPrecioFinal].PrecioFinal, listaProductosBuscador[iPrecioFinal]);
+                //}
+                // Inicio 17/02/2016
+                List<string> ListaSucursal = RecuperarSucursalesDelCliente();// DKbase.web.FuncionesPersonalizadas_base.RecuperarSucursalesParaBuscadorDeCliente(oClientes);
+                listaProductosBuscador = ActualizarStockListaProductos_SubirArchico(ListaSucursal, listaProductosBuscador, HttpContext.Current.Session["subirpedido_SucursalEleginda"].ToString());
+                // Fin 17/02/2016
+                cjSonBuscadorProductos ResultadoObj = new cjSonBuscadorProductos();
+                ResultadoObj.listaSucursal = ListaSucursal;
+                ResultadoObj.listaProductos = listaProductosBuscador;
+                resultado = ResultadoObj;
+            }
+            return resultado;
+        }
 
         public static cjSonBuscadorProductos RecuperarProductosGeneral_V3(int? pIdOferta, string pTxtBuscador, List<string> pListaColumna, bool pIsOrfeta, bool pIsTransfer)
         {
