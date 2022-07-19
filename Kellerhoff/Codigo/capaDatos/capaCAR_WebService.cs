@@ -66,25 +66,25 @@ namespace Kellerhoff.Codigo.capaDatos
         //    // sin no valida la credencial
         //    return null;
         //}
-        public static bool ActualizarProductoCarritoSubirArchivo(List<cProductosAndCantidad> pListaValor, int pIdCliente, int pIdUsuario)
-        {
-            string strXML = string.Empty;
-            strXML += "<Root>";
-            foreach (cProductosAndCantidad item in pListaValor)
-            {
-                List<XAttribute> listaAtributos = new List<XAttribute>();
+        //public static bool ActualizarProductoCarritoSubirArchivo(List<cProductosAndCantidad> pListaValor, int pIdCliente, int pIdUsuario)
+        //{
+        //    string strXML = string.Empty;
+        //    strXML += "<Root>";
+        //    foreach (cProductosAndCantidad item in pListaValor)
+        //    {
+        //        List<XAttribute> listaAtributos = new List<XAttribute>();
 
-                listaAtributos.Add(new XAttribute("lcp_cantidad", item.cantidad));
-                listaAtributos.Add(new XAttribute("codigo", item.codProducto));
-                listaAtributos.Add(new XAttribute("nombre", item.codProductoNombre));
-                listaAtributos.Add(new XAttribute("codTransfer", item.tde_codtfr));
-                listaAtributos.Add(new XAttribute("isTransferFacturacionDirecta", item.isTransferFacturacionDirecta));
-                listaAtributos.Add(new XAttribute("codSucursal", item.codSucursal));
-                XElement nodo = new XElement("DetallePedido", listaAtributos);
-                strXML += nodo.ToString();
-            }
-            strXML += "</Root>";
-            return capaCAR_base.SubirPedido(strXML, pIdCliente, pIdUsuario, Constantes.cTipo_Carrito, Constantes.cTipo_CarritoTransfers);
-        }
+        //        listaAtributos.Add(new XAttribute("lcp_cantidad", item.cantidad));
+        //        listaAtributos.Add(new XAttribute("codigo", item.codProducto));
+        //        listaAtributos.Add(new XAttribute("nombre", item.codProductoNombre));
+        //        listaAtributos.Add(new XAttribute("codTransfer", item.tde_codtfr));
+        //        listaAtributos.Add(new XAttribute("isTransferFacturacionDirecta", item.isTransferFacturacionDirecta));
+        //        listaAtributos.Add(new XAttribute("codSucursal", item.codSucursal));
+        //        XElement nodo = new XElement("DetallePedido", listaAtributos);
+        //        strXML += nodo.ToString();
+        //    }
+        //    strXML += "</Root>";
+        //    return capaCAR_base.SubirPedido(strXML, pIdCliente, pIdUsuario, Constantes.cTipo_Carrito, Constantes.cTipo_CarritoTransfers);
+        //}
     }
 }

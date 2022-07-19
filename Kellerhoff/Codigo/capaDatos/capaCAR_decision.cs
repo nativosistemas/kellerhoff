@@ -49,7 +49,7 @@ namespace Kellerhoff.Codigo.capaDatos
                         }
                     }
                 }
-                return WebService.BorrarCarrito(lrc_id)?0:-1;
+                return WebService.BorrarCarrito(lrc_id) ? 0 : -1;
             }
         }
         public static int BorrarCarritosDiferidos(int lrc_id, string lrc_codSucursal)
@@ -76,14 +76,14 @@ namespace Kellerhoff.Codigo.capaDatos
                     }
                 }
                 WebService.BorrarCarritosDiferidos(lrc_id);
-                return 0 ;
+                return 0;
             }
         }
         public static int BorrarCarritoTransfer(string pSucursal)
         {
             if (isCAR)
             {
-                return capaCAR_WebService.BorrarCarritoTransfer((int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, pSucursal, Constantes.cAccionCarrito_VACIAR) ;
+                return capaCAR_WebService.BorrarCarritoTransfer((int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, pSucursal, Constantes.cAccionCarrito_VACIAR);
             }
             else
             {
@@ -94,10 +94,10 @@ namespace Kellerhoff.Codigo.capaDatos
                     Resultado = WebService.BorrarCarritoTransfer(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, pSucursal);
                 }
 
-                return Resultado ?0:-1;
+                return Resultado ? 0 : -1;
             }
         }
-        public static void GuardarPedidoBorrarCarrito(List<cProductosGenerico> pListaProductos,int car_id, string pSucursal, string pTipo, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
+        public static void GuardarPedidoBorrarCarrito(List<cProductosGenerico> pListaProductos, int car_id, string pSucursal, string pTipo, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
             if (isCAR)
             {
@@ -238,7 +238,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             if (isCAR)
             {
-                return capaCAR_WebService.ActualizarProductoCarritoSubirArchivo(pListaValor, (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                return capaCAR_WebService_base.ActualizarProductoCarritoSubirArchivo(pListaValor, (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
             }
             else
             {
@@ -261,94 +261,7 @@ namespace Kellerhoff.Codigo.capaDatos
                 return true;
             }
         }
-        public static bool AgregarProductosDelRecuperardorAlCarrito(string pSucursal, string[] pArrayNombreProducto, int[] pArrayCantidad, bool[] pArrayOferta)
-        {
-            bool resultado = false;
-            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null && System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_CantidadDia"] != null)
-            {
-                List<cProductosAndCantidad> listaAUX = new List<cProductosAndCantidad>();
-                for (int i = 0; i < pArrayNombreProducto.Count(); i++)
-                {
-                    cProductosAndCantidad obj = new cProductosAndCantidad();
-                    obj.cantidad = pArrayCantidad[i];
-                    obj.codProductoNombre = pArrayNombreProducto[i];
-                    listaAUX.Add(obj);
-                }
-                List<cProductosGenerico> listaProductos = WebService.RecuperarTodosProductosDesdeTabla(listaAUX, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
-                if (isCAR)
-                {
-                    List<cProductosAndCantidad> listaProductos_capaCAR = new List<cProductosAndCantidad>();
-                    for (int i = 0; i < pArrayNombreProducto.Count(); i++)
-                    {
-                        cProductosGenerico objProducto = listaProductos.Where(x => x.pro_nombre == pArrayNombreProducto[i]).First();
-                        int cantidad = pArrayCantidad[i];
-                        int cantidadAgregar = 0;
 
-                        List<int> cantidadBD = WebService.RecuperarCantidadProductoEnCarritoYCarritoTransferFacturacionDirecta(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, pSucursal, objProducto.pro_codigo, objProducto.pro_nombre);
-                        int cantidadTotalMasBD = cantidad;
-                        if (cantidadBD != null)
-                        {
-                            cantidadTotalMasBD += cantidadBD[0] + cantidadBD[1];
-                        }
-                        List<int> listaCantidades = FuncionesPersonalizadas.CargarProductoCantidadDependiendoTransfer(objProducto, cantidadTotalMasBD);
-
-                        cProductosAndCantidad objProductosAndCantidad = new cProductosAndCantidad();
-                        objProductosAndCantidad.codProductoNombre = objProducto.pro_nombre;
-                        objProductosAndCantidad.codProducto = objProducto.pro_codigo;
-                        objProductosAndCantidad.codSucursal = pSucursal;
-                        objProductosAndCantidad.cantidad = listaCantidades[0];
-                        objProductosAndCantidad.isTransferFacturacionDirecta = false;
-                        listaProductos_capaCAR.Add(objProductosAndCantidad);
-
-
-
-                        cProductosAndCantidad objProductosAndCantidad_transfer = new cProductosAndCantidad();
-                        objProductosAndCantidad_transfer.codProductoNombre = objProducto.pro_nombre;
-                        objProductosAndCantidad_transfer.codProducto = objProducto.pro_codigo;
-                        objProductosAndCantidad_transfer.codSucursal = pSucursal;
-                        objProductosAndCantidad_transfer.cantidad = listaCantidades[1];
-                        objProductosAndCantidad_transfer.isTransferFacturacionDirecta = true;
-                        objProductosAndCantidad_transfer.tde_codtfr = objProducto.tde_codtfr;
-                        listaProductos_capaCAR.Add(objProductosAndCantidad_transfer);
-                        //capaCAR_decision.AgregarProductosTransfersAlCarrito(tempListaProductos, (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id, objProducto.tde_codtfr, pSucursal, Constantes.cTipo_CarritoTransfers);
-
-                        WebService.BorrarPorProductosFaltasProblemasCrediticiosV2(pSucursal, (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), objProducto.pro_nombre, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_CantidadDia"]), cantidadAgregar);
-                    }
-                    return ActualizarProductoCarritoSubirArchivo(listaProductos_capaCAR);
-                }
-                else
-                {
-                    for (int i = 0; i < pArrayNombreProducto.Count(); i++)
-                    {
-                        cProductosGenerico objProducto = listaProductos.Where(x => x.pro_nombre == pArrayNombreProducto[i]).First();
-                        int cantidad = pArrayCantidad[i];
-                        int cantidadAgregar = 0;
-
-                        List<int> cantidadBD = WebService.RecuperarCantidadProductoEnCarritoYCarritoTransferFacturacionDirecta(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, pSucursal, objProducto.pro_codigo, objProducto.pro_nombre);
-                        int cantidadTotalMasBD = cantidad;
-                        if (cantidadBD != null)
-                        {
-                            cantidadTotalMasBD += cantidadBD[0] + cantidadBD[1];
-                        }
-                        List<int> listaCantidades = FuncionesPersonalizadas.CargarProductoCantidadDependiendoTransfer(objProducto, cantidadTotalMasBD);
-
-                        // Carrito comun
-                        WebService.AgregarProductoAlCarritoDesdeRecuperador(pSucursal, objProducto.pro_nombre, listaCantidades[0], (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
-
-                        List<cProductosAndCantidad> tempListaProductos = new List<cProductosAndCantidad>();
-                        cProductosAndCantidad objProductosAndCantidad = new cProductosAndCantidad();
-                        objProductosAndCantidad.codProductoNombre = objProducto.pro_nombre;
-                        objProductosAndCantidad.cantidad = listaCantidades[1];
-                        tempListaProductos.Add(objProductosAndCantidad);
-                        capaCAR_decision.AgregarProductosTransfersAlCarrito(tempListaProductos, (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id, objProducto.tde_codtfr, pSucursal, Constantes.cTipo_CarritoTransfers);
-
-                        WebService.BorrarPorProductosFaltasProblemasCrediticiosV2(pSucursal, (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), objProducto.pro_nombre, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_CantidadDia"]), cantidadAgregar);
-                    }
-                    resultado = true;
-                }
-            }
-            return resultado;
-        }
     }
 
 }

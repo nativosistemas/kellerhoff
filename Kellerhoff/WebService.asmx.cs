@@ -3632,7 +3632,7 @@ namespace Kellerhoff
             if (VerificarPermisos(CredencialAutenticacion))
             {
                 DataSet dsResultado = null;
-                DataTable pTablaDetalle = FuncionesPersonalizadas.ObtenerDataTableProductosCarritoArchivosPedidos();
+                DataTable pTablaDetalle = FuncionesPersonalizadas_base.ObtenerDataTableProductosCarritoArchivosPedidos();
                 //DataRow fila = pTablaDetalle.NewRow();
                 if (pListaProducto.Count > 0)
                 {
@@ -3644,7 +3644,7 @@ namespace Kellerhoff
                         pTablaDetalle.Rows.Add(fila);
                     }
                 }
-                dsResultado = capaProductos.RecuperarProductosDesdeTabla(pTablaDetalle, pSucursalPerteneciente, pCli_codprov, pCli_codigo);
+                dsResultado = capaProductos_base.RecuperarProductosDesdeTabla(pTablaDetalle, pSucursalPerteneciente, pCli_codprov, pCli_codigo);
                 if (dsResultado != null)
                 {
                     DataTable tablaProductos = dsResultado.Tables[0];

@@ -213,7 +213,7 @@ namespace Kellerhoff.Controllers
         public ActionResult promocionescliente(string t)
         {
             Session["promocionescliente_TIPO"] = t;
-            
+
             return View();
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
@@ -512,7 +512,7 @@ namespace Kellerhoff.Controllers
         {
             return TomarPedidoCarrito_generico(Constantes.cTipo_Carrito, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
         }
-        public string TomarPedidoCarrito_generico(string pTipo,string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
+        public string TomarPedidoCarrito_generico(string pTipo, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
             ServiceReferenceDLL.cDllPedido resultadoPedido = null;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
@@ -552,7 +552,7 @@ namespace Kellerhoff.Controllers
                             oRepetido.Error = msgCarritoRepetido;
                             return Serializador.SerializarAJson(oRepetido);
                         }
-                        resultadoPedido = capaCore_decision.TomarPedidoConIdCarrito(item.car_id,((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
+                        resultadoPedido = capaCore_decision.TomarPedidoConIdCarrito(item.car_id, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
                         if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
                             return null;
                         if (resultadoPedido == null)
@@ -598,7 +598,7 @@ namespace Kellerhoff.Controllers
                                         WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemConProblemasDeCreditos.NombreObjetoComercial, cantidadProblemaCrediticia, Constantes.cPEDIDO_PROBLEMACREDITICIO);
                                     }
                                 }
-                            
+
                                 capaCAR_decision.GuardarPedidoBorrarCarrito(item, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
                             }
                         }
@@ -679,7 +679,7 @@ namespace Kellerhoff.Controllers
                     resultadoPedido.Add(oRepetido);
                     return Serializador.SerializarAJson(resultadoPedido);
                 }
-                List<ServiceReferenceDLL.cDllPedidoTransfer> listaCarritoAux = capaWebServiceDLL.TomarPedidoDeTransfersConIdCarrito(car_id_aux,((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos);
+                List<ServiceReferenceDLL.cDllPedidoTransfer> listaCarritoAux = capaWebServiceDLL.TomarPedidoDeTransfersConIdCarrito(car_id_aux, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos);
                 if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
                     return null;
 
@@ -941,7 +941,15 @@ namespace Kellerhoff.Controllers
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public bool AgregarProductosDelRecuperardorAlCarrito(string pSucursal, string[] pArrayNombreProducto, int[] pArrayCantidad, bool[] pArrayOferta)
         {
-            return capaCAR_decision.AgregarProductosDelRecuperardorAlCarrito(pSucursal, pArrayNombreProducto, pArrayCantidad, pArrayOferta);
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null && System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_CantidadDia"] != null)
+            {
+                cClientes oCliente = ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+                Usuario oUsuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
+                int Recuperador_Tipo = Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]);
+                int Recuperador_CantidadDia = Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_CantidadDia"]);
+                return acceso.AgregarProductosDelRecuperardorAlCarrito(oCliente, oUsuario, pSucursal, pArrayNombreProducto, pArrayCantidad, pArrayOferta, Recuperador_Tipo, Recuperador_CantidadDia);
+            }
+            return false;
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string BorrarPorProductosFaltasProblemasCrediticios(string pSucursal, string[] pArrayNombreProducto)

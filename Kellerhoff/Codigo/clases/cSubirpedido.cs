@@ -94,7 +94,7 @@ namespace Kellerhoff.Codigo.clases
                     {
                         TipoArchivo = "S";
                     }
-                    DataTable tablaArchivoPedidos = FuncionesPersonalizadas.ObtenerDataTableProductosCarritoArchivosPedidos();
+                    DataTable tablaArchivoPedidos = FuncionesPersonalizadas_base.ObtenerDataTableProductosCarritoArchivosPedidos();
 
                     while (sLine != null)
                     {
