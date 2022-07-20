@@ -57,6 +57,7 @@ namespace Kellerhoff.Controllers
         }
         public ActionResult SignOff()
         {
+            FuncionesPersonalizadas.clearHorarioCierre();
             System.Web.HttpContext.Current.Session["main_ListaOferta"] = null;
             System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] = null;
             System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = null;
@@ -70,6 +71,7 @@ namespace Kellerhoff.Controllers
             System.Web.HttpContext.Current.Session["TodosSucursalDependienteTipoEnvioCliente"] = null;
             System.Web.HttpContext.Current.Session["RecuperarTiposDeEnvios"] = null;
             System.Web.HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"] = null;
+
             return Content("Ok");
         }
         //public ActionResult loginTest(string pName, string pPass)

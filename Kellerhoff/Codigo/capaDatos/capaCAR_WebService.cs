@@ -17,7 +17,12 @@ namespace Kellerhoff.Codigo.capaDatos
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
-                return DKbase.web.capaDatos.capaCAR_WebService_base.RecuperarCarritosPorSucursalYProductos_generica(cliente, Constantes.cTipo_Carrito);
+                List<cCarrito> l = DKbase.web.capaDatos.capaCAR_WebService_base.RecuperarCarritosPorSucursalYProductos_generica(cliente, Constantes.cTipo_Carrito);
+                foreach (var item in l)
+                {
+                    item.proximoHorarioEntrega = FuncionesPersonalizadas.getObtenerHorarioCierre(item.codSucursal);
+                }
+                return l;
             }
             return null;
         }
@@ -26,7 +31,12 @@ namespace Kellerhoff.Codigo.capaDatos
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
-                return DKbase.web.capaDatos.capaCAR_WebService_base.RecuperarCarritosPorSucursalYProductos_generica(cliente, Constantes.cTipo_CarritoDiferido);
+                List<cCarrito> l = DKbase.web.capaDatos.capaCAR_WebService_base.RecuperarCarritosPorSucursalYProductos_generica(cliente, Constantes.cTipo_CarritoDiferido);
+                foreach (var item in l)
+                {
+                    item.proximoHorarioEntrega = FuncionesPersonalizadas.getObtenerHorarioCierre(item.codSucursal);
+                }
+                return l;
             }
             return null;
         }

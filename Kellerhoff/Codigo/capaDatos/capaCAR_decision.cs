@@ -132,8 +132,8 @@ namespace Kellerhoff.Codigo.capaDatos
         public static cSucursalCarritoTransfer RecuperarCarritosTransferPorIdClienteIdSucursal(cClientes pCliente, string pCodSucursal, string pTipo)
         {
             if (isCAR)
-            {
-                return capaCAR_WebService_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo).Where(x => x.Sucursal == pCodSucursal).FirstOrDefault();
+            {                
+                return RecuperarCarritosTransferPorCliente_generico(pCliente, pTipo, pCodSucursal);
             }
             else
             {
@@ -215,19 +215,37 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             if (isCAR)
             {
-                return capaCAR_WebService_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo);
+                return RecuperarCarritosTransfer_generico(pCliente, pTipo);// capaCAR_WebService_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo);
             }
             else
             {
                 return WebService.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente);
             }
         }
+        public static List<cSucursalCarritoTransfer> RecuperarCarritosTransfer_generico(cClientes pCliente, string pTipo)
+        {
+            List<cSucursalCarritoTransfer> result = null;
+            result = capaCAR_WebService_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo);
+            if (result != null)
+            {
+                foreach (var item in result)
+                {
+                    item.proximoHorarioEntrega = FuncionesPersonalizadas.getObtenerHorarioCierre(item.Sucursal);
+                }
+            }
+            return result;
+        }
+        public static cSucursalCarritoTransfer RecuperarCarritosTransferPorCliente_generico(cClientes pCliente, string pTipo, string pIdSucursal)
+        {
+            cSucursalCarritoTransfer o = RecuperarCarritosTransfer_generico(pCliente, pTipo).Where(x => x.Sucursal == pIdSucursal).FirstOrDefault();
+            return o;
+        }
         public static List<cCarritoTransfer> RecuperarCarritosTransferPorIdCliente(cClientes pCliente, string pTipo, string pIdSucursal)
         {
             if (isCAR)
             {
-                cSucursalCarritoTransfer o = capaCAR_WebService_base.RecuperarCarritosTransferPorIdClienteOrdenadosPorSucursal(pCliente, pTipo).Where(x => x.Sucursal == pIdSucursal).FirstOrDefault();
-                return o == null ? null : o.listaTransfer;//new List<cCarritoTransfer>()
+                cSucursalCarritoTransfer o = RecuperarCarritosTransferPorCliente_generico(pCliente, pTipo, pIdSucursal);
+                return o == null ? null : o.listaTransfer;
             }
             else
             {
