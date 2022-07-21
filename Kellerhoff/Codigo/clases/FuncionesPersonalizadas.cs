@@ -316,6 +316,30 @@ namespace Kellerhoff.Codigo.clases
         //    }
         //    return resultado;
         //}
+        public static string ObtenerHorarioCierreAnterior(string pSucursal, string pSucursalDependiente, string pCodigoReparto, string pHorarioCierre)
+        {//ObtenerHorarioCierreAnterior
+            string result = string.Empty;
+            cClientes oCliente = ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]);
+            if (HttpContext.Current.Session["horario_siguiente" + pSucursal] == null)
+            {
+                    HttpContext.Current.Session["horario_siguiente" + pSucursal] = DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(oCliente, pSucursalDependiente, pHorarioCierre);
+            }
+            if (HttpContext.Current.Session["horario_siguiente" + pSucursal] != null)
+            {
+                result = HttpContext.Current.Session["horario_siguiente" + pSucursal].ToString();
+                DateTime? fechaHorarioCierre = FuncionesPersonalizadas_base.getFecha_Horario(getObtenerHorarioCierre(pSucursal));
+                DateTime? fechaGuarda = FuncionesPersonalizadas_base.getFecha_Horario(result);
+                if (fechaHorarioCierre != null && fechaGuarda != null && fechaGuarda.Value < fechaHorarioCierre.Value)
+                {
+                    HttpContext.Current.Session["horario_siguiente" + pSucursal] = DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(oCliente, pSucursalDependiente, pHorarioCierre);
+                    result = HttpContext.Current.Session["horario_siguiente" + pSucursal].ToString();
+                }
+
+                //
+
+            }
+            return result;
+        }
         public static string getObtenerHorarioCierre(string pSucursal)
         {
             string result = string.Empty;
@@ -350,6 +374,7 @@ namespace Kellerhoff.Codigo.clases
                 foreach (var itemSucursal in l)
                 {
                     HttpContext.Current.Session["horario_" + itemSucursal] = null;
+                    HttpContext.Current.Session["horario_siguiente" + itemSucursal] = null;
                 }
             }
         }
@@ -357,11 +382,11 @@ namespace Kellerhoff.Codigo.clases
         {
             return getObtenerHorarioCierre(pSucursalDependiente);
         }
-        public static string ObtenerHorarioCierreAnterior(string pSucursal, string pSucursalDependiente, string pCodigoReparto, string pHorarioCierre)
-        {
-            cClientes oCliente = ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]);
-            return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(oCliente, pSucursalDependiente, pHorarioCierre);
-        }
+        //public static string ObtenerHorarioCierreAnterior(string pSucursal, string pSucursalDependiente, string pCodigoReparto, string pHorarioCierre)
+        //{
+        //    cClientes oCliente = ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]);
+        //    return DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(oCliente, pSucursalDependiente, pHorarioCierre);
+        //}
         public static void GenerarCSV()
         {
             List<string> lista = new List<string>();
