@@ -15,7 +15,8 @@ namespace Kellerhoff.Codigo.capaDatos
     public class capaCore_WebService
     {
         private static readonly HttpClient client = new HttpClient();
-        private static string url = System.Configuration.ConfigurationManager.AppSettings["url_DKcore"];
+        public static string url_DKcore = System.Configuration.ConfigurationManager.AppSettings["url_DKcore"];
+        public static string url_DKdll = System.Configuration.ConfigurationManager.AppSettings["url_DKdll"];
         private static JsonSerializerOptions oJsonSerializerOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
         private static string _pass { get; set; }
         private static string _login { get; set; }
@@ -41,11 +42,11 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        private static async Task<HttpResponseMessage> PostAsync(string name, object pParameter, bool isRepeatBecauseNotAuthorized = true)
+        private static async Task<HttpResponseMessage> PostAsync(string pUrl, string name, object pParameter, bool isRepeatBecauseNotAuthorized = true)
         {
             try
             {
-                string url_api = url + name;
+                string url_api = pUrl + name;
                 var myContent = JsonSerializer.Serialize(pParameter);
                 var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
@@ -56,10 +57,13 @@ namespace Kellerhoff.Codigo.capaDatos
                 if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
                     DKbase.generales.Log.LogError(MethodBase.GetCurrentMethod(), "StatusCode == HttpStatusCode.Unauthorized", DateTime.Now, name, pParameter);
-                    if (isRepeatBecauseNotAuthorized)
+                    if (pUrl == url_DKcore)
                     {
-                        await SetAuthorization();
-                        return await PostAsync(name, pParameter, false);
+                        if (isRepeatBecauseNotAuthorized)
+                        {
+                            await SetAuthorization();
+                            return await PostAsync(pUrl, name, pParameter, false);
+                        }
                     }
                 }
                 return null;
@@ -75,7 +79,8 @@ namespace Kellerhoff.Codigo.capaDatos
             string result = null;
             string name = @"Authenticate";
             DKbase.Models.AuthenticateRequest parameter = new DKbase.Models.AuthenticateRequest() { login = pLogin, pass = pPass };
-            HttpResponseMessage response = await PostAsync(name, parameter, false);
+
+            HttpResponseMessage response = await PostAsync(url_DKcore, name, parameter, false);
             if (response != null)
             {
                 var resultResponse = response.Content.ReadAsStringAsync().Result;
@@ -115,7 +120,8 @@ namespace Kellerhoff.Codigo.capaDatos
             DKbase.dll.cDllPedido result = null;
             string name = "TomarPedidoConIdCarrito";
             DKbase.Models.TomarPedidoConIdCarritoRequest parameter = new DKbase.Models.TomarPedidoConIdCarritoRequest() { pIdCarrito = pIdCarrito, pLoginCliente = pLoginCliente, pIdSucursal = pIdSucursal, pMensajeEnFactura = pMensajeEnFactura, pMensajeEnRemito = pMensajeEnRemito, pTipoEnvio = pTipoEnvio, pListaProducto = pListaProducto, pIsUrgente = pIsUrgente };
-            HttpResponseMessage response = await PostAsync(name, parameter);
+
+            HttpResponseMessage response = await PostAsync(url_DKdll, name, parameter);
             if (response != null)
             {
                 var resultResponse = response.Content.ReadAsStringAsync().Result;

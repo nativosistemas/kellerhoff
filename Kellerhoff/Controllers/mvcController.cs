@@ -1,4 +1,5 @@
-﻿using DKbase.web;
+﻿using DKbase.dll;
+using DKbase.web;
 using DKbase.web.capaDatos;
 using Kellerhoff.Codigo;
 using Kellerhoff.Codigo.capaDatos;
@@ -508,111 +509,123 @@ namespace Kellerhoff.Controllers
             return Serializador.SerializarAJson(resultado);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
-        public string TomarPedidoCarrito(string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
+        public string TomarPedidoCarrito(Usuario pUsuario, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
-            return TomarPedidoCarrito_generico(Constantes.cTipo_Carrito, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
+            cClientes oClientes = ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+            List<cCarrito> listaCarrito = DKbase.web.capaDatos.capaCAR_WebService_base.RecuperarCarritosPorSucursalYProductos_generica(oClientes,Constantes.cTipo_Carrito);
+            string horarioCierre = FuncionesPersonalizadas.getObtenerHorarioCierre(pIdSucursal);
+            return Serializador.SerializarAJson(capaCAR_WebService_base.TomarPedidoCarrito_generico(pUsuario, oClientes, listaCarrito, horarioCierre, Constantes.cTipo_Carrito, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente));
         }
-        public string TomarPedidoCarrito_generico(string pTipo, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
-        {
-            ServiceReferenceDLL.cDllPedido resultadoPedido = null;
-            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-            {
-                List<cCarrito> listaCarrito = null;
-                if (pTipo == Constantes.cTipo_Carrito)
-                {
-                    listaCarrito = capaCAR_decision.RecuperarCarritosPorSucursalYProductos((int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
-                }
-                else if (pTipo == Constantes.cTipo_CarritoDiferido)
-                {
-                    listaCarrito = capaCAR_decision.RecuperarCarritosDiferidosPorCliente((int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
-                }
-                if (listaCarrito == null)
-                    return null;
-                foreach (cCarrito item in listaCarrito)
-                {
-                    if (item.codSucursal == pIdSucursal)
-                    {
-                        if (capaCAR_base.IsCarritoEnProceso(item.car_id))
-                        {
-                            ServiceReferenceDLL.cDllPedido oEnProceso = new ServiceReferenceDLL.cDllPedido();
-                            oEnProceso.Error = msgCarritoEnProceso;
-                            return Serializador.SerializarAJson(oEnProceso);
-                        }
+        //public string TomarPedidoCarrito_generico(Usuario pUsuario,string pTipo, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
+        //{
+        //    //     DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+        //    //   List<cCarrito> listaCarrito = DKbase.web.capaDatos.capaCAR_WebService_base.RecuperarCarritosPorSucursalYProductos_generica(pTipo);
 
 
-                        List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
-                        foreach (cProductosGenerico itemProductos in item.listaProductos)
-                        {
-                            listaProductos.Add(FuncionesPersonalizadas.ProductosEnCarrito_ToConvert_DllProductosAndCantidad(itemProductos));
-                        }
-                        if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
-                        {
-                            capaCAR_base.BorrarCarritoPorId_SleepTimer(item.car_id, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
-                            ServiceReferenceDLL.cDllPedido oRepetido = new ServiceReferenceDLL.cDllPedido();
-                            oRepetido.Error = msgCarritoRepetido;
-                            return Serializador.SerializarAJson(oRepetido);
-                        }
-                        resultadoPedido = capaCore_decision.TomarPedidoConIdCarrito(item.car_id, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
-                        if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
-                            return null;
-                        if (resultadoPedido == null)
-                            return null;
-                        else if (resultadoPedido != null)
-                        {
-                            bool isErrorPedido = true;
-                            if (resultadoPedido.Error == null)
-                            {
-                                isErrorPedido = false;
-                            }
-                            else
-                            {
-                                if (resultadoPedido.Error.Trim() == string.Empty)
-                                {
-                                    isErrorPedido = false;
-                                }
-                            }
-                            // Si se genero error
-                            if (isErrorPedido)
-                            {
-                                resultadoPedido.Error = FuncionesPersonalizadas.LimpiarStringErrorPedido(resultadoPedido.Error);
-                            }
-                            else
-                            {
-                                // Obtener horario cierre
-                                string horarioCierre = ObtenerHorarioCierre_interno(pIdSucursal);
-                                resultadoPedido.Login = horarioCierre;
-                                // fin Obtener horario cierre
-                                // OPTIMIZAR //////////////////
-                                foreach (ServiceReferenceDLL.cDllPedidoItem itemFaltantes in resultadoPedido.Items)
-                                {
-                                    if (itemFaltantes.Faltas > 0)
-                                    {
-                                        WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemFaltantes.NombreObjetoComercial, itemFaltantes.Faltas, Constantes.cPEDIDO_FALTANTES);
-                                    }
-                                }
-                                foreach (ServiceReferenceDLL.cDllPedidoItem itemConProblemasDeCreditos in resultadoPedido.ItemsConProblemasDeCreditos)
-                                {
-                                    int cantidadProblemaCrediticia = itemConProblemasDeCreditos.Cantidad + itemConProblemasDeCreditos.Faltas;
-                                    if (cantidadProblemaCrediticia > 0)
-                                    {
-                                        WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemConProblemasDeCreditos.NombreObjetoComercial, cantidadProblemaCrediticia, Constantes.cPEDIDO_PROBLEMACREDITICIO);
-                                    }
-                                }
+        //    ServiceReferenceDLL.cDllPedido resultadoPedido = null;
+        //    if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+        //    {
+        //        List<cCarrito> listaCarrito = null;
+        //        if (pTipo == Constantes.cTipo_Carrito)
+        //        {
+        //            listaCarrito = capaCAR_decision.RecuperarCarritosPorSucursalYProductos((int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
+        //        }
+        //        else if (pTipo == Constantes.cTipo_CarritoDiferido)
+        //        {
+        //            listaCarrito = capaCAR_decision.RecuperarCarritosDiferidosPorCliente((int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente);
+        //        }
+        //        if (listaCarrito == null)
+        //            return null;
+        //        foreach (cCarrito item in listaCarrito)
+        //        {
+        //            if (item.codSucursal == pIdSucursal)
+        //            {
+        //                if (capaCAR_base.IsCarritoEnProceso(item.car_id))
+        //                {
+        //                    ServiceReferenceDLL.cDllPedido oEnProceso = new ServiceReferenceDLL.cDllPedido();
+        //                    oEnProceso.Error = msgCarritoEnProceso;
+        //                    return Serializador.SerializarAJson(oEnProceso);
+        //                }
 
-                                capaCAR_decision.GuardarPedidoBorrarCarrito(item, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
 
-            return Serializador.SerializarAJson(resultadoPedido);
-        }
+        //                List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
+        //                foreach (cProductosGenerico itemProductos in item.listaProductos)
+        //                {
+        //                    listaProductos.Add(FuncionesPersonalizadas_base.ProductosEnCarrito_ToConvert_DllProductosAndCantidad(itemProductos));
+        //                }
+        //                if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
+        //                {
+        //                    capaCAR_base.BorrarCarritoPorId_SleepTimer(item.car_id, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
+        //                    ServiceReferenceDLL.cDllPedido oRepetido = new ServiceReferenceDLL.cDllPedido();
+        //                    oRepetido.Error = msgCarritoRepetido;
+        //                    return Serializador.SerializarAJson(oRepetido);
+        //                }
+        //                resultadoPedido = capaCore_decision.TomarPedidoConIdCarrito(item.car_id, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
+        //                if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(item.car_id))
+        //                    return null;
+        //                if (resultadoPedido == null)
+        //                    return null;
+        //                else if (resultadoPedido != null)
+        //                {
+        //                    bool isErrorPedido = true;
+        //                    if (resultadoPedido.Error == null)
+        //                    {
+        //                        isErrorPedido = false;
+        //                    }
+        //                    else
+        //                    {
+        //                        if (resultadoPedido.Error.Trim() == string.Empty)
+        //                        {
+        //                            isErrorPedido = false;
+        //                        }
+        //                    }
+        //                    // Si se genero error
+        //                    if (isErrorPedido)
+        //                    {
+        //                        resultadoPedido.Error = FuncionesPersonalizadas.LimpiarStringErrorPedido(resultadoPedido.Error);
+        //                    }
+        //                    else
+        //                    {
+        //                        // Obtener horario cierre
+        //                        string horarioCierre = ObtenerHorarioCierre_interno(pIdSucursal);
+        //                        resultadoPedido.Login = horarioCierre;
+        //                        // fin Obtener horario cierre
+        //                        // OPTIMIZAR //////////////////
+        //                        foreach (ServiceReferenceDLL.cDllPedidoItem itemFaltantes in resultadoPedido.Items)
+        //                        {
+        //                            if (itemFaltantes.Faltas > 0)
+        //                            {
+        //                                WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemFaltantes.NombreObjetoComercial, itemFaltantes.Faltas, Constantes.cPEDIDO_FALTANTES);
+        //                            }
+        //                        }
+        //                        foreach (ServiceReferenceDLL.cDllPedidoItem itemConProblemasDeCreditos in resultadoPedido.ItemsConProblemasDeCreditos)
+        //                        {
+        //                            int cantidadProblemaCrediticia = itemConProblemasDeCreditos.Cantidad + itemConProblemasDeCreditos.Faltas;
+        //                            if (cantidadProblemaCrediticia > 0)
+        //                            {
+        //                                WebService.InsertarFaltantesProblemasCrediticios(item.lrc_id, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemConProblemasDeCreditos.NombreObjetoComercial, cantidadProblemaCrediticia, Constantes.cPEDIDO_PROBLEMACREDITICIO);
+        //                            }
+        //                        }
+
+        //                        capaCAR_base.GuardarPedidoBorrarCarrito(pUsuario,item, pTipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
+        //                    }
+        //                }
+        //                break;
+        //            }
+        //        }
+        //    }
+
+        //    return Serializador.SerializarAJson(resultadoPedido);
+        //}
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string TomarPedidoCarritoDiferido(string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
-            return TomarPedidoCarrito_generico(Constantes.cTipo_CarritoDiferido, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
+            cClientes oClientes = ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+            Usuario oUsuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
+            List<cCarrito> listaCarrito = DKbase.web.capaDatos.capaCAR_WebService_base.RecuperarCarritosPorSucursalYProductos_generica(oClientes, Constantes.cTipo_CarritoDiferido);
+            string horarioCierre = FuncionesPersonalizadas.getObtenerHorarioCierre(pIdSucursal);
+            cDllPedido resultadoPedido = capaCAR_WebService_base.TomarPedidoCarrito_generico(oUsuario, oClientes, listaCarrito, horarioCierre, Constantes.cTipo_CarritoDiferido, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
+            return Serializador.SerializarAJson(resultadoPedido);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public int BorrarCarritoTransferDiferido(string pSucursal)
@@ -634,189 +647,202 @@ namespace Kellerhoff.Controllers
         public string TomarTransferPedidoCarrito(bool pIsDiferido, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio)
         {
             string tipo = pIsDiferido ? Constantes.cTipo_CarritoDiferidoTransfers : Constantes.cTipo_CarritoTransfers;
-            //bool isTomarPedido = false; List<ServiceReferenceDLL.cDllPedidoTransfer>
-            List<ServiceReferenceDLL.cDllPedidoTransfer> resultadoPedido = null;
-            int car_id_aux = 0;
-            if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-            {
-                List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
-
-                List<cCarritoTransfer> listaCarrito = capaCAR_decision.RecuperarCarritosTransferPorIdCliente((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"], tipo, pIdSucursal);
-                if (listaCarrito == null)
-                    return null;
-                List<cProductosGenerico> listaProductos_Auditoria = new List<cProductosGenerico>();
-                foreach (cCarritoTransfer item in listaCarrito)
-                {
-                    if (item.ctr_codSucursal == pIdSucursal)
-                    {
-                        car_id_aux = item.car_id_aux;
-                        foreach (cProductosGenerico itemProductos in item.listaProductos)
-                        {
-                            ServiceReferenceDLL.cDllProductosAndCantidad objProductos = FuncionesPersonalizadas.ProductosEnCarrito_ToConvert_DllProductosAndCantidad(itemProductos);
-                            objProductos.IdTransfer = item.tfr_codigo;
-                            listaProductos.Add(objProductos);
-                            itemProductos.tfr_codigo = item.tfr_codigo;
-                            itemProductos.tde_codtfr = item.tfr_codigo;
-                            listaProductos_Auditoria.Add(itemProductos);
-
-                        }
-                    }
-                } // fin   foreach (cCarritoTransfer item in listaCarrito)
-                if (capaCAR_base.IsCarritoEnProceso(car_id_aux))
-                {
-                    ServiceReferenceDLL.cDllPedidoTransfer oEnProceso = new ServiceReferenceDLL.cDllPedidoTransfer();
-                    oEnProceso.Error = msgCarritoEnProceso;
-                    resultadoPedido = new List<ServiceReferenceDLL.cDllPedidoTransfer>();
-                    resultadoPedido.Add(oEnProceso);
-                    return Serializador.SerializarAJson(resultadoPedido);
-                }
-                if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
-                {
-                    capaCAR_base.BorrarCarritoPorId_SleepTimer(car_id_aux, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
-                    ServiceReferenceDLL.cDllPedidoTransfer oRepetido = new ServiceReferenceDLL.cDllPedidoTransfer();
-                    oRepetido.Error = msgCarritoRepetido;
-                    resultadoPedido = new List<ServiceReferenceDLL.cDllPedidoTransfer>();
-                    resultadoPedido.Add(oRepetido);
-                    return Serializador.SerializarAJson(resultadoPedido);
-                }
-                List<ServiceReferenceDLL.cDllPedidoTransfer> listaCarritoAux = capaWebServiceDLL.TomarPedidoDeTransfersConIdCarrito(car_id_aux, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos);
-                if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
-                    return null;
-
-                if (listaCarritoAux != null)
-                {
-                    resultadoPedido = listaCarritoAux;
-                    bool isErrorPedido = true;
-                    if (listaCarritoAux.Count > 0)
-                    {
-                        if (listaCarritoAux[0].Error == null)
-                        {
-                            isErrorPedido = false;
-                        }
-                        else
-                        {
-                            if (listaCarritoAux[0].Error.Trim() == string.Empty)
-                            {
-                                isErrorPedido = false;
-                            }
-                        }
-                        // INICIO FALTANTE
-                        foreach (ServiceReferenceDLL.cDllPedidoTransfer itemPedidoTransferFaltante in listaCarritoAux)
-                        {
-                            if (itemPedidoTransferFaltante.Login == "REVISION")
-                            {
-
-                            }
-                            else if (itemPedidoTransferFaltante.Login == "CONFIRMACION")
-                            {
-
-                            }
-                            else
-                            {
-                                if (itemPedidoTransferFaltante.Items != null)
-                                {
-                                    if (itemPedidoTransferFaltante.Items.Count > 0)
-                                    {
-                                        for (int iArrayOfCDllPedidoItem = 0; iArrayOfCDllPedidoItem < itemPedidoTransferFaltante.Items.Count; iArrayOfCDllPedidoItem++)
-                                        {
-                                            if (itemPedidoTransferFaltante.Items[iArrayOfCDllPedidoItem].Faltas > 0)
-                                            {
-                                                WebService.InsertarFaltantesProblemasCrediticios(null, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemPedidoTransferFaltante.Items[iArrayOfCDllPedidoItem].NombreObjetoComercial, itemPedidoTransferFaltante.Items[iArrayOfCDllPedidoItem].Faltas, Constantes.cPEDIDO_FALTANTES);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // FIN FALTANTE
-                    }
-                    else
-                    {
-                        isErrorPedido = false;
-                    }
-                    // Si se genero error
-                    if (isErrorPedido)
-                    {
-                        listaCarritoAux[0].Error = FuncionesPersonalizadas.LimpiarStringErrorPedido(listaCarritoAux[0].Error);
-                    }
-                    else
-                    {
-                        // borrar carrito transfer
-                        //WebService.BorrarCarritoTransfer(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, pIdSucursal);
-                        capaCAR_decision.GuardarPedidoBorrarCarrito(listaProductos_Auditoria, car_id_aux, pIdSucursal, tipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, false);
-                    }
-                }
-                else
-                    return null;
-            }
+            cClientes oClientes = ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+            Usuario oUsuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
+            List<cCarritoTransfer> pListaCarrito = capaCAR_decision.RecuperarCarritosTransferPorIdCliente(oClientes, tipo, pIdSucursal);
+            //string horarioCierre = FuncionesPersonalizadas.getObtenerHorarioCierre(pIdSucursal);
+            List<cDllPedidoTransfer> resultadoPedido = capaCAR_WebService_base.TomarTransferPedidoCarrito(oUsuario, oClientes, pListaCarrito, pIsDiferido, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio);
             return Serializador.SerializarAJson(resultadoPedido);
+            //string tipo = pIsDiferido ? Constantes.cTipo_CarritoDiferidoTransfers : Constantes.cTipo_CarritoTransfers;
+            ////bool isTomarPedido = false; List<ServiceReferenceDLL.cDllPedidoTransfer>
+            //List<ServiceReferenceDLL.cDllPedidoTransfer> resultadoPedido = null;
+            //int car_id_aux = 0;
+            //if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            //{
+            //    List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
+
+            //    List<cCarritoTransfer> listaCarrito = capaCAR_decision.RecuperarCarritosTransferPorIdCliente((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"], tipo, pIdSucursal);
+            //    if (listaCarrito == null)
+            //        return null;
+            //    List<cProductosGenerico> listaProductos_Auditoria = new List<cProductosGenerico>();
+            //    foreach (cCarritoTransfer item in listaCarrito)
+            //    {
+            //        if (item.ctr_codSucursal == pIdSucursal)
+            //        {
+            //            car_id_aux = item.car_id_aux;
+            //            foreach (cProductosGenerico itemProductos in item.listaProductos)
+            //            {
+            //                ServiceReferenceDLL.cDllProductosAndCantidad objProductos = FuncionesPersonalizadas.ProductosEnCarrito_ToConvert_DllProductosAndCantidad(itemProductos);
+            //                objProductos.IdTransfer = item.tfr_codigo;
+            //                listaProductos.Add(objProductos);
+            //                itemProductos.tfr_codigo = item.tfr_codigo;
+            //                itemProductos.tde_codtfr = item.tfr_codigo;
+            //                listaProductos_Auditoria.Add(itemProductos);
+
+            //            }
+            //        }
+            //    } // fin   foreach (cCarritoTransfer item in listaCarrito)
+            //    if (capaCAR_base.IsCarritoEnProceso(car_id_aux))
+            //    {
+            //        ServiceReferenceDLL.cDllPedidoTransfer oEnProceso = new ServiceReferenceDLL.cDllPedidoTransfer();
+            //        oEnProceso.Error = msgCarritoEnProceso;
+            //        resultadoPedido = new List<ServiceReferenceDLL.cDllPedidoTransfer>();
+            //        resultadoPedido.Add(oEnProceso);
+            //        return Serializador.SerializarAJson(resultadoPedido);
+            //    }
+            //    if (capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
+            //    {
+            //        capaCAR_base.BorrarCarritoPorId_SleepTimer(car_id_aux, Constantes.cAccionCarrito_BORRAR_CARRRITO_REPETIDO);
+            //        ServiceReferenceDLL.cDllPedidoTransfer oRepetido = new ServiceReferenceDLL.cDllPedidoTransfer();
+            //        oRepetido.Error = msgCarritoRepetido;
+            //        resultadoPedido = new List<ServiceReferenceDLL.cDllPedidoTransfer>();
+            //        resultadoPedido.Add(oRepetido);
+            //        return Serializador.SerializarAJson(resultadoPedido);
+            //    }
+            //    List<ServiceReferenceDLL.cDllPedidoTransfer> listaCarritoAux = capaWebServiceDLL.TomarPedidoDeTransfersConIdCarrito(car_id_aux, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos);
+            //    if (!capaWebServiceDLL.ValidarExistenciaDeCarritoWebPasado(car_id_aux))
+            //        return null;
+
+            //    if (listaCarritoAux != null)
+            //    {
+            //        resultadoPedido = listaCarritoAux;
+            //        bool isErrorPedido = true;
+            //        if (listaCarritoAux.Count > 0)
+            //        {
+            //            if (listaCarritoAux[0].Error == null)
+            //            {
+            //                isErrorPedido = false;
+            //            }
+            //            else
+            //            {
+            //                if (listaCarritoAux[0].Error.Trim() == string.Empty)
+            //                {
+            //                    isErrorPedido = false;
+            //                }
+            //            }
+            //            // INICIO FALTANTE
+            //            foreach (ServiceReferenceDLL.cDllPedidoTransfer itemPedidoTransferFaltante in listaCarritoAux)
+            //            {
+            //                if (itemPedidoTransferFaltante.Login == "REVISION")
+            //                {
+
+            //                }
+            //                else if (itemPedidoTransferFaltante.Login == "CONFIRMACION")
+            //                {
+
+            //                }
+            //                else
+            //                {
+            //                    if (itemPedidoTransferFaltante.Items != null)
+            //                    {
+            //                        if (itemPedidoTransferFaltante.Items.Count > 0)
+            //                        {
+            //                            for (int iArrayOfCDllPedidoItem = 0; iArrayOfCDllPedidoItem < itemPedidoTransferFaltante.Items.Count; iArrayOfCDllPedidoItem++)
+            //                            {
+            //                                if (itemPedidoTransferFaltante.Items[iArrayOfCDllPedidoItem].Faltas > 0)
+            //                                {
+            //                                    WebService.InsertarFaltantesProblemasCrediticios(null, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemPedidoTransferFaltante.Items[iArrayOfCDllPedidoItem].NombreObjetoComercial, itemPedidoTransferFaltante.Items[iArrayOfCDllPedidoItem].Faltas, Constantes.cPEDIDO_FALTANTES);
+            //                                }
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //            // FIN FALTANTE
+            //        }
+            //        else
+            //        {
+            //            isErrorPedido = false;
+            //        }
+            //        // Si se genero error
+            //        if (isErrorPedido)
+            //        {
+            //            listaCarritoAux[0].Error = FuncionesPersonalizadas.LimpiarStringErrorPedido(listaCarritoAux[0].Error);
+            //        }
+            //        else
+            //        {
+            //            // borrar carrito transfer
+            //            //WebService.BorrarCarritoTransfer(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, pIdSucursal);
+            //            capaCAR_decision.GuardarPedidoBorrarCarrito(listaProductos_Auditoria, car_id_aux, pIdSucursal, tipo, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, false);
+            //        }
+            //    }
+            //    else
+            //        return null;
+            //}
+            //return Serializador.SerializarAJson(resultadoPedido);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string TomarPedidoCarritoFacturarseFormaHabitual(string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente, string[] pListaNombreComercial, int[] pListaCantidad)
         {
-            ServiceReferenceDLL.cDllPedido resultadoPedido = null;
-            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-            {
-                List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
-                for (int i = 0; i < pListaNombreComercial.Count(); i++)
-                {
-                    ServiceReferenceDLL.cDllProductosAndCantidad obj = new ServiceReferenceDLL.cDllProductosAndCantidad();
-                    obj.codProductoNombre = pListaNombreComercial[i];
-                    obj.cantidad = pListaCantidad[i];
-                    cProductos objProductoBD = WebService.RecuperarProductoPorNombre(obj.codProductoNombre);
-                    obj.isOferta = (objProductoBD.pro_ofeunidades == 0 && objProductoBD.pro_ofeporcentaje == 0) ? false : true;
-                    listaProductos.Add(obj);
-                }
-                resultadoPedido = capaWebServiceDLL.TomarPedido(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
-                if (resultadoPedido == null)
-                    return null;
-                else if (resultadoPedido != null)
-                {
-                    bool isErrorPedido = true;
-                    if (resultadoPedido.Error == null)
-                    {
-                        isErrorPedido = false;
-                    }
-                    else
-                    {
-                        if (resultadoPedido.Error.Trim() == string.Empty)
-                        {
-                            isErrorPedido = false;
-                        }
-                    }
-                    // Si se genero error
-                    if (isErrorPedido)
-                    {
-                        resultadoPedido.Error = FuncionesPersonalizadas.LimpiarStringErrorPedido(resultadoPedido.Error);
-                    }
-                    else
-                    {
-                        // Obtener horario cierre
-                        string horarioCierre = ObtenerHorarioCierre_interno(pIdSucursal);
-                        resultadoPedido.Login = horarioCierre;
-                        // fin Obtener horario cierre
-                        // OPTIMIZAR //////////////////
-                        foreach (ServiceReferenceDLL.cDllPedidoItem itemFaltantes in resultadoPedido.Items)
-                        {
-                            if (itemFaltantes.Faltas > 0)
-                            {
-                                WebService.InsertarFaltantesProblemasCrediticios(null, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemFaltantes.NombreObjetoComercial, itemFaltantes.Faltas, Constantes.cPEDIDO_FALTANTES);
-                            }
-                            //
-                        }
-                        foreach (ServiceReferenceDLL.cDllPedidoItem itemConProblemasDeCreditos in resultadoPedido.ItemsConProblemasDeCreditos)
-                        {
-                            int cantidadProblemaCrediticia = itemConProblemasDeCreditos.Cantidad + itemConProblemasDeCreditos.Faltas;
-                            if (cantidadProblemaCrediticia > 0)
-                            {
-                                WebService.InsertarFaltantesProblemasCrediticios(null, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemConProblemasDeCreditos.NombreObjetoComercial, cantidadProblemaCrediticia, Constantes.cPEDIDO_PROBLEMACREDITICIO);
-                            }
-                        }
-                    }
-                }
-            }
-
+            cClientes oClientes = ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+            Usuario oUsuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
+           // List<cCarrito> listaCarrito = DKbase.web.capaDatos.capaCAR_WebService_base.RecuperarCarritosPorSucursalYProductos_generica(oClientes, Constantes.cTipo_CarritoDiferido);
+            string horarioCierre = FuncionesPersonalizadas.getObtenerHorarioCierre(pIdSucursal);
+            cDllPedido resultadoPedido = capaCAR_WebService_base.TomarPedidoCarritoFacturarseFormaHabitual(oUsuario, oClientes, horarioCierre, pIdSucursal,  pMensajeEnFactura,  pMensajeEnRemito,  pTipoEnvio,  pIsUrgente,pListaNombreComercial, pListaCantidad);
             return Serializador.SerializarAJson(resultadoPedido);
+            //ServiceReferenceDLL.cDllPedido resultadoPedido = null;
+            //if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            //{
+            //    List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
+            //    for (int i = 0; i < pListaNombreComercial.Count(); i++)
+            //    {
+            //        ServiceReferenceDLL.cDllProductosAndCantidad obj = new ServiceReferenceDLL.cDllProductosAndCantidad();
+            //        obj.codProductoNombre = pListaNombreComercial[i];
+            //        obj.cantidad = pListaCantidad[i];
+            //        cProductos objProductoBD = WebService.RecuperarProductoPorNombre(obj.codProductoNombre);
+            //        obj.isOferta = (objProductoBD.pro_ofeunidades == 0 && objProductoBD.pro_ofeporcentaje == 0) ? false : true;
+            //        listaProductos.Add(obj);
+            //    }
+            //    resultadoPedido = capaWebServiceDLL.TomarPedido(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, listaProductos, pIsUrgente);
+            //    if (resultadoPedido == null)
+            //        return null;
+            //    else if (resultadoPedido != null)
+            //    {
+            //        bool isErrorPedido = true;
+            //        if (resultadoPedido.Error == null)
+            //        {
+            //            isErrorPedido = false;
+            //        }
+            //        else
+            //        {
+            //            if (resultadoPedido.Error.Trim() == string.Empty)
+            //            {
+            //                isErrorPedido = false;
+            //            }
+            //        }
+            //        // Si se genero error
+            //        if (isErrorPedido)
+            //        {
+            //            resultadoPedido.Error = FuncionesPersonalizadas.LimpiarStringErrorPedido(resultadoPedido.Error);
+            //        }
+            //        else
+            //        {
+            //            // Obtener horario cierre
+            //            string horarioCierre = ObtenerHorarioCierre_interno(pIdSucursal);
+            //            resultadoPedido.Login = horarioCierre;
+            //            // fin Obtener horario cierre
+            //            // OPTIMIZAR //////////////////
+            //            foreach (ServiceReferenceDLL.cDllPedidoItem itemFaltantes in resultadoPedido.Items)
+            //            {
+            //                if (itemFaltantes.Faltas > 0)
+            //                {
+            //                    WebService.InsertarFaltantesProblemasCrediticios(null, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemFaltantes.NombreObjetoComercial, itemFaltantes.Faltas, Constantes.cPEDIDO_FALTANTES);
+            //                }
+            //                //
+            //            }
+            //            foreach (ServiceReferenceDLL.cDllPedidoItem itemConProblemasDeCreditos in resultadoPedido.ItemsConProblemasDeCreditos)
+            //            {
+            //                int cantidadProblemaCrediticia = itemConProblemasDeCreditos.Cantidad + itemConProblemasDeCreditos.Faltas;
+            //                if (cantidadProblemaCrediticia > 0)
+            //                {
+            //                    WebService.InsertarFaltantesProblemasCrediticios(null, pIdSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, itemConProblemasDeCreditos.NombreObjetoComercial, cantidadProblemaCrediticia, Constantes.cPEDIDO_PROBLEMACREDITICIO);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+
+            //return Serializador.SerializarAJson(resultadoPedido);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string ActualizarProductoCarritoSubirArchivo(List<cProductosAndCantidad> pListaValor)

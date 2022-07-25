@@ -150,7 +150,7 @@ namespace Kellerhoff.servicios
                                         //6 precio público N(10) [1]
                                         //7 precio unitario N(10) [1]
                                         //8 importe N(10) [1]   
-                                        cProductos producto = WebService.RecuperarProductoPorNombre(item.Descripcion);
+                                        cProductos producto = capaCAR_WebService_base.RecuperarProductoPorNombre(item.Descripcion);
                                         bool isNoTieneCodigoBarra = true;//código de barras producto C(13)
                                         if (producto != null)
                                         {

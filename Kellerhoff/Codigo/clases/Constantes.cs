@@ -263,14 +263,6 @@ namespace Kellerhoff.Codigo.clases
         {
             get { return "F"; }
         }
-        public static int cPEDIDO_FALTANTES
-        {
-            get { return 1; }
-        }
-        public static int cPEDIDO_PROBLEMACREDITICIO
-        {
-            get { return 2; }
-        }
         public static string cRaizLog
         {
             get { return System.Configuration.ConfigurationManager.AppSettings["raiz_Log"].ToString(); }

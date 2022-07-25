@@ -307,35 +307,6 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataTable RecuperarProductoPorNombre(string pNombreProducto)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Productos.spRecuperadorTodosProductosPorNombre", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paPro_nombre = cmdComandoInicio.Parameters.Add("@pro_nombre", SqlDbType.NVarChar, 75);
-            paPro_nombre.Value = pNombreProducto;
-
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
         public static DataSet RecuperarTodosProductosEnOferta()
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

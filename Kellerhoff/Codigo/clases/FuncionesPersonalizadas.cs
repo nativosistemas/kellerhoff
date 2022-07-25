@@ -56,22 +56,7 @@ namespace Kellerhoff.Codigo.clases
         {
             return DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinalTransferBase(pClientes, pTransfer.tfr_deshab, pTransfer.tfr_pordesadi, pTransferDetalle.pro_neto, pTransferDetalle.pro_codtpopro, pTransferDetalle.pro_descuentoweb, (decimal)pTransferDetalle.tde_predescuento, pTransferDetalle.tde_PrecioConDescuentoDirecto, pTransferDetalle.tde_PorcARestarDelDtoDeCliente);
         }
-        public static string LimpiarStringErrorPedido(string pValor)
-        {
-            string resultado = pValor;
-            resultado = resultado.Replace("-", string.Empty);
-            resultado = resultado.Replace("0", string.Empty);
-            resultado = resultado.Replace("1", string.Empty);
-            resultado = resultado.Replace("2", string.Empty);
-            resultado = resultado.Replace("3", string.Empty);
-            resultado = resultado.Replace("4", string.Empty);
-            resultado = resultado.Replace("5", string.Empty);
-            resultado = resultado.Replace("6", string.Empty);
-            resultado = resultado.Replace("7", string.Empty);
-            resultado = resultado.Replace("8", string.Empty);
-            resultado = resultado.Replace("9", string.Empty);
-            return resultado;
-        }
+
         public static DataTable ConvertNombresSeccionToDataTable(List<string> pListaNombreSeccion)
         {
             return DKbase.web.FuncionesPersonalizadas_base.ConvertNombresSeccionToDataTable(pListaNombreSeccion);
@@ -95,14 +80,7 @@ namespace Kellerhoff.Codigo.clases
             fila["nroordenamiento"] = pTabla.Rows.Count + 1;
             return fila;
         }
-        public static ServiceReferenceDLL.cDllProductosAndCantidad ProductosEnCarrito_ToConvert_DllProductosAndCantidad(cProductosGenerico pValor)
-        {
-            ServiceReferenceDLL.cDllProductosAndCantidad resultado = new ServiceReferenceDLL.cDllProductosAndCantidad();
-            resultado.cantidad = pValor.cantidad;
-            resultado.codProductoNombre = pValor.pro_nombre;
-            resultado.isOferta = (pValor.pro_ofeunidades == 0 && pValor.pro_ofeporcentaje == 0) ? false : true;
-            return resultado;
-        }
+
         public static void CargarMensajeActualizado(int pIdCliente)
         {
             bool isAgregar = true;

@@ -975,22 +975,7 @@ namespace Kellerhoff
         {
             return Codigo.clases.Generales.Serializador.DeserializarJson<cClientes>(Codigo.clases.Generales.Serializador.SerializarAJson(DKbase.web.acceso.ConvertToCliente(pItem)));
         }
-        public static cProductos RecuperarProductoPorNombre(string pNombreProducto)
-        {
-            cProductos resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tablaProductos = capaProductos.RecuperarProductoPorNombre(pNombreProducto);
-                if (tablaProductos != null)
-                {
-                    if (tablaProductos.Rows.Count > 0)
-                    {
-                        resultado = ConvertToProductos(tablaProductos.Rows[0]);
-                    }
-                }
-            }
-            return resultado;
-        }
+
         public static List<cProductos> RecuperarTodosProductos()
         {
             List<cProductos> resultado = null;
@@ -2013,7 +1998,7 @@ namespace Kellerhoff
         {
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataSet dsResultado = capaLogRegistro.GestiónFaltantesProblemasCrediticios(null, fpc_codCarrito, fpc_codSucursal, fpc_codCliente, fpc_nombreProducto, fpc_cantidad, fpc_tipo, null, Constantes.cSQL_INSERT);
+                DataSet dsResultado = capaLogRegistro_base.GestiónFaltantesProblemasCrediticios(null, fpc_codCarrito, fpc_codSucursal, fpc_codCliente, fpc_nombreProducto, fpc_cantidad, fpc_tipo, null, Constantes.cSQL_INSERT);
                 int resultado = -1;
                 if (dsResultado != null)
                 {
