@@ -367,6 +367,7 @@ function getHtml_ProductosFacturados(pValor) {
     strHtml += '</tr></thead></table>';
     strHtml += '<table class="footable table popup table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="0" cellpadding="0" border="0">';
     strHtml += '<tbody>';
+    if (listaFaltantes != null) {
     for (var iFaltantes = 0; iFaltantes < listaFaltantes.length; iFaltantes++) {
         if (listaFaltantes[iFaltantes].Cantidad > 0) {
             isProductosPedidos = true;
@@ -379,6 +380,7 @@ function getHtml_ProductosFacturados(pValor) {
             strHtml += '<td class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">' + listaFaltantes[iFaltantes].Cantidad + '</td>';
             strHtml += '</tr>';
             cant++;
+        }
         }
     }
     strHtml += '</tbody></table>';
@@ -402,18 +404,20 @@ function getHtml_ProductosEnFalta(pValor) {
     strHtml += '</tr></thead></table>';
     strHtml += '<table class="footable table popup table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="0" cellpadding="0" border="0">';
     strHtml += '<tbody>';
-    for (var iFaltantes = 0; iFaltantes < listaFaltantes.length; iFaltantes++) {
-        if (listaFaltantes[iFaltantes].Faltas > 0) {
-            isFaltantes = true;
-            var strHtmlColorFondo = 'grs';
-            if (cant % 2 != 0) {
-                strHtmlColorFondo = 'wht';
+    if (listaFaltantes != null) {
+        for (var iFaltantes = 0; iFaltantes < listaFaltantes.length; iFaltantes++) {
+            if (listaFaltantes[iFaltantes].Faltas > 0) {
+                isFaltantes = true;
+                var strHtmlColorFondo = 'grs';
+                if (cant % 2 != 0) {
+                    strHtmlColorFondo = 'wht';
+                }
+                strHtml += '<tr class="' + strHtmlColorFondo + '">';
+                strHtml += '<td class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">' + listaFaltantes[iFaltantes].NombreObjetoComercial + '</td>';
+                strHtml += '<td class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">' + listaFaltantes[iFaltantes].Faltas + '</td>';
+                strHtml += '</tr>';
+                cant++;
             }
-            strHtml += '<tr class="' + strHtmlColorFondo + '">';
-            strHtml += '<td class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">' + listaFaltantes[iFaltantes].NombreObjetoComercial + '</td>';
-            strHtml += '<td class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">' + listaFaltantes[iFaltantes].Faltas + '</td>';
-            strHtml += '</tr>';
-            cant++;
         }
     }
     strHtml += '</tbody></table>';
@@ -435,19 +439,21 @@ function getHtml_ProductosConProblemasDeCredito(pValor) {
     strHtml += '</tr></thead></table>';
     strHtml += '<table class="footable table popup table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="0" cellpadding="0" border="0">';
     strHtml += '<tbody>';
-    for (var iProblemaCrediticio = 0; iProblemaCrediticio < listaProblemaCrediticio.length; iProblemaCrediticio++) {
-        var cantidadProblemasCrediticios = listaProblemaCrediticio[iProblemaCrediticio].Cantidad + listaProblemaCrediticio[iProblemaCrediticio].Faltas;
-        if (cantidadProblemasCrediticios > 0) {
-            isFaltantes = true;
-            var strHtmlColorFondo = 'grs';
-            if (cant % 2 != 0) {
-                strHtmlColorFondo = 'wht';
+    if (listaProblemaCrediticio != null) {
+        for (var iProblemaCrediticio = 0; iProblemaCrediticio < listaProblemaCrediticio.length; iProblemaCrediticio++) {
+            var cantidadProblemasCrediticios = listaProblemaCrediticio[iProblemaCrediticio].Cantidad + listaProblemaCrediticio[iProblemaCrediticio].Faltas;
+            if (cantidadProblemasCrediticios > 0) {
+                isFaltantes = true;
+                var strHtmlColorFondo = 'grs';
+                if (cant % 2 != 0) {
+                    strHtmlColorFondo = 'wht';
+                }
+                strHtml += '<tr class="' + strHtmlColorFondo + '">';
+                strHtml += '<td class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">' + listaProblemaCrediticio[iProblemaCrediticio].NombreObjetoComercial + '</td>';
+                strHtml += '<td class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">' + cantidadProblemasCrediticios + '</td>';
+                strHtml += '</tr>';
+                cant++;
             }
-            strHtml += '<tr class="' + strHtmlColorFondo + '">';
-            strHtml += '<td class="col-lg-10 col-md-10 col-sm-10 col-xs-9 text-left">' + listaProblemaCrediticio[iProblemaCrediticio].NombreObjetoComercial + '</td>';
-            strHtml += '<td class="col-lg-2 col-md-2 col-sm-10 col-xs-3 text-center">' + cantidadProblemasCrediticios + '</td>';
-            strHtml += '</tr>';
-            cant++;
         }
     }
     strHtml += '</tbody></table>';
