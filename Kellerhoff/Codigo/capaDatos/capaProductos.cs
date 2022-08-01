@@ -537,35 +537,6 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static bool ActualizarInsertarProductosImagen(string pCodigoProducto, string pNombreArchivo)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("dbo.spActualizarInsertarProductosImagen", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paPri_codigo = cmdComandoInicio.Parameters.Add("@pri_codigo", SqlDbType.NVarChar, 50);
-            SqlParameter paPri_nombreArchivo = cmdComandoInicio.Parameters.Add("@pri_nombreArchivo", SqlDbType.NVarChar, 100);
-            paPri_codigo.Value = pCodigoProducto;
-            paPri_nombreArchivo.Value = pNombreArchivo;
-
-            try
-            {
-                Conn.Open();
-                cmdComandoInicio.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
         public static bool ActualizarProductosImagenAnchoAlto(string pri_codigo, int pri_ancho_ampliar, int pri_alto_ampliar)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

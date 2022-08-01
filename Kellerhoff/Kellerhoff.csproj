@@ -1279,6 +1279,7 @@
     </Compile>
     <Compile Include="admin\pages\GestionProcedimientos.aspx.cs">
       <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="admin\pages\GestionProcedimientos.aspx.designer.cs">
       <DependentUpon>GestionProcedimientos.aspx</DependentUpon>
@@ -1327,18 +1328,21 @@
     </Compile>
     <Compile Include="admin\pages\GestionRegla.aspx.cs">
       <DependentUpon>GestionRegla.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="admin\pages\GestionRegla.aspx.designer.cs">
       <DependentUpon>GestionRegla.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\pages\GestionRol.aspx.cs">
       <DependentUpon>GestionRol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="admin\pages\GestionRol.aspx.designer.cs">
       <DependentUpon>GestionRol.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\pages\GestionRolesYReglas.aspx.cs">
       <DependentUpon>GestionRolesYReglas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="admin\pages\GestionRolesYReglas.aspx.designer.cs">
       <DependentUpon>GestionRolesYReglas.aspx</DependentUpon>
@@ -1373,6 +1377,7 @@
     </Compile>
     <Compile Include="admin\pages\GestionUsuario.aspx.cs">
       <DependentUpon>GestionUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="admin\pages\GestionUsuario.aspx.designer.cs">
       <DependentUpon>GestionUsuario.aspx</DependentUpon>
@@ -1393,6 +1398,7 @@
     </Compile>
     <Compile Include="admin\pages\MenuPrincipal.aspx.cs">
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="admin\pages\MenuPrincipal.aspx.designer.cs">
       <DependentUpon>MenuPrincipal.aspx</DependentUpon>
@@ -1536,7 +1542,9 @@
     <Compile Include="Codigo\clases\cHomePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Codigo\clases\ClasesPersonalizadas.cs" />
+    <Compile Include="Codigo\clases\ClasesPersonalizadas.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Codigo\clases\Constantes.cs" />
     <Compile Include="Codigo\clases\cSubirpedido.cs" />
     <Compile Include="Codigo\clases\cThumbnail.cs" />
@@ -1679,6 +1687,7 @@
     </Compile>
     <Compile Include="master\BaseAdmin.Master.cs">
       <DependentUpon>BaseAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="master\BaseAdmin.Master.designer.cs">
       <DependentUpon>BaseAdmin.Master</DependentUpon>

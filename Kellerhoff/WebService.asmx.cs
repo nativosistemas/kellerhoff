@@ -3761,8 +3761,10 @@ namespace Kellerhoff
         public static bool? ActualizarInsertarProductosImagen(string pCodigoProducto, string pNombreArchivo)
         {
             bool? resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-                resultado = capaProductos.ActualizarInsertarProductosImagen(pCodigoProducto, pNombreArchivo);
+            if (VerificarPermisos(CredencialAutenticacion)) { 
+                resultado = capaProductos_base.ActualizarInsertarProductosImagen(DKbase.Helper.getConnectionStringSQL,pCodigoProducto, pNombreArchivo);
+                capaProductos_base.ActualizarInsertarProductosImagen(DKbase.Helper.getConnectionStringSQL_intranet, pCodigoProducto, pNombreArchivo);
+            }
             return resultado;
         }
         public static bool? ElimimarProductoImagenPorId(string pCodigoProducto)

@@ -38,6 +38,7 @@ namespace Kellerhoff.admin.pages
             {
                 Boolean fileOK = false;
                 String path = Constantes.cRaizArchivos + @"/archivos/productos/";
+                String path_nuevos = Constantes.cRaizArchivos + @"/archivos/productos_nuevos/";
                 if (FileUpload1.HasFile)
                 {
                     String fileExtension =
@@ -79,6 +80,7 @@ namespace Kellerhoff.admin.pages
                             }
 
                             FileUpload1.PostedFile.SaveAs(path + nombreFinal);
+                            FileUpload1.PostedFile.SaveAs(path_nuevos + nombreFinal);
 
                             cThumbnail.obtenerImagen("productos", nombreFinal, Constantes.cWidth_Oferta.ToString(), Constantes.cHeight_Oferta.ToString(), "#FFFFFF", false);
 
