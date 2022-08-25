@@ -54,7 +54,7 @@
 <body class="<% htmlCssBody(); %>">
     <%--onresize="onresizeCarrusel()"--%>
     <%--bd_home bd_sec--%>
-     <div id="modalModulo" class="modal md-effect-1 md-content portfolio-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+    <div id="modalModulo" class="modal md-effect-1 md-content portfolio-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
     <div class="container-fluid hdr_nd hidden-xs">
         <div class="row">
             <div class="col-lg-5 col-md-5 text-left hidden-sm hidden-xs">
@@ -227,18 +227,16 @@
                     </div>--%>
                     <div class="clear55"></div>
                     <div class="hospitalario">
-                        <h1>DK INSTITUCIONALES / ALTO COSTO</h1>
+                        <h1>DK INSTITUCIONALES</h1>
                     </div>
                     <div class="clear10"></div>
                     <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80</a></div>
-                    <div class="clear10"></div>
                     <div class="hospitalario">
                         <h1>ALTO COSTO</h1>
                     </div>
+                    <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-6100365">0341 6100365 (pedidos)</a></div>
                     <div class="clear10"></div>
-                    <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0351-6600707">0351 6600707 (Córdoba)</a></div>
-                    <div class="clear10"></div>
-                    <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-2503999">0341 2503999 (Santa Fe-Entre Ríos)</a></div>
+                    <div><i class="fa fa-envelope fa_contacto_ftr"></i>dkinstitucional@kellerhoff.com.ar</div>
                 </div>
                 <div class="clear55 visible-sm visible-md"></div>
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ftr_contacto">
@@ -335,19 +333,18 @@
                     <a class="hidden-xs hidden-sm" href="#" target="_F960AFIPInfo"><img src="../img/home/dataweb.jpg" height="90" border="0"></a>--%>
                         <div class="clear55"></div>
                         <div class="hospitalario">
-                            <h1>DK INSTITUCIONALES / ALTO COSTO</h1>
+                            <h1>DK INSTITUCIONALES</h1>
                         </div>
                         <div class="clear10"></div>
-                        <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80</a></div>
-                        <div class="clear10"></div>
+                        <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80 (administración)</a></div>
+                        <div class="clear55"></div>
                         <div class="hospitalario">
                             <h1>ALTO COSTO</h1>
                         </div>
                         <div class="clear10"></div>
-                        <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0351-6600707">0351 6600707 (Córdoba)</a></div>
+                        <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-6100365">0341 6100365 (pedidos)</a></div>
                         <div class="clear10"></div>
-                        <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-2503999">0341 2503999 (Santa Fe-Entre Ríos)</a></div>
-
+                        <div><i class="fa fa-envelope fa_contacto_ftr"></i>dkinstitucional@kellerhoff.com.ar</div>
                     </div>
                 </div>
             </div>

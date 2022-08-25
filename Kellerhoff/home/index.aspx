@@ -202,7 +202,7 @@
                                         <b>C&#211;RDOBA</b><br />
                                         <u>Encargado</u>: Marcelo Bravin<br />
                                         <u>Supervisor Comercial</u>: Alejandro Chaui<br />
-                                        <u>Promotor</u>: Olga Echenique - Juan Pablo Martellotto – Rodrigo Echenique<br />
+                                        <u>Promotor</u>: Olga Echenique - Emmanuel Damián Peralta – Rodrigo Echenique<br />
                                         <u>Ctas. Ctes.</u>: Carolina Beretta – Maria Elena Merlo – Monica Aquino<br />
                                         <u>Farmacéutico</u>: Karina Nieddu<br />
                                         <u>Domicilio</u>: RAYO CORTADO 2275 - Bº EMPALME<br />
@@ -217,7 +217,7 @@
                                         <b>SANTA FE</b><br />
                                         <u>Encargado</u>: Walter Cesar Luque<br />
                                         <u>Supervisor Comercial</u>: Julio Culler<br />
-                                        <u>Promotor</u>: Gastón Edward - Milton Córdoba<br />
+                                        <u>Promotor</u>: Leandro Daniel Logioco - Milton Córdoba<br />
                                         <u>Ctas. Ctes.</u>: Claudia Campagnucci - Daniela Cardozo
                                         <br />
                                         <u>Farmacéutico</u>: Patricia Borrelli<br />
