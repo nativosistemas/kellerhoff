@@ -190,8 +190,8 @@
                                         <u>Supervisor Comercial</u>: Julio Culler<br />
                                         <u>Promotor</u>: Hernan Siegwart<br />
                                         <u>Farmacéutico</u>: Nicolás Cian<br />
-                                        <u>Domicilio</u>: Sarmiento 642<br />
-                                        <u>C.P.A.</u>: E3202AGL<br />
+                                        <u>Domicilio</u>: 25 de Mayo 625<br />
+                                        <u>C.P.A.</u>: E3202ALK<br />
                                         <u>Teléfonos</u>: 0345-4222545 (Tel/Fax)<br />
                                         <u>WhatsApp Cta/Cte</u>: 3442-567240<br />
                                         <u>E-Mail</u>: sucursalconcordia@kellerhoff.com.ar<br />
