@@ -205,6 +205,10 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             DKbase.web.capaDatos.cClientes cliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
             List<cCarrito> l = DKbase.web.capaDatos.capaCAR_WebService_base.RecuperarCarritosPorSucursalYProductos_generica(cliente, pTipo);
+            foreach (var item in l)
+            {
+                item.proximoHorarioEntrega = FuncionesPersonalizadas.getObtenerHorarioCierre(item.codSucursal);
+            }
             return l;
         }
         public static List<cCarrito> RecuperarCarritosPorSucursalYProductos(int pIdCliente)
