@@ -414,7 +414,7 @@ namespace Kellerhoff.Controllers
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public bool IsBanderaUsarDll()
         {
-            bool resultado = WebService.IsBanderaCodigo(Constantes.cBAN_SERVIDORDLL);
+            bool resultado = WebService.IsBanderaCodigo(DKbase.generales.Constantes.cBAN_SERVIDORDLL);
             return resultado;
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]

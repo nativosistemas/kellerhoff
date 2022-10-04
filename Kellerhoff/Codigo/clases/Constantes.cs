@@ -283,10 +283,6 @@ namespace Kellerhoff.Codigo.clases
         {
             get { return System.Configuration.ConfigurationManager.AppSettings["raiz"].ToString(); }
         }
-        public static string cBAN_SERVIDORDLL
-        {
-            get { return Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["BAN_SERVIDORDLL"]); }
-        }
         public static string cSECCION_PEDIDOS
         {
             get { return Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["seccion_PEDIDOS"]); }

@@ -28,7 +28,7 @@ public class cPageClientes : System.Web.UI.Page
         [WebMethod(EnableSession = true)]
         public static bool IsBanderaUsarDll()
         {
-            bool resultado = WebService.IsBanderaCodigo(Constantes.cBAN_SERVIDORDLL);
+            bool resultado = WebService.IsBanderaCodigo(DKbase.generales.Constantes.cBAN_SERVIDORDLL);
             return resultado;
         }
         /// <summary>
