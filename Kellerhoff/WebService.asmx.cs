@@ -2707,18 +2707,7 @@ namespace Kellerhoff
             bool resultado = true;
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tabla = capaSeguridad.RecuperarTablaBandera(pCodigoBandera);
-                if (tabla != null)
-                {
-                    if (tabla.Rows.Count > 0)
-                    {
-                        if (tabla.Rows[0]["ban_estado"] != DBNull.Value)
-                        {
-                            resultado = Convert.ToBoolean(tabla.Rows[0]["ban_estado"]);
-                        }
-                    }
-                }
-
+                resultado = capaCAR_WebService_base.IsBanderaCodigo(pCodigoBandera);
             }
             return resultado;
         }
