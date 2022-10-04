@@ -777,7 +777,7 @@ namespace Kellerhoff.Controllers
             lista.Add((fechaHasta.Month).ToString());
             lista.Add((fechaHasta.Year).ToString());
 
-            List<ServiceReferenceDLL.cDllPedido> resultadoObj = WebService.ObtenerPedidosEntreFechas(fechaDesde, fechaHasta, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login);
+            List<DKbase.dll.cDllPedido> resultadoObj = capaCAR_WebService_base.ObtenerPedidosEntreFechas(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login,fechaDesde, fechaHasta);
 
             System.Web.HttpContext.Current.Session["estadopedidos_Resultado"] = resultadoObj;
             return lista;

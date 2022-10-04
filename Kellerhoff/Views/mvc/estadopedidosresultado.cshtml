@@ -10,21 +10,21 @@
         string resultado = string.Empty;
         if (Session["estadopedidos_Resultado"] != null)
         {
-            List<Kellerhoff.ServiceReferenceDLL.cDllPedido> listaPedidos = (List<Kellerhoff.ServiceReferenceDLL.cDllPedido>)Session["estadopedidos_Resultado"];
+            List<DKbase.dll.cDllPedido> listaPedidos = (List<DKbase.dll.cDllPedido>)Session["estadopedidos_Resultado"];
             Session["estadopedidos_ListaPendienteDeFacturar"] = null;
-            foreach (Kellerhoff.ServiceReferenceDLL.cDllPedido item in listaPedidos)
+            foreach (DKbase.dll.cDllPedido item in listaPedidos)
             {
                 if (item.EstadoToString == "PendienteDeFacturar")
                 {
                     if (Session["estadopedidos_ListaPendienteDeFacturar"] == null)
                     {
-                        Session["estadopedidos_ListaPendienteDeFacturar"] = new List<Kellerhoff.ServiceReferenceDLL.cDllPedido>();
+                        Session["estadopedidos_ListaPendienteDeFacturar"] = new List<DKbase.dll.cDllPedido>();
                     }
-                    ((List<Kellerhoff.ServiceReferenceDLL.cDllPedido>)Session["estadopedidos_ListaPendienteDeFacturar"]).Add(item);
+                    ((List<DKbase.dll.cDllPedido>)Session["estadopedidos_ListaPendienteDeFacturar"]).Add(item);
                 }
             }
 
-            resultado += "<input type=\"hidden\" id=\"hiddenListaPedidos\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson((List<Kellerhoff.ServiceReferenceDLL.cDllPedido>)Session["estadopedidos_Resultado"])) + "\" />";
+            resultado += "<input type=\"hidden\" id=\"hiddenListaPedidos\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson((List<DKbase.dll.cDllPedido>)Session["estadopedidos_Resultado"])) + "\" />";
         }
         WriteLiteral(resultado);
     }
