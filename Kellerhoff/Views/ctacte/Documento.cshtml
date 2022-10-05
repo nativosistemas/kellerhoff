@@ -20,7 +20,7 @@
                 case "PENDINTE":
                     if (HttpContext.Current.Session["estadopedidos_ListaPendienteDeFacturar"] != null)
                     {
-                        resultadoObj = ((List<Kellerhoff.ServiceReferenceDLL.cDllPedido>)Session["estadopedidos_ListaPendienteDeFacturar"])[Convert.ToInt32(Session["clientes_pages_Documento_ID"])];
+                        resultadoObj = ((List<DKbase.dll.cDllPedido>)Session["estadopedidos_ListaPendienteDeFacturar"])[Convert.ToInt32(Session["clientes_pages_Documento_ID"])];
                     }
                     break;
                 case "NCR":
