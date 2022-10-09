@@ -140,7 +140,7 @@ namespace Kellerhoff.Controllers
                     //////////////////////////////////
                     if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                     {
-                        cClientes objCliente = WebService.RecuperarClientePorId(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
+                        cClientes objCliente = (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
                         if (objCliente != null)
                         {
                             ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_estado = objCliente.cli_estado;
