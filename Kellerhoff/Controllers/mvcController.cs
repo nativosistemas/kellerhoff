@@ -86,6 +86,24 @@ namespace Kellerhoff.Controllers
             //return View();
         }
         [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
+        public ActionResult reservavacunas()
+        {
+            System.Web.HttpContext.Current.Session["url_type"] = "reservavacunas";
+            return View();
+        }
+        [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
+        public ActionResult reservavacunas_mis()
+        {
+            System.Web.HttpContext.Current.Session["url_type"] = "reservavacunas_mis";
+            return View();
+        }
+        [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
+        public ActionResult reservavacunas_total()
+        {
+            System.Web.HttpContext.Current.Session["url_type"] = "reservavacunas_total";
+            return View();
+        }
+        [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
         public ActionResult Buscador()
         {
             //var rr = 2 / Convert.ToInt16("0");

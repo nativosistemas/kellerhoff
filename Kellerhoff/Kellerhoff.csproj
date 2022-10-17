@@ -630,6 +630,7 @@
     <Content Include="includes\mvc\js\plugins\daterangepicker\moment.min.js" />
     <Content Include="includes\mvc\js\plugins\footable\footable.js" />
     <Content Include="includes\mvc\js\promotores.js" />
+    <Content Include="includes\mvc\js\reservavacunas.js" />
     <Content Include="includes\mvc\js\select2.full.min.js" />
     <Content Include="includes\mvc\js\subirpedido.js" />
     <Content Include="includes\mvc\js\transfer.js" />
@@ -1153,6 +1154,11 @@
     <Content Include="Views\devoluciones\DevolucionesFacturadoNoEnviado.cshtml" />
     <Content Include="Views\devoluciones\ReclamoFacturadoNoEnviado.cshtml" />
     <None Include="Service References\ServiceReferenceDLL\Service2.wsdl" />
+    <Content Include="Views\mvc\reservavacunas.cshtml" />
+    <Content Include="Views\mvc\_nav_reservavacunas.cshtml" />
+    <Content Include="Views\mvc\reservavacunas_mis.cshtml" />
+    <Content Include="Views\mvc\reservavacunas_total.cshtml" />
+    <Content Include="Views\mvc\_scripts_reservavacunas.cshtml" />
     <None Include="Web_config\Web.config_produccion">
       <SubType>Designer</SubType>
     </None>
@@ -1902,7 +1908,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>35226</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:35230/</IISUrl>
+          <IISUrl>http://localhost:35231/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
