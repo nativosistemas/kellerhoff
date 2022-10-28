@@ -1,5 +1,6 @@
 ﻿var listaReservasVacunas = null;
-
+var listaReservasVacunas_mis = null;
+var listaReservasVacunas_total = null;
 
 $(document).ready(function () {
     //prepararListaOfertas($('#hiddenListaOfertas').val());
@@ -9,9 +10,22 @@ $(document).ready(function () {
             listaReservasVacunas = null;
         }
     }
-  
-    ReservasVacunas();
+    if (listaReservasVacunas_mis == null) {
+        listaReservasVacunas_mis = eval('(' + $('#hiddenListaReservasVacunas_mis').val() + ')');
+        if (typeof listaReservasVacunas_mis == 'undefined') {
+            listaReservasVacunas_mis = null;
+        }
+    }
+    if (listaReservasVacunas_total == null) {
+        listaReservasVacunas_total = eval('(' + $('#hiddenListaReservasVacunas_total').val() + ')');
+        if (typeof listaReservasVacunas_total == 'undefined') {
+            listaReservasVacunas_total = null;
+        }
+    }
 
+    ReservasVacunas();
+    ReservasVacunas_mis();
+    ReservasVacunas_total();
 });
 function ReservasVacunas() {
     if (listaReservasVacunas != null) {
@@ -62,14 +76,10 @@ function ReservasVacunas() {
                 strHtml += listaReservasVacunas[i].rdv_condicion;
                 strHtml += '</td>';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
-                strHtml += listaReservasVacunas[i].rdv_nombre;
+                strHtml += listaReservasVacunas[i].rdv_plazo;
                 strHtml += '</td>';
                 strHtml += '<td col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">';
-               // strHtml += listaReservasVacunas[i].rdv_nombre;
-                strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value=""  />';
-                //strHtml += '<a class="btn_emp pdf" href="..\\..\\archivos\\catalogo\\' + listaCatalogo[i].tbc_descripcion + '" target="_blank" title="DESCARGAR"><span>DESCARGAR</span></a>';
-                //strHtml += '<a class="btn_emp pdf" href="..\\..\\servicios\\descargarArchivo.aspx?t=catalogo&n=' + listaCatalogo[i].tbc_descripcion + '" target="_blank" title="DESCARGAR"><span>DESCARGAR</span></a>';
-
+                strHtml += '<input id="' + 'textReserva' + i + '" class="form-control2" onblur="onblurValidarMultiplo(event, this)" type="number" placeholder="Cantidad" value=""  />';
                 strHtml += '</td>';
                 strHtml += '</tr>';
             }
@@ -77,5 +87,145 @@ function ReservasVacunas() {
             strHtml += '</table>';
         }
         $('#divGridReservaVacunas').html(strHtml);
+    }
+}
+function ReservasVacunas_mis() {
+    if (listaReservasVacunas_mis != null) {
+        if (listaReservasVacunas_mis.length > 0) {
+            var strHtml = '';
+            strHtml += '<table class="footable table sin_b table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="1" cellpadding="5" border="0">';
+            //
+            strHtml += '<thead>';
+            strHtml += '<tr>';
+            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+            strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Fecha</td></tr>';
+            strHtml += '</table>';
+            strHtml += '</th>';
+            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+            strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Descripci&oacute;n</td></tr>';
+            strHtml += '</table>';
+            strHtml += '</th>';
+            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+            strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Unid. Pedidas</td></tr>';
+            strHtml += '</table>';
+            strHtml += '</th>';
+            strHtml += '</tr>';
+            strHtml += '</thead>';
+            //
+            strHtml += '<tbody>';
+            for (var i = 0; i < listaReservasVacunas_mis.length; i++) {
+                var strHtmlColorFondo = 'wht';
+                if (i % 2 != 0) {
+                    strHtmlColorFondo = 'grs';
+                }
+                strHtml += '<tr class="' + strHtmlColorFondo + '">';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += listaReservasVacunas_mis[i].fechaToString;
+                strHtml += '</td>';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += listaReservasVacunas_mis[i].rdv_nombre;
+                strHtml += '</td>';
+                strHtml += '<td col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">';
+                strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_mis[i].unidadPedidas + '" disabled />';
+                strHtml += '</td>';
+                strHtml += '</tr>';
+            }
+            strHtml += '<tbody>';
+            strHtml += '</table>';
+        }
+        $('#divGridReservaVacunas').html(strHtml);
+    }
+}
+function ReservasVacunas_total() {
+    if (listaReservasVacunas_total != null) {
+        if (listaReservasVacunas_total.length > 0) {
+            var strHtml = '';
+            strHtml += '<table class="footable table sin_b table-stripped" data-empty="No hay informacion disponible" width="100%" align="center" cellspacing="1" cellpadding="5" border="0">';
+            //
+            strHtml += '<thead>';
+            strHtml += '<tr>';
+            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+            strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Descripci&oacute;n</td></tr>';
+            strHtml += '</table>';
+            strHtml += '</th>';
+            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+            strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Unidades Totales</td></tr>';
+            strHtml += '</table>';
+            strHtml += '</th>';
+            strHtml += '</tr>';
+            strHtml += '</thead>';
+            //
+            strHtml += '<tbody>';
+            for (var i = 0; i < listaReservasVacunas_total.length; i++) {
+                var strHtmlColorFondo = 'wht';
+                if (i % 2 != 0) {
+                    strHtmlColorFondo = 'grs';
+                }
+                strHtml += '<tr class="' + strHtmlColorFondo + '">';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += listaReservasVacunas_total[i].rdv_nombre;
+                strHtml += '</td>';
+                strHtml += '<td col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">';
+                strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_total[i].unidadTotales + '" disabled  />';
+                strHtml += '</td>';
+                strHtml += '</tr>';
+            }
+            strHtml += '<tbody>';
+            strHtml += '</table>';
+        }
+        $('#divGridReservaVacunas').html(strHtml);
+    }
+}
+/*
+  onkeypress="return onkeypressEnterReserva(event, this);"
+function onkeypressEnterReserva(e, elemento) {
+    let result = true;
+    let numero;
+    let multiplo;
+    let tecla;
+    tecla = (document.all) ? e.keyCode : e.which;
+    teclaEnNumero = 0;
+    numero = parseInt(toString(elemento.value) + toString(teclaEnNumero));
+    multiplo = 2;
+   
+    if (tecla == 13) {//es numerico
+        
+    }
+   
+
+
+    //if (numero % multiplo == 0) {
+    //    result = true;
+    //}
+    return result;
+}
+*/
+
+function onblurValidarMultiplo(e, elemento) {
+    if (elemento.value != '') {
+        let numero;
+        let multiplo;
+        numero = parseInt(elemento.value);
+        multiplo = 2;
+        if (numero % multiplo == 0) {
+
+        }
+        else {
+            elemento.value = '';
+            elemento.style.backgroundColor = "red";
+            setTimeout(function () {
+                elemento.style.backgroundColor = '';
+            }, 700);
+        }
     }
 }

@@ -8,15 +8,15 @@
 
     string resultado = string.Empty;
 
-    //List<DKbase.web.capaDatos.cReservasVacunas> listaReservaVacunas = DKbase.web.acceso.ObtenerReservasVacunas();
-    //if (listaReservaVacunas != null)
-    //{
-    //    resultado += "<input type=\"hidden\" id=\"hiddenListaReservasVacunas\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaReservaVacunas)) + "\" />";
-    //}
+    List<DKbase.web.capaDatos.cReservasVacunas> listaReservaVacunas = DKbase.web.acceso.ObtenerReservasVacunas_mis();
+    if (listaReservaVacunas != null)
+    {
+        resultado += "<input type=\"hidden\" id=\"hiddenListaReservasVacunas_mis\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaReservaVacunas)) + "\" />";
+    }
     WriteLiteral(resultado);
 }
 
-<h2>reservavacunas_mis</h2>
+@*<h2>reservavacunas_mis</h2>*@
 
 <div class="row">
 
