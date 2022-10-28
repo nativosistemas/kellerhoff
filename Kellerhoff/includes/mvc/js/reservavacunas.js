@@ -215,8 +215,9 @@ function onblurValidarMultiplo(e, elemento) {
     if (elemento.value != '') {
         let numero;
         let multiplo;
+        multiplo =  listaReservasVacunas[parseInt(elemento.id.replace('textReserva', ''))].rdv_multiplo;
         numero = parseInt(elemento.value);
-        multiplo = 2;
+        //multiplo = 2;
         if (numero % multiplo == 0) {
 
         }
