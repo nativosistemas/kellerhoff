@@ -876,6 +876,13 @@ namespace Kellerhoff.Controllers
             else
                 return null;
         }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public void funReservaVacunas(List<DKbase.dll.cVacuna> pListaVacunas)
+        {
+            DKbase.web.capaDatos.capaDLL.AgregarVacunas(pListaVacunas);
+            //System.Web.HttpContext.Current.Session["isMostrarOferta"] = pIsMostrarOferta;
+            //return Convert.ToBoolean(System.Web.HttpContext.Current.Session["isMostrarOferta"]);
+        }
 
     }
 }

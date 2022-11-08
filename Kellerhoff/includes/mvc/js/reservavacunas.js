@@ -27,6 +27,25 @@ $(document).ready(function () {
     ReservasVacunas_mis();
     ReservasVacunas_total();
 });
+function onclickReservarVacunas() {
+    var l_reserva = [];
+    for (var i = 0; i < listaReservasVacunas.length; i++) {
+
+        //listaReservasVacunas[i].rdv_nombre
+        var oTextNumber = document.getElementById('textReserva' + i).value;
+        if (isNotNullEmpty(oTextNumber)) {
+            var data = {};
+            data.ID = 0;
+            data.Login = cli_login();
+            data.NombreProducto = listaReservasVacunas[i].rdv_nombre;
+            data.UnidadesVendidas = oTextNumber;
+            l_reserva.push(data);
+        }
+    }
+    if (l_reserva.length > 0) {
+        enviarReservaVacunas(l_reserva);
+    }
+}
 function ReservasVacunas() {
     if (listaReservasVacunas != null) {
         if (listaReservasVacunas.length > 0) {
@@ -85,6 +104,9 @@ function ReservasVacunas() {
             }
             strHtml += '<tbody>';
             strHtml += '</table>';
+            if (listaReservasVacunas.length > 0) { 
+                strHtml += '<button class="btn_emp" onclick="onclickReservarVacunas(); return false;">Enviar</button>';
+            }
         }
         $('#divGridReservaVacunas').html(strHtml);
     }
