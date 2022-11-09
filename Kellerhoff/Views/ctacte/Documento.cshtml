@@ -2,7 +2,7 @@
 
 @section Scripts{
     <script type="text/javascript" src="../includes/mvc/js/plugins/footable/footable.js"></script>
-    <script src="~/includes/mvc/js/documento.js?n=13" type="text/javascript"></script>
+    <script src="~/includes/mvc/js/documento.js?n=24" type="text/javascript"></script>
 }
 
 @section sectionHidden{
@@ -22,6 +22,13 @@
                     {
                         resultadoObj = ((List<DKbase.dll.cDllPedido>)Session["estadopedidos_ListaPendienteDeFacturar"])[Convert.ToInt32(Session["clientes_pages_Documento_ID"])];
                     }
+                    break;
+                case "ENPREPARACION":
+                    if (HttpContext.Current.Session["estadopedidos_ListaEnPreparacion"] != null)
+                    {
+                        resultadoObj = ((List<DKbase.dll.cDllPedido>)Session["estadopedidos_ListaEnPreparacion"])[Convert.ToInt32(Session["clientes_pages_Documento_ID"])];
+                    }
+                    //Session["clientes_pages_Documento_TIPO"] = "PENDIENTE";
                     break;
                 case "NCR":
                     resultadoObj = WebService.ObtenerNotaDeCredito(Session["clientes_pages_Documento_ID"].ToString(), ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_login);
