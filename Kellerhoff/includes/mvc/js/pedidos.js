@@ -1,6 +1,7 @@
 ﻿var listaEstadoPedidos = null;
 var diasPedidos = 0;
 var nroPendientesDeFacturar = 0;
+var nroEnPreparacion = 0;
 var listaRecuperardor = null;
 var tipoRecuperador = null;
 var listaSucursales = null;
@@ -46,9 +47,9 @@ function CargarHtmlListaEstadoPedidos() {
             strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-left" data-breakpoints="xs">';
             strHtml += '<table class="hidden-xs" width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr class="hidden-xs"><td class="col-lg-12 text-center">&nbsp;<div class="clear"></div></td></tr>';
-            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Remito</td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Remito/OP</td></tr>';
             strHtml += '</table>';
-            strHtml += '<span class="thd_user visible-xs">Remito</span>';
+            strHtml += '<span class="thd_user visible-xs">Remito/OP</span>';
             strHtml += '</th>';
             strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center" data-breakpoints="xs">';
             strHtml += '<table class="hidden-xs" width="100%" cellpadding="0" cellspacing="0">';
@@ -110,6 +111,11 @@ function CargarHtmlListaEstadoPedidos() {
                     strHtml += ' <a href="../ctacte/Documento?t=PENDINTE&id=' + nroPendientesDeFacturar + '" >' + strDescVerDetalle + '</a>';
                     nroPendientesDeFacturar++;
                 }
+                else if (listaEstadoPedidos[i].EstadoToString == 'EnPreparacion') {
+                    var strDescVerDetalle = 'Ver detalles';
+                    strHtml += ' <a href="../ctacte/Documento?t=ENPREPARACION&id=' + nroEnPreparacion + '" >' + strDescVerDetalle + '</a>';
+                    nroEnPreparacion++;
+                }
                 else {
                     strHtml += ' <a href="../ctacte/Documento?t=FAC&id=' + listaEstadoPedidos[i].NumeroFactura + '" >' + listaEstadoPedidos[i].NumeroFactura + '</a>';
                 }
@@ -122,7 +128,22 @@ function CargarHtmlListaEstadoPedidos() {
                 strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 col-xs-6 text-right pr_est no_b_r-sm">$&nbsp;' + FormatoDecimalConDivisorMiles(listaEstadoPedidos[i].MontoTotal) + '</td>';
                 strHtml += '<td class="col-lg-1 col-md-1 col-sm-12 col-xs-12 c_to_l-sm c_to_l-xs">' + listaEstadoPedidos[i].CantidadUnidad + '</td>';
                 strHtml += '<td class="col-lg-1 col-md-1 col-sm-12 col-xs-12 c_to_l-sm c_to_l-xs">' + listaEstadoPedidos[i].CantidadRenglones + '</td>';
-                strHtml += '<td class="col-lg-1 col-md-1 col-sm-12 col-xs-12 c_to_l-sm c_to_l-xs">' + listaEstadoPedidos[i].EstadoToString + '</td>';
+                let EstadoPedido = '';
+                switch (listaEstadoPedidos[i].EstadoToString) {
+                    case 'EnPreparacion':
+                        EstadoPedido = "En Preparación";
+                        break;
+                    case 'PendienteDeFacturar':
+                        EstadoPedido = "Aceptado";
+                        break;
+                    case 'Enviado':
+                        EstadoPedido = "Enviado";
+                        break;
+                    case 'Anulado':
+                        EstadoPedido = "Anulado";
+                        break;
+                }
+                strHtml += '<td class="col-lg-1 col-md-1 col-sm-12 col-xs-12 c_to_l-sm c_to_l-xs">' + EstadoPedido + '</td>';
                 strHtml += '</tr>';
             }
             strHtml += '</tbody>';
