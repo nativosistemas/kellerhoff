@@ -14,7 +14,7 @@
             Session["estadopedidos_ListaPendienteDeFacturar"] = null;
             foreach (DKbase.dll.cDllPedido item in listaPedidos)
             {
-                if (item.EstadoToString == "PendienteDeFacturar" || item.EstadoToString == "EnPreparacion")
+                if (item.EstadoToString == "PendienteDeFacturar")
                 {
                     if (Session["estadopedidos_ListaPendienteDeFacturar"] == null)
                     {
