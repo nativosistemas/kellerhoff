@@ -8,7 +8,7 @@
 
     string resultado = string.Empty;
 
-    List<DKbase.web.capaDatos.cReservasVacunas> listaReservaVacunas = DKbase.web.acceso.ObtenerReservasVacunas();
+    List<DKbase.web.capaDatos.cReservasVacunasBD> listaReservaVacunas = DKbase.web.acceso.ObtenerReservasVacunas();
     if (listaReservaVacunas != null)
     {
         resultado += "<input type=\"hidden\" id=\"hiddenListaReservasVacunas\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaReservaVacunas)) + "\" />";

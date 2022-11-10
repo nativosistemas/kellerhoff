@@ -154,13 +154,13 @@ function ReservasVacunas_mis() {
                 }
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
-                strHtml += listaReservasVacunas_mis[i].fechaToString;
+                strHtml += listaReservasVacunas_mis[i].FechaAltaToString;
                 strHtml += '</td>';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
-                strHtml += listaReservasVacunas_mis[i].rdv_nombre;
+                strHtml += listaReservasVacunas_mis[i].NombreProducto;
                 strHtml += '</td>';
                 strHtml += '<td col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">';
-                strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_mis[i].unidadPedidas + '" disabled />';
+                strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_mis[i].UnidadesVendidas + '" disabled />';
                 strHtml += '</td>';
                 strHtml += '</tr>';
             }

@@ -7,8 +7,8 @@
 @{
 
     string resultado = string.Empty;
-
-    List<DKbase.web.capaDatos.cReservasVacunas> listaReservaVacunas = DKbase.web.acceso.ObtenerReservasVacunas_mis();
+    DKbase.web.capaDatos.cClientes oCliente = (DKbase.web.capaDatos.cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+    List<DKbase.dll.cReservaVacuna> listaReservaVacunas = DKbase.web.acceso.ObtenerReservasVacunas_mis(oCliente);
     if (listaReservaVacunas != null)
     {
         resultado += "<input type=\"hidden\" id=\"hiddenListaReservasVacunas_mis\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaReservaVacunas)) + "\" />";
