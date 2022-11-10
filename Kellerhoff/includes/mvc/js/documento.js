@@ -694,7 +694,7 @@ function CargarHtmlCabecera_Generico(objDocumento) {
 
     strHtml += '<div class="div_cont_ctacte">';
     strHtml += '<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 doc_info"><span>N&uacute;mero:</span>' + objDocumento.Numero + '</div>';
-    //strHtml += '<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 doc_info"><span>Remito/OP:</span>' + objDocumento.NumeroRemito + '</div>';
+    strHtml += '<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 doc_info"><span>Remito/OP:</span>' + objDocumento.NumeroRemito + '</div>';
     strHtml += '<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 doc_info"><span>Fecha:</span>' + objDocumento.FechaToString + '</div>';
     var aFecha = objDocumento.FechaToString.split("/");
     var FechaFac = new Date(Number(aFecha[2]), Number(aFecha[1]) - 1, Number(aFecha[0]));
