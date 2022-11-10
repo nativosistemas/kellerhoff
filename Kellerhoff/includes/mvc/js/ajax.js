@@ -22,11 +22,11 @@ function RecuperarProductosVariasColumnas(pTxtBuscador, pListaColumna, pIsBuscar
         url: "/mvc/RecuperarProductosVariasColumnas",
         data: { pTxtBuscador: pTxtBuscador, pListaColumna: pListaColumna, pIsBuscarConOferta: pIsBuscarConOferta, pIsBuscarConTransfer: pIsBuscarConTransfer },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            //OnCallBackRecuperarProductos(response);
-            OnCallBackRecuperarProductosConPaginador(response);
-        },
+            function (response) {
+                hideCargandoBuscador();
+                //OnCallBackRecuperarProductos(response);
+                OnCallBackRecuperarProductosConPaginador(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -43,10 +43,10 @@ function RecuperarProductosPaginador(pPage) {
         url: "/mvc/RecuperarProductosPaginador",
         data: { pPage: pPage },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            OnCallBackRecuperarProductosConPaginador(response);
-        },
+            function (response) {
+                hideCargandoBuscador();
+                OnCallBackRecuperarProductosConPaginador(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -65,10 +65,10 @@ function RecuperarProductosOrdenar(pColumna, pOrden) {
         url: "/mvc/RecuperarProductosOrdenar",
         data: { pAscColumna: pColumna, pAscOrdenar: pOrden },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            OnCallBackRecuperarProductos(response);
-        },
+            function (response) {
+                hideCargandoBuscador();
+                OnCallBackRecuperarProductos(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -85,9 +85,9 @@ function AgregarProductosTransfersAlCarrito(pListaProductosMasCantidad, pIdTrans
         url: "/mvc/AgregarProductosTransfersAlCarrito" + (isCarritoDiferido ? 'Diferido' : ''),
         data: { pListaProductosMasCantidad: pListaProductosMasCantidad, pIdTransfers: pIdTransfers, pCodSucursal: pCodSucursal },
         success:
-        function (response) {
-            eval(pOnCallBack + '(' + response + ')');
-        },
+            function (response) {
+                eval(pOnCallBack + '(' + response + ')');
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -102,9 +102,9 @@ function CargarCarritoDiferido(pIdSucursal, pIdProduco, pCantidadProducto) {
         url: "/mvc/CargarCarritoDiferido",
         data: { pIdSucursal: pIdSucursal, pNombreProducto: pIdProduco, pCantidadProducto: pCantidadProducto },
         success:
-        function (response) {
-            OnCallBackCargarCarritoDiferido(response);
-        },
+            function (response) {
+                OnCallBackCargarCarritoDiferido(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -119,20 +119,20 @@ function ActualizarProductoCarrito(pIdProduco, pIdSucursal, pCantidadProducto) {
         url: "/mvc/ActualizarProductoCarrito",
         data: { pIdProducto: pIdProduco, pCodSucursal: pIdSucursal, pCantidadProducto: pCantidadProducto },
         success:
-        function (response) {
-            try {
-                var oResult = eval('(' + response + ')');
-                if (oResult.isOk) {
-                    //OnCallBackActualizarProductoCarrito(response);
-                }
-                else {
+            function (response) {
+                try {
+                    var oResult = eval('(' + response + ')');
+                    if (oResult.isOk) {
+                        //OnCallBackActualizarProductoCarrito(response);
+                    }
+                    else {
+                        funLog();
+                    }
+                } catch (e) {
                     funLog();
                 }
-            } catch (e) {
-                funLog();
-            }
-            OnCallBackActualizarProductoCarrito(response);
-        },
+                OnCallBackActualizarProductoCarrito(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -147,9 +147,9 @@ function ModificarCantidadProductos(pCodProducto, pCodSucursal, pCantidad) {
         url: "/mvc/ModificarCantidadProductos",
         data: { pCodProducto: pCodProducto, pCodSucursal: pCodSucursal, pCantidad: pCantidad },
         success:
-        function (response) {
-            //OnCallBackModificarCantidadProductos(response);
-        },
+            function (response) {
+                //OnCallBackModificarCantidadProductos(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -182,10 +182,10 @@ function RecuperarProductosEnOfertas(pPage) {
         url: "/mvc/RecuperarProductosEnOfertas",
         data: { pPage: pPage },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            OnCallBackRecuperarProductosConPaginador(response);
-        },
+            function (response) {
+                hideCargandoBuscador();
+                OnCallBackRecuperarProductosConPaginador(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -202,10 +202,10 @@ function RecuperarProductosEnTransfer(pPage) {
         url: "/mvc/RecuperarProductosEnTransfer",
         data: { pPage: pPage },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            OnCallBackRecuperarProductosConPaginador(response);
-        },
+            function (response) {
+                hideCargandoBuscador();
+                OnCallBackRecuperarProductosConPaginador(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -255,16 +255,16 @@ function BorrarCarrito(lrc_id, lrc_codSucursal) {
         url: "/mvc/BorrarCarrito",
         data: { lrc_id: lrc_id, lrc_codSucursal: lrc_codSucursal },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            if (response == -1) {
-              
-                mensaje('INFORMACIÓN', "<div style='font-size:1.5em'>" + objMensajeIntentaNuevamente + "</div>");
-            }
-            else { 
-                OnCallBackBorrarCarrito(response);
-            }
-        },
+            function (response) {
+                hideCargandoBuscador();
+                if (response == -1) {
+
+                    mensaje('INFORMACIÓN', "<div style='font-size:1.5em'>" + objMensajeIntentaNuevamente + "</div>");
+                }
+                else {
+                    OnCallBackBorrarCarrito(response);
+                }
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -283,16 +283,16 @@ function BorrarCarritosDiferidos(lrc_id, lrc_codSucursal) {
         url: "/mvc/BorrarCarritosDiferidos",
         data: { lrc_id: lrc_id, lrc_codSucursal: lrc_codSucursal },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            if (response == -1) {
-               // modalModuloAlertHide();
-                mensaje('INFORMACIÓN', "<div style='font-size:1.5em'>" + objMensajeIntentaNuevamente + "</div>");
-            }
-            else {
-                OnCallBackBorrarCarrito(response);
-            }
-        },
+            function (response) {
+                hideCargandoBuscador();
+                if (response == -1) {
+                    // modalModuloAlertHide();
+                    mensaje('INFORMACIÓN', "<div style='font-size:1.5em'>" + objMensajeIntentaNuevamente + "</div>");
+                }
+                else {
+                    OnCallBackBorrarCarrito(response);
+                }
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -311,16 +311,16 @@ function BorrarCarritoTransfer(pSucursal) {
         url: "/mvc/BorrarCarritoTransfer" + (isCarritoDiferido ? 'Diferido' : ''),
         data: { pSucursal: pSucursal },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            if (response == -1) {
-                // modalModuloAlertHide();
-                mensaje('INFORMACIÓN', "<div style='font-size:1.5em'>" + objMensajeIntentaNuevamente + "</div>");
-            }
-            else {
-                OnCallBackBorrarCarritoTransfer(response);
-            }
-        },
+            function (response) {
+                hideCargandoBuscador();
+                if (response == -1) {
+                    // modalModuloAlertHide();
+                    mensaje('INFORMACIÓN', "<div style='font-size:1.5em'>" + objMensajeIntentaNuevamente + "</div>");
+                }
+                else {
+                    OnCallBackBorrarCarritoTransfer(response);
+                }
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -337,9 +337,9 @@ function IsHacerPedidos(pSucursal, pOnCallBack) {
         url: "/config/IsHacerPedidos",
         data: { pSucursal: pSucursal },
         success:
-        function (response) {
-            eval(pOnCallBack + '(' + response + ')');
-        },
+            function (response) {
+                eval(pOnCallBack + '(' + response + ')');
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -354,13 +354,13 @@ function IsBanderaUsarDll(pOnCallBack) {
         url: "/config/IsBanderaUsarDll",
         //data: { },
         success:
-        function (response) {
-            var resultValue = (String(response).toLowerCase() == 'true');
-            //if (pOnCallBack == 'OnCallBackIsBanderaUsarDll_ListaPedidos') {
-            //    OnCallBackIsBanderaUsarDll_ListaPedidos(resultValue);
-            //}
-            eval(pOnCallBack + '(' + resultValue + ')');
-        },
+            function (response) {
+                var resultValue = (String(response).toLowerCase() == 'true');
+                //if (pOnCallBack == 'OnCallBackIsBanderaUsarDll_ListaPedidos') {
+                //    OnCallBackIsBanderaUsarDll_ListaPedidos(resultValue);
+                //}
+                eval(pOnCallBack + '(' + resultValue + ')');
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -375,9 +375,9 @@ function ObtenerHorarioCierreAndSiguiente(pSucursal) {
         url: "/mvc/ObtenerHorarioCierreAndSiguiente",
         data: { pSucursalDependiente: pSucursal },
         success:
-        function (response) {
-            OnCallBackObtenerHorarioCierreCuentaRegresiva(response);
-        },
+            function (response) {
+                OnCallBackObtenerHorarioCierreCuentaRegresiva(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -392,10 +392,10 @@ function ObtenerHorarioCierre(pSucursal, pOnCallBack) {
         url: "/mvc/ObtenerHorarioCierre",
         data: { pSucursalDependiente: pSucursal },
         success:
-        function (response) {
-            //OnCallBackObtenerHorarioCierre(response);
-            eval(pOnCallBack + '("' + response + '")');
-        },
+            function (response) {
+                //OnCallBackObtenerHorarioCierre(response);
+                eval(pOnCallBack + '("' + response + '")');
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -410,10 +410,10 @@ function TomarPedidoCarrito(pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pT
         url: "/mvc/TomarPedidoCarrito",
         data: { pIdSucursal: pIdSucursal, pMensajeEnFactura: pMensajeEnFactura, pMensajeEnRemito: pMensajeEnRemito, pTipoEnvio: pTipoEnvio, pIsUrgente: pIsUrgente },
         success:
-        function (response) {
-            OnCallBackTomarPedidoCarrito(response);
-            hideCargando();
-        },
+            function (response) {
+                OnCallBackTomarPedidoCarrito(response);
+                hideCargando();
+            },
         failure: function (response) {
             OnFailBotonEnProceso(response);
             hideCargando();
@@ -430,10 +430,10 @@ function TomarPedidoCarritoDiferido(pIdSucursal, pMensajeEnFactura, pMensajeEnRe
         url: "/mvc/TomarPedidoCarritoDiferido",
         data: { pIdSucursal: pIdSucursal, pMensajeEnFactura: pMensajeEnFactura, pMensajeEnRemito: pMensajeEnRemito, pTipoEnvio: pTipoEnvio, pIsUrgente: pIsUrgente },
         success:
-        function (response) {
-            OnCallBackTomarPedidoCarrito(response);
-            hideCargando();
-        },
+            function (response) {
+                OnCallBackTomarPedidoCarrito(response);
+                hideCargando();
+            },
         failure: function (response) {
             OnFailBotonEnProceso(response);
             hideCargando();
@@ -450,9 +450,9 @@ function RecuperarTransfer(pNombreProducto) {
         url: "/mvc/RecuperarTransfer",
         data: { pNombreProducto: pNombreProducto },
         success:
-        function (response) {
-            OnCallBackRecuperarTransfer(response);
-        },
+            function (response) {
+                OnCallBackRecuperarTransfer(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -484,10 +484,10 @@ function TomarTransferPedidoCarrito(pIdSucursal, pMensajeEnFactura, pMensajeEnRe
         url: "/mvc/TomarTransferPedidoCarrito",
         data: { pIsDiferido: isCarritoDiferido, pIdSucursal: pIdSucursal, pMensajeEnFactura: pMensajeEnFactura, pMensajeEnRemito: pMensajeEnRemito, pTipoEnvio: pTipoEnvio },
         success:
-        function (response) {
-            OnCallBackTomarTransferPedidoCarrito(response);
-            hideCargando();
-        },
+            function (response) {
+                OnCallBackTomarTransferPedidoCarrito(response);
+                hideCargando();
+            },
         failure: function (response) {
             OnFailBotonEnProceso(response);
             hideCargando();
@@ -504,10 +504,10 @@ function TomarPedidoCarritoFacturarseFormaHabitual(pIdSucursal, pMensajeEnFactur
         url: "/mvc/TomarPedidoCarritoFacturarseFormaHabitual",
         data: { pIdSucursal: pIdSucursal, pMensajeEnFactura: pMensajeEnFactura, pMensajeEnRemito: pMensajeEnRemito, pTipoEnvio: pTipoEnvio, pIsUrgente: pIsUrgente, pListaNombreComercial: pListaNombreComercial, pListaCantidad: pListaCantidad },
         success:
-        function (response) {
-            OnCallBackTomarPedidoCarritoFacturarseFormaHabitual(response);
-            hideCargando();
-        },
+            function (response) {
+                OnCallBackTomarPedidoCarritoFacturarseFormaHabitual(response);
+                hideCargando();
+            },
         failure: function (response) {
             OnFailBotonEnProceso(response);
             hideCargando();
@@ -524,9 +524,9 @@ function cargarOferta(pIdOferta) {
         url: "/mvc/cargarOferta",
         data: { pIdOferta: pIdOferta },
         success:
-        function (response) {
-            OnCallBackcargarOferta(response);
-        },
+            function (response) {
+                OnCallBackcargarOferta(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -541,11 +541,11 @@ function RecuperarProductosHomeOferta(pIdOferta) {
         url: "/mvc/RecuperarProductosHomeOferta",
         data: { pIdOferta: pIdOferta },
         success:
-        function (response) {
-            //OnCallBackRecuperarProductos(response);
-            OnCallBackRecuperarProductosConPaginador(response);
-            hideCargandoBuscador();
-        },
+            function (response) {
+                //OnCallBackRecuperarProductos(response);
+                OnCallBackRecuperarProductosConPaginador(response);
+                hideCargandoBuscador();
+            },
         failure: function (response) {
             OnFailBotonEnProceso(response);
             hideCargandoBuscador();
@@ -562,10 +562,10 @@ function RecuperarTransferPorId(pIdTransfer) {
         url: "/mvc/RecuperarTransferPorId",
         data: { pIdTransfer: pIdTransfer },
         success:
-        function (response) {
-            OnCallBackRecuperarTransferPorId_home(response);
-            hideCargandoBuscador();
-        },
+            function (response) {
+                OnCallBackRecuperarTransferPorId_home(response);
+                hideCargandoBuscador();
+            },
         failure: function (response) {
             OnFailBotonEnProceso(response);
             hideCargandoBuscador();
@@ -582,14 +582,14 @@ function ActualizarProductoCarritoSubirArchivo(pListaValor) {
         url: "/mvc/ActualizarProductoCarritoSubirArchivo",
         data: { pListaValor: pListaValor },
         success:
-        function (response) {
-            if (response == '1') {
-                location.href = '../mvc/Buscador';             
-            } else {
-                mensaje('INFORMACIÓN', "<div style='font-size:1.5em'>" + objMensajeIntentaNuevamente + "</div>");
-                hideCargandoBuscador();
-            }
-        },
+            function (response) {
+                if (response == '1') {
+                    location.href = '../mvc/Buscador';
+                } else {
+                    mensaje('INFORMACIÓN', "<div style='font-size:1.5em'>" + objMensajeIntentaNuevamente + "</div>");
+                    hideCargandoBuscador();
+                }
+            },
         failure: function (response) {
             OnFail(response);
             hideCargandoBuscador();
@@ -606,12 +606,12 @@ function CargarArchivoPedidoDeNuevo(has_id) {
         url: "/mvc/CargarArchivoPedidoDeNuevo",
         data: { has_id: has_id },
         success:
-        function (response) {
-            if (response)
-                location.href = '../mvc/subirpedido';
-            else
-                hideCargandoBuscador();
-        },
+            function (response) {
+                if (response)
+                    location.href = '../mvc/subirpedido';
+                else
+                    hideCargandoBuscador();
+            },
         failure: function (response) {
             OnFail(response);
             hideCargandoBuscador();
@@ -628,9 +628,9 @@ function CambiarEstadoMensaje(pIdMensaje, pIdEstado) {
         url: "/config/CambiarEstadoMensaje",
         data: { pIdMensaje: pIdMensaje, pIdEstado: pIdEstado },
         success:
-        function (response) {
-            //OnCallBackRecuperarProductosConPaginador(response);
-        },
+            function (response) {
+                //OnCallBackRecuperarProductosConPaginador(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -645,9 +645,9 @@ function funIsMostrarOferta(pIsMostrarOferta) {
         url: "/mvc/funIsMostrarOferta",
         data: { pIsMostrarOferta: pIsMostrarOferta },
         success:
-        function (response) {
-            //OnCallBackfunIsMostrarOferta(response);
-        },
+            function (response) {
+                //OnCallBackfunIsMostrarOferta(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -662,9 +662,9 @@ function CambiarContraseñaPersonal(pContraseñaVieja, pContraseñaNueva) {
         url: "/config/CambiarContraseñaPersonal",
         data: { pContraseñaVieja: pContraseñaVieja, pContraseñaNueva: pContraseñaNueva },
         success:
-        function (response) {
-            //OnCallBackCambiarContraseñaPersonal(response);
-        },
+            function (response) {
+                //OnCallBackCambiarContraseñaPersonal(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -679,10 +679,10 @@ function ObtenerRangoFecha_pedidos(pDia) {
         url: "/mvc/ObtenerRangoFecha_pedidos",
         data: { pDia: pDia },
         success:
-        function (response) {
-            OnCallBackObtenerRangoFecha_pedidos(response);
-            hideCargando();
-        },
+            function (response) {
+                OnCallBackObtenerRangoFecha_pedidos(response);
+                hideCargando();
+            },
         failure: function (response) {
             OnFail(response);
             hideCargando();
@@ -699,9 +699,9 @@ function GuardarUsuario(pIdUsuario, pNombre, pApellido, pMail, pLogin, pContrase
         url: "/config/GuardarUsuario",
         data: { pIdUsuario: pIdUsuario, pNombre: pNombre, pApellido: pApellido, pMail: pMail, pLogin: pLogin, pContraseña: pContraseña, pObservaciones1: pObservaciones1, pListaPermisos: pListaPermisos },
         success:
-        function (response) {
-            OnCallBackGuardarUsuario(response);
-        },
+            function (response) {
+                OnCallBackGuardarUsuario(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -716,9 +716,9 @@ function CambiarEstadoUsuario(pIdUsuario) {
         url: "/config/CambiarEstadoUsuario",
         data: { pIdUsuario: pIdUsuario },
         success:
-        function (response) {
-            OnCallBackCambiarEstadoUsuario(response);
-        },
+            function (response) {
+                OnCallBackCambiarEstadoUsuario(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -733,9 +733,9 @@ function EliminarUsuario(pIdUsuario) {
         url: "/config/EliminarUsuario",
         data: { pIdUsuario: pIdUsuario },
         success:
-        function (response) {
-            OnCallBackEliminarUsuario(response);
-        },
+            function (response) {
+                OnCallBackEliminarUsuario(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -750,9 +750,9 @@ function CambiarContraseñaUsuario(pIdUsuario, pPass) {
         url: "/config/CambiarContraseñaUsuario",
         data: { pIdUsuario: pIdUsuario, pPass: pPass },
         success:
-        function (response) {
-            OnCallBackCambiarContraseñaUsuario(response);
-        },
+            function (response) {
+                OnCallBackCambiarContraseñaUsuario(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -767,9 +767,9 @@ function ObtenerUsuarios() {
         url: "/config/ObtenerUsuarios",
         //data: { pIdUsuario: pIdUsuario, pPass: pPass },
         success:
-        function (response) {
-            OnCallBackObtenerUsuarios(response);
-        },
+            function (response) {
+                OnCallBackObtenerUsuarios(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -785,9 +785,9 @@ function RecuperarFaltasProblemasCrediticios(pDia) {
         url: "/mvc/RecuperarFaltasProblemasCrediticios",
         data: { pDia: pDia },
         success:
-        function (response) {
-            OnCallBackLlenarGrillaFaltasProblemasCrediticios(response);
-        },
+            function (response) {
+                OnCallBackLlenarGrillaFaltasProblemasCrediticios(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -802,9 +802,9 @@ function RecuperarFaltasProblemasCrediticiosTodosEstados(pDia) {
         url: "/mvc/RecuperarFaltasProblemasCrediticiosTodosEstados",
         data: { pDia: pDia },
         success:
-        function (response) {
-            OnCallBackLlenarGrillaFaltasProblemasCrediticios(response);
-        },
+            function (response) {
+                OnCallBackLlenarGrillaFaltasProblemasCrediticios(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -820,10 +820,10 @@ function AgregarProductosDelRecuperardorAlCarrito(pSucursal, pArrayNombreProduct
         url: "/mvc/AgregarProductosDelRecuperardorAlCarrito",
         data: { pSucursal: pSucursal, pArrayNombreProducto: pArrayNombreProducto, pArrayCantidad: pArrayCantidad, pArrayOferta: pArrayOferta },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            OnCallBackAgregarProductosDelRecuperardorAlCarrito(response);
-        },
+            function (response) {
+                hideCargandoBuscador();
+                OnCallBackAgregarProductosDelRecuperardorAlCarrito(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -840,9 +840,9 @@ function BorrarPorProductosFaltasProblemasCrediticios(pSucursal, pArrayNombrePro
         url: "/mvc/BorrarPorProductosFaltasProblemasCrediticios",
         data: { pSucursal: pSucursal, pArrayNombreProducto: pArrayNombreProducto },
         success:
-        function (response) {
-            OnCallBackBorrarPorProductosFaltasProblemasCrediticios(response);
-        },
+            function (response) {
+                OnCallBackBorrarPorProductosFaltasProblemasCrediticios(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -857,9 +857,9 @@ function ObtenerHistorialSubirArchivo(pDia) {
         url: "/mvc/ObtenerHistorialSubirArchivo",
         data: { pDia: pDia },
         success:
-        function (response) {
-            OnCallBackObtenerHistorialSubirArchivo(response);
-        },
+            function (response) {
+                OnCallBackObtenerHistorialSubirArchivo(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -875,10 +875,10 @@ function ObtenerMovimientosDeFicha(pSemana) {
         url: "/ctacte/ObtenerMovimientosDeFicha",
         data: { pSemana: pSemana },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            OnCallBackObtenerMovimientosDeFicha(response);
-        },
+            function (response) {
+                hideCargandoBuscador();
+                OnCallBackObtenerMovimientosDeFicha(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -896,11 +896,11 @@ function IsExistenciaComprobanteResumenes_todos(pNombreArchivo, pContadorAUX) {
         url: "/ctacte/IsExistenciaComprobanteResumenes_todos",
         data: { pNombreArchivo: pNombreArchivo, pContadorAUX: pContadorAUX },
         success:
-        function (response) {
-            //hideCargandoBuscador();
-            response = eval('(' + response + ')');
-            OnCallBackIsExistenciaComprobanteResumenes_todos(response);
-        },
+            function (response) {
+                //hideCargandoBuscador();
+                response = eval('(' + response + ')');
+                OnCallBackIsExistenciaComprobanteResumenes_todos(response);
+            },
         failure: function (response) {
             //hideCargandoBuscador();
             OnFail(response);
@@ -918,11 +918,11 @@ function IsExistenciaComprobanteResumenes(pNombreArchivo, pIndex, pContadorAUX) 
         url: "/ctacte/IsExistenciaComprobanteResumenes",
         data: { pNombreArchivo: pNombreArchivo, pIndex: pIndex, pContadorAUX: pContadorAUX },
         success:
-        function (response) {
-            //hideCargandoBuscador();
-            response = eval('(' + response + ')');
-            OnCallBackIsExistenciaComprobanteResumenes(response);
-        },
+            function (response) {
+                //hideCargandoBuscador();
+                response = eval('(' + response + ')');
+                OnCallBackIsExistenciaComprobanteResumenes(response);
+            },
         failure: function (response) {
             //hideCargandoBuscador();
             OnFail(response);
@@ -941,9 +941,9 @@ function IsExistenciaComprobante(pNombreArchivo, pOnCallBack) {
         url: "/ctacte/IsExistenciaComprobante",
         data: { pNombreArchivo: pNombreArchivo },
         success:
-        function (response) {
-            eval(pOnCallBack + '("' + response + '")');
-        },
+            function (response) {
+                eval(pOnCallBack + '("' + response + '")');
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -959,10 +959,10 @@ function ObtenerRangoFecha(pDia, pPendiente, pCancelado) {
         url: "/ctacte/ObtenerRangoFecha",
         data: { pDia: pDia, pPendiente: pPendiente, pCancelado: pCancelado },
         success:
-        function (response) {
-            //hideCargandoBuscador();
-            OnCallBackObtenerRangoFecha(response);
-        },
+            function (response) {
+                //hideCargandoBuscador();
+                OnCallBackObtenerRangoFecha(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -980,10 +980,10 @@ function ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas(diaDesde, mes
         url: "/ctacte/ObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas",
         data: { diaDesde: diaDesde, mesDesde: mesDesde, añoDesde: añoDesde, diaHasta: diaHasta, mesHasta: mesHasta, añoHasta: añoHasta },
         success:
-        function (response) {
-            //hideCargandoBuscador();
-            OnCallBackObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas(response);
-        },
+            function (response) {
+                //hideCargandoBuscador();
+                OnCallBackObtenerComprobantesDiscriminadosDePuntoDeVentaEntreFechas(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -1001,10 +1001,10 @@ function AgregarVariableSessionConsultaDeComprobantes(pTipo, diaDesde, mesDesde,
         url: "/ctacte/AgregarVariableSessionConsultaDeComprobantes",
         data: { pTipo: pTipo, diaDesde: diaDesde, mesDesde: mesDesde, añoDesde: añoDesde, diaHasta: diaHasta, mesHasta: mesHasta, añoHasta: añoHasta },
         success:
-        function (response) {
-            //hideCargandoBuscador();
-            OnCallBackAgregarVariableSessionConsultaDeComprobantes(response);
-        },
+            function (response) {
+                //hideCargandoBuscador();
+                OnCallBackAgregarVariableSessionConsultaDeComprobantes(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -1022,10 +1022,10 @@ function enviarConsultaCtaCte(pMail, pComentario) {
         url: "/ctacte/enviarConsultaCtaCte",
         data: { pMail: pMail, pComentario: pComentario },
         success:
-        function (response) {
-            //modalModuloHide();
-            hideCargandoBuscador();
-        },
+            function (response) {
+                //modalModuloHide();
+                hideCargandoBuscador();
+            },
         failure: function (response) {
             //modalModuloHide();
             hideCargandoBuscador();
@@ -1038,7 +1038,7 @@ function enviarConsultaCtaCte(pMail, pComentario) {
         }
     });
 }
-function enviarConsultaReclamo(pMail, pComentario,pNombreProducto) {
+function enviarConsultaReclamo(pMail, pComentario, pNombreProducto) {
     showCargandoBuscador();
     $.ajax({
         type: "POST",
@@ -1049,10 +1049,10 @@ function enviarConsultaReclamo(pMail, pComentario,pNombreProducto) {
             pNombreProducto
         },
         success:
-        function (response) {
-            //modalModuloHide();
-            hideCargandoBuscador();
-        },
+            function (response) {
+                //modalModuloHide();
+                hideCargandoBuscador();
+            },
         failure: function (response) {
             //modalModuloHide();
             hideCargandoBuscador();
@@ -1065,7 +1065,7 @@ function enviarConsultaReclamo(pMail, pComentario,pNombreProducto) {
         }
     });
 }
-function enviarConsultaValePsicotropico(pMail, pComentario,pNombreProducto) {
+function enviarConsultaValePsicotropico(pMail, pComentario, pNombreProducto) {
     showCargandoBuscador();
     $.ajax({
         type: "POST",
@@ -1076,10 +1076,10 @@ function enviarConsultaValePsicotropico(pMail, pComentario,pNombreProducto) {
             pNombreProducto
         },
         success:
-        function (response) {
-            //modalModuloHide();
-            hideCargandoBuscador();
-        },
+            function (response) {
+                //modalModuloHide();
+                hideCargandoBuscador();
+            },
         failure: function (response) {
             //modalModuloHide();
             hideCargandoBuscador();
@@ -1123,10 +1123,10 @@ function ObtenerCreditoDisponible(pCli_login) {
         url: "/ctacte/ObtenerCreditoDisponible",
         data: { pCli_login: pCli_login },
         success:
-        function (response) {
-            hideCargandoBuscador();
-            OnCallBackObtenerCreditoDisponible(response);
-        },
+            function (response) {
+                hideCargandoBuscador();
+                OnCallBackObtenerCreditoDisponible(response);
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -1144,13 +1144,13 @@ function ObtenerComprobantesObrasSocialesDePuntoDeVentaEntreFechas(pLoginWeb, pP
         url: "/ctacte/ObtenerComprobantesObrasSocialesDePuntoDeVentaEntreFechas",
         data: { pLoginWeb: pLoginWeb, pPlan: pPlan, diaDesde: diaDesde, mesDesde: mesDesde, añoDesde: añoDesde, diaHasta: diaHasta, mesHasta: mesHasta, añoHasta: añoHasta },
         success:
-        function (response) {
-            //hideCargandoBuscador();
-            //OnCallBackObtenerCreditoDisponible(response);
-            //if (response == 'Ok')
-            //{ }
-            location.href = '../ctacte/ConsultaDeComprobantesObraSocialResultadoRango';
-        },
+            function (response) {
+                //hideCargandoBuscador();
+                //OnCallBackObtenerCreditoDisponible(response);
+                //if (response == 'Ok')
+                //{ }
+                location.href = '../ctacte/ConsultaDeComprobantesObraSocialResultadoRango';
+            },
         failure: function (response) {
             hideCargandoBuscador();
             OnFail(response);
@@ -1207,26 +1207,50 @@ function enviarSolicitudSobresRemesa() {
     });
 }
 function enviarReservaVacunas(pValue) {
-   // showCargandoBuscador();
+    showCargandoBuscador();
     $.ajax({
         type: "POST",
         url: "/mvc/funReservaVacunas",
-        data: { pListaVacunas:  pValue },
+        data: { pListaVacunas: pValue },
         success:
             function (response) {
-
-                //hideCargandoBuscador();
-                mensaje_SolicitudSobreRemesa();
+                hideCargandoBuscador();
+                mensaje_ReservaVacunas();
+                limpiarReservarVacunas();
             },
         failure: function (response) {
 
-            //hideCargandoBuscador();
+            hideCargandoBuscador();
             OnFail(response);
         },
         error: function (response) {
 
-//hideCargandoBuscador();
+            hideCargandoBuscador();
             OnFail(response);
         }
     });
 }
+//function ObtenerTotalReservasDeVacunasPorClienteEntreFechas() {
+//    showCargandoBuscador();
+//    $.ajax({
+//        type: "POST",
+//        url: "/mvc/ObtenerTotalReservasDeVacunasPorClienteEntreFechas",
+//        //data: { pListaVacunas: pValue },
+//        success:
+//            function (response) {
+//                hideCargandoBuscador();
+//                mensaje_ReservaVacunas();
+//                limpiarReservarVacunas();
+//            },
+//        failure: function (response) {
+
+//            hideCargandoBuscador();
+//            OnFail(response);
+//        },
+//        error: function (response) {
+
+//            hideCargandoBuscador();
+//            OnFail(response);
+//        }
+//    });
+//}

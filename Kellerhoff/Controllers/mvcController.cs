@@ -883,6 +883,14 @@ namespace Kellerhoff.Controllers
             //System.Web.HttpContext.Current.Session["isMostrarOferta"] = pIsMostrarOferta;
             //return Convert.ToBoolean(System.Web.HttpContext.Current.Session["isMostrarOferta"]);
         }
+        //[AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        //public List<DKbase.dll.cVacuna> ObtenerTotalReservasDeVacunasPorClienteEntreFechas()
+        //{
+        //    cClientes oCliente = (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+        //    DateTime now = DateTime.Now;
+        //    List<DKbase.dll.cVacuna> result = DKbase.web.capaDatos.capaDLL.ObtenerTotalReservasDeVacunasPorClienteEntreFechas(now.AddDays(-20), now,oCliente.cli_login);
+        //    return result;
+        //}
 
     }
 }

@@ -27,6 +27,12 @@ $(document).ready(function () {
     ReservasVacunas_mis();
     ReservasVacunas_total();
 });
+function limpiarReservarVacunas() {
+    for (var i = 0; i < listaReservasVacunas.length; i++) {
+       document.getElementById('textReserva' + i).value = '';
+    }
+
+}
 function onclickReservarVacunas() {
     var l_reserva = [];
     for (var i = 0; i < listaReservasVacunas.length; i++) {
@@ -35,7 +41,7 @@ function onclickReservarVacunas() {
         var oTextNumber = document.getElementById('textReserva' + i).value;
         if (isNotNullEmpty(oTextNumber)) {
             var data = {};
-            data.ID = 0;
+            data.ID = i;
             data.Login = cli_login();
             data.NombreProducto = listaReservasVacunas[i].rdv_nombre;
             data.UnidadesVendidas = oTextNumber;
@@ -195,10 +201,10 @@ function ReservasVacunas_total() {
                 }
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
-                strHtml += listaReservasVacunas_total[i].rdv_nombre;
+                strHtml += listaReservasVacunas_total[i].NombreProducto;
                 strHtml += '</td>';
                 strHtml += '<td col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">';
-                strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_total[i].unidadTotales + '" disabled  />';
+                strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_total[i].UnidadesVendidas + '" disabled  />';
                 strHtml += '</td>';
                 strHtml += '</tr>';
             }
