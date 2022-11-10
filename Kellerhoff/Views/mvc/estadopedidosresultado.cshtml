@@ -14,13 +14,21 @@
             Session["estadopedidos_ListaPendienteDeFacturar"] = null;
             foreach (DKbase.dll.cDllPedido item in listaPedidos)
             {
-                if (item.EstadoToString == "PendienteDeFacturar")
+                if (item.EstadoToString == "PendienteDeFacturar" || item.EstadoToString == "EnPreparacion")
                 {
                     if (Session["estadopedidos_ListaPendienteDeFacturar"] == null)
                     {
                         Session["estadopedidos_ListaPendienteDeFacturar"] = new List<DKbase.dll.cDllPedido>();
                     }
                     ((List<DKbase.dll.cDllPedido>)Session["estadopedidos_ListaPendienteDeFacturar"]).Add(item);
+                }
+                if (item.EstadoToString == "EnPreparacion")
+                {
+                    if (Session["estadopedidos_ListaEnPreparacion"] == null)
+                    {
+                        Session["estadopedidos_ListaEnPreparacion"] = new List<DKbase.dll.cDllPedido>();
+                    }
+                    ((List<DKbase.dll.cDllPedido>)Session["estadopedidos_ListaEnPreparacion"]).Add(item);
                 }
             }
 
