@@ -134,6 +134,18 @@ function ReservasVacunas_mis() {
             strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">TomaWeb</td></tr>';
+            strHtml += '</table>';
+            strHtml += '</th>';
+            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+            strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Nombre Producto</td></tr>';
+            strHtml += '</table>';
+            strHtml += '</th>';
+            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+            strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Descripci&oacute;n</td></tr>';
             strHtml += '</table>';
             strHtml += '</th>';
@@ -157,10 +169,17 @@ function ReservasVacunas_mis() {
                 strHtml += listaReservasVacunas_mis[i].FechaAltaToString;
                 strHtml += '</td>';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += listaReservasVacunas_mis[i].TomaWeb;
+                strHtml += '</td>';   
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
                 strHtml += listaReservasVacunas_mis[i].NombreProducto;
                 strHtml += '</td>';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += listaReservasVacunas_mis[i].DescripcionPack;
+                strHtml += '</td>';
                 strHtml += '<td col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">';
-                strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_mis[i].UnidadesVendidas + '" disabled />';
+                strHtml += listaReservasVacunas_mis[i].UnidadesVendidas;
+                //strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_mis[i].UnidadesVendidas + '" disabled />';
                 strHtml += '</td>';
                 strHtml += '</tr>';
             }
@@ -178,6 +197,12 @@ function ReservasVacunas_total() {
             //
             strHtml += '<thead>';
             strHtml += '<tr>';
+            //strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            //strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
+            //strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
+            //strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Nombre Producto</td></tr>';
+            //strHtml += '</table>';
+            //strHtml += '</th>';
             strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
@@ -200,11 +225,15 @@ function ReservasVacunas_total() {
                     strHtmlColorFondo = 'grs';
                 }
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
+                //strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                //strHtml += listaReservasVacunas_total[i].NombreProducto;
+                //strHtml += '</td>';
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
                 strHtml += listaReservasVacunas_total[i].NombreProducto;
                 strHtml += '</td>';
                 strHtml += '<td col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">';
-                strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_total[i].UnidadesVendidas + '" disabled  />';
+                strHtml +=  listaReservasVacunas_total[i].UnidadesVendidas;
+                //strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_total[i].UnidadesVendidas + '" disabled  />';
                 strHtml += '</td>';
                 strHtml += '</tr>';
             }
