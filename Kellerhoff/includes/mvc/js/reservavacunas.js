@@ -295,7 +295,7 @@ function onblurValidarMultiplo(e, elemento) {
             elemento.focus();
             setTimeout(function () {
                 oLabel.style.display = "none";
-            }, 1500);
+            }, 2000);
         }
     }
 }
