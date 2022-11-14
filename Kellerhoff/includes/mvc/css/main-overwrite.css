@@ -605,3 +605,9 @@ a.mtz {
 .separateReservaVacunas {
     margin-left: 80px;
 }
+.labelMsgError {
+    display: none;
+    color: red;
+    font-weight: bold;
+    text-transform: uppercase;
+}

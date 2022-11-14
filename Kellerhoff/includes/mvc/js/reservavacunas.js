@@ -1,9 +1,15 @@
 ﻿var listaReservasVacunas = null;
 var listaReservasVacunas_mis = null;
 var listaReservasVacunas_total = null;
+var selectedInput_reservaVacunas = null;
 
 $(document).ready(function () {
-    //prepararListaOfertas($('#hiddenListaOfertas').val());
+    $(document).keydown(function (e) {
+        if (!e) {
+            e = window.event;
+        }
+        teclaPresionada_reservaVacunas(e);
+    });
     if (listaReservasVacunas == null) {
         listaReservasVacunas = eval('(' + $('#hiddenListaReservasVacunas').val() + ')');
         if (typeof listaReservasVacunas == 'undefined') {
@@ -60,25 +66,25 @@ function ReservasVacunas() {
             //
             strHtml += '<thead>';
             strHtml += '<tr>';
-            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<th class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center no-padding">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Descripci&oacute;n</td></tr>';
             strHtml += '</table>';
             strHtml += '</th>';
-            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<th class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center no-padding">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Condici&oacute;n</td></tr>';
             strHtml += '</table>';
             strHtml += '</th>';
-            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center no-padding">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Plazo Pago</td></tr>';
             strHtml += '</table>';
             strHtml += '</th>';
-            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center no-padding">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Unid. Pedidas</td></tr>';
@@ -93,18 +99,19 @@ function ReservasVacunas() {
                 if (i % 2 != 0) {
                     strHtmlColorFondo = 'grs';
                 }
-                strHtml += '<tr class="' + strHtmlColorFondo + '">';
-                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += '<tr class="' + strHtmlColorFondo + ' cssFilaBuscadorDesmarcar cssFilaBuscador_' + i + '">';
+                strHtml += '<td class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">';
                 strHtml += listaReservasVacunas[i].rdv_nombre;
                 strHtml += '</td>';
-                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += '<td class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">';
                 strHtml += listaReservasVacunas[i].rdv_condicion;
                 strHtml += '</td>';
-                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">';
                 strHtml += listaReservasVacunas[i].rdv_plazo;
                 strHtml += '</td>';
-                strHtml += '<td col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">';
-                strHtml += '<input id="' + 'textReserva' + i + '" class="form-control2" onblur="onblurValidarMultiplo(event, this)" type="number" placeholder="Cantidad" value=""  />';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">';
+                strHtml += '<input id="' + 'textReserva' + i + '" class="form-control2" onblur="onblurValidarMultiplo(event, this)" onfocus="onfocusSucursal_reservaVacunas(this)" type="text" placeholder="Cantidad" value=""  />';
+                strHtml += '<label id="' + 'labelReserva' + i + '" for="' + 'textReserva' + i + '"  class="labelMsgError" >' + listaReservasVacunas[i].rdv_multiplo+'</label>';
                 strHtml += '</td>';
                 strHtml += '</tr>';
             }
@@ -125,13 +132,13 @@ function ReservasVacunas_mis() {
             //
             strHtml += '<thead>';
             strHtml += '<tr>';
-            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left no-padding">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Fecha</td></tr>';
             strHtml += '</table>';
             strHtml += '</th>';
-            strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
+            strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center no-padding">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
             strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">TomaWeb</td></tr>';
@@ -165,19 +172,19 @@ function ReservasVacunas_mis() {
                     strHtmlColorFondo = 'grs';
                 }
                 strHtml += '<tr class="' + strHtmlColorFondo + '">';
-                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">';
                 strHtml += listaReservasVacunas_mis[i].FechaAltaToString;
                 strHtml += '</td>';
-                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
-                strHtml += listaReservasVacunas_mis[i].TomaWeb;
+                strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">';
+                strHtml += listaReservasVacunas_mis[i].TomaWeb?"Si":"No";
                 strHtml += '</td>';   
-                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">';
                 strHtml += listaReservasVacunas_mis[i].NombreProducto;
                 strHtml += '</td>';
-                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">';
                 strHtml += listaReservasVacunas_mis[i].DescripcionPack;
                 strHtml += '</td>';
-                strHtml += '<td col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">';
                 strHtml += listaReservasVacunas_mis[i].UnidadesVendidas;
                 //strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_mis[i].UnidadesVendidas + '" disabled />';
                 strHtml += '</td>';
@@ -228,10 +235,10 @@ function ReservasVacunas_total() {
                 //strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
                 //strHtml += listaReservasVacunas_total[i].NombreProducto;
                 //strHtml += '</td>';
-                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-left">';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">';
                 strHtml += listaReservasVacunas_total[i].NombreProducto;
                 strHtml += '</td>';
-                strHtml += '<td col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">';
+                strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">';
                 strHtml +=  listaReservasVacunas_total[i].UnidadesVendidas;
                 //strHtml += '<input  class="form-control2" type="number" placeholder="Cantidad" value="' + listaReservasVacunas_total[i].UnidadesVendidas + '" disabled  />';
                 strHtml += '</td>';
@@ -272,18 +279,99 @@ function onblurValidarMultiplo(e, elemento) {
     if (elemento.value != '') {
         let numero;
         let multiplo;
-        multiplo =  listaReservasVacunas[parseInt(elemento.id.replace('textReserva', ''))].rdv_multiplo;
+        let index = parseInt(elemento.id.replace('textReserva', ''));
+        multiplo = listaReservasVacunas[index].rdv_multiplo;
         numero = parseInt(elemento.value);
         //multiplo = 2;
         if (numero % multiplo == 0) {
 
         }
         else {
+            let msg = 'Debe ser múltiplo de ' + listaReservasVacunas[index].rdv_multiplo;
+            var oLabel = document.getElementById('labelReserva' + index);
+            oLabel.style.display = "block";
+            oLabel.innerHTML = msg;
             elemento.value = '';
-            elemento.style.backgroundColor = "red";
+            elemento.focus();
             setTimeout(function () {
-                elemento.style.backgroundColor = '';
-            }, 700);
+                oLabel.style.display = "none";
+            }, 1500);
         }
     }
+}
+
+function onfocusSucursal_reservaVacunas(pValor) {
+    selectedInput_reservaVacunas = pValor;
+    setTimeout(function () { selectedInput_reservaVacunas.select(); MarcarFilaSeleccionada_reservaVacunas(pValor); }, 5);
+}
+function DesmarcarFilaSeleccionada_reservaVacunas() {
+    $('.cssFilaBuscadorDesmarcar').removeClass('borderFilaBuscadorSeleccionada');
+}
+function MarcarFilaSeleccionada_reservaVacunas(pValor) {
+    //if (!$("#divBody").hasClass("modal-open-Celular")) {
+    DesmarcarFilaSeleccionada_reservaVacunas();
+    var nombre = pValor.id;
+    nombre = nombre.replace('textReserva', '');
+    // var palabrasBase = nombre.split("_");
+    var fila = parseInt(nombre);
+    $('.cssFilaBuscador_' + fila).addClass('borderFilaBuscadorSeleccionada');
+    //}
+}
+function teclaPresionada_reservaVacunas(e) {
+    if (typeof (e) == 'undefined') {
+        e = event;
+    }
+    var keyCode = document.all ? e.which : e.keyCode;
+    var cantMaxFila_reservaVacunas = 0;
+    
+    if (listaReservasVacunas != null) {
+        cantMaxFila_reservaVacunas = listaReservasVacunas.length;
+    }
+    if (keyCode == 40 || keyCode == 38 || keyCode == 13) {
+        if (selectedInput_reservaVacunas != null) {
+            if (selectedInput_reservaVacunas.id != undefined) {
+                    if (keyCode == 13) {
+                        return;
+                    }
+                    var fila = 0;
+                    var nombre = selectedInput_reservaVacunas.id;
+                    nombre = nombre.replace('textReserva', '');
+                    fila = parseInt(nombre);
+                    var mytext = null;
+                    while (mytext == null) {
+                        var isSalirWhile = false;
+                        switch (keyCode) {
+                            case 38: //arriba
+                                if (fila != 0) {
+                                    fila--;
+                                } else {
+                                    isSalirWhile = true;
+                                }
+                                break;
+                            case 40: //abajo
+                                if (fila < cantMaxFila_reservaVacunas - 1) {
+                                    fila++;
+                                } else {
+                                    isSalirWhile = true;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        if (isSalirWhile) {
+                            break;
+                        }
+                        mytext = $("#textReserva" + fila);
+                        if (mytext.length > 0) {
+                        } else {
+                            mytext = null;
+                        }
+                    }
+                    if (mytext != null) {
+                        mytext.focus();
+                    }
+            }
+        }
+    }
+    return true;
 }
