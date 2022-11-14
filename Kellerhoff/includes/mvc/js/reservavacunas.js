@@ -141,7 +141,7 @@ function ReservasVacunas_mis() {
             strHtml += '<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center no-padding">';
             strHtml += '<table width="100%" cellpadding="0" cellspacing="0">';
             strHtml += '<tr><td class="col-lg-12 text-center">&nbsp;<div class="clear5"></div></td></tr>';
-            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">TomaWeb</td></tr>';
+            strHtml += '<tr class="tr_thead"><td class="col-lg-12 text-center">Operador</td></tr>';
             strHtml += '</table>';
             strHtml += '</th>';
             strHtml += '<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center no-padding">';
@@ -176,7 +176,7 @@ function ReservasVacunas_mis() {
                 strHtml += listaReservasVacunas_mis[i].FechaAltaToString;
                 strHtml += '</td>';
                 strHtml += '<td class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">';
-                strHtml += listaReservasVacunas_mis[i].TomaWeb?"Si":"No";
+                strHtml += listaReservasVacunas_mis[i].TomaWeb ? "Web" :"Telefonista";
                 strHtml += '</td>';   
                 strHtml += '<td class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">';
                 strHtml += listaReservasVacunas_mis[i].NombreProducto;

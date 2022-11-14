@@ -79,6 +79,18 @@ namespace Kellerhoff.Controllers
                 return true;
             return false;
         }
+        public static bool isUsuarioConPermisoPedido()
+        {
+            if (((DKbase.web.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
+        ((DKbase.web.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+        ((DKbase.web.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL &&
+        ((DKbase.web.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
+            {
+                return true;
+            }
+            return false;
+        }
+
         // GET: mvc
         public ActionResult Index()
         {
@@ -89,6 +101,9 @@ namespace Kellerhoff.Controllers
         public ActionResult reservavacunas()
         {
             System.Web.HttpContext.Current.Session["url_type"] = "reservavacunas";
+            if (!isUsuarioConPermisoPedido()) {
+                return RedirectToAction("reservavacunas_mis");
+            }
             return View();
         }
         [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
@@ -707,7 +722,7 @@ namespace Kellerhoff.Controllers
             else
             {
                 return Serializador.SerializarAJson(resultadoPedido);
-            }     
+            }
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string ActualizarProductoCarritoSubirArchivo(List<cProductosAndCantidad> pListaValor)
@@ -795,7 +810,7 @@ namespace Kellerhoff.Controllers
             lista.Add((fechaHasta.Month).ToString());
             lista.Add((fechaHasta.Year).ToString());
 
-            List<DKbase.dll.cDllPedido> resultadoObj = capaCAR_WebService_base.ObtenerPedidosEntreFechas(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login,fechaDesde, fechaHasta);
+            List<DKbase.dll.cDllPedido> resultadoObj = capaCAR_WebService_base.ObtenerPedidosEntreFechas(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, fechaDesde, fechaHasta);
 
             System.Web.HttpContext.Current.Session["estadopedidos_Resultado"] = resultadoObj;
             return lista;
