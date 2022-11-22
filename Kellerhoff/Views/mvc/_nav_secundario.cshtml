@@ -7,6 +7,7 @@
     string classPromocionesCliente = "";
     string classNuevosLanzamientos = "";
     string classReservaVacunas = "";
+    string classReservaVacunasSinTroquel = "";
     string strController = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
     switch (strController)
     {
@@ -41,7 +42,18 @@
         case "reservavacunas":
         case "reservavacunas_mis":
         case "reservavacunas_total":
-            classReservaVacunas = " class=\"active\" ";
+            bool isSinTroquel = false;
+            if (System.Web.HttpContext.Current.Session["clientes_pages_reservavacunas_SinTroquel"] != null &&
+               Convert.ToBoolean( System.Web.HttpContext.Current.Session["clientes_pages_reservavacunas_SinTroquel"])) {
+                isSinTroquel = true;
+            }
+            if (isSinTroquel)
+            {
+                classReservaVacunasSinTroquel = " class=\"active\" ";
+            }
+            else {
+                classReservaVacunas = " class=\"active\" ";
+            }
             break;
         default:
             break;
@@ -85,8 +97,10 @@
             <div class="separate"></div>
             <a href="https://bit.ly/2E2EusC" target="_blank" class=""><img id="labbi" src="~/archivos/LABBI.jpg" /></a>
             <div class="separate separateReservaVacunas"></div>
-            <a href="/mvc/reservavacunas"  @{ WriteLiteral(classReservaVacunas);}><i class="fa fa-stethoscope" title="RESERVA VACUNAS 2023"></i><span class="hidden-sm hidden-xs hidden-md">RESERVA VACUNAS 2023</span></a>
-
+            <a href="/mvc/reservavacunas" @{ WriteLiteral(classReservaVacunas);}><i class="fa fa-stethoscope" title="RESERVA VACUNAS 2023"></i><span class="hidden-sm hidden-xs hidden-md">RESERVA VACUNAS 2023</span></a>
+            <div class="separate "></div>
+            <a href="/mvc/reservavacunas?t=1" @{ WriteLiteral(classReservaVacunasSinTroquel);}><i class="fa fa-stethoscope" title="RESERVAR VACUNAS SIN TROQUEL"></i><span class="hidden-sm hidden-xs hidden-md">RESERVAR VACUNAS SIN TROQUEL</span></a>
+            
         </div>
     </div>
 </div>

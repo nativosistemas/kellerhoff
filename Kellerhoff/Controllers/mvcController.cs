@@ -83,7 +83,6 @@ namespace Kellerhoff.Controllers
         {
             if (((DKbase.web.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
         ((DKbase.web.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
-        ((DKbase.web.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL &&
         ((DKbase.web.Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_GRUPOCLIENTE)
             {
                 return true;
@@ -98,8 +97,14 @@ namespace Kellerhoff.Controllers
             //return View();
         }
         [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
-        public ActionResult reservavacunas()
+        public ActionResult reservavacunas(string t)
         {
+            bool resultado = false;
+            if (!string.IsNullOrEmpty( t) && t == "1")
+            {
+                resultado = true;
+            }
+            System.Web.HttpContext.Current.Session["clientes_pages_reservavacunas_SinTroquel"] = resultado;
             System.Web.HttpContext.Current.Session["url_type"] = "reservavacunas";
             if (!isUsuarioConPermisoPedido()) {
                 return RedirectToAction("reservavacunas_mis");
@@ -895,17 +900,7 @@ namespace Kellerhoff.Controllers
         public void funReservaVacunas(List<DKbase.dll.cVacuna> pListaVacunas)
         {
             DKbase.web.capaDatos.capaDLL.AgregarVacunas(pListaVacunas);
-            //System.Web.HttpContext.Current.Session["isMostrarOferta"] = pIsMostrarOferta;
-            //return Convert.ToBoolean(System.Web.HttpContext.Current.Session["isMostrarOferta"]);
         }
-        //[AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
-        //public List<DKbase.dll.cVacuna> ObtenerTotalReservasDeVacunasPorClienteEntreFechas()
-        //{
-        //    cClientes oCliente = (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
-        //    DateTime now = DateTime.Now;
-        //    List<DKbase.dll.cVacuna> result = DKbase.web.capaDatos.capaDLL.ObtenerTotalReservasDeVacunasPorClienteEntreFechas(now.AddDays(-20), now,oCliente.cli_login);
-        //    return result;
-        //}
 
     }
 }

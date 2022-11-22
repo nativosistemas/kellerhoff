@@ -2,6 +2,7 @@
 var listaReservasVacunas_mis = null;
 var listaReservasVacunas_total = null;
 var selectedInput_reservaVacunas = null;
+var isOnclickReservarVacunas = false;
 
 $(document).ready(function () {
     $(document).keydown(function (e) {
@@ -37,9 +38,11 @@ function limpiarReservarVacunas() {
     for (var i = 0; i < listaReservasVacunas.length; i++) {
        document.getElementById('textReserva' + i).value = '';
     }
-
+    isOnclickReservarVacunas = false;
 }
 function onclickReservarVacunas() {
+    if (!isOnclickReservarVacunas) {
+        isOnclickReservarVacunas = true;
     var l_reserva = [];
     for (var i = 0; i < listaReservasVacunas.length; i++) {
 
@@ -56,6 +59,7 @@ function onclickReservarVacunas() {
     }
     if (l_reserva.length > 0) {
         enviarReservaVacunas(l_reserva);
+        }
     }
 }
 function ReservasVacunas() {
