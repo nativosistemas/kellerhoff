@@ -1219,12 +1219,12 @@ function enviarReservaVacunas(pValue) {
                 limpiarReservarVacunas();
             },
         failure: function (response) {
-
+            isOnclickReservarVacunas = false;
             hideCargandoBuscador();
             OnFail(response);
         },
         error: function (response) {
-
+            isOnclickReservarVacunas = false;
             hideCargandoBuscador();
             OnFail(response);
         }

@@ -42,7 +42,7 @@ function limpiarReservarVacunas() {
 }
 function onclickReservarVacunas() {
     if (!isOnclickReservarVacunas) {
-        isOnclickReservarVacunas = true;
+
     var l_reserva = [];
     for (var i = 0; i < listaReservasVacunas.length; i++) {
 
@@ -57,7 +57,8 @@ function onclickReservarVacunas() {
             l_reserva.push(data);
         }
     }
-    if (l_reserva.length > 0) {
+        if (l_reserva.length > 0) {
+            isOnclickReservarVacunas = true;
         enviarReservaVacunas(l_reserva);
         }
     }
