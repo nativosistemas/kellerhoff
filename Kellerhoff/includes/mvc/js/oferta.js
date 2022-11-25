@@ -144,7 +144,7 @@ function CargarHtmlOfertasEnHome() {
         if (isMostrarOferta) {
             accionOferta();
         }
-        setTimeout("cambiarColorOferta()", 1000);
+       // setTimeout("cambiarColorOferta()", 1000);
     }
 }
 
@@ -181,7 +181,7 @@ function cambiarColorOferta() {
             nroColorOferta = 0;
         document.getElementById("botonOferta").style.backgroundColor = styleColorOferta;
         //document.getElementById("botonOferta").style.fontWeight = fontWeightColorOferta;
-        setTimeout("cambiarColorOferta()", 150);
+       // setTimeout("cambiarColorOferta()", 150);
     }
 
 }
@@ -195,7 +195,7 @@ function accionOferta() {
         $(".s-h_off_fxd").animate({ "bottom": 2 }, 500).html('<i class="fa fa-angle-up"></i>Mostrar ofertas');
         $(".off_fxd_cont").animate({ "height": 2 }, 500);
         isColorOfertaAccion = true;
-        cambiarColorOferta();
+        //cambiarColorOferta();
         return false;
     }
 }

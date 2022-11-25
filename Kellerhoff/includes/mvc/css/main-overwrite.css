@@ -611,3 +611,26 @@ a.mtz {
     font-weight: bold;
     text-transform: uppercase;
 }
+@keyframes anim {
+    0% {
+        background-color: #315e7b;
+    }
+    25% {
+        background-color: #1b82c5;
+    }
+    50% {
+        background-color: #315e7b;
+    }
+    75% {
+        background-color: #1b82c5;
+    }
+    100% {
+        background-color: #315e7b;
+    }
+}
+
+#botonOferta {
+    animation-name: anim;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
