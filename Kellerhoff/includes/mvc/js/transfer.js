@@ -281,7 +281,7 @@ function onclickConfimarTransferPedidoOk() {
 
 
             idTipoEnvioPedidoTransfer = $('#comboTipoEnvio').val();
-            textFacturaPedidoTransfer = $('#txtMensajeFactura').val();
+            textFacturaPedidoTransfer = '';//$('#txtMensajeFactura').val();
             textRemitoPedidoTransfer = $('#txtMensajeRemito').val();
             codSucursalPedidoTransfer = listaCarritoTransferPorSucursal[indexSucursalTransferSeleccionado].Sucursal;
             textTipoEnvioCarritoTransfer = $('#comboTipoEnvio option:selected').text();
@@ -310,13 +310,18 @@ function OnCallBackTomarTransferPedidoCarrito(args) {
     } else {
         var isError = false;
         if (args.length > 0) {
-            if (args[0].Error != '') {
+            if (args[0].Error != '' || args[0].web_Error ) {
                 isError = true;
             }
         }
         if (isError) {
-            //alert(args[0].Error);
-            mensaje_alert_base(args[0].Error, 'volverBuscador()');
+            var msgError = '';
+            if (args[0].Error != '') {
+                msgError = args[0].Error;
+            } else if (args[0].web_Error != '') {
+                msgError = args[0].web_Error;
+            }
+            mensaje_alert_base(msgError, 'volverBuscador()');
             //location.href = '../mvc/Buscador';
         } else {
             isHacerBorradoCarritos = true;

@@ -129,6 +129,8 @@ namespace Kellerhoff.Controllers
 
                             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
                             {
+                                cClientes oCliente = (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                                FuncionesPersonalizadas.CargarMensajeActualizado(oCliente.cli_codigo);
                                 System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] = user;
                                 List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
                                 System.Web.HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = listaPermisoDenegados;
@@ -304,10 +306,10 @@ namespace Kellerhoff.Controllers
         public static int ObtenerCantidadMensaje()
         {
             int resultado = 0;
-            if ((System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensaje"] == null ||
-                System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"] == null)
-                && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
-                Codigo.clases.FuncionesPersonalizadas.CargarMensajeActualizado(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
+            //if ((System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensaje"] == null ||
+            //    System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"] == null)
+            //    && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+            //    Codigo.clases.FuncionesPersonalizadas.CargarMensajeActualizado(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
             if (System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensaje"] != null)
                 resultado = Convert.ToInt32(System.Web.HttpContext.Current.Session["clientesDefault_CantListaMensaje"]);
             return resultado;

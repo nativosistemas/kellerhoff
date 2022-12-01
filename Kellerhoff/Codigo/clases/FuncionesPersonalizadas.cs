@@ -83,24 +83,23 @@ namespace Kellerhoff.Codigo.clases
 
         public static void CargarMensajeActualizado(int pIdCliente)
         {
-            bool isAgregar = true;
-            if (HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"] != null)
+            //bool isAgregar = true;
+            //if (HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"] != null)
+            //{
+            //    if (((DateTime)HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"]) < DateTime.Now.AddMinutes(-5))
+            //    {
+            //        isAgregar = false;
+            //    }
+            //}
+            //if (isAgregar)
+            //{
+            List<cMensaje> listaMensaje = WebService.RecuperarTodosMensajesPorIdCliente(pIdCliente);
+            if (listaMensaje != null)
             {
-                if (((DateTime)HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"]) < DateTime.Now.AddMinutes(-5))
-                {
-                    isAgregar = false;
-                }
+                HttpContext.Current.Session["clientesDefault_CantListaMensaje"] = listaMensaje.Where(x => (x.tme_estado == Convert.ToInt32(Constantes.cESTADO_SINLEER) && !x.tme_importante)).ToList().Count;
+                HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"] = DateTime.Now;
             }
-            if (isAgregar)
-            {
-                List<cMensaje> listaMensaje = WebService.RecuperarTodosMensajesPorIdCliente(pIdCliente);
-                if (listaMensaje != null)
-                {
-                    //List<cMensaje> lista = ((List<cMensaje>)(Session["clientesDefault_ListaMensaje"])).Where(x => x.tme_estado == Convert.ToInt32(Constantes.cESTADO_SINLEER)).ToList();
-                    HttpContext.Current.Session["clientesDefault_CantListaMensaje"] = listaMensaje.Where(x => (x.tme_estado == Convert.ToInt32(Constantes.cESTADO_SINLEER) && !x.tme_importante)).ToList().Count;
-                    HttpContext.Current.Session["clientesDefault_CantListaMensajeFechaHora"] = DateTime.Now;
-                }
-            }
+            //}
         }
         public static void CargarRecuperadorFaltaActualizado(int pIdCliente)
         {
@@ -300,7 +299,7 @@ namespace Kellerhoff.Codigo.clases
             cClientes oCliente = ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]);
             if (HttpContext.Current.Session["horario_siguiente" + pSucursal] == null)
             {
-                    HttpContext.Current.Session["horario_siguiente" + pSucursal] = DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(oCliente, pSucursalDependiente, pHorarioCierre);
+                HttpContext.Current.Session["horario_siguiente" + pSucursal] = DKbase.web.FuncionesPersonalizadas_base.ObtenerHorarioCierreAnterior(oCliente, pSucursalDependiente, pHorarioCierre);
             }
             if (HttpContext.Current.Session["horario_siguiente" + pSucursal] != null)
             {

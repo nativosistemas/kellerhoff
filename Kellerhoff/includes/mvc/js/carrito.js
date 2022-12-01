@@ -218,11 +218,11 @@ function MostrarConfirmarCarrito(pIndexCarrito, pIsTransfer) {
     strHtml += '<div class="close-modal" data-dismiss="modal"><i class="fa fa-times"></i></div>';
     strHtml += '</div>';
     strHtml += '<div class="modal-body">';
-    strHtml += '<div class="col-md-6 div_msj">';
-    strHtml += '<textarea class="" id="txtMensajeFactura" name="txtMensajeFactura" placeholder="Mensaje en factura" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
-    strHtml += '</div>';
-    strHtml += '<div class="col-md-6 div_msj">';
-    strHtml += '<textarea class="" id="txtMensajeRemito" name="txtMensajeRemito" placeholder="Mensaje en remito" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
+    //strHtml += '<div class="col-md-6 div_msj">';
+    //strHtml += '<textarea class="" id="txtMensajeFactura" name="txtMensajeFactura" placeholder="Mensaje en factura" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
+    //strHtml += '</div>';
+    strHtml += '<div class="col-md-12 div_msj">';
+    strHtml += '<textarea class="" id="txtMensajeRemito" name="txtMensajeRemito" placeholder="Mensaje en Orden de Pedido" maxlength="40" onchange="MensajeFacturaRemitoLength(this)" onkeyup="MensajeFacturaRemitoLength(this)" onpaste="MensajeFacturaRemitoLength(this)"></textarea>';
     strHtml += '</div>';
     strHtml += '<div class="col-md-6">Tipo de envio:&nbsp;';
     strHtml += '<select class="form-shop" name="comboTipoEnvio" id="comboTipoEnvio" onchange="onChangeTipoEnvio()" style="width:200px">';
@@ -302,7 +302,7 @@ function ConfirmarCarrito(pIndexCarrito) {
             }
         }
         if (isTomarPedido) {
-            var textFactura = $('#txtMensajeFactura').val();
+            var textFactura = '';//$('#txtMensajeFactura').val();
             var textRemito = $('#txtMensajeRemito').val();
             var isUrgente = $('#checkboxIsUrgentePedido').is(":checked");
             var idTipoEnvio = $('#comboTipoEnvio').val();
@@ -345,10 +345,16 @@ function OnCallBackTomarPedidoCarrito(args) {
         mensaje_alert_base(mensajeCuandoSeMuestraError, 'volverBuscador()');
     } else {
         // Error dsd dll pedido
-        if (args.Error != '') {
-            mensaje_alert_base(args.Error, 'volverBuscador()');
+        if (args.Error != '' || args.web_Error != '' ) {
+            var msgError = '';
+            if (args.Error != '') {
+                msgError = args.Error;
+            } else if (args.web_Error != '') {
+                msgError = args.web_Error;
+            }
+            mensaje_alert_base(msgError, 'volverBuscador()');
             // Fin Error dsd dll pedido
-        } else {
+        } else{
             isHacerBorradoCarritos = true;
             CargarRespuestaDePedido(args);
         }
