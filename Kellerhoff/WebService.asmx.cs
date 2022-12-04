@@ -192,23 +192,7 @@ namespace Kellerhoff
         }
         public static List<cArchivo> RecuperarTodosArchivos(int pArc_codRelacion, string pArc_galeria, string pFiltro)
         {
-            //if (VerificarPermisos(CredencialAutenticacion))
-            //{
-            List<cArchivo> lista = new List<cArchivo>();
-            DataSet dsResultado = capaRecurso.GestiónArchivo(null, pArc_codRelacion, pArc_galeria, null, null, null, null, null, null, null, null, null, pFiltro, Constantes.cSQL_SELECT);
-            if (dsResultado != null)
-            {
-                foreach (DataRow item in dsResultado.Tables["Archivo"].Rows)
-                {
-                    lista.Add(DKbase.web.acceso.ConvertToArchivo(item));
-                }
-            }
-            return lista;
-            //}
-            //else
-            //{
-            //    return null;
-            //}
+            return DKbase.Util.RecuperarTodosArchivos(pArc_codRelacion, pArc_galeria, pFiltro);
         }
 
         public static void CambiarPosicionArchivoPorId(int pArc_codRecurso, int pArc_codRelacion, string pArc_galeria, bool isSubir, int pIdUsuarioSession)
@@ -1010,127 +994,21 @@ namespace Kellerhoff
             }
             return resultado;
         }
-        //private static cProductos ConvertToProductosAUX(DataRow pItem)
-        //{
-        //    cProductosBuscador obj = new cProductosBuscador();
-        //    obj.pro_codigo = pItem["pro_codigo"].ToString();
-        //    if (pItem["pro_nombre"] != DBNull.Value)
-        //    {
-        //        obj.pro_nombre = pItem["pro_nombre"].ToString();
-        //    }
-        //    if (pItem["pro_precio"] != DBNull.Value)
-        //    {
-        //        obj.pro_precio = Convert.ToDecimal(pItem["pro_precio"]);
-        //    }
-        //    if (pItem["pro_preciofarmacia"] != DBNull.Value)
-        //    {
-        //        obj.pro_preciofarmacia = Convert.ToDecimal(pItem["pro_preciofarmacia"]);
-        //    }
-        //    if (pItem["pro_ofeunidades"] != DBNull.Value)
-        //    {
-        //        obj.pro_ofeunidades = Convert.ToInt32(pItem["pro_ofeunidades"]);
-        //    }
-        //    if (pItem["pro_ofeporcentaje"] != DBNull.Value)
-        //    {
-        //        obj.pro_ofeporcentaje = Convert.ToDecimal(pItem["pro_ofeporcentaje"]);
-        //    }
-        //    if (pItem["pro_neto"] != DBNull.Value)
-        //    {
-        //        obj.pro_neto = Convert.ToBoolean(pItem["pro_neto"]);
-        //    }
-        //    if (pItem["pro_codtpopro"] != DBNull.Value)
-        //    {
-        //        obj.pro_codtpopro = pItem["pro_codtpopro"].ToString().ToUpper();
-        //    }
-        //    if (pItem["pro_descuentoweb"] != DBNull.Value)
-        //    {
-        //        obj.pro_descuentoweb = Convert.ToDecimal(pItem["pro_descuentoweb"]);
-        //    }
-        //    if (pItem["pro_laboratorio"] != DBNull.Value)
-        //    {
-        //        obj.pro_laboratorio = pItem["pro_laboratorio"].ToString();
-        //    }
-        //    if (pItem["pro_monodroga"] != DBNull.Value)
-        //    {
-        //        obj.pro_monodroga = pItem["pro_monodroga"].ToString();
-        //    }
-        //    if (pItem["pro_codigobarra"] != DBNull.Value)
-        //    {
-        //        obj.pro_codigobarra = pItem["pro_codigobarra"].ToString();
-        //    }
-        //    if (pItem["pro_codigoalfabeta"] != DBNull.Value)
-        //    {
-        //        obj.pro_codigoalfabeta = pItem["pro_codigoalfabeta"].ToString();
-        //    }
-        //    return obj;
-        //}
         public static List<cClientes> RecuperarTodosClientes()
         {
-            List<cClientes> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tablaClientes = capaClientes.RecuperarTodosClientes();
-                if (tablaClientes != null)
-                {
-                    resultado = new List<cClientes>();
-                    foreach (DataRow item in tablaClientes.Rows)
-                    {
-                        resultado.Add(ConvertToCliente(item));
-                    }
-                }
-            }
-            return resultado;
+            return DKbase.Util.RecuperarTodosClientes();
         }
         public static List<cClientes> RecuperarTodosClientesBySucursal(string pSucursal)
         {
-            List<cClientes> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tablaClientes = capaClientes.RecuperarTodosClientesBySucursal(pSucursal);
-                if (tablaClientes != null)
-                {
-                    resultado = new List<cClientes>();
-                    foreach (DataRow item in tablaClientes.Rows)
-                    {
-                        resultado.Add(ConvertToCliente(item));
-                    }
-                }
-            }
-            return resultado;
+            return DKbase.Util.RecuperarTodosClientesBySucursal(pSucursal);
         }
         public static List<cClientes> RecuperarTodosClientesByGrupoCliente(string pGC)
         {
-            List<cClientes> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tablaClientes = capaClientes.RecuperarTodosClientesByGrupoCliente(pGC);
-                if (tablaClientes != null)
-                {
-                    resultado = new List<cClientes>();
-                    foreach (DataRow item in tablaClientes.Rows)
-                    {
-                        resultado.Add(ConvertToCliente(item));
-                    }
-                }
-            }
-            return resultado;
+            return DKbase.Util.RecuperarTodosClientesByGrupoCliente(pGC);
         }
         public static List<cClientes> spRecuperarTodosClientesByPromotor(string pPromotor)
         {
-            List<cClientes> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tablaClientes = DKbase.web.capaDatos.capaClientes_base.spRecuperarTodosClientesByPromotor(pPromotor);
-                if (tablaClientes != null)
-                {
-                    resultado = new List<cClientes>();
-                    foreach (DataRow item in tablaClientes.Rows)
-                    {
-                        resultado.Add(ConvertToCliente(item));
-                    }
-                }
-            }
-            return resultado;
+            return DKbase.Util.spRecuperarTodosClientesByPromotor(pPromotor);
         }
         public static List<string> RecuperarTodosCodigoReparto()
         {
@@ -1783,96 +1661,96 @@ namespace Kellerhoff
             DataTable pTablaDetalle = DKbase.web.FuncionesPersonalizadas_base.ConvertProductosAndCantidadToDataTable(pListaProductosMasCantidad);
             return capaTransfer.AgregarProductosTransfersAlCarrito_TempSubirArchivo(pTablaDetalle, pIdCliente, pIdUsuario, pIdTransfers, pCodSucursal);
         }
-        private static cMensaje ConvertToMensaje(DataRow pItem)
-        {
-            cMensaje obj = new cMensaje();
-            if (pItem["tme_codigo"] != DBNull.Value)
-            {
-                obj.tme_codigo = Convert.ToInt32(pItem["tme_codigo"]);
-            }
-            if (pItem["tme_fecha"] != DBNull.Value)
-            {
-                obj.tme_fecha = Convert.ToDateTime(pItem["tme_fecha"]);
-                obj.tme_fechaToString = Convert.ToDateTime(pItem["tme_fecha"]).ToShortDateString();
-            }
-            if (pItem["tme_asunto"] != DBNull.Value)
-            {
-                obj.tme_asunto = pItem["tme_asunto"].ToString();
-            }
-            if (pItem["tme_mensaje"] != DBNull.Value)
-            {
-                obj.tme_mensaje = pItem["tme_mensaje"].ToString();
-            }
-            if (pItem["tme_codUsuario"] != DBNull.Value)
-            {
-                obj.tme_codUsuario = Convert.ToInt32(pItem["tme_codUsuario"]);
-            }
-            if (pItem["tme_estado"] != DBNull.Value)
-            {
-                obj.tme_estado = Convert.ToInt32(pItem["tme_estado"]);
-            }
-            if (pItem["tme_codClienteDestinatario"] != DBNull.Value)
-            {
-                obj.tme_codClienteDestinatario = Convert.ToInt32(pItem["tme_codClienteDestinatario"]);
-            }
-            if (pItem.Table.Columns.Contains("est_nombre"))
-            {
-                if (pItem["est_nombre"] != DBNull.Value)
-                {
-                    obj.est_nombre = Convert.ToString(pItem["est_nombre"]);
-                }
-            }
+        //private static cMensaje ConvertToMensaje(DataRow pItem)
+        //{
+        //    cMensaje obj = new cMensaje();
+        //    if (pItem["tme_codigo"] != DBNull.Value)
+        //    {
+        //        obj.tme_codigo = Convert.ToInt32(pItem["tme_codigo"]);
+        //    }
+        //    if (pItem["tme_fecha"] != DBNull.Value)
+        //    {
+        //        obj.tme_fecha = Convert.ToDateTime(pItem["tme_fecha"]);
+        //        obj.tme_fechaToString = Convert.ToDateTime(pItem["tme_fecha"]).ToShortDateString();
+        //    }
+        //    if (pItem["tme_asunto"] != DBNull.Value)
+        //    {
+        //        obj.tme_asunto = pItem["tme_asunto"].ToString();
+        //    }
+        //    if (pItem["tme_mensaje"] != DBNull.Value)
+        //    {
+        //        obj.tme_mensaje = pItem["tme_mensaje"].ToString();
+        //    }
+        //    if (pItem["tme_codUsuario"] != DBNull.Value)
+        //    {
+        //        obj.tme_codUsuario = Convert.ToInt32(pItem["tme_codUsuario"]);
+        //    }
+        //    if (pItem["tme_estado"] != DBNull.Value)
+        //    {
+        //        obj.tme_estado = Convert.ToInt32(pItem["tme_estado"]);
+        //    }
+        //    if (pItem["tme_codClienteDestinatario"] != DBNull.Value)
+        //    {
+        //        obj.tme_codClienteDestinatario = Convert.ToInt32(pItem["tme_codClienteDestinatario"]);
+        //    }
+        //    if (pItem.Table.Columns.Contains("est_nombre"))
+        //    {
+        //        if (pItem["est_nombre"] != DBNull.Value)
+        //        {
+        //            obj.est_nombre = Convert.ToString(pItem["est_nombre"]);
+        //        }
+        //    }
 
-            if (pItem.Table.Columns.Contains("tme_importante"))
-            {
-                if (pItem["tme_importante"] != DBNull.Value)
-                {
-                    obj.tme_importante = Convert.ToBoolean(pItem["tme_importante"]);
-                }
-            }
-            obj.tme_fechaDesde = DateTime.MinValue;
-            if (pItem.Table.Columns.Contains("tme_fechaDesde"))
-            {
-                if (pItem["tme_fechaDesde"] != DBNull.Value)
-                {
-                    obj.tme_fechaDesde = Convert.ToDateTime(pItem["tme_fechaDesde"]);
-                }
-            }
-            obj.tme_fechaHasta = DateTime.MinValue;
-            if (pItem.Table.Columns.Contains("tme_fechaHasta"))
-            {
-                if (pItem["tme_fechaHasta"] != DBNull.Value)
-                {
-                    obj.tme_fechaHasta = Convert.ToDateTime(pItem["tme_fechaHasta"]);
-                }
-            }
-            if (obj.tme_importante)
-            {
-                obj.tme_fechaDesdeToString = ((DateTime)obj.tme_fechaDesde).ToShortDateString();
-                obj.tme_fechaHastaToString = ((DateTime)obj.tme_fechaHasta).ToShortDateString();
-                obj.tme_importanteToString = "Si";
-            }
-            else
-            {
-                obj.tme_importanteToString = "No";
-            }
-            obj.tme_todos = null;
-            if (pItem.Table.Columns.Contains("tme_todos"))
-            {
-                if (pItem["tme_todos"] != DBNull.Value)
-                {
-                    obj.tme_todos = Convert.ToInt32(pItem["tme_todos"]);
-                }
-            }
-            if (pItem.Table.Columns.Contains("tme_todosSucursales"))
-            {
-                if (pItem["tme_todosSucursales"] != DBNull.Value)
-                {
-                    obj.tme_todosSucursales = Convert.ToInt32(pItem["tme_todosSucursales"]);
-                }
-            }
-            return obj;
-        }
+        //    if (pItem.Table.Columns.Contains("tme_importante"))
+        //    {
+        //        if (pItem["tme_importante"] != DBNull.Value)
+        //        {
+        //            obj.tme_importante = Convert.ToBoolean(pItem["tme_importante"]);
+        //        }
+        //    }
+        //    obj.tme_fechaDesde = DateTime.MinValue;
+        //    if (pItem.Table.Columns.Contains("tme_fechaDesde"))
+        //    {
+        //        if (pItem["tme_fechaDesde"] != DBNull.Value)
+        //        {
+        //            obj.tme_fechaDesde = Convert.ToDateTime(pItem["tme_fechaDesde"]);
+        //        }
+        //    }
+        //    obj.tme_fechaHasta = DateTime.MinValue;
+        //    if (pItem.Table.Columns.Contains("tme_fechaHasta"))
+        //    {
+        //        if (pItem["tme_fechaHasta"] != DBNull.Value)
+        //        {
+        //            obj.tme_fechaHasta = Convert.ToDateTime(pItem["tme_fechaHasta"]);
+        //        }
+        //    }
+        //    if (obj.tme_importante)
+        //    {
+        //        obj.tme_fechaDesdeToString = ((DateTime)obj.tme_fechaDesde).ToShortDateString();
+        //        obj.tme_fechaHastaToString = ((DateTime)obj.tme_fechaHasta).ToShortDateString();
+        //        obj.tme_importanteToString = "Si";
+        //    }
+        //    else
+        //    {
+        //        obj.tme_importanteToString = "No";
+        //    }
+        //    obj.tme_todos = null;
+        //    if (pItem.Table.Columns.Contains("tme_todos"))
+        //    {
+        //        if (pItem["tme_todos"] != DBNull.Value)
+        //        {
+        //            obj.tme_todos = Convert.ToInt32(pItem["tme_todos"]);
+        //        }
+        //    }
+        //    if (pItem.Table.Columns.Contains("tme_todosSucursales"))
+        //    {
+        //        if (pItem["tme_todosSucursales"] != DBNull.Value)
+        //        {
+        //            obj.tme_todosSucursales = Convert.ToInt32(pItem["tme_todosSucursales"]);
+        //        }
+        //    }
+        //    return obj;
+        //}
         public static List<cMensaje> RecuperarTodosMensaje()
         {
             if (VerificarPermisos(CredencialAutenticacion))
@@ -1883,7 +1761,7 @@ namespace Kellerhoff
                 {
                     foreach (DataRow item in tabla.Rows)
                     {
-                        cMensaje obj = ConvertToMensaje(item);
+                        cMensaje obj = DKbase.web.capaDatos.capaMensaje_base.ConvertToMensaje(item);
                         if (item["cli_nombre"] != DBNull.Value)
                         {
                             obj.cli_nombre = Convert.ToString(item["cli_nombre"]);
@@ -1907,7 +1785,7 @@ namespace Kellerhoff
                 {
                     foreach (DataRow item in tabla.Rows)
                     {
-                        return ConvertToMensaje(item);
+                        return DKbase.web.capaDatos.capaMensaje_base.ConvertToMensaje(item);
                     }
                 }
                 return null;
@@ -1946,23 +1824,7 @@ namespace Kellerhoff
         }
         public static List<cMensaje> RecuperarTodosMensajesPorIdCliente(int pIdCliente)
         {
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                List<cMensaje> resultado = new List<cMensaje>();
-                DataTable tabla = capaMensaje.RecuperartTodosMensajesPorIdCliente(pIdCliente);
-                if (tabla != null)
-                {
-                    foreach (DataRow item in tabla.Rows)
-                    {
-                        resultado.Add(ConvertToMensaje(item));
-                    }
-                }
-                return resultado;
-            }
-            else
-            {
-                return null;
-            }
+            return DKbase.Util.RecuperarTodosMensajesPorIdCliente(pIdCliente);
         }
         public static int InsertarActualizarMensaje(int pIdMensaje, string pAsunto, string pMensaje, int pIdCliente, int pIdUsuario, int pIdEstado, DateTime? pFechaDesde, DateTime? pFechaHasta, bool pImportante)
         {
@@ -3750,8 +3612,9 @@ namespace Kellerhoff
         public static bool? ActualizarInsertarProductosImagen(string pCodigoProducto, string pNombreArchivo)
         {
             bool? resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion)) { 
-                resultado = capaProductos_base.ActualizarInsertarProductosImagen(DKbase.Helper.getConnectionStringSQL,pCodigoProducto, pNombreArchivo);
+            if (VerificarPermisos(CredencialAutenticacion))
+            {
+                resultado = capaProductos_base.ActualizarInsertarProductosImagen(DKbase.Helper.getConnectionStringSQL, pCodigoProducto, pNombreArchivo);
                 capaProductos_base.ActualizarInsertarProductosImagen(DKbase.Helper.getConnectionStringSQL_intranet, pCodigoProducto, pNombreArchivo);
             }
             return resultado;
@@ -4575,22 +4438,7 @@ namespace Kellerhoff
         }
         public static List<cArchivo> RecuperarPopUpPorCliente(int pIdCliente, string pSucursal)
         {
-            List<DKbase.web.capaDatos.cArchivo> result = null;
-            result = WebService.RecuperarTodosArchivos(1, "popup", string.Empty).Where(x => x.arc_estado == Kellerhoff.Codigo.clases.Constantes.cESTADO_ACTIVO).ToList();
-            result = result.Where(x => string.IsNullOrWhiteSpace(x.arc_descripcion) || x.arc_descripcion.Contains("<" + pSucursal + ">")).ToList();
-            foreach (var item in result)
-            {
-                // item.arc_mime
-                string RutaCompleta = Constantes.cRaizArchivos + @"\archivos\" + "popup" + @"\";
-                string RutaCompletaNombreArchivo = RutaCompleta + item.arc_nombre;
-                if (System.IO.File.Exists(RutaCompletaNombreArchivo) && System.Text.RegularExpressions.Regex.IsMatch(item.arc_nombre.ToLower(), @"^.*\.(jpg|gif|png|jpeg|bmp)$"))
-                {
-                    System.Drawing.Image origImagen = cThumbnail.obtenerImagen("popup", item.arc_nombre, "1024", "768", "", false); //System.Drawing.Image.FromFile(RutaCompletaNombreArchivo);
-                    item.ancho = origImagen.Width;
-                    item.alto = origImagen.Height;
-                }
-            }
-            return result;
+            return DKbase.Util.RecuperarPopUpPorCliente(pIdCliente, pSucursal);
         }
         public static bool? CambiarPublicarReCall(int rec_id)
         {
@@ -4620,94 +4468,68 @@ namespace Kellerhoff
             return DKbase.web.acceso.ConvertToProductos(pItem);
         }
 
-        private static cMensajeNew ConvertToMensajeNew(DataRow pItem)
-        {
-            cMensajeNew obj = new cMensajeNew();
-            if (pItem["tmn_codigo"] != DBNull.Value)
-            {
-                obj.tmn_codigo = Convert.ToInt32(pItem["tmn_codigo"]);
-            }
-            if (pItem["tmn_fecha"] != DBNull.Value)
-            {
-                obj.tmn_fecha = Convert.ToDateTime(pItem["tmn_fecha"]);
-                obj.tmn_fechaToString = Convert.ToDateTime(pItem["tmn_fecha"]).ToShortDateString();
-            }
-            if (pItem["tmn_asunto"] != DBNull.Value)
-            {
-                obj.tmn_asunto = pItem["tmn_asunto"].ToString();
-            }
-            if (pItem["tmn_mensaje"] != DBNull.Value)
-            {
-                obj.tmn_mensaje = pItem["tmn_mensaje"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("tmn_importante") && pItem["tmn_importante"] != DBNull.Value)
-            {
-                obj.tmn_importante = Convert.ToBoolean(pItem["tmn_importante"]);
-            }
-            obj.tmn_fechaDesde = DateTime.MinValue;
-            if (pItem.Table.Columns.Contains("tmn_fechaDesde") && pItem["tmn_fechaDesde"] != DBNull.Value)
-            {
-                obj.tmn_fechaDesde = Convert.ToDateTime(pItem["tmn_fechaDesde"]);
-            }
-            obj.tmn_fechaHasta = DateTime.MinValue;
-            if (pItem.Table.Columns.Contains("tmn_fechaHasta") && pItem["tmn_fechaHasta"] != DBNull.Value)
-            {
-                obj.tmn_fechaHasta = Convert.ToDateTime(pItem["tmn_fechaHasta"]);
-            }
-            if (obj.tmn_importante)
-            {
-                obj.tmn_fechaDesdeToString = ((DateTime)obj.tmn_fechaDesde).ToShortDateString();
-                obj.tmn_fechaHastaToString = ((DateTime)obj.tmn_fechaHasta).ToShortDateString();
-                obj.tmn_importanteToString = "Si";
-            }
-            else
-            {
-                obj.tmn_importanteToString = "No";
-            }
+        //private static cMensajeNew ConvertToMensajeNew(DataRow pItem)
+        //{
+        //    cMensajeNew obj = new cMensajeNew();
+        //    if (pItem["tmn_codigo"] != DBNull.Value)
+        //    {
+        //        obj.tmn_codigo = Convert.ToInt32(pItem["tmn_codigo"]);
+        //    }
+        //    if (pItem["tmn_fecha"] != DBNull.Value)
+        //    {
+        //        obj.tmn_fecha = Convert.ToDateTime(pItem["tmn_fecha"]);
+        //        obj.tmn_fechaToString = Convert.ToDateTime(pItem["tmn_fecha"]).ToShortDateString();
+        //    }
+        //    if (pItem["tmn_asunto"] != DBNull.Value)
+        //    {
+        //        obj.tmn_asunto = pItem["tmn_asunto"].ToString();
+        //    }
+        //    if (pItem["tmn_mensaje"] != DBNull.Value)
+        //    {
+        //        obj.tmn_mensaje = pItem["tmn_mensaje"].ToString();
+        //    }
+        //    if (pItem.Table.Columns.Contains("tmn_importante") && pItem["tmn_importante"] != DBNull.Value)
+        //    {
+        //        obj.tmn_importante = Convert.ToBoolean(pItem["tmn_importante"]);
+        //    }
+        //    obj.tmn_fechaDesde = DateTime.MinValue;
+        //    if (pItem.Table.Columns.Contains("tmn_fechaDesde") && pItem["tmn_fechaDesde"] != DBNull.Value)
+        //    {
+        //        obj.tmn_fechaDesde = Convert.ToDateTime(pItem["tmn_fechaDesde"]);
+        //    }
+        //    obj.tmn_fechaHasta = DateTime.MinValue;
+        //    if (pItem.Table.Columns.Contains("tmn_fechaHasta") && pItem["tmn_fechaHasta"] != DBNull.Value)
+        //    {
+        //        obj.tmn_fechaHasta = Convert.ToDateTime(pItem["tmn_fechaHasta"]);
+        //    }
+        //    if (obj.tmn_importante)
+        //    {
+        //        obj.tmn_fechaDesdeToString = ((DateTime)obj.tmn_fechaDesde).ToShortDateString();
+        //        obj.tmn_fechaHastaToString = ((DateTime)obj.tmn_fechaHasta).ToShortDateString();
+        //        obj.tmn_importanteToString = "Si";
+        //    }
+        //    else
+        //    {
+        //        obj.tmn_importanteToString = "No";
+        //    }
 
-            if (pItem.Table.Columns.Contains("tmn_todosSucursales") && pItem["tmn_todosSucursales"] != DBNull.Value)
-            {
-                obj.tmn_todosSucursales = pItem["tmn_todosSucursales"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("tmn_tipo") && pItem["tmn_tipo"] != DBNull.Value)
-            {
-                obj.tmn_tipo = pItem["tmn_tipo"].ToString();
-            }
-            if (pItem.Table.Columns.Contains("tmn_todosRepartos") && pItem["tmn_todosRepartos"] != DBNull.Value)
-            {
-                obj.tmn_todosRepartos = pItem["tmn_todosRepartos"].ToString();
-            }
-            return obj;
-        }
+        //    if (pItem.Table.Columns.Contains("tmn_todosSucursales") && pItem["tmn_todosSucursales"] != DBNull.Value)
+        //    {
+        //        obj.tmn_todosSucursales = pItem["tmn_todosSucursales"].ToString();
+        //    }
+        //    if (pItem.Table.Columns.Contains("tmn_tipo") && pItem["tmn_tipo"] != DBNull.Value)
+        //    {
+        //        obj.tmn_tipo = pItem["tmn_tipo"].ToString();
+        //    }
+        //    if (pItem.Table.Columns.Contains("tmn_todosRepartos") && pItem["tmn_todosRepartos"] != DBNull.Value)
+        //    {
+        //        obj.tmn_todosRepartos = pItem["tmn_todosRepartos"].ToString();
+        //    }
+        //    return obj;
+        //}
         public static List<cMensaje> RecuperartTodosMensajeNewPorSucursal(string pSucursal, string pReparto)
         {
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                List<cMensaje> lista = new List<cMensaje>();
-                List<cMensajeNew> lista_aux = new List<cMensajeNew>();
-                DataTable tabla = capaMensaje.RecuperartTodosMensajeNewPorSucursal(pSucursal, pReparto);
-                if (tabla != null)
-                {
-                    foreach (DataRow item in tabla.Rows)
-                    {
-                        cMensajeNew obj = ConvertToMensajeNew(item);
-                        lista_aux.Add(obj);
-                    }
-                    if (lista_aux.Count > 0)
-                    {
-                        foreach (cMensajeNew m in lista_aux)
-                        {
-                            cMensaje o = new cMensaje() { tme_asunto = m.tmn_asunto, tme_mensaje = m.tmn_mensaje };
-                            lista.Add(o);
-                        }
-                    }
-                }
-                return lista;
-            }
-            else
-            {
-                return null;
-            }
+            return DKbase.Util.RecuperartTodosMensajeNewPorSucursal(pSucursal, pReparto);
         }
         public static List<ServiceReferenceDLL.cVencimientoResumen> ObtenerVencimientosResumenPorFecha(string pNumeroResumen, DateTime pFechaVencimiento)
         {
