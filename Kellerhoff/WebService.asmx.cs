@@ -3779,23 +3779,9 @@ namespace Kellerhoff
             }
             return resultado;
         }
-        public static List<cOferta> RecuperarTodasOfertaPublicar(bool isNuevosLanzamiento = false)
+        public static List<DKbase.web.capaDatos.cOferta> RecuperarTodasOfertaPublicar(bool isNuevosLanzamiento = false)
         {
-            List<cOferta> resultado = null;
-            DataTable tabla = capaHome.RecuperarTodasOfertaPublicar();
-            if (tabla != null)
-            {
-                resultado = new List<cOferta>();
-                foreach (DataRow fila in tabla.Rows)
-                {
-                    resultado.Add(ConvertToOferta(fila));
-                }
-            }
-            if (resultado != null)
-            {
-                resultado = resultado.Where(x => x.ofe_nuevosLanzamiento == isNuevosLanzamiento).ToList();
-            }
-            return resultado;
+            return DKbase.Util.RecuperarTodasOfertaPublicar(isNuevosLanzamiento);
         }
         public static cOferta RecuperarOfertaPorId(int pIdOferta)
         {

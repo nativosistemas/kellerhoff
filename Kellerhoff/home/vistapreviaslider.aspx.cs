@@ -24,8 +24,8 @@ namespace Kellerhoff.home
             int? id = 0;
             if (HttpContext.Current.Session["vistapreviaslider_idSlider"] != null)
                 id = Convert.ToInt32(HttpContext.Current.Session["vistapreviaslider_idSlider"]);
-            List<cHomeSlide> resultado = new List<cHomeSlide>();
-            cHomeSlide o = WebService.RecuperarHomeSlidePorId(id.Value);
+            List<DKbase.web.capaDatos.cHomeSlide> resultado = new List<DKbase.web.capaDatos.cHomeSlide>();
+            DKbase.web.capaDatos.cHomeSlide o = WebService.RecuperarHomeSlidePorId(id.Value);
             if (o != null)
                 resultado.Add(o);
             return resultado == null ? string.Empty : Serializador.SerializarAJson(resultado);

@@ -32,7 +32,7 @@ namespace Kellerhoff.home
             {
                 isNuevoLanzamiento = Convert.ToBoolean(HttpContext.Current.Session["promociones_isNuevoLanzamiento"]);
             }
-            List<cOferta> resultado = WebService.RecuperarTodasOfertaPublicar(isNuevoLanzamiento);
+            List<DKbase.web.capaDatos.cOferta> resultado = WebService.RecuperarTodasOfertaPublicar(isNuevoLanzamiento);
             return resultado == null ? string.Empty : Serializador.SerializarAJson(resultado);
         }
         public void AgregarHtmlOculto()

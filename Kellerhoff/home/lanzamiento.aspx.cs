@@ -28,8 +28,8 @@ namespace Kellerhoff.home
             if (HttpContext.Current.Session["lanzamiento_idOferta"] != null)
                 id = Convert.ToInt32(HttpContext.Current.Session["lanzamiento_idOferta"]);
 
-            List<cOferta> resultado = new List<cOferta>();
-            cOferta o = WebService.RecuperarTodasOfertas_generico().FirstOrDefault(x => x.ofe_idOferta == id);
+            List<DKbase.web.capaDatos.cOferta> resultado = new List<DKbase.web.capaDatos.cOferta>();
+            DKbase.web.capaDatos.cOferta o = WebService.RecuperarTodasOfertas_generico().FirstOrDefault(x => x.ofe_idOferta == id);
             if (o != null)
                 resultado.Add(o);
             /*foreach (var item in resultado)
