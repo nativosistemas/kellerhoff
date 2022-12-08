@@ -17,7 +17,7 @@ namespace Kellerhoff.admin.pages
             Seguridad(consPalabraClave);
             if (!IsPostBack)
             {
-                txt_Cantidad.Text = WebService.RecuperarProductoParametrizadoCantidad().ToString();
+                txt_Cantidad.Text = DKbase.Util.RecuperarProductoParametrizadoCantidad().ToString();
             }
 
         }

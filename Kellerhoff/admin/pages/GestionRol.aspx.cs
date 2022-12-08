@@ -26,7 +26,7 @@ namespace Kellerhoff.admin.pages
         }
         public override void Modificar(int pIdRol)
         {
-            Kellerhoff.Codigo.capaDatos.cRol rol = Kellerhoff.Codigo.clases.Seguridad.RecuperarRolPorId(pIdRol);
+            DKbase.web.cRol rol = Kellerhoff.Codigo.clases.Seguridad.RecuperarRolPorId(pIdRol);
             Session["GestionRol_IdRol"] = rol.rol_codRol;
             txt_nombre.Text = rol.rol_Nombre;
             pnl_grilla.Visible = false;
@@ -95,8 +95,8 @@ namespace Kellerhoff.admin.pages
             bool resultado = true;
             if (Session["GestionRol_IdRol"] != null)
             {
-                List<Kellerhoff.Codigo.capaDatos.cRol> listaRol = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodasRoles(string.Empty);
-                foreach (Kellerhoff.Codigo.capaDatos.cRol item in listaRol)
+                List<DKbase.web.cRol> listaRol = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodasRoles(string.Empty);
+                foreach (DKbase.web.cRol item in listaRol)
                 {
                     if (item.rol_Nombre == args.Value)
                     {

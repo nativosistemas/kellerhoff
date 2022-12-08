@@ -409,18 +409,7 @@ namespace Kellerhoff.Codigo.clases
         }
         public static List<string> RecuperarSinPermisosSecciones(int pIdUsuario)
         {
-            List<string> resultado = null;
-            List<cUsuarioSinPermisosIntranet> lista = WebService.RecuperarTodosSinPermisosIntranetPorIdUsuario(pIdUsuario);
-            if (lista != null)
-            {
-                resultado = new List<string>();
-                foreach (cUsuarioSinPermisosIntranet item in lista)
-                {
-                    resultado.Add(item.usp_nombreSeccion.ToUpper());
-                }
-            }
-            //HttpContext.Current.Session["master_ListaSinPermisoSecciones"] = resultado;
-            return resultado;
+            return DKbase.Util.RecuperarSinPermisosSecciones( pIdUsuario);
         }
         public static bool IsPermisoSeccion(string pNombreSeccion)
         {
@@ -460,77 +449,7 @@ namespace Kellerhoff.Codigo.clases
             else if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 cClientes objCliente = ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]);
-                List<cSucursalDependienteTipoEnviosCliente> lista = WebService.RecuperarTodosSucursalDependienteTipoEnvioCliente_cliente();
-                if (lista != null)
-                {
-                    resultado = new List<cTipoEnvioClienteFront>();
-                    for (int i = 0; i < lista.Count; i++)
-                    {
-                        cTipoEnvioClienteFront obj = new cTipoEnvioClienteFront();
-                        obj.sucursal = lista[i].sde_sucursalDependiente;
-                        obj.tipoEnvio = lista[i].env_codigo;
-
-                        List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> listaTiposEnvios = WebService.RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios_Excepciones(lista[i].tsd_id, objCliente.cli_codrep);
-                        if (listaTiposEnvios == null || listaTiposEnvios.Count == 0)
-                        {
-                            listaTiposEnvios = WebService.RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios().Where(x => x.tdt_idSucursalDependienteTipoEnvioCliente == lista[i].tsd_id).ToList();
-                        }
-                        if (listaTiposEnvios != null)
-                        {
-                            obj.lista = new List<cTiposEnvios>();
-                            foreach (cSucursalDependienteTipoEnviosCliente_TiposEnvios itemSucursalDependienteTipoEnviosCliente_TiposEnvios in listaTiposEnvios)
-                            {
-                                cTiposEnvios objTipoEnvio = new cTiposEnvios();
-                                objTipoEnvio.env_codigo = itemSucursalDependienteTipoEnviosCliente_TiposEnvios.env_codigo;
-                                objTipoEnvio.env_nombre = itemSucursalDependienteTipoEnviosCliente_TiposEnvios.env_nombre;
-                                objTipoEnvio.env_id = itemSucursalDependienteTipoEnviosCliente_TiposEnvios.env_id;
-                                obj.lista.Add(objTipoEnvio);
-                            }
-                        }
-                        //
-                        resultado.Add(obj);
-                    }
-                }
-                // Inicio S7
-                if (((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codrep == "S7")
-                {
-                    cTipoEnvioClienteFront obj = new cTipoEnvioClienteFront();
-                    obj.sucursal = "SF";
-                    obj.tipoEnvio = null;
-                    obj.lista = new List<cTiposEnvios>();
-                    cTiposEnvios objTipoEnvioR = new cTiposEnvios();
-                    objTipoEnvioR.env_codigo = "R";
-                    objTipoEnvioR.env_nombre = "Reparto";
-                    obj.lista.Add(objTipoEnvioR);
-                    cTiposEnvios objTipoEnvioE = new cTiposEnvios();
-                    objTipoEnvioE.env_codigo = "E";
-                    objTipoEnvioE.env_nombre = "Encomienda";
-                    obj.lista.Add(objTipoEnvioE);
-                    cTiposEnvios objTipoEnvioM = new cTiposEnvios();
-                    objTipoEnvioM.env_codigo = "M";
-                    objTipoEnvioM.env_nombre = "Mostrador";
-                    obj.lista.Add(objTipoEnvioM);
-                    cTiposEnvios objTipoEnvioC = new cTiposEnvios();
-                    objTipoEnvioC.env_codigo = "C";
-                    objTipoEnvioC.env_nombre = "Cadeteria";
-                    obj.lista.Add(objTipoEnvioC);
-                    resultado.Add(obj);
-                }
-                // Fin S7
-                if (!string.IsNullOrEmpty(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa)
-                    && resultado.FirstOrDefault(x => x.sucursal == ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa) == null)
-                {
-                    cTipoEnvioClienteFront obj = new cTipoEnvioClienteFront();
-                    obj.sucursal = ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_IdSucursalAlternativa;
-                    obj.tipoEnvio = null;
-                    obj.lista = new List<cTiposEnvios>();
-                    cTiposEnvios objTipoEnvioR = new cTiposEnvios();
-                    objTipoEnvioR.env_codigo = "R";
-                    objTipoEnvioR.env_nombre = "Reparto";
-                    obj.lista.Add(objTipoEnvioR);
-                    resultado.Add(obj);
-                }
-
+                resultado = DKbase.Util.RecuperarTiposDeEnvios(objCliente);
                 HttpContext.Current.Session["RecuperarTiposDeEnvios"] = resultado;
             }
             return resultado;

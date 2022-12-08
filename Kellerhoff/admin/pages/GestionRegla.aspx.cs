@@ -27,7 +27,7 @@ namespace Kellerhoff.admin.pages
         public static List<bool> IsNombreOPalabraNoSeRepite(int pIdRegla, string pNombre, string pPalabra)
         {
             List<bool> resultado = new List<bool>();
-            List<Kellerhoff.Codigo.capaDatos.cRegla> listaRegla = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodasReglas(string.Empty);
+            List<DKbase.web.cRegla> listaRegla = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodasReglas(string.Empty);
             resultado.Add(listaRegla.Where(x => x.rgl_Descripcion == pNombre && x.rgl_codRegla != pIdRegla).Count() > 0 ? false : true);
             resultado.Add(listaRegla.Where(x => x.rgl_PalabraClave == pPalabra.ToLower() && x.rgl_codRegla != pIdRegla).Count() > 0 ? false : true);
             return resultado;
@@ -66,7 +66,7 @@ namespace Kellerhoff.admin.pages
         public static Kellerhoff.Codigo.capaDatos.ListaCheck RecuperarReglaRaiz()
         {
             Kellerhoff.Codigo.capaDatos.ListaCheck resultado = null;
-            List<Kellerhoff.Codigo.capaDatos.cRegla> listaRegla = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodasReglas(string.Empty).Where(x => x.rgl_codReglaPadre == null).ToList();
+            List<DKbase.web.cRegla> listaRegla = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodasReglas(string.Empty).Where(x => x.rgl_codReglaPadre == null).ToList();
             if (listaRegla.Count > 0)
             {
                 return ConvertToListaCheck(listaRegla[0]);
@@ -77,7 +77,7 @@ namespace Kellerhoff.admin.pages
         public static Kellerhoff.Codigo.capaDatos.ListaCheck RecuperarReglaPorId(int pIdRegla)
         {
             Kellerhoff.Codigo.capaDatos.ListaCheck resultado = null;
-            Kellerhoff.Codigo.capaDatos.cRegla regla = Kellerhoff.Codigo.clases.Seguridad.RecuperarReglaPorId(pIdRegla);
+            DKbase.web.cRegla regla = Kellerhoff.Codigo.clases.Seguridad.RecuperarReglaPorId(pIdRegla);
             if (regla != null)
             {
                 return ConvertToListaCheck(regla);
@@ -102,7 +102,7 @@ namespace Kellerhoff.admin.pages
             }
             return resultado;
         }
-        private static Kellerhoff.Codigo.capaDatos.ListaCheck ConvertToListaCheck(Kellerhoff.Codigo.capaDatos.cRegla pRegla)
+        private static Kellerhoff.Codigo.capaDatos.ListaCheck ConvertToListaCheck(DKbase.web.cRegla pRegla)
         {
             Kellerhoff.Codigo.capaDatos.ListaCheck resultado = new Kellerhoff.Codigo.capaDatos.ListaCheck();
             resultado.id = pRegla.rgl_codRegla;
@@ -133,7 +133,7 @@ namespace Kellerhoff.admin.pages
             {
                 resultado.checkEliminar = 0;
             }
-            List<Kellerhoff.Codigo.capaDatos.cRegla> listaReglaParametro = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodasReglas(string.Empty);
+            List<DKbase.web.cRegla> listaReglaParametro = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodasReglas(string.Empty);
             resultado.listaIdHijas = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodosIdReglasHijas(pRegla.rgl_codRegla, listaReglaParametro);
             return resultado;
         }

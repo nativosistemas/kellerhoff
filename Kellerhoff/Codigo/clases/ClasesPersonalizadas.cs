@@ -93,23 +93,23 @@ public class cPageClientes : System.Web.UI.Page
         public string dia { get; set; }
         public string hora { get; set; }
     }
-    public class cUsuarioSinPermisosIntranet
-    {
-        public int usp_id { get; set; }
-        public int usp_codUsuario { get; set; }
-        public string usp_nombreSeccion { get; set; }
-    }
+    //public class cUsuarioSinPermisosIntranet
+    //{
+    //    public int usp_id { get; set; }
+    //    public int usp_codUsuario { get; set; }
+    //    public string usp_nombreSeccion { get; set; }
+    //}
     public class cGaleria
     {
         public cNoticia noticia { get; set; }
         public List<cArchivo> listaArchivo { get; set; }
     }
-    public class cTipoEnvioClienteFront
-    {
-        public string sucursal { get; set; }
-        public string tipoEnvio { get; set; }
-        public List<cTiposEnvios> lista { get; set; }
-    }
+    //public class cTipoEnvioClienteFront
+    //{
+    //    public string sucursal { get; set; }
+    //    public string tipoEnvio { get; set; }
+    //    public List<cTiposEnvios> lista { get; set; }
+    //}
     public class htmlArchivo
     {
         public int codRecurso { get; set; }

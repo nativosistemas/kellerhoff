@@ -61,7 +61,7 @@ namespace Kellerhoff.admin.pages
             if (e.CommandName == "Modificar")
             {
                 Session["GestionTiposEnvios_Env_id"] = Convert.ToInt32(e.CommandArgument);
-                cTiposEnvios obj = WebService.RecuperarTodosTiposEnvios().Where(x => x.env_id == Convert.ToInt32(e.CommandArgument)).First();
+                DKbase.web.cTiposEnvios obj = WebService.RecuperarTodosTiposEnvios().Where(x => x.env_id == Convert.ToInt32(e.CommandArgument)).First();
                 txt_codigo.Text = obj.env_codigo;
                 txt_nombre.Text = obj.env_nombre;
                 pnl_grilla.Visible = false;

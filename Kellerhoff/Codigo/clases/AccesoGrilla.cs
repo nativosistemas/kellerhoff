@@ -81,7 +81,7 @@ namespace Kellerhoff.Codigo.clases
             }
             return query;
         }
-        public static List<capaDatos.cRol> GetRoles(string sortExpression, string pFiltro)
+        public static List<cRol> GetRoles(string sortExpression, string pFiltro)
         {
             ordenamientoExpresion order = new ordenamientoExpresion(sortExpression);
             string filtro = string.Empty;

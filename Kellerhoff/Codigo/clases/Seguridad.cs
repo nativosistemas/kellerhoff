@@ -13,52 +13,11 @@ namespace Kellerhoff.Codigo.clases
     {
         public static Usuario Login(string pLogin, string pPassword, string pIp, string pHostName, string pUserAgent)
         {
-            DataSet dsResultado = capaSeguridad.Login(pLogin, pPassword, pIp, pHostName, pUserAgent);
-            if (dsResultado != null)
-            {
-                if (dsResultado.Tables["Login"].Rows.Count == 0)
-                {
-                    Usuario usSin = new Usuario();
-                    usSin.id = -1;
-                    return usSin;
-                }
-                else
-                {
-                    Usuario us = new Usuario();
-                    //capaCore_WebService.setDatosLogin(pLogin, pPassword);
-                    us.id = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_codigo"]);
-                    us.idRol = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_codRol"]);
-                    us.NombreYApellido = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["NombreYapellido"]).Trim();
-                    us.ApNombre = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["ApNombre"]).Trim();
-                    us.idUsuarioLog = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["ulg_codUsuarioLog"]);
-                    us.usu_login = pLogin;
-                    if (dsResultado.Tables["Login"].Rows[0]["usu_estado"] != DBNull.Value)
-                    {
-                        us.usu_estado = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_estado"]);
-                    }
-                    if (dsResultado.Tables["Login"].Rows[0]["usu_codCliente"] == DBNull.Value)
-                    {
-                        us.usu_codCliente = null;
-                    }
-                    else
-                    {
-                        us.usu_codCliente = Convert.ToInt32(dsResultado.Tables["Login"].Rows[0]["usu_codCliente"]);
-                    }
-                    if (dsResultado.Tables["Login"].Rows[0]["usu_pswDesencriptado"] != DBNull.Value)
-                    {
-                        us.usu_pswDesencriptado = Convert.ToString(dsResultado.Tables["Login"].Rows[0]["usu_pswDesencriptado"]);
-                    }
-                    return us;
-                }
-            }
-            else
-            {
-                return null;
-            }
+           return DKbase.Util.Login(pLogin, pPassword, pIp, pHostName, pUserAgent);
         }
         public static void CerrarSession(int pIdUsuarioLog)
         {
-            capaSeguridad.CerrarSession(pIdUsuarioLog);
+            DKbase.Util.CerrarSession(pIdUsuarioLog);
         }
         public static int InsertarActualizarRol(int rol_codRol, string rol_Nombre)
         {
@@ -81,15 +40,15 @@ namespace Kellerhoff.Codigo.clases
             }
             return resultado;
         }
-        public static List<capaDatos.cRol> RecuperarTodasRoles(string pFiltro)
+        public static List<cRol> RecuperarTodasRoles(string pFiltro)
         {
-            List<capaDatos.cRol> lista = new List<capaDatos.cRol>();
+            List<cRol> lista = new List<cRol>();
             DataSet dsResultado = capaSeguridad.GestiónRol(null, null, pFiltro, Constantes.cSQL_SELECT);
             if (dsResultado != null)
             {
                 foreach (DataRow item in dsResultado.Tables["Rol"].Rows)
                 {
-                    capaDatos.cRol obj = new capaDatos.cRol();
+                    cRol obj = new cRol();
                     if (item["rol_codRol"] != DBNull.Value)
                     {
                         obj.rol_codRol = Convert.ToInt32(item["rol_codRol"]);
@@ -103,9 +62,9 @@ namespace Kellerhoff.Codigo.clases
             }
             return lista;
         }
-        public static capaDatos.cRol RecuperarRolPorId(int pIdRol)
+        public static cRol RecuperarRolPorId(int pIdRol)
         {
-            capaDatos.cRol resultado = new capaDatos.cRol();
+            cRol resultado = new cRol();
             DataSet dsResultado = capaSeguridad.GestiónRol(pIdRol, null, null, Constantes.cSQL_SELECT);
             if (dsResultado != null)
             {
@@ -123,15 +82,15 @@ namespace Kellerhoff.Codigo.clases
             }
             return resultado;
         }
-        public static List<capaDatos.cRol> RecuperarTodasRoles_Combo()
+        public static List<cRol> RecuperarTodasRoles_Combo()
         {
-            List<capaDatos.cRol> lista = new List<capaDatos.cRol>();
+            List<cRol> lista = new List<cRol>();
             DataSet dsResultado = capaSeguridad.GestiónRol(null, null, null, Constantes.cSQL_COMBO);
             if (dsResultado != null)
             {
                 foreach (DataRow item in dsResultado.Tables["Rol"].Rows)
                 {
-                    capaDatos.cRol obj = new capaDatos.cRol();
+                    cRol obj = new cRol();
                     if (item["rol_codRol"] != DBNull.Value)
                     {
                         obj.rol_codRol = Convert.ToInt32(item["rol_codRol"]);
@@ -178,15 +137,15 @@ namespace Kellerhoff.Codigo.clases
             }
             return resultado;
         }
-        public static List<capaDatos.cRegla> RecuperarTodasReglas(string pFiltro)
+        public static List<cRegla> RecuperarTodasReglas(string pFiltro)
         {
-            List<capaDatos.cRegla> lista = new List<capaDatos.cRegla>();
+            List<cRegla> lista = new List<cRegla>();
             DataSet dsResultado = capaSeguridad.GestiónRegla(null, null, null, null, null, null, null, pFiltro, Constantes.cSQL_SELECT);
             if (dsResultado != null)
             {
                 foreach (DataRow item in dsResultado.Tables["Regla"].Rows)
                 {
-                    capaDatos.cRegla obj = new capaDatos.cRegla();
+                    cRegla obj = new cRegla();
                     if (item["rgl_codRegla"] != DBNull.Value)
                     {
                         obj.rgl_codRegla = Convert.ToInt32(item["rgl_codRegla"]);
@@ -220,15 +179,15 @@ namespace Kellerhoff.Codigo.clases
             }
             return lista;
         }
-        public static capaDatos.cRegla RecuperarReglaPorId(int pIdRegla)
+        public static cRegla RecuperarReglaPorId(int pIdRegla)
         {
-            capaDatos.cRegla obj = null;
+            cRegla obj = null;
             DataSet dsResultado = capaSeguridad.GestiónRegla(pIdRegla, null, null, null, null, null, null, null, Constantes.cSQL_SELECT);
             if (dsResultado != null)
             {
                 foreach (DataRow item in dsResultado.Tables["Regla"].Rows)
                 {
-                    obj = new capaDatos.cRegla();
+                    obj = new cRegla();
                     if (item["rgl_codRegla"] != DBNull.Value)
                     {
                         obj.rgl_codRegla = Convert.ToInt32(item["rgl_codRegla"]);
@@ -286,63 +245,7 @@ namespace Kellerhoff.Codigo.clases
         }
         public static ListaAcccionesRol RecuperarTodasAccionesPorIdRol(int pIdRol)
         {
-            DataTable tablaAcciones = capaDatos.capaSeguridad.RecuperarTodasAccionesRol(pIdRol);
-            ListaAcccionesRol listaAcciones = new ListaAcccionesRol();
-            foreach (DataRow item in tablaAcciones.Rows)
-            {
-                capaDatos.AcccionesRol acRol = new capaDatos.AcccionesRol();
-
-                acRol.idRegla = Convert.ToInt32(item["rgl_codRegla"]);
-                acRol.palabraClave = item["rgl_PalabraClave"].ToString();
-
-                if (DBNull.Value.Equals(item["rrr_codRelacionRolRegla"]))
-                {
-                    acRol.idReglaRol = null;
-                }
-                else
-                {
-                    acRol.idReglaRol = Convert.ToInt32(item["rrr_codRelacionRolRegla"]);
-                }
-
-                if (DBNull.Value.Equals(item["rrr_IsActivo"]))
-                {
-                    acRol.isActivo = false;
-                }
-                else
-                {
-                    acRol.isActivo = Convert.ToBoolean(item["rrr_IsActivo"]);
-                }
-
-                if (DBNull.Value.Equals(item["rrr_IsAgregar"]))
-                {
-                    acRol.isAgregar = false;
-                }
-                else
-                {
-                    acRol.isAgregar = Convert.ToBoolean(item["rrr_IsAgregar"]);
-                }
-
-                if (DBNull.Value.Equals(item["rrr_IsEditar"]))
-                {
-                    acRol.isEditar = false;
-                }
-                else
-                {
-                    acRol.isEditar = Convert.ToBoolean(item["rrr_IsEditar"]);
-                }
-
-                if (DBNull.Value.Equals(item["rrr_IsEliminar"]))
-                {
-                    acRol.isEliminar = false;
-                }
-                else
-                {
-                    acRol.isEliminar = Convert.ToBoolean(item["rrr_IsEliminar"]);
-                }
-
-                listaAcciones.Agregar(acRol);
-            }
-            return listaAcciones;
+            return DKbase.Util.RecuperarTodasAccionesPorIdRol(pIdRol);
         }
 
         public static void InsertarActualizarRelacionRolRegla(int pIdRol, string pXML)
@@ -392,13 +295,13 @@ namespace Kellerhoff.Codigo.clases
             return listaResultado;
         }
         //
-        public static List<int> RecuperarTodosIdReglasHijas(int pIdRegla, List<capaDatos.cRegla> pListaRegla)
+        public static List<int> RecuperarTodosIdReglasHijas(int pIdRegla, List<cRegla> pListaRegla)
         {
             List<int> listaHijas = new List<int>();
             if (pListaRegla != null)
             {
-                List<capaDatos.cRegla> listaRegla = pListaRegla.Where(x => x.rgl_codReglaPadre == pIdRegla).ToList();
-                foreach (capaDatos.cRegla item in listaRegla)
+                List<cRegla> listaRegla = pListaRegla.Where(x => x.rgl_codReglaPadre == pIdRegla).ToList();
+                foreach (cRegla item in listaRegla)
                 {
                     listaHijas.Add(item.rgl_codRegla);
                 }
@@ -407,7 +310,7 @@ namespace Kellerhoff.Codigo.clases
         }
         public static List<capaDatos.ListaCheck> RecuperarTodasReglasPorNivel()
         {
-            List<capaDatos.cRegla> listaReglaParametro = RecuperarTodasReglas(string.Empty);
+            List<cRegla> listaReglaParametro = RecuperarTodasReglas(string.Empty);
             List<capaDatos.ListaCheck> listaResultado = new List<capaDatos.ListaCheck>();
             DataTable tabla = capaDatos.capaSeguridad.RecuperarTodasReglasPorNivel();
             for (int i = 0; i < tabla.Rows.Count; i++)

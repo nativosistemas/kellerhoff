@@ -258,35 +258,35 @@ namespace Kellerhoff.Codigo.capaDatos
         //        }
         //    }
         //}
-        public static DataTable RecuperarClientePorId(int pIdCliente)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Clientes.spRecuperarClientePorId", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //public static DataTable RecuperarClientePorId(int pIdCliente)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Clientes.spRecuperarClientePorId", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@cli_codigo", SqlDbType.Int);
-            paIdCliente.Value = pIdCliente;
+        //    SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@cli_codigo", SqlDbType.Int);
+        //    paIdCliente.Value = pIdCliente;
 
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
         public static DataSet GestiónSucursal(int? sde_codigo, string sde_sucursal, string sde_sucursalDependiente, string accion)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

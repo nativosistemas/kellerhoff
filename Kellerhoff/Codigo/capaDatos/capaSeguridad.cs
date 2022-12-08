@@ -9,23 +9,23 @@ using Kellerhoff.Codigo.clases;
 
 namespace Kellerhoff.Codigo.capaDatos
 {
-    public class cRegla : DKbase.web.cRegla
-    {
-        public cRegla()
-        {
+    //public class cRegla : DKbase.web.cRegla
+    //{
+    //    public cRegla()
+    //    {
 
-        }
+    //    }
 
-    }
-    public class cRol : DKbase.web.cRol
-    {
+    //}
+    //public class cRol : DKbase.web.cRol
+    //{
 
-    }
-    public class AcccionesRol : DKbase.web.AcccionesRol
-    {
+    //}
+    //public class AcccionesRol : DKbase.web.AcccionesRol
+    //{
 
 
-    }
+    //}
  
     [DataContract]
     public class ListaCheck
@@ -81,71 +81,71 @@ namespace Kellerhoff.Codigo.capaDatos
     }
     public class capaSeguridad
     {
-        public static DataSet Login(string pNombreLogin, string pPassword, string pIp, string pHostName, string pUserAgent)
-        {
+        //public static DataSet Login(string pNombreLogin, string pPassword, string pIp, string pHostName, string pUserAgent)
+        //{
 
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spInicioSession", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spInicioSession", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paLogin = cmdComandoInicio.Parameters.Add("@login", SqlDbType.NVarChar, 255);
-            SqlParameter paPassword = cmdComandoInicio.Parameters.Add("@Password", SqlDbType.NVarChar, 255);
-            SqlParameter paIp = cmdComandoInicio.Parameters.Add("@Ip", SqlDbType.NVarChar, 255);
-            SqlParameter paHost = cmdComandoInicio.Parameters.Add("@Host", SqlDbType.NVarChar, 255);
-            SqlParameter paUserName = cmdComandoInicio.Parameters.Add("@UserName", SqlDbType.NVarChar, 255);
+        //    SqlParameter paLogin = cmdComandoInicio.Parameters.Add("@login", SqlDbType.NVarChar, 255);
+        //    SqlParameter paPassword = cmdComandoInicio.Parameters.Add("@Password", SqlDbType.NVarChar, 255);
+        //    SqlParameter paIp = cmdComandoInicio.Parameters.Add("@Ip", SqlDbType.NVarChar, 255);
+        //    SqlParameter paHost = cmdComandoInicio.Parameters.Add("@Host", SqlDbType.NVarChar, 255);
+        //    SqlParameter paUserName = cmdComandoInicio.Parameters.Add("@UserName", SqlDbType.NVarChar, 255);
 
-            paLogin.Value = pNombreLogin;
-            paPassword.Value = pPassword;
-            paIp.Value = pIp;
-            paHost.Value = pHostName;
-            paUserName.Value = pUserAgent;
+        //    paLogin.Value = pNombreLogin;
+        //    paPassword.Value = pPassword;
+        //    paIp.Value = pIp;
+        //    paHost.Value = pHostName;
+        //    paUserName.Value = pUserAgent;
 
-            try
-            {
-                Conn.Open();
-                DataSet dsResultado = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
-                da.Fill(dsResultado, "Login");
-                return dsResultado;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static void CerrarSession(int pIdUsuarioLog)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spCerrarSession", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataSet dsResultado = new DataSet();
+        //        SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
+        //        da.Fill(dsResultado, "Login");
+        //        return dsResultado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
+        //public static void CerrarSession(int pIdUsuarioLog)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spCerrarSession", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paIdUsuarioLog = cmdComandoInicio.Parameters.Add("@IdUsuarioLog", SqlDbType.Int);
-            paIdUsuarioLog.Value = pIdUsuarioLog;
+        //    SqlParameter paIdUsuarioLog = cmdComandoInicio.Parameters.Add("@IdUsuarioLog", SqlDbType.Int);
+        //    paIdUsuarioLog.Value = pIdUsuarioLog;
 
-            try
-            {
-                Conn.Open();
-                int count = cmdComandoInicio.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
+        //    try
+        //    {
+        //        Conn.Open();
+        //        int count = cmdComandoInicio.ExecuteNonQuery();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
 
-        }
+        //}
         public static DataSet GestiónRol(int? rol_codRol, string rol_Nombre, string filtro, string accion)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
@@ -354,38 +354,38 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataTable RecuperarTodasAccionesRol(int pIdRol)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spRecuperarAccionesUsuario", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //public static DataTable RecuperarTodasAccionesRol(int pIdRol)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spRecuperarAccionesUsuario", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paIdRol = cmdComandoInicio.Parameters.Add("@IdRol", SqlDbType.Int);
-            paIdRol.Direction = ParameterDirection.Input;
+        //    SqlParameter paIdRol = cmdComandoInicio.Parameters.Add("@IdRol", SqlDbType.Int);
+        //    paIdRol.Direction = ParameterDirection.Input;
 
-            paIdRol.Value = pIdRol;
+        //    paIdRol.Value = pIdRol;
 
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
 
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
         public static DataSet GestiónRoleRegla(int? rrr_codRol, int? rrr_codRegla, string pXML, string accion)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
@@ -671,38 +671,38 @@ namespace Kellerhoff.Codigo.capaDatos
             }
         }
 
-        public static DataTable RecuperarSinPermisoUsuarioIntranetPorIdUsuario(int pIdUsuario)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spRecuperarSinPermisoUsuarioIntranetPorIdUsuario", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //public static DataTable RecuperarSinPermisoUsuarioIntranetPorIdUsuario(int pIdUsuario)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spRecuperarSinPermisoUsuarioIntranetPorIdUsuario", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paIdUsuario = cmdComandoInicio.Parameters.Add("@idUsuario", SqlDbType.Int);
-            paIdUsuario.Direction = ParameterDirection.Input;
+        //    SqlParameter paIdUsuario = cmdComandoInicio.Parameters.Add("@idUsuario", SqlDbType.Int);
+        //    paIdUsuario.Direction = ParameterDirection.Input;
 
-            paIdUsuario.Value = pIdUsuario;
+        //    paIdUsuario.Value = pIdUsuario;
 
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
 
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
         public static int InsertarSinPermisoUsuarioIntranetPorIdUsuario(int pIdUsuario, DataTable pTablaNombresSeccion)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

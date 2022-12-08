@@ -1044,19 +1044,7 @@ namespace Kellerhoff
         }
         public static cClientes RecuperarClientePorId(int pIdCliente)
         {
-            cClientes resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tablaClientes = capaClientes.RecuperarClientePorId(pIdCliente);
-                if (tablaClientes != null)
-                {
-                    foreach (DataRow item in tablaClientes.Rows)
-                    {
-                        resultado = ConvertToCliente(item);
-                    }
-                }
-            }
-            return resultado;
+            return DKbase.Util.RecuperarClientePorId( pIdCliente);
         }
         private static cHistorialProcesos ConvertToHistorialProcesos(DataRow pItem)
         {
@@ -1495,25 +1483,6 @@ namespace Kellerhoff
             }
             return resultado;
         }
-        public static List<cSucursal> RecuperarTodasSucursales_base()
-        {
-            List<cSucursal> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tabla = capaClientes_base.RecuperarTodasSucursales();
-
-                if (tabla != null)
-                {
-                    resultado = new List<cSucursal>();
-                    for (int i = 0; i < tabla.Rows.Count; i++)
-                    {
-                        resultado.Add(DKbase.web.acceso.ConvertToSucursal(tabla.Rows[i]));
-                    }
-
-                }
-            }
-            return resultado;
-        }
         public static List<cSucursal> RecuperarTodasSucursales()
         {
             List<cSucursal> result = null;
@@ -1523,7 +1492,7 @@ namespace Kellerhoff
             }
             else
             {
-                result = RecuperarTodasSucursales_base();
+                result = DKbase.Util.RecuperarTodasSucursales();
                 HttpContext.Current.Session["todasSucursales"] = result;
             }
             return result;
@@ -2645,34 +2614,7 @@ namespace Kellerhoff
 
         public static List<cUsuarioSinPermisosIntranet> RecuperarTodosSinPermisosIntranetPorIdUsuario(int pIdUsuario)
         {
-            List<cUsuarioSinPermisosIntranet> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tabla = capaSeguridad.RecuperarSinPermisoUsuarioIntranetPorIdUsuario(pIdUsuario);
-
-                if (tabla != null)
-                {
-                    resultado = new List<cUsuarioSinPermisosIntranet>();
-                    for (int i = 0; i < tabla.Rows.Count; i++)
-                    {
-                        cUsuarioSinPermisosIntranet obj = new cUsuarioSinPermisosIntranet();
-                        if (tabla.Rows[i]["usp_id"] != DBNull.Value)
-                        {
-                            obj.usp_id = Convert.ToInt32(tabla.Rows[i]["usp_id"]);
-                        }
-                        if (tabla.Rows[i]["usp_codUsuario"] != DBNull.Value)
-                        {
-                            obj.usp_codUsuario = Convert.ToInt32(tabla.Rows[i]["usp_codUsuario"]);
-                        }
-                        if (tabla.Rows[i]["usp_nombreSeccion"] != DBNull.Value)
-                        {
-                            obj.usp_nombreSeccion = Convert.ToString(tabla.Rows[i]["usp_nombreSeccion"]);
-                        }
-                        resultado.Add(obj);
-                    }
-                }
-            }
-            return resultado;
+            return DKbase.Util.RecuperarTodosSinPermisosIntranetPorIdUsuario( pIdUsuario);
         }
         public static bool InsertarSinPermisoUsuarioIntranetPorIdUsuario(int pIdUsuario, List<string> pListaNombreSeccion)
         {
@@ -3098,7 +3040,7 @@ namespace Kellerhoff
             List<cCombo> resultado = null;// new List<SitioBase.clases.cCombo>();
             if (VerificarPermisos(CredencialAutenticacion))
             {
-                DataTable tabla = capaTiposEnvios.RecuperarTipoEnviosExcepcionesPorSucursalDependiente(pIdSucursalDependienteTipoEnvioCliente, pTdr_codReparto);
+                DataTable tabla = capaTiposEnvios_base.RecuperarTipoEnviosExcepcionesPorSucursalDependiente(pIdSucursalDependienteTipoEnvioCliente, pTdr_codReparto);
                 if (tabla != null)
                 {
                     resultado = new List<cCombo>();
@@ -3121,55 +3063,38 @@ namespace Kellerhoff
         }
         public static List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_TodasLasExcepciones(int pIdSucursalDependienteTipoEnvioCliente)
         {
-            List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tabla = capaTiposEnvios.RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_TodasLasExcepciones(pIdSucursalDependienteTipoEnvioCliente);
-                if (tabla != null)
-                {
-                    resultado = new List<cSucursalDependienteTipoEnviosCliente_TiposEnvios>();
-                    foreach (DataRow item in tabla.Rows)
-                    {
-                        cSucursalDependienteTipoEnviosCliente_TiposEnvios obj = ConvertToTiposEnviosSucursalDependiente_TiposEnvios_Excepciones(item);
-                        if (obj != null)
-                        {
-                            resultado.Add(obj);
-                        }
-                    }
-                }
-            }
-            return resultado;
+            return DKbase.Util.RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_TodasLasExcepciones(pIdSucursalDependienteTipoEnvioCliente);
         }
-        private static cSucursalDependienteTipoEnviosCliente_TiposEnvios ConvertToTiposEnviosSucursalDependiente_TiposEnvios_Excepciones(DataRow pItem)
-        {
-            cSucursalDependienteTipoEnviosCliente_TiposEnvios obj = new cSucursalDependienteTipoEnviosCliente_TiposEnvios();
+        //private static cSucursalDependienteTipoEnviosCliente_TiposEnvios ConvertToTiposEnviosSucursalDependiente_TiposEnvios_Excepciones(DataRow pItem)
+        //{
+        //    cSucursalDependienteTipoEnviosCliente_TiposEnvios obj = new cSucursalDependienteTipoEnviosCliente_TiposEnvios();
 
-            if (pItem.Table.Columns.Contains("tdr_idSucursalDependienteTipoEnvioCliente") && pItem["tdr_idSucursalDependienteTipoEnvioCliente"] != DBNull.Value)
-            {
-                obj.tdt_idSucursalDependienteTipoEnvioCliente = Convert.ToInt32(pItem["tdr_idSucursalDependienteTipoEnvioCliente"]);
-            }
-            if (pItem.Table.Columns.Contains("tdr_idTipoEnvio") && pItem["tdr_idTipoEnvio"] != DBNull.Value)
-            {
-                obj.tdt_idTipoEnvio = Convert.ToInt32(pItem["tdr_idTipoEnvio"]);
-            }
-            if (pItem.Table.Columns.Contains("env_id") && pItem["env_id"] != DBNull.Value)
-            {
-                obj.env_id = Convert.ToInt32(pItem["env_id"]);
-            }
-            if (pItem.Table.Columns.Contains("env_codigo") && pItem["env_codigo"] != DBNull.Value)
-            {
-                obj.env_codigo = Convert.ToString(pItem["env_codigo"]);
-            }
-            if (pItem.Table.Columns.Contains("env_nombre") && pItem["env_nombre"] != DBNull.Value)
-            {
-                obj.env_nombre = Convert.ToString(pItem["env_nombre"]);
-            }
-            if (pItem.Table.Columns.Contains("tdr_codReparto") && pItem["tdr_codReparto"] != DBNull.Value)
-            {
-                obj.tdr_codReparto = Convert.ToString(pItem["tdr_codReparto"]);
-            }
-            return obj;
-        }
+        //    if (pItem.Table.Columns.Contains("tdr_idSucursalDependienteTipoEnvioCliente") && pItem["tdr_idSucursalDependienteTipoEnvioCliente"] != DBNull.Value)
+        //    {
+        //        obj.tdt_idSucursalDependienteTipoEnvioCliente = Convert.ToInt32(pItem["tdr_idSucursalDependienteTipoEnvioCliente"]);
+        //    }
+        //    if (pItem.Table.Columns.Contains("tdr_idTipoEnvio") && pItem["tdr_idTipoEnvio"] != DBNull.Value)
+        //    {
+        //        obj.tdt_idTipoEnvio = Convert.ToInt32(pItem["tdr_idTipoEnvio"]);
+        //    }
+        //    if (pItem.Table.Columns.Contains("env_id") && pItem["env_id"] != DBNull.Value)
+        //    {
+        //        obj.env_id = Convert.ToInt32(pItem["env_id"]);
+        //    }
+        //    if (pItem.Table.Columns.Contains("env_codigo") && pItem["env_codigo"] != DBNull.Value)
+        //    {
+        //        obj.env_codigo = Convert.ToString(pItem["env_codigo"]);
+        //    }
+        //    if (pItem.Table.Columns.Contains("env_nombre") && pItem["env_nombre"] != DBNull.Value)
+        //    {
+        //        obj.env_nombre = Convert.ToString(pItem["env_nombre"]);
+        //    }
+        //    if (pItem.Table.Columns.Contains("tdr_codReparto") && pItem["tdr_codReparto"] != DBNull.Value)
+        //    {
+        //        obj.tdr_codReparto = Convert.ToString(pItem["tdr_codReparto"]);
+        //    }
+        //    return obj;
+        //}
         public static bool EliminarSucursalDependienteTipoEnvioCliente(int pTsd_id)
         {
             bool resultado = false;
@@ -3182,24 +3107,7 @@ namespace Kellerhoff
         }
         public static List<cSucursalDependienteTipoEnviosCliente> RecuperarTodosSucursalDependienteTipoEnvioCliente()
         {
-            List<cSucursalDependienteTipoEnviosCliente> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tabla = capaTiposEnvios.RecuperarTodosSucursalDependienteTipoEnvioCliente();
-                if (tabla != null)
-                {
-                    resultado = new List<cSucursalDependienteTipoEnviosCliente>();
-                    foreach (DataRow item in tabla.Rows)
-                    {
-                        cSucursalDependienteTipoEnviosCliente obj = ConvertToTiposEnviosSucursalDependiente(item);
-                        if (obj != null)
-                        {
-                            resultado.Add(obj);
-                        }
-                    }
-                }
-            }
-            return resultado;
+            return DKbase.Util.RecuperarTodosSucursalDependienteTipoEnvioCliente();
         }
         public static List<cSucursalDependienteTipoEnviosCliente> RecuperarTodosSucursalDependienteTipoEnvioCliente_cliente()
         {
@@ -3218,45 +3126,11 @@ namespace Kellerhoff
         }
         public static List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios()
         {
-            List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tabla = capaTiposEnvios.RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios();
-                if (tabla != null)
-                {
-                    resultado = new List<cSucursalDependienteTipoEnviosCliente_TiposEnvios>();
-                    foreach (DataRow item in tabla.Rows)
-                    {
-                        cSucursalDependienteTipoEnviosCliente_TiposEnvios obj = ConvertToTiposEnviosSucursalDependiente_TiposEnvios(item);
-                        if (obj != null)
-                        {
-                            resultado.Add(obj);
-                        }
-                    }
-                }
-            }
-            return resultado;
+            return DKbase.Util.RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios();
         }
         public static List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios_Excepciones(int pIdSucursalDependienteTipoEnvioCliente, string tdr_codReparto)
         {
-            List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tabla = capaTiposEnvios.RecuperarTipoEnviosExcepcionesPorSucursalDependiente(pIdSucursalDependienteTipoEnvioCliente, tdr_codReparto);
-                if (tabla != null)
-                {
-                    resultado = new List<cSucursalDependienteTipoEnviosCliente_TiposEnvios>();
-                    foreach (DataRow item in tabla.Rows)
-                    {
-                        cSucursalDependienteTipoEnviosCliente_TiposEnvios obj = ConvertToTiposEnviosSucursalDependiente_TiposEnvios_Excepciones(item);
-                        if (obj != null)
-                        {
-                            resultado.Add(obj);
-                        }
-                    }
-                }
-            }
-            return resultado;
+            return DKbase.Util.RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios_Excepciones( pIdSucursalDependienteTipoEnvioCliente,  tdr_codReparto);
         }
         private static cTiposEnvios ConvertToTiposEnvios(DataRow pItem)
         {
@@ -3364,23 +3238,11 @@ namespace Kellerhoff
         }
         public static int RecuperarProductoParametrizadoCantidad()
         {
-            int resultado = -1;
-            if (VerificarPermisos(CredencialAutenticacion))
+            if (HttpContext.Current.Session["RecuperarProductoParametrizadoCantidad"] == null)
             {
-                resultado = 0;
-                DataTable dtResultado = capaProductos.RecuperarProductoParametrizadoCantidad();
-                if (dtResultado != null)
-                {
-                    foreach (DataRow item in dtResultado.Rows)
-                    {
-                        if (item["cpc_cantidadParametrizada"] != DBNull.Value)
-                        {
-                            resultado = Convert.ToInt32(item["cpc_cantidadParametrizada"]);
-                            break;
-                        }
-                    }
-                }
+                HttpContext.Current.Session["RecuperarProductoParametrizadoCantidad"] = DKbase.Util.RecuperarProductoParametrizadoCantidad();
             }
+            int resultado = Convert.ToInt32(HttpContext.Current.Session["RecuperarProductoParametrizadoCantidad"]);
             return resultado;
         }
         public static int InsertarActualizarCadeteriaRestricciones(int pTcr_id, string pTcr_codigoSucursal, int pTcr_UnidadesMinimas, int pTcr_UnidadesMaximas, double pTcr_MontoMinimo, double pTcr_MontoIgnorar)
@@ -3405,63 +3267,47 @@ namespace Kellerhoff
         public static List<cCadeteriaRestricciones> RecuperarTodosCadeteriaRestricciones()
         {
             List<cCadeteriaRestricciones> resultado = null;
-            if (HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"] != null)
+            if (HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"] == null)
             {
-                resultado = (List<cCadeteriaRestricciones>)HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"];
+                HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"] = DKbase.Util.RecuperarTodosCadeteriaRestricciones();
             }
-            else
-            {
-                DataTable tabla = capaTiposEnvios.RecuperarTodosCadeteriaRestricciones();
-                if (tabla != null)
-                {
-                    resultado = new List<cCadeteriaRestricciones>();
-                    foreach (DataRow item in tabla.Rows)
-                    {
-                        cCadeteriaRestricciones obj = ConvertToCadeteriaRestricciones(item);
-                        if (obj != null)
-                        {
-                            resultado.Add(obj);
-                        }
-                    }
-                }
-                HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"] = resultado;
-            }
+            resultado = (List<cCadeteriaRestricciones>)HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"];
             return resultado;
         }
-        private static cCadeteriaRestricciones ConvertToCadeteriaRestricciones(DataRow pItem)
-        {
-            cCadeteriaRestricciones obj = new cCadeteriaRestricciones();
+        //private static cCadeteriaRestricciones ConvertToCadeteriaRestricciones(DataRow pItem)
+        //{
+        //   cCadeteriaRestricciones obj = new cCadeteriaRestricciones();
 
-            if (pItem["tcr_id"] != DBNull.Value)
-            {
-                obj.tcr_id = Convert.ToInt32(pItem["tcr_id"]);
-            }
-            if (pItem["tcr_codigoSucursal"] != DBNull.Value)
-            {
-                obj.tcr_codigoSucursal = Convert.ToString(pItem["tcr_codigoSucursal"]);
-            }
-            if (pItem["tcr_MontoIgnorar"] != DBNull.Value)
-            {
-                obj.tcr_MontoIgnorar = Convert.ToDouble(pItem["tcr_MontoIgnorar"]);
-            }
-            if (pItem["tcr_MontoMinimo"] != DBNull.Value)
-            {
-                obj.tcr_MontoMinimo = Convert.ToDouble(pItem["tcr_MontoMinimo"]);
-            }
-            if (pItem["tcr_UnidadesMaximas"] != DBNull.Value)
-            {
-                obj.tcr_UnidadesMaximas = Convert.ToInt32(pItem["tcr_UnidadesMaximas"]);
-            }
-            if (pItem["tcr_UnidadesMinimas"] != DBNull.Value)
-            {
-                obj.tcr_UnidadesMinimas = Convert.ToInt32(pItem["tcr_UnidadesMinimas"]);
-            }
-            if (pItem["suc_nombre"] != DBNull.Value)
-            {
-                obj.suc_nombre = Convert.ToString(pItem["suc_nombre"]);
-            }
-            return obj;
-        }
+        //    if (pItem["tcr_id"] != DBNull.Value)
+        //    {
+        //        obj.tcr_id = Convert.ToInt32(pItem["tcr_id"]);
+        //    }
+        //    if (pItem["tcr_codigoSucursal"] != DBNull.Value)
+        //    {
+        //        obj.tcr_codigoSucursal = Convert.ToString(pItem["tcr_codigoSucursal"]);
+        //    }
+        //    if (pItem["tcr_MontoIgnorar"] != DBNull.Value)
+        //    {
+        //        obj.tcr_MontoIgnorar = Convert.ToDouble(pItem["tcr_MontoIgnorar"]);
+        //    }
+        //    if (pItem["tcr_MontoMinimo"] != DBNull.Value)
+        //    {
+        //        obj.tcr_MontoMinimo = Convert.ToDouble(pItem["tcr_MontoMinimo"]);
+        //    }
+        //    if (pItem["tcr_UnidadesMaximas"] != DBNull.Value)
+        //    {
+        //        obj.tcr_UnidadesMaximas = Convert.ToInt32(pItem["tcr_UnidadesMaximas"]);
+        //    }
+        //    if (pItem["tcr_UnidadesMinimas"] != DBNull.Value)
+        //    {
+        //        obj.tcr_UnidadesMinimas = Convert.ToInt32(pItem["tcr_UnidadesMinimas"]);
+        //    }
+        //    if (pItem["suc_nombre"] != DBNull.Value)
+        //    {
+        //        obj.suc_nombre = Convert.ToString(pItem["suc_nombre"]);
+        //    }
+        //    return obj;
+        //}
         public static List<cProductosGenerico> RecuperarTodosProductosDesdeTabla(List<cProductosAndCantidad> pListaProducto, string pSucursalPerteneciente, string pCli_codprov, int pCli_codigo)
         {
             List<cProductosGenerico> resultado = null;

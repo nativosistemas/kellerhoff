@@ -9,21 +9,6 @@ using System.Web;
 namespace Kellerhoff.Codigo.capaDatos
 {
 
-    public class cTiposEnvios
-    {
-        public cTiposEnvios()
-        {
-        }
-        public cTiposEnvios(int id, string nombreSucursal)
-        {
-            env_id = id;
-            env_codigo = string.Empty;
-            env_nombre = nombreSucursal;
-        }
-        public int env_id { get; set; }
-        public string env_codigo { get; set; }
-        public string env_nombre { get; set; }
-    }
     public class cTiposEnviosSucursal : cSucursal
     {
         public int tes_id { get; set; }
@@ -34,39 +19,39 @@ namespace Kellerhoff.Codigo.capaDatos
         public string env_codigo { get; set; }
         public string env_nombre { get; set; }
     }
-    public class cSucursalDependienteTipoEnviosCliente
-    {
-        public int tsd_id { get; set; }
-        public int tsd_idSucursalDependiente { get; set; }
-        public int? tsd_idTipoEnvioCliente { get; set; }
-        public int sde_codigo { get; set; }
-        public string sde_sucursal { get; set; }
-        public string sde_sucursalDependiente { get; set; }
-        public int env_id { get; set; }
-        public string env_codigo { get; set; }
-        public string env_nombre { get; set; }
-        List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> listaTiposEnvios { get; set; }
-    }
-    public class cSucursalDependienteTipoEnviosCliente_TiposEnvios
-    {
-        public int tdt_id { get; set; }
-        public int tdt_idSucursalDependienteTipoEnvioCliente { get; set; }
-        public int tdt_idTipoEnvio { get; set; }
-        public int env_id { get; set; }
-        public string env_codigo { get; set; }
-        public string env_nombre { get; set; }
-        public string tdr_codReparto { get; set; }
-    }
-    public class cCadeteriaRestricciones
-    {
-        public int tcr_id { get; set; }
-        public string tcr_codigoSucursal { get; set; }
-        public int tcr_UnidadesMinimas { get; set; }
-        public int tcr_UnidadesMaximas { get; set; }
-        public double tcr_MontoMinimo { get; set; }
-        public double tcr_MontoIgnorar { get; set; }
-        public string suc_nombre { get; set; }
-    }
+    //public class cSucursalDependienteTipoEnviosCliente
+    //{
+    //    public int tsd_id { get; set; }
+    //    public int tsd_idSucursalDependiente { get; set; }
+    //    public int? tsd_idTipoEnvioCliente { get; set; }
+    //    public int sde_codigo { get; set; }
+    //    public string sde_sucursal { get; set; }
+    //    public string sde_sucursalDependiente { get; set; }
+    //    public int env_id { get; set; }
+    //    public string env_codigo { get; set; }
+    //    public string env_nombre { get; set; }
+    //    List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> listaTiposEnvios { get; set; }
+    //}
+    //public class cSucursalDependienteTipoEnviosCliente_TiposEnvios
+    //{
+    //    public int tdt_id { get; set; }
+    //    public int tdt_idSucursalDependienteTipoEnvioCliente { get; set; }
+    //    public int tdt_idTipoEnvio { get; set; }
+    //    public int env_id { get; set; }
+    //    public string env_codigo { get; set; }
+    //    public string env_nombre { get; set; }
+    //    public string tdr_codReparto { get; set; }
+    //}
+    //public class cCadeteriaRestricciones
+    //{
+    //    public int tcr_id { get; set; }
+    //    public string tcr_codigoSucursal { get; set; }
+    //    public int tcr_UnidadesMinimas { get; set; }
+    //    public int tcr_UnidadesMaximas { get; set; }
+    //    public double tcr_MontoMinimo { get; set; }
+    //    public double tcr_MontoIgnorar { get; set; }
+    //    public string suc_nombre { get; set; }
+    //}
     /// <summary>
     /// Summary description for capaTiposEnvios
     /// </summary>
@@ -302,60 +287,60 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataTable RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios()
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("TiposEnvios.spRecuperarTodosSucursalDependienteTipoEnvioCliente_TipoEnvios", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static DataTable RecuperarTipoEnviosExcepcionesPorSucursalDependiente(int pIdSucursalDependienteTipoEnvioCliente, string tdr_codReparto)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("TiposEnvios.spRecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-            SqlParameter paTdr_idSucursalDependienteTipoEnvioCliente = cmdComandoInicio.Parameters.Add("@tdr_idSucursalDependienteTipoEnvioCliente", SqlDbType.Int);
-            SqlParameter paTdr_codReparto = cmdComandoInicio.Parameters.Add("@tdr_codReparto", SqlDbType.NVarChar, 2);
-            paTdr_codReparto.Value = tdr_codReparto;
-            paTdr_idSucursalDependienteTipoEnvioCliente.Value = pIdSucursalDependienteTipoEnvioCliente;
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //public static DataTable RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios()
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("TiposEnvios.spRecuperarTodosSucursalDependienteTipoEnvioCliente_TipoEnvios", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
+        //public static DataTable RecuperarTipoEnviosExcepcionesPorSucursalDependiente(int pIdSucursalDependienteTipoEnvioCliente, string tdr_codReparto)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("TiposEnvios.spRecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    SqlParameter paTdr_idSucursalDependienteTipoEnvioCliente = cmdComandoInicio.Parameters.Add("@tdr_idSucursalDependienteTipoEnvioCliente", SqlDbType.Int);
+        //    SqlParameter paTdr_codReparto = cmdComandoInicio.Parameters.Add("@tdr_codReparto", SqlDbType.NVarChar, 2);
+        //    paTdr_codReparto.Value = tdr_codReparto;
+        //    paTdr_idSucursalDependienteTipoEnvioCliente.Value = pIdSucursalDependienteTipoEnvioCliente;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
         ///////////
         public static int InsertarActualizarCadeteriaRestricciones(int pTcr_id, string pTcr_codigoSucursal, int pTcr_UnidadesMinimas, int pTcr_UnidadesMaximas, double pTcr_MontoMinimo, double pTcr_MontoIgnorar)
         {
@@ -420,59 +405,59 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataTable RecuperarTodosCadeteriaRestricciones()
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("TiposEnvios.spRecuperarTodosCadeteriaRestricciones", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //public static DataTable RecuperarTodosCadeteriaRestricciones()
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("TiposEnvios.spRecuperarTodosCadeteriaRestricciones", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static DataTable RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_TodasLasExcepciones(int pIdSucursalDependienteTipoEnvioCliente)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("TiposEnvios.spRecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_TodasLasExcepciones", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-            SqlParameter paTdr_idSucursalDependienteTipoEnvioCliente = cmdComandoInicio.Parameters.Add("@tdr_idSucursalDependienteTipoEnvioCliente", SqlDbType.Int);
-            paTdr_idSucursalDependienteTipoEnvioCliente.Value = pIdSucursalDependienteTipoEnvioCliente;
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
+        //public static DataTable RecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_TodasLasExcepciones(int pIdSucursalDependienteTipoEnvioCliente)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("TiposEnvios.spRecuperarSucursalDependienteTipoEnvioCliente_TipoEnvios_TodasLasExcepciones", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    SqlParameter paTdr_idSucursalDependienteTipoEnvioCliente = cmdComandoInicio.Parameters.Add("@tdr_idSucursalDependienteTipoEnvioCliente", SqlDbType.Int);
+        //    paTdr_idSucursalDependienteTipoEnvioCliente.Value = pIdSucursalDependienteTipoEnvioCliente;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
         public static int InsertarEliminarSucursalDependienteTipoEnvioCliente_TipoEnvios_Excepciones(int? pTdr_id, int? pTdr_idSucursalDependienteTipoEnvioCliente, int? pTdr_idTipoEnvio, String pTdr_codReparto)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
