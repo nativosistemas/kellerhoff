@@ -12,95 +12,95 @@ namespace Kellerhoff.Codigo.capaDatos
     /// </summary>
     public class capaTransfer
     {
-        public static DataSet RecuperarTodosTransfer()
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Transfers.RecuperarTodosTransfer", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                Conn.Open();
-                DataSet dsResultado = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
-                da.Fill(dsResultado, "Transfers");
-                return dsResultado;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static DataSet RecuperarTodosTransferMasDetallePorIdProducto(string pSucursal, string pNombreProducto,int pIdCliente)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Transfers.spRecuperarTodosTransferMasDetallePorIdProducto", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //public static DataSet RecuperarTodosTransfer()
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Transfers.RecuperarTodosTransfer", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataSet dsResultado = new DataSet();
+        //        SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
+        //        da.Fill(dsResultado, "Transfers");
+        //        return dsResultado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
+        //public static DataSet RecuperarTodosTransferMasDetallePorIdProducto(string pSucursal, string pNombreProducto,int pIdCliente)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Transfers.spRecuperarTodosTransferMasDetallePorIdProducto", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paTde_codpro = cmdComandoInicio.Parameters.Add("@tde_codpro", SqlDbType.NVarChar, 75);
-            SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@sucursal", SqlDbType.NVarChar, 2);
-            SqlParameter paCodCliente = cmdComandoInicio.Parameters.Add("@codCliente", SqlDbType.Int);
-            paTde_codpro.Value = pNombreProducto;
-            paSucursal.Value = pSucursal;
-            paCodCliente.Value = pIdCliente;
-            try
-            {
-                Conn.Open();
-                DataSet dsResultado = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
-                da.Fill(dsResultado, "Transfers");
-                return dsResultado;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static DataSet RecuperarTransferMasDetallePorIdTransfer(string pSucursal, int pTfr_codigo,int pIdCliente)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Transfers.spRecuperarTransferMasDetallePorIdTransfer", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    SqlParameter paTde_codpro = cmdComandoInicio.Parameters.Add("@tde_codpro", SqlDbType.NVarChar, 75);
+        //    SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@sucursal", SqlDbType.NVarChar, 2);
+        //    SqlParameter paCodCliente = cmdComandoInicio.Parameters.Add("@codCliente", SqlDbType.Int);
+        //    paTde_codpro.Value = pNombreProducto;
+        //    paSucursal.Value = pSucursal;
+        //    paCodCliente.Value = pIdCliente;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataSet dsResultado = new DataSet();
+        //        SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
+        //        da.Fill(dsResultado, "Transfers");
+        //        return dsResultado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
+        //public static DataSet RecuperarTransferMasDetallePorIdTransfer(string pSucursal, int pTfr_codigo,int pIdCliente)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Transfers.spRecuperarTransferMasDetallePorIdTransfer", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paTfr_codigo = cmdComandoInicio.Parameters.Add("@tfr_codigo", SqlDbType.Int);
-            SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@sucursal", SqlDbType.NVarChar, 2);
-            SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@codCliente", SqlDbType.Int);
-            paIdCliente.Value = pIdCliente;
-            paTfr_codigo.Value = pTfr_codigo;
-            paSucursal.Value = pSucursal;
-            try
-            {
-                Conn.Open();
-                DataSet dsResultado = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
-                da.Fill(dsResultado, "Transfers");
-                return dsResultado;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //    SqlParameter paTfr_codigo = cmdComandoInicio.Parameters.Add("@tfr_codigo", SqlDbType.Int);
+        //    SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@sucursal", SqlDbType.NVarChar, 2);
+        //    SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@codCliente", SqlDbType.Int);
+        //    paIdCliente.Value = pIdCliente;
+        //    paTfr_codigo.Value = pTfr_codigo;
+        //    paSucursal.Value = pSucursal;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataSet dsResultado = new DataSet();
+        //        SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
+        //        da.Fill(dsResultado, "Transfers");
+        //        return dsResultado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
         public static bool AgregarProductosTransfersAlCarrito(DataTable pTablaDetalleProductos, int pIdCliente, int pIdUsuario, int pIdTransfers, string pCodSucursal)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

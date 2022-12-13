@@ -43,7 +43,7 @@ namespace Kellerhoff.Codigo.clases
                     string SegundaParteNombre = string.Empty;
                     //
                     bool isNombreRepetido = false;
-                    List<cHistorialArchivoSubir> listaHistorialArchivoSubir = WebService.RecuperarHistorialSubirArchivoPorNombreArchivoOriginal(nombreCompletoOriginal);
+                    List<cHistorialArchivoSubir> listaHistorialArchivoSubir = DKbase.Util.RecuperarHistorialSubirArchivoPorNombreArchivoOriginal(nombreCompletoOriginal);
                     if (listaHistorialArchivoSubir != null)
                     {
                         if (listaHistorialArchivoSubir.Count > 0)
@@ -161,7 +161,7 @@ namespace Kellerhoff.Codigo.clases
                         //}
                         //else
                         //{
-                            WebService.AgregarHistorialSubirArchivo(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, sucElegida, pNombreArchivo, pNombreArchivoOriginal, DateTime.Now);
+                            DKbase.Util.AgregarHistorialSubirArchivo(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, sucElegida, pNombreArchivo, pNombreArchivoOriginal, DateTime.Now);
                         //}
                     }
                 }
@@ -180,7 +180,7 @@ namespace Kellerhoff.Codigo.clases
                     string[] partSplit = pRenglon.Split('\t');
                     string strCodBarra = partSplit[5];
                     string strCantidad = partSplit[2];
-                    return FuncionesPersonalizadas.ConvertProductosCarritoArchivosPedidosToDataRow(pTabla, null, Convert.ToInt32(strCantidad), strCodBarra, string.Empty, string.Empty, "S");
+                    return FuncionesPersonalizadas_base.ConvertProductosCarritoArchivosPedidosToDataRow(pTabla, null, Convert.ToInt32(strCantidad), strCodBarra, string.Empty, string.Empty, "S");
                 }
             }
             catch (Exception ex)
@@ -196,7 +196,7 @@ namespace Kellerhoff.Codigo.clases
                 string[] partSplit = pRenglon.Split(',');
                 string strCodBarra = partSplit[4];
                 string strCantidad = partSplit[2];
-                return FuncionesPersonalizadas.ConvertProductosCarritoArchivosPedidosToDataRow(pTabla, null, Convert.ToInt32(strCantidad), strCodBarra, string.Empty, string.Empty, "S");
+                return FuncionesPersonalizadas_base.ConvertProductosCarritoArchivosPedidosToDataRow(pTabla, null, Convert.ToInt32(strCantidad), strCodBarra, string.Empty, string.Empty, "S");
             }
             catch (Exception ex)
             {
@@ -233,7 +233,7 @@ namespace Kellerhoff.Codigo.clases
                 {
                     strCodBarra += pRenglon[i].ToString();
                 }
-                return FuncionesPersonalizadas.ConvertProductosCarritoArchivosPedidosToDataRow(pTabla, null, Convert.ToInt32(strCantidad), strCodBarra, strAlfaBeta, strTroquel, "S");
+                return FuncionesPersonalizadas_base.ConvertProductosCarritoArchivosPedidosToDataRow(pTabla, null, Convert.ToInt32(strCantidad), strCodBarra, strAlfaBeta, strTroquel, "S");
             }
             catch (Exception ex)
             {
@@ -263,7 +263,7 @@ namespace Kellerhoff.Codigo.clases
                 {
                     strNroProducto += pRenglon[i].ToString();
                 }
-                return FuncionesPersonalizadas.ConvertProductosCarritoArchivosPedidosToDataRow(pTabla, strNroProducto, Convert.ToInt32(strCantidad), null, null, null, "F");
+                return FuncionesPersonalizadas_base.ConvertProductosCarritoArchivosPedidosToDataRow(pTabla, strNroProducto, Convert.ToInt32(strCantidad), null, null, null, "F");
             }
             catch (Exception ex)
             {
@@ -276,7 +276,7 @@ namespace Kellerhoff.Codigo.clases
             Boolean? isRedireccionar = false;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                cHistorialArchivoSubir objHistorialArchivoSubir = WebService.RecuperarHistorialSubirArchivoPorId(has_id);
+                cHistorialArchivoSubir objHistorialArchivoSubir = DKbase.Util.RecuperarHistorialSubirArchivoPorId(has_id);
                 if (objHistorialArchivoSubir != null)
                     isRedireccionar = LeerArchivoPedido_Generica(objHistorialArchivoSubir.has_NombreArchivo, objHistorialArchivoSubir.has_sucursal, objHistorialArchivoSubir.has_NombreArchivoOriginal, null);
             }

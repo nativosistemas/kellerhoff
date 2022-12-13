@@ -170,6 +170,11 @@ namespace Kellerhoff.Controllers
         [HttpPost]
         public ActionResult subirpedidoUpload()//HttpPostedFileBase pFile
         {
+
+            /*var filePath = Path.GetTempFileName();
+            foreach (var formFile in Request.Form.Files) { 
+            
+            }*/
             if (Request.Files.Count > 0)
             {
                 var file = Request.Files[0];
@@ -457,7 +462,7 @@ namespace Kellerhoff.Controllers
         {
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
-                ResultCargaProducto result = result = new ResultCargaProducto();
+                ResultCargaProducto result = new ResultCargaProducto();
                 WebService.AgregarHistorialProductoCarrito((int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, pIdProducto, ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
                 result.isOk = capaCAR_decision.AgregarProductoAlCarrito(pCodSucursal, pIdProducto, pCantidadProducto, (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
                 //if (result.isOk)
@@ -591,7 +596,9 @@ namespace Kellerhoff.Controllers
             List<cTransfer> listaTransfer = null;
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                listaTransfer = WebService.RecuperarTodosTransferMasDetallePorIdProducto(pNombreProducto, (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).Where(x => x.tfr_facturaciondirecta == null ? true : !(bool)x.tfr_facturaciondirecta).ToList();
+                List<string> listaSucursal = FuncionesPersonalizadas.RecuperarSucursalesDelCliente();
+                listaTransfer =  DKbase.Util.RecuperarTodosTransferMasDetallePorIdProducto(pNombreProducto, (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"], listaSucursal).Where(x => x.tfr_facturaciondirecta == null ? true : !(bool)x.tfr_facturaciondirecta).ToList();
+                // listaTransfer = WebService.RecuperarTodosTransferMasDetallePorIdProducto(pNombreProducto, (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).Where(x => x.tfr_facturaciondirecta == null ? true : !(bool)x.tfr_facturaciondirecta).ToList();
             }
             return Serializador.SerializarAJson(listaTransfer);
         }
@@ -784,7 +791,7 @@ namespace Kellerhoff.Controllers
             List<cHistorialArchivoSubir> resultado = null;
             DateTime fechaDesdeAUX = DateTime.Now.AddDays(pDia * -1);
             DateTime fechaDesde = new DateTime(fechaDesdeAUX.Year, fechaDesdeAUX.Month, fechaDesdeAUX.Day, 0, 0, 0);
-            List<cHistorialArchivoSubir> listaArchivosSubir = WebService.RecuperarHistorialSubirArchivo(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
+            List<cHistorialArchivoSubir> listaArchivosSubir = DKbase.Util.RecuperarHistorialSubirArchivo(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo);
             if (listaArchivosSubir != null)
             {
                 resultado = listaArchivosSubir.Where(x => x.has_fecha >= fechaDesde).ToList();

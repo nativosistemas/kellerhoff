@@ -62,24 +62,24 @@ namespace Kellerhoff.Codigo.clases
             return DKbase.web.FuncionesPersonalizadas_base.ConvertNombresSeccionToDataTable(pListaNombreSeccion);
         }
 
-        public static DataRow ConvertProductosCarritoArchivosPedidosToDataRow(DataTable pTabla, string pCodProducto, int pCantidad, string pCodigoBarra, string pCodigoAlfaBeta, string pTroquel, string pTipoArchivoPedidos)
-        {
-            DataRow fila = pTabla.NewRow();
-            if (pTipoArchivoPedidos == "F")
-            {
-                fila["codProducto"] = pCodProducto;
-                fila["cantidad"] = pCantidad;
-            }
-            else if (pTipoArchivoPedidos == "S")
-            {
-                fila["codigobarra"] = pCodigoBarra;
-                fila["codigoalfabeta"] = pCodigoAlfaBeta;
-                fila["troquel"] = pTroquel;//.Trim();
-                fila["cantidad"] = pCantidad;
-            }
-            fila["nroordenamiento"] = pTabla.Rows.Count + 1;
-            return fila;
-        }
+        //public static DataRow ConvertProductosCarritoArchivosPedidosToDataRow(DataTable pTabla, string pCodProducto, int pCantidad, string pCodigoBarra, string pCodigoAlfaBeta, string pTroquel, string pTipoArchivoPedidos)
+        //{
+        //    DataRow fila = pTabla.NewRow();
+        //    if (pTipoArchivoPedidos == "F")
+        //    {
+        //        fila["codProducto"] = pCodProducto;
+        //        fila["cantidad"] = pCantidad;
+        //    }
+        //    else if (pTipoArchivoPedidos == "S")
+        //    {
+        //        fila["codigobarra"] = pCodigoBarra;
+        //        fila["codigoalfabeta"] = pCodigoAlfaBeta;
+        //        fila["troquel"] = pTroquel;//.Trim();
+        //        fila["cantidad"] = pCantidad;
+        //    }
+        //    fila["nroordenamiento"] = pTabla.Rows.Count + 1;
+        //    return fila;
+        //}
 
         public static void CargarMensajeActualizado(int pIdCliente)
         {
@@ -193,20 +193,9 @@ namespace Kellerhoff.Codigo.clases
             {
                 cClientes oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
                 List<cProductosGenerico> listaProductosBuscador = pListaProveedor;
-                // fin Si el cliente no toma perfumeria
-                //for (int iPrecioFinal = 0; iPrecioFinal < listaProductosBuscador.Count; iPrecioFinal++)
-                //{
-                //    listaProductosBuscador[iPrecioFinal].PrecioFinal = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioFinal(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]), listaProductosBuscador[iPrecioFinal]);
-                //    listaProductosBuscador[iPrecioFinal].PrecioConDescuentoOferta = DKbase.web.FuncionesPersonalizadas_base.ObtenerPrecioUnitarioConDescuentoOferta(listaProductosBuscador[iPrecioFinal].PrecioFinal, listaProductosBuscador[iPrecioFinal]);
-                //}
-                // Inicio 17/02/2016
-                List<string> ListaSucursal = RecuperarSucursalesDelCliente();// DKbase.web.FuncionesPersonalizadas_base.RecuperarSucursalesParaBuscadorDeCliente(oClientes);
-                listaProductosBuscador = ActualizarStockListaProductos_SubirArchico(ListaSucursal, listaProductosBuscador, HttpContext.Current.Session["subirpedido_SucursalEleginda"].ToString());
-                // Fin 17/02/2016
-                cjSonBuscadorProductos ResultadoObj = new cjSonBuscadorProductos();
-                ResultadoObj.listaSucursal = ListaSucursal;
-                ResultadoObj.listaProductos = listaProductosBuscador;
-                resultado = ResultadoObj;
+                List<string> ListaSucursal = RecuperarSucursalesDelCliente();
+                string SucursalEleginda = HttpContext.Current.Session["subirpedido_SucursalEleginda"].ToString();
+                resultado = DKbase.Util.RecuperarProductosGeneralSubirPedidos(oClientes, SucursalEleginda, ListaSucursal, pListaProveedor);
             }
             return resultado;
         }
@@ -228,7 +217,7 @@ namespace Kellerhoff.Codigo.clases
             if (!string.IsNullOrEmpty(pTxtBuscador) || pIdOferta != null)
             {
                 if (!string.IsNullOrEmpty(pTxtBuscador) && pTxtBuscador.Trim() != string.Empty && HttpContext.Current.Session["clientesDefault_Usuario"] != null)
-                    HttpContext.Current.Session["clientesPages_Buscador"] = WebService.InsertarPalabraBuscada(pTxtBuscador.ToUpper(), ((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id, Constantes.cTABLA_PRODUCTO);
+                    HttpContext.Current.Session["clientesPages_Buscador"] = DKbase.Util.InsertarPalabraBuscada(pTxtBuscador.ToUpper(), ((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id, Constantes.cTABLA_PRODUCTO);
 
                 resultado = FuncionesPersonalizadas.RecuperarProductosGeneral_V3(pIdOferta, pTxtBuscador, pListaColumna, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tomaOfertas, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_tomaTransfers);
                 if (pIsBuscarConOferta || pIsBuscarConTransfer)
@@ -409,7 +398,7 @@ namespace Kellerhoff.Codigo.clases
         }
         public static List<string> RecuperarSinPermisosSecciones(int pIdUsuario)
         {
-            return DKbase.Util.RecuperarSinPermisosSecciones( pIdUsuario);
+            return DKbase.Util.RecuperarSinPermisosSecciones(pIdUsuario);
         }
         public static bool IsPermisoSeccion(string pNombreSeccion)
         {

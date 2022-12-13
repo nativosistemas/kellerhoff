@@ -64,17 +64,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public decimal PrecioFinalTransfer { get; set; }
         public string stk_stock { get; set; }
     }
-    public class cHistorialArchivoSubir
-    {
-        public int has_id { get; set; }
-        public int has_codCliente { get; set; }
-        public string has_NombreArchivo { get; set; }
-        public string has_NombreArchivoOriginal { get; set; }
-        public string has_sucursal { get; set; }
-        public string suc_nombre { get; set; }
-        public DateTime has_fecha { get; set; }
-        public string has_fechaToString { get; set; }
-    }
+
     public class cFrasesFront
     {
         public int tff_id { get; set; }
@@ -388,104 +378,104 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static void AgregarProductosBuscadosDelCarrito(int pIdCliente, string pIdProducto, int? pIdUsuario)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spAgregarProductosBuscadosDelCarrito", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //public static void AgregarProductosBuscadosDelCarrito(int pIdCliente, string pIdProducto, int? pIdUsuario)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spAgregarProductosBuscadosDelCarrito", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paIdUsuario = cmdComandoInicio.Parameters.Add("@hpb_codUsuario", SqlDbType.Int);
-            SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@hpb_codCliente", SqlDbType.Int);
-            SqlParameter paIdProducto = cmdComandoInicio.Parameters.Add("@hpb_codProducto", SqlDbType.NVarChar, 75);
+        //    SqlParameter paIdUsuario = cmdComandoInicio.Parameters.Add("@hpb_codUsuario", SqlDbType.Int);
+        //    SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@hpb_codCliente", SqlDbType.Int);
+        //    SqlParameter paIdProducto = cmdComandoInicio.Parameters.Add("@hpb_codProducto", SqlDbType.NVarChar, 75);
 
-            if (pIdUsuario == null)
-            {
-                paIdUsuario.Value = DBNull.Value;
-            }
-            else
-            {
-                paIdUsuario.Value = pIdUsuario;
-            }
-            //if (pIdCliente == null)
-            //{
-            //    paIdCliente.Value = DBNull.Value;
-            //}
-            //else
-            //{
-            //   paIdCliente.Value = pIdCliente;   
-            //}
-            paIdCliente.Value = pIdCliente;
+        //    if (pIdUsuario == null)
+        //    {
+        //        paIdUsuario.Value = DBNull.Value;
+        //    }
+        //    else
+        //    {
+        //        paIdUsuario.Value = pIdUsuario;
+        //    }
+        //    //if (pIdCliente == null)
+        //    //{
+        //    //    paIdCliente.Value = DBNull.Value;
+        //    //}
+        //    //else
+        //    //{
+        //    //   paIdCliente.Value = pIdCliente;   
+        //    //}
+        //    paIdCliente.Value = pIdCliente;
 
-            if (paIdProducto == null)
-            {
-                paIdProducto.Value = DBNull.Value;
-            }
-            else
-            {
-                paIdProducto.Value = pIdProducto;
-            }
-            try
-            {
-                Conn.Open();
-                object objResultado = cmdComandoInicio.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
+        //    if (paIdProducto == null)
+        //    {
+        //        paIdProducto.Value = DBNull.Value;
+        //    }
+        //    else
+        //    {
+        //        paIdProducto.Value = pIdProducto;
+        //    }
+        //    try
+        //    {
+        //        Conn.Open();
+        //        object objResultado = cmdComandoInicio.ExecuteNonQuery();
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static void AgregarProductosBuscadosDelCarritoTransfer(int pIdCliente, DataTable pTablaProducto, int? pIdUsuario)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spAgregarProductosBuscadosDelCarritoTransferPorNombreProducto", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
+        //public static void AgregarProductosBuscadosDelCarritoTransfer(int pIdCliente, DataTable pTablaProducto, int? pIdUsuario)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spAgregarProductosBuscadosDelCarritoTransferPorNombreProducto", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paIdUsuario = cmdComandoInicio.Parameters.Add("@hpb_codUsuario", SqlDbType.Int);
-            SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@hpb_codCliente", SqlDbType.Int);
-            SqlParameter paTablaProductos = cmdComandoInicio.Parameters.Add("@Tabla_Detalle", SqlDbType.Structured);
+        //    SqlParameter paIdUsuario = cmdComandoInicio.Parameters.Add("@hpb_codUsuario", SqlDbType.Int);
+        //    SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@hpb_codCliente", SqlDbType.Int);
+        //    SqlParameter paTablaProductos = cmdComandoInicio.Parameters.Add("@Tabla_Detalle", SqlDbType.Structured);
 
-            if (pIdUsuario == null)
-            {
-                paIdUsuario.Value = DBNull.Value;
-            }
-            else
-            {
-                paIdUsuario.Value = pIdUsuario;
-            }
-            paIdCliente.Value = pIdCliente;
+        //    if (pIdUsuario == null)
+        //    {
+        //        paIdUsuario.Value = DBNull.Value;
+        //    }
+        //    else
+        //    {
+        //        paIdUsuario.Value = pIdUsuario;
+        //    }
+        //    paIdCliente.Value = pIdCliente;
 
-            if (pTablaProducto == null)
-            {
-                paTablaProductos.Value = DBNull.Value;
-            }
-            else
-            {
-                paTablaProductos.Value = pTablaProducto;
-            }
-            try
-            {
-                Conn.Open();
-                object objResultado = cmdComandoInicio.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
+        //    if (pTablaProducto == null)
+        //    {
+        //        paTablaProductos.Value = DBNull.Value;
+        //    }
+        //    else
+        //    {
+        //        paTablaProductos.Value = pTablaProducto;
+        //    }
+        //    try
+        //    {
+        //        Conn.Open();
+        //        object objResultado = cmdComandoInicio.ExecuteNonQuery();
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
         public static bool AgregarProductoAlCarrito(string pSucursal, string pIdProducto, int pCantidadProducto, int pIdCliente, int? pIdUsuario)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
@@ -915,132 +905,69 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataTable RecuperarHistorialSubirArchivo(int pIdCliente)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarHistorialSubirArchivo", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //public static DataTable RecuperarHistorialSubirArchivo(int pIdCliente)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarHistorialSubirArchivo", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@has_codCliente", SqlDbType.Int);
-            paIdCliente.Value = pIdCliente;
+        //    SqlParameter paIdCliente = cmdComandoInicio.Parameters.Add("@has_codCliente", SqlDbType.Int);
+        //    paIdCliente.Value = pIdCliente;
 
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static DataTable RecuperarHistorialSubirArchivoPorId(int pId)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarHistorialSubirArchivoPorId", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
+        //public static DataTable RecuperarHistorialSubirArchivoPorId(int pId)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarHistorialSubirArchivoPorId", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paId = cmdComandoInicio.Parameters.Add("@has_id", SqlDbType.Int);
-            paId.Value = pId;
+        //    SqlParameter paId = cmdComandoInicio.Parameters.Add("@has_id", SqlDbType.Int);
+        //    paId.Value = pId;
 
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static DataTable RecuperarHistorialSubirArchivoPorNombreArchivoOriginal(string pNombreArchivoOriginal)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarHistorialSubirArchivoPorNombreArchivoOriginal", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paNombreArchivoOriginal = cmdComandoInicio.Parameters.Add("@has_NombreArchivoOriginal", SqlDbType.NVarChar, 100);
-            paNombreArchivoOriginal.Value = pNombreArchivoOriginal;
-
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
+   
 
 
 
-        public static bool AgregarHistorialSubirArchivo(int has_codCliente, string has_NombreArchivo, string has_NombreArchivoOriginal, string has_sucursal, DateTime has_fecha)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spAgregarHistorialSubirArchivo", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paHas_NombreArchivo = cmdComandoInicio.Parameters.Add("@has_NombreArchivo", SqlDbType.NVarChar, 100);
-            SqlParameter paHas_NombreArchivoOriginal = cmdComandoInicio.Parameters.Add("@has_NombreArchivoOriginal", SqlDbType.NVarChar, 100);
-            SqlParameter paHas_codCliente = cmdComandoInicio.Parameters.Add("@has_codCliente", SqlDbType.Int);
-            SqlParameter paHas_Sucursal = cmdComandoInicio.Parameters.Add("@has_sucursal", SqlDbType.NVarChar, 2);
-            SqlParameter paHas_fecha = cmdComandoInicio.Parameters.Add("@has_fecha", SqlDbType.DateTime);
-
-            paHas_NombreArchivo.Value = has_NombreArchivo;
-            paHas_NombreArchivoOriginal.Value = has_NombreArchivoOriginal;
-            paHas_codCliente.Value = has_codCliente;
-            paHas_Sucursal.Value = has_sucursal;
-            paHas_fecha.Value = has_fecha;
-
-            try
-            {
-                Conn.Open();
-                object objResultado = cmdComandoInicio.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+      
         public static bool CargarCarritoProductoSucursalAndCarritoTransferPorDetalles(string pCodSucursal, int pIdCliente, string pIdProducto, int pCantidadProducto, DataTable pTablaDetalleProductos, int pIdTransfers, int pIdUsuario)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
