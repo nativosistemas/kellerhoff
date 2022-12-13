@@ -709,21 +709,10 @@ namespace Kellerhoff.Controllers
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public List<string> ObtenerRangoFecha_pedidos(int pDia)
         {
-            List<string> lista = new List<string>();
-            DateTime fechaDesdeAUX = DateTime.Now.AddDays(pDia * -1);
-            DateTime fechaDesde = new DateTime(fechaDesdeAUX.Year, fechaDesdeAUX.Month, fechaDesdeAUX.Day, 0, 0, 0);
-            DateTime fechaHasta = DateTime.Now.AddDays(1);
-            lista.Add(fechaDesde.Day.ToString());
-            lista.Add((fechaDesde.Month).ToString());
-            lista.Add((fechaDesde.Year).ToString());
-
-            lista.Add(fechaHasta.Day.ToString());
-            lista.Add((fechaHasta.Month).ToString());
-            lista.Add((fechaHasta.Year).ToString());
-
-            List<DKbase.dll.cDllPedido> resultadoObj = capaCAR_WebService_base.ObtenerPedidosEntreFechas(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, fechaDesde, fechaHasta);
-
-            System.Web.HttpContext.Current.Session["estadopedidos_Resultado"] = resultadoObj;
+            cClientes oCliente = (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+            cRangoFecha_Pedidos o = DKbase.Util.ObtenerRangoFecha_pedidos(oCliente, pDia);
+            List<string> lista = o.lista;
+            System.Web.HttpContext.Current.Session["estadopedidos_Resultado"] = o.resultadoObj;
             return lista;
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
