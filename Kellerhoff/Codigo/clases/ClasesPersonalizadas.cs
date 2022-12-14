@@ -22,13 +22,13 @@ public class cPageClientes : System.Web.UI.Page
         [WebMethod(EnableSession = true)]
         public static bool IsBanderaUsarDllSucursal(string pSucursal)
         {
-            bool resultado = WebService.IsBanderaCodigo(pSucursal);
+            bool resultado = capaCAR_WebService_base.IsBanderaCodigo(pSucursal);
             return resultado;
         }
         [WebMethod(EnableSession = true)]
         public static bool IsBanderaUsarDll()
         {
-            bool resultado = WebService.IsBanderaCodigo(DKbase.generales.Constantes.cBAN_SERVIDORDLL);
+            bool resultado = capaCAR_WebService_base.IsBanderaCodigo(DKbase.generales.Constantes.cBAN_SERVIDORDLL);
             return resultado;
         }
         /// <summary>

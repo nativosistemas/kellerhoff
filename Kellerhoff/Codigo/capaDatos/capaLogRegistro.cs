@@ -16,24 +16,7 @@ namespace Kellerhoff.Codigo.capaDatos
         public DateTime? his_Fecha { get; set; }
         public string his_FechaToString { get; set; }
     }
-    public class cFaltantesConProblemasCrediticiosPadre
-    {
-        //public int fpc_id { get; set; }
-        //public int fpc_codCarrito { get; set; }
-        public string fpc_codSucursal { get; set; }
-        public string suc_nombre { get; set; }
-
-        //public int fpc_codCliente { get; set; }
-        //public string fpc_nombreProducto { get; set; }
-        //public int fpc_cantidad { get; set; }
-        public int fpc_tipo { get; set; }
-        //public DateTime? fpc_fecha { get; set; }
-        //public string fpc_fechaToString { get; set; }
-        //public string stk_stock { get; set; }
-
-        //public List<cFaltantesConProblemasCrediticios> listaProductos { get; set; }
-        public List<cProductosGenerico> listaProductos { get; set; }
-    }
+   
     public class cFaltantesConProblemasCrediticios//:cProductos
     {
         //public cFaltantesConProblemasCrediticios(cProductos pProducto)
@@ -700,110 +683,75 @@ namespace Kellerhoff.Codigo.capaDatos
             }
         }
 
-        public static DataSet RecuperarFaltasProblemasCrediticios(int fpc_codCliente, int fpc_tipo, int pDia, string pSucursal)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarFaltasProblemasCrediticiosV2", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+   
+        //public static DataSet RecuperarFaltasProblemasCrediticios_TodosEstados(int fpc_codCliente, int fpc_tipo, int pDia, string pSucursal)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarFaltasProblemasCrediticiosTodosEstadosV2", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter paCodCliente = cmdComandoInicio.Parameters.Add("@fpc_codCliente", SqlDbType.Int);
-            SqlParameter paTipo = cmdComandoInicio.Parameters.Add("@fpc_tipo", SqlDbType.Int);
-            SqlParameter paCantidadDia = cmdComandoInicio.Parameters.Add("@cantidadDia", SqlDbType.Int);
-            SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar,2);
+        //    SqlParameter paCodCliente = cmdComandoInicio.Parameters.Add("@fpc_codCliente", SqlDbType.Int);
+        //    SqlParameter paTipo = cmdComandoInicio.Parameters.Add("@fpc_tipo", SqlDbType.Int);
+        //    SqlParameter paCantidadDia = cmdComandoInicio.Parameters.Add("@cantidadDia", SqlDbType.Int);
+        //    SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar,2);
 
-            paCantidadDia.Value = pDia;
-            paCodCliente.Value = fpc_codCliente;
-            paTipo.Value = fpc_tipo;
-            paSucursal.Value = pSucursal;
+        //    paCantidadDia.Value = pDia;
+        //    paCodCliente.Value = fpc_codCliente;
+        //    paTipo.Value = fpc_tipo;
+        //    paSucursal.Value = pSucursal;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataSet dsResultado = new DataSet();
+        //        SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
+        //        da.Fill(dsResultado, "ProductosBuscador");
+        //        return dsResultado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
+        //public static bool BorrarPorProductosFaltasProblemasCrediticios(string fpc_codSucursal, int fpc_codCliente, int fpc_tipo, string fpc_nombreProducto)
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spBorrarPorProductosFaltasProblemasCrediticios", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            try
-            {
-                Conn.Open();
-                DataSet dsResultado = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
-                da.Fill(dsResultado, "ProductosBuscador");
-                return dsResultado;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static DataSet RecuperarFaltasProblemasCrediticios_TodosEstados(int fpc_codCliente, int fpc_tipo, int pDia, string pSucursal)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spRecuperarFaltasProblemasCrediticiosTodosEstadosV2", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    SqlParameter paCodSucursal = cmdComandoInicio.Parameters.Add("@fpc_codSucursal", SqlDbType.NVarChar, 2);
+        //    SqlParameter paCodCliente = cmdComandoInicio.Parameters.Add("@fpc_codCliente", SqlDbType.Int);
+        //    SqlParameter paTipo = cmdComandoInicio.Parameters.Add("@fpc_tipo", SqlDbType.Int);
+        //    SqlParameter paFpc_nombreProducto = cmdComandoInicio.Parameters.Add("@fpc_nombreProducto", SqlDbType.NVarChar, 75);
 
-            SqlParameter paCodCliente = cmdComandoInicio.Parameters.Add("@fpc_codCliente", SqlDbType.Int);
-            SqlParameter paTipo = cmdComandoInicio.Parameters.Add("@fpc_tipo", SqlDbType.Int);
-            SqlParameter paCantidadDia = cmdComandoInicio.Parameters.Add("@cantidadDia", SqlDbType.Int);
-            SqlParameter paSucursal = cmdComandoInicio.Parameters.Add("@Sucursal", SqlDbType.NVarChar,2);
-
-            paCantidadDia.Value = pDia;
-            paCodCliente.Value = fpc_codCliente;
-            paTipo.Value = fpc_tipo;
-            paSucursal.Value = pSucursal;
-            try
-            {
-                Conn.Open();
-                DataSet dsResultado = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
-                da.Fill(dsResultado, "ProductosBuscador");
-                return dsResultado;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
-        public static bool BorrarPorProductosFaltasProblemasCrediticios(string fpc_codSucursal, int fpc_codCliente, int fpc_tipo, string fpc_nombreProducto)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("LogRegistro.spBorrarPorProductosFaltasProblemasCrediticios", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paCodSucursal = cmdComandoInicio.Parameters.Add("@fpc_codSucursal", SqlDbType.NVarChar, 2);
-            SqlParameter paCodCliente = cmdComandoInicio.Parameters.Add("@fpc_codCliente", SqlDbType.Int);
-            SqlParameter paTipo = cmdComandoInicio.Parameters.Add("@fpc_tipo", SqlDbType.Int);
-            SqlParameter paFpc_nombreProducto = cmdComandoInicio.Parameters.Add("@fpc_nombreProducto", SqlDbType.NVarChar, 75);
-
-            paCodSucursal.Value = fpc_codSucursal;
-            paCodCliente.Value = fpc_codCliente;
-            paTipo.Value = fpc_tipo;
-            paFpc_nombreProducto.Value = fpc_nombreProducto;
-            try
-            {
-                Conn.Open();
-                cmdComandoInicio.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //    paCodSucursal.Value = fpc_codSucursal;
+        //    paCodCliente.Value = fpc_codCliente;
+        //    paTipo.Value = fpc_tipo;
+        //    paFpc_nombreProducto.Value = fpc_nombreProducto;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        cmdComandoInicio.ExecuteNonQuery();
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return false;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
         public static bool BorrarPorProductosFaltasProblemasCrediticiosV2(string fpc_codSucursal, int fpc_codCliente, int fpc_tipo, string fpc_nombreProducto, int pCantidadDia, int pCantidadProductoGrabarNuevo)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

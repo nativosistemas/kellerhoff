@@ -113,7 +113,8 @@ namespace Kellerhoff.Codigo.clases
             }
             if (isAgregar && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
-                List<cFaltantesConProblemasCrediticiosPadre> listaRecuperador = WebService.RecuperarFaltasProblemasCrediticios(pIdCliente, 1, 14, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc); ;
+                cClientes oCliente = (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                List<cFaltantesConProblemasCrediticiosPadre> listaRecuperador = DKbase.Util.RecuperarFaltasProblemasCrediticios(oCliente, 1, 14, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc); ;
                 if (listaRecuperador != null)
                 {
                     HttpContext.Current.Session["clientesDefault_CantRecuperadorFalta"] = listaRecuperador.Count;

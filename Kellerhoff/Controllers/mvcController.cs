@@ -447,7 +447,7 @@ namespace Kellerhoff.Controllers
         {
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
-                ResultCargaProducto result = result = new ResultCargaProducto();
+                ResultCargaProducto result = new ResultCargaProducto();
                 result.isOk = capaCAR_decision.CargarCarritoDiferido(pIdSucursal, pNombreProducto, pCantidadProducto, (int)((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).usu_codCliente, ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
                 //if (result.isOk)
                 //{
@@ -552,12 +552,13 @@ namespace Kellerhoff.Controllers
             return Serializador.SerializarAJson(resultado);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
-        public string TomarPedidoCarrito(Usuario pUsuario, string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
+        public string TomarPedidoCarrito(string pIdSucursal, string pMensajeEnFactura, string pMensajeEnRemito, string pTipoEnvio, bool pIsUrgente)
         {
             cClientes oClientes = ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+            Usuario oUsuario = ((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]);
             List<cCarrito> listaCarrito = DKbase.web.capaDatos.capaCAR_WebService_base.RecuperarCarritosPorSucursalYProductos_generica(oClientes, Constantes.cTipo_Carrito);
             string horarioCierre = FuncionesPersonalizadas.getObtenerHorarioCierre(pIdSucursal);
-            var resultPedido = capaCAR_WebService_base.TomarPedidoCarrito_generico(pUsuario, oClientes, listaCarrito, horarioCierre, Constantes.cTipo_Carrito, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
+            var resultPedido = capaCAR_WebService_base.TomarPedidoCarrito_generico(oUsuario, oClientes, listaCarrito, horarioCierre, Constantes.cTipo_Carrito, pIdSucursal, pMensajeEnFactura, pMensajeEnRemito, pTipoEnvio, pIsUrgente);
             if (resultPedido == null)
             {
                 return null;
@@ -722,7 +723,8 @@ namespace Kellerhoff.Controllers
             if (System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_CantidadDia"] = pDia;
-                listaRecuperador = WebService.RecuperarFaltasProblemasCrediticios(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), pDia, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc);
+                cClientes oCliente = (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                listaRecuperador = DKbase.Util.RecuperarFaltasProblemasCrediticios(oCliente, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), pDia, oCliente.cli_codsuc);
             }
             if (listaRecuperador != null)
                 return Serializador.SerializarAJson(listaRecuperador);
@@ -736,7 +738,8 @@ namespace Kellerhoff.Controllers
             if (System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_CantidadDia"] = pDia;
-                listaRecuperador = WebService.RecuperarFaltasProblemasCrediticios_TodosEstados(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), pDia, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc);
+                cClientes  oCliente = ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]);
+                listaRecuperador = DKbase.Util.RecuperarFaltasProblemasCrediticios_TodosEstados(oCliente, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), pDia, oCliente.cli_codsuc);
             }
             if (listaRecuperador != null)
                 return Serializador.SerializarAJson(listaRecuperador);
@@ -762,10 +765,10 @@ namespace Kellerhoff.Controllers
         {
             if (System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null && System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"] != null)
             {
-                List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
+                //List<ServiceReferenceDLL.cDllProductosAndCantidad> listaProductos = new List<ServiceReferenceDLL.cDllProductosAndCantidad>();
                 for (int i = 0; i < pArrayNombreProducto.Count(); i++)
                 {
-                    WebService.BorrarPorProductosFaltasProblemasCrediticios(pSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), pArrayNombreProducto[i]);
+                    capaLogRegistro_base.BorrarPorProductosFaltasProblemasCrediticios(pSucursal, ((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, Convert.ToInt32(System.Web.HttpContext.Current.Session["clientes_pages_Recuperador_Tipo"]), pArrayNombreProducto[i]);
                 }
             }
             System.Web.HttpContext.Current.Session["clientesDefault_CantRecuperadorFaltaFechaHora"] = null;

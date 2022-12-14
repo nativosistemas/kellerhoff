@@ -416,13 +416,13 @@ namespace Kellerhoff.Controllers
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public bool IsBanderaUsarDll()
         {
-            bool resultado = WebService.IsBanderaCodigo(DKbase.generales.Constantes.cBAN_SERVIDORDLL);
+            bool resultado = capaCAR_WebService_base.IsBanderaCodigo(DKbase.generales.Constantes.cBAN_SERVIDORDLL);
             return resultado;
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public bool IsBanderaUsarDllSucursal(string pSucursal)
         {
-            bool resultado = WebService.IsBanderaCodigo(pSucursal);
+            bool resultado = capaCAR_WebService_base.IsBanderaCodigo(pSucursal);
             return resultado;
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
