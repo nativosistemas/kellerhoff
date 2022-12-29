@@ -47,7 +47,7 @@ namespace Kellerhoff.admin.pages
         public static string getHtmlOptionCatalogo()
         {
             string result = string.Empty;
-            List<cCatalogo> l = WebService.RecuperarTodosCatalogos();
+            List<DKbase.web.capaDatos.cCatalogo> l = DKbase.Util.RecuperarTodosCatalogos();
             if (l != null)
             {
                 for (int i = 0; i < l.Count; i++)

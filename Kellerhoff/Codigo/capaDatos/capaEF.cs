@@ -230,7 +230,7 @@ namespace Kellerhoff.Codigo.capaDatos
             List<tbl_Recall> resultado = null;
             try
             {
-                DataTable tb = capaLogRegistro.RecuperarTodaReCall_aux();
+                DataTable tb = DKbase.web.capaDatos.capaHome_base.RecuperarTodaReCall_aux();
                 if (tb != null)
                 {
                     resultado = new List<tbl_Recall>();

@@ -1077,31 +1077,31 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataTable RecuperarTodaReCall_aux()
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("spGetRecall", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //public static DataTable RecuperarTodaReCall_aux()
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("spGetRecall", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
     }
 
 }

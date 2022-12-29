@@ -2,7 +2,7 @@
 @section sectionHidden{
     @{
         string resultado = string.Empty;
-        List<Kellerhoff.Codigo.capaDatos.cCatalogo> lista = WebService.getCatalogosParaDescarga();
+        List<DKbase.web.capaDatos.cCatalogo> lista = WebService.getCatalogosParaDescarga();
         if (lista != null)
         {
             resultado += "<input type=\"hidden\" id=\"hiddenListaCatalogo\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(lista)) + "\" />";

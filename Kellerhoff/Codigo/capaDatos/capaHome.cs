@@ -11,31 +11,7 @@ namespace Kellerhoff.Codigo.capaDatos
     public class capaHome
     {
         //
-        public static DataTable RecuperarTodasHomeSlidePublicar()
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("spRecuperarTodasHomeSlide", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+
         public static DataTable RecuperarHomeSlidePorId(int pIdHomeSlide)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
@@ -64,31 +40,7 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static DataTable RecuperarTodasOfertaParaHome()
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("spRecuperarTodasOfertaParaHome", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+
         //
         //public static DataTable RecuperarOfertaPorId(int pIdOferta)
         //{

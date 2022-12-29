@@ -16,6 +16,17 @@ namespace Kellerhoff.Controllers
 {
     public class configController : Controller
     {
+        public ActionResult action(int id)
+        {
+            switch (id) {
+                case 1:
+                    return RedirectToAction("perfil");
+                    //break;
+                default:
+                    break;
+            }
+            return View();
+        }
         public string RecuperarOferta(int pId)
         {
             int? id = pId;

@@ -36,15 +36,15 @@ namespace Kellerhoff.home
             //////
             try
             {
-                cCatalogo o = WebService.RecuperarTodosCatalogos().Where(x => x.tbc_publicarHome != null).FirstOrDefault(x => x.tbc_publicarHome.Value);
+                cCatalogo o = DKbase.Util.RecuperarTodoCatalogo_PublicarHome();
                 if (o != null)
-                {
-                    cArchivo oArchivo = WebService.RecuperarTodosArchivos(o.tbc_codigo, Constantes.cTABLA_CATALOGO, string.Empty).FirstOrDefault();
+                {//
+                    cArchivo oArchivo = DKbase.Util.RecuperarTodosArchivos(o.tbc_codigo, DKbase.generales.Constantes.cTABLA_CATALOGO, string.Empty).FirstOrDefault();
                     if (oArchivo != null)
                     {
                         Panel_Revista.Visible = true;
-                        HttpContext.Current.Session["href_Revista"] = "href =\"../../" + "servicios/descargarArchivo.aspx?t=" + Constantes.cTABLA_CATALOGO + "&n=" + oArchivo.arc_nombre + "&inline=yes" + "\"";
-                        HttpContext.Current.Session["homeIndex_Revista"] = "<a  class=\"pdf\" target =\"_blank\" href =\"../../" + "servicios/descargarArchivo.aspx?t=" + Constantes.cTABLA_CATALOGO + "&n=" + oArchivo.arc_nombre + "&inline=yes" + "\" >DESCARGAR</a>";
+                        HttpContext.Current.Session["href_Revista"] = "href =\"../../" + "servicios/descargarArchivo.aspx?t=" + DKbase.generales.Constantes.cTABLA_CATALOGO + "&n=" + oArchivo.arc_nombre + "&inline=yes" + "\"";
+                        HttpContext.Current.Session["homeIndex_Revista"] = "<a  class=\"pdf\" target =\"_blank\" href =\"../../" + "servicios/descargarArchivo.aspx?t=" + DKbase.generales.Constantes.cTABLA_CATALOGO + "&n=" + oArchivo.arc_nombre + "&inline=yes" + "\" >DESCARGAR</a>";
                     }
 
                 }
@@ -80,7 +80,7 @@ namespace Kellerhoff.home
         public static string RecuperarTodasHomeSlide()
         {
 
-            List<cHomeSlide> resultado = WebService.RecuperarTodasHomeSlidePublicar();
+            List<cHomeSlide> resultado = DKbase.Util.RecuperarTodasHomeSlidePublicar();
             return resultado == null ? string.Empty : Serializador.SerializarAJson(resultado);
 
         }
@@ -93,7 +93,7 @@ namespace Kellerhoff.home
         public void AgregarHtmlOculto()
         {
             string resultado = string.Empty;
-            List<cOfertaHome> resultado_lista_OfertaHome = WebService.RecuperarTodasOfertaParaHome();
+            List<cOfertaHome> resultado_lista_OfertaHome = DKbase.Util.RecuperarTodasOfertaParaHome();
             if (resultado_lista_OfertaHome == null) {
                 resultado_lista_OfertaHome = new List<cOfertaHome>();
             }

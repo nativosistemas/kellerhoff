@@ -2631,55 +2631,7 @@ namespace Kellerhoff
                 capaLogRegistro.EliminarFrasesFront(pTff_id);
             }
         }
-        private static cCatalogo ConvertToCatalogo(DataRow pItem)
-        {
-            cCatalogo obj = new cCatalogo();
-
-            if (pItem["tbc_codigo"] != DBNull.Value)
-            {
-                obj.tbc_codigo = Convert.ToInt32(pItem["tbc_codigo"]);
-            }
-            if (pItem["tbc_titulo"] != DBNull.Value)
-            {
-                obj.tbc_titulo = Convert.ToString(pItem["tbc_titulo"]);
-            }
-            if (pItem["tbc_descripcion"] != DBNull.Value)
-            {
-                obj.tbc_descripcion = Convert.ToString(pItem["tbc_descripcion"]);
-            }
-            if (pItem["tbc_orden"] != DBNull.Value)
-            {
-                obj.tbc_orden = Convert.ToInt32(pItem["tbc_orden"]);
-            }
-            if (pItem["tbc_fecha"] != DBNull.Value)
-            {
-                obj.tbc_fecha = Convert.ToDateTime(pItem["tbc_fecha"]);
-                obj.tbc_fechaToString = ((DateTime)obj.tbc_fecha).ToString();
-            }
-            if (pItem["tbc_estado"] != DBNull.Value)
-            {
-                obj.tbc_estado = Convert.ToInt32(pItem["tbc_estado"]);
-            }
-            if (pItem["est_nombre"] != DBNull.Value)
-            {
-                obj.tbc_estadoToString = Convert.ToString(pItem["est_nombre"]);
-            }
-            //obj.tbc_publicarHomeToString = "No publicar";
-            if (pItem.Table.Columns.Contains("tbc_publicarHome"))
-            {
-                if (pItem["tbc_publicarHome"] != DBNull.Value)
-                {
-                    obj.tbc_publicarHome = Convert.ToBoolean(pItem["tbc_publicarHome"]);
-                    if (obj.tbc_publicarHome.Value)
-                        obj.tbc_publicarHomeToString = "Publicar Home";
-                }
-            }
-            if (pItem.Table.Columns.Contains("arc_rating") && pItem["arc_rating"] != DBNull.Value)
-            {
-                obj.arc_rating = Convert.ToInt32(pItem["arc_rating"]);
-            }
-            return obj;
-        }
+       
         public static int? InsertarActualizarCatalogo(int tbc_codigo, string tbc_titulo, string tbc_descripcion, int? tbc_orden, DateTime? tbc_fecha, int tbc_estado)
         {
             int? resultado = null;
@@ -2703,23 +2655,7 @@ namespace Kellerhoff
                 capaCatalogo.PublicarHomeCatalogo(tbc_codigo, tbc_publicarHome);
             }
         }
-        public static List<cCatalogo> RecuperarTodosCatalogos()
-        {
-            List<cCatalogo> resultado = null;
-            //if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable tabla = capaCatalogo.RecuperarTodosCatalogos();
-                if (tabla != null)
-                {
-                    resultado = new List<cCatalogo>();
-                    foreach (DataRow fila in tabla.Rows)
-                    {
-                        resultado.Add(ConvertToCatalogo(fila));
-                    }
-                }
-            }
-            return resultado;
-        }
+
         //
         private static cCurriculumVitae ConvertToCurriculumVitae(DataRow pItem)
         {
@@ -3572,11 +3508,7 @@ namespace Kellerhoff
         }
         public static cOferta RecuperarOfertaPorId(int pIdOferta)
         {
-            cOferta resultado = null;
-            DataTable tabla = capaHome_base.RecuperarOfertaPorId(pIdOferta);
-            if (tabla != null && tabla.Rows.Count > 0)
-                resultado = DKbase.web.capaDatos.capaHome_base.ConvertToOferta(tabla.Rows[0]);
-            return resultado;
+            return DKbase.Util.RecuperarOfertaPorId( pIdOferta);
         }
         //public static cOferta RecuperarOfertaPorId(int pId)
         //{
@@ -3652,97 +3584,26 @@ namespace Kellerhoff
                 resultado = capaEF.ActualizarImagenHomeSlide(hsl_idHomeSlide, idRecurso, pTipo);
             return resultado;
         }
-        private static cOfertaHome ConvertTocOfertaHome(DataRow pItem)
-        {
-            cOfertaHome obj = new cOfertaHome();
+        //public static cOfertaHome ConvertTocOfertaHome(DataRow pItem)
+        //{
+        //    cOfertaHome obj = new cOfertaHome();
 
-            if (pItem["ofh_idOfertaHome"] != DBNull.Value)
-            {
-                obj.ofh_idOfertaHome = Convert.ToInt32(pItem["ofh_idOfertaHome"]);
-            }
-            if (pItem["ofh_orden"] != DBNull.Value)
-            {
-                obj.ofh_orden = Convert.ToInt32(pItem["ofh_orden"]);
-            }
-            if (pItem["ofh_idOferta"] != DBNull.Value)
-            {
-                obj.ofh_idOferta = Convert.ToInt32(pItem["ofh_idOferta"]);
-            }
+        //    if (pItem["ofh_idOfertaHome"] != DBNull.Value)
+        //    {
+        //        obj.ofh_idOfertaHome = Convert.ToInt32(pItem["ofh_idOfertaHome"]);
+        //    }
+        //    if (pItem["ofh_orden"] != DBNull.Value)
+        //    {
+        //        obj.ofh_orden = Convert.ToInt32(pItem["ofh_orden"]);
+        //    }
+        //    if (pItem["ofh_idOferta"] != DBNull.Value)
+        //    {
+        //        obj.ofh_idOferta = Convert.ToInt32(pItem["ofh_idOferta"]);
+        //    }
 
-            return obj;
-        }
-        private static cOfertaHome ConvertAddOferta(DataRow pItem, cOfertaHome obj)
-        {
-            //cOferta oAux= ConvertToOferta(pItem);
+        //    return obj;
+        //}
 
-            if (pItem["ofe_idOferta"] != DBNull.Value)
-            {
-                obj.ofe_idOferta = Convert.ToInt32(pItem["ofe_idOferta"]);
-            }
-            if (pItem["ofe_titulo"] != DBNull.Value)
-            {
-                obj.ofe_titulo = Convert.ToString(pItem["ofe_titulo"]);
-            }
-            if (pItem["ofe_descuento"] != DBNull.Value)
-            {
-                obj.ofe_descuento = Convert.ToString(pItem["ofe_descuento"]);
-            }
-            if (pItem["ofe_tipo"] != DBNull.Value)
-            {
-                obj.ofe_tipo = Convert.ToInt32(pItem["ofe_tipo"]);
-            }
-            if (pItem["ofe_descr"] != DBNull.Value)
-            {
-                obj.ofe_descr = Convert.ToString(pItem["ofe_descr"]);
-            }
-            if (pItem["ofe_publicar"] != DBNull.Value)
-            {
-                obj.ofe_publicar = Convert.ToBoolean(pItem["ofe_publicar"]);
-            }
-            if (pItem["ofe_activo"] != DBNull.Value)
-            {
-                obj.ofe_activo = Convert.ToBoolean(pItem["ofe_activo"]);
-            }
-            if (pItem["ofe_fecha"] != DBNull.Value)
-            {
-                obj.ofe_fecha = Convert.ToDateTime(pItem["ofe_fecha"]);
-                obj.ofe_fechaToString = obj.ofe_fecha.ToString();
-            }
-            if (pItem["ofe_etiqueta"] != DBNull.Value)
-            {
-                obj.ofe_etiqueta = Convert.ToString(pItem["ofe_etiqueta"]);
-            }
-            if (pItem["ofe_etiquetaColor"] != DBNull.Value)
-            {
-                obj.ofe_etiquetaColor = Convert.ToString(pItem["ofe_etiquetaColor"]);
-            }
-            if (pItem.Table.Columns.Contains("countOfertaDetalles") && pItem["countOfertaDetalles"] != DBNull.Value)
-                obj.countOfertaDetalles = Convert.ToInt32(pItem["countOfertaDetalles"]);
-            if (pItem.Table.Columns.Contains("Rating") && pItem["Rating"] != DBNull.Value)
-                obj.Rating = Convert.ToInt32(pItem["Rating"]);
-            if (pItem.Table.Columns.Contains("ofe_nombreTransfer") && pItem["ofe_nombreTransfer"] != DBNull.Value)
-                obj.ofe_nombreTransfer = Convert.ToString(pItem["ofe_nombreTransfer"]);
-            if (pItem.Table.Columns.Contains("tfr_codigo") && pItem["tfr_codigo"] != DBNull.Value)
-                obj.tfr_codigo = Convert.ToInt32(pItem["tfr_codigo"]);
-            if (pItem.Table.Columns.Contains("nameImagen") && pItem["nameImagen"] != DBNull.Value)
-                obj.nameImagen = Convert.ToString(pItem["nameImagen"]);
-            if (pItem.Table.Columns.Contains("namePdf") && pItem["namePdf"] != DBNull.Value)
-                obj.namePdf = Convert.ToString(pItem["namePdf"]);
-            if (pItem.Table.Columns.Contains("nameImagenAmpliar") && pItem["nameImagenAmpliar"] != DBNull.Value)
-                obj.nameImagenAmpliar = Convert.ToString(pItem["nameImagenAmpliar"]);
-            if (pItem.Table.Columns.Contains("ofe_fechaFinOferta") && pItem["ofe_fechaFinOferta"] != DBNull.Value)
-            {
-                obj.ofe_fechaFinOferta = Convert.ToDateTime(pItem["ofe_fechaFinOferta"]);
-                obj.ofe_fechaFinOfertaToString = obj.ofe_fechaFinOferta.Value.ToString("dd'/'MM'/'yyyy");
-            }
-            if (pItem.Table.Columns.Contains("ofe_nuevosLanzamiento") && pItem["ofe_nuevosLanzamiento"] != DBNull.Value)
-                obj.ofe_nuevosLanzamiento = Convert.ToBoolean(pItem["ofe_nuevosLanzamiento"]);
-
-            if (pItem.Table.Columns.Contains("ofe_descrHtml") && pItem["ofe_descrHtml"] != DBNull.Value)
-                obj.ofe_descrHtml = Convert.ToString(pItem["ofe_descrHtml"]);
-
-            return obj;
-        }
         public static List<cOfertaHome> RecuperarTodasOfertaHome()
         {
             List<cOfertaHome> resultado = null;
@@ -3752,7 +3613,7 @@ namespace Kellerhoff
                 resultado = new List<cOfertaHome>();
                 foreach (DataRow fila in tabla.Rows)
                 {
-                    resultado.Add(ConvertTocOfertaHome(fila));
+                    resultado.Add(DKbase.web.capaDatos.capaHome_base.ConvertTocOfertaHome(fila));
                 }
             }
             return resultado;
@@ -3763,21 +3624,21 @@ namespace Kellerhoff
             resultado = capaHome.InsertarActualizarOfertaHome(ofh_idOfertaHome, ofh_orden, ofh_idOferta);
             return resultado;
         }
-        public static List<cOfertaHome> RecuperarTodasOfertaParaHome()
-        {
-            List<cOfertaHome> resultado = null;
-            DataTable tabla = capaHome.RecuperarTodasOfertaParaHome();
-            if (tabla != null)
-            {
-                resultado = new List<cOfertaHome>();
-                foreach (DataRow fila in tabla.Rows)
-                {
-                    cOfertaHome o = ConvertTocOfertaHome(fila);
-                    resultado.Add(ConvertAddOferta(fila, o));
-                }
-            }
-            return resultado;
-        }
+        //public static List<cOfertaHome> RecuperarTodasOfertaParaHome()
+        //{
+        //    List<cOfertaHome> resultado = null;
+        //    DataTable tabla = capaHome_base.RecuperarTodasOfertaParaHome();
+        //    if (tabla != null)
+        //    {
+        //        resultado = new List<cOfertaHome>();
+        //        foreach (DataRow fila in tabla.Rows)
+        //        {
+        //            cOfertaHome o = DKbase.web.capaDatos.capaHome_base.ConvertTocOfertaHome(fila);
+        //            resultado.Add(DKbase.web.capaDatos.capaHome_base.ConvertAddOferta(fila, o));
+        //        }
+        //    }
+        //    return resultado;
+        //}
         public static bool? EliminarOfertaHome(int pIdOfertaHome)
         {
             bool? resultado = null;
@@ -3785,110 +3646,14 @@ namespace Kellerhoff
                 resultado = capaHome.EliminarOfertaHome(pIdOfertaHome);
             return resultado;
         }
-        private static cHomeSlide ConvertToHomeSlide(DataRow pItem)
-        {
-            cHomeSlide obj = new cHomeSlide();
+    
 
-            if (pItem["hsl_idHomeSlide"] != DBNull.Value)
-            {
-                obj.hsl_idHomeSlide = Convert.ToInt32(pItem["hsl_idHomeSlide"]);
-            }
-            if (pItem["hsl_titulo"] != DBNull.Value)
-            {
-                obj.hsl_titulo = Convert.ToString(pItem["hsl_titulo"]);
-            }
-            if (pItem["hsl_descr"] != DBNull.Value)
-            {
-                obj.hsl_descr = Convert.ToString(pItem["hsl_descr"]);
-            }
-            if (pItem["hsl_descrReducido"] != DBNull.Value)
-            {
-                obj.hsl_descrReducido = Convert.ToString(pItem["hsl_descrReducido"]);
-            }
-            if (pItem["hsl_descrHtml"] != DBNull.Value)
-            {
-                obj.hsl_descrHtml = Convert.ToString(pItem["hsl_descrHtml"]);
-            }
-            if (pItem["hsl_descrHtmlReducido"] != DBNull.Value)
-            {
-                obj.hsl_descrHtmlReducido = Convert.ToString(pItem["hsl_descrHtmlReducido"]);
-            }
-            if (pItem["hsl_tipo"] != DBNull.Value)
-            {
-                obj.hsl_tipo = Convert.ToInt32(pItem["hsl_tipo"]);
-            }
-            obj.tipoRecurso = "slider";
-            if (pItem["hsl_idRecursoDoc"] != DBNull.Value)
-            {
-                obj.hsl_idRecursoDoc = Convert.ToInt32(pItem["hsl_idRecursoDoc"]);
-            }
-            if (pItem["hsl_NombreRecursoDoc"] != DBNull.Value)
-            {
-                obj.hsl_NombreRecursoDoc = Convert.ToString(pItem["hsl_NombreRecursoDoc"]);
-            }
-            if (pItem["hsl_idRecursoImgPC"] != DBNull.Value)
-            {
-                obj.hsl_idRecursoImgPC = Convert.ToInt32(pItem["hsl_idRecursoImgPC"]);
-            }
-            if (pItem["arc_nombrePC"] != DBNull.Value)
-            {
-                obj.arc_nombrePC = Convert.ToString(pItem["arc_nombrePC"]);
-            }
-            if (pItem["hsl_idRecursoImgMobil"] != DBNull.Value)
-            {
-                obj.hsl_idRecursoImgMobil = Convert.ToInt32(pItem["hsl_idRecursoImgMobil"]);
-            }
-            if (pItem["arc_nombreMobil"] != DBNull.Value)
-            {
-                obj.arc_nombreMobil = Convert.ToString(pItem["arc_nombreMobil"]);
-            }
-            if (pItem["hsl_idOferta"] != DBNull.Value)
-            {
-                obj.hsl_idOferta = Convert.ToInt32(pItem["hsl_idOferta"]);
-            }
-            if (pItem["hsl_etiqueta"] != DBNull.Value)
-            {
-                obj.hsl_etiqueta = Convert.ToString(pItem["hsl_etiqueta"]);
-            }
-            if (pItem["hsl_publicar"] != DBNull.Value)
-            {
-                obj.hsl_publicar = Convert.ToBoolean(pItem["hsl_publicar"]);
-            }
-            if (pItem["hsl_activo"] != DBNull.Value)
-            {
-                obj.hsl_activo = Convert.ToBoolean(pItem["hsl_activo"]);
-            }
-            if (pItem["hsl_fecha"] != DBNull.Value)
-            {
-                obj.hsl_fecha = Convert.ToDateTime(pItem["hsl_fecha"]);
-                obj.hsl_fechaToString = obj.hsl_fecha.ToString();
-            }
-            if (pItem.Table.Columns.Contains("hsl_orden") && pItem["hsl_orden"] != DBNull.Value)
-            {
-                obj.hsl_orden = Convert.ToInt32(pItem["hsl_orden"]);
-            }
-            return obj;
-        }
-        public static List<cHomeSlide> RecuperarTodasHomeSlidePublicar()
-        {
-            List<cHomeSlide> resultado = null;
-            DataTable tabla = capaHome.RecuperarTodasHomeSlidePublicar();
-            if (tabla != null)
-            {
-                resultado = new List<cHomeSlide>();
-                foreach (DataRow fila in tabla.Rows)
-                {
-                    resultado.Add(ConvertToHomeSlide(fila));
-                }
-            }
-            return resultado;
-        }
         public static cHomeSlide RecuperarHomeSlidePorId(int pIdHomeSlide)
         {
             cHomeSlide resultado = null;
             DataTable tabla = capaHome.RecuperarHomeSlidePorId(pIdHomeSlide);
             if (tabla != null && tabla.Rows.Count > 0)
-                resultado = ConvertToHomeSlide(tabla.Rows[0]);
+                resultado = DKbase.web.capaDatos.capaHome_base.ConvertToHomeSlide(tabla.Rows[0]);
             return resultado;
         }
         public static bool? CambiarOrdenHomeSlide(int hsl_idHomeSlide, bool isSubir)
@@ -4126,7 +3891,7 @@ namespace Kellerhoff
         public static List<cCatalogo> getCatalogosParaDescarga()
         {
             List<cCatalogo> listaSession = null;
-            List<cCatalogo> lista = RecuperarTodosCatalogos().Where(x => x.tbc_estado == Constantes.cESTADO_ACTIVO).OrderByDescending(x => x.tbc_orden).ToList();
+            List<cCatalogo> lista = DKbase.Util.RecuperarTodosCatalogos().Where(x => x.tbc_estado == Constantes.cESTADO_ACTIVO).OrderByDescending(x => x.tbc_orden).ToList();
             if (lista != null)
             {
                 listaSession = new List<cCatalogo>();

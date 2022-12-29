@@ -40,7 +40,7 @@ namespace Kellerhoff.admin.pages
                 return;
             else
             {
-                List<cCatalogo> l = WebService.RecuperarTodosCatalogos().Where(x => x.tbc_titulo == txtTitulo.Text.ToUpper()).ToList();
+                List<cCatalogo> l = DKbase.Util.RecuperarTodosCatalogos().Where(x => x.tbc_titulo == txtTitulo.Text.ToUpper()).ToList();
                 int codigoCatalogoTemp = 0;
                 if (Session["GestionCatalogo_Tbc_codigo"] != null)
                     codigoCatalogoTemp = Convert.ToInt32(Session["GestionCatalogo_Tbc_codigo"]);
@@ -63,7 +63,7 @@ namespace Kellerhoff.admin.pages
                 }
                 else
                 {
-                    List<cCatalogo> listaCatalogo = WebService.RecuperarTodosCatalogos();
+                    List<cCatalogo> listaCatalogo = DKbase.Util.RecuperarTodosCatalogos();
                     cCatalogo catalogo = null;
                     catalogo = listaCatalogo.Where(x => x.tbc_codigo == codigoCatalogo).First();
                     if (catalogo != null)
@@ -115,7 +115,7 @@ namespace Kellerhoff.admin.pages
         public override void Modificar(int pId)
         {
             Session["GestionCatalogo_Tbc_codigo"] = pId;
-            List<cCatalogo> listaCatalogo = WebService.RecuperarTodosCatalogos();
+            List<cCatalogo> listaCatalogo = DKbase.Util.RecuperarTodosCatalogos();
             cCatalogo catalogo = null;
             catalogo = listaCatalogo.Where(x => x.tbc_codigo == pId).First();
             if (catalogo != null)
@@ -159,7 +159,7 @@ namespace Kellerhoff.admin.pages
         public override void CambiarEstado(int pId)
         {
             Session["GestionCatalogo_Tbc_codigo"] = pId;
-            List<cCatalogo> listaCatalogo = WebService.RecuperarTodosCatalogos();
+            List<cCatalogo> listaCatalogo = DKbase.Util.RecuperarTodosCatalogos();
             cCatalogo catalogo = null;
             catalogo = listaCatalogo.Where(x => x.tbc_codigo == pId).First();
             if (catalogo != null)
@@ -201,8 +201,8 @@ namespace Kellerhoff.admin.pages
             if (Session["BaseAdmin_Usuario"] != null)
             {
                 bool tbc_publicarHome = true;
-                cCatalogo o = WebService.RecuperarTodosCatalogos().Where(x => x.tbc_codigo == pId).FirstOrDefault();
-                cCatalogo oPublicarHome = WebService.RecuperarTodosCatalogos().Where(x => (x.tbc_publicarHome != null && x.tbc_publicarHome.Value)).FirstOrDefault();
+                cCatalogo o = DKbase.Util.RecuperarTodosCatalogos().Where(x => x.tbc_codigo == pId).FirstOrDefault();
+                cCatalogo oPublicarHome = DKbase.Util.RecuperarTodosCatalogos().Where(x => (x.tbc_publicarHome != null && x.tbc_publicarHome.Value)).FirstOrDefault();
                 if (o != null && o.tbc_publicarHome != null)
                     tbc_publicarHome = !o.tbc_publicarHome.Value;
                 if (oPublicarHome != null && oPublicarHome.tbc_codigo != pId)

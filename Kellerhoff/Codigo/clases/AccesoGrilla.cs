@@ -842,7 +842,7 @@ namespace Kellerhoff.Codigo.clases
             {
                 filtro = pFiltro;
             }
-            var query = string.IsNullOrEmpty(pFiltro) ? WebService.RecuperarTodosCatalogos() : WebService.RecuperarTodosCatalogos().Where(x => x.tbc_titulo.ToUpper().Contains(pFiltro.ToUpper().Trim()) || x.tbc_estadoToString.ToUpper().Contains(pFiltro.ToUpper().Trim())).ToList();
+            var query = string.IsNullOrEmpty(pFiltro) ? DKbase.Util.RecuperarTodosCatalogos() : DKbase.Util.RecuperarTodosCatalogos().Where(x => x.tbc_titulo.ToUpper().Contains(pFiltro.ToUpper().Trim()) || x.tbc_estadoToString.ToUpper().Contains(pFiltro.ToUpper().Trim())).ToList();
             if (order.isOrderBy)
             {
                 if (order.OrderByAsc)

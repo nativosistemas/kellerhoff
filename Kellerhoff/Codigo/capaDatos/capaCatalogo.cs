@@ -8,20 +8,7 @@ using System.Web;
 namespace Kellerhoff.Codigo.capaDatos
 {
 
-    public class cCatalogo
-    {
-        public int tbc_codigo { get; set; }
-        public string tbc_titulo { get; set; }
-        public string tbc_descripcion { get; set; }
-        public int tbc_orden { get; set; }
-        public DateTime? tbc_fecha { get; set; }
-        public string tbc_fechaToString { get; set; }
-        public int tbc_estado { get; set; }
-        public bool? tbc_publicarHome { get; set; }
-        public string tbc_publicarHomeToString { get; set; }
-        public string tbc_estadoToString { get; set; }
-        public int arc_rating { get; set; }
-    }
+  
     /// <summary>
     /// Summary description for capaCatalogo
     /// </summary>
@@ -34,33 +21,33 @@ namespace Kellerhoff.Codigo.capaDatos
         //    // TODO: Add constructor logic here
         //    //
         //}
-        public static DataTable RecuperarTodosCatalogos()
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Catalogo.spRecuperarTodosCatalogos", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //public static DataTable RecuperarTodosCatalogos()
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Catalogo.spRecuperarTodosCatalogos", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
 
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                return dt;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        return dt;
 
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
         public static int InsertarActualizarCatalogo(int tbc_codigo, string tbc_titulo, string tbc_descripcion, int? tbc_orden, DateTime? tbc_fecha, int tbc_estado)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
