@@ -131,12 +131,31 @@ namespace Kellerhoff.Filters
             }
             else
             {
+
                 string url = "";
                 if (area == null)
                     url = "/mvc/Index";
                 else
                     url = "/" + area.ToString() + "/mvc/Index";
-                filterContext.Result = new RedirectResult(url);
+
+                if (filterContext.HttpContext.Request.RawUrl == @"/config/perfil")
+                {
+                    int paramsID = 0;
+                    if (System.Web.HttpContext.Current.Session["action_id"] != null)
+                    {
+                        paramsID = Convert.ToInt32(System.Web.HttpContext.Current.Session["action_id"]);
+                    }
+                    url = "/config/loginbot?id=" + paramsID;
+                    filterContext.Result = new RedirectResult(url);
+                }
+                else if (filterContext.HttpContext.Request.RawUrl == @"/config/loginbot")
+                {
+                    // url = "/config/loginbot";
+                }
+                else
+                {
+                    filterContext.Result = new RedirectResult(url);
+                }
             }
         }
         public class ErrorActionResult : ActionResult

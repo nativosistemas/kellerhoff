@@ -1,0 +1,112 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+    <script src="~/includes/mvc/js/libreria.js?n=22" type="text/javascript"></script>
+    <script type="text/javascript">
+        var isIngresarPageMethods = false;
+        function onclickIngresar() {
+            if (!isIngresarPageMethods) {
+                isIngresarPageMethods = true;
+                name = document.getElementById('txtBot_name').value;// $('#txtBot_name').val();
+                pass = document.getElementById('txtBot_pass').value;// $('#txtBot_pass').val();
+
+                ajaxLogin(name, pass);
+            }
+            return false;
+        }
+        function ajaxLogin(name, pass) {
+            if (isNotNullEmpty(name) && isNotNullEmpty(pass)) {
+                //.then((response) => {
+                //    return response.json()
+                //})
+
+                var url = "/config/login?";
+                fetch(url + new URLSearchParams({
+                    pName: name,
+                    pPass: pass
+                })).then(function (body) {
+                    return body.text(); // <--- THIS PART WAS MISSING
+                }).then((pResult) => {
+                        OnCallBackLogin(pResult);
+                    })
+                    .catch(error => {
+                        isIngresarPageMethods = false;
+                      //  OnFail(error);
+                    });
+
+                //$.ajax({
+                //    type: "POST",
+                //    url: "../config/login",
+                //    data: { pName: name, pPass: pass },
+                //    success:
+                //        function (response) {
+                //            OnCallBackLogin(response);
+                //        },
+                //    failure: function (response) {
+                //        OnFail(response);
+                //    },
+                //    error: function (response) {
+                //        OnFail(response);
+                //    }
+                //});
+            }
+        }
+        function OnCallBackLogin(args) {
+            isIngresarPageMethods = false;
+            //console.log(args);
+            if (args == 'Ok') {
+                //localStorage['name'] = name;
+                //localStorage['pass'] = pass;
+                //  funIrIntranet();
+                var hidden_action_id = document.getElementById('hidden_action_id').value ;
+                if (typeof hidden_action_id == 'undefined') {
+                    hidden_action_id = 0;
+                }
+                location.href = '../config/action?id=' + hidden_action_id;
+            }
+            else if (args == 'OkPromotor') {
+                //localStorage['name'] = name;
+                //localStorage['pass'] = pass;
+                //funIrIntranetPromotor();
+            }
+            else {
+                alert(args);
+                //$.alert({
+                //    title: 'Información',
+                //    content: args,
+                //});
+            }
+        }
+    </script>
+}
+@{
+    string resultado = string.Empty;
+
+    if (System.Web.HttpContext.Current.Session["action_id"] != null)
+    {
+        resultado += "<input type=\"hidden\" id=\"hidden_action_id\" value=\"" + Server.HtmlEncode(Session["action_id"].ToString()) + "\" />";
+    }
+    WriteLiteral(resultado);
+}
+<br />
+<div class="container">
+
+    <div class="form-outline mb-4">
+        <label class="form-label" for="txtBot_name">Usuario</label>
+        <input type="text" id="txtBot_name" class="form-control" />
+
+    </div>
+
+    <div class="form-outline mb-4">
+        <label class="form-label" for="txtBot_pass">Contraseña</label>
+        <input type="password" id="txtBot_pass" class="form-control" />
+
+    </div>
+
+
+    <!-- Submit button -->
+    <button type="button" class="btn btn-primary btn-block mb-4" onclick="onclickIngresar()">Login</button>
+</div>

@@ -1861,6 +1861,8 @@
     <Content Include="Views\ctacte\ConsultaDeComprobantesObraSocialResultadoRango.cshtml" />
     <Content Include="Views\ctacte\deudaVencida.cshtml" />
     <Content Include="Views\mvc\_scripts_subirArchivo.cshtml" />
+    <Content Include="Views\config\action.cshtml" />
+    <Content Include="Views\config\loginbot.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

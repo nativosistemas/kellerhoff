@@ -16,12 +16,24 @@ namespace Kellerhoff.Controllers
 {
     public class configController : Controller
     {
+        public ActionResult loginbot(int id)
+        {
+            //switch (id)
+            //{
+            //    case 1:
+            //        return RedirectToAction("perfil");
+            //    default:
+            //        break;
+            //}
+            return View();
+        }
         public ActionResult action(int id)
         {
+
+            System.Web.HttpContext.Current.Session["action_id"] = id;
             switch (id) {
                 case 1:
                     return RedirectToAction("perfil");
-                    //break;
                 default:
                     break;
             }
