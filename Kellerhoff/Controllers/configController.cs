@@ -16,26 +16,41 @@ namespace Kellerhoff.Controllers
 {
     public class configController : Controller
     {
-        public ActionResult loginbot(int id)
+        public ActionResult loginbot()
         {
-            //switch (id)
-            //{
-            //    case 1:
-            //        return RedirectToAction("perfil");
-            //    default:
-            //        break;
-            //}
             return View();
         }
         public ActionResult action(int id)
         {
 
+            
             System.Web.HttpContext.Current.Session["action_id"] = id;
-            switch (id) {
-                case 1:
-                    return RedirectToAction("perfil");
-                default:
-                    break;
+            if (Session["clientesDefault_Cliente"] == null)
+            {
+                return RedirectToAction("loginbot");//?id=" + id
+            }
+            else
+            {
+
+                switch (id)
+                {
+                    case 1:
+                        return RedirectToAction("descargaResumenes", "ctacte");//Descargas de Resumen	https://www.kellerhoff.com.ar/ctacte/descargaResumenes
+                    case 2:
+                        return RedirectToAction("mediosdepago1", "config");//Formas De Pago	https://www.kellerhoff.com.ar/config/mediosdepago1
+                    case 3:
+                        return RedirectToAction("ConsultaDeComprobantes", "ctacte");//Consulta de Comprobantes	https://www.kellerhoff.com.ar/ctacte/ConsultaDeComprobantes
+                    case 4:
+                        return RedirectToAction("ConsultaDeComprobantesObraSocial", "ctacte");//Consulta NC Obras Sociales	https://www.kellerhoff.com.ar/ctacte/ConsultaDeComprobantesObraSocial
+                    case 5:
+                        return RedirectToAction("composicionsaldo", "ctacte");//Envíos Remesas de Pago
+                    case 6:
+                        return RedirectToAction("NuevaDevolucion", "devoluciones");// Devolución por Reclamo https://www.kellerhoff.com.ar/devoluciones/NuevaDevolucion
+                    case 7:
+                        return RedirectToAction("DevolucionesFacturadoNoEnviado", "devoluciones");//Facturado No Enviado	https://www.kellerhoff.com.ar/devoluciones/DevolucionesFacturadoNoEnviado
+                    default:
+                        break;
+                }
             }
             return View();
         }

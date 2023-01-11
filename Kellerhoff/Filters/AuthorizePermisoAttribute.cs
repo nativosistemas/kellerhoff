@@ -138,7 +138,7 @@ namespace Kellerhoff.Filters
                 else
                     url = "/" + area.ToString() + "/mvc/Index";
 
-                if (filterContext.HttpContext.Request.RawUrl == @"/config/perfil")
+               /* if (filterContext.HttpContext.Request.RawUrl == @"/config/perfil")
                 {
                     int paramsID = 0;
                     if (System.Web.HttpContext.Current.Session["action_id"] != null)
@@ -148,7 +148,8 @@ namespace Kellerhoff.Filters
                     url = "/config/loginbot?id=" + paramsID;
                     filterContext.Result = new RedirectResult(url);
                 }
-                else if (filterContext.HttpContext.Request.RawUrl == @"/config/loginbot")
+                else */
+                if (filterContext.HttpContext.Request.RawUrl == @"/config/loginbot")
                 {
                     // url = "/config/loginbot";
                 }

@@ -230,13 +230,13 @@
                         <h1>DK INSTITUCIONALES</h1>
                     </div>
                     <div class="clear10"></div>
-                    <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80</a></div>
+                    <div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:0341-3631749">0341 3631749 / 0341 37632705</a></div>
+                    <div class="clear10"></div>
+                    <div><i class="fa fa-envelope fa_contacto_ftr"></i>dkinstitucional@kellerhoff.com.ar</div>
                     <div class="hospitalario">
                         <h1>ALTO COSTO</h1>
                     </div>
                     <div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:0341-6100365">0341 6100365</a></div>
-                    <div class="clear10"></div>
-                    <div><i class="fa fa-envelope fa_contacto_ftr"></i>dkinstitucional@kellerhoff.com.ar</div>
                 </div>
                 <div class="clear55 visible-sm visible-md"></div>
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 ftr_contacto">
@@ -336,15 +336,16 @@
                             <h1>DK INSTITUCIONALES</h1>
                         </div>
                         <div class="clear10"></div>
-                        <div><i class="fa fa-phone fa_contacto_ftr"></i><a href="tel:0341-4239234">0341 4239234/80 (administración)</a></div>
+                        <div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:0341-3631749">0341 3631749 / 0341 37632705</a></div>
+                        <div class="clear10"></div>
+                        <div><i class="fa fa-envelope fa_contacto_ftr"></i>dkinstitucional@kellerhoff.com.ar</div>
                         <div class="clear55"></div>
                         <div class="hospitalario">
                             <h1>ALTO COSTO</h1>
                         </div>
                         <div class="clear10"></div>
                         <div><i class="fa fa-whatsapp fa_contacto_ftr"></i><a href="tel:0341-6100365">0341 6100365</a></div>
-                        <div class="clear10"></div>
-                        <div><i class="fa fa-envelope fa_contacto_ftr"></i>dkinstitucional@kellerhoff.com.ar</div>
+
                     </div>
                 </div>
             </div>
