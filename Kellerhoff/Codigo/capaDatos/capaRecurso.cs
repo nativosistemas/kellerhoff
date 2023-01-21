@@ -17,16 +17,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             return DKbase.web.capaDatos.capaRecurso_base.GestiónArchivo(arc_codRecurso, arc_codRelacion, arc_galeria, arc_tipo, arc_mime, arc_nombre, arc_titulo, arc_descripcion, arc_hash, arc_codUsuarioUltMov, arc_estado, arc_accion, filtro, accion);
         }
-        public static string obtenerExtencion(string pNombreArchivo)
-        {
-            string resultado = string.Empty;
-            if (!string.IsNullOrEmpty(pNombreArchivo))
-            {
-                string[] listaNombre = pNombreArchivo.Split('.');
-                resultado = listaNombre[listaNombre.Length - 1].Trim().ToLower();
-            }
-            return resultado;
-        }
+    
         public static string obtenerMIME(string pExtencion)
         {
             string resultado = string.Empty;
@@ -76,66 +67,7 @@ namespace Kellerhoff.Codigo.capaDatos
             }
             return resultado;
         }
-        public static string nombreArchivoSinRepetir(string pPath, string pNombreArchivo)
-        {
-            string resultado = string.Empty;
-            string[] listaNombre = pNombreArchivo.Split('.');
-            string NombreArchivo = string.Empty;
-            string ExtencionArchivo = string.Empty;
-            for (int i = 0; i < listaNombre.Length - 1; i++)
-            {
-                NombreArchivo += listaNombre[i];
-            }
-            NombreArchivo = remplazarCaracteresEspeciales(NombreArchivo);
-            ExtencionArchivo = listaNombre[listaNombre.Length - 1];
-            int contNombre = -1;
-            string NombreTemporal = NombreArchivo + "." + ExtencionArchivo;
-            while (System.IO.File.Exists(pPath + "\\" + NombreTemporal))
-            {
-                contNombre++;
-                NombreTemporal = NombreArchivo + "_" + contNombre.ToString() + "." + ExtencionArchivo;
-            }
-            if (contNombre == -1)
-            {
-                resultado = NombreArchivo + "." + ExtencionArchivo;
-            }
-            else
-            {
-                resultado = NombreTemporal;
-            }
-            return resultado;
-        }
-        public static string remplazarCaracteresEspeciales(string pStr)
-        {
-            //pStr = Encoding.UTF8.GetString(pStr.GetEnumerator());
-            const string pStrOriginal = "áéíóúàèìòùâêîôûäëïöüãõñÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÑçÇ";
-            const string pStrARemplazar = "aeiouaeiouaeiouaeiouaonaeiouaeiouaeiouaeiouncc";
-            if (pStr != null)
-            {
-                string resultado = string.Empty;
-                for (int i = 0; i < pStrOriginal.Length; i++)
-                {
-                    pStr.Replace(pStrOriginal[i], pStrARemplazar[i]);
-                }
+      
 
-                for (int i = 0; i < pStr.Length; i++)
-                {
-                    char[] CharEspeciales = new char[] { '\r', '\n', '\t' }; ;
-                    if (pStr[i] == CharEspeciales[0] || pStr[i] == CharEspeciales[1] || pStr[i] == CharEspeciales[2])
-                    {
-                    }
-                    else
-                    {
-                        resultado += pStr[i];
-                    }
-
-                }
-                return resultado;
-            }
-            else
-            {
-                return null;
-            }
-        }
     }
 }

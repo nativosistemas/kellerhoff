@@ -24,13 +24,13 @@ namespace Kellerhoff.admin.pages
         [WebMethod(EnableSession = true)]
         public static string RecuperarCurriculumVitae(string pValor)
         {
-            List<cCurriculumVitae> resultado = Kellerhoff.Codigo.clases.AccesoGrilla.GetCurriculumVitae("", pValor);
+            List<DKbase.web.capaDatos.cCurriculumVitae> resultado = Kellerhoff.Codigo.clases.AccesoGrilla.GetCurriculumVitae("", pValor);
             return resultado == null ? string.Empty : Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(resultado);
         }
         [WebMethod(EnableSession = true)]
         public static string RecuperarCurriculumVitae(string pValor, string pPuesto, string pSucursal)
         {
-            List<cCurriculumVitae> resultado = Kellerhoff.Codigo.clases.AccesoGrilla.GetCurriculumVitae("", string.IsNullOrEmpty(pValor) ? "" : pValor.Trim());
+            List<DKbase.web.capaDatos.cCurriculumVitae> resultado = Kellerhoff.Codigo.clases.AccesoGrilla.GetCurriculumVitae("", string.IsNullOrEmpty(pValor) ? "" : pValor.Trim());
             if (!string.IsNullOrEmpty(pPuesto))
                 resultado = resultado.Where(x => x.tcv_puesto == pPuesto).ToList();
             if (!string.IsNullOrEmpty(pSucursal))

@@ -46,7 +46,6 @@
                     <h2 class="color_emp_nd">RRHH</h2>
                     <div class="clear25"></div>
                     <p>Para enviar su curriculum vitae, complete el formulario.</p>
-                    <%--  	<form id="FormCv">--%>
                     <input name="nombre_cv" id="nombre_cv" class="form-control" type="text" placeholder="Nombre y Apellido (*)" value="" required="required" />
                     <div class="clear20"></div>
                     <input name="dni_cv" id="dni_cv" class="form-control" type="text" placeholder="DNI (*)" value="" required="required" />
@@ -75,8 +74,6 @@
                         <option value="VILLA MARÍA">VILLA MARÍA</option>
                         <option value="RÍO CUARTO">RÍO CUARTO</option>
                     </select>
-        <%--            <div class="clear20"></div>
-                    <input name="date_cv" id="date_cv" type="date"  class="form-control" required="required"  >--%>
                     <div class="clear20"></div>
                     <textarea name="cuerpo_cv" id="cuerpo_cv" class="form-control" placeholder="Comentario (*)" required="required"></textarea>
                     <div class="clear20"></div>
@@ -92,7 +89,6 @@
                         <div class="clear20 hidden-xs"></div>
                         <button class="btn_emp float-right" type="submit">ENVIAR</button>
                     </div>
-                    <%--   </form>--%>
                 </div>
             </div>
 

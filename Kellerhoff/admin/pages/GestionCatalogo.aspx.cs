@@ -77,14 +77,14 @@ namespace Kellerhoff.admin.pages
                     {
                         if (FileUpload1.PostedFile.ContentType == Constantes.cMIME_pdf)
                         {
-                            string extencion = capaRecurso.obtenerExtencion(FileUpload1.FileName);
+                            string extencion = capaRecurso_base.obtenerExtencion(FileUpload1.FileName);
                             string pathDestinoRaiz = Constantes.cRaizArchivos + @"\archivos\";
                             string pathDestino = pathDestinoRaiz + Constantes.cTABLA_CATALOGO;
                             if (Directory.Exists(pathDestino) == false)
                             {
                                 Directory.CreateDirectory(pathDestino);
                             }
-                            string filename = capaRecurso.nombreArchivoSinRepetir(pathDestino, FileUpload1.FileName);
+                            string filename = capaRecurso_base.nombreArchivoSinRepetir(pathDestino, FileUpload1.FileName);
                             string nombreArchivo = filename;
                             string destino = pathDestino + @"\" + nombreArchivo; 
                             FileUpload1.SaveAs(destino);
@@ -97,7 +97,7 @@ namespace Kellerhoff.admin.pages
                                     codRecurso = listaArchivo[0].arc_codRecurso;
                                 }
                             }
-                            WebService.InsertarActualizarArchivo(codRecurso, codigoCatalogo, Constantes.cTABLA_CATALOGO, extencion, FileUpload1.PostedFile.ContentType, nombreArchivo, string.Empty, string.Empty, string.Empty, codigoUsuarioEnSession);
+                            DKbase.Util.InsertarActualizarArchivo(codRecurso, codigoCatalogo, Constantes.cTABLA_CATALOGO, extencion, FileUpload1.PostedFile.ContentType, nombreArchivo, string.Empty, string.Empty, string.Empty, codigoUsuarioEnSession);
                         }
                     }
                 }

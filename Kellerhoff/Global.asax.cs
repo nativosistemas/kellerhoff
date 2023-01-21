@@ -30,6 +30,10 @@ namespace Kellerhoff
             DKbase.Helper.getUrl_DKcore = System.Configuration.ConfigurationManager.AppSettings["url_DKcore"].ToString();
             DKbase.Helper.getUrl_DKdll = System.Configuration.ConfigurationManager.AppSettings["url_DKdll"].ToString();
             DKbase.Helper.getConnectionStringSQL_intranet = ConfigurationManager.ConnectionStrings["db_conexion_intranet"].ConnectionString;
+            DKbase.Helper.getMail_cv = System.Configuration.ConfigurationManager.AppSettings["mail_cv"].ToString();
+            DKbase.Helper.getMailContacto = System.Configuration.ConfigurationManager.AppSettings["mailContacto"].ToString();
+            DKbase.Helper.getMailRegistracion = System.Configuration.ConfigurationManager.AppSettings["mailRegistracion"].ToString();
+            DKbase.Helper.getMailRegistracionNoCliente = System.Configuration.ConfigurationManager.AppSettings["mailRegistracionNoCliente"].ToString();
         }
         //protected void Application_Error(object sender, EventArgs e)
         //{

@@ -11,7 +11,7 @@ using Kellerhoff.Codigo;
 using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
 using Kellerhoff.Codigo.clases.Generales;
-using static Kellerhoff.Codigo.capaDatos.cCurriculumVitae;
+//using static Kellerhoff.Codigo.capaDatos.cCurriculumVitae;
 
 namespace Kellerhoff
 {
@@ -58,36 +58,36 @@ namespace Kellerhoff
             }
         }
         //// Archivo
-        public static int InsertarActualizarArchivo(int arc_codRecurso, int arc_codRelacion, string arc_galeria, string arc_tipo, string arc_mime, string arc_nombre, string arc_titulo, string arc_descripcion, string arc_hash, int arc_codUsuarioUltMov)
-        {
-            //if (VerificarPermisos(CredencialAutenticacion))
-            //{
-            string accion = arc_codRecurso == 0 ? Constantes.cSQL_INSERT : Constantes.cSQL_UPDATE;
-            int codigoAccion = arc_codRecurso == 0 ? Constantes.cACCION_ALTA : Constantes.cACCION_MODIFICACION;
-            int? codigoEstado = arc_codRecurso == 0 ? Constantes.cESTADO_ACTIVO : (int?)null;
-            DataSet dsResultado = capaRecurso.GestiónArchivo(arc_codRecurso, arc_codRelacion, arc_galeria, arc_tipo, arc_mime, arc_nombre, arc_titulo, arc_descripcion, arc_hash, arc_codUsuarioUltMov, codigoEstado, codigoAccion, null, accion);
-            int resultado = -1;
-            if (arc_codRecurso == 0)
-            {
-                if (dsResultado != null)
-                {
-                    if (dsResultado.Tables["Archivo"].Rows[0]["arc_codRecurso"] != DBNull.Value)
-                    {
-                        resultado = Convert.ToInt32(dsResultado.Tables["Archivo"].Rows[0]["arc_codRecurso"]);
-                    }
-                }
-            }
-            else
-            {
-                resultado = arc_codRecurso;
-            }
-            return resultado;
-            //}
-            //else
-            //{
-            //    return -100;
-            //}
-        }
+        //public static int InsertarActualizarArchivo(int arc_codRecurso, int arc_codRelacion, string arc_galeria, string arc_tipo, string arc_mime, string arc_nombre, string arc_titulo, string arc_descripcion, string arc_hash, int arc_codUsuarioUltMov)
+        //{
+        //    //if (VerificarPermisos(CredencialAutenticacion))
+        //    //{
+        //    string accion = arc_codRecurso == 0 ? Constantes.cSQL_INSERT : Constantes.cSQL_UPDATE;
+        //    int codigoAccion = arc_codRecurso == 0 ? Constantes.cACCION_ALTA : Constantes.cACCION_MODIFICACION;
+        //    int? codigoEstado = arc_codRecurso == 0 ? Constantes.cESTADO_ACTIVO : (int?)null;
+        //    DataSet dsResultado = capaRecurso.GestiónArchivo(arc_codRecurso, arc_codRelacion, arc_galeria, arc_tipo, arc_mime, arc_nombre, arc_titulo, arc_descripcion, arc_hash, arc_codUsuarioUltMov, codigoEstado, codigoAccion, null, accion);
+        //    int resultado = -1;
+        //    if (arc_codRecurso == 0)
+        //    {
+        //        if (dsResultado != null)
+        //        {
+        //            if (dsResultado.Tables["Archivo"].Rows[0]["arc_codRecurso"] != DBNull.Value)
+        //            {
+        //                resultado = Convert.ToInt32(dsResultado.Tables["Archivo"].Rows[0]["arc_codRecurso"]);
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        resultado = arc_codRecurso;
+        //    }
+        //    return resultado;
+        //    //}
+        //    //else
+        //    //{
+        //    //    return -100;
+        //    //}
+        //}
 
         public static List<ServiceReferenceDLL.cLote> ObtenerNumerosLoteDeProductoDeFacturaProveedorLogLotesConCadena(string pNombreProducto, string pNumeroLote, string pLoginWeb)
         {
@@ -2657,131 +2657,131 @@ namespace Kellerhoff
         }
 
         //
-        private static cCurriculumVitae ConvertToCurriculumVitae(DataRow pItem)
-        {
-            cCurriculumVitae obj = new cCurriculumVitae();
+        //private static cCurriculumVitae ConvertToCurriculumVitae(DataRow pItem)
+        //{
+        //    cCurriculumVitae obj = new cCurriculumVitae();
 
-            if (pItem["tcv_codCV"] != DBNull.Value)
-            {
-                obj.tcv_codCV = Convert.ToInt32(pItem["tcv_codCV"]);
-            }
-            if (pItem["tcv_nombre"] != DBNull.Value)
-            {
-                obj.tcv_nombre = Convert.ToString(pItem["tcv_nombre"]);
-            }
-            if (pItem["tcv_comentario"] != DBNull.Value)
-            {
-                obj.tcv_comentario = Convert.ToString(pItem["tcv_comentario"]);
-            }
-            if (pItem["tcv_dni"] != DBNull.Value)
-            {
-                obj.tcv_dni = Convert.ToString(pItem["tcv_dni"]);
-            }
-            if (pItem["tcv_mail"] != DBNull.Value)
-            {
-                obj.tcv_mail = Convert.ToString(pItem["tcv_mail"]);
-            }
-            if (pItem["tcv_fecha"] != DBNull.Value)
-            {
-                obj.tcv_fecha = Convert.ToDateTime(pItem["tcv_fecha"]);
-                obj.tcv_fechaToString = ((DateTime)obj.tcv_fecha).ToString();
-            }
-            if (pItem["tcv_estado"] != DBNull.Value)
-            {
-                obj.tcv_estado = Convert.ToInt32(pItem["tcv_estado"]);
-            }
-            if (pItem["est_nombre"] != DBNull.Value)
-            {
-                obj.tcv_estadoToString = Convert.ToString(pItem["est_nombre"]);
-            }
-            if (pItem["tcv_puesto"] != DBNull.Value)
-            {
-                obj.tcv_puesto = Convert.ToString(pItem["tcv_puesto"]);
-            }
-            if (pItem["tcv_sucursal"] != DBNull.Value)
-            {
-                obj.tcv_sucursal = Convert.ToString(pItem["tcv_sucursal"]);
-            }
-            if (pItem["tcv_fechaPresentacion"] != DBNull.Value)
-            {
-                obj.tcv_fechaPresentacion = Convert.ToDateTime(pItem["tcv_fechaPresentacion"]);
-                obj.tcv_fechaPresentacionToString = ((DateTime)obj.tcv_fechaPresentacion).ToString();
-            }
-            List<cArchivo> listaArchivo = WebService.RecuperarTodosArchivos(obj.tcv_codCV, Constantes.cTABLA_CV, string.Empty);
-            if (listaArchivo != null)
-            {
-                if (listaArchivo.Count > 0)
-                {
-                    obj.arc_nombre = listaArchivo[0].arc_nombre;
-                }
-            }
-            return obj;
-        }
-        public static int InsertarCurriculumVitae(string tcv_nombre, string tcv_comentario, string tcv_mail, string tcv_dni, string tcv_puesto, string tcv_sucursal, DateTime? tcv_fechaPresentacion)
-        {
-            int resultado = 0;
-            string accion = Constantes.cSQL_INSERT;
-            int codigoEstado = Constantes.cESTADO_SINLEER;
-            DataSet dsResultado = capaCV.GestiónCurriculumVitae(null, DateTime.Now, tcv_nombre, tcv_comentario, tcv_mail, tcv_dni, codigoEstado, null, accion, tcv_puesto, tcv_sucursal, tcv_fechaPresentacion);
-            if (dsResultado != null)
-            {
-                if (dsResultado.Tables.Contains("CurriculumVitae"))
-                {
-                    if (dsResultado.Tables["CurriculumVitae"].Rows.Count > 0)
-                    {
-                        if (dsResultado.Tables["CurriculumVitae"].Rows[0]["tcv_codCV"] != DBNull.Value)
-                        {
-                            resultado = Convert.ToInt32(dsResultado.Tables["CurriculumVitae"].Rows[0]["tcv_codCV"]);
-                            cMail.enviarMail(System.Configuration.ConfigurationManager.AppSettings["mail_cv"], "Nuevo Curriculum Vitae", GenerarHtmlCuerpoMail(tcv_nombre, tcv_comentario, tcv_mail));
-                        }
-                    }
-                }
-            }
-            return resultado;
-        }
-        private static string GenerarHtmlCuerpoMail(string tcv_nombre, string tcv_comentario, string tcv_mail)
-        {
-            string resultado = string.Empty;
-            resultado += "<table>";
-            resultado += "<tr>";
-            resultado += "<td>";
-            resultado += "Nombre:";
-            resultado += "</td>";
-            resultado += "<td>";
-            resultado += tcv_nombre;
-            resultado += "</td>";
-            resultado += "</tr>";
-            resultado += "<tr>";
-            resultado += "<td>";
-            resultado += "Mail:";
-            resultado += "</td>";
-            resultado += "<td>";
-            resultado += tcv_mail;
-            resultado += "</td>";
-            resultado += "</tr>";
-            resultado += "<tr>";
-            resultado += "<td>";
-            resultado += "Comentario:";
-            resultado += "</td>";
-            resultado += "<td>";
-            resultado += tcv_comentario;
-            resultado += "</td>";
-            resultado += "</tr>";
-            resultado += "</table>";
-            return resultado;
-        }
+        //    if (pItem["tcv_codCV"] != DBNull.Value)
+        //    {
+        //        obj.tcv_codCV = Convert.ToInt32(pItem["tcv_codCV"]);
+        //    }
+        //    if (pItem["tcv_nombre"] != DBNull.Value)
+        //    {
+        //        obj.tcv_nombre = Convert.ToString(pItem["tcv_nombre"]);
+        //    }
+        //    if (pItem["tcv_comentario"] != DBNull.Value)
+        //    {
+        //        obj.tcv_comentario = Convert.ToString(pItem["tcv_comentario"]);
+        //    }
+        //    if (pItem["tcv_dni"] != DBNull.Value)
+        //    {
+        //        obj.tcv_dni = Convert.ToString(pItem["tcv_dni"]);
+        //    }
+        //    if (pItem["tcv_mail"] != DBNull.Value)
+        //    {
+        //        obj.tcv_mail = Convert.ToString(pItem["tcv_mail"]);
+        //    }
+        //    if (pItem["tcv_fecha"] != DBNull.Value)
+        //    {
+        //        obj.tcv_fecha = Convert.ToDateTime(pItem["tcv_fecha"]);
+        //        obj.tcv_fechaToString = ((DateTime)obj.tcv_fecha).ToString();
+        //    }
+        //    if (pItem["tcv_estado"] != DBNull.Value)
+        //    {
+        //        obj.tcv_estado = Convert.ToInt32(pItem["tcv_estado"]);
+        //    }
+        //    if (pItem["est_nombre"] != DBNull.Value)
+        //    {
+        //        obj.tcv_estadoToString = Convert.ToString(pItem["est_nombre"]);
+        //    }
+        //    if (pItem["tcv_puesto"] != DBNull.Value)
+        //    {
+        //        obj.tcv_puesto = Convert.ToString(pItem["tcv_puesto"]);
+        //    }
+        //    if (pItem["tcv_sucursal"] != DBNull.Value)
+        //    {
+        //        obj.tcv_sucursal = Convert.ToString(pItem["tcv_sucursal"]);
+        //    }
+        //    if (pItem["tcv_fechaPresentacion"] != DBNull.Value)
+        //    {
+        //        obj.tcv_fechaPresentacion = Convert.ToDateTime(pItem["tcv_fechaPresentacion"]);
+        //        obj.tcv_fechaPresentacionToString = ((DateTime)obj.tcv_fechaPresentacion).ToString();
+        //    }
+        //    List<cArchivo> listaArchivo = WebService.RecuperarTodosArchivos(obj.tcv_codCV, Constantes.cTABLA_CV, string.Empty);
+        //    if (listaArchivo != null)
+        //    {
+        //        if (listaArchivo.Count > 0)
+        //        {
+        //            obj.arc_nombre = listaArchivo[0].arc_nombre;
+        //        }
+        //    }
+        //    return obj;
+        //}
+        //public static int InsertarCurriculumVitae(string tcv_nombre, string tcv_comentario, string tcv_mail, string tcv_dni, string tcv_puesto, string tcv_sucursal, DateTime? tcv_fechaPresentacion)
+        //{
+        //    int resultado = 0;
+        //    string accion = Constantes.cSQL_INSERT;
+        //    int codigoEstado = Constantes.cESTADO_SINLEER;
+        //    DataSet dsResultado = capaCV_base.GestiónCurriculumVitae(null, DateTime.Now, tcv_nombre, tcv_comentario, tcv_mail, tcv_dni, codigoEstado, null, accion, tcv_puesto, tcv_sucursal, tcv_fechaPresentacion);
+        //    if (dsResultado != null)
+        //    {
+        //        if (dsResultado.Tables.Contains("CurriculumVitae"))
+        //        {
+        //            if (dsResultado.Tables["CurriculumVitae"].Rows.Count > 0)
+        //            {
+        //                if (dsResultado.Tables["CurriculumVitae"].Rows[0]["tcv_codCV"] != DBNull.Value)
+        //                {
+        //                    resultado = Convert.ToInt32(dsResultado.Tables["CurriculumVitae"].Rows[0]["tcv_codCV"]);
+        //                    DKbase.web.generales.cMail_base.enviarMail(System.Configuration.ConfigurationManager.AppSettings["mail_cv"], "Nuevo Curriculum Vitae", GenerarHtmlCuerpoMail(tcv_nombre, tcv_comentario, tcv_mail));
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return resultado;
+        //}
+        //private static string GenerarHtmlCuerpoMail(string tcv_nombre, string tcv_comentario, string tcv_mail)
+        //{
+        //    string resultado = string.Empty;
+        //    resultado += "<table>";
+        //    resultado += "<tr>";
+        //    resultado += "<td>";
+        //    resultado += "Nombre:";
+        //    resultado += "</td>";
+        //    resultado += "<td>";
+        //    resultado += tcv_nombre;
+        //    resultado += "</td>";
+        //    resultado += "</tr>";
+        //    resultado += "<tr>";
+        //    resultado += "<td>";
+        //    resultado += "Mail:";
+        //    resultado += "</td>";
+        //    resultado += "<td>";
+        //    resultado += tcv_mail;
+        //    resultado += "</td>";
+        //    resultado += "</tr>";
+        //    resultado += "<tr>";
+        //    resultado += "<td>";
+        //    resultado += "Comentario:";
+        //    resultado += "</td>";
+        //    resultado += "<td>";
+        //    resultado += tcv_comentario;
+        //    resultado += "</td>";
+        //    resultado += "</tr>";
+        //    resultado += "</table>";
+        //    return resultado;
+        //}
         public static cCurriculumVitae RecuperarCurriculumVitae(int pId)
         {
             cCurriculumVitae resultado = null;
             string accion = Constantes.cSQL_SELECT;
-            DataSet dsResultado = capaCV.GestiónCurriculumVitae(pId, null, null, null, null, null, null, null, accion, null, null, null);
+            DataSet dsResultado = capaCV_base.GestiónCurriculumVitae(pId, null, null, null, null, null, null, null, accion, null, null, null);
             if (dsResultado != null)
             {
                 if (dsResultado.Tables.Contains("CurriculumVitae"))
                 {
                     foreach (DataRow item in dsResultado.Tables["CurriculumVitae"].Rows)
                     {
-                        resultado = ConvertToCurriculumVitae(item);
+                        resultado = DKbase.web.capaDatos.capaCV_base.ConvertToCurriculumVitae(item);
                         break;
                     }
                 }
@@ -2792,7 +2792,7 @@ namespace Kellerhoff
         {
             List<cCurriculumVitae> resultado = null;
             string accion = Constantes.cSQL_SELECT;
-            DataSet dsResultado = capaCV.GestiónCurriculumVitae(null, null, null, null, null, null, null, pFiltro, accion, null, null, null);
+            DataSet dsResultado = capaCV_base.GestiónCurriculumVitae(null, null, null, null, null, null, null, pFiltro, accion, null, null, null);
             if (dsResultado != null)
             {
                 resultado = new List<cCurriculumVitae>();
@@ -2800,7 +2800,7 @@ namespace Kellerhoff
                 {
                     foreach (DataRow item in dsResultado.Tables["CurriculumVitae"].Rows)
                     {
-                        resultado.Add(ConvertToCurriculumVitae(item));
+                        resultado.Add(DKbase.web.capaDatos.capaCV_base.ConvertToCurriculumVitae(item));
                     }
                 }
             }
@@ -2809,12 +2809,12 @@ namespace Kellerhoff
         public static void EliminarCurriculumVitae(int tcv_codCV)
         {
             string accion = Constantes.cSQL_DELETE;
-            DataSet dsResultado = capaCV.GestiónCurriculumVitae(tcv_codCV, null, null, null, null, null, null, null, accion, null, null, null);
+            DataSet dsResultado = capaCV_base.GestiónCurriculumVitae(tcv_codCV, null, null, null, null, null, null, null, accion, null, null, null);
         }
         public static void CambiarEstadoCurriculumVitae(int tcv_codCV, int tcv_estado)
         {
             string accion = Constantes.cSQL_ESTADO;
-            DataSet dsResultado = capaCV.GestiónCurriculumVitae(tcv_codCV, null, null, null, null, null, tcv_estado, null, accion, null, null, null);
+            DataSet dsResultado = capaCV_base.GestiónCurriculumVitae(tcv_codCV, null, null, null, null, null, tcv_estado, null, accion, null, null, null);
         }
         public static bool ImprimirComprobante(string pTipoComprobante, string pNroComprobante)
         {

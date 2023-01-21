@@ -16,7 +16,6 @@
                  
             <div class="clear"></div>	
                 <div id="successOk" class="alert"></div>
-<%--          	<form id="FormRegistro">--%>
           	<div class="col-lg-6 col-md-6 col-xs-12 col_registro_left">
                 <div class="clear5"></div>
                 <label class="cliente">¿Es cliente?</label>
@@ -35,10 +34,6 @@
                 <div class="clear20"></div>
                 <input name="txtFechaNacimiento" id="txtFechaNacimiento" class="form-control" type="text" placeholder="Fecha nacimiento" value="" data-mask="99-99-9999"  />
                 <div class="clear20"></div>
- <%--               <div id="solicitud" style="display:none">
-                <input name="txtCUIT" id="txtCUIT" class="form-control" type="text" placeholder="CUIT" value="" data-mask="99-99999999-9"  />
-                <div class="clear20"></div>
-                </div>--%>
                 <input name="txtContacto" id="txtContacto" class="form-control" type="text" placeholder="Nombre de Contacto" value=""  />
                 <div class="clear20"></div>
                 <input name="txtNombreFarmacia" id="txtNombreFarmacia" class="form-control" type="text" placeholder="Nombre de la farmacia (*)" value="" required="required"  />
@@ -75,10 +70,8 @@
                     <button class="btn_emp float-right" type="submit" onclick="return GrabarRegistracion(); ">ENVIAR</button>
                 </div>
 	        </div>
-         <%--   </form>--%>
         </div>
             <div id="success" class="alert"></div>
-          <%--  <button onclick="return GrabarRegistracion(); " >sdsdsdsd</button>--%>
 
 
         </div>

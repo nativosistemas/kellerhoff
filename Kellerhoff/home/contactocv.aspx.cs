@@ -1,4 +1,5 @@
-﻿using Kellerhoff.Codigo.capaDatos;
+﻿using DKbase.web.capaDatos;
+using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases;
 using System;
 using System.Collections.Generic;
@@ -35,18 +36,18 @@ namespace Kellerhoff.home
                             if (file != null && file.ContentLength > 0)
                             {
                                 DateTime fechaPresentacion = DateTime.Now;// DateTime.Parse(Request.Form["date_cv"]); //&& Request.Form["date_cv"] != ""
-                                int codigoCV = WebService.InsertarCurriculumVitae(Request.Form["nombre_cv"], Request.Form["cuerpo_cv"], Request.Form["email_cv"], Request.Form["dni_cv"], Request.Form["puesto_cv"], Request.Form["sucursal_cv"], fechaPresentacion);
+                                int codigoCV = DKbase.Util.InsertarCurriculumVitae(Request.Form["nombre_cv"], Request.Form["cuerpo_cv"], Request.Form["email_cv"], Request.Form["dni_cv"], Request.Form["puesto_cv"], Request.Form["sucursal_cv"], fechaPresentacion);
                                 string fname = Path.GetFileName(file.FileName);
-                                string extencion = capaRecurso.obtenerExtencion(fname);
+                                string extencion = capaRecurso_base.obtenerExtencion(fname);
                               //  string pathDestinoRaiz = @"../" + Constantes.cArchivo_Raiz;
                                 string pathDestino  = Constantes.cRaizArchivos + @"\archivos\"  + Constantes.cTABLA_CV + @"/";
                               //  string mapPathDestino = HttpContext.Current.Server.MapPath(pathDestino);
                                 if (!Directory.Exists(pathDestino))
                                     Directory.CreateDirectory(pathDestino);
-                                string nombreArchivo = capaRecurso.nombreArchivoSinRepetir(pathDestino, fname);
+                                string nombreArchivo = capaRecurso_base.nombreArchivoSinRepetir(pathDestino, fname);
                                 string destino = pathDestino + nombreArchivo;
                                 file.SaveAs(destino);
-                                WebService.InsertarActualizarArchivo(0, codigoCV, Constantes.cTABLA_CV, extencion, file.ContentType, nombreArchivo, string.Empty, string.Empty, string.Empty, Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["codigoUsuarioSinRegistrar"]));
+                                DKbase.Util.InsertarActualizarArchivo(0, codigoCV, Constantes.cTABLA_CV, extencion, file.ContentType, nombreArchivo, string.Empty, string.Empty, string.Empty, Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["codigoUsuarioSinRegistrar"]));
                                 result = "Ok";
                                 HttpContext.Current.Session["contactocv_result"] = "Ok";
                                 //Redirect to clear the form.

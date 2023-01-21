@@ -151,7 +151,7 @@ namespace Kellerhoff.admin.pages
 
                         cThumbnail.obtenerImagen(obj.tipo, nombreFinal, obj.ancho.ToString(), obj.alto.ToString(), "", false);
 
-                        obj.codRecurso = WebService.InsertarActualizarArchivo(obj.codRecurso, obj.id, obj.tipo, CacheExtencionArchivo, FileUpload1.PostedFile.ContentType, nombreFinal, string.Empty, string.Empty, string.Empty, Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["codigoUsuarioSinRegistrar"]));
+                        obj.codRecurso = DKbase.Util.InsertarActualizarArchivo(obj.codRecurso, obj.id, obj.tipo, CacheExtencionArchivo, FileUpload1.PostedFile.ContentType, nombreFinal, string.Empty, string.Empty, string.Empty, Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["codigoUsuarioSinRegistrar"]));
                         HttpContext.Current.Session["AgregarArchivo_obj"] = null;
 
                         string parametro = string.Empty;

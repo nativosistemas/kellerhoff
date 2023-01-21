@@ -117,7 +117,7 @@ namespace Kellerhoff.admin.pages
                             }
                         }
 
-                        obj.codRecurso = WebService.InsertarActualizarArchivo(obj.codRecurso, obj.id, obj.tipo, CacheExtencionArchivo, FileUpload1.PostedFile.ContentType, nombreFinal, titulo, descr, string.Empty, Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["codigoUsuarioSinRegistrar"]));
+                        obj.codRecurso = DKbase.Util.InsertarActualizarArchivo(obj.codRecurso, obj.id, obj.tipo, CacheExtencionArchivo, FileUpload1.PostedFile.ContentType, nombreFinal, titulo, descr, string.Empty, Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["codigoUsuarioSinRegistrar"]));
                         HttpContext.Current.Session["AgregarArchivoGenerico_obj"] = null;
 
 
@@ -161,7 +161,7 @@ namespace Kellerhoff.admin.pages
                         }
                     }
 
-                    obj.codRecurso = WebService.InsertarActualizarArchivo(obj.codRecurso, obj.id, obj.tipo, obj.objArchivo.arc_tipo, obj.objArchivo.arc_mime, obj.objArchivo.arc_nombre, titulo, descr, string.Empty, Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["codigoUsuarioSinRegistrar"]));
+                    obj.codRecurso = DKbase.Util.InsertarActualizarArchivo(obj.codRecurso, obj.id, obj.tipo, obj.objArchivo.arc_tipo, obj.objArchivo.arc_mime, obj.objArchivo.arc_nombre, titulo, descr, string.Empty, Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["codigoUsuarioSinRegistrar"]));
                     HttpContext.Current.Session["AgregarArchivoGenerico_obj"] = null;
 
                     switch (obj.tipo)
