@@ -3888,35 +3888,35 @@ namespace Kellerhoff
             }
             return null;
         }
-        public static List<cCatalogo> getCatalogosParaDescarga()
-        {
-            List<cCatalogo> listaSession = null;
-            List<cCatalogo> lista = DKbase.Util.RecuperarTodosCatalogos().Where(x => x.tbc_estado == Constantes.cESTADO_ACTIVO).OrderByDescending(x => x.tbc_orden).ToList();
-            if (lista != null)
-            {
-                listaSession = new List<cCatalogo>();
-                for (int i = 0; i < lista.Count; i++)
-                {
-                    if (lista[i].tbc_estado == Constantes.cESTADO_ACTIVO)
-                    {
-                        lista[i].tbc_descripcion = string.Empty;
-                        List<cArchivo> listaArchivo = WebService.RecuperarTodosArchivos(lista[i].tbc_codigo, Constantes.cTABLA_CATALOGO, string.Empty);
-                        if (listaArchivo != null)
-                        {
-                            if (listaArchivo.Count > 0)
-                            {
-                                if (listaArchivo[0].arc_estado == Constantes.cESTADO_ACTIVO)
-                                {
-                                    lista[i].tbc_descripcion = listaArchivo[0].arc_nombre;
-                                    listaSession.Add(lista[i]);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return listaSession;
-        }
+        //public static List<cCatalogo> getCatalogosParaDescarga()
+        //{
+        //    List<cCatalogo> listaSession = null;
+        //    List<cCatalogo> lista = DKbase.Util.RecuperarTodosCatalogos().Where(x => x.tbc_estado == Constantes.cESTADO_ACTIVO).OrderByDescending(x => x.tbc_orden).ToList();
+        //    if (lista != null)
+        //    {
+        //        listaSession = new List<cCatalogo>();
+        //        for (int i = 0; i < lista.Count; i++)
+        //        {
+        //            if (lista[i].tbc_estado == Constantes.cESTADO_ACTIVO)
+        //            {
+        //                lista[i].tbc_descripcion = string.Empty;
+        //                List<cArchivo> listaArchivo = WebService.RecuperarTodosArchivos(lista[i].tbc_codigo, Constantes.cTABLA_CATALOGO, string.Empty);
+        //                if (listaArchivo != null)
+        //                {
+        //                    if (listaArchivo.Count > 0)
+        //                    {
+        //                        if (listaArchivo[0].arc_estado == Constantes.cESTADO_ACTIVO)
+        //                        {
+        //                            lista[i].tbc_descripcion = listaArchivo[0].arc_nombre;
+        //                            listaSession.Add(lista[i]);
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return listaSession;
+        //}
         public static int enviarConsultaCtaCte(string pMail, string pComentario)
         {
             int resultado = 0;
