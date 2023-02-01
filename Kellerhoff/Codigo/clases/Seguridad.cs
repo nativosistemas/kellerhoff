@@ -6,6 +6,7 @@ using System.Data;
 using Kellerhoff.Codigo.capaDatos;
 using Kellerhoff.Codigo.clases.Generales;
 using DKbase.web;
+using DKbase.web.capaDatos;
 
 namespace Kellerhoff.Codigo.clases
 {
@@ -112,10 +113,10 @@ namespace Kellerhoff.Codigo.clases
         {
             DataSet dsResultado = capaSeguridad.GestiónRegla(rgl_codRegla, null, null, null, null, null, null, null, Constantes.cSQL_DELETE);
         }
-        public static void EliminarUsuario(int usu_codigo)
-        {
-            DataSet dsResultado = capaSeguridad.GestiónUsuario(usu_codigo, null, null, null, null, null, null, null, null, null, null, null, null, Constantes.cSQL_DELETE);
-        }
+        //public static void EliminarUsuario(int usu_codigo)
+        //{
+        //    DataSet dsResultado = capaSeguridad_base.GestiónUsuario(usu_codigo, null, null, null, null, null, null, null, null, null, null, null, null, Constantes.cSQL_DELETE);
+        //}
         public static int InsertarActualizarRegla(int rgl_codRegla, string rgl_Descripcion, string rgl_PalabraClave, bool rgl_IsAgregarSoporta, bool rgl_IsEditarSoporta, bool rgl_IsEliminarSoporta, int? rgl_codReglaPadre)
         {
             string accion = rgl_codRegla == 0 ? Constantes.cSQL_INSERT : Constantes.cSQL_UPDATE;
@@ -363,145 +364,33 @@ namespace Kellerhoff.Codigo.clases
 
             return listaResultado;
         }
-        public static int InsertarActualizarUsuario(int usu_codigo, int usu_codRol, int? usu_codCliente, string usu_nombre, string usu_apellido, string usu_mail, string usu_login, string usu_psw, string usu_observacion, int? usu_codUsuarioUltMov)
-        {
-            string accion = usu_codigo == 0 ? Constantes.cSQL_INSERT : Constantes.cSQL_UPDATE;
-            int codigoAccion = usu_codigo == 0 ? Constantes.cACCION_ALTA : Constantes.cACCION_MODIFICACION;
-            int? codigoEstado = usu_codigo == 0 ? Constantes.cESTADO_ACTIVO : (int?)null;
-            DataSet dsResultado = capaSeguridad.GestiónUsuario(usu_codigo, usu_codRol, usu_codCliente, usu_nombre, usu_apellido, usu_mail, usu_login, usu_psw, usu_observacion, usu_codUsuarioUltMov, codigoAccion, codigoEstado, null, accion);
-            int resultado = -1;
-            if (usu_codigo == 0)
-            {
-                if (dsResultado != null)
-                {
-                    if (dsResultado.Tables["Usuario"].Rows[0]["usu_codigo"] != DBNull.Value)
-                    {
-                        resultado = Convert.ToInt32(dsResultado.Tables["Usuario"].Rows[0]["usu_codigo"]);
-                    }
-                }
-            }
-            else
-            {
-                resultado = usu_codigo;
-            }
-            return resultado;
-        }
-        public static cUsuario ConvertToUsuario(DataRow pItem)
-        {
-            cUsuario obj = new cUsuario();
-            if (pItem["usu_codigo"] != DBNull.Value)
-            {
-                obj.usu_codigo = Convert.ToInt32(pItem["usu_codigo"]);
-            }
-            if (pItem["usu_codRol"] != DBNull.Value)
-            {
-                obj.usu_codRol = Convert.ToInt32(pItem["usu_codRol"]);
-            }
-            if (pItem["usu_codCliente"] != DBNull.Value)
-            {
-                obj.usu_codCliente = Convert.ToInt32(pItem["usu_codCliente"]);
-                if (pItem.Table.Columns.Contains("cli_nombre"))
-                {
-                    obj.cli_nombre = pItem["cli_nombre"].ToString();
-                }
-            }
-            else
-            {
-                obj.usu_codCliente = null;
-            }
-            if (pItem["usu_nombre"] != DBNull.Value)
-            {
-                obj.usu_nombre = pItem["usu_nombre"].ToString();
-            }
-            if (pItem["usu_apellido"] != DBNull.Value)
-            {
-                obj.usu_apellido = pItem["usu_apellido"].ToString();
-            }
-            if (pItem["NombreYapellido"] != DBNull.Value)
-            {
-                obj.NombreYapellido = pItem["NombreYapellido"].ToString();
-            }
-            if (pItem["usu_login"] != DBNull.Value)
-            {
-                obj.usu_login = pItem["usu_login"].ToString();
-            }
-            if (pItem["usu_mail"] != DBNull.Value)
-            {
-                obj.usu_mail = pItem["usu_mail"].ToString();
-            }
-            if (pItem["usu_pswDesencriptado"] != DBNull.Value)
-            {
-                obj.usu_pswDesencriptado = pItem["usu_pswDesencriptado"].ToString();
-            }
-            if (pItem["rol_Nombre"] != DBNull.Value)
-            {
-                obj.rol_Nombre = pItem["rol_Nombre"].ToString();
-            }
-            if (pItem["usu_observacion"] != DBNull.Value)
-            {
-                obj.usu_observacion = pItem["usu_observacion"].ToString();
-            }
-            if (pItem["usu_estado"] != DBNull.Value)
-            {
-                obj.usu_estado = Convert.ToInt32(pItem["usu_estado"]);
-                obj.usu_estadoToString = capaSeguridad.obtenerStringEstado(obj.usu_estado);
-            }
-            return obj;
-        }
+    
         public static List<cUsuario> RecuperarTodosUsuarios(string pFiltro)
         {
             List<cUsuario> lista = new List<cUsuario>();
-            DataSet dsResultado = capaSeguridad.GestiónUsuario(null, null, null, null, null, null, null, null, null, null, null, null, pFiltro, Constantes.cSQL_SELECT);
+            DataSet dsResultado = capaSeguridad_base.GestiónUsuario(null, null, null, null, null, null, null, null, null, null, null, null, pFiltro, Constantes.cSQL_SELECT);
             if (dsResultado != null)
             {
                 foreach (DataRow item in dsResultado.Tables["Usuario"].Rows)
                 {
-                    lista.Add(ConvertToUsuario(item));
+                    lista.Add(DKbase.web.capaDatos.capaSeguridad_base.ConvertToUsuario(item));
                 }
             }
             return lista;
         }
-        public static cUsuario RecuperarUsuarioPorId(int pIdUsuario)
-        {
-            cUsuario obj = null;
-            DataSet dsResultado = capaSeguridad.GestiónUsuario(pIdUsuario, null, null, null, null, null, null, null, null, null, null, null, null, Constantes.cSQL_SELECT);
-            if (dsResultado != null)
-            {
-                foreach (DataRow item in dsResultado.Tables["Usuario"].Rows)
-                {
-                    obj = ConvertToUsuario(item);
-                    obj.listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(obj.usu_codigo);
-                    break;
-                }
-            }
-            return obj;
-        }
-        public static void CambiarEstadoUsuarioPorId(int pIdUsuario, int pIdEstado, int pIdUsuarioEnSession)
-        {
-            capaSeguridad.GestiónUsuario(pIdUsuario, null, null, null, null, null, null, null, null, pIdUsuarioEnSession, Constantes.cACCION_CAMBIOESTADO, pIdEstado, null, Constantes.cSQL_ESTADO);
-        }
-        public static void CambiarContraseñaUsuario(int pIdUsuario, string pConstraseña, int? pIdUsuarioEnSession)
-        {
-            //List<capaDatos.cUsuario> lista = new List<capaDatos.cUsuario>();
-            DataSet dsResultado = capaSeguridad.GestiónUsuario(pIdUsuario, null, null, null, null, null, null, pConstraseña, null, pIdUsuarioEnSession, Constantes.cACCION_CAMBIOCONTRASEÑA, null, null, Constantes.cSQL_CAMBIOCONTRASEÑA);
-        }
+        //public static void CambiarEstadoUsuarioPorId(int pIdUsuario, int pIdEstado, int pIdUsuarioEnSession)
+        //{
+        //    capaSeguridad_base.GestiónUsuario(pIdUsuario, null, null, null, null, null, null, null, null, pIdUsuarioEnSession, Constantes.cACCION_CAMBIOESTADO, pIdEstado, null, Constantes.cSQL_ESTADO);
+        //}
+        //public static void CambiarContraseñaUsuario(int pIdUsuario, string pConstraseña, int? pIdUsuarioEnSession)
+        //{
+        //    //List<capaDatos.cUsuario> lista = new List<capaDatos.cUsuario>();
+        //    DataSet dsResultado = capaSeguridad_base.GestiónUsuario(pIdUsuario, null, null, null, null, null, null, pConstraseña, null, pIdUsuarioEnSession, Constantes.cACCION_CAMBIOCONTRASEÑA, null, null, Constantes.cSQL_CAMBIOCONTRASEÑA);
+        //}
         //public static void CambiarContraseñaUsuario(int pIdUsuario, string pConstraseña, int? pIdUsuarioEnSession)
         //{
         //    List<capaDatos.cUsuario> lista = new List<capaDatos.cUsuario>();
         //    DataSet dsResultado = capaSeguridad.GestiónUsuario(pIdUsuario, null, null, null, null, null, null, null, pIdUsuarioEnSession, null, null, null, Constantes.cSQL_CAMBIOCONTRASEÑA);
         //}  
-        public static bool IsRepetidoLogin(int pIdUsuario, string pLogin)
-        {
-            bool resultado = false;
-            DataTable dtResultado = capaSeguridad.IsRepetidoLogin(pIdUsuario, pLogin);
-            if (dtResultado != null)
-            {
-                if (dtResultado.Rows.Count > 0)
-                {
-                    resultado = true;
-                }
-            }
-            return resultado;
-        }
     }
 }

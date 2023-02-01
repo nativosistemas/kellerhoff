@@ -849,25 +849,7 @@ namespace Kellerhoff
 
         public static List<cUsuario> RecuperarUsuariosDeCliente(int usu_codRol, int usu_codCliente, string filtro)
         {
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                List<cUsuario> lista = new List<cUsuario>();
-                DataSet dsResultado = capaClientes.RecuperarUsuariosDeCliente(usu_codRol, usu_codCliente, filtro);
-                if (dsResultado != null)
-                {
-                    foreach (DataRow item in dsResultado.Tables["UsuariosCliente"].Rows)
-                    {
-                        cUsuario o = Seguridad.ConvertToUsuario(item);
-                        o.listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(o.usu_codigo);
-                        lista.Add(o);
-                    }
-                }
-                return lista;
-            }
-            else
-            {
-                return null;
-            }
+            return DKbase.Util.RecuperarUsuariosDeCliente( usu_codRol,  usu_codCliente,  filtro);
         }
 
 
@@ -1044,7 +1026,7 @@ namespace Kellerhoff
         }
         public static cClientes RecuperarClientePorId(int pIdCliente)
         {
-            return DKbase.Util.RecuperarClientePorId( pIdCliente);
+            return DKbase.Util.RecuperarClientePorId(pIdCliente);
         }
         private static cHistorialProcesos ConvertToHistorialProcesos(DataRow pItem)
         {
@@ -1555,8 +1537,8 @@ namespace Kellerhoff
         }
         public static cTransfer RecuperarTransferMasDetallePorIdTransfer(int pIdTransfer, cClientes pClientes)
         {
-            List<string> l_Sucursales =FuncionesPersonalizadas.RecuperarSucursalesDelCliente();
-            return DKbase.Util.RecuperarTransferMasDetallePorIdTransfer( pIdTransfer,  pClientes, l_Sucursales);
+            List<string> l_Sucursales = FuncionesPersonalizadas.RecuperarSucursalesDelCliente();
+            return DKbase.Util.RecuperarTransferMasDetallePorIdTransfer(pIdTransfer, pClientes, l_Sucursales);
         }
         public static bool AgregarProductosTransfersAlCarrito(List<cProductosAndCantidad> pListaProductosMasCantidad, int pIdCliente, int pIdUsuario, int pIdTransfers, string pCodSucursal)
         {
@@ -2555,19 +2537,19 @@ namespace Kellerhoff
 
         public static List<cUsuarioSinPermisosIntranet> RecuperarTodosSinPermisosIntranetPorIdUsuario(int pIdUsuario)
         {
-            return DKbase.Util.RecuperarTodosSinPermisosIntranetPorIdUsuario( pIdUsuario);
+            return DKbase.Util.RecuperarTodosSinPermisosIntranetPorIdUsuario(pIdUsuario);
         }
-        public static bool InsertarSinPermisoUsuarioIntranetPorIdUsuario(int pIdUsuario, List<string> pListaNombreSeccion)
-        {
-            bool resultado = false;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                DataTable pTablaDetalle = FuncionesPersonalizadas.ConvertNombresSeccionToDataTable(pListaNombreSeccion);
-                capaSeguridad.InsertarSinPermisoUsuarioIntranetPorIdUsuario(pIdUsuario, pTablaDetalle);
-                resultado = true;
-            }
-            return resultado;
-        }
+        //public static bool InsertarSinPermisoUsuarioIntranetPorIdUsuario(int pIdUsuario, List<string> pListaNombreSeccion)
+        //{
+        //    bool resultado = false;
+        //    //if (VerificarPermisos(CredencialAutenticacion))
+        //    //{
+        //        DataTable pTablaDetalle = DKbase.web.FuncionesPersonalizadas_base.ConvertNombresSeccionToDataTable(pListaNombreSeccion);
+        //        capaSeguridad_base.InsertarSinPermisoUsuarioIntranetPorIdUsuario(pIdUsuario, pTablaDetalle);
+        //        resultado = true;
+        //  //  }
+        //    return resultado;
+        //}
         private static cFrasesFront ConvertToFrasesFront(DataRow pItem)
         {
             cFrasesFront obj = new cFrasesFront();
@@ -2631,7 +2613,7 @@ namespace Kellerhoff
                 capaLogRegistro.EliminarFrasesFront(pTff_id);
             }
         }
-       
+
         public static int? InsertarActualizarCatalogo(int tbc_codigo, string tbc_titulo, string tbc_descripcion, int? tbc_orden, DateTime? tbc_fecha, int tbc_estado)
         {
             int? resultado = null;
@@ -3007,7 +2989,7 @@ namespace Kellerhoff
         }
         public static List<cSucursalDependienteTipoEnviosCliente_TiposEnvios> RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios_Excepciones(int pIdSucursalDependienteTipoEnvioCliente, string tdr_codReparto)
         {
-            return DKbase.Util.RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios_Excepciones( pIdSucursalDependienteTipoEnvioCliente,  tdr_codReparto);
+            return DKbase.Util.RecuperarTodosSucursalDependienteTipoEnvioCliente_TiposEnvios_Excepciones(pIdSucursalDependienteTipoEnvioCliente, tdr_codReparto);
         }
         private static cTiposEnvios ConvertToTiposEnvios(DataRow pItem)
         {
@@ -3497,7 +3479,7 @@ namespace Kellerhoff
                 resultado = new List<cOferta>();
                 foreach (DataRow fila in tabla.Rows)
                 {
-                    resultado.Add( DKbase.web.capaDatos.capaHome_base.ConvertToOferta(fila));
+                    resultado.Add(DKbase.web.capaDatos.capaHome_base.ConvertToOferta(fila));
                 }
             }
             return resultado;
@@ -3508,7 +3490,7 @@ namespace Kellerhoff
         }
         public static cOferta RecuperarOfertaPorId(int pIdOferta)
         {
-            return DKbase.Util.RecuperarOfertaPorId( pIdOferta);
+            return DKbase.Util.RecuperarOfertaPorId(pIdOferta);
         }
         //public static cOferta RecuperarOfertaPorId(int pId)
         //{
@@ -3646,7 +3628,7 @@ namespace Kellerhoff
                 resultado = capaHome.EliminarOfertaHome(pIdOfertaHome);
             return resultado;
         }
-    
+
 
         public static cHomeSlide RecuperarHomeSlidePorId(int pIdHomeSlide)
         {

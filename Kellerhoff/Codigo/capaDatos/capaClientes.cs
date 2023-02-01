@@ -42,49 +42,7 @@ namespace Kellerhoff.Codigo.capaDatos
             }
         }
 
-        public static DataSet RecuperarUsuariosDeCliente(int usu_codRol, int usu_codCliente, string filtro)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Recursos.spRecuperarUsuariosPorIdCliente", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paFiltro = cmdComandoInicio.Parameters.Add("@filtro", SqlDbType.NVarChar, 50);
-            SqlParameter paUsu_codRol = cmdComandoInicio.Parameters.Add("@usu_codRol", SqlDbType.Int);
-            SqlParameter paUsu_codCliente = cmdComandoInicio.Parameters.Add("@usu_codCliente", SqlDbType.Int);
-            paUsu_codRol.Value = usu_codRol;
-            paUsu_codCliente.Value = usu_codCliente;
-
-
-            if (filtro == null)
-            {
-                paFiltro.Value = DBNull.Value;
-            }
-            else
-            {
-                paFiltro.Value = filtro;
-            }
-
-            try
-            {
-                Conn.Open();
-                DataSet dsResultado = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter(cmdComandoInicio);
-                da.Fill(dsResultado, "UsuariosCliente");
-                return dsResultado;
-
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+  
         public static DataSet MostrarProvincia(string filtro)
         {
             SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());

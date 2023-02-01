@@ -44,7 +44,7 @@ namespace Kellerhoff.admin.pages
             }
             else if (e.CommandName == "Eliminar")
             {
-                Kellerhoff.Codigo.clases.Seguridad.EliminarUsuario(Convert.ToInt32(e.CommandArgument));
+                DKbase.Util.EliminarUsuario(Convert.ToInt32(e.CommandArgument));
                 gv_datos.DataBind();
             }
             else if (e.CommandName == "Contraseña")
@@ -57,7 +57,7 @@ namespace Kellerhoff.admin.pages
         public override void Modificar(int pIdUsuario)
         {
             Session["GestionUsuario_Usu_codigo"] = pIdUsuario;
-            DKbase.web.cUsuario usuario = Kellerhoff.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
+            DKbase.web.cUsuario usuario = DKbase.Util.RecuperarUsuarioPorId(pIdUsuario);
             txtNombre.Text = usuario.usu_nombre;
             txtApellido.Text = usuario.usu_apellido;
             txtObservaciones1.Text = usuario.usu_observacion;
@@ -109,9 +109,9 @@ namespace Kellerhoff.admin.pages
             if (Session["BaseAdmin_Usuario"] != null)
             {
                 int codigoUsuarioEnSession = ((DKbase.web.Usuario)Session["BaseAdmin_Usuario"]).id;
-                DKbase.web.cUsuario usuario = Kellerhoff.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
+                DKbase.web.cUsuario usuario = DKbase.Util.RecuperarUsuarioPorId(pIdUsuario);
                 int estadoUsuario = usuario.usu_estado == Constantes.cESTADO_ACTIVO ? Constantes.cESTADO_INACTIVO : Constantes.cESTADO_ACTIVO;
-                Kellerhoff.Codigo.clases.Seguridad.CambiarEstadoUsuarioPorId(usuario.usu_codigo, estadoUsuario, codigoUsuarioEnSession);
+                DKbase.Util.CambiarEstadoUsuarioPorId(usuario.usu_codigo, estadoUsuario, codigoUsuarioEnSession);
                 gv_datos.DataBind();
             }
         }
@@ -133,7 +133,7 @@ namespace Kellerhoff.admin.pages
                     {
                         int? codCliente = Convert.ToInt32(cmbCliente.SelectedValue) != -1 ? (int?)Convert.ToInt32(cmbCliente.SelectedValue) : null;
                         int? codigoUsuarioEnSession = ((DKbase.web.Usuario)Session["BaseAdmin_Usuario"]).id;
-                        Kellerhoff.Codigo.clases.Seguridad.InsertarActualizarUsuario(codUsuario, Convert.ToInt32(cmbRol.SelectedValue), codCliente, txtNombre.Text, txtApellido.Text, txtMail.Text, txtLogin.Text, txtContraseña.Text, txtObservaciones1.Text, codigoUsuarioEnSession);
+                        DKbase.Util.InsertarActualizarUsuario(codUsuario, Convert.ToInt32(cmbRol.SelectedValue), codCliente, txtNombre.Text, txtApellido.Text, txtMail.Text, txtLogin.Text, txtContraseña.Text, txtObservaciones1.Text, codigoUsuarioEnSession);
                     }
                 }
                 gv_datos.DataBind();
@@ -146,7 +146,7 @@ namespace Kellerhoff.admin.pages
             bool resultado = true;
             if (Session["GestionUsuario_Usu_codigo"] != null)
             {
-                resultado = !Kellerhoff.Codigo.clases.Seguridad.IsRepetidoLogin(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]), args.Value);
+                resultado = !DKbase.Util.IsRepetidoLogin(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]), args.Value);
             }
             CustomValidatorLogin.ErrorMessage = "Login repetido";
             args.IsValid = resultado;
@@ -170,8 +170,8 @@ namespace Kellerhoff.admin.pages
                 int codigoUsuarioEnSession = ((DKbase.web.Usuario)Session["BaseAdmin_Usuario"]).id;
                 DKbase.web.cUsuario objUsuario = null;
                 DKbase.web.capaDatos.cClientes objCliente = null;
-                objUsuario = Kellerhoff.Codigo.clases.Seguridad.RecuperarUsuarioPorId(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]));
-                Kellerhoff.Codigo.clases.Seguridad.CambiarContraseñaUsuario(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]), txtContraseñaCambiar.Text, codigoUsuarioEnSession);
+                objUsuario = DKbase.Util.RecuperarUsuarioPorId(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]));
+                DKbase.Util.CambiarContraseñaUsuario(Convert.ToInt32(Session["GestionUsuario_Usu_codigo"]), txtContraseñaCambiar.Text, codigoUsuarioEnSession);
                 if (objUsuario.usu_codRol == Constantes.cROL_ADMINISTRADORCLIENTE)
                 {
                     objCliente = WebService.RecuperarClienteAdministradorPorIdUsuarios(objUsuario.usu_codigo);

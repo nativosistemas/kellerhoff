@@ -23,7 +23,7 @@ namespace Kellerhoff.Controllers
         public ActionResult action(int id)
         {
 
-            
+
             System.Web.HttpContext.Current.Session["action_id"] = id;
             if (Session["clientesDefault_Cliente"] == null)
             {
@@ -438,7 +438,7 @@ namespace Kellerhoff.Controllers
             if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
             {
                 cUsuario objUsuario = null;
-                objUsuario = Seguridad.RecuperarUsuarioPorId(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                objUsuario = DKbase.Util.RecuperarUsuarioPorId(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
                 if (pContraseñaVieja == objUsuario.usu_pswDesencriptado)
                 {
                     id = WebService.CambiarContraseñaUsuarioPersonal(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id, pContraseñaVieja, pContraseñaNueva);
@@ -493,30 +493,19 @@ namespace Kellerhoff.Controllers
         {
             if (Session["clientesDefault_Cliente"] == null)
                 return -1;
-            int? codCliente = ((cClientes)Session["clientesDefault_Cliente"]).cli_codigo;// Convert.ToInt32(cmbCliente.SelectedValue) != -1 ? (int?)Convert.ToInt32(cmbCliente.SelectedValue) : null;
-            int? codigoUsuarioEnSession = null;
-            if (Codigo.clases.Seguridad.IsRepetidoLogin(pIdUsuario, pLogin))
-                return -2;
-            int codUsuarioInsertarActualizar = Kellerhoff.Codigo.clases.Seguridad.InsertarActualizarUsuario(pIdUsuario, Constantes.cROL_OPERADORCLIENTE, codCliente, pNombre, pApellido, pMail, pLogin, pContraseña, pObservaciones1, codigoUsuarioEnSession);
-            WebService.InsertarSinPermisoUsuarioIntranetPorIdUsuario(codUsuarioInsertarActualizar, pListaPermisos);
-            return codUsuarioInsertarActualizar;
+           return DKbase.Util.GuardarUsuario((cClientes)Session["clientesDefault_Cliente"], pIdUsuario, pNombre, pApellido, pMail, pLogin, pContraseña, pObservaciones1, pListaPermisos);          
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public int CambiarEstadoUsuario(int pIdUsuario)
         {
             if (Session["clientesDefault_Usuario"] == null)
                 return -1;
-            int codigoUsuarioEnSession = ((Usuario)Session["clientesDefault_Usuario"]).id;
-            cUsuario usuario = Kellerhoff.Codigo.clases.Seguridad.RecuperarUsuarioPorId(pIdUsuario);
-            int estadoUsuario = usuario.usu_estado == Constantes.cESTADO_ACTIVO ? Constantes.cESTADO_INACTIVO : Constantes.cESTADO_ACTIVO;
-            Kellerhoff.Codigo.clases.Seguridad.CambiarEstadoUsuarioPorId(usuario.usu_codigo, estadoUsuario, codigoUsuarioEnSession);
-            return 0;
-
+            return DKbase.Util.CambiarEstadoUsuario((Usuario)Session["clientesDefault_Usuario"], pIdUsuario);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public int EliminarUsuario(int pIdUsuario)
         {
-            Kellerhoff.Codigo.clases.Seguridad.EliminarUsuario(pIdUsuario);
+            DKbase.Util.EliminarUsuario(pIdUsuario);
             return 0;
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
@@ -524,302 +513,26 @@ namespace Kellerhoff.Controllers
         {
             if (Session["clientesDefault_Usuario"] == null)
                 return -1;
-            int codigoUsuarioEnSession = ((Usuario)Session["clientesDefault_Usuario"]).id;
-            Kellerhoff.Codigo.clases.Seguridad.CambiarContraseñaUsuario(pIdUsuario, pPass, codigoUsuarioEnSession);
-            return 0;
+            return DKbase.Util.CambiarContraseñaUsuario((Usuario)Session["clientesDefault_Usuario"], pIdUsuario,  pPass);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string ObtenerUsuarios()
         {
             if (Session["clientesDefault_Cliente"] == null)
                 return null;
-            List<DKbase.web.cUsuario> lista = Kellerhoff.Codigo.clases.AccesoGrilla.GetUsuariosDeCliente("usu_codigo", ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
+            List<DKbase.web.cUsuario> lista = DKbase.web.AccesoGrilla_base.GetUsuariosDeCliente("usu_codigo", ((DKbase.web.capaDatos.cClientes)Session["clientesDefault_Cliente"]).cli_codigo, null);
             return Codigo.clases.Generales.Serializador.SerializarAJson(lista);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
-        public FileStreamResult GenerateDocument(int id)
+        public FileContentResult GenerateDocument(int id)
         {
             if (Session["clientesDefault_Cliente"] == null)
                 return null;
-
-            try
-            {
-                DataTable dt = null;
-                string nameFile = string.Empty;
-                switch (id)
-                {
-                    case 1:
-                    case 5:
-                        dt = capaProductos.DescargaTodosProductos(((cClientes)Session["clientesDefault_Cliente"]).cli_codprov);
-                        if (id == 1)
-                            nameFile = "Productos.xls";
-                        else
-                            nameFile = "Productos.csv";
-                        break;
-                    case 2:
-                    case 6:
-                        dt = capaProductos.DescargaTodosProductosDrogueria(((cClientes)Session["clientesDefault_Cliente"]).cli_codprov);
-                        if (id == 2)
-                            nameFile = "ProductosDrogueria.xls";
-                        else
-                            nameFile = "ProductosDrogueria.csv";
-                        break;
-                    case 3:
-                    case 7:
-                        dt = capaProductos.DescargaTodosProductosPerfumeria(((cClientes)Session["clientesDefault_Cliente"]).cli_codprov);
-                        if (id == 3)
-                            nameFile = "ProductosPerfumeria.xls";
-                        else
-                            nameFile = "ProductosPerfumeria.csv";
-                        break;
-                    case 4:
-                    case 8:
-                        dt = capaProductos.DescargaTodosProductosEnOferta();
-                        if (id == 4)
-                            nameFile = "ProductosEnOferta.xls";
-                        else
-                            nameFile = "ProductosEnOferta.csv";
-                        break;
-                    case 9:
-                        dt = capaProductos.DescargaMedicamentosYAccesoriosNoIncluidosEnAlfaBeta();
-                        nameFile = "MedicamentosYAccesoriosNoIncluidosEnAlfaBeta.csv";
-                        break;
-                    default:
-                        break;
-                }
-                if (dt != null)
-                {
-                    String path = Convert.ToString(Constantes.cRaizArchivos + @"\temp\");
-                    String f = path + nameFile;
-                    if (id == 1 || id == 2 || id == 3 || id == 4)
-                    {
-                        DataSet ds = new DataSet();
-                        ds.Tables.Add(dt);
-                        ds.WriteXml(f);
-                    }
-                    else if (id == 5 || id == 6 || id == 7)
-                    {
-                        GenerarArchivo(f, dt);
-                    }
-                    else if (id == 8)
-                    {
-                        GenerarArchivo_ProductosEnOferta(f, dt);
-                    }
-                    else if (id == 9)
-                    {
-                        GenerarArchivo_MedicamentosYAccesoriosNoIncluidosEnAlfaBeta(f, dt);
-                    }
-                    var fileStream = new FileStream(f, FileMode.Open, FileAccess.Read);
-                    //return new FileStreamResult(fileStream, MimeMapping.GetMimeMapping(f));
-                    return File(fileStream, MimeMapping.GetMimeMapping(f), nameFile);
-                }
-            }
-            catch (Exception ex)
-            {
-                FuncionesPersonalizadas.grabarLog(System.Reflection.MethodBase.GetCurrentMethod(), ex, DateTime.Now, id);
-
-            }
-            return null;
-        }
-        public static void GenerarArchivo(string RutaNombreArchivo, DataTable pTabla)
-        {
-            if (pTabla != null && RutaNombreArchivo != null)
-            {
-                if (pTabla.Rows.Count > 0)
-                {
-                    string path = RutaNombreArchivo;
-                    FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write);
-                    //StreamWriter writer = new StreamWriter(stream);
-                    using (StreamWriter writer = new StreamWriter(stream))
-                    {
-                        string encabezado = string.Empty;
-                        encabezado += "Tipo" + Constantes.cSeparadorCSV;
-                        encabezado += "Producto" + Constantes.cSeparadorCSV;
-                        encabezado += "AlfaBeta" + Constantes.cSeparadorCSV;
-                        encabezado += "Troquel" + Constantes.cSeparadorCSV;
-                        encabezado += "CodBarraPrinc" + Constantes.cSeparadorCSV;
-                        encabezado += "Laboratorio" + Constantes.cSeparadorCSV;
-                        encabezado += "Precio" + Constantes.cSeparadorCSV;
-                        encabezado += "Neto" + Constantes.cSeparadorCSV;
-                        encabezado += "CadenaFrio" + Constantes.cSeparadorCSV;
-                        encabezado += "RequiereVale" + Constantes.cSeparadorCSV;
-                        encabezado += "Trazable";
-
-                        writer.WriteLine(encabezado);
-                        //resultado += "\n";
-                        foreach (DataRow item in pTabla.Rows)
-                        {
-                            string fila = string.Empty;
-                            string Tipo = string.Empty;
-                            if (item["Tipo"] != DBNull.Value)
-                            {
-                                Tipo = item["Tipo"].ToString();
-                            }
-                            fila += Tipo + Constantes.cSeparadorCSV;
-                            string Producto = string.Empty;
-                            if (item["Producto"] != DBNull.Value)
-                            {
-                                Producto = item["Producto"].ToString();
-                            }
-                            fila += Producto + Constantes.cSeparadorCSV;
-                            string AlfaBeta = string.Empty;
-                            if (item["AlfaBeta"] != DBNull.Value)
-                            {
-                                AlfaBeta = item["AlfaBeta"].ToString();
-                            }
-                            fila += AlfaBeta + Constantes.cSeparadorCSV;
-                            string Troquel = string.Empty;
-                            if (item["Troquel"] != DBNull.Value)
-                            {
-                                Troquel = item["Troquel"].ToString();
-                            }
-                            fila += Troquel + Constantes.cSeparadorCSV;
-                            string CodBarraPrinc = string.Empty;
-                            if (item["CodBarraPrinc"] != DBNull.Value)
-                            {
-                                CodBarraPrinc = item["CodBarraPrinc"].ToString();
-                            }
-                            fila += CodBarraPrinc + Constantes.cSeparadorCSV;
-                            string Laboratorio = string.Empty;
-                            if (item["Laboratorio"] != DBNull.Value)
-                            {
-                                Laboratorio = item["Laboratorio"].ToString();
-                            }
-                            fila += Laboratorio + Constantes.cSeparadorCSV;
-                            string Precio = string.Empty;
-                            if (item["Precio"] != DBNull.Value)
-                            {
-                                Precio = item["Precio"].ToString();
-                            }
-                            fila += Precio + Constantes.cSeparadorCSV;
-                            string Neto = string.Empty;
-                            if (item["Neto"] != DBNull.Value)
-                            {
-                                Neto = item["Neto"].ToString();
-                            }
-                            fila += Neto + Constantes.cSeparadorCSV;
-                            string CadenaFrio = string.Empty;
-                            if (item["CadenaFrio"] != DBNull.Value)
-                            {
-                                CadenaFrio = item["CadenaFrio"].ToString();
-                            }
-                            fila += CadenaFrio + Constantes.cSeparadorCSV;
-                            string RequiereVale = string.Empty;
-                            if (item["RequiereVale"] != DBNull.Value)
-                            {
-                                RequiereVale = item["RequiereVale"].ToString();
-                            }
-                            fila += RequiereVale + Constantes.cSeparadorCSV;
-                            string Trazable = string.Empty;
-                            if (item["Trazable"] != DBNull.Value)
-                            {
-                                Trazable = item["Trazable"].ToString();
-                            }
-                            fila += Trazable;
-                            writer.WriteLine(fila);
-                        }
-                    }
-                    //writer.Close();
-                }
-            }
-        }
-        public static void GenerarArchivo_ProductosEnOferta(string RutaNombreArchivo, DataTable pTabla)
-        {
-            if (pTabla != null && RutaNombreArchivo != null)
-            {
-                if (pTabla.Rows.Count > 0)
-                {
-                    string path = RutaNombreArchivo;
-                    FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write);
-                    //StreamWriter writer = new StreamWriter(stream);
-                    using (StreamWriter writer = new StreamWriter(stream))
-                    {
-                        string encabezado = string.Empty;
-                        encabezado += "Nombre producto" + Constantes.cSeparadorCSV;
-                        encabezado += "Codigo Barra" + Constantes.cSeparadorCSV;
-                        encabezado += "Unidades Mínimas" + Constantes.cSeparadorCSV;
-                        encabezado += "% de descuento";
-                        writer.WriteLine(encabezado);
-                        foreach (DataRow item in pTabla.Rows)
-                        {
-                            string fila = string.Empty;
-                            string NombreProducto = string.Empty;
-                            if (item["Nombre producto"] != DBNull.Value)
-                            {
-                                NombreProducto = item["Nombre producto"].ToString();
-                            }
-                            fila += NombreProducto + Constantes.cSeparadorCSV;
-                            string CodigoBarra = string.Empty;
-                            if (item["Codigo Barra"] != DBNull.Value)
-                            {
-                                CodigoBarra = item["Codigo Barra"].ToString();
-                            }
-                            fila += CodigoBarra + Constantes.cSeparadorCSV;
-                            string UnidadesMínimas = string.Empty;
-                            if (item["Unidades Mínimas"] != DBNull.Value)
-                            {
-                                UnidadesMínimas = item["Unidades Mínimas"].ToString();
-                            }
-                            fila += UnidadesMínimas + Constantes.cSeparadorCSV;
-                            string Descuento = string.Empty;
-                            if (item["% de descuento"] != DBNull.Value)
-                            {
-                                Descuento = item["% de descuento"].ToString();
-                            }
-                            fila += Descuento;
-                            writer.WriteLine(fila);
-                        }
-                    }
-                    //writer.Close();
-                }
-            }
-        }
-
-        public static void GenerarArchivo_MedicamentosYAccesoriosNoIncluidosEnAlfaBeta(string RutaNombreArchivo, DataTable pTabla)
-        {
-            if (pTabla != null && RutaNombreArchivo != null)
-            {
-                if (pTabla.Rows.Count > 0)
-                {
-                    string path = RutaNombreArchivo;
-                    FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write);
-                    //StreamWriter writer = new StreamWriter(stream);
-                    using (StreamWriter writer = new StreamWriter(stream))
-                    {
-                        string encabezado = string.Empty;
-                        encabezado += "Tipo" + Constantes.cSeparadorCSV;
-                        encabezado += "Producto" + Constantes.cSeparadorCSV;
-                        encabezado += "AlfaBeta" + Constantes.cSeparadorCSV;
-                        encabezado += "Troquel" + Constantes.cSeparadorCSV;
-                        encabezado += "CodBarraPrinc" + Constantes.cSeparadorCSV;
-                        encabezado += "Laboratorio" + Constantes.cSeparadorCSV;
-                        encabezado += "Precio" + Constantes.cSeparadorCSV;
-                        encabezado += "Neto" + Constantes.cSeparadorCSV;
-                        encabezado += "CadenaFrio" + Constantes.cSeparadorCSV;
-                        encabezado += "RequiereVale" + Constantes.cSeparadorCSV;
-                        encabezado += "Trazable";
-                        writer.WriteLine(encabezado);
-                        foreach (DataRow item in pTabla.Rows)
-                        {
-                            string fila = string.Empty;
-                            fila += item["Tipo"].ToString() + Constantes.cSeparadorCSV;
-                            fila += item["Producto"].ToString() + Constantes.cSeparadorCSV;
-                            fila += item["AlfaBeta"].ToString() + Constantes.cSeparadorCSV;
-                            fila += item["Troquel"].ToString() + Constantes.cSeparadorCSV;
-                            fila += item["CodBarraPrinc"].ToString() + Constantes.cSeparadorCSV;
-                            fila += item["Laboratorio"].ToString() + Constantes.cSeparadorCSV;
-                            fila += item["Precio"].ToString() + Constantes.cSeparadorCSV;
-                            fila += item["Neto"].ToString() + Constantes.cSeparadorCSV;
-                            fila += item["CadenaFrio"].ToString() + Constantes.cSeparadorCSV;
-                            fila += item["RequiereVale"].ToString() + Constantes.cSeparadorCSV;
-                            fila += item["Trazable"].ToString();
-
-                            writer.WriteLine(fila);
-                        }
-                    }
-                    //writer.Close();
-                }
-            }
+            cClientes oCliente = (cClientes)Session["clientesDefault_Cliente"];
+            var nameFile = DKbase.Util.GenerateDocument_getNameFile(id);
+            var fileStream = DKbase.Util.GenerateDocument(id, oCliente);
+            String f = DKbase.Util.GenerateDocument_getPathFile(id);
+            return File(fileStream, MimeMapping.GetMimeMapping(f), nameFile);
         }
     }
 }

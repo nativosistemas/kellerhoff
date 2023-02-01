@@ -99,7 +99,8 @@ namespace Kellerhoff.Controllers
         [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
         public ActionResult reservavacunas(string t)
         {
-            bool resultado = false;
+            return RedirectToAction("reservavacunas_mis");
+            /*bool resultado = false;
             if (!string.IsNullOrEmpty( t) && t == "1")
             {
                 resultado = true;
@@ -109,7 +110,7 @@ namespace Kellerhoff.Controllers
             if (!isUsuarioConPermisoPedido()) {
                 return RedirectToAction("reservavacunas_mis");
             }
-            return View();
+            return View();*/
         }
         [AuthorizePermisoAttribute(Permiso = "PEDIDOS", isCheckEstado = true)]
         public ActionResult reservavacunas_mis()
