@@ -457,40 +457,7 @@ namespace Kellerhoff.Codigo.capaDatos
         {
             return DKbase.web.capaDatos.capaSeguridad_base.obtenerStringEstado(pIdEstado);
         }
-        public static int CambiarContraseñaPersonal(int pUsu_codigo, string pPasswordViejo, string pPasswordNuevo)
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Seguridad.spCambiarContraseñaPersonal", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-
-            SqlParameter paUsu_codigo = cmdComandoInicio.Parameters.Add("@usu_codigo", SqlDbType.Int);
-            SqlParameter paPasswordViejo = cmdComandoInicio.Parameters.Add("@PasswordViejo", SqlDbType.NVarChar, 255);
-            SqlParameter paPasswordNuevo = cmdComandoInicio.Parameters.Add("@PasswordNuevo", SqlDbType.NVarChar, 255);
-            SqlParameter paUsu_codAccion = cmdComandoInicio.Parameters.Add("@usu_codAccion", SqlDbType.Int);
-
-            paUsu_codigo.Value = pUsu_codigo;
-            paPasswordViejo.Value = pPasswordViejo;
-            paPasswordNuevo.Value = pPasswordNuevo;
-            paUsu_codAccion.Value = Constantes.cACCION_CAMBIOCONTRASEÑA;
-
-            try
-            {
-                Conn.Open();
-                object resultado = cmdComandoInicio.ExecuteScalar();
-                return Convert.ToInt32(resultado);
-            }
-            catch (Exception ex)
-            {
-                return -1;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+   
 
       
 

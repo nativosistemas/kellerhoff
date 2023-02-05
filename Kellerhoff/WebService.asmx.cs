@@ -1113,15 +1113,15 @@ namespace Kellerhoff
         //    }
         //    return resultado;
         //}
-        public static int CambiarContraseñaUsuarioPersonal(int pIdUsuario, string pContraseñaVieja, string pContraseñaNueva)
-        {
-            int resultado = -1;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                resultado = capaSeguridad.CambiarContraseñaPersonal(pIdUsuario, pContraseñaVieja, pContraseñaNueva);
-            }
-            return resultado;
-        }
+        //public static int CambiarContraseñaUsuarioPersonal(int pIdUsuario, string pContraseñaVieja, string pContraseñaNueva)
+        //{
+        //    int resultado = -1;
+        //    if (VerificarPermisos(CredencialAutenticacion))
+        //    {
+        //        resultado = capaSeguridad_base.CambiarContraseñaPersonal(pIdUsuario, pContraseñaVieja, pContraseñaNueva);
+        //    }
+        //    return resultado;
+        //}
         //ESCONTRASEÑACORRECTA
         public static void AgregarHistorialProductoCarrito(int pIdCliente, string pIdProducto, int? pIdUsuario)
         {

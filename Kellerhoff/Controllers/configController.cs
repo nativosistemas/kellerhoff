@@ -435,16 +435,19 @@ namespace Kellerhoff.Controllers
         public int CambiarContraseñaPersonal(string pContraseñaVieja, string pContraseñaNueva)
         {
             int id = -1;
-            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null)
+
+            if (System.Web.HttpContext.Current.Session["clientesDefault_Usuario"] != null && System.Web.HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
+                cClientes cliente = (cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"];
+                Usuario usu = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
                 cUsuario objUsuario = null;
-                objUsuario = DKbase.Util.RecuperarUsuarioPorId(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                objUsuario = DKbase.Util.RecuperarUsuarioPorId(usu.id);
                 if (pContraseñaVieja == objUsuario.usu_pswDesencriptado)
                 {
-                    id = WebService.CambiarContraseñaUsuarioPersonal(((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).id, pContraseñaVieja, pContraseñaNueva);
-                    if (((Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"]).idRol == Constantes.cROL_ADMINISTRADORCLIENTE)
+                    id = capaSeguridad_base.CambiarContraseñaPersonal(usu.id, pContraseñaVieja, pContraseñaNueva);
+                    if (usu.idRol == Constantes.cROL_ADMINISTRADORCLIENTE)
                     {
-                        WebService.ModificarPasswordWEB(((cClientes)System.Web.HttpContext.Current.Session["clientesDefault_Cliente"]).cli_login, objUsuario.usu_pswDesencriptado, pContraseñaNueva);
+                        WebService.ModificarPasswordWEB(cliente.cli_login, objUsuario.usu_pswDesencriptado, pContraseñaNueva);
                     }
                 }
                 else { id = 0; }
@@ -493,7 +496,7 @@ namespace Kellerhoff.Controllers
         {
             if (Session["clientesDefault_Cliente"] == null)
                 return -1;
-           return DKbase.Util.GuardarUsuario((cClientes)Session["clientesDefault_Cliente"], pIdUsuario, pNombre, pApellido, pMail, pLogin, pContraseña, pObservaciones1, pListaPermisos);          
+            return DKbase.Util.GuardarUsuario((cClientes)Session["clientesDefault_Cliente"], pIdUsuario, pNombre, pApellido, pMail, pLogin, pContraseña, pObservaciones1, pListaPermisos);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public int CambiarEstadoUsuario(int pIdUsuario)
@@ -513,7 +516,7 @@ namespace Kellerhoff.Controllers
         {
             if (Session["clientesDefault_Usuario"] == null)
                 return -1;
-            return DKbase.Util.CambiarContraseñaUsuario((Usuario)Session["clientesDefault_Usuario"], pIdUsuario,  pPass);
+            return DKbase.Util.CambiarContraseñaUsuario((Usuario)Session["clientesDefault_Usuario"], pIdUsuario, pPass);
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public string ObtenerUsuarios()
