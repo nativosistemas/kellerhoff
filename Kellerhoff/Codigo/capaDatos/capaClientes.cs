@@ -356,40 +356,40 @@ namespace Kellerhoff.Codigo.capaDatos
                 }
             }
         }
-        public static decimal? RecuperarLimiteSaldo()
-        {
-            SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
-            SqlCommand cmdComandoInicio = new SqlCommand("Clientes.spRecuperarLimiteSaldo", Conn);
-            cmdComandoInicio.CommandType = CommandType.StoredProcedure;
-            try
-            {
-                Conn.Open();
-                DataTable dt = new DataTable();
-                SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
-                dt.Load(LectorSQLdata);
-                decimal? resultado = null;
-                if (dt.Rows.Count > 0)
-                {
-                    if (dt.Columns.Contains("tls_limiteSaldo"))
-                    {
-                        resultado = Convert.ToDecimal(dt.Rows[0]["tls_limiteSaldo"]);
-                    }
-                }
+        //public static decimal? RecuperarLimiteSaldo()
+        //{
+        //    SqlConnection Conn = new SqlConnection(accesoBD.ObtenerConexión());
+        //    SqlCommand cmdComandoInicio = new SqlCommand("Clientes.spRecuperarLimiteSaldo", Conn);
+        //    cmdComandoInicio.CommandType = CommandType.StoredProcedure;
+        //    try
+        //    {
+        //        Conn.Open();
+        //        DataTable dt = new DataTable();
+        //        SqlDataReader LectorSQLdata = cmdComandoInicio.ExecuteReader();
+        //        dt.Load(LectorSQLdata);
+        //        decimal? resultado = null;
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            if (dt.Columns.Contains("tls_limiteSaldo"))
+        //            {
+        //                resultado = Convert.ToDecimal(dt.Rows[0]["tls_limiteSaldo"]);
+        //            }
+        //        }
 
-                return resultado;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                if (Conn.State == ConnectionState.Open)
-                {
-                    Conn.Close();
-                }
-            }
-        }
+        //        return resultado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (Conn.State == ConnectionState.Open)
+        //        {
+        //            Conn.Close();
+        //        }
+        //    }
+        //}
   
         public static bool AgregarMontoMinimo(string suc_codigo, decimal suc_montoMinimo)
         {

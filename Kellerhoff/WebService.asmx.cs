@@ -1794,12 +1794,7 @@ namespace Kellerhoff
         }
         public static decimal? RecuperarLimiteSaldo()
         {
-            decimal? resultado = null;
-            if (VerificarPermisos(CredencialAutenticacion))
-            {
-                resultado = capaClientes.RecuperarLimiteSaldo();
-            }
-            return resultado;
+            return DKbase.Util.RecuperarLimiteSaldo();
         }
         //public static List<cFaltantesConProblemasCrediticiosPadre> RecuperarFaltasProblemasCrediticios(cClientes pCliente, int fpc_tipo, int pCantidadDia, string pSucursal)
         //{
