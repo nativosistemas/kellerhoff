@@ -236,6 +236,7 @@
     <Content Include="home\contacto.aspx" />
     <Content Include="home\contactocv.aspx" />
     <Content Include="home\lanzamiento.aspx" />
+    <Content Include="home\contactoCtaCte.aspx" />
     <Content Include="home\videoinstitucional.aspx" />
     <Content Include="home\empresa.aspx" />
     <Content Include="home\index.aspx" />
@@ -1615,6 +1616,13 @@
     </Compile>
     <Compile Include="home\lanzamiento.aspx.designer.cs">
       <DependentUpon>lanzamiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="home\contactoCtaCte.aspx.cs">
+      <DependentUpon>contactoCtaCte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="home\contactoCtaCte.aspx.designer.cs">
+      <DependentUpon>contactoCtaCte.aspx</DependentUpon>
     </Compile>
     <Compile Include="home\videoinstitucional.aspx.cs">
       <DependentUpon>videoinstitucional.aspx</DependentUpon>
