@@ -123,12 +123,12 @@ public class cPageClientes : System.Web.UI.Page
         public cArchivo objArchivo { get; set; }
 
     }
-    public class cPdfComprobante
-    {
-        public int index { get; set; }
-        public string nombreArchivo { get; set; }
-        public bool isOk { get; set; }
-    }
+    //public class cPdfComprobante
+    //{
+    //    public int index { get; set; }
+    //    public string nombreArchivo { get; set; }
+    //    public bool isOk { get; set; }
+    //}
     public class Class_Admin
     {
 
