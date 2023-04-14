@@ -34,6 +34,7 @@ namespace Kellerhoff
             DKbase.Helper.getMailContacto = System.Configuration.ConfigurationManager.AppSettings["mailContacto"].ToString();
             DKbase.Helper.getMailRegistracion = System.Configuration.ConfigurationManager.AppSettings["mailRegistracion"].ToString();
             DKbase.Helper.getMailRegistracionNoCliente = System.Configuration.ConfigurationManager.AppSettings["mailRegistracionNoCliente"].ToString();
+            DKbase.Helper.getMail_reclamos = System.Configuration.ConfigurationManager.AppSettings["mail_reclamos"].ToString();
         }
         //protected void Application_Error(object sender, EventArgs e)
         //{

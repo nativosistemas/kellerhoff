@@ -407,5 +407,30 @@ namespace Kellerhoff.Controllers
         {
             return WebService.enviarSolicitudSobresRemesa();
         }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public  ActionResult generar_factura_csv(string factura)
+        {
+            DKbase.web.capaDatos.cClientes oCliente = ((cClientes)Session["clientesDefault_Cliente"]);
+            string pathNameFile = DKbase.Util.generar_factura_csv(oCliente, factura);
+            if (!string.IsNullOrEmpty(pathNameFile))
+            {
+                try
+                {
+                    string contentType;
+                    //new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider().TryGetContentType(pathNameFile, out contentType);
+                    contentType =  "application/octet-stream";
+                    string Content_Disposition = "attachment; filename=" + factura + ".csv";
+                    byte[] bites = System.IO.File.ReadAllBytes(pathNameFile);
+                    Response.Headers.Add("Content-Disposition", Content_Disposition);
+                    return File(bites, contentType);
+                }
+                catch (Exception ex)
+                {
+                    DKbase.generales.Log.LogError(System.Reflection.MethodBase.GetCurrentMethod(), ex, DateTime.Now);
+                  //  return BadRequest();
+                }
+            }
+            return Content("BadRequest");
+        }
     }
 }
