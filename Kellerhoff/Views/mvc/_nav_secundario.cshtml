@@ -13,22 +13,26 @@
         case "Buscador":
         case "carrito":
             classBuscador = " class=\"active\" ";
+            classSubirpedido = " class=\"nuevo-sublink\" ";
             break;
         case "Diferido":
         case "carritoDiferido":
             classDiferido = " class=\"active\" ";
+            classSubirpedido = " class=\"nuevo-sublink\" ";
             break;
         case "subirpedido":
         case "subirarchivoresultado":
         case "subirarchivoresultado_msg":
-            classSubirpedido = " class=\"active\" ";
+            classSubirpedido = " class=\"nuevo-sublink active\" ";
             break;
         case "estadopedidos":
         case "estadopedidosresultado":
             classEstadopedidos = " class=\"active\" ";
+            classSubirpedido = " class=\"nuevo-sublink\" ";
             break;
         case "recuperador":
             classRecuperador = " class=\"active\" ";
+            classSubirpedido = " class=\"nuevo-sublink\" ";
             break;
         case "promocionescliente":
             if (Session["promocionescliente_TIPO"] != null && Session["promocionescliente_TIPO"].ToString() == "1")
@@ -37,11 +41,13 @@
             }
             else { classPromocionesCliente = " active "; }
 
+            classSubirpedido = " class=\"nuevo-sublink\" ";
             break;
         case "reservavacunas":
         case "reservavacunas_mis":
         case "reservavacunas_total":
             classReservaVacunas = " class=\"active\" ";
+            classSubirpedido = " class=\"nuevo-sublink\" ";
             break;
         default:
             break;
@@ -75,7 +81,7 @@
                 {
                     <a href="/mvc/recuperador?t=1" @{WriteLiteral(classRecuperador);}><i class="fa fa-recycle" title="RECUPERADOR"></i><span class="hidden-sm hidden-xs">RECUPERADOR</span></a>
                     <div class="separate"></div>
-                    <a href="/mvc/subirpedido" @{ WriteLiteral(classSubirpedido);}><i class="fa fa-upload" title="SUBIR PEDIDOS"></i><span class="hidden-sm hidden-xs">SUBIR PEDIDOS</span></a>
+                    <a data-fecha="2023-07-01" href="/mvc/subirpedido" @{ WriteLiteral(classSubirpedido);}><i class="fa fa-upload" title="SUBIR PEDIDOS"></i><span class="hidden-sm hidden-xs">SUBIR PEDIDOS</span></a>
                     <div class="separate"></div>
                 }
             }

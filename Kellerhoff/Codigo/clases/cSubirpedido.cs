@@ -8,6 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Kellerhoff.Codigo.clases
 {
@@ -61,7 +63,16 @@ namespace Kellerhoff.Codigo.clases
                     }
                     string nombreCompleto = NombreArchivo + SegundaParteNombre + "." + ExtencionArchivo;
                     pFileUpload.SaveAs(rutaTemporal + nombreCompleto);
-                    resultado = LeerArchivoPedido_Generica(nombreCompleto, pSucursal, nombreCompletoOriginal, isNombreRepetido);
+
+
+                    if (ExtencionArchivo.ToUpper() == "XLSX")
+                    {
+                        resultado = LeerArchivoPedido_Excel(nombreCompleto, pSucursal, nombreCompletoOriginal, isNombreRepetido);
+                    }
+                    else
+                    {
+                        resultado = LeerArchivoPedido_Generica(nombreCompleto, pSucursal, nombreCompletoOriginal, isNombreRepetido);
+                    }
                 }
             }
             return resultado;
@@ -149,25 +160,97 @@ namespace Kellerhoff.Codigo.clases
                     objReader.Close();
                     if (!isArchivoErroneo)
                     {
-                        string sucElegida = pSucursal;// HiddenFieldSucursalEleginda.Value;
-                        HttpContext.Current.Session["subirpedido_SucursalEleginda"] = sucElegida;
-                        HttpContext.Current.Session["subirpedido_ListaProductos"] = WebService.AgregarProductoAlCarritoDesdeArchivoPedidosV5(sucElegida, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc, tablaArchivoPedidos, TipoArchivo, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_isGLN, ((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id);
-
-
-                        //if (pIsNombreRepetido == null || pIsNombreRepetido.Value)
-                        //{
-                            HttpContext.Current.Session["subirpedido_nombreArchivoCompleto"] = pNombreArchivo;
-                            HttpContext.Current.Session["subirpedido_nombreArchivoCompletoOriginal"] = pNombreArchivoOriginal;
-                        //}
-                        //else
-                        //{
-                            DKbase.Util.AgregarHistorialSubirArchivo(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, sucElegida, pNombreArchivo, pNombreArchivoOriginal, DateTime.Now);
-                        //}
+                        ProcesarArchivoPedido(pSucursal, pNombreArchivo, pNombreArchivoOriginal, pIsNombreRepetido, TipoArchivo, tablaArchivoPedidos);
                     }
                 }
             }
             return resultado;
         }
+        private static Boolean? LeerArchivoPedido_Excel(string pNombreArchivo, string pSucursal, string pNombreArchivoOriginal, Boolean? pIsNombreRepetido)
+        {
+            string TipoArchivo = "E";
+            Boolean? resultado = false;
+            if (!string.IsNullOrWhiteSpace(pNombreArchivo))
+            {
+                string rutaTemporal = Constantes.cRaizArchivos + @"\archivos\ArchivosPedidos\";
+                string rutaTemporalAndNombreArchivo = rutaTemporal + pNombreArchivo;
+                if (System.IO.File.Exists(rutaTemporalAndNombreArchivo))
+                {
+                    resultado = true;
+                    try
+                    {
+                        using (var document = SpreadsheetDocument.Open(rutaTemporalAndNombreArchivo, false))
+                        {
+                            WorkbookPart workbookPart = document.WorkbookPart;
+                            IEnumerable<Sheet> sheets = workbookPart.Workbook.Descendants<Sheet>();
+                            Sheet hojaDeseada = sheets.FirstOrDefault();
+
+                            WorksheetPart worksheetPart = (WorksheetPart)workbookPart.GetPartById(hojaDeseada.Id);
+                            Worksheet worksheet = worksheetPart.Worksheet;
+
+                            if (worksheet != null)
+                            {
+                                DataTable tablaArchivoPedidos = FuncionesPersonalizadas_base.ObtenerDataTableProductosCarritoArchivosPedidos();
+
+                                SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+                                foreach (Row excelRow in sheetData.Elements<Row>().Skip(1))
+                                {
+                                    DataRow r = LeerRenglonArchivoExcel(tablaArchivoPedidos, worksheet, excelRow, workbookPart);
+                                    if (r != null)
+                                        tablaArchivoPedidos.Rows.Add(r);
+                                }
+                                ProcesarArchivoPedido(pSucursal, pNombreArchivo, pNombreArchivoOriginal, pIsNombreRepetido, TipoArchivo, tablaArchivoPedidos);
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        resultado = null;
+                    }
+                }
+            }
+            return resultado;
+        }
+
+        private static void ProcesarArchivoPedido(string pSucursal, string pNombreArchivo, string pNombreArchivoOriginal, Boolean? pIsNombreRepetido, string TipoArchivo, DataTable tablaArchivoPedidos)
+        {
+            string sucElegida = pSucursal;// HiddenFieldSucursalEleginda.Value;
+            HttpContext.Current.Session["subirpedido_SucursalEleginda"] = sucElegida;
+            HttpContext.Current.Session["subirpedido_ListaProductos"] = WebService.AgregarProductoAlCarritoDesdeArchivoPedidosV5(sucElegida, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codsuc, tablaArchivoPedidos, TipoArchivo, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codprov, ((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_isGLN, ((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+
+            HttpContext.Current.Session["subirpedido_nombreArchivoCompleto"] = pNombreArchivo;
+            HttpContext.Current.Session["subirpedido_nombreArchivoCompletoOriginal"] = pNombreArchivoOriginal;
+
+            DKbase.Util.AgregarHistorialSubirArchivo(((cClientes)HttpContext.Current.Session["clientesDefault_Cliente"]).cli_codigo, sucElegida, pNombreArchivo, pNombreArchivoOriginal, DateTime.Now);
+        }
+
+        public static DataRow LeerRenglonArchivoExcel(DataTable tabla, Worksheet worksheet, Row excelRow, WorkbookPart workbookPart)
+        {
+            var cellValues = excelRow.Elements<Cell>().Select(c => GetCellValue(c, workbookPart)).ToList();
+
+            string strCodBarra = cellValues[0];
+            string strCantidad = cellValues[1];
+
+            if (!string.IsNullOrEmpty(strCodBarra))
+                return FuncionesPersonalizadas_base.ConvertProductosCarritoArchivosPedidosToDataRow(tabla, null, Convert.ToInt32(strCantidad), strCodBarra, string.Empty, string.Empty, "E");
+
+            return null;
+        }
+
+        private static string GetCellValue(Cell cell, WorkbookPart workbookPart)
+        {
+            if (cell.DataType == null)
+            {
+                return cell.InnerText;
+            }
+            else if (cell.DataType.Value == CellValues.Number)
+            {
+                return cell.InnerText;
+            }
+
+            return string.Empty;
+        }
+
         public static DataRow LeerRenglonArchivoTXT(DataTable pTabla, string pRenglon)
         {
             //DataRow r = null;
@@ -278,9 +361,24 @@ namespace Kellerhoff.Codigo.clases
             {
                 cHistorialArchivoSubir objHistorialArchivoSubir = DKbase.Util.RecuperarHistorialSubirArchivoPorId(has_id);
                 if (objHistorialArchivoSubir != null)
-                    isRedireccionar = LeerArchivoPedido_Generica(objHistorialArchivoSubir.has_NombreArchivo, objHistorialArchivoSubir.has_sucursal, objHistorialArchivoSubir.has_NombreArchivoOriginal, null);
+                {
+                    string extensionArchivo = Path.GetExtension(objHistorialArchivoSubir.has_NombreArchivoOriginal).ToUpper();
+
+                    if (extensionArchivo.Replace(".", "") == "XLSX")
+                    {
+                        isRedireccionar = LeerArchivoPedido_Excel(objHistorialArchivoSubir.has_NombreArchivo, objHistorialArchivoSubir.has_sucursal, objHistorialArchivoSubir.has_NombreArchivoOriginal, null);
+                    }
+                    else
+                    {
+                        isRedireccionar = LeerArchivoPedido_Generica(objHistorialArchivoSubir.has_NombreArchivo, objHistorialArchivoSubir.has_sucursal, objHistorialArchivoSubir.has_NombreArchivoOriginal, null);
+                    }
+                }
+                return isRedireccionar;
             }
-            return isRedireccionar;
+            else
+            {
+                return null;
+            }
         }
     }
 }
