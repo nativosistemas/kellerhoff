@@ -31,7 +31,7 @@
     @RenderSection("head", required: false)
     <link href="../includes/mvc/css/main.css?n=22" rel="stylesheet">
     <link href="../includes/mvc/css/select2.min.css?n=3" rel="stylesheet">
-    <link href="../includes/mvc/css/main-overwrite.css?n=57" rel="stylesheet">
+    <link href="../includes/mvc/css/main-overwrite.css?n=58" rel="stylesheet">
 </head>
 @{
     if (Session["clientesDefault_Usuario"] != null &&
@@ -285,24 +285,24 @@
                     }
                     if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_DEVOLUCIONES))
                     {
-                        <li>
-                            <a class="s_menu nuevo-celu" id="filter_6" href="#" data-fecha="2021-01-01">DEVOLUCIONES<i id="angle_filter_6" class="fa fa-angle-down"></i></a>
-                            <div class="div_filter" id="d_filter_6">
-                                <a href="/devoluciones/Devoluciones"><i class="fa fa-file-text"></i>DEVOLUCIONES</a>
-                                @{
-                                    if (Session["clientesDefault_Usuario"] != null &&
-                                        (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
-                                        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
-                                        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL &&
-                                        ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_GRUPOCLIENTE))
-                                    {
-                                        <a href="/devoluciones/NuevaDevolucion"><i class="fa fa-reply"></i>DEVOLUCIÓN NORMAL</a>
-                                        <a href="/devoluciones/NuevaDevolucionVencidos"><i class="fa fa-calendar-minus-o"></i>DEVOLUCIÓN DE VENCIDOS</a>
-                                        <a href="/devoluciones/DevolucionesFacturadoNoEnviado" class="nuevo-celu" data-fecha="2021-06-01"><i class="fa fa-calendar-minus-o"></i>FACTURADO NO ENVIADO</a>
-                                    }
-                                }
-                            </div>
-                        </li>
+            <li>
+                <a class="s_menu" id="filter_6" href="#">DEVOLUCIONES<i id="angle_filter_6" class="fa fa-angle-down"></i></a>
+                <div class="div_filter" id="d_filter_6">
+                    <a href="/devoluciones/Devoluciones"><i class="fa fa-file-text"></i>DEVOLUCIONES</a>
+                    @{
+                        if (Session["clientesDefault_Usuario"] != null &&
+                            (((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_PROMOTOR &&
+                            ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCSUCURSAL &&
+                            ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_ENCGRAL &&
+                            ((DKbase.web.Usuario)Session["clientesDefault_Usuario"]).idRol != Kellerhoff.Codigo.clases.Constantes.cROL_GRUPOCLIENTE))
+                        {
+                            <a href="/devoluciones/NuevaDevolucion"><i class="fa fa-reply"></i>DEVOLUCIÓN NORMAL</a>
+                            <a href="/devoluciones/NuevaDevolucionVencidos"><i class="fa fa-calendar-minus-o"></i>DEVOLUCIÓN DE VENCIDOS</a>
+                            <a href="/devoluciones/DevolucionesFacturadoNoEnviado"><i class="fa fa-calendar-minus-o"></i>FACTURADO NO ENVIADO</a>
+                        }
+                    }
+                </div>
+            </li>
                     }
                     if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.IsPermisoSeccion(Kellerhoff.Codigo.clases.Constantes.cSECCION_CUENTASCORRIENTES))
                     {
