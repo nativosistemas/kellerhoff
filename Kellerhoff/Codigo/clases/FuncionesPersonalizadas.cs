@@ -44,6 +44,25 @@ namespace Kellerhoff.Codigo.clases
             resultado.AddRange(WebService.RecuperarTodosClientes());
             return resultado;
         }
+        public static bool isForceChangePasswordFindCliente()
+        {
+            bool result = false;
+
+            if (HttpContext.Current.Session["isForceChangePasswordFindCliente"] == null)
+            {
+                cClientes oClientes = null;
+                if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                {
+                    oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                    HttpContext.Current.Session["isForceChangePasswordFindCliente"] = DKbase.Util.spForceChangePasswordFindCliente(oClientes.cli_codigo);
+                }
+            }
+            if (HttpContext.Current.Session["isForceChangePasswordFindCliente"] != null)
+            {
+                result = (bool)HttpContext.Current.Session["isForceChangePasswordFindCliente"];
+            }
+            return result;
+        }
 
         public static List<string> RecuperarPalabrasYaBuscadaSinRepetir(int? pIdUsuario, string pNombreTabla)
         {

@@ -613,7 +613,7 @@
                     List<DKbase.web.capaDatos.cArchivo> listaPopUp = WebService.RecuperarPopUpPorCliente(oCli.cli_codigo, oCli.cli_codsuc);
                     resultado += "<input type=\"hidden\" id=\"hiddenListaPopUp\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.Generales.Serializador.SerializarAJson(listaPopUp)) + "\" />";
                 }
-                resultado += "<input type=\"hidden\" id=\"hiddenIsForceChangePassword\" value=\"" + Server.HtmlEncode(DKbase.Util.spForceChangePasswordFindCliente(oCli.cli_codigo) ? "1" : "0") + "\" />";                
+               // resultado += "<input type=\"hidden\" id=\"hiddenIsForceChangePassword\" value=\"" + Server.HtmlEncode(Kellerhoff.Codigo.clases.FuncionesPersonalizadas.isForceChangePasswordFindCliente() ? "1" : "0") + "\" />";
             }
         }
 

@@ -14,7 +14,7 @@ var longMensajeImportanteMostrar = null;
 var listaPopUp = null;
 var longPopUpMostrar = null;
 var listaLog = null;
-var IsForceChangePassword = null;
+//var IsForceChangePassword = null;
 
 function cCarrito() {
     this.lrc_id = -1;
@@ -62,19 +62,19 @@ $(document).ready(function () {
             cliente = null;
         }
     }
-    if (IsForceChangePassword == null) {
-        IsForceChangePassword = $('#hiddenIsForceChangePassword').val();
-        if (typeof IsForceChangePassword == 'undefined') {
-            IsForceChangePassword = null;
-        }
-        if (IsForceChangePassword == null) {
-            IsForceChangePassword = false;
-        } else if (IsForceChangePassword == '1') {
-            IsForceChangePassword = true;
-        } else {
-            IsForceChangePassword = false;
-        }
-    }
+    //if (IsForceChangePassword == null) {
+    //    IsForceChangePassword = $('#hiddenIsForceChangePassword').val();
+    //    if (typeof IsForceChangePassword == 'undefined') {
+    //        IsForceChangePassword = null;
+    //    }
+    //    if (IsForceChangePassword == null) {
+    //        IsForceChangePassword = false;
+    //    } else if (IsForceChangePassword == '1') {
+    //        IsForceChangePassword = true;
+    //    } else {
+    //        IsForceChangePassword = false;
+    //    }
+    //}
     if (listaMensajeImportanteMostrar == null) {
         listaMensajeImportanteMostrar = eval('(' + $('#hiddenListaMensajeImportante').val() + ')');
         if (typeof listaMensajeImportanteMostrar == 'undefined') {
@@ -93,12 +93,12 @@ $(document).ready(function () {
     if (listaPopUp != null) {
         longPopUpMostrar = listaPopUp.length;
     }
-    if (IsForceChangePassword) {
-        location.href = '../config/changePassword';
-    }
-    else {
-        setTimeout(function () { MostrarMensajeImportante(); }, 300);
-    }
+    //if (IsForceChangePassword) {
+    //    location.href = '../config/changePassword';
+    //}
+    //else {
+    setTimeout(function () { MostrarMensajeImportante(); }, 300);
+    //}
 
 });
 function MostrarMensajePopUp() {

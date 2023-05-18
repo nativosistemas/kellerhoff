@@ -37,6 +37,13 @@ namespace Kellerhoff.Filters
                     user = HttpContext.Current.Session["clientesDefault_Usuario"];
                     HttpContext.Current.Session["UsrAdmin"] = null;
                 }
+                var request = HttpContext.Current.Request;
+                var path = request.Path; // Obtiene la ruta URL actual
+
+                if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.isForceChangePasswordFindCliente() && !path.ToString().ToLower().Contains("changePassword".ToLower()))
+                {
+                    return false;
+                }
                 if (user != null)
                 {
 
@@ -72,6 +79,11 @@ namespace Kellerhoff.Filters
                 HttpContext.Current.Session["UsrAdmin"] = null;
             }
 
+            if (Kellerhoff.Codigo.clases.FuncionesPersonalizadas.isForceChangePasswordFindCliente())
+            {
+                filterContext.Result = new RedirectResult("/config/changePassword");
+                return;
+            }
             if (user != null)
             {
                 if (Permiso == Constantes.cSECCION_CUENTASCORRIENTES)

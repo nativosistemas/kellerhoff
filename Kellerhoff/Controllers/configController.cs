@@ -109,6 +109,7 @@ namespace Kellerhoff.Controllers
             System.Web.HttpContext.Current.Session["TodosSucursalDependienteTipoEnvioCliente"] = null;
             System.Web.HttpContext.Current.Session["RecuperarTiposDeEnvios"] = null;
             System.Web.HttpContext.Current.Session["RecuperarTodosCadeteriaRestricciones"] = null;
+            System.Web.HttpContext.Current.Session["isForceChangePasswordFindCliente"] = null;
 
             return Content("Ok");
         }
@@ -419,7 +420,8 @@ namespace Kellerhoff.Controllers
         {
             Usuario usu = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
             System.Web.HttpContext.Current.Session["perfil_CambiarContraseña"] = CambiarContraseñaPersonal(usu.usu_pswDesencriptado, idContraseniaNueva);
-            DKbase.Util.spForceChangePasswordHistoryAdd(usu.usu_codCliente.Value, usu.id,DKbase.generales.Constantes.cSQL_CAMBIOCONTRASEÑA);
+            System.Web.HttpContext.Current.Session["isForceChangePasswordFindCliente"] = null;
+          DKbase.Util.spForceChangePasswordHistoryAdd(usu.usu_codCliente.Value, usu.id,DKbase.generales.Constantes.cSQL_CAMBIOCONTRASEÑA);
             DKbase.Util.spForceChangePasswordDeleteCliente(usu.usu_codCliente.Value);
             return RedirectToAction("Buscador", "mvc");
         }
