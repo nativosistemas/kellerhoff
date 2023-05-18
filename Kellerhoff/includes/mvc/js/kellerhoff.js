@@ -14,7 +14,7 @@ var longMensajeImportanteMostrar = null;
 var listaPopUp = null;
 var longPopUpMostrar = null;
 var listaLog = null;
-
+var IsForceChangePassword = null;
 
 function cCarrito() {
     this.lrc_id = -1;
@@ -62,7 +62,19 @@ $(document).ready(function () {
             cliente = null;
         }
     }
-
+    if (IsForceChangePassword == null) {
+        IsForceChangePassword = $('#hiddenIsForceChangePassword').val();
+        if (typeof IsForceChangePassword == 'undefined') {
+            IsForceChangePassword = null;
+        }
+        if (IsForceChangePassword == null) {
+            IsForceChangePassword = false;
+        } else if (IsForceChangePassword == '1') {
+            IsForceChangePassword = true;
+        } else {
+            IsForceChangePassword = false;
+        }
+    }
     if (listaMensajeImportanteMostrar == null) {
         listaMensajeImportanteMostrar = eval('(' + $('#hiddenListaMensajeImportante').val() + ')');
         if (typeof listaMensajeImportanteMostrar == 'undefined') {
@@ -81,8 +93,12 @@ $(document).ready(function () {
     if (listaPopUp != null) {
         longPopUpMostrar = listaPopUp.length;
     }
-    setTimeout(function () { MostrarMensajeImportante(); }, 300);
-
+    if (IsForceChangePassword) {
+        location.href = '../config/changePassword';
+    }
+    else {
+        setTimeout(function () { MostrarMensajeImportante(); }, 300);
+    }
 
 });
 function MostrarMensajePopUp() {
@@ -215,9 +231,9 @@ function onclickSignOff() {
         type: "POST",
         url: "/config/SignOff",
         success:
-        function (response) {
-            OnCallBackSignOff(response);
-        },
+            function (response) {
+                OnCallBackSignOff(response);
+            },
         failure: function (response) {
             OnFail(response);
         },
@@ -395,7 +411,7 @@ $('.buttonontop').click(function () {
 
 var h = $(window).height();
 var $document = $(document),
-	$element = $('#hdr');
+    $element = $('#hdr');
 $document.scroll(function () {
     if ($document.scrollTop() >= 150) {
         $('#hdr').removeClass("navbar-default navbar-static-top");
@@ -630,8 +646,8 @@ function isMostrarImput_pedirCC(pPro_codtpopro, pSucursalEvaluar, pListaSucursal
         pSucursalEvaluar == 'CC' && // Casa central
         !sucursalInfo.suc_pedirCC_ok &&
         ((pPro_codtpopro == 'P' &&
-        sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)//TIPOPRODUCTO_Perfumeria
-        || !sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)) {
+            sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)//TIPOPRODUCTO_Perfumeria
+            || !sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)) {
         var sucReferencia = cli_codsuc();
         if (sucursalInfo.suc_pedirCC_sucursalReferencia != null) {
             sucReferencia = sucursalInfo.suc_pedirCC_sucursalReferencia;
@@ -648,7 +664,7 @@ function isMostrarImput_pedirCC(pPro_codtpopro, pSucursalEvaluar, pListaSucursal
     return true;
 }
 function MostrarImputPerfu(pPro_codtpopro, pSucursalEvaluar) {
-    
+
     if (listaSucursales != null) {
         for (var iSucursal = 0; iSucursal < listaSucursales.length; iSucursal++) {
             if (listaSucursales[iSucursal].sde_sucursal === pSucursalEvaluar && listaSucursales[iSucursal].suc_trabajaPerfumeria) {
@@ -667,10 +683,10 @@ function getCantidad_SubirArchivo_pedirCC(pPro_codtpopro, pSucursalEvaluar, pLis
             sucReferencia = sucursalInfo.suc_pedirCC_sucursalReferencia;
         }
         if (pSucursalEvaluar == sucReferencia &&
-           !sucursalInfo.suc_pedirCC_ok &&
+            !sucursalInfo.suc_pedirCC_ok &&
             ((pPro_codtpopro == 'P' &&
-        sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)//TIPOPRODUCTO_Perfumeria
-        || !sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)) //TIPOPRODUCTO_Perfumeria
+                sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)//TIPOPRODUCTO_Perfumeria
+                || !sucursalInfo.suc_pedirCC_tomaSoloPerfumeria)) //TIPOPRODUCTO_Perfumeria
         {
             for (var iSucursal = 0; iSucursal < pListaSucursalStocks.length; iSucursal++) {
                 if (pListaSucursalStocks[iSucursal].stk_codsuc === 'CC') {// Casa central

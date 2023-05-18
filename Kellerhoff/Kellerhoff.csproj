@@ -1875,6 +1875,7 @@
     <Content Include="Views\mvc\_scripts_subirArchivo.cshtml" />
     <Content Include="Views\config\action.cshtml" />
     <Content Include="Views\config\loginbot.cshtml" />
+    <Content Include="Views\config\changePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

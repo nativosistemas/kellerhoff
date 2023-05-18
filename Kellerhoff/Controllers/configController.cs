@@ -382,6 +382,23 @@ namespace Kellerhoff.Controllers
             }
             return View();
         }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public ActionResult changePassword()
+        {
+            //ViewBag.ContraseniaNueva = null;
+            //ViewBag.ContraseniaVieja = null;
+            //ViewBag.ContraseniaNuevaRepetir = null;
+            //if (System.Web.HttpContext.Current.Session["perfil_CambiarContraseña"] != null &&
+            //    Convert.ToInt32(System.Web.HttpContext.Current.Session["perfil_CambiarContraseña"]) == 0 &&
+            //    System.Web.HttpContext.Current.Session["perfil_idContraseniaVieja"] != null &&
+            //    System.Web.HttpContext.Current.Session["perfil_idContraseniaNueva"] != null)
+            //{
+            //    ViewBag.ContraseniaVieja = System.Web.HttpContext.Current.Session["perfil_idContraseniaVieja"].ToString();
+            //    ViewBag.ContraseniaNueva = System.Web.HttpContext.Current.Session["perfil_idContraseniaNueva"].ToString();
+            //    ViewBag.ContraseniaNuevaRepetir = System.Web.HttpContext.Current.Session["perfil_idContraseniaNueva"].ToString();
+            //}
+            return View();
+        }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador", isCheckOPERADORCLIENTE = true)]
         public ActionResult usuarios()
         {
@@ -395,6 +412,16 @@ namespace Kellerhoff.Controllers
             System.Web.HttpContext.Current.Session["perfil_idContraseniaNueva"] = idContraseniaNueva;
             System.Web.HttpContext.Current.Session["perfil_CambiarContraseña"] = CambiarContraseñaPersonal(idContraseniaVieja, idContraseniaNueva);
             return RedirectToAction("perfil");
+        }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        [HttpPost]
+        public ActionResult ActionChangePassword( string idContraseniaNueva)
+        {
+            Usuario usu = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+            System.Web.HttpContext.Current.Session["perfil_CambiarContraseña"] = CambiarContraseñaPersonal(usu.usu_pswDesencriptado, idContraseniaNueva);
+            DKbase.Util.spForceChangePasswordHistoryAdd(usu.usu_codCliente.Value, usu.id,DKbase.generales.Constantes.cSQL_CAMBIOCONTRASEÑA);
+            DKbase.Util.spForceChangePasswordDeleteCliente(usu.usu_codCliente.Value);
+            return RedirectToAction("Buscador", "mvc");
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public ActionResult mediosdepago1()
