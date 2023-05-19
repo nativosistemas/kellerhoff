@@ -16,6 +16,8 @@ namespace Kellerhoff.Controllers
     public class devolucionesController : Controller
     {
         // GET: devoluciones
+
+        [AuthorizePermisoAttribute()]
         public ActionResult Devoluciones()
         {
             if (Session["clientesDefault_Cliente"] == null)
