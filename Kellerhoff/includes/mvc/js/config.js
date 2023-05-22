@@ -39,7 +39,7 @@ jQuery(document).ready(function () {
         }
     }
     if (listaCatalogo == null) {
-        listaCatalogo = eval('(' +  $('#hiddenListaCatalogo').val() +  ')');
+        listaCatalogo = eval('(' + $('#hiddenListaCatalogo').val() + ')');
         if (typeof listaCatalogo == 'undefined') {
             listaCatalogo = null;
         }
@@ -274,14 +274,25 @@ function onclickGuardarPerfil() {
     return true;
 
 }
-function onclickGuardarChangePass(){
-    if ($('#idContraseniaNueva').val() != $('#idContraseniaNuevaRepetir').val()) {
+function onclickGuardarChangePass() {
+    if (!($('#idContraseniaNueva').val() === $('#idContraseniaNuevaRepetir').val())) {
         var strMsg = 'La contraseña debe coincidir';
         mensaje_informacion_generico(strMsg);
         return false;
     }
-    return true;
+    funCambiarContrasenia($('#idContraseniaNueva').val());
+    return false;
 
+}
+function successFunChangePassword(pValue) {
+    if (pValue === 'Ok') {
+        localStorage['pass'] = $('#idContraseniaNueva').val();
+        location.href = '../mvc/Buscador';
+    }
+    else {
+        var strMsg = 'La contraseña tiene que ser diferente de la antigua';
+        mensaje_informacion_generico(strMsg);
+    }
 }
 function usuarioNuevo() {
     indexUsuario = null;
@@ -436,7 +447,7 @@ function OnCallBackGuardarUsuario(args) {
     if (args == '-2') {
         var strMsg = 'Login repetido';
         mensaje_informacion_generico(strMsg);
-    } else { 
+    } else {
         //location.href = '../config/usuarios';
         ObtenerUsuarios();
     }
@@ -473,7 +484,7 @@ function OnCallBackCambiarContraseñaUsuario(args) {
 }
 
 function onsubmitCambiarContraseñaUsuario() {
-    var pass = $('#txtPassCambiar').val();   
+    var pass = $('#txtPassCambiar').val();
     CambiarContraseñaUsuario(listaUsuarios[indexUsuario].usu_codigo, pass);
     return false;
 }

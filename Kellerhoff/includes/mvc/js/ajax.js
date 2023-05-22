@@ -1230,27 +1230,27 @@ function enviarReservaVacunas(pValue) {
         }
     });
 }
-//function ObtenerTotalReservasDeVacunasPorClienteEntreFechas() {
-//    showCargandoBuscador();
-//    $.ajax({
-//        type: "POST",
-//        url: "/mvc/ObtenerTotalReservasDeVacunasPorClienteEntreFechas",
-//        //data: { pListaVacunas: pValue },
-//        success:
-//            function (response) {
-//                hideCargandoBuscador();
-//                mensaje_ReservaVacunas();
-//                limpiarReservarVacunas();
-//            },
-//        failure: function (response) {
-
-//            hideCargandoBuscador();
-//            OnFail(response);
-//        },
-//        error: function (response) {
-
-//            hideCargandoBuscador();
-//            OnFail(response);
-//        }
-//    });
-//}
+function funCambiarContrasenia(pValue) {
+    showCargandoBuscador();
+    $.ajax({
+        type: "POST",
+        url: "/config/funChangePassword",
+        data: { idContraseniaNueva: pValue },
+        success:
+            function (response) {
+                hideCargandoBuscador();
+                successFunChangePassword(response);
+                //limpiarReservarVacunas();
+            },
+        failure: function (response) {
+            //isOnclickReservarVacunas = false;
+            hideCargandoBuscador();
+            OnFail(response);
+        },
+        error: function (response) {
+            //isOnclickReservarVacunas = false;
+            hideCargandoBuscador();
+            OnFail(response);
+        }
+    });
+}

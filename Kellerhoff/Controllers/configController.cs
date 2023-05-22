@@ -416,14 +416,32 @@ namespace Kellerhoff.Controllers
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         [HttpPost]
-        public ActionResult ActionChangePassword( string idContraseniaNueva)
+        public ActionResult ActionChangePassword(string idContraseniaNueva)
         {
             Usuario usu = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
-            System.Web.HttpContext.Current.Session["perfil_CambiarContraseña"] = CambiarContraseñaPersonal(usu.usu_pswDesencriptado, idContraseniaNueva);
-            System.Web.HttpContext.Current.Session["isForceChangePasswordFindCliente"] = null;
-          DKbase.Util.spForceChangePasswordHistoryAdd(usu.usu_codCliente.Value, usu.id,DKbase.generales.Constantes.cSQL_CAMBIOCONTRASEÑA);
-            DKbase.Util.spForceChangePasswordDeleteCliente(usu.usu_codCliente.Value);
-            return RedirectToAction("Buscador", "mvc");
+            if (usu.usu_pswDesencriptado != idContraseniaNueva)
+            {
+                System.Web.HttpContext.Current.Session["perfil_CambiarContraseña"] = CambiarContraseñaPersonal(usu.usu_pswDesencriptado, idContraseniaNueva);
+                System.Web.HttpContext.Current.Session["isForceChangePasswordFindCliente"] = null;
+                DKbase.Util.spForceChangePasswordHistoryAdd(usu.usu_codCliente.Value, usu.id, DKbase.generales.Constantes.cSQL_CAMBIOCONTRASEÑA);
+                DKbase.Util.spForceChangePasswordDeleteCliente(usu.usu_codCliente.Value);
+                return RedirectToAction("Buscador", "mvc");
+            }
+            return RedirectToAction("changePassword", "config");
+        }
+        [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
+        public string funChangePassword(string idContraseniaNueva)
+        {
+            Usuario usu = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+            if (usu.usu_pswDesencriptado != idContraseniaNueva)
+            {
+                System.Web.HttpContext.Current.Session["perfil_CambiarContraseña"] = CambiarContraseñaPersonal(usu.usu_pswDesencriptado, idContraseniaNueva);
+                System.Web.HttpContext.Current.Session["isForceChangePasswordFindCliente"] = null;
+                DKbase.Util.spForceChangePasswordHistoryAdd(usu.usu_codCliente.Value, usu.id, DKbase.generales.Constantes.cSQL_CAMBIOCONTRASEÑA);
+                DKbase.Util.spForceChangePasswordDeleteCliente(usu.usu_codCliente.Value);
+                return "Ok";
+            }
+            return "SeRepiteContraseña";
         }
         [AuthorizePermisoAttribute(Permiso = "mvc_Buscador")]
         public ActionResult mediosdepago1()
