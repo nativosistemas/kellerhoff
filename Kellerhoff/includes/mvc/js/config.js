@@ -275,6 +275,10 @@ function onclickGuardarPerfil() {
 
 }
 function onclickGuardarChangePass() {
+    var varPass = $('#idContraseniaNueva').val();
+    if (varPass == null || varPass == '') {
+        return false;
+    }
     if (!($('#idContraseniaNueva').val() === $('#idContraseniaNuevaRepetir').val())) {
         var strMsg = 'La contraseña debe coincidir';
         mensaje_informacion_generico(strMsg);
