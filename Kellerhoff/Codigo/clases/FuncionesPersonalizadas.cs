@@ -51,10 +51,14 @@ namespace Kellerhoff.Codigo.clases
             if (HttpContext.Current.Session["isForceChangePasswordFindCliente"] == null)
             {
                 cClientes oClientes = null;
-                if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                if (HttpContext.Current.Session["clientesDefault_Cliente"] != null && HttpContext.Current.Session["clientesDefault_Usuario"] != null)
                 {
-                    oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
-                    HttpContext.Current.Session["isForceChangePasswordFindCliente"] = DKbase.Util.spForceChangePasswordFindCliente(oClientes.cli_codigo);
+                    Usuario usu = (Usuario)System.Web.HttpContext.Current.Session["clientesDefault_Usuario"];
+                    if (usu.idRol != 10)
+                    {
+                        oClientes = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
+                        HttpContext.Current.Session["isForceChangePasswordFindCliente"] = DKbase.Util.spForceChangePasswordFindCliente(oClientes.cli_codigo);
+                    }
                 }
             }
             if (HttpContext.Current.Session["isForceChangePasswordFindCliente"] != null)
