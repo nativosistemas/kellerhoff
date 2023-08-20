@@ -26,7 +26,7 @@ namespace Kellerhoff.admin.pages
         }
         public override void Modificar(int pIdRol)
         {
-            DKbase.web.cRol rol = Kellerhoff.Codigo.clases.Seguridad.RecuperarRolPorId(pIdRol);
+            DKbase.web.cRol rol = DKbase.Util.RecuperarRolPorId(pIdRol);
             Session["GestionRol_IdRol"] = rol.rol_codRol;
             txt_nombre.Text = rol.rol_Nombre;
             pnl_grilla.Visible = false;
@@ -70,7 +70,7 @@ namespace Kellerhoff.admin.pages
                     int codigoRol = Convert.ToInt32(Session["GestionRol_IdRol"]);
                     if ((codigoRol == 0 && cBaseAdmin.isAgregar(consPalabraClave)) || (codigoRol != 0 && cBaseAdmin.isEditar(consPalabraClave)))
                     {
-                        Kellerhoff.Codigo.clases.Seguridad.InsertarActualizarRol(codigoRol, txt_nombre.Text);
+                        DKbase.Util.InsertarActualizarRol(codigoRol, txt_nombre.Text);
                     }
                 }
                 gv_datos.DataBind();
@@ -95,7 +95,7 @@ namespace Kellerhoff.admin.pages
             bool resultado = true;
             if (Session["GestionRol_IdRol"] != null)
             {
-                List<DKbase.web.cRol> listaRol = Kellerhoff.Codigo.clases.Seguridad.RecuperarTodasRoles(string.Empty);
+                List<DKbase.web.cRol> listaRol = DKbase.Util.RecuperarTodasRoles(string.Empty);
                 foreach (DKbase.web.cRol item in listaRol)
                 {
                     if (item.rol_Nombre == args.Value)

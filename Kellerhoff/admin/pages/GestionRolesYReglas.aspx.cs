@@ -64,7 +64,7 @@ namespace Kellerhoff.admin.pages
                     strXML += "</Root>";
                     string parameXML = strXML;
 
-                    Kellerhoff.Codigo.clases.Seguridad.InsertarActualizarRelacionRolRegla(pIdRol, parameXML);
+                    DKbase.Util.InsertarActualizarRelacionRolRegla(pIdRol, parameXML);
                     cBaseAdmin.CargarAccionesEnVariableSession();
                     return true;
                 }
@@ -74,7 +74,7 @@ namespace Kellerhoff.admin.pages
         [WebMethod(EnableSession = true)]
         public static string RecuperarReglasPorRol(int pIdRol)
         {
-            List<Kellerhoff.Codigo.capaDatos.ReglaPorRol> listaResultado = Kellerhoff.Codigo.clases.Seguridad.RecuperarRelacionRolReglasPorRol(pIdRol);
+            List<DKbase.web.ReglaPorRol> listaResultado =DKbase.Util.RecuperarRelacionRolReglasPorRol(pIdRol);
             return Codigo.clases.Generales.Serializador.SerializarAJson(listaResultado);
         }
         //[WebMethod(EnableSession = true)]

@@ -56,7 +56,7 @@ namespace Kellerhoff.Codigo.clases
             {
                 filtro = pFiltro;
             }
-            var query = clases.Seguridad.RecuperarTodasRoles(filtro);
+            var query = DKbase.Util.RecuperarTodasRoles(filtro);
             if (order.isOrderBy)
             {
                 if (order.OrderByAsc)
