@@ -36,12 +36,12 @@ function ajaxLogin(name, pass, token) {
         });
     }
 }
-function ajaxLoginCarrito(name, pass, pIdOferta) {
+function ajaxLoginCarrito(name, pass, pIdOferta,pToken) {
     if (isNotNullEmpty(name) && isNotNullEmpty(pass)) {
         $.ajax({
             type: "POST",
             url: "../config/loginCarrito",
-            data: { pName: name, pPass: pass, pIdOferta: pIdOferta },
+            data: { pName: name, pPass: pass, pIdOferta: pIdOferta, pToken: pToken  },
             success:
                 function (response) {
                     OnCallBackLoginCarrito(response);
