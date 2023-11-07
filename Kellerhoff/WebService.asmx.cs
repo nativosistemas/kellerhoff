@@ -25,7 +25,23 @@ namespace Kellerhoff
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
-
+        public static bool Validate_CAPTCHA(string EncodedResponse)
+        {
+            bool result = false;
+            try
+            {
+                string PrivateKey = System.Configuration.ConfigurationManager.AppSettings["reCAPTCHA_ClaveSecreta_V3"];
+                var client = new System.Net.WebClient();
+                string GoogleReply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", PrivateKey, EncodedResponse));
+                if (!string.IsNullOrEmpty(GoogleReply) && GoogleReply.ToLower().Contains("true"))
+                    result = true;
+            }
+            catch (Exception ex)
+            {
+                DKbase.generales.Log.LogError(System.Reflection.MethodBase.GetCurrentMethod(), ex, DateTime.Now);
+            }
+            return result;
+        }
         //public WebService () {
         //    //Uncomment the following line if using designed components 
         //    //InitializeComponent(); 

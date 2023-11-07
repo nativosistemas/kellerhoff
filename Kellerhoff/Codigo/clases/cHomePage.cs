@@ -16,7 +16,7 @@ namespace Kellerhoff.Codigo.clases
         public static string loginCarrito(string pName, string pPass, int pIdOferta)
         {
             string resultado = null;
-            resultado = login(pName, pPass);
+            resultado = login(pName, pPass,"");
             if (resultado == "Ok" && HttpContext.Current.Session["clientesDefault_Cliente"] != null)
             {
                 cClientes oCliente = (cClientes)HttpContext.Current.Session["clientesDefault_Cliente"];
@@ -33,69 +33,72 @@ namespace Kellerhoff.Codigo.clases
             return resultado;
         }
         [WebMethod(EnableSession = true)]
-        public static string login(string pName, string pPass)
+        public static string login(string pName, string pPass, string pToken)
         {
             string resultado = null;
-
-            string userAgent = HttpContext.Current.Request.UserAgent;
-            string ip = HttpContext.Current.Server.HtmlEncode(HttpContext.Current.Request.UserHostAddress);
-            string hostName = HttpContext.Current.Request.UserHostName;
-            Usuario user = Seguridad.Login(pName, pPass, ip, hostName, userAgent);
-            if (user != null)
+            string publicKey = pToken;
+            resultado = "reCAPTCHA Invalido";
+            if (WebService.Validate_CAPTCHA(publicKey))
             {
-                if (user.id != -1)
+                string userAgent = HttpContext.Current.Request.UserAgent;
+                string ip = HttpContext.Current.Server.HtmlEncode(HttpContext.Current.Request.UserHostAddress);
+                string hostName = HttpContext.Current.Request.UserHostName;
+                Usuario user = Seguridad.Login(pName, pPass, ip, hostName, userAgent);
+                if (user != null)
                 {
-                    if (user.usu_estado == Constantes.cESTADO_ACTIVO && user.usu_codCliente != null)
+                    if (user.id != -1)
                     {
-                        if (user.idRol == Constantes.cROL_ADMINISTRADORCLIENTE || user.idRol == Constantes.cROL_OPERADORCLIENTE)
+                        if (user.usu_estado == Constantes.cESTADO_ACTIVO && user.usu_codCliente != null)
                         {
-                            Autenticacion objAutenticacion = new Autenticacion();
-                            objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
-                            objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
-                            WebService.CredencialAutenticacion = objAutenticacion;
-                            HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)user.usu_codCliente);
-
-                            if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                            if (user.idRol == Constantes.cROL_ADMINISTRADORCLIENTE || user.idRol == Constantes.cROL_OPERADORCLIENTE)
                             {
-                                HttpContext.Current.Session["clientesDefault_Usuario"] = user;
-                                List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id);
-                                CargarAccionesEnVariableSession();
-                                HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
-                                //HttpContext.Current.Response.Redirect("~/clientes/pages/PedidosBuscador.aspx");// Response.Redirect("~/clientes/pages/PedidosBuscadorNew.aspx");
-                                resultado = "Ok";
+                                Autenticacion objAutenticacion = new Autenticacion();
+                                objAutenticacion.UsuarioNombre = System.Configuration.ConfigurationManager.AppSettings["ws_usu"];
+                                objAutenticacion.UsuarioClave = System.Configuration.ConfigurationManager.AppSettings["ws_psw"];
+                                WebService.CredencialAutenticacion = objAutenticacion;
+                                HttpContext.Current.Session["clientesDefault_Cliente"] = WebService.RecuperarClientePorId((int)user.usu_codCliente);
+
+                                if (HttpContext.Current.Session["clientesDefault_Cliente"] != null)
+                                {
+                                    HttpContext.Current.Session["clientesDefault_Usuario"] = user;
+                                    List<string> listaPermisoDenegados = FuncionesPersonalizadas.RecuperarSinPermisosSecciones(((Usuario)HttpContext.Current.Session["clientesDefault_Usuario"]).id);
+                                    CargarAccionesEnVariableSession();
+                                    HttpContext.Current.Session["ClientesBase_isLogeo"] = true;
+                                    //HttpContext.Current.Response.Redirect("~/clientes/pages/PedidosBuscador.aspx");// Response.Redirect("~/clientes/pages/PedidosBuscadorNew.aspx");
+                                    resultado = "Ok";
+                                }
+                                else
+                                {
+                                    resultado = "Error al recuperar el cliente";
+                                }
                             }
                             else
                             {
-                                resultado = "Error al recuperar el cliente";
+                                resultado = "Usuario con rol sin permiso";
                             }
                         }
                         else
                         {
-                            resultado = "Usuario con rol sin permiso";
+                            if (user.usu_codCliente == null)
+                            {
+                                resultado = "Usuario no asigando cliente";
+                            }
+                            else
+                            {
+                                resultado = "Usuario inactivo";
+                            }
                         }
                     }
                     else
                     {
-                        if (user.usu_codCliente == null)
-                        {
-                            resultado = "Usuario no asigando cliente";
-                        }
-                        else
-                        {
-                            resultado = "Usuario inactivo";
-                        }
+                        resultado = "Mail o contraseña erróneo";
                     }
                 }
                 else
                 {
-                    resultado = "Mail o contraseña erróneo";
+                    resultado = "Error en el servidor";
                 }
             }
-            else
-            {
-                resultado = "Error en el servidor";
-            }
-
 
             return resultado;
         }

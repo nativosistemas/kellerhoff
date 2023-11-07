@@ -3,10 +3,10 @@ var isIngresarPageMethods = false;
 var name = null;
 var pass = null;
 jQuery(document).ready(function () {
-//        localStorage['name'] = name;
+    //        localStorage['name'] = name;
     //localStorage['pass'] = pass;
-    	
- 
+
+
 
     var myName = localStorage['name'] || '';
     var myPass = localStorage['pass'] || '';
@@ -17,16 +17,16 @@ jQuery(document).ready(function () {
     $('#name_footer').val(myName);
 });
 
-function ajaxLogin(name, pass) {
+function ajaxLogin(name, pass, token) {
     if (isNotNullEmpty(name) && isNotNullEmpty(pass)) {
         $.ajax({
             type: "POST",
             url: "../config/login",
-            data: { pName: name, pPass: pass },
+            data: { pName: name, pPass: pass, pToken: token  },
             success:
-            function (response) {
-                OnCallBackLogin(response);
-            },
+                function (response) {
+                    OnCallBackLogin(response);
+                },
             failure: function (response) {
                 OnFail(response);
             },
@@ -43,9 +43,9 @@ function ajaxLoginCarrito(name, pass, pIdOferta) {
             url: "../config/loginCarrito",
             data: { pName: name, pPass: pass, pIdOferta: pIdOferta },
             success:
-            function (response) {
-                OnCallBackLoginCarrito(response);
-            },
+                function (response) {
+                    OnCallBackLoginCarrito(response);
+                },
             failure: function (response) {
                 OnFail(response);
             },
@@ -86,21 +86,40 @@ function onkeypressIngresarDesdeAgregarCarrito(e) {
 function onclickIngresar() {
     if (!isIngresarPageMethods) {
         isIngresarPageMethods = true;
-         name = $('#login_name').val();
-         pass = $('#login_password').val();
+        name = $('#login_name').val();
+        pass = $('#login_password').val();
 
-         //PageMethods.login(name, pass, OnCallBackLogin, OnFailLogin);
-         ajaxLogin(name, pass);
+        //ajaxLogin(name, pass);
+        var token = "";
+
+        grecaptcha.execute("6LeVNeQoAAAAAB8BX4-pJCSwCfdS7iWes-JQWhJe", {
+            action: "iniciar_sesion",
+        })
+            .then(function (tokenResponse) {
+                token = tokenResponse;
+
+                ajaxLogin(name, pass, token);
+            });
     }
     return false;
 }
 function onclickIngresarAbajo() {
     if (!isIngresarPageMethods) {
         isIngresarPageMethods = true;
-         name = $('#name_footer').val();
-         pass = $('#password_footer').val();
-         //PageMethods.login(name, pass, OnCallBackLogin, OnFailLogin);
-         ajaxLogin(name, pass);
+        name = $('#name_footer').val();
+        pass = $('#password_footer').val();
+        // ajaxLogin(name, pass);
+
+        var token = "";
+
+        grecaptcha.execute("6LeVNeQoAAAAAB8BX4-pJCSwCfdS7iWes-JQWhJe", {
+                action: "iniciar_sesion",
+            })
+            .then(function (tokenResponse) {
+                token = tokenResponse;
+
+                ajaxLogin(name, pass, token);
+            });
     }
     return false;
 }
@@ -119,10 +138,19 @@ function IngresarDsdMobil() {
     $('#myModal').modal();
 }
 function onclickIngresarDesdeAgregarCarrito() {
-     name = $('#name_carrito').val();
-     pass = $('#password_carrito').val();
-    //PageMethods.loginCarrito(name, pass, idOferta, OnCallBackLoginCarrito, OnFail);
-    ajaxLoginCarrito(name, pass, idOferta);
+    name = $('#name_carrito').val();
+    pass = $('#password_carrito').val();
+   // ajaxLoginCarrito(name, pass, idOferta);
+    var token = "";
+
+    grecaptcha.execute("6LeVNeQoAAAAAB8BX4-pJCSwCfdS7iWes-JQWhJe", {
+        action: "iniciar_sesion",
+    })
+        .then(function (tokenResponse) {
+            token = tokenResponse;
+
+            ajaxLoginCarrito(name, pass, idOferta, token);
+        });
     return false;
 }
 function OnCallBackLoginCarrito(args) {

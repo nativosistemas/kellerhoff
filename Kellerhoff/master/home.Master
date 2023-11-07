@@ -43,7 +43,7 @@
 
     <script type="text/javascript" src="../includes/mvc/js/mensaje.js?n=31"></script>
     <script type="text/javascript" src="../includes/home/js/jquery/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="../includes/home/js/master.js?n=9"></script>
+    <script type="text/javascript" src="../includes/home/js/master.js?n=10"></script>
     <script src="../includes/js/Libreria.js?n=2"></script>
     <script type="text/javascript" src="../includes/home/js/recall.js?n=2"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -406,6 +406,7 @@
         </div>
     </div>
     <!--fin Modal content-->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeVNeQoAAAAAB8BX4-pJCSwCfdS7iWes-JQWhJe"></script>
     <script type="text/javascript">
         $("#menu-close").click(function (e) {
             e.preventDefault();
