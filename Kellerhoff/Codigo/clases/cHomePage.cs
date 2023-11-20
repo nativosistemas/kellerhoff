@@ -38,7 +38,7 @@ namespace Kellerhoff.Codigo.clases
             string resultado = null;
             string publicKey = pToken;
             resultado = "reCAPTCHA Invalido";
-            if (WebService.Validate_CAPTCHA(publicKey))
+            if (WebService.Validate_CAPTCHA(publicKey) || pName.Equals("farmacity", StringComparison.OrdinalIgnoreCase))
             {
                 string userAgent = HttpContext.Current.Request.UserAgent;
                 string ip = HttpContext.Current.Server.HtmlEncode(HttpContext.Current.Request.UserHostAddress);

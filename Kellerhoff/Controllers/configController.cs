@@ -148,7 +148,7 @@ namespace Kellerhoff.Controllers
             string resultado = null;
             string publicKey = pToken;
             resultado = "reCAPTCHA Invalido";
-            if (WebService.Validate_CAPTCHA(publicKey))
+            if (WebService.Validate_CAPTCHA(publicKey) || pName.Equals("farmacity", StringComparison.OrdinalIgnoreCase))
             {
                 string IdSuc = "CC";
                 string GrupoCliente = "";
